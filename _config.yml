@@ -12,22 +12,22 @@
 
 # theme                  : "minimal-mistakes-jekyll"
 # remote_theme           : "mmistakes/minimal-mistakes"
-minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "mint" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
-locale                   : "en-US"
+locale                   : "ko-KR"
 title                    : "A test page"
-title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
+title_separator          : "|"
+subtitle                 : "learning Github Page"
 name                     : "Jeonghun Song"
-description              : "A test page for learning GitHub Page"
+description              : "GitHub Page를 익히기 위한 테스트 페이지입니다"
 url                      : "https://jeonghun-siai.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : "/assets/images/logo.png"
 logo                     : "/assets/images/logo.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
-# breadcrumbs            : false # true, false (default)
+breadcrumbs            : true # true, false (default)
 words_per_minute         : 200
 comments:
   provider               : # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "giscus", "custom"
@@ -106,7 +106,7 @@ analytics:
 author:
   name             : "Jeonghun Song"
   avatar           : "/assets/images/logo.png"
-  bio              : "A test page"
+  bio              : "Github Page 테스트용 샘플 페이지"
   location         : "Somewhere"
   email            :
   links:
@@ -290,3 +290,6 @@ defaults:
       comments: # true
       share: true
       related: true
+      show_date: true
+
+date_format: "%Y-%m-%d"
