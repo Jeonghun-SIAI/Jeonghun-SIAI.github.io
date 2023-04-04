@@ -1,6 +1,7 @@
 ---
 layout: single
 title:  "Example of MD file"
+categories: Projects
 ---
 
 # Term project for COM506-Data Management
