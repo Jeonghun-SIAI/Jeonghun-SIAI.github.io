@@ -1,11 +1,16 @@
+---
+layout: single
+title:  "Example of MD file"
+---
+
 # Term project for COM506-Data Management
 ## An automated data pipeline for scraping book information from an online bookseller and storing it to SQL/ NoSQL databases
 Jeonghun Song (20212210010), submitted in 6th September 2022
 
 <img src="https://d1sslqz50ui5dv.cloudfront.net/wp-content/uploads/2021/07/26094151/siai_logo_prev.png" width="600px">
   
-#  
-#  
+
+
 ## Project Charter
 
 ### Problem statement  
