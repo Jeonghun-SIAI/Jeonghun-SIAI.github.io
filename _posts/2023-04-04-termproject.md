@@ -52,8 +52,7 @@ Also, the tool should be able to handle not only basic attributes of books but a
 * Project Manager & Developer: Jeonghun Song, MSc in Data Science, F2021, Swiss Inistitue of Artificial Intelligence
 
 
-#
-#  
+  
 ## How to run
 
 ### Prerequisite
