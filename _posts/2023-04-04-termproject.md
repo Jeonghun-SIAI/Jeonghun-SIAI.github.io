@@ -2,6 +2,12 @@
 layout: single
 title:  "Example of MD file"
 categories: Projects
+toc: true
+toc_sticky: true
+toc_label:  Contents
+author_profile: false
+sidebar:
+    nav: "counts"
 ---
 
 # Term project for COM506-Data Management

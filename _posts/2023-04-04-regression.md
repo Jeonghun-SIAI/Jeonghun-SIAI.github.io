@@ -1,10 +1,18 @@
 ---
 layout: single
 title:  "회귀분석 관련 정리"
-categories: Regression analysis
+categories: Theory
 typora-root-url: ../
 toc: true
+toc_sticky: true
+toc_label:  Contents
+toc_icon: "fas fa-smile-beam"
 use_math: true
+author_profile: false
+sidebar:
+    nav: "docs"
+redirect_from:
+    - /Regression/regression
 ---
 
 ## Ordinary least squares

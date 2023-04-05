@@ -105,7 +105,7 @@ analytics:
 # Site Author
 author:
   name             : "Jeonghun Song"
-  avatar           : "/assets/images/logo.png"
+  avatar           : "/assets/images/clean.jpg"
   bio              : "Github Page 테스트용 샘플 페이지"
   location         : "Somewhere"
   email            :
@@ -216,6 +216,7 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
+  - jekyll-redirect-from
 
 # mimic GitHub Pages with --safe
 whitelist:
@@ -224,6 +225,7 @@ whitelist:
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
+  - jekyll-redirect-from
 
 
 # Archives
