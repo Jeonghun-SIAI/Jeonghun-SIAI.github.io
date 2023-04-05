@@ -1,5 +1,6 @@
 ---
-layout: single
+layout: categories
+classes: wide
 title:  "회귀분석 관련 정리"
 categories: Theory
 typora-root-url: ../
