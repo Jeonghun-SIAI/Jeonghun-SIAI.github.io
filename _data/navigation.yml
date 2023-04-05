@@ -7,7 +7,7 @@ main:
   - title: "search"
     url: /search/  
 
-docs:
+docs: # For sidebar
   - title: "Categories"
     children:
       - title: "Theory"
