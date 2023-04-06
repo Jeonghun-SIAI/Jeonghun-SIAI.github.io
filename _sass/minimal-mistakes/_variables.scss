@@ -147,8 +147,8 @@ $base0f: #ff5370 !default;
 $small: 600px !default;
 $medium: 768px !default;
 $medium-wide: 900px !default;
-$large: 1024px !default;
-$x-large: 1280px !default;
+$large: 1024px !default; /* Modified from 1024 to 2048 by Jeonghun Song */
+$x-large: 1280px !default; /* Modified from 1280 to 2048 by Jeonghun Song */
 $max-width: $x-large !default;
 
 /*
