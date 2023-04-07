@@ -6,8 +6,7 @@ toc: true
 toc_sticky: true
 toc_label:  Contents
 author_profile: false
-sidebar:
-    nav: "counts"
+sidebar: true
 ---
 
 # Term project for COM506-Data Management

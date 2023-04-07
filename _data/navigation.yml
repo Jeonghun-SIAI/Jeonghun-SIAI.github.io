@@ -7,14 +7,6 @@ main:
   - title: "search"
     url: /search/  
 
-docs: # For sidebar
-  - title: "Categories"
-    children:
-      - title: "Theory"
-        url: /categories/#Theory
-      - title: "Projects"
-        url: /categories/#Projects
-
 counts:
   - title: "카테고리"
     use: true

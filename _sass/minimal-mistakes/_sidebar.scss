@@ -37,6 +37,7 @@
   }
 
   @include breakpoint($x-large) {
+    float: left;
     width: calc(#{$right-sidebar-width} - 1em);
   }
 
@@ -70,6 +71,40 @@
     }
   }
 }
+
+// .sidebar {
+//   margin-bottom: 1em;
+
+//   @include breakpoint($large) {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: calc(#{$right-sidebar-width-narrow}+2em);
+//     margin-left: calc(#{$right-sidebar-width-narrow});
+//     padding-right: 3em; /* Changed from 1em to 3em by Jeonghun */
+//     z-index: 10;
+
+//     &.sticky {
+//       @include clearfix();
+//       position: -webkit-sticky;
+//       position: sticky;
+//       top: 2em;
+//       float: left;
+
+//       .toc {
+//         .toc__menu {
+//           overflow-y: auto;
+//           max-height: calc(100vh - 7em);
+//         }
+//       }
+//     }
+//   }
+
+//   @include breakpoint($x-large) {
+//     width: calc(#{$right-sidebar-width} - 1em);
+//     margin-right: -1 * calc(#{$right-sidebar-width} - 1em);
+//   }
+// }
 
 .sidebar__right {
   margin-bottom: 1em;
@@ -341,7 +376,7 @@
     z-index: initial;
 
     &.sticky {
-      float: none;
+      float: left;
     }
   }
 

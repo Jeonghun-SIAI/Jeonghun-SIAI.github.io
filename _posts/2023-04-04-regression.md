@@ -9,8 +9,7 @@ toc_label:  Contents
 toc_icon: "fas fa-smile-beam"
 use_math: true
 author_profile: false
-sidebar:
-    nav: "docs"
+sidebar: true
 redirect_from:
     - /Regression/regression
 ---
