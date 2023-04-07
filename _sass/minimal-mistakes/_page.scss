@@ -39,13 +39,15 @@ body {
   @include breakpoint($large) {
     float: left; /* modified from right to left by Jeonghun */
     width: calc(100%- #{$right-sidebar-width-narrow});
-    padding-right: $right-sidebar-width-narrow;    
+    padding-right: $right-sidebar-width-narrow; 
+    padding-left: calc(#{$right-sidebar-width-narrow} - 1em); /* Added by Jeonghun */
   }
 
   @include breakpoint($x-large) {
     float: left;
     width: calc(100%- #{$right-sidebar-width});
     padding-right: $right-sidebar-width;
+    padding-left: calc(#{$right-sidebar-width} - 1em); /* Added by Jeonghun */
   }
 
   .page__inner-wrap {
