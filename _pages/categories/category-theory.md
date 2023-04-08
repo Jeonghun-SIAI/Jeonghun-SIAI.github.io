@@ -1,5 +1,5 @@
 ---
-title: "코드"
+title: "이론"
 layout: archive
 permalink: categories/theory
 author_profile: true

@@ -7,7 +7,9 @@
    ========================================================================== */
 
 .sidebar {
-  @include clearfix();
+  @include clearfix(); // @include는 @mixin와 함께 사용되며, @mixin은 그룹단위 스타일 변수를 설정하고 @include는 그걸 적용함
+  // clearfix 스타일변수는 _mixins.scss에서 정의되어 있음
+  // left sidebar 이전 요소들 (위의 masthead, breadcrumble) 과 별개의 흐름으로 새로 배치되어야 하므로 clearfix 적용한 듯
   // @include breakpoint(max-width $large) {
   //   /* fix z-index order of follow links */
   //   position: relative;
@@ -16,7 +18,7 @@
   //   transform: translate3d(0, 0, 0);
   // }
 
-  @include breakpoint($large) {
+  @include breakpoint($large) { // @mixin breakpoint는 _breakpoint.scss에 있음
     float: left;
     width: calc(#{$right-sidebar-width-narrow} - 1em);
     opacity: 0.75;
@@ -71,6 +73,8 @@
     }
   }
 }
+
+
 
 // .sidebar {
 //   margin-bottom: 1em;

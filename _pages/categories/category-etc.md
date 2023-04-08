@@ -1,5 +1,5 @@
 ---
-title: "코드"
+title: "기타"
 layout: archive
 permalink: categories/etc
 author_profile: true

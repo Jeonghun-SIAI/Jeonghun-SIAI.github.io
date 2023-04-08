@@ -37,7 +37,7 @@ $breakpoint: () !default;
 // Breakpoint Mixin
 //////////////////////////////
 
-@mixin breakpoint($query, $no-query: false) {
+@mixin breakpoint($query, $no-query: false) { // 화면 커질 때
   @include legacy-settings-warning;
 
   // Reset contexts
@@ -63,7 +63,7 @@ $breakpoint: () !default;
   // Print Out Query String
   @if not breakpoint-get('no queries') {
     @media #{$query-string} {
-      @content;
+      @content; // @content는 @include breakpoint한 곳에서 {} 내에 정의한 사항을 쓰라는 뜻
     }
   }
 

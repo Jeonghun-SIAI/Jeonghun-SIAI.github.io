@@ -1,5 +1,5 @@
 ---
-title: "코드"
+title: "프로젝트"
 layout: archive
 permalink: categories/project
 author_profile: true
