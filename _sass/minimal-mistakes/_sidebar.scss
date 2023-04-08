@@ -17,14 +17,14 @@
   //   -webkit-transform: translate3d(0, 0, 0);
   //   transform: translate3d(0, 0, 0);
   // }
-
+  z-index: 10;  
   @include breakpoint($large) { // @mixin breakpoint는 _breakpoint.scss에 있음
     float: left;
     width: calc(#{$right-sidebar-width-narrow} - 1em);
     opacity: 0.75;
     -webkit-transition: opacity 0.2s ease-in-out;
     transition: opacity 0.2s ease-in-out;
-    z-index: 10; /* Added by Jeonghun */
+    //z-index: 10; /* Added by Jeonghun */
 
     &:hover {
       opacity: 1;
@@ -42,7 +42,7 @@
   @include breakpoint($x-large) {
     float: left;
     width: calc(#{$right-sidebar-width} - 1em);
-    z-index: 10; /* Added by Jeonghun */
+    //z-index: 10; /* Added by Jeonghun */
   }
 
   > * {
