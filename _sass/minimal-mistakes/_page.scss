@@ -51,7 +51,7 @@ body {
     top: $post-rise;
     float: left; /* modified from right to left by Jeonghun */
     width: calc(100%); /*modified from calc(100%- #{$right-sidebar-width-narrow}); to 100% by Jeonghun */
-    padding-right: calc($right-sidebar-width-narrow + 1em); 
+    padding-right: calc(#{$right-sidebar-width-narrow} + 1em); 
     padding-left: calc(#{$right-sidebar-width-narrow} + 1em); /* Added by Jeonghun */
   }
 
@@ -61,7 +61,7 @@ body {
     top: $post-rise;
     float: left;
     width: calc(100%); /*modified from calc(100%- #{$right-sidebar-width}); to 100% by Jeonghun */
-    padding-right: calc($right-sidebar-width + 1em);
+    padding-right: calc(#{$right-sidebar-width} + 1em);
     padding-left: calc(#{$right-sidebar-width} + 1em); /* Added by Jeonghun */
   }
 
