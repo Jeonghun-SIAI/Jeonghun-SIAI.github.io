@@ -280,5 +280,6 @@ defaults:
       related: true
       show_date: true
       sidebar_main: true # Added for sidebar which shows categories
+      read_time: false # Added
 
 date_format: "%Y-%m-%d"
