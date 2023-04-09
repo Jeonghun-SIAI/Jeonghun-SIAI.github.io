@@ -17,14 +17,14 @@
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
                 {% for category in site.categories %}
                     {% if category[0] == "Code" %}
-                        <li><a href="/categories/code" class="">코드 ({{category[1].size}})</a></li>
+                        <li><a href="/code" class="">코드 ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "Theory" %}
-                        <li><a href="/categories/theory" class="">이론 ({{category[1].size}})</a></li>
+                        <li><a href="/theory" class="">이론 ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
@@ -32,14 +32,14 @@
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "Projects" %}
-                        <li><a href="/categories/project" class="">프로젝트 ({{category[1].size}})</a></li>
+                        <li><a href="/project" class="">프로젝트 ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "etc" %}
-                        <li><a href="/categories/etc" class="">기타 ({{category[1].size}})</a></li>
+                        <li><a href="/etc" class="">기타 ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
