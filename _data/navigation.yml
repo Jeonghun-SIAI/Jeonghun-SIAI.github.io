@@ -1,13 +1,15 @@
 # main links
 main:
+  - title: "About Me"
+    url: /aboutme/  
+  - title: "Search"
+    url: /search/    
   - title: "Category"
     url: /categories/
   - title: "Tag"
     url: /tags/
-  - title: "search"
-    url: /search/  
-  - title: "About Me"
-    url: /aboutme/  
+  
+  
 
 counts:
   - title: "카테고리"
