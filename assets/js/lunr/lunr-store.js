@@ -46,4 +46,10 @@ var store = [{
         "tags": [],
         "url": "/2023/04/regressiontwo.html",
         "teaser": "/assets/images/logo.png"
+      },{
+        "title": "회귀분석 관련 정리 4",
+        "excerpt":"Ordinary least squares 선형회귀모델 $y=X \\beta + \\epsilon$ 에는 아래의 다섯가지 가정이 들어감. A1: $X$는 full rank임 (즉 특정 설명변수를 다른 설명변수들의 선형결합으로 완전하게 나타낼 수 없으며, $X’X$의 역행렬이 존재). 이 조건이 깨지면 estimator를 구할 수 없음. A2: 설명변수와 반응변수 간에 선형관계가 성립하고, 오차항의 편향이 없음 (즉 $\\text{E}[\\epsilon] = 0$)....","categories": ["Theory"],
+        "tags": [],
+        "url": "/2023/04/regressionfour.html",
+        "teaser": "/assets/images/logo.png"
       }]
