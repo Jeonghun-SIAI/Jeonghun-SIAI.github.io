@@ -1,0 +1,978 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+
+<head>
+  <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Web scrapper example | A test page</title>
+<meta name="description" content="소개 아래는 PubMed 사이트에서 원하는 논문 정보들을 수집하는 Web scrapping 코드입니다. 친구한테 만들어줬었습니다.">
+
+
+  <meta name="author" content="Jeonghun Song">
+  
+  <meta property="article:author" content="Jeonghun Song">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="A test page">
+<meta property="og:title" content="Web scrapper example">
+<meta property="og:url" content="http://localhost:4000/2023/04/scrapper.html">
+
+
+  <meta property="og:description" content="소개 아래는 PubMed 사이트에서 원하는 논문 정보들을 수집하는 Web scrapping 코드입니다. 친구한테 만들어줬었습니다.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-04-04T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/2023/04/scrapper.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Jeonghun Song",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="A test page Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+
+
+<!-- end custom head snippets -->
+</head>
+
+<body
+  class="layout--single">
+  <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+  
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="A test page"></a>
+        
+        <a class="site-title" href="/">
+          A test page
+          <span class="site-subtitle">learning Github Page</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/aboutme/">About Me</a>
+            </li><li class="masthead__menu-item">
+              <a href="/search/">Search</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tag</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">카테고리 목록</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+  <div class="initial-content">
+    
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#2023" itemprop="item"><span itemprop="name">2023</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#04" itemprop="item"><span itemprop="name">04</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Web scrapper example</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+    
+  
+  
+  
+  
+    
+    
+      
+    
+    
+  
+  
+   <!-- three lines added by Jeonghun  -->
+    
+
+<nav class="nav__list">
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">카테고리 목록</label>
+  <ul class="nav__items" id="category_tag_menu">
+      <!--전체 글 수-->
+      <li>
+            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">150</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
+      </li>
+      <li>
+        <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
+        <span class="nav__sub-title">범주1</span>
+            <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
+                <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/code" class="">코드 (2)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/theory" class="">이론 (8)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        <span class="nav__sub-title">범주2</span>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/project" class="">프로젝트 (2)</a></li>
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">기타 (4)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+      </li>
+  </ul>
+</nav>
+  
+  
+
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Web scrapper example">
+    <meta itemprop="description" content="소개아래는 PubMed 사이트에서 원하는 논문 정보들을 수집하는 Web scrapping 코드입니다. 친구한테 만들어줬었습니다.">
+    <meta itemprop="datePublished" content="2023-04-04T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/2023/04/scrapper.html" class="u-url" itemprop="url">Web scrapper example
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-04T00:00:00+09:00">2023-04-04</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#소개">소개</a></li><li><a href="#코드">코드</a></li></ul>
+ <!-- 우측 TOC -->
+            </nav>
+          </aside>
+        
+        <h2 id="소개">소개</h2>
+<p>아래는 PubMed 사이트에서 원하는 논문 정보들을 수집하는 Web scrapping 코드입니다. 친구한테 만들어줬었습니다.</p>
+
+<h2 id="코드">코드</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+<span class="kn">from</span> <span class="n">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span>
+<span class="kn">from</span> <span class="n">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="n">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="c1"># Each tuple in list variable "searchwordlist" contains searchword as the first element,
+# and desired number of search result pages as the second element 
+</span><span class="n">searchwordlist</span> <span class="o">=</span> <span class="p">[</span>
+<span class="p">(</span><span class="s">"""
+Venoms[mesh] AND pathology[affiliation]
+"""</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">(</span><span class="s">"""
+Turtle[mesh] AND pathology[affiliation]
+"""</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="p">]</span> 
+
+
+
+<span class="c1">### Below is the code for scrapping
+</span>
+<span class="k">def</span> <span class="nf">get_html</span><span class="p">(</span><span class="n">url</span><span class="p">):</span> 
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nf">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> 
+    <span class="c1"># retry if failed to get html of the target webpage
+</span>    <span class="k">except</span> <span class="nb">Exception</span><span class="p">:</span>  
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Retrying"</span><span class="p">)</span>
+        <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nf">get_html</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="n">starttime</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+
+<span class="nf">for </span><span class="p">(</span><span class="n">searchword</span><span class="p">,</span><span class="n">numpages</span><span class="p">)</span> <span class="ow">in</span> <span class="n">searchwordlist</span><span class="p">:</span>
+
+    <span class="n">urls</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Initialize the lists for storing scraped data
+</span>    <span class="n">papertitle</span><span class="o">=</span> <span class="p">[]</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">affiliations</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">authors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">keywords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">journals</span> <span class="o">=</span> <span class="p">[]</span>   
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">numpages</span><span class="p">):</span> <span class="c1"># for each searchresult page
+</span>    
+        <span class="n">url_searchpage</span> <span class="o">=</span> <span class="s">"https://pubmed.ncbi.nlm.nih.gov/?term="</span> <span class="o">+</span> <span class="nf">quote</span><span class="p">(</span><span class="n">searchword</span><span class="p">)</span> <span class="o">+</span> <span class="s">"&amp;page={}"</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># make URL of searchresult page
+</span>        <span class="n">getdata</span> <span class="o">=</span> <span class="nf">get_html</span><span class="p">(</span><span class="n">url_searchpage</span><span class="p">)</span> <span class="c1"># get HTML of the page
+</span>        <span class="n">getdata</span><span class="p">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s">"UTF-8"</span>
+        <span class="n">soup</span> <span class="o">=</span> <span class="nc">BeautifulSoup</span><span class="p">(</span><span class="n">getdata</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span> <span class="c1"># parse the HTML 
+</span>        <span class="n">titles</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="nf">find_all</span><span class="p">(</span><span class="s">"a"</span><span class="p">,{</span><span class="s">"class"</span><span class="p">:</span><span class="s">"docsum-title"</span><span class="p">})</span> 
+             
+        <span class="k">for</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">titles</span><span class="p">:</span> <span class="c1"># for each paper page
+</span>            <span class="n">url_paperpage</span> <span class="o">=</span> <span class="s">"https://pubmed.ncbi.nlm.nih.gov/"</span> <span class="o">+</span> <span class="n">title</span><span class="p">[</span><span class="s">"data-article-id"</span><span class="p">]</span> <span class="c1"># make URL of paper page (title["data-article-id"] is an ID of the paper in PubMed)
+</span>            <span class="n">urls</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">url_paperpage</span><span class="p">)</span> <span class="c1"># store URL to the list
+</span>            <span class="n">getdata</span> <span class="o">=</span> <span class="nf">get_html</span><span class="p">(</span><span class="n">url_paperpage</span><span class="p">)</span> <span class="c1"># get HTML of the page
+</span>            <span class="n">soup</span> <span class="o">=</span> <span class="nc">BeautifulSoup</span><span class="p">(</span><span class="n">getdata</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span> <span class="c1"># parse the HTML
+</span>            
+            <span class="n">papertitle</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">soup</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s">"h1"</span><span class="p">,{</span><span class="s">"class"</span><span class="p">:</span><span class="s">"heading-title"</span><span class="p">}).</span><span class="n">text</span><span class="p">.</span><span class="nf">lstrip</span><span class="p">().</span><span class="nf">rstrip</span><span class="p">())</span> <span class="c1"># store title to the list, after processing the data using functions such as replace, lstrip, rstrip
+</span>            
+            <span class="k">if</span> <span class="n">soup</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s">"span"</span><span class="p">,{</span><span class="s">"class"</span><span class="p">:</span><span class="s">"cit"</span><span class="p">})</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> 
+                <span class="n">date</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="s">"No date"</span><span class="p">)</span> <span class="c1"># if there is no information of date of publication, store a default message
+</span>            <span class="k">else</span><span class="p">:</span>
+                <span class="n">date</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">soup</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s">"span"</span><span class="p">,{</span><span class="s">"class"</span><span class="p">:</span><span class="s">"cit"</span><span class="p">}).</span><span class="n">text</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s">";"</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># store date of publication to the list, after processing the data using functions such as replace, lstrip, rstrip
+</span>                
+            <span class="k">if</span> <span class="n">soup</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s">"div"</span><span class="p">,{</span><span class="s">"class"</span><span class="p">:</span><span class="s">"authors"</span><span class="p">})</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>   
+                <span class="n">authors</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="s">"No author"</span><span class="p">)</span> <span class="c1"># if there is no information of authors, store a default message
+</span>            <span class="k">else</span><span class="p">:</span>
+                <span class="n">authors</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">soup</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s">"div"</span><span class="p">,{</span><span class="s">"class"</span><span class="p">:</span><span class="s">"authors"</span><span class="p">}).</span><span class="n">text</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="s">"                "</span><span class="p">,</span><span class="s">""</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="s">"              "</span><span class="p">,</span><span class="s">""</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="s">"Authors"</span><span class="p">,</span><span class="s">""</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="s">"Author"</span><span class="p">,</span><span class="s">""</span><span class="p">).</span><span class="nf">lstrip</span><span class="p">().</span><span class="nf">rstrip</span><span class="p">())</span> <span class="c1"># store authors to the list, after processing the data using functions such as replace, lstrip, rstrip
+</span>                
+            <span class="k">if</span> <span class="n">soup</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s">"div"</span><span class="p">,{</span><span class="s">"class"</span><span class="p">:</span><span class="s">"affiliations"</span><span class="p">})</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">affiliations</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="s">"No affiliation"</span><span class="p">)</span> <span class="c1"># if there is no information of affiliation, store a default message
+</span>            <span class="k">else</span><span class="p">:</span> 
+                <span class="n">affiliations</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">soup</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s">"div"</span><span class="p">,{</span><span class="s">"class"</span><span class="p">:</span><span class="s">"affiliations"</span><span class="p">}).</span><span class="n">text</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="s">"Affiliations"</span><span class="p">,</span><span class="s">""</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="s">"Affiliation"</span><span class="p">,</span><span class="s">""</span><span class="p">).</span><span class="nf">lstrip</span><span class="p">().</span><span class="nf">rstrip</span><span class="p">())</span>  <span class="c1"># store affiliation to the list, after processing the data using functions such as replace, lstrip, rstrip
+</span>            
+            <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">soup</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s">"div"</span><span class="p">,{</span><span class="s">"class"</span><span class="p">:</span><span class="s">"abstract"</span><span class="p">}).</span><span class="n">text</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s">"Keywords:"</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">keywords</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="s">"No keywords"</span><span class="p">)</span> <span class="c1"># if there is no information of keywords, store a default message
+</span>            <span class="k">else</span><span class="p">:</span>
+                <span class="n">keywords</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">soup</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s">"div"</span><span class="p">,{</span><span class="s">"class"</span><span class="p">:</span><span class="s">"abstract"</span><span class="p">}).</span><span class="n">text</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s">"Keywords:"</span><span class="p">)[</span><span class="mi">1</span><span class="p">].</span><span class="nf">lstrip</span><span class="p">().</span><span class="nf">rstrip</span><span class="p">())</span> <span class="c1"># store keywords to the list, after processing the data using functions such as replace, lstrip, rstrip
+</span>                
+            <span class="k">if</span> <span class="n">soup</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s">"span"</span><span class="p">,{</span><span class="s">"class"</span><span class="p">:</span><span class="s">"journal"</span><span class="p">})</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> 
+                <span class="n">journals</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="s">"No journal"</span><span class="p">)</span> <span class="c1"># if there is no information of journal, store a default message
+</span>            <span class="k">else</span><span class="p">:</span>
+                <span class="n">journals</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">soup</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s">"span"</span><span class="p">,{</span><span class="s">"class"</span><span class="p">:</span><span class="s">"journal"</span><span class="p">}).</span><span class="n">text</span><span class="p">.</span><span class="nf">lstrip</span><span class="p">().</span><span class="nf">rstrip</span><span class="p">())</span> <span class="c1"># store journal to the list, after processing the data using functions such as replace, lstrip, rstrip
+</span>                
+        <span class="n">checktime</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"{} of {} pages scraped. {} seconds elapsed"</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">numpages</span><span class="p">,</span><span class="nf">round</span><span class="p">(</span><span class="n">checktime</span><span class="o">-</span><span class="n">starttime</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span> <span class="c1"># display a message informing progress
+</span>
+    <span class="n">df_papers</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span> <span class="c1"># combine the lists containing data as a dataframe
+</span>        <span class="p">{</span>
+            <span class="s">"Title"</span><span class="p">:</span> <span class="n">papertitle</span><span class="p">,</span>
+            <span class="s">"Authors"</span><span class="p">:</span> <span class="n">authors</span><span class="p">,</span>
+            <span class="s">"Affiliations"</span><span class="p">:</span> <span class="n">affiliations</span><span class="p">,</span>
+            <span class="s">"Keywords"</span><span class="p">:</span> <span class="n">keywords</span><span class="p">,</span>
+            <span class="s">"Date"</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span>
+            <span class="s">"Journal"</span><span class="p">:</span> <span class="n">journals</span><span class="p">,</span>
+            <span class="s">"URL"</span><span class="p">:</span> <span class="n">urls</span><span class="p">,</span>
+            <span class="s">"Searchword:{}"</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">searchword</span><span class="p">):</span> <span class="bp">None</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    
+    <span class="n">df_papers</span><span class="p">.</span><span class="nf">to_excel</span><span class="p">(</span><span class="s">'results_{}.xlsx'</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">().</span><span class="nf">replace</span><span class="p">(</span><span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">)).</span><span class="nf">replace</span><span class="p">(</span><span class="s">":"</span><span class="p">,</span><span class="s">"-"</span><span class="p">)))</span> <span class="c1"># export the dataframe as an excel file    
+</span>    <span class="nf">print</span><span class="p">(</span><span class="s">"Excel file exported."</span><span class="p">)</span>
+</code></pre></div></div>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#beautifulsoup" class="page__taxonomy-item p-category" rel="tag">BeautifulSoup</a><span class="sep">, </span>
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">python</a>
+    
+    </span>
+  </p>
+
+
+
+<!-- 
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#code" class="page__taxonomy-item p-category" rel="tag">Code</a><span class="sep">, </span>
+    
+      <a href="/categories/#exampleoutputname" class="page__taxonomy-item p-category" rel="tag">exampleoutputname</a>
+    
+    </span>
+  </p>
+
+ -->
+        <!-- 
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-04-04T00:00:00+09:00">2023-04-04</time></p>
+ -->
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <!-- <a href="https://twitter.com/intent/tweet?text=Web+scrapper+example%20http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Fscrapper.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Fscrapper.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Fscrapper.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      <p></p>
+        <h4 class="page__meta-title"><span>exampleoutputname</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  	
+  	
+  	
+  	
+  	
+
+<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
+
+  
+    
+      <a href="/2023/04/termproject.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>Example of MD file</a>
+    
+    
+      <a href="/2023/04/regression.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>회귀분석 관련 정리</a>
+        
+  
+
+</nav>
+      <p></p>
+    </div>
+
+    
+  </article>
+
+  
+  <!-- 
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/regressiontwo.html" rel="permalink">회귀분석 관련 정리 2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-09T00:00:00+09:00">2023-04-09</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Ordinary least squares
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/regressionthree.html" rel="permalink">회귀분석 관련 정리 3
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-09T00:00:00+09:00">2023-04-09</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Ordinary least squares
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/regressionone.html" rel="permalink">회귀분석 관련 정리 1
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-09T00:00:00+09:00">2023-04-09</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Ordinary least squares
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/regressiontwo.html" rel="permalink">회귀분석 관련 정리 2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-09T00:00:00+09:00">2023-04-09</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Ordinary least squares
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div> -->
+  
+  <!--  -->
+</div>
+
+  </div>
+
+  
+
+  <aside class="sidebar__top">
+    <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside>
+
+  <div id="footer" class="page__footer">
+    <footer>
+      <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+      <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://blog.naver.com/song4energy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Jeonghun Song. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+    </footer>
+  </div>
+
+  
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
