@@ -1,0 +1,899 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+
+<head>
+  <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>데이터 전처리 예시 - 주택의 분 단위 전기부하 자료 | A test page</title>
+<meta name="description" content="데이터 소개">
+
+
+  <meta name="author" content="Jeonghun Song">
+  
+  <meta property="article:author" content="Jeonghun Song">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="A test page">
+<meta property="og:title" content="데이터 전처리 예시 - 주택의 분 단위 전기부하 자료">
+<meta property="og:url" content="http://localhost:4000/2023/04/preprocessmocanu.html">
+
+
+  <meta property="og:description" content="데이터 소개">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-04-09T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/2023/04/preprocessmocanu.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Jeonghun Song",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="A test page Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<!-- end custom head snippets -->
+</head>
+
+<body
+  class="layout--single">
+  <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+  
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="A test page"></a>
+        
+        <a class="site-title" href="/">
+          A test page
+          <span class="site-subtitle">learning Github Page</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/aboutme/">About Me</a>
+            </li><li class="masthead__menu-item">
+              <a href="/search/">Search</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tag</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">카테고리 목록</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+  <div class="initial-content">
+    
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#2023" itemprop="item"><span itemprop="name">2023</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#04" itemprop="item"><span itemprop="name">04</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">데이터 전처리 예시 - 주택의 분 단위 전기부하 자료</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+    
+  
+  
+  
+  
+    
+    
+      
+    
+    
+  
+  
+   <!-- three lines added by Jeonghun  -->
+    
+
+<nav class="nav__list">
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">카테고리 목록</label>
+  <ul class="nav__items" id="category_tag_menu">
+      <!--전체 글 수-->
+      <li>
+            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">21</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
+      </li>
+      <li>
+        <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
+        <span class="nav__sub-title">범주1</span>
+            <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
+                <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/code" class="">코드 (1)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/theory" class="">이론 (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/energy" class="">에너지 (15)</a></li>
+                    
+                
+            </ul>
+        <span class="nav__sub-title">범주2</span>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/project" class="">프로젝트 (1)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/etc" class="">기타 (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+      </li>
+  </ul>
+</nav>
+  
+  
+
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="데이터 전처리 예시 - 주택의 분 단위 전기부하 자료">
+    <meta itemprop="description" content="데이터 소개">
+    <meta itemprop="datePublished" content="2023-04-09T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/2023/04/preprocessmocanu.html" class="u-url" itemprop="url">데이터 전처리 예시 - 주택의 분 단위 전기부하 자료
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-09T00:00:00+09:00">2023-04-09</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#데이터-소개">데이터 소개</a></li><li><a href="#데이터-전처리">데이터 전처리</a></li></ul>
+ <!-- 우측 TOC -->
+            </nav>
+          </aside>
+        
+        <h2 id="데이터-소개">데이터 소개</h2>
+
+<p>스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 ‘스마트그리드 빅데이터 분석의 활용’ 이 있다. <a href="https://www.yes24.com/Product/Goods/86365343">(링크)<a></a></a></p>
+
+<p>이 책의 7장 ‘딥러닝을 이용한 스마트그리드 데이터 분석’ 에서는, 널리 알려진 backpropagation 기반 ANN 모델 뿐 아니라 (Factored Conditional) Restricted Boltzmann Machine 기반 모델을 이용해 전력 부하를 예측하는 연구를 소개한다. <a href="https://www.sciencedirect.com/science/article/abs/pii/S2352467716000163">(원본 논문 링크)<a></a></a></p>
+
+<p>해당 연구에서 사용한 데이터는, 프랑스 내 특정 가구의 전기 부하를 1분 단위로 총 4년에 가까운 기간 동안 측정한 데이터이다. <a href="http://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption#">(링크)<a></a></a></p>
+
+<p>이 포스팅은, 해당 데이터를 Python을 이용한 분석에 사용할 수 있도록 전처리하는 과정을 기록한 것이다.</p>
+
+<p><br /></p>
+
+<h2 id="데이터-전처리">데이터 전처리</h2>
+
+<p>먼저 다운받은 txt 파일을 SQL DB 파일로 변환한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
+</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="s">'household_power_consumption.txt'</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s">';'</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="n">sqlite3</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">'db_powerconsumption.db'</span><span class="p">)</span>
+
+<span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span> 
+
+<span class="k">with</span> <span class="n">conn</span><span class="p">:</span> 
+    
+    <span class="n">sql_create</span> <span class="o">=</span> <span class="s">"""
+    create table Individualhousehold
+    (date text,
+     time text,
+     global_active_power numeric,
+     global_reactive_power numeric,
+     voltage numeric,
+     global_intensity numeric,
+     sub_metering_1 integer,
+     sub_metering_2 integer,
+     sub_metering_3 integer
+    )
+    """</span>
+    
+    <span class="n">cur</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">sql_create</span><span class="p">)</span>
+    
+<span class="n">data</span><span class="p">.</span><span class="nf">to_sql</span><span class="p">(</span><span class="s">'Individualhousehold'</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s">'append'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>다음으로 누락치를 메꾼다. 원본 파일 및 SQL table을 불러온 파일에는 누락치가 ?로 표기되어 있다.</p>
+
+<p>(스크린샷)</p>
+
+<p>누락치를 메꾸는 코드는 다음과 같다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
+</span>
+
+<span class="c1"># SQLite DB로부터 분별 유효전력 데이터 불러오기
+</span><span class="n">your_query</span> <span class="o">=</span> <span class="s">"""
+select date, time, global_active_power from Individualhousehold
+"""</span>
+
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="n">sqlite3</span>
+<span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">"db_powerconsumption.db"</span><span class="p">)</span> <span class="c1"># .db 까먹지 말 것
+</span>
+<span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">conn</span><span class="p">:</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">your_query</span><span class="p">).</span><span class="nf">fetchall</span><span class="p">())</span>
+    <span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cur</span><span class="p">.</span><span class="n">description</span><span class="p">]</span>
+<span class="n">conn</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>    
+
+
+<span class="c1"># 데이터 타입이 object이므로 이를 float로 변경, 일부 값들이 ?이므로 먼저 str로 변경 후 0으로 대체 후 float로 변경
+</span><span class="n">df</span><span class="p">.</span><span class="n">dtypes</span>
+<span class="n">df</span><span class="p">[</span><span class="s">'global_active_power'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'global_active_power'</span><span class="p">].</span><span class="nf">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="s">'?'</span><span class="p">,</span><span class="s">'0'</span><span class="p">).</span><span class="nf">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'date'</span><span class="p">]</span> <span class="o">+</span><span class="s">' '</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s">'time'</span><span class="p">]</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">],</span><span class="nb">format</span> <span class="o">=</span><span class="s">'%d/%m/%Y %H:%M:%S'</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s">'datetime'</span><span class="p">,</span><span class="s">'global_active_power'</span><span class="p">]]</span>
+
+<span class="c1"># ?이었던 (그리고 임시로 0으로 바뀐) 데이터 imputation: 논문에서는 타 년도의 같은 시점의 값의 평균으로 함
+</span>
+<span class="n">list_year</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2006</span><span class="p">,</span><span class="mi">2007</span><span class="p">,</span><span class="mi">2008</span><span class="p">,</span><span class="mi">2009</span><span class="p">,</span><span class="mi">2010</span><span class="p">]</span>
+<span class="n">is_dropped</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'global_active_power'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># ?이었던 행만 모음
+</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">is_dropped</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">num_for_impute</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># 각 누락시점별로 타 년도의 같은 시점의 전기사용량을 모을 임시리스
+</span>    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">list_year</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_dropped</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">].</span><span class="nf">date</span><span class="p">().</span><span class="n">year</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span> <span class="c1"># 누락시점의 연도가 아닌 경우
+</span>            <span class="n">temp_dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> 
+                              <span class="n">month</span><span class="o">=</span><span class="n">is_dropped</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">].</span><span class="nf">date</span><span class="p">().</span><span class="n">month</span><span class="p">,</span> 
+                              <span class="n">day</span><span class="o">=</span><span class="n">is_dropped</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">].</span><span class="nf">date</span><span class="p">().</span><span class="n">day</span><span class="p">,</span>
+                              <span class="n">hour</span><span class="o">=</span><span class="n">is_dropped</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">].</span><span class="nf">time</span><span class="p">().</span><span class="n">hour</span><span class="p">,</span>
+                              <span class="n">minute</span><span class="o">=</span><span class="n">is_dropped</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">].</span><span class="nf">time</span><span class="p">().</span><span class="n">minute</span><span class="p">)</span>   
+            <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span><span class="o">==</span><span class="n">temp_dt</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># 그 연도에 해당 날짜가 있으면
+</span>                <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span><span class="o">==</span><span class="n">temp_dt</span><span class="p">].</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span> <span class="c1"># 그 데이터가 0(누락)이 아니면
+</span>                    <span class="n">num_for_impute</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span><span class="o">==</span><span class="n">temp_dt</span><span class="p">].</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># 해당 연도의 그 시점의 전력사용량 데이터를 임시리스트에 저장
+</span>    <span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span><span class="o">==</span><span class="n">is_dropped</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="s">'global_active_power'</span><span class="p">]</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">num_for_impute</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">num_for_impute</span><span class="p">),</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># 타년도 같은시점의 전력사용 데이터들의 평균값을 임시리스트로부터 계산, 소수점 셋째자리에서 반올림한 후 impute
+</span>    <span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">connn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">"db_powerconsumption.db"</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="nf">to_sql</span><span class="p">(</span><span class="s">'active_corrected_Individualhousehold'</span><span class="p">,</span> <span class="n">connn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s">'append'</span><span class="p">)</span> <span class="c1"># 별도의 SQLite DB로 저장
+</span></code></pre></div></div>
+
+<p>Pandas dataframe으로 불러올 경우 모든 칼럼들의 데이터타입이 object이기 때문에, 전처리를 하려면 데이터타입을 변경해야 한다.</p>
+
+<p>우선 전기부하의 경우 누락치가 ?으로 되어 있으므로, 먼저 데이터타입을 string으로 바꾼 후 ?를 0으로 바꾸고 나서 다시 데이터타입을 float으로 바꿨다.</p>
+
+<p>날짜와 시간의 경우, 원본 데이터에서는 날짜와 시간이 두 칼럼으로 분리되어 있지만 필자는 한번에 처리하기 위해 이를 하나로 합쳤다. 그리고 데이터타입을 datetime으로 바꿨다. (Python에서 날짜와 시간을 다루는 datetime 라이브러리를 불러와야 함)</p>
+
+<p>논문에서는 특정 시점의 누락치를, 타 년도의 같은 시점 (같은 월/ 일/ 시간/ 분) 의 값들의 산술평균으로 대체했다. (참고로 이 데이터에는 특정 시점의 전기부하 값의 누락은 있어도, 시점 자체의 누락은 없다, 즉 시작 시점부터 끝 시점까지의 모든 1분 간격 시간들이 각 row로써 존재한다.)</p>
+
+<p>이를 수행하기 위해, is_dropped에 누락 시점들을 모으고, 데이터셋에 해당 누락 시점과 연도만 다르고 나머지는 같은 시간이 각 연도별로 있는지, 있다면 전기부하 값이 0이 아닌지를 확인해서 그 값들을 num_for_impute에 모으고 평균을 내서 누락치를 대체한다.</p>
+
+<p>마지막으로, 누락치를 대체한 데이터셋을 논문 내 시나리오 (15분 평균, 1시간 평균, 1주일 평균) 에 따라 쓸 수 있도록 시나리오별 timestep 단위 평균 데이터를 만든다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
+</span>
+<span class="c1"># SQLite DB로부터 분별 유효전력 데이터 불러오기
+</span><span class="n">your_query</span> <span class="o">=</span> <span class="s">"""
+select * from active_corrected_Individualhousehold
+"""</span>
+
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">sqlite3</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">"db_powerconsumption.db"</span><span class="p">)</span> <span class="c1"># .db 까먹지 말 것
+</span>
+<span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">conn</span><span class="p">:</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">your_query</span><span class="p">).</span><span class="nf">fetchall</span><span class="p">())</span>
+    <span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cur</span><span class="p">.</span><span class="n">description</span><span class="p">]</span>
+<span class="n">conn</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>    
+<span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">],</span><span class="nb">format</span> <span class="o">=</span><span class="s">'%Y-%m-%d %H:%M:%S'</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">dtypes</span>
+
+<span class="c1"># 15분 평균 데이터 생성
+</span>
+<span class="c1"># 먼저, 시작을 0분/ 15분/ 30분/ 45분 중 하나로, 끝을 14분/ 29분/ 44분/ 59분 중 하나로 맞추기
+</span><span class="n">df_temp</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">&gt;=</span><span class="s">'2006-12-16 17:30:00'</span><span class="p">]</span> <span class="c1"># 데이터의 시작시점(2006-12-16 17:24:00) 에 가장 가까운 0분/15분/30분/45분  
+</span><span class="n">df_temp</span> <span class="o">=</span> <span class="n">df_temp</span><span class="p">[</span><span class="n">df_temp</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">&lt;=</span><span class="s">'2010-11-26 20:59:00'</span><span class="p">]</span> <span class="c1"># 데이터의 종료시점(20010-11-26 21:02:00) 에 가장 가까운 14분/39분/44분/59분, 우변에 df_temp 가 아니라 df로 착각하지 않도록 주의
+</span><span class="n">activepower_avg_temp</span> <span class="o">=</span> <span class="n">df_temp</span><span class="p">[</span><span class="s">'global_active_power'</span><span class="p">].</span><span class="nf">to_numpy</span><span class="p">().</span><span class="nf">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">15</span><span class="p">)).</span><span class="nf">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># mean(axis=1) 로 평균내기
+</span>
+
+
+<span class="c1"># 1시간 평균 데이터 생성
+# 먼저, 시작을 0분, 끝을 59분으로 맞추기
+</span><span class="n">df_temp</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">&gt;=</span><span class="s">'2006-12-16 18:00:00'</span><span class="p">]</span>
+<span class="n">df_temp</span> <span class="o">=</span> <span class="n">df_temp</span><span class="p">[</span><span class="n">df_temp</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">&lt;=</span><span class="s">'2010-11-26 20:59:00'</span><span class="p">]</span>
+<span class="n">activepower_avg_temp</span> <span class="o">=</span> <span class="n">df_temp</span><span class="p">[</span><span class="s">'global_active_power'</span><span class="p">].</span><span class="nf">to_numpy</span><span class="p">().</span><span class="nf">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">60</span><span class="p">)).</span><span class="nf">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="c1"># 1주일 평균 데이터 생성
+# 시작일을 2006년 12월 17일(일요일) 0시 0분으로, 끝을 2010년 11월 20일(토요일) 23시 59분으로 맞추기 
+</span><span class="n">df_temp</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">&gt;=</span><span class="s">'2006-12-17 00:00:00'</span><span class="p">]</span>
+<span class="n">df_temp</span> <span class="o">=</span> <span class="n">df_temp</span><span class="p">[</span><span class="n">df_temp</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">&lt;=</span><span class="s">'2010-11-20 23:59:00'</span><span class="p">]</span>
+<span class="n">activepower_avg_temp</span> <span class="o">=</span> <span class="n">df_temp</span><span class="p">[</span><span class="s">'global_active_power'</span><span class="p">].</span><span class="nf">to_numpy</span><span class="p">().</span><span class="nf">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">60</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">7</span><span class="p">)).</span><span class="nf">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#beautifulsoup" class="page__taxonomy-item p-category" rel="tag">BeautifulSoup</a><span class="sep">, </span>
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">python</a>
+    
+    </span>
+  </p>
+
+
+
+<!-- 
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#energy" class="page__taxonomy-item p-category" rel="tag">Energy</a>
+    
+    </span>
+  </p>
+
+ -->
+        <!-- 
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-04-09T00:00:00+09:00">2023-04-09</time></p>
+ -->
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EB%8D%B0%EC%9D%B4%ED%84%B0+%EC%A0%84%EC%B2%98%EB%A6%AC+%EC%98%88%EC%8B%9C+-+%EC%A3%BC%ED%83%9D%EC%9D%98+%EB%B6%84+%EB%8B%A8%EC%9C%84+%EC%A0%84%EA%B8%B0%EB%B6%80%ED%95%98+%EC%9E%90%EB%A3%8C%20http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Fpreprocessmocanu.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Fpreprocessmocanu.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Fpreprocessmocanu.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      <p></p>
+        <h4 class="page__meta-title"><span>Energy</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  	
+  	
+  	
+  	
+  	
+
+<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
+
+  
+    
+      <a href="/2023/04/linprogone.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>정수선형계획법 기반 분산에너지시스템 최적화 설명 - 1) 최소비용 시스템과 시간별 자료의 중요성</a>
+    
+    
+      <a href="/2023/04/mypapertwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>내 Applied Energy 논문의 수학 설명 - 도심지 건축물 신재생 설치 확대 영향을 '빨리' 분석하기</a>
+        
+  
+
+</nav>
+      <p></p>
+    </div>
+
+    
+  </article>
+
+  
+  <!-- 
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/monthlyenergyone.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-20T00:00:00+09:00">2023-04-20</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-19T00:00:00+09:00">2023-04-19</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learnin...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/reinforcefour.html" rel="permalink">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 4) DDPG를 통한 continuous control 도출
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-18T00:00:00+09:00">2023-04-18</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 마이크로그리드에 discrete action 기반의 심층강화학습을 적용해 과거 시점의데이터 기반으로 control을 결정하는 방법을 알아보았다. 그러나 실제로는 continuous action이므로, continuous action을 다루는 심층강화학습 기법을 적...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/reinforcethree.html" rel="permalink">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-17T00:00:00+09:00">2023-04-17</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서도 언급했듯, 이 문제에서 state는 직전 24시간 동안의 태양광 발전량과 부하 및 직전 1시간의 배터리 내 에너지양이고, action은 1.1kW 수전/ 1.1kW 송전/ idle 3가지이다. (action 인덱스는 0,1,2라 하자). 이 때 심층신경망은 sta...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div> -->
+  
+  <!--  -->
+</div>
+
+  </div>
+
+  
+
+  <aside class="sidebar__top">
+    <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside>
+
+  <div id="footer" class="page__footer">
+    <footer>
+      <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+      <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://blog.naver.com/song4energy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Jeonghun Song. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+    </footer>
+  </div>
+
+  
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

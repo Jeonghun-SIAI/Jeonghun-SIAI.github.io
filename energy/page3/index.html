@@ -10,7 +10,7 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>프로젝트 | A test page</title>
+<!-- begin _includes/seo.html --><title>에너지 | A test page &#124; 페이지 3</title>
 <meta name="description" content="GitHub Page를 익히기 위한 테스트 페이지입니다">
 
 
@@ -21,8 +21,8 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="A test page">
-<meta property="og:title" content="프로젝트">
-<meta property="og:url" content="http://localhost:4000/project/">
+<meta property="og:title" content="에너지">
+<meta property="og:url" content="http://localhost:4000/energy/page3/">
 
 
   <meta property="og:description" content="GitHub Page를 익히기 위한 테스트 페이지입니다">
@@ -42,9 +42,13 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/project/">
+<link rel="canonical" href="http://localhost:4000/energy/page3/">
 
 
+  <link rel="prev" href="http://localhost:4000/energy/page2/">
+
+
+  <link rel="next" href="http://localhost:4000/energy/page4/">
 
 
 <script type="application/ld+json">
@@ -380,7 +384,7 @@
 
   <div class="archive">
     
-      <h1 id="page-title" class="page__title">프로젝트</h1>
+      <h1 id="page-title" class="page__title">에너지</h1>
     
     <!-- Just some nice to have styles for the pager buttons -->
 <style>
@@ -402,11 +406,31 @@
     
       <li>
         <h2>
-          <a class="post-link" href="/2023/04/termproject.html">Example of MD file</a>
+          <a class="post-link" href="/2023/04/linprogfour.html">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 4) 태양광과 배터리의 용량 정하기</a>
         </h2>
-        <span class="post-meta">Apr 4, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">Term project for COM506-Data Management
-An automated data pipeline for scraping book information from an online bookseller and storing it to SQL/ NoSQL datab...</p>
+        <span class="post-meta">Apr 14, 2023</span>
+        <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서는 `주어진 용량의’ 배터리가 건물에 설치된 경우의 시간별 최소비용 충/방전 스케줄을 구하기 위한 선형계획법 문제 수식 구성 및 코딩을 설명했다.
+</p>
+        
+      </li>
+    
+      <li>
+        <h2>
+          <a class="post-link" href="/2023/04/linprogthree.html">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 3) 배터리의 충/방전 스케줄 정하기: Python 코드</a>
+        </h2>
+        <span class="post-meta">Apr 13, 2023</span>
+        <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서 봤던 문제에서는 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었다. 이 경우, 선형계획법 (Linear Programming) 을 이용해서 풀 수 있다.
+</p>
+        
+      </li>
+    
+      <li>
+        <h2>
+          <a class="post-link" href="/2023/04/linprogtwo.html">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 2) 배터리의 충/방전 스케줄 정하기: 수식</a>
+        </h2>
+        <span class="post-meta">Apr 12, 2023</span>
+        <p class="archive__item-excerpt" itemprop="description">이제 본격적으로, 분산형 에너지시스템 도입의 경제적 안 도출을 위한 수학적 최적화 문제 구성을 알아보기로 한다.
+</p>
         
       </li>
     
@@ -416,7 +440,76 @@ An automated data pipeline for scraping book information from an online booksell
     Showing buttons to move to the next and to the previous list of posts (pager buttons).
   -->
   <!-- 
+<nav class="pagination">
+  
+  <ul>
+    
+    
+      
+        <li><a href="/page2">이전</a></li>
+      
+    
+
+    
+    
+      <li><a href="/energy/">1</a></li>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+        
+        
+        
+        <li><a href="/page2">2</a></li>
+      
+    
+      
+        <li><a href="/page3" class="disabled current">3</a></li>
+      
+    
+      
+        
+        
+        
+        <li><a href="/page4">4</a></li>
+      
+    
+
+    
+    
+
+    
+      <li><a href="/page5">5</a></li>
+    
+
+    
+    
+      <li><a href="/page4">다음</a></li>
+    
+  </ul>
+</nav>
+
  -->
+  
+  <ul class="pager">
+      
+      <li class="previous">
+          <a href="/energy/page2/"><b>&#9664; Newer Posts</b></a>
+      </li>
+      
+      
+      <li class="next">
+          <a href="/energy/page4/"><b>Older Posts &#9654;</b></a>
+      </li>
+      
+  </ul>
   
 
   <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
@@ -445,7 +538,7 @@ layout: archive
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/termproject.html" rel="permalink">Example of MD file
+        <a href="/2023/04/linprogfour.html" rel="permalink">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 4) 태양광과 배터리의 용량 정하기
 </a>
       
     </h2>
@@ -457,7 +550,7 @@ layout: archive
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-04T00:00:00+09:00">2023-04-04</time>
+        <time datetime="2023-04-14T00:00:00+09:00">2023-04-14</time>
       </span>
     
 
@@ -467,14 +560,144 @@ layout: archive
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Term project for COM506-Data Management
-An automated data pipeline for scraping book information from an online bookseller and storing it to SQL/ NoSQL datab...</p>
+    <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서는 `주어진 용량의’ 배터리가 건물에 설치된 경우의 시간별 최소비용 충/방전 스케줄을 구하기 위한 선형계획법 문제 수식 구성 및 코딩을 설명했다.
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/linprogthree.html" rel="permalink">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 3) 배터리의 충/방전 스케줄 정하기: Python 코드
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-13T00:00:00+09:00">2023-04-13</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서 봤던 문제에서는 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었다. 이 경우, 선형계획법 (Linear Programming) 을 이용해서 풀 수 있다.
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/linprogtwo.html" rel="permalink">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 2) 배터리의 충/방전 스케줄 정하기: 수식
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-12T00:00:00+09:00">2023-04-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이제 본격적으로, 분산형 에너지시스템 도입의 경제적 안 도출을 위한 수학적 최적화 문제 구성을 알아보기로 한다.
+</p>
   </article>
 </div>
 
   
 </div>
 
+
+<nav class="pagination">
+  
+  <ul>
+    
+    
+      
+        <li><a href="/page2">이전</a></li>
+      
+    
+
+    
+    
+      <li><a href="/energy/">1</a></li>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+        
+        
+        
+        <li><a href="/page2">2</a></li>
+      
+    
+      
+        <li><a href="/page3" class="disabled current">3</a></li>
+      
+    
+      
+        
+        
+        
+        <li><a href="/page4">4</a></li>
+      
+    
+
+    
+    
+
+    
+      <li><a href="/page5">5</a></li>
+    
+
+    
+    
+      <li><a href="/page4">다음</a></li>
+    
+  </ul>
+</nav>
 
  -->
 

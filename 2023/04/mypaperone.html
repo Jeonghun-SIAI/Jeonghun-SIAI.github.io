@@ -10,8 +10,8 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>A new example | A test page</title>
-<meta name="description" content="A trivial file created in and pushed from my PC">
+<!-- begin _includes/seo.html --><title>내 Applied Energy 논문의 수학 설명 - ‘가짜’ curtailment 문제 | A test page</title>
+<meta name="description" content="논문 배경 필자는 박사과정 동안 수행했던 연구들로, 국제학술지 Applied Energy에 제1저자 논문 2편을 게재하였다. (조금 자기PR 하자면, Applied Energy의 Impact Factor는 2020년 이전에도 7~8이었고 지금은 10이 넘으며, SJR에서 Energy(Miscellaneous) 부문에 속하는 100개 이상의 저널들 중 한 자리 등수를 유지해오고 있다. 필자의 논문들도 지금까지 각각 10번 이상 인용되었다.)">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -23,30 +23,30 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="A test page">
-<meta property="og:title" content="A new example">
-<meta property="og:url" content="http://localhost:4000/2023/04/frompc.html">
+<meta property="og:title" content="내 Applied Energy 논문의 수학 설명 - ‘가짜’ curtailment 문제">
+<meta property="og:url" content="http://localhost:4000/2023/04/mypaperone.html">
 
 
-  <meta property="og:description" content="A trivial file created in and pushed from my PC">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2023-04-04T00:00:00+09:00">
+  <meta property="og:description" content="논문 배경 필자는 박사과정 동안 수행했던 연구들로, 국제학술지 Applied Energy에 제1저자 논문 2편을 게재하였다. (조금 자기PR 하자면, Applied Energy의 Impact Factor는 2020년 이전에도 7~8이었고 지금은 10이 넘으며, SJR에서 Energy(Miscellaneous) 부문에 속하는 100개 이상의 저널들 중 한 자리 등수를 유지해오고 있다. 필자의 논문들도 지금까지 각각 10번 이상 인용되었다.)">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2023-04-07T00:00:00+09:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/2023/04/frompc.html">
+
+<link rel="canonical" href="http://localhost:4000/2023/04/mypaperone.html">
 
 
 
@@ -220,7 +220,7 @@
     
       
       
-        <li class="current">A new example</li>
+        <li class="current">내 Applied Energy 논문의 수학 설명 - '가짜' curtailment 문제</li>
       
     
   </ol>
@@ -350,16 +350,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="A new example">
-    <meta itemprop="description" content="A trivial file created in and pushed from my PC">
-    <meta itemprop="datePublished" content="2023-04-04T00:00:00+09:00">
+    <meta itemprop="headline" content="내 Applied Energy 논문의 수학 설명 - ‘가짜’ curtailment 문제">
+    <meta itemprop="description" content="논문 배경필자는 박사과정 동안 수행했던 연구들로, 국제학술지 Applied Energy에 제1저자 논문 2편을 게재하였다. (조금 자기PR 하자면, Applied Energy의 Impact Factor는 2020년 이전에도 7~8이었고 지금은 10이 넘으며, SJR에서 Energy(Miscellaneous) 부문에 속하는 100개 이상의 저널들 중 한 자리 등수를 유지해오고 있다. 필자의 논문들도 지금까지 각각 10번 이상 인용되었다.)">
+    <meta itemprop="datePublished" content="2023-04-07T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/2023/04/frompc.html" class="u-url" itemprop="url">A new example
+            <a href="http://localhost:4000/2023/04/mypaperone.html" class="u-url" itemprop="url">내 Applied Energy 논문의 수학 설명 - ‘가짜’ curtailment 문제
 </a>
           </h1>
           
@@ -370,7 +370,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-04T00:00:00+09:00">2023-04-04</time>
+        <time datetime="2023-04-07T00:00:00+09:00">2023-04-07</time>
       </span>
     
 
@@ -385,45 +385,102 @@
 
       <section class="page__content e-content" itemprop="text">
         
-          <aside class="sidebar__right ">
+          <aside class="sidebar__right sticky">
             <nav class="toc">
-              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header> 
-              
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#논문-배경">논문 배경</a></li><li><a href="#최적화-모델링">최적화 모델링</a></li><li><a href="#curtailment-제한-제약-추가-시-발생한-문제">Curtailment 제한 제약 추가 시 발생한 문제</a></li><li><a href="#문제의-원인-및-해결책">문제의 원인 및 해결책</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <p>A trivial file created in and pushed from my PC</p>
+        <h2 id="논문-배경">논문 배경</h2>
+<p>필자는 박사과정 동안 수행했던 연구들로, 국제학술지 <a href="https://www.sciencedirect.com/journal/applied-energy">Applied Energy</a>에 제1저자 논문 2편을 게재하였다. (조금 자기PR 하자면, Applied Energy의 Impact Factor는 2020년 이전에도 7~8이었고 지금은 10이 넘으며, SJR에서 Energy(Miscellaneous) 부문에 속하는 100개 이상의 저널들 중 한 자리 등수를 유지해오고 있다. 필자의 논문들도 지금까지 각각 10번 이상 인용되었다.)</p>
 
-<p><img src="/assets/images/q1_2_qqplot.png" alt="q1_2_qqplot" /></p>
+<p>그 중 <a href="https://doi.org/10.1016/j.apenergy.2018.04.131">첫 번째 논문</a>의 주제는 ‘태양광/ 풍력/ ESS를 포함한 고립계통에서 재생에너지 출력제한(curtailment)의 총량에 상한을 둘 경우’에 대한 최적화 문제 세팅 및 분석이다.</p>
 
-<p><img src="/assets/images/2023-04-04-frompc/EigenFace.png" alt="EigenFace" style="zoom:2000%;" /></p>
+<p>출력제한은 필자가 논문을 쓰던 당시에는 ‘가까운 미래의 일’ 정도로 생각되었으나, 최근에는 실제로 이슈가 되고 있다. 대략 2021년 즈음부터 제주도에서 태양광과 풍력의 출력제한 증가가 본격적으로 언론에 보도되기 시작하였고, 재생발전 출력제한에 따른 사업자들의 손실 우려 및 보상 방안에 대한 논의가 필요한 상황이다.</p>
 
-<p class="notice--primary">This is an eigenface</p>
+<p>(구글 ‘제주도 출력제한’ 스크린샷)</p>
 
-<p><img src="/assets/images/2023-04-04-frompc/q2_4_scaledplot.png" alt="q2_4_scaledplot" class="align-center" /></p>
+<p>이 포스팅에서는, 위 논문에 사용한 직관 및 수학 내용을 정리해 본다.</p>
 
-<div class="notice--danger">
-<h4>This is an example of Fisher's linear discriminant analysis</h4>
-<ul>
-    <li> Two dimensional data </li>
-    <li> Three classes </li>
-</ul>
-</div>
+<p><br />
+대상 에너지시스템은 태양광 + 풍력 + 디젤 + ESS로 전기부하를 공급하며 중앙계통과는 분리되어 있다 (녹색섬이라 생각하자). 혹시 재생발전량이 0이더라도, 디젤발전기만으로 부하 충당 자체는 가능하다. 반대로 재생발전량이 너무 많아 부하 충족은 물론 ESS 완충까지 하더라도 전기가 남을 경우 이는 특별한 용도 없이 dump load에서 소비된다, 즉 출력제한(curtail)된다. 이 때 녹색섬이라 불리려면, 전체 전기에너지 수요의 일정 비율은 재생발전으로 충당해야 한다.</p>
 
-<p>$y = X \beta + \epsilon$ 일 때, OLS estimator는
-$\hat{\beta} = (X’X)^{-1}X’y$ 로 주어짐</p>
+<p>(도식도)</p>
 
-<p><a href="https://product.kyobobook.co.kr/detail/S000001681559" class="btn btn--danger">추천교재</a></p>
+<p><br /></p>
 
-<p><a href="/assets/files/linearalgebra_.pdf" class="btn btn--danger">정리본다운</a></p>
+<h2 id="최적화-모델링">최적화 모델링</h2>
+<p>그러면 태양광/ 풍력/ ESS는 각각 어느 정도의 용량으로 설치해야 할까? 이는 특정 기간의 시간별 전기부하, 일사량, 풍속을 input 자료로 사용하여, 재생발전기 초기설치비용과 운영기간 내 디젤 연료비의 총 합을 최소화하는 태양광/ 풍력/ ESS 각각의 용량을 도출하는 최적화 문제를 풀어서 결정할 수 있다. 수식은 아래와 같다.</p>
 
-<!-- Courtesy of embedresponsively.com -->
+<p>Minimize $c_{pv} S_{pv} + c_{wt} S_{wt} + c_{batt} S_{batt} + c_{diesel} \sum_{t} P_{diesel}[t]$</p>
 
-<div class="responsive-video-container">
-    <iframe src="https://www.youtube-nocookie.com/embed/ACzFIAOsfpM" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
-  </div>
+<p>Subject to</p>
 
+<p>$P_{load}[t] = P_{diesel}[t] + S_{pv} P_{pv}[t] + S_{wt} P_{wt}[t] + P_{disch}[t] – P_{ch}[t] – P_{dump}[t]$</p>
+
+<p>$E_{batt}[t+1] = E_{batt}[t] + \mu P_{ch}[t] – P_{disch} /\mu$</p>
+
+<p>$ E_{batt}[t] \leq S_{batt} $</p>
+
+<p>$ P_{ch}[t] \leq \gamma S_{batt}$</p>
+
+<p>$ P_{disch}[t] \leq \gamma S_{batt}$</p>
+
+<p>$ P_{ch}[t] P_{disch}[t] = 0$</p>
+
+<p>$ \sum_{t} P_{diesel}[t] \leq (1-\alpha_{renewable}) \sum_{t} P_{load}[t] $</p>
+
+<p>위에서 $S$는 용량, $P$는 전력, $E$는 저장된 에너지, $\mu$는 효율, $\alpha$는 규정 비율이며, pv는 태양광, wt는 풍력, batt는 배터리, load는 부하, diesel은 디젤엔진, ch는 충전, disch는 방전, dump는 출력제한이다. $S_{wt}$는 풍력 발전기의 대수이므로 nonnegative integer이며, 나머지는 nonnegative real number$들이다.</p>
+
+<p><br />
+위에서 제약조건 ()은, 한 time step 내에서 ESS는 충전 또는 방전 둘 중 하나만을 수행한다는 제약이다. 충전항과 방전항이 동시에 양수가 되지 않도록 두 항 간 곱이 0이라는 제약을 둔다.</p>
+
+<p>문제는, 이 제약조건이 nonlinear equality constraint이므로 문제를 nonlinear non-convex problem로 만든다는 것이다.</p>
+
+<p>만약 아래와 같이 시간별 이진수 $x[t]$를 도입하면, 문제를 최소한 linear form으로는 바꿀 수 있다.</p>
+
+<p>$ P_{disch}[t] \leq M x[t]$, $P_{ch}[t] \leq M (1-x[t]) $</p>
+
+<p>그러나 이 경우, 이진수가 너무 많아져서 계산 시간이 매우 오래 걸린다는 문제가 있다.</p>
+
+<p>이 문제를 해결하는, 구체적으로는 시간별 이진수 없는 linear convex problem으로 만들면서도 거의 같은 답을 얻는 방법이 있다. 위 제약 ()을 없애는 대신, 아래와 같이 목적함수에 충전항과 방전항에 아주 작은 양수계수를 곱한 항들의 합 $ \epsilon \sum_t ( P_{disch}[t] + P_{ch}[t] ) $ 을 penalty term들로써 추가하는 것이다.</p>
+
+<p>목적함수를 최소화하기 위해, 같은 time step에 대한 충전 $P_{ch}[t]$과 방전 $P_{disch}[t]$ 둘 중 하나는 0이 된다.</p>
+
+<p><br /></p>
+
+<h2 id="curtailment-제한-제약-추가-시-발생한-문제">Curtailment 제한 제약 추가 시 발생한 문제</h2>
+<p>위 최적화 문제에 재생발전 curtailment의 총량을 제한하는 제약을 아래 수식과 같이 추가할 수 있다. (제주도에서 curtailment 총량이 늘어나는 데 대한 문제의식이 생기면서 향후 이런 제약조건이 추가된 문제들이 본격적으로 연구될 수도 있다)</p>
+
+<p>$ \sum_{t} P_{dump}[t] \leq \alpha_{dump} \sum_{t} P_{load}[t] $</p>
+
+<p>필자는 이 제약을 추가 시, 충전과 방전에 양수계수를 곱한 penalty term들을 목적함수에 추가해도 충전항과 방전항이 둘 다 양수가 되는 문제가 발생함을 발견했다.</p>
+
+<p>필자의 분석 결과, 이는 충전과 방전 간 차이 $P_{ch}(t)-P_{disch}(t)$ 가 같을 때 둘 다 0보다 커질수록 생기는 일종의 가짜 curtailment 효과이다. 
+이를테면 $P_{ch}(t)-P_{disch}(t)=a$라 하면 (충전), 정상적인 답에서는 $P_{ch}(t)=a, P_{disch}(t)=0$이어야 한다. 그러나 만약 $P_{ch}(t) = a+b, P_{disch}(t) = b$, 즉 충전과 방전 모두에 $b$가 더해진 경우 어떻게 될까?</p>
+
+<p>배터리 내 에너지의 변화를 $\triangle E(P_{ch}(t), P_{disch}(t)) = E_{batt}(t+1) – E_{batt}(t) = \mu P_{ch}(t) - P_{disch}(t)/\mu$라 하면, $\triangle E(a+b,b) - \triangle E(a,0) = b (\mu – 1/\mu) &lt; 0$ 이 된다 ($0&lt;\mu&lt;1$ 이니까). 즉, 충전과 방전 모두에 $b$가 더해지면 충전에 의한 배터리 내 에너지 증가분이 $b (\mu – 1/\mu)$ 만큼 더 작게 계산된다.</p>
+
+<p>$P_{ch}(t)-P_{disch}(t)=-a$, 즉 방전시에도 결과는 마찬가지다. 똑같이 $\triangle E(a+b,b) - \triangle E(a,0) = b (\mu – 1/\mu) &lt; 0$ 이 되어, 방전에 의한 배터리 내 에너지 감소분이 $b (\mu – 1/\mu)$ 만큼 더 크게 계산된다.</p>
+
+<p>즉 문제가 없을 때의 답과 비교하면 배터리 내 저장된 에너지의 양이 $b (\mu – 1/\mu)$만큼 사라지는 것처럼 계산되는데, 이는 실제로 dump load에서 소비된 것은 아니기 때문에 ‘가짜’ curtailment라고 이름붙였다.</p>
+
+<p><br /></p>
+
+<h2 id="문제의-원인-및-해결책">문제의 원인 및 해결책</h2>
+<p>이 문제는 왜 발생하는 걸까?</p>
+
+<p>이런 가짜 curtailment가 발생하면, 배터리에 저장된 에너지가 줄어든다. 이는 에너지를 저장하기 위해 요구되는 배터리의 용량도 줄어든다는 뜻이다. 배터리는 비싼 설비이기 때문에, 배터리 용량을 많이 줄일 수 있는 solution이 있다면 그 solution이 optimal solution이 된다.</p>
+
+<p>그래서 ‘수학적으로 목적함수가 최소화되는’ 해를 찾는 과정에서 저런 문제가 발생하는 것이다. 실제로 한 case에 대해 계산 결과 원래는 배터리 용량이 220 kWh로 도출되어야 하나, 가짜 curtailment 문제가 발생한 경우 178 kWh로 도출되었다.</p>
+
+<p>필자는 이 문제를 해결하기 위해, 아래와 같은 프로세스를 제안하였다. correct solution에서는 모든 시간 각각에 대해 충전항과 방전항 둘 중 하나는 0임에 착안해, 조건들에 따라 각 시간별 충전항, 방전항들 중 특정 항의 upper bound를 강제로 0으로 만드는 과정을 반복한다.</p>
+
+<p>(flowchart)</p>
+
+<p>이 방법을 쓰면, 시간별 이진수를 도입하지 않고도 5~30번 정도의 iteration이면 충분히 correct solution에 근접한 solution을 얻는 것을 확인하였다.</p>
 
         
       </section>
@@ -431,6 +488,23 @@ $\hat{\beta} = (X’X)^{-1}X’y$ 로 주어짐</p>
       <footer class="page__meta">
         
         
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#beautifulsoup" class="page__taxonomy-item p-category" rel="tag">BeautifulSoup</a><span class="sep">, </span>
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">python</a>
+    
+    </span>
+  </p>
+
+
 
 <!-- 
   
@@ -442,7 +516,7 @@ $\hat{\beta} = (X’X)^{-1}X’y$ 로 주어짐</p>
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#etc" class="page__taxonomy-item p-category" rel="tag">etc</a>
+      <a href="/categories/#energy" class="page__taxonomy-item p-category" rel="tag">Energy</a>
     
     </span>
   </p>
@@ -450,7 +524,7 @@ $\hat{\beta} = (X’X)^{-1}X’y$ 로 주어짐</p>
  -->
         <!-- 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-04-04T00:00:00+09:00">2023-04-04</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-04-07T00:00:00+09:00">2023-04-07</time></p>
  -->
       </footer>
 
@@ -459,18 +533,42 @@ $\hat{\beta} = (X’X)^{-1}X’y$ 로 주어짐</p>
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=A+new+example%20http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Ffrompc.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EB%82%B4+Applied+Energy+%EB%85%BC%EB%AC%B8%EC%9D%98+%EC%88%98%ED%95%99+%EC%84%A4%EB%AA%85+-+%27%EA%B0%80%EC%A7%9C%27+curtailment+%EB%AC%B8%EC%A0%9C%20http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Fmypaperone.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Ffrompc.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Fmypaperone.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Ffrompc.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Fmypaperone.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>etc</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <h4 class="page__meta-title"><span>Energy</span> <span>카테고리 내 다른 글 보러가기</span></h4>
         
 
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
   	
@@ -483,10 +581,10 @@ $\hat{\beta} = (X’X)^{-1}X’y$ 로 주어짐</p>
 
   
     
-      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
+      <a href="/2023/04/mypapertwo.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>내 Applied Energy 논문의 수학 설명 - 도심지 건축물 신재생 설치 확대 영향을 '빨리' 분석하기</a>
     
     
-      <a href="/2023/04/first.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>First test</a>
+      <a href="/2023/04/predictiontwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?</a>
         
   
 

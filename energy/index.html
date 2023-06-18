@@ -10,7 +10,7 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>이론 | A test page &#124; 페이지 2</title>
+<!-- begin _includes/seo.html --><title>에너지 | A test page</title>
 <meta name="description" content="GitHub Page를 익히기 위한 테스트 페이지입니다">
 
 
@@ -21,8 +21,8 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="A test page">
-<meta property="og:title" content="이론">
-<meta property="og:url" content="http://localhost:4000/theory/page2/">
+<meta property="og:title" content="에너지">
+<meta property="og:url" content="http://localhost:4000/energy/">
 
 
   <meta property="og:description" content="GitHub Page를 익히기 위한 테스트 페이지입니다">
@@ -42,11 +42,11 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/theory/page2/">
+<link rel="canonical" href="http://localhost:4000/energy/">
 
 
-  <link rel="prev" href="http://localhost:4000/theory/">
 
+  <link rel="next" href="http://localhost:4000/energy/page2/">
 
 
 <script type="application/ld+json">
@@ -285,7 +285,7 @@
   <ul class="nav__items" id="category_tag_menu">
       <!--전체 글 수-->
       <li>
-            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">9</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
+            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">21</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
       </li>
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
@@ -305,17 +305,36 @@
                 
                     
                 
+                    
+                
             </ul>
             <ul>
                 
                     
                 
                     
-                        <li><a href="/theory" class="">이론 (5)</a></li>
+                        <li><a href="/theory" class="">이론 (2)</a></li>
                     
                 
                     
                 
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/energy" class="">에너지 (15)</a></li>
                     
                 
             </ul>
@@ -332,11 +351,15 @@
                         <li><a href="/project" class="">프로젝트 (1)</a></li>
                     
                 
+                    
+                
             </ul>
             <ul>
                 
                     
                         <li><a href="/etc" class="">기타 (2)</a></li>
+                    
+                
                     
                 
                     
@@ -359,7 +382,7 @@
 
   <div class="archive">
     
-      <h1 id="page-title" class="page__title">이론</h1>
+      <h1 id="page-title" class="page__title">에너지</h1>
     
     <!-- Just some nice to have styles for the pager buttons -->
 <style>
@@ -381,21 +404,29 @@
     
       <li>
         <h2>
-          <a class="post-link" href="/2023/04/regressionthree.html">회귀분석 관련 정리 3</a>
+          <a class="post-link" href="/2023/04/monthlyenergyone.html">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화</a>
         </h2>
-        <span class="post-meta">Apr 9, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">Ordinary least squares
+        <span class="post-meta">Apr 20, 2023</span>
+        <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
 </p>
         
       </li>
     
       <li>
         <h2>
-          <a class="post-link" href="/2023/04/regression.html">회귀분석 관련 정리</a>
+          <a class="post-link" href="/2023/04/reinforcefive.html">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출</a>
         </h2>
-        <span class="post-meta">Apr 4, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">Ordinary least squares
-</p>
+        <span class="post-meta">Apr 19, 2023</span>
+        <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learnin...</p>
+        
+      </li>
+    
+      <li>
+        <h2>
+          <a class="post-link" href="/2023/04/reinforcefour.html">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 4) DDPG를 통한 continuous control 도출</a>
+        </h2>
+        <span class="post-meta">Apr 18, 2023</span>
+        <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 마이크로그리드에 discrete action 기반의 심층강화학습을 적용해 과거 시점의데이터 기반으로 control을 결정하는 방법을 알아보았다. 그러나 실제로는 continuous action이므로, continuous action을 다루는 심층강화학습 기법을 적...</p>
         
       </li>
     
@@ -410,35 +441,56 @@
   <ul>
     
     
+    <li><a href="#" class="disabled"><span aria-hidden="true">이전</span></a></li>
+    
+
+    
+    
+      <li><a href="#" class="disabled current">1</a></li>
+    
+
+    
+    
+
+    
+    
+    
+
+    
       
-        <li><a href="/theory/">이전</a></li>
+        
+        
+        
+        <li><a href="/page2">2</a></li>
+      
+    
+      
+        
+        
+        
+        <li><a href="/page3">3</a></li>
+      
+    
+      
+        
+        
+        
+        <li><a href="/page4">4</a></li>
       
     
 
     
     
-      <li><a href="/theory/">1</a></li>
+      <li><a href="#" class="disabled">&hellip;</a></li>
+    
+
+    
+      <li><a href="/page5">5</a></li>
     
 
     
     
-
-    
-    
-    
-
-    
-
-    
-    
-
-    
-      <li><a href="#" class="disabled current">2</a></li>
-    
-
-    
-    
-      <li><a href="#" class="disabled"><span aria-hidden="true">다음</span></a></li>
+      <li><a href="/page2">다음</a></li>
     
   </ul>
 </nav>
@@ -447,10 +499,10 @@
   
   <ul class="pager">
       
-      <li class="previous">
-          <a href="/theory/"><b>&#9664; Newer Posts</b></a>
-      </li>
       
+      <li class="next">
+          <a href="/energy/page2/"><b>Older Posts &#9654;</b></a>
+      </li>
       
   </ul>
   
@@ -481,7 +533,7 @@ layout: archive
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/regressionthree.html" rel="permalink">회귀분석 관련 정리 3
+        <a href="/2023/04/monthlyenergyone.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화
 </a>
       
     </h2>
@@ -493,7 +545,7 @@ layout: archive
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-09T00:00:00+09:00">2023-04-09</time>
+        <time datetime="2023-04-20T00:00:00+09:00">2023-04-20</time>
       </span>
     
 
@@ -503,7 +555,7 @@ layout: archive
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Ordinary least squares
+    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
 </p>
   </article>
 </div>
@@ -518,7 +570,7 @@ layout: archive
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/regression.html" rel="permalink">회귀분석 관련 정리
+        <a href="/2023/04/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출
 </a>
       
     </h2>
@@ -530,7 +582,7 @@ layout: archive
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-04T00:00:00+09:00">2023-04-04</time>
+        <time datetime="2023-04-19T00:00:00+09:00">2023-04-19</time>
       </span>
     
 
@@ -540,8 +592,43 @@ layout: archive
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Ordinary least squares
-</p>
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learnin...</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/reinforcefour.html" rel="permalink">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 4) DDPG를 통한 continuous control 도출
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-18T00:00:00+09:00">2023-04-18</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 마이크로그리드에 discrete action 기반의 심층강화학습을 적용해 과거 시점의데이터 기반으로 control을 결정하는 방법을 알아보았다. 그러나 실제로는 continuous action이므로, continuous action을 다루는 심층강화학습 기법을 적...</p>
   </article>
 </div>
 
@@ -554,35 +641,56 @@ layout: archive
   <ul>
     
     
+    <li><a href="#" class="disabled"><span aria-hidden="true">이전</span></a></li>
+    
+
+    
+    
+      <li><a href="#" class="disabled current">1</a></li>
+    
+
+    
+    
+
+    
+    
+    
+
+    
       
-        <li><a href="/theory/">이전</a></li>
+        
+        
+        
+        <li><a href="/page2">2</a></li>
+      
+    
+      
+        
+        
+        
+        <li><a href="/page3">3</a></li>
+      
+    
+      
+        
+        
+        
+        <li><a href="/page4">4</a></li>
       
     
 
     
     
-      <li><a href="/theory/">1</a></li>
+      <li><a href="#" class="disabled">&hellip;</a></li>
+    
+
+    
+      <li><a href="/page5">5</a></li>
     
 
     
     
-
-    
-    
-    
-
-    
-
-    
-    
-
-    
-      <li><a href="#" class="disabled current">2</a></li>
-    
-
-    
-    
-      <li><a href="#" class="disabled"><span aria-hidden="true">다음</span></a></li>
+      <li><a href="/page2">다음</a></li>
     
   </ul>
 </nav>

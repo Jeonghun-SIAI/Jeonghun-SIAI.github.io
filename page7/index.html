@@ -10,7 +10,7 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>프로젝트 | A test page</title>
+<!-- begin _includes/seo.html --><title>송정훈의 GitHub Page 테스트용 페이지 (pagination 테스트 중) | A test page &#124; 페이지 7</title>
 <meta name="description" content="GitHub Page를 익히기 위한 테스트 페이지입니다">
 
 
@@ -21,8 +21,8 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="A test page">
-<meta property="og:title" content="프로젝트">
-<meta property="og:url" content="http://localhost:4000/project/">
+<meta property="og:title" content="송정훈의 GitHub Page 테스트용 페이지 (pagination 테스트 중)">
+<meta property="og:url" content="http://localhost:4000/page7/">
 
 
   <meta property="og:description" content="GitHub Page를 익히기 위한 테스트 페이지입니다">
@@ -42,8 +42,10 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/project/">
+<link rel="canonical" href="http://localhost:4000/page7/">
 
+
+  <link rel="prev" href="http://localhost:4000/page6/">
 
 
 
@@ -380,7 +382,7 @@
 
   <div class="archive">
     
-      <h1 id="page-title" class="page__title">프로젝트</h1>
+      <h1 id="page-title" class="page__title">송정훈의 GitHub Page 테스트용 페이지 (pagination 테스트 중)</h1>
     
     <!-- Just some nice to have styles for the pager buttons -->
 <style>
@@ -402,11 +404,32 @@
     
       <li>
         <h2>
-          <a class="post-link" href="/2023/04/termproject.html">Example of MD file</a>
+          <a class="post-link" href="/2023/04/scrapper.html">Web scrapper example</a>
         </h2>
         <span class="post-meta">Apr 4, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">Term project for COM506-Data Management
-An automated data pipeline for scraping book information from an online bookseller and storing it to SQL/ NoSQL datab...</p>
+        <p class="archive__item-excerpt" itemprop="description">소개
+아래는 PubMed 사이트에서 원하는 논문 정보들을 수집하는 Web scrapping 코드입니다. 친구한테 만들어줬었습니다.
+</p>
+        
+      </li>
+    
+      <li>
+        <h2>
+          <a class="post-link" href="/2023/04/regression.html">회귀분석 관련 정리</a>
+        </h2>
+        <span class="post-meta">Apr 4, 2023</span>
+        <p class="archive__item-excerpt" itemprop="description">Ordinary least squares
+</p>
+        
+      </li>
+    
+      <li>
+        <h2>
+          <a class="post-link" href="/2023/04/frompc.html">A new example</a>
+        </h2>
+        <span class="post-meta">Apr 4, 2023</span>
+        <p class="archive__item-excerpt" itemprop="description">A trivial file created in and pushed from my PC
+</p>
         
       </li>
     
@@ -416,7 +439,72 @@ An automated data pipeline for scraping book information from an online booksell
     Showing buttons to move to the next and to the previous list of posts (pager buttons).
   -->
   <!-- 
+<nav class="pagination">
+  
+  <ul>
+    
+    
+      
+        <li><a href="/page6">이전</a></li>
+      
+    
+
+    
+    
+      <li><a href="/">1</a></li>
+    
+
+    
+    
+      
+      
+      <li><a href="#" class="disabled">&hellip;</a></li>
+    
+
+    
+    
+    
+
+    
+      
+        
+        
+        
+        <li><a href="/page5">5</a></li>
+      
+    
+      
+        
+        
+        
+        <li><a href="/page6">6</a></li>
+      
+    
+
+    
+    
+
+    
+      <li><a href="#" class="disabled current">7</a></li>
+    
+
+    
+    
+      <li><a href="#" class="disabled"><span aria-hidden="true">다음</span></a></li>
+    
+  </ul>
+</nav>
+
  -->
+  
+  <ul class="pager">
+      
+      <li class="previous">
+          <a href="/page6/"><b>&#9664; Newer Posts</b></a>
+      </li>
+      
+      
+  </ul>
   
 
   <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
@@ -445,7 +533,7 @@ layout: archive
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/termproject.html" rel="permalink">Example of MD file
+        <a href="/2023/04/scrapper.html" rel="permalink">Web scrapper example
 </a>
       
     </h2>
@@ -467,14 +555,145 @@ layout: archive
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Term project for COM506-Data Management
-An automated data pipeline for scraping book information from an online bookseller and storing it to SQL/ NoSQL datab...</p>
+    <p class="archive__item-excerpt" itemprop="description">소개
+아래는 PubMed 사이트에서 원하는 논문 정보들을 수집하는 Web scrapping 코드입니다. 친구한테 만들어줬었습니다.
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/regression.html" rel="permalink">회귀분석 관련 정리
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-04T00:00:00+09:00">2023-04-04</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Ordinary least squares
+</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/frompc.html" rel="permalink">A new example
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-04T00:00:00+09:00">2023-04-04</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">A trivial file created in and pushed from my PC
+</p>
   </article>
 </div>
 
   
 </div>
 
+
+<nav class="pagination">
+  
+  <ul>
+    
+    
+      
+        <li><a href="/page6">이전</a></li>
+      
+    
+
+    
+    
+      <li><a href="/">1</a></li>
+    
+
+    
+    
+      
+      
+      <li><a href="#" class="disabled">&hellip;</a></li>
+    
+
+    
+    
+    
+
+    
+      
+        
+        
+        
+        <li><a href="/page5">5</a></li>
+      
+    
+      
+        
+        
+        
+        <li><a href="/page6">6</a></li>
+      
+    
+
+    
+    
+
+    
+      <li><a href="#" class="disabled current">7</a></li>
+    
+
+    
+    
+      <li><a href="#" class="disabled"><span aria-hidden="true">다음</span></a></li>
+    
+  </ul>
+</nav>
 
  -->
 

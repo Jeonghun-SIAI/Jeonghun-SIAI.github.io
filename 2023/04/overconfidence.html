@@ -10,8 +10,8 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>A new example | A test page</title>
-<meta name="description" content="A trivial file created in and pushed from my PC">
+<!-- begin _includes/seo.html --><title>로지스틱 회귀에서의 over-confidence에 대한 이해 | A test page</title>
+<meta name="description" content="Over-confidence란">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -23,30 +23,30 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="A test page">
-<meta property="og:title" content="A new example">
-<meta property="og:url" content="http://localhost:4000/2023/04/frompc.html">
+<meta property="og:title" content="로지스틱 회귀에서의 over-confidence에 대한 이해">
+<meta property="og:url" content="http://localhost:4000/2023/04/overconfidence.html">
 
 
-  <meta property="og:description" content="A trivial file created in and pushed from my PC">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2023-04-04T00:00:00+09:00">
+  <meta property="og:description" content="Over-confidence란">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2023-04-10T00:00:00+09:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/2023/04/frompc.html">
+
+<link rel="canonical" href="http://localhost:4000/2023/04/overconfidence.html">
 
 
 
@@ -220,7 +220,7 @@
     
       
       
-        <li class="current">A new example</li>
+        <li class="current">로지스틱 회귀에서의 over-confidence에 대한 이해</li>
       
     
   </ol>
@@ -350,16 +350,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="A new example">
-    <meta itemprop="description" content="A trivial file created in and pushed from my PC">
-    <meta itemprop="datePublished" content="2023-04-04T00:00:00+09:00">
+    <meta itemprop="headline" content="로지스틱 회귀에서의 over-confidence에 대한 이해">
+    <meta itemprop="description" content="Over-confidence란">
+    <meta itemprop="datePublished" content="2023-04-10T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/2023/04/frompc.html" class="u-url" itemprop="url">A new example
+            <a href="http://localhost:4000/2023/04/overconfidence.html" class="u-url" itemprop="url">로지스틱 회귀에서의 over-confidence에 대한 이해
 </a>
           </h1>
           
@@ -370,7 +370,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-04T00:00:00+09:00">2023-04-04</time>
+        <time datetime="2023-04-10T00:00:00+09:00">2023-04-10</time>
       </span>
     
 
@@ -385,45 +385,49 @@
 
       <section class="page__content e-content" itemprop="text">
         
-          <aside class="sidebar__right ">
+          <aside class="sidebar__right sticky">
             <nav class="toc">
-              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header> 
-              
+              <header><h4 class="nav__title"><i class="fas fa-fas fa-smile-beam"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#over-confidence란">Over-confidence란</a></li><li><a href="#over-confidence가-발생하는-이유">Over-confidence가 발생하는 이유</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <p>A trivial file created in and pushed from my PC</p>
+        <h2 id="over-confidence란">Over-confidence란</h2>
 
-<p><img src="/assets/images/q1_2_qqplot.png" alt="q1_2_qqplot" /></p>
+<p>Logistic regression에서는 각 point 별로 response $y$가 0과 1 중 1일 확률 추정값 $\hat{y}$를 제공한다 (물론 실제 $y$값들은 알려져 있다). 한편, feature space에서 response가 1인 point들과 0인 point들이 완전히 linearly separable하면 (즉 $\hat{y}=0.5$를 기준으로 misclassified point가 하나도 없으면), logistic regression 추정이 되지 않음이 잘 알려져 있다.</p>
 
-<p><img src="/assets/images/2023-04-04-frompc/EigenFace.png" alt="EigenFace" style="zoom:2000%;" /></p>
+<p>Feature space에서 response가 1인 point들과 0인 point들이 ‘거의’ linearly separable인 경우 (즉 $\hat{y}=0.5$를 기준으로 misclassified point들이 ‘거의’ 없는 경우) 에도 문제가 발생한다. 이 경우 계수추정량들의 magnitude가 매우 커지고, 그 결과 추정값들이 모든 경우에 대해 1 또는 0에 아주 가까워진다. 이를 어느 class에 속할지에 대해 지나치게 확신한다고 해서, over-confidence라 한다.</p>
 
-<p class="notice--primary">This is an eigenface</p>
+<p>Toy problem을 예시로 들면, 아래와 같은 두 class의 point들을 분류하는 plane을 ($\hat{y}=0.5$를 기준으로) logistic regression으로 찾는다고 하자.</p>
 
-<p><img src="/assets/images/2023-04-04-frompc/q2_4_scaledplot.png" alt="q2_4_scaledplot" class="align-center" /></p>
+<p>(그림들 3개)</p>
 
-<div class="notice--danger">
-<h4>This is an example of Fisher's linear discriminant analysis</h4>
-<ul>
-    <li> Two dimensional data </li>
-    <li> Three classes </li>
-</ul>
-</div>
+<p>각 경우에 대해 계수추정량들 및 계수의 표준오차들을 구하면 아래 표와 같다.</p>
 
-<p>$y = X \beta + \epsilon$ 일 때, OLS estimator는
-$\hat{\beta} = (X’X)^{-1}X’y$ 로 주어짐</p>
+<p>(계수추정량, 표)</p>
 
-<p><a href="https://product.kyobobook.co.kr/detail/S000001681559" class="btn btn--danger">추천교재</a></p>
+<p>Misclassified point의 비중이 적을수록 계수추정량의 magnitude는 커지고, t-value는 작아진다. Python에서는 perfectly separable case에 대해서도 결과를 제공하기는 하는데, t-value를 보면 계수의 값에 별 의미는 없는 것으로 보인다.</p>
 
-<p><a href="/assets/files/linearalgebra_.pdf" class="btn btn--danger">정리본다운</a></p>
+<p><br /></p>
+<h2 id="over-confidence가-발생하는-이유">Over-confidence가 발생하는 이유</h2>
 
-<!-- Courtesy of embedresponsively.com -->
+<p>Over-confidence에 대해 아주 엄밀한 설명은 아직 만나보지 못했지만, 필자가 간단히 수학적으로/ 직관적으로 생각해 본 바는 아래와 같다.</p>
 
-<div class="responsive-video-container">
-    <iframe src="https://www.youtube-nocookie.com/embed/ACzFIAOsfpM" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
-  </div>
+<p>먼저 수학적으로는 다음과 같다.</p>
 
+<p>실제 response가 1인 점을 기준으로 추정값이 1에서 멀어지고 0으로 가까워질수록, 모델에 대한 penalty가 exponential하게 증가한다. 이는 실제 response가 0인데 추정값이 1에 가까워질 경우에도 마찬가지이다. 이 때 $\hat{y}=0.5$ 기준으로 misclassified point가 여럿 있는 경우에는, 해당 point들 때문에 생기는 exponential penalty를 줄이기 위해 추정값들이 1 또는 0에 너무 가까워지지 않도록 계수의 magnitude를 작게 설정해야 한다.</p>
+
+<p>그러나 계수의 magnitude를 작게 할수록, 실제 값이 1이고 추정값이 1에 가까운 경우에도 완전히 1에 매우 가깝기보다는 1보다 어느 정도는 작은 값이 될 것이다. 실제 값이 0이고 추정값이 0인 경우에도 0보다 어느 정도는 큰 값이 될 것이다. 이 차이 또한 작게나마 penalty로 계산된다.</p>
+
+<p>misclassified point가 매우 조금밖에 없을 경우에는, misclassified point의 penalty가 아무리 exponential하게 증가한다고 해도 그 숫자 자체가 매우 적기 때문에, 실제값과 추정값이 서로 가까운 point들에 대한 $\hat{y}$가 1 또는 0에 매우 가까워지도록 계수의 magnitude를 크게 설정하는 것이 total penalty를 더 작게 만드는 선택일 수 있는 것이다.</p>
+
+<p><br />
+다음으로 직관적으로는 아래와 같다.</p>
+
+<p>Misclassified point가 여럿 있는 경우에는, boundary 근처 point들에 대해 이 분류가 맞다는 확신을 가지기가 어려울 것이고 (말 그대로 misclassification이 많았으니까), 그래서 확률 추정값을 0.5에서 많이 차이나지 않게 주는 것이 자연스럽다.</p>
+
+<p>그러나 misclassified point가 거의 없는 경우에는, boundary 근처 point들에 대해서도 보다 더 확신을 가질 것이고, 확률 추정값도 0 또는 1에 가깝게 줄 수 있는 것이다.</p>
 
         
       </section>
@@ -442,7 +446,7 @@ $\hat{\beta} = (X’X)^{-1}X’y$ 로 주어짐</p>
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#etc" class="page__taxonomy-item p-category" rel="tag">etc</a>
+      <a href="/categories/#theory" class="page__taxonomy-item p-category" rel="tag">Theory</a>
     
     </span>
   </p>
@@ -450,7 +454,7 @@ $\hat{\beta} = (X’X)^{-1}X’y$ 로 주어짐</p>
  -->
         <!-- 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-04-04T00:00:00+09:00">2023-04-04</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-04-10T00:00:00+09:00">2023-04-10</time></p>
  -->
       </footer>
 
@@ -459,16 +463,16 @@ $\hat{\beta} = (X’X)^{-1}X’y$ 로 주어짐</p>
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=A+new+example%20http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Ffrompc.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EB%A1%9C%EC%A7%80%EC%8A%A4%ED%8B%B1+%ED%9A%8C%EA%B7%80%EC%97%90%EC%84%9C%EC%9D%98+over-confidence%EC%97%90+%EB%8C%80%ED%95%9C+%EC%9D%B4%ED%95%B4%20http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Foverconfidence.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Ffrompc.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Foverconfidence.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Ffrompc.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Foverconfidence.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>etc</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <h4 class="page__meta-title"><span>Theory</span> <span>카테고리 내 다른 글 보러가기</span></h4>
         
 
 
@@ -486,7 +490,7 @@ $\hat{\beta} = (X’X)^{-1}X’y$ 로 주어짐</p>
       <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
     
     
-      <a href="/2023/04/first.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>First test</a>
+      <a href="/2023/04/regression.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>회귀분석 관련 정리</a>
         
   
 

@@ -1,0 +1,1008 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+
+<head>
+  <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면? | A test page</title>
+<meta name="description" content="Dense NN 지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀로 구성하는 과정을 설명했다. 또한, 간단한 선형회귀로도 나름 괜찮은 예측 성능의 모델을 얻을 수 있음을 보였다.">
+
+
+  <meta name="author" content="Jeonghun Song">
+  
+  <meta property="article:author" content="Jeonghun Song">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="A test page">
+<meta property="og:title" content="건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?">
+<meta property="og:url" content="http://localhost:4000/2023/04/predictiontwo.html">
+
+
+  <meta property="og:description" content="Dense NN 지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀로 구성하는 과정을 설명했다. 또한, 간단한 선형회귀로도 나름 괜찮은 예측 성능의 모델을 얻을 수 있음을 보였다.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-04-06T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/2023/04/predictiontwo.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Jeonghun Song",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="A test page Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<!-- end custom head snippets -->
+</head>
+
+<body
+  class="layout--single">
+  <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+  
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="A test page"></a>
+        
+        <a class="site-title" href="/">
+          A test page
+          <span class="site-subtitle">learning Github Page</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/aboutme/">About Me</a>
+            </li><li class="masthead__menu-item">
+              <a href="/search/">Search</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tag</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">카테고리 목록</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+  <div class="initial-content">
+    
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#2023" itemprop="item"><span itemprop="name">2023</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#04" itemprop="item"><span itemprop="name">04</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+    
+  
+  
+  
+  
+    
+    
+      
+    
+    
+  
+  
+   <!-- three lines added by Jeonghun  -->
+    
+
+<nav class="nav__list">
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">카테고리 목록</label>
+  <ul class="nav__items" id="category_tag_menu">
+      <!--전체 글 수-->
+      <li>
+            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">21</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
+      </li>
+      <li>
+        <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
+        <span class="nav__sub-title">범주1</span>
+            <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
+                <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/code" class="">코드 (1)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/theory" class="">이론 (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/energy" class="">에너지 (15)</a></li>
+                    
+                
+            </ul>
+        <span class="nav__sub-title">범주2</span>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/project" class="">프로젝트 (1)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/etc" class="">기타 (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+      </li>
+  </ul>
+</nav>
+  
+  
+
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?">
+    <meta itemprop="description" content="Dense NN지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀로 구성하는 과정을 설명했다. 또한, 간단한 선형회귀로도 나름 괜찮은 예측 성능의 모델을 얻을 수 있음을 보였다.">
+    <meta itemprop="datePublished" content="2023-04-06T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/2023/04/predictiontwo.html" class="u-url" itemprop="url">건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-06T00:00:00+09:00">2023-04-06</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#dense-nn">Dense NN</a></li><li><a href="#recurrent-nn">Recurrent NN</a></li><li><a href="#나가며">나가며</a></li></ul>
+ <!-- 우측 TOC -->
+            </nav>
+          </aside>
+        
+        <h2 id="dense-nn">Dense NN</h2>
+<p>지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀로 구성하는 과정을 설명했다. 또한, 간단한 선형회귀로도 나름 괜찮은 예측 성능의 모델을 얻을 수 있음을 보였다.</p>
+
+<p>이번 포스팅에서는, 딥러닝을 써서 모델을 만들어 본다.</p>
+
+<p><br />
+전기부하 데이터는 시계열 데이터이므로 Recurrent Neural Network (RNN) 을 쓸 수 있으나, 먼저 단순한 Dense Neural Network (DNN) 을 사용해 보자. 
+이 경우 지난 포스팅의 선형회귀와 제대로 비교하기 위해서는, 선형회귀에서처럼 유형별 sub모델 4개를 만들고 predictor들도 이차항과 교차항을 제외하면 선형회귀에서와 똑같이 두어야 한다 (이차항과 교차항은 빼도 된다, NN이 제대로 적합된다면 기온/조도와 전기부하 간의 적절한 nonlinear function을 찾아줄 것이므로).</p>
+
+<p>여기서는 DNN은 2개의 Dense layer로 이루어져 있고 첫 layer의 node는 20개, 두 번째 layer의 node는 10개로 둔다. 훈련 epoch 수는 1000이고, optimizer는 특별한 이슈가 없으므로 가장 일반적인 Adam을 쓴다.</p>
+
+<p>구체적인 코드는 아래와 같다 (전기부하 데이터를 최대값이 1 이하가 되게 scaling하였음에 주의한다. Scaling하지 않으면 적합 결과가 상수함수가 되어 전혀 추정을 하지 못한다).</p>
+
+<p><br /></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
+</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="n">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+<span class="kn">from</span> <span class="n">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+
+<span class="n">workday_springfall_train</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"I_train.txt"</span><span class="p">)</span>
+<span class="n">workday_summer_train</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"II_train.txt"</span><span class="p">)</span>
+<span class="n">workday_winter_train</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"III_train.txt"</span><span class="p">)</span>
+<span class="n">holiday_train</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"IV_train.txt"</span><span class="p">)</span>
+
+<span class="n">workday_springfall_test</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"I_test.txt"</span><span class="p">)</span>
+<span class="n">workday_summer_test</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"II_test.txt"</span><span class="p">)</span>
+<span class="n">workday_winter_test</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"III_test.txt"</span><span class="p">)</span>
+<span class="n">holiday_test</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"IV_test.txt"</span><span class="p">)</span>
+
+<span class="n">actualpower</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"actualusage.txt"</span><span class="p">)</span>
+
+<span class="n">n_node_firstlayer</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">n_node_secondlayer</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="k">def</span> <span class="nf">model_dnn</span><span class="p">():</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="nc">Sequential</span><span class="p">([</span>
+            <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Dense</span><span class="p">(</span><span class="n">n_node_firstlayer</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">"sigmoid"</span><span class="p">),</span>
+            <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Dense</span><span class="p">(</span><span class="n">n_node_secondlayer</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">"sigmoid"</span><span class="p">),</span>
+            <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">"linear"</span><span class="p">)</span> <span class="c1"># 계측형 데이터 예측이므로 마지막 층은 node 1개, activation은 linear
+</span>            <span class="p">])</span>
+    <span class="k">return</span> <span class="n">model</span>
+        
+
+
+<span class="n">response_workday_summer_train</span> <span class="o">=</span> <span class="n">workday_summer_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span> <span class="c1"># [0,1] 구간즈음에 들어오게 scaling해야 함, 그렇지 않고 원본 쓰면 제대로 fit 안되고 대표값 1개만 반환함
+</span><span class="n">features_workday_summer_train</span> <span class="o">=</span> <span class="n">workday_summer_train</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
+<span class="n">hourindex_workday_summer_train</span> <span class="o">=</span> <span class="n">workday_summer_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="n">response_workday_summer_test</span> <span class="o">=</span> <span class="n">workday_summer_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span>
+<span class="n">features_workday_summer_test</span> <span class="o">=</span> <span class="n">workday_summer_test</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
+<span class="n">hourindex_workday_summer_test</span> <span class="o">=</span> <span class="n">workday_summer_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="n">model_workday_summer</span> <span class="o">=</span> <span class="nf">model_dnn</span><span class="p">()</span>
+
+<span class="n">checkpoint_cb</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">callbacks</span><span class="p">.</span><span class="nc">ModelCheckpoint</span><span class="p">(</span><span class="s">"./dnn_workday_summer.h5"</span><span class="p">,</span><span class="n">monitor</span><span class="o">=</span><span class="s">'loss'</span><span class="p">,</span><span class="n">save_best_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># monitor까지 해 줘야 파일이 저장됨
+</span><span class="n">model_workday_summer</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">"mse"</span><span class="p">,</span><span class="n">optimizer</span><span class="o">=</span><span class="s">"adam"</span><span class="p">)</span> <span class="c1"># 계측형 데이터 예측이므로 loss function은 mse
+</span><span class="n">history</span> <span class="o">=</span> <span class="n">model_workday_summer</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">features_workday_summer_train</span><span class="p">,</span><span class="n">response_workday_summer_train</span><span class="p">,</span><span class="n">epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span><span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_cb</span><span class="p">])</span>
+
+<span class="n">y_fit_workday_summer</span> <span class="o">=</span> <span class="n">model_workday_summer</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">features_workday_summer_train</span><span class="p">)</span>
+<span class="n">y_pred_workday_summer</span> <span class="o">=</span> <span class="n">model_workday_summer</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">features_workday_summer_test</span><span class="p">)</span>
+
+
+
+<span class="n">response_workday_winter_train</span> <span class="o">=</span> <span class="n">workday_winter_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span> <span class="c1"># [0,1] 구간즈음에 들어오게 scaling해야 함, 그렇지 않고 원본 쓰면 제대로 fit 안되고 대표값 1개만 반환함
+</span><span class="n">features_workday_winter_train</span> <span class="o">=</span> <span class="n">workday_winter_train</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
+<span class="n">hourindex_workday_winter_train</span> <span class="o">=</span> <span class="n">workday_winter_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="n">response_workday_winter_test</span> <span class="o">=</span> <span class="n">workday_winter_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span>
+<span class="n">features_workday_winter_test</span> <span class="o">=</span> <span class="n">workday_winter_test</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
+<span class="n">hourindex_workday_winter_test</span> <span class="o">=</span> <span class="n">workday_winter_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="n">model_workday_winter</span> <span class="o">=</span> <span class="nf">model_dnn</span><span class="p">()</span>
+
+<span class="n">checkpoint_cb</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">callbacks</span><span class="p">.</span><span class="nc">ModelCheckpoint</span><span class="p">(</span><span class="s">"./dnn_workday_winter.h5"</span><span class="p">,</span><span class="n">monitor</span><span class="o">=</span><span class="s">'loss'</span><span class="p">,</span><span class="n">save_best_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># monitor까지 해 줘야 파일이 저장됨
+</span><span class="n">model_workday_winter</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">"mse"</span><span class="p">,</span><span class="n">optimizer</span><span class="o">=</span><span class="s">"adam"</span><span class="p">)</span> <span class="c1"># 계측형 데이터 예측이므로 loss function은 mse
+</span><span class="n">history</span> <span class="o">=</span> <span class="n">model_workday_winter</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">features_workday_winter_train</span><span class="p">,</span><span class="n">response_workday_winter_train</span><span class="p">,</span><span class="n">epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span><span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_cb</span><span class="p">])</span>
+
+<span class="n">y_fit_workday_winter</span> <span class="o">=</span> <span class="n">model_workday_winter</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">features_workday_winter_train</span><span class="p">)</span>
+<span class="n">y_pred_workday_winter</span> <span class="o">=</span> <span class="n">model_workday_winter</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">features_workday_winter_test</span><span class="p">)</span>
+
+
+
+<span class="n">response_workday_springfall_train</span> <span class="o">=</span> <span class="n">workday_springfall_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span> <span class="c1"># [0,1] 구간즈음에 들어오게 scaling해야 함, 그렇지 않고 원본 쓰면 제대로 fit 안되고 대표값 1개만 반환함
+</span><span class="n">features_workday_springfall_train</span> <span class="o">=</span> <span class="n">workday_springfall_train</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
+<span class="n">hourindex_workday_springfall_train</span> <span class="o">=</span> <span class="n">workday_springfall_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="n">response_workday_springfall_test</span> <span class="o">=</span> <span class="n">workday_springfall_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span>
+<span class="n">features_workday_springfall_test</span> <span class="o">=</span> <span class="n">workday_springfall_test</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
+<span class="n">hourindex_workday_springfall_test</span> <span class="o">=</span> <span class="n">workday_springfall_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="n">model_workday_springfall</span> <span class="o">=</span> <span class="nf">model_dnn</span><span class="p">()</span>
+
+<span class="n">checkpoint_cb</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">callbacks</span><span class="p">.</span><span class="nc">ModelCheckpoint</span><span class="p">(</span><span class="s">"./dnn_workday_springfall.h5"</span><span class="p">,</span><span class="n">monitor</span><span class="o">=</span><span class="s">'loss'</span><span class="p">,</span><span class="n">save_best_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># monitor까지 해 줘야 파일이 저장됨
+</span><span class="n">model_workday_springfall</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">"mse"</span><span class="p">,</span><span class="n">optimizer</span><span class="o">=</span><span class="s">"adam"</span><span class="p">)</span> <span class="c1"># 계측형 데이터 예측이므로 loss function은 mse
+</span><span class="n">history</span> <span class="o">=</span> <span class="n">model_workday_springfall</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">features_workday_springfall_train</span><span class="p">,</span><span class="n">response_workday_springfall_train</span><span class="p">,</span><span class="n">epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span><span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_cb</span><span class="p">])</span>
+
+<span class="n">y_fit_workday_springfall</span> <span class="o">=</span> <span class="n">model_workday_springfall</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">features_workday_springfall_train</span><span class="p">)</span>
+<span class="n">y_pred_workday_springfall</span> <span class="o">=</span> <span class="n">model_workday_springfall</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">features_workday_springfall_test</span><span class="p">)</span>
+
+
+
+<span class="n">response_holiday_train</span> <span class="o">=</span> <span class="n">holiday_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span> <span class="c1"># [0,1] 구간즈음에 들어오게 scaling해야 함, 그렇지 않고 원본 쓰면 제대로 fit 안되고 대표값 1개만 반환함
+</span><span class="n">features_holiday_train</span> <span class="o">=</span> <span class="n">holiday_train</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
+<span class="n">hourindex_holiday_train</span> <span class="o">=</span> <span class="n">holiday_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="n">response_holiday_test</span> <span class="o">=</span> <span class="n">holiday_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span>
+<span class="n">features_holiday_test</span> <span class="o">=</span> <span class="n">holiday_test</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
+<span class="n">hourindex_holiday_test</span> <span class="o">=</span> <span class="n">holiday_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="n">model_holiday</span> <span class="o">=</span> <span class="nf">model_dnn</span><span class="p">()</span>
+
+<span class="n">checkpoint_cb</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">callbacks</span><span class="p">.</span><span class="nc">ModelCheckpoint</span><span class="p">(</span><span class="s">"./dnn_holiday.h5"</span><span class="p">,</span><span class="n">monitor</span><span class="o">=</span><span class="s">'loss'</span><span class="p">,</span><span class="n">save_best_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># monitor까지 해 줘야 파일이 저장됨
+</span><span class="n">model_holiday</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">"mse"</span><span class="p">,</span><span class="n">optimizer</span><span class="o">=</span><span class="s">"adam"</span><span class="p">)</span> <span class="c1"># 계측형 데이터 예측이므로 loss function은 mse
+</span><span class="n">history</span> <span class="o">=</span> <span class="n">model_holiday</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">features_holiday_train</span><span class="p">,</span><span class="n">response_holiday_train</span><span class="p">,</span><span class="n">epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span><span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_cb</span><span class="p">])</span>
+
+<span class="n">y_fit_holiday</span> <span class="o">=</span> <span class="n">model_holiday</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">features_holiday_train</span><span class="p">)</span>
+<span class="n">y_pred_holiday</span> <span class="o">=</span> <span class="n">model_holiday</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">features_holiday_test</span><span class="p">)</span>
+
+
+
+<span class="n">fittedpower</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="mi">8760</span><span class="p">,))</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">y_fit_workday_summer</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">fittedpower</span><span class="p">[</span><span class="nf">int</span><span class="p">(</span><span class="n">hourindex_workday_summer_train</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">y_fit_workday_summer</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">y_fit_workday_winter</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">fittedpower</span><span class="p">[</span><span class="nf">int</span><span class="p">(</span><span class="n">hourindex_workday_winter_train</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">y_fit_workday_winter</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">y_fit_workday_springfall</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">fittedpower</span><span class="p">[</span><span class="nf">int</span><span class="p">(</span><span class="n">hourindex_workday_springfall_train</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">y_fit_workday_springfall</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">y_fit_holiday</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">fittedpower</span><span class="p">[</span><span class="nf">int</span><span class="p">(</span><span class="n">hourindex_holiday_train</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">y_fit_holiday</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    
+<span class="n">predictedpower</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="mi">8760</span><span class="p">,))</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">y_pred_workday_summer</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">predictedpower</span><span class="p">[</span><span class="nf">int</span><span class="p">(</span><span class="n">hourindex_workday_summer_test</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">y_pred_workday_summer</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">y_pred_workday_winter</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">predictedpower</span><span class="p">[</span><span class="nf">int</span><span class="p">(</span><span class="n">hourindex_workday_winter_test</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">y_pred_workday_winter</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">y_pred_workday_springfall</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">predictedpower</span><span class="p">[</span><span class="nf">int</span><span class="p">(</span><span class="n">hourindex_workday_springfall_test</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">y_pred_workday_springfall</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">y_pred_holiday</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">predictedpower</span><span class="p">[</span><span class="nf">int</span><span class="p">(</span><span class="n">hourindex_holiday_test</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">y_pred_holiday</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>    
+    
+<span class="n">fittedpower</span> <span class="o">=</span> <span class="n">fittedpower</span><span class="o">*</span><span class="mi">2000</span>   
+<span class="n">predictedpower</span> <span class="o">=</span> <span class="n">predictedpower</span><span class="o">*</span><span class="mi">2000</span>   
+
+
+
+<span class="k">def</span> <span class="nf">adjrsq</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span><span class="n">estimate</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+    <span class="n">bary</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span>
+    <span class="n">SST</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">((</span><span class="n">actual</span> <span class="o">-</span> <span class="n">bary</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">SSR</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">((</span><span class="n">actual</span> <span class="o">-</span> <span class="n">estimate</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">SSR</span><span class="o">/</span><span class="p">(</span><span class="mi">8760</span><span class="o">-</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">SST</span><span class="o">/</span><span class="p">(</span><span class="mi">8760</span><span class="o">-</span><span class="n">k</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">r</span>
+    
+<span class="n">adjRsq_train</span> <span class="o">=</span> <span class="nf">adjrsq</span><span class="p">(</span><span class="n">actualpower</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">fittedpower</span><span class="p">,</span><span class="n">features_workday_summer_train</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">adjRsq_test</span> <span class="o">=</span> <span class="nf">adjrsq</span><span class="p">(</span><span class="n">actualpower</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">predictedpower</span><span class="p">,</span><span class="n">features_workday_summer_test</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">adjRsq_train</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">adjRsq_test</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">actualpower</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">fittedpower</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">actualpower</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">predictedpower</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Adjusted $R^2$를 계산해보면 훈련 set에 대한 값은 0.9509로, 선형회귀에서의 0.9263보다 더 높다.역시 딥러닝이 우월한 것일까?</p>
+
+<p>그러나, 검증 set에 대한 값은 0.8642로 선형회귀에서의 0.8716보다 소폭이지만 낮다. 딥러닝 훈련에 드는 계산비용을 생각하면, 딥러닝이 우월하다고 볼 수 없다 (계산 시간만 따져도 2분 이상 vs. 몇 초).</p>
+
+<p>(그림: actual &amp; 선형회귀 &amp; DNN)</p>
+
+<p><br /></p>
+<h2 id="recurrent-nn">Recurrent NN</h2>
+<p>그럼, RNN을 쓰면 어떨까?</p>
+
+<p>RNN의 경우 이전 시간의 전기부하가 predictor로 포함되는 구조이므로, 일 유형별로 sub모델을 4개 만들 수는 없다. 1번째 시간의 data point부터 8,760번째 시간의 point까지 연속적으로 모델에 흘러들어가야 하므로, 하나의 모델로 모든 시간의 전기부하를 예측해야 한다. 그러므로 RNN의 predictor로는 일 유형(평일/휴일) dummy도 추가한다.</p>
+
+<p>Layer 수와 node 수는 DNN에서와 같게 둔다. DNN에서 그래도 선형회귀와 비슷한 수준의 예측 성능을 보였으므로, layer 수와 node 수 결정이 잘못된 것은 아니라 판단했다.</p>
+
+<p>코드는 아래와 같다.</p>
+
+<p><br /></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
+</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="n">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+<span class="kn">from</span> <span class="n">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+
+<span class="n">data_train</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"RNN_train.txt"</span><span class="p">)</span>
+<span class="n">data_test</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"RNN_test.txt"</span><span class="p">)</span>
+
+<span class="n">n_node_firstlayer</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">n_node_secondlayer</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">optimizers</span><span class="p">.</span><span class="nc">Adam</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span><span class="n">beta_1</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span><span class="n">beta_2</span><span class="o">=</span><span class="mf">0.999</span><span class="p">)</span>
+
+
+<span class="n">response_train</span> <span class="o">=</span> <span class="n">data_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2000</span> <span class="c1"># scaling
+</span><span class="n">features_train</span> <span class="o">=</span> <span class="n">data_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:].</span><span class="nf">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">37</span><span class="p">)</span> <span class="c1"># reshape 해 줘야 rnn코드가 돌아감
+</span>
+<span class="n">response_test</span> <span class="o">=</span> <span class="n">data_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2000</span>
+<span class="n">features_test</span> <span class="o">=</span> <span class="n">data_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:].</span><span class="nf">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">37</span><span class="p">)</span>
+
+
+
+<span class="n">model_rnn</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="nc">Sequential</span><span class="p">([</span>
+    <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">SimpleRNN</span><span class="p">(</span><span class="n">n_node_firstlayer</span><span class="p">,</span><span class="n">return_sequences</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">input_shape</span><span class="o">=</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span><span class="mi">37</span><span class="p">]),</span>
+    <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">SimpleRNN</span><span class="p">(</span><span class="n">n_node_secondlayer</span><span class="p">,</span><span class="n">return_sequences</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+    <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">TimeDistributed</span><span class="p">(</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># To make a sequence-to-sequence model, TimeDistributed should be used
+</span>    <span class="p">])</span>
+
+<span class="n">checkpoint_cb_rnn</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">callbacks</span><span class="p">.</span><span class="nc">ModelCheckpoint</span><span class="p">(</span><span class="s">"./rnn.h5"</span><span class="p">,</span><span class="n">monitor</span><span class="o">=</span><span class="s">'loss'</span><span class="p">,</span><span class="n">save_best_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># monitor까지 해 줘야 파일이 저장됨
+</span><span class="n">model_rnn</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">"mse"</span><span class="p">,</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">)</span>
+<span class="n">history_rnn</span> <span class="o">=</span> <span class="n">model_rnn</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span><span class="n">response_train</span><span class="p">,</span><span class="n">epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span><span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_cb_rnn</span><span class="p">])</span>
+
+<span class="n">y_fit</span> <span class="o">=</span> <span class="p">(</span><span class="n">model_rnn</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">features_train</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2000</span><span class="p">).</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">(</span><span class="n">model_rnn</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">features_test</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2000</span><span class="p">).</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+
+
+<span class="k">def</span> <span class="nf">adjrsq</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span><span class="n">estimate</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+    <span class="n">bary</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span>
+    <span class="n">SST</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">((</span><span class="n">actual</span> <span class="o">-</span> <span class="n">bary</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">SSR</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">((</span><span class="n">actual</span> <span class="o">-</span> <span class="n">estimate</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">SSR</span><span class="o">/</span><span class="p">(</span><span class="mi">8760</span><span class="o">-</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">SST</span><span class="o">/</span><span class="p">(</span><span class="mi">8760</span><span class="o">-</span><span class="n">k</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">r</span>
+    
+<span class="n">adjRsq_train</span> <span class="o">=</span> <span class="nf">adjrsq</span><span class="p">(</span><span class="n">data_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y_fit</span><span class="p">,</span><span class="n">features_train</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">adjRsq_test</span> <span class="o">=</span> <span class="nf">adjrsq</span><span class="p">(</span><span class="n">data_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y_pred</span><span class="p">,</span><span class="n">features_test</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">adjRsq_train</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">adjRsq_test</span><span class="p">)</span>
+
+
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">data_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">y_fit</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">data_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">((</span><span class="n">data_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_fit</span><span class="p">))</span>
+
+</code></pre></div></div>
+
+<p>계산에 걸리는 시간은 수십 분으로, 당연히 DNN보다도 훨씬 길다. 그렇다면 적합 결과는?</p>
+
+<p>Adjusted $R^2$를 계산해보면 훈련 set에 대한 값은 0.6941, 검증 set에 대한 값은 0.4890으로, 처참한 수준이다. 심지어 훈련 set에 대해서조차 그렇다.</p>
+
+<p>(그림: actual &amp; 선형회귀 &amp; RNN)</p>
+
+<p>훈련 set에 대해서도 예측성능이 형편없는 것을 보면 underfitting이니 layer와 node를 더 추가해야 하는 것이 아니냐 물을 수 있는데, 이미 WLS와 DNN으로 제대로 된 예측이 가능한 문제를 굳이 계산비용을 더 추가해서 다시 RNN으로 해 보고 싶진 않다.</p>
+
+<p>혹시 LSTM이나 GRU 같은 ‘진보된’ 방법들을 쓰면 제대로 될까? 이 ‘진보된’ 방법들도 계산 시간은 훨씬 더 많이 요구하면서, 전기부하 데이터와 predictor들 간 관계를 제대로 학습하지 못한다. (계산해보고 $R^2$ 적기)</p>
+
+<p><br /></p>
+<h2 id="나가며">나가며</h2>
+<p>딥러닝이 음성인식과 자연어 처리에서 큰 진보를 이뤄내서 그런지, 이런 시계열 데이터 예측은 RNN으로 하면 다 해결될 거라 생각하는 경우가 많다. 그러나 간단한 선형회귀 모델도 잘 구성하면 NN보다 좋은 경우도 많고, 특히 RNN은 매우 복잡한 패턴이 stationary한 분포를 갖고 반복적으로 나타날 때 의미가 있지 (같은 나라/ 문법/ 분야 하의 문장들 등), 그렇지 않으면 계산 비용만 크게 소비하고 별 효과가 없다는 것은 계산과학 필드에서는 상식이다. 이러한 상식은 에너지 부하 데이터에 대해서도 마찬가지로 적용됨을 확인해 볼 수 있었다.</p>
+
+<p>당장 이번 사례에서 선형회귀와 DNN에 대해 sub모델 4개를 구성한 것을 생각해 보면, 1년간의 시간별 부하 데이터는 non-stationary data이다. 이를 고려하지 않고 non-stationary data에 대해 무작정 단일한 RNN 모델을 쓰면, 결과가 이상하게 나올 수밖에 없다. 이를 고려해 sub모델 4개로 나누는 `데이터 전처리’를 한 덕분에, 간단한 선형회귀 모델로 RNN보다 더 만족스러운 결과를 얻을 수 있었다.</p>
+
+<p><a href="https://pdsi.pabii.com/data-scientists-future-2/">(RNN과 전통적인 시계열 모델에 대해 참고할 만한 글)</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#beautifulsoup" class="page__taxonomy-item p-category" rel="tag">BeautifulSoup</a><span class="sep">, </span>
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">python</a>
+    
+    </span>
+  </p>
+
+
+
+<!-- 
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#energy" class="page__taxonomy-item p-category" rel="tag">Energy</a>
+    
+    </span>
+  </p>
+
+ -->
+        <!-- 
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-04-06T00:00:00+09:00">2023-04-06</time></p>
+ -->
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EA%B1%B4%EB%AC%BC%EC%9D%98+%EC%8B%9C%EA%B0%84%EB%B3%84+%EC%A0%84%EA%B8%B0%EB%B6%80%ED%95%98+%ED%95%99%EC%8A%B5+%ED%9B%84+%EC%98%88%EC%B8%A1%ED%95%98%EA%B8%B0+-+%EB%94%A5%EB%9F%AC%EB%8B%9D%EC%9D%84+%EC%93%B4%EB%8B%A4%EB%A9%B4%3F%20http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Fpredictiontwo.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Fpredictiontwo.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Fpredictiontwo.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      <p></p>
+        <h4 class="page__meta-title"><span>Energy</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  	
+  	
+  	
+  	
+  	
+
+<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
+
+  
+    
+      <a href="/2023/04/mypaperone.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>내 Applied Energy 논문의 수학 설명 - '가짜' curtailment 문제</a>
+    
+    
+      <a href="/2023/04/predictionone.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝 대신 회귀분석으로</a>
+        
+  
+
+</nav>
+      <p></p>
+    </div>
+
+    
+  </article>
+
+  
+  <!-- 
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/monthlyenergyone.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-20T00:00:00+09:00">2023-04-20</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-19T00:00:00+09:00">2023-04-19</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learnin...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/reinforcefour.html" rel="permalink">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 4) DDPG를 통한 continuous control 도출
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-18T00:00:00+09:00">2023-04-18</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 마이크로그리드에 discrete action 기반의 심층강화학습을 적용해 과거 시점의데이터 기반으로 control을 결정하는 방법을 알아보았다. 그러나 실제로는 continuous action이므로, continuous action을 다루는 심층강화학습 기법을 적...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/reinforcethree.html" rel="permalink">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-17T00:00:00+09:00">2023-04-17</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서도 언급했듯, 이 문제에서 state는 직전 24시간 동안의 태양광 발전량과 부하 및 직전 1시간의 배터리 내 에너지양이고, action은 1.1kW 수전/ 1.1kW 송전/ idle 3가지이다. (action 인덱스는 0,1,2라 하자). 이 때 심층신경망은 sta...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div> -->
+  
+  <!--  -->
+</div>
+
+  </div>
+
+  
+
+  <aside class="sidebar__top">
+    <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside>
+
+  <div id="footer" class="page__footer">
+    <footer>
+      <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+      <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://blog.naver.com/song4energy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Jeonghun Song. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+    </footer>
+  </div>
+
+  
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
