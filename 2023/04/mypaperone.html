@@ -414,56 +414,56 @@
 <h2 id="최적화-모델링">최적화 모델링</h2>
 <p>그러면 태양광/ 풍력/ ESS는 각각 어느 정도의 용량으로 설치해야 할까? 이는 특정 기간의 시간별 전기부하, 일사량, 풍속을 input 자료로 사용하여, 재생발전기 초기설치비용과 운영기간 내 디젤 연료비의 총 합을 최소화하는 태양광/ 풍력/ ESS 각각의 용량을 도출하는 최적화 문제를 풀어서 결정할 수 있다. 수식은 아래와 같다.</p>
 
-<p>Minimize $c_{pv} S_{pv} + c_{wt} S_{wt} + c_{batt} S_{batt} + c_{diesel} \sum_{t} P_{diesel}[t]$</p>
+<p>Minimize $c_{\text{pv}} s_{\text{pv}} + c_{\text{wt}} s_{\text{wt}} + c_{\text{batt}} s_{\text{batt}} + c_{\text{diesel}} \sum_{t} p_{\text{diesel}}[t]$</p>
 
 <p>Subject to</p>
 
-<p>$P_{load}[t] = P_{diesel}[t] + S_{pv} P_{pv}[t] + S_{wt} P_{wt}[t] + P_{disch}[t] – P_{ch}[t] – P_{dump}[t]$</p>
+<p>$p_{\text{load}}[t] = p_{\text{diesel}}[t] + s_{\text{pv}} p_{\text{pv}}[t] + s_{\text{wt}} p_{\text{wt}}[t] + p_{\text{disch}}[t] – p_{\text{ch}}[t] – p_{\text{dump}}[t]$</p>
 
-<p>$E_{batt}[t+1] = E_{batt}[t] + \mu P_{ch}[t] – P_{disch} /\mu$</p>
+<p>$e_{\text{batt}}[t+1] = e_{\text{batt}}[t] + \mu p_{\text{ch}}[t] – p_{\text{disch}} /\mu$</p>
 
-<p>$ E_{batt}[t] \leq S_{batt} $</p>
+<p>$ e_{\text{batt}}[t] \leq s_{\text{batt}} $</p>
 
-<p>$ P_{ch}[t] \leq \gamma S_{batt}$</p>
+<p>$ p_{\text{ch}}[t] \leq \gamma s_{\text{batt}}$</p>
 
-<p>$ P_{disch}[t] \leq \gamma S_{batt}$</p>
+<p>$ p_{\text{disch}}[t] \leq \gamma s_{\text{batt}}$</p>
 
-<p>$ P_{ch}[t] P_{disch}[t] = 0$</p>
+<p>$ p_{\text{ch}}[t] p_{\text{disch}}[t] = 0$</p>
 
-<p>$ \sum_{t} P_{diesel}[t] \leq (1-\alpha_{renewable}) \sum_{t} P_{load}[t] $</p>
+<p>$ \sum_{t} p_{\text{diesel}}[t] \leq (1-\alpha_{\text{renewable}}) \sum_{t} p_{\text{load}}[t] $</p>
 
-<p>위에서 $S$는 용량, $P$는 전력, $E$는 저장된 에너지, $\mu$는 효율, $\alpha$는 규정 비율이며, pv는 태양광, wt는 풍력, batt는 배터리, load는 부하, diesel은 디젤엔진, ch는 충전, disch는 방전, dump는 출력제한이다. $S_{wt}$는 풍력 발전기의 대수이므로 nonnegative integer이며, 나머지는 nonnegative real number$들이다.</p>
+<p>위에서 $s$는 용량, $p$는 전력, $e$는 저장된 에너지, $\mu$는 효율, $\alpha$는 규정 비율이며, pv는 태양광, wt는 풍력, batt는 배터리, load는 부하, diesel은 디젤엔진, ch는 충전, disch는 방전, dump는 출력제한이다. $S_{wt}$는 풍력 발전기의 대수이므로 nonnegative integer이며, 나머지는 nonnegative real number$들이다.</p>
 
 <p><br />
 위에서 제약조건 ()은, 한 time step 내에서 ESS는 충전 또는 방전 둘 중 하나만을 수행한다는 제약이다. 충전항과 방전항이 동시에 양수가 되지 않도록 두 항 간 곱이 0이라는 제약을 둔다.</p>
 
 <p>문제는, 이 제약조건이 nonlinear equality constraint이므로 문제를 nonlinear non-convex problem로 만든다는 것이다.</p>
 
-<p>만약 아래와 같이 시간별 이진수 $x[t]$를 도입하면, 문제를 최소한 linear form으로는 바꿀 수 있다.</p>
+<p>만약 아래와 같이 충분히 큰 양수 $M$과 시간별 이진수 $x[t]$를 도입하면, 문제를 최소한 linear form으로는 바꿀 수 있다.</p>
 
-<p>$ P_{disch}[t] \leq M x[t]$, $P_{ch}[t] \leq M (1-x[t]) $</p>
+<p>$ p_{\text{disch}}[t] \leq M x[t]$,  $p_{\text{ch}}[t] \leq M (1-x[t]) $</p>
 
 <p>그러나 이 경우, 이진수가 너무 많아져서 계산 시간이 매우 오래 걸린다는 문제가 있다.</p>
 
-<p>이 문제를 해결하는, 구체적으로는 시간별 이진수 없는 linear convex problem으로 만들면서도 거의 같은 답을 얻는 방법이 있다. 위 제약 ()을 없애는 대신, 아래와 같이 목적함수에 충전항과 방전항에 아주 작은 양수계수를 곱한 항들의 합 $ \epsilon \sum_t ( P_{disch}[t] + P_{ch}[t] ) $ 을 penalty term들로써 추가하는 것이다.</p>
+<p>이 문제를 해결하는, 구체적으로는 시간별 이진수 없는 linear convex problem으로 만들면서도 거의 같은 답을 얻는 방법이 있다. 위 제약 ()을 없애는 대신, 아래와 같이 목적함수에 충전항과 방전항에 아주 작은 양수계수를 곱한 항들의 합 $ \epsilon \sum_t ( p_{\text{disch}}[t] + p_{\text{ch}}[t] ) $ 을 penalty term들로써 추가하는 것이다.</p>
 
-<p>목적함수를 최소화하기 위해, 같은 time step에 대한 충전 $P_{ch}[t]$과 방전 $P_{disch}[t]$ 둘 중 하나는 0이 된다.</p>
+<p>목적함수를 최소화하기 위해, 같은 time step에 대한 충전 $p_{\text{ch}}[t]$과 방전 $p_{\text{disch}}[t]$ 둘 중 하나는 0이 된다.</p>
 
 <p><br /></p>
 
 <h2 id="curtailment-제한-제약-추가-시-발생한-문제">Curtailment 제한 제약 추가 시 발생한 문제</h2>
 <p>위 최적화 문제에 재생발전 curtailment의 총량을 제한하는 제약을 아래 수식과 같이 추가할 수 있다. (제주도에서 curtailment 총량이 늘어나는 데 대한 문제의식이 생기면서 향후 이런 제약조건이 추가된 문제들이 본격적으로 연구될 수도 있다)</p>
 
-<p>$ \sum_{t} P_{dump}[t] \leq \alpha_{dump} \sum_{t} P_{load}[t] $</p>
+<p>$ \sum_{t} p_{\text{dump}}[t] \leq \alpha_{\text{dump}} \sum_{t} p_{\text{load}}[t] $</p>
 
 <p>필자는 이 제약을 추가 시, 충전과 방전에 양수계수를 곱한 penalty term들을 목적함수에 추가해도 충전항과 방전항이 둘 다 양수가 되는 문제가 발생함을 발견했다.</p>
 
-<p>필자의 분석 결과, 이는 충전과 방전 간 차이 $P_{ch}(t)-P_{disch}(t)$ 가 같을 때 둘 다 0보다 커질수록 생기는 일종의 가짜 curtailment 효과이다. 
-이를테면 $P_{ch}(t)-P_{disch}(t)=a$라 하면 (충전), 정상적인 답에서는 $P_{ch}(t)=a, P_{disch}(t)=0$이어야 한다. 그러나 만약 $P_{ch}(t) = a+b, P_{disch}(t) = b$, 즉 충전과 방전 모두에 $b$가 더해진 경우 어떻게 될까?</p>
+<p>필자의 분석 결과, 이는 충전과 방전 간 차이 $p_{\text{ch}}[t]-p_{\text{disch}}[t]$ 가 같을 때 둘 다 0보다 커질수록 생기는 일종의 가짜 curtailment 효과이다. 
+이를테면 $p_{\text{ch}}[t]-p_{\text{disch}}[t]=a$라 하면 (충전), 정상적인 답에서는 $p_{\text{ch}}[t]=a, p_{\text{disch}}[t]0$이어야 한다. 그러나 만약 $p_{\text{ch}}[t] = a+b, P_{\text{disch}}[t] = b$, 즉 충전과 방전 모두에 $b$가 더해진 경우 어떻게 될까?</p>
 
-<p>배터리 내 에너지의 변화를 $\triangle E(P_{ch}(t), P_{disch}(t)) = E_{batt}(t+1) – E_{batt}(t) = \mu P_{ch}(t) - P_{disch}(t)/\mu$라 하면, $\triangle E(a+b,b) - \triangle E(a,0) = b (\mu – 1/\mu) &lt; 0$ 이 된다 ($0&lt;\mu&lt;1$ 이니까). 즉, 충전과 방전 모두에 $b$가 더해지면 충전에 의한 배터리 내 에너지 증가분이 $b (\mu – 1/\mu)$ 만큼 더 작게 계산된다.</p>
+<p>배터리 내 에너지의 변화를 $\triangle e(P_{\text{ch}}[t], p_{\text{disch}}[t]) = e_{\text{batt}}[t+1] – e_{\text{batt}}[t] = \mu p_{\text{ch}}[t] - p_{\text{disch}}[t]/\mu$라 하면, $\triangle e(a+b,b) - \triangle e(a,0) = b (\mu – 1/\mu) &lt; 0$ 이 된다 ($0&lt;\mu&lt;1$ 이니까). 즉, 충전과 방전 모두에 $b$가 더해지면 충전에 의한 배터리 내 에너지 증가분이 $b (\mu – 1/\mu)$ 만큼 더 작게 계산된다.</p>
 
-<p>$P_{ch}(t)-P_{disch}(t)=-a$, 즉 방전시에도 결과는 마찬가지다. 똑같이 $\triangle E(a+b,b) - \triangle E(a,0) = b (\mu – 1/\mu) &lt; 0$ 이 되어, 방전에 의한 배터리 내 에너지 감소분이 $b (\mu – 1/\mu)$ 만큼 더 크게 계산된다.</p>
+<p>$p_{\text{ch}}[t]-p_{\text{disch}}[t]=-a$, 즉 방전시에도 결과는 마찬가지다. 똑같이 $\triangle e(a+b,b) - \triangle e(a,0) = b (\mu – 1/\mu) &lt; 0$ 이 되어, 방전에 의한 배터리 내 에너지 감소분이 $b (\mu – 1/\mu)$ 만큼 더 크게 계산된다.</p>
 
 <p>즉 문제가 없을 때의 답과 비교하면 배터리 내 저장된 에너지의 양이 $b (\mu – 1/\mu)$만큼 사라지는 것처럼 계산되는데, 이는 실제로 dump load에서 소비된 것은 아니기 때문에 ‘가짜’ curtailment라고 이름붙였다.</p>
 
@@ -478,7 +478,7 @@
 
 <p>필자는 이 문제를 해결하기 위해, 아래와 같은 프로세스를 제안하였다. correct solution에서는 모든 시간 각각에 대해 충전항과 방전항 둘 중 하나는 0임에 착안해, 조건들에 따라 각 시간별 충전항, 방전항들 중 특정 항의 upper bound를 강제로 0으로 만드는 과정을 반복한다.</p>
 
-<p>(flowchart)</p>
+<p><img src="/assets/images/2023-04-07-mypaperone/flowchart.png" alt="flowchart" class="align-center" /></p>
 
 <p>이 방법을 쓰면, 시간별 이진수를 도입하지 않고도 5~30번 정도의 iteration이면 충분히 correct solution에 근접한 solution을 얻는 것을 확인하였다.</p>
 
