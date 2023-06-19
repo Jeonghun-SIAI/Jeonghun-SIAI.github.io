@@ -124,4 +124,10 @@ var store = [{
         "tags": ["python","BeautifulSoup"],
         "url": "/2023/04/monthlyenergyone.html",
         "teaser": "/assets/images/logo.png"
+      },{
+        "title": "WSL2 Ubuntu 22.04에 CUDA & cuDNN 설치하기",
+        "excerpt":"자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 다운로드 웹페이지 찾아서 윈도우에서 설치 ubuntu bash에서 $\\texttt{nvidia-smi}$ 실행 시, 드라이버 설치 확인 가능 Tensorflow 웹페이지에서 호환되는 CUDA 버전 확인 (‘소프트웨어 요구사항’ 항목을 보면, Tensorflow의 경우 CUDA 11.2 지원) CUDA Toolkit Downloads 웹페이지에서 Linux - x86_64 - WSL-Ubuntu - 2.0 - runtime (local)...","categories": ["etc"],
+        "tags": ["python","BeautifulSoup"],
+        "url": "/2023/04/cudadudnn.html",
+        "teaser": "/assets/images/logo.png"
       }]
