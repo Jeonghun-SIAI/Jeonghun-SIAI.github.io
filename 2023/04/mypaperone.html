@@ -254,7 +254,7 @@
   <ul class="nav__items" id="category_tag_menu">
       <!--전체 글 수-->
       <li>
-            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">22</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
+            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">24</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
       </li>
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
@@ -303,7 +303,7 @@
                     
                 
                     
-                        <li><a href="/energy" class="">에너지 (15)</a></li>
+                        <li><a href="/energy" class="">에너지 (17)</a></li>
                     
                 
             </ul>
@@ -418,30 +418,30 @@
 
 <p>Subject to</p>
 
-<p>$p_{\text{load}}[t] = p_{\text{diesel}}[t] + s_{\text{pv}} p_{\text{pv}}[t] + s_{\text{wt}} p_{\text{wt}}[t] + p_{\text{disch}}[t] – p_{\text{ch}}[t] – p_{\text{dump}}[t]$</p>
+<p>$p_{\text{load}}[t] = p_{\text{diesel}}[t] + s_{\text{pv}} p_{\text{pv}}[t] + s_{\text{wt}} p_{\text{wt}}[t] + p_{\text{disch}}[t] – p_{\text{ch}}[t] – p_{\text{dump}}[t] \quad \forall t$</p>
 
-<p>$e_{\text{batt}}[t+1] = e_{\text{batt}}[t] + \mu p_{\text{ch}}[t] – p_{\text{disch}} /\mu$</p>
+<p>$e_{\text{batt}}[t+1] = e_{\text{batt}}[t] + \mu p_{\text{ch}}[t] – p_{\text{disch}} /\mu \quad \forall t$</p>
 
-<p>$ e_{\text{batt}}[t] \leq s_{\text{batt}} $</p>
+<p>$ e_{\text{batt}}[t] \leq s_{\text{batt}}  \quad \forall t$</p>
 
-<p>$ p_{\text{ch}}[t] \leq \gamma s_{\text{batt}}$</p>
+<p>$ p_{\text{ch}}[t] \leq \gamma s_{\text{batt}} \quad \forall t$</p>
 
-<p>$ p_{\text{disch}}[t] \leq \gamma s_{\text{batt}}$</p>
+<p>$ p_{\text{disch}}[t] \leq \gamma s_{\text{batt}} \quad \forall t$</p>
 
-<p>$ p_{\text{ch}}[t] p_{\text{disch}}[t] = 0$</p>
+<p>$ p_{\text{ch}}[t] p_{\text{disch}}[t] = 0 \quad \forall t$</p>
 
 <p>$ \sum_{t} p_{\text{diesel}}[t] \leq (1-\alpha_{\text{renewable}}) \sum_{t} p_{\text{load}}[t] $</p>
 
 <p>위에서 $s$는 용량, $p$는 전력, $e$는 저장된 에너지, $\mu$는 효율, $\alpha$는 규정 비율이며, pv는 태양광, wt는 풍력, batt는 배터리, load는 부하, diesel은 디젤엔진, ch는 충전, disch는 방전, dump는 출력제한이다. $S_{wt}$는 풍력 발전기의 대수이므로 nonnegative integer이며, 나머지는 nonnegative real number$들이다.</p>
 
 <p><br />
-위에서 제약조건 ()은, 한 time step 내에서 ESS는 충전 또는 방전 둘 중 하나만을 수행한다는 제약이다. 충전항과 방전항이 동시에 양수가 되지 않도록 두 항 간 곱이 0이라는 제약을 둔다.</p>
+위에서 제약조건 $ p_{\text{ch}}[t] p_{\text{disch}}[t] = 0$ 은, 한 time step 내에서 ESS는 충전 또는 방전 둘 중 하나만을 수행한다는 제약이다. 충전항과 방전항이 동시에 양수가 되지 않도록 두 항 간 곱이 0이라는 제약을 둔다.</p>
 
 <p>문제는, 이 제약조건이 nonlinear equality constraint이므로 문제를 nonlinear non-convex problem로 만든다는 것이다.</p>
 
 <p>만약 아래와 같이 충분히 큰 양수 $M$과 시간별 이진수 $x[t]$를 도입하면, 문제를 최소한 linear form으로는 바꿀 수 있다.</p>
 
-<p>$ p_{\text{disch}}[t] \leq M x[t]$,  $p_{\text{ch}}[t] \leq M (1-x[t]) $</p>
+<p>$ p_{\text{disch}}[t] \leq M x[t]$,  $p_{\text{ch}}[t] \leq M (1-x[t])  \quad \forall t$</p>
 
 <p>그러나 이 경우, 이진수가 너무 많아져서 계산 시간이 매우 오래 걸린다는 문제가 있다.</p>
 
@@ -571,6 +571,10 @@
   
 
   
+
+  
+
+  
   	
   	
   	
@@ -600,6 +604,88 @@
     <div class="page__related">
       <h2 class="page__related-title">참고</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/monthlyenergythree.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-23T00:00:00+09:00">2023-04-23</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 `추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/monthlyenergytwo.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-22T00:00:00+09:00">2023-04-22</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서, 각 건물의 지번별/월별 전기와 도시가스 사용량 데이터를 소개하였다. 또한 이를 표제부와 결합해 건물 에너지 분석에 활용할 수 있으며, 그 결합 방법 또한 소개하였다.
+</p>
+  </article>
+</div>
+
         
           
 
@@ -679,86 +765,6 @@
 
     <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
 </p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/logo.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2023/04/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-19T00:00:00+09:00">2023-04-19</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learnin...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/logo.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2023/04/reinforcefour.html" rel="permalink">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 4) DDPG를 통한 continuous control 도출
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-18T00:00:00+09:00">2023-04-18</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 마이크로그리드에 discrete action 기반의 심층강화학습을 적용해 과거 시점의데이터 기반으로 control을 결정하는 방법을 알아보았다. 그러나 실제로는 continuous action이므로, continuous action을 다루는 심층강화학습 기법을 적...</p>
   </article>
 </div>
 

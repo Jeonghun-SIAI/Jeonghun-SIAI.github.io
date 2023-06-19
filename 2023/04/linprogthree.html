@@ -254,7 +254,7 @@
   <ul class="nav__items" id="category_tag_menu">
       <!--전체 글 수-->
       <li>
-            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">22</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
+            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">24</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
       </li>
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
@@ -303,7 +303,7 @@
                     
                 
                     
-                        <li><a href="/energy" class="">에너지 (15)</a></li>
+                        <li><a href="/energy" class="">에너지 (17)</a></li>
                     
                 
             </ul>
@@ -424,7 +424,7 @@
 
 <p>$\textbf{I}$는 단위행렬이고, $\textbf{0}$는 영행렬이다. 2부에서는 시간별 부하 충족 조건에 $\textbf{e}_{\text{batt}}$를 기재하지 않았지만, 여기서는 기재했음에 주의한다. 그리고 $\textbf{e}_{\text{batt}}$는 25차원 벡터, 그 앞에 붙은 영행렬은 $24 \times 25$ 행렬임에도 주의한다 ($e_{\text{batt}}[t]$는 $t=0,1,\cdots,24$에 대해 정의되므로).</p>
 
-<p>cvxopt에서 등호 제약조건은 $\textbf{A}_{eq} \textbf{x} = \textbf{b}_{eq}$ 꼴로 입력되어야 한다, $\textbf{x}$는 우리가 결정해야 할 변수들을 모두 모은 벡터 ($1 \sim 24$시간 각각의 수전, 충전, 방전, $0 \sim 24$시간 각각의 배터리 내 에너지) 이고, $\textbf{A}$는 그 변수들에 붙는 계수들, $\textbf{b}$는 변수가 아닌 상수들을 의미한다. 그러면,  $\textbf{A} \textbf{x} = \textbf{b}$ 꼴의 식은 아래와 같다.</p>
+<p>cvxopt에서 등호 제약조건은 $\textbf{A}_{eq} \textbf{x} = \textbf{b}_{eq}$ 꼴로 입력되어야 한다, $\textbf{x}$는 우리가 결정해야 할 변수들을 세로로 모두 이어 붙여 만든 열벡터 $[\textbf{p}_{\text{grid}}^{\top},\textbf{p}_{\text{ch}}^{\top},\textbf{p}_{\text{disch}}^{\top},\textbf{e}_{\text{batt}}^{\top}]^{\top}$ 이고 원소 수는 97이다 (수전 24, 충전 24, 방전 24, 배터리내에너지 25). $\textbf{A}$는 그 변수들에 붙는 계수들, $\textbf{b}$는 변수가 아닌 상수들을 의미한다. 그러면,  $\textbf{A} \textbf{x} = \textbf{b}$ 꼴의 식은 아래와 같다.</p>
 
 <p>$ \begin{bmatrix}
 \textbf{I} &amp; -\textbf{I} &amp; \textbf{I} &amp; \textbf{0}
@@ -457,7 +457,7 @@
 
 <p>여기서 sparse란 `희소하다’ 라는 뜻으로, 0이 많은 행렬에 대해서 0을 곱하거나 더하는 연산을 수행하지 않고, 0을 저장하지도 않는 데이터 타입임을 의미한다 (0이 아닌 원소들 각각이 어느 위치에 있는지만을 저장한다). 이러한 sparse 처리를 해야 행렬 변수가 차지하는 메모리 크기도 작아지고 연산도 빨라진다. 특히 변수가 수만 개를 넘어가면 sparse 처리를 하지 않은 경우와 한 경우의 계산 시간 간 차이가 매우 크며, 구형 컴퓨터의 경우 메모리가 꽉 찰 수도 있다. 그러므로 웬만하면 sparse 처리를 하자.</p>
 
-<p>그리고 시간별 부하를 원소로 하는 numpy array를 $\texttt{data_load}$라 하자. 편의상 전기 부하는 모든 시간에 대해 300kW라 하자 (실제로는 시간에 따라 다르다). 그러면, 위 제약조건을 변수 $\texttt{Aeq_balance}$와 $\texttt{beq_balance}$로 표현한 최종 코드는 아래와 같다.</p>
+<p>그리고 시간별 부하를 원소로 하는 numpy array를 $\texttt{p_load}$라 하자. 편의상 전기 부하는 모든 시간에 대해 300kW라 하자 (실제로는 시간에 따라 다르다). 그러면, 위 제약조건을 변수 $\texttt{Aeq_balance}$와 $\texttt{beq_balance}$로 표현한 최종 코드는 아래와 같다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p_load</span> <span class="o">=</span> <span class="mi">300</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">((</span><span class="mi">24</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
 
@@ -473,13 +473,13 @@
 <p><br />
 이번에는 나머지 등호조건인 배터리 내 에너지 조건을 보자. 해당 조건을 다시 매 시간별 식으로 표현하면 아래와 같다.</p>
 
-<p>$ e_{\text{batt}}[1] - e_{\text{batt}}[0] - 0.9 p_{\text{ch}}[1] + p_{\text{disch}}[1]/ 0.9 = 0 $</p>
+<p>$ - 0.9 p_{\text{ch}}[1] + p_{\text{disch}}[1]/ 0.9 - e_{\text{batt}}[0]  + e_{\text{batt}}[1]= 0 $</p>
 
-<p>$ e_{\text{batt}}[2] - e_{\text{batt}}[1] - 0.9 p_{\text{ch}}[2] + p_{\text{disch}}[2]/ 0.9 = 0 $</p>
+<p>$ - 0.9 p_{\text{ch}}[2] + p_{\text{disch}}[2]/ 0.9 - e_{\text{batt}}[1]  + e_{\text{batt}}[2]= 0 $</p>
 
 <p>$\vdots$</p>
 
-<p>$ e_{\text{batt}}[24] - e_{\text{batt}}[23] - 0.9 p_{\text{ch}}[24] + p_{\text{disch}}[24]/ 0.9 = 0 $</p>
+<p>$ - 0.9 p_{\text{ch}}[24] + p_{\text{disch}}[24]/ 0.9 - e_{\text{batt}}[23] + e_{\text{batt}}[24]= 0 $</p>
 
 <p>위 식을 보면, $\textbf{p}_{\text{ch}}$와 $\textbf{p}_{\text{disch}}$에 곱해지는 행렬은 단위행렬 꼴이지만, $\textbf{e}_{\text{batt}}$에 곱해지는 행렬은 단위행렬 꼴이 아님을 짐작할 수 있다. 하나의 식에 $\textbf{e}_{\text{batt}}$ 항이 두 개가 나오기 때문이다. 
 이 제약을 행렬들의 식으로 쓰면, 아래와 같이 된다.</p>
@@ -498,7 +498,7 @@
 0 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 &amp; -1 &amp; 1 
 \end{bmatrix} \textbf{e}_{\text{batt}} = \textbf{0} $</p>
 
-<p>위 제약조건을 변수 $\texttt{Aeq_batteryenergy}$와 $\texttt{beq_batteryenergy}$로 표현한 최종 코드는 아래와 같다.</p>
+<p>$\textbf{e}_{\text{batt}}$의 계수행렬을 함수 $\texttt{block_batt()}$으로 만들고, 위 제약조건을 변수 $\texttt{Aeq_batteryenergy}$와 $\texttt{beq_batteryenergy}$로 구성한 최종 코드는 아래와 같다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">block_batt</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
     <span class="k">return</span> <span class="nf">sparse</span><span class="p">([[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="mi">1</span><span class="p">)],[</span><span class="nf">block_eye</span><span class="p">(</span><span class="n">size</span><span class="p">)]])</span> <span class="o">-</span> <span class="nf">sparse</span><span class="p">([[</span><span class="nf">block_eye</span><span class="p">(</span><span class="n">size</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="mi">1</span><span class="p">)]])</span>
@@ -509,7 +509,7 @@
 <span class="n">beq_batteryenergy</span> <span class="o">=</span> <span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>cvxopt에서는 모든 등호제약조건들의 좌변의 계수들을 결합한 하나의 행렬 $A_{\text{eq}}$와 우변의 상수들을 결합한 하나의 벡터 $b_{\text{eq}}$를 요구한다. 그러므로 두 등호 제약을 결합해서, 최종적으로 하나의 행렬과 하나의 벡터로 만든다.</p>
+<p>cvxopt에서는 모든 등호제약조건들의 좌변의 계수들을 결합한 하나의 행렬 $\textbf{A}_{\text{eq}}$와 우변의 상수들을 결합한 하나의 벡터 $\textbf{b}_{\text{eq}}$를 요구한다. 그러므로 두 등호 제약을 결합해서, 최종적으로 하나의 행렬과 하나의 벡터로 만든다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Aeq</span> <span class="o">=</span> <span class="nf">sparse</span><span class="p">([</span><span class="n">Aeq_balance</span><span class="p">,</span><span class="n">Aeq_batteryenergy</span><span class="p">])</span> <span class="c1"># ([]) 안의 요소들에 []를 안 붙이면 vstack, []를 붙이면 hstack으로 생각
 </span><span class="n">beq</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">([</span><span class="n">beq_balance</span><span class="p">,</span><span class="n">beq_batteryenergy</span><span class="p">])</span>
@@ -518,17 +518,17 @@
 <p>여기서 $\texttt{Aeq_balance}$와 $\texttt{Aeq_batteryenergy}$는 세로로 이어붙여진다. 이 때는 각 요소를 대괄호로 감싸지 않음에 주의. ($\texttt{beq_balance}$와 $\texttt{beq_batteryenergy}$ 에 대해서도 마찬가지이다)</p>
 
 <p><br />
-다음으로 이 문제의 부등호 제약을 보자. 해당 제약들은 배터리 충전전력/ 방전전력/ 저장에너지의 하한과 상한이다. 그리고 부등호 제약들은 모두 $Ax \leq b$ 꼴로 나타내야 한다 (부등호 방향이 틀리지 않도록 매우 주의해야 한다! 결과가 이상한 경우, 어떤 식에서 부등호 방향을 거꾸로 했기 때문일 경우가 많다).</p>
+다음으로 이 문제의 부등호 제약을 보자. 해당 제약들은 배터리 충전전력/ 방전전력/ 저장에너지의 하한과 상한이다. 그리고 부등호 제약들은 모두 $\textbf{A}\textbf{x} \preceq \textbf{b}$ 꼴로 나타내야 한다 (부등호 방향이 틀리지 않도록 매우 주의해야 한다! 결과가 이상한 경우, 어떤 식에서 부등호 방향을 거꾸로 했기 때문일 경우가 많다).</p>
 
 <p>그러므로 $ p_{\text{ch}}[t]$의 하한과 상한 조건은 아래와 같이 표현하는 것이 좋다.</p>
 
-<p>$ p_{\text{ch}}[t] \leq 50, \,\, -P_{\text{ch}}[t] \leq 0$</p>
+<p>$ p_{\text{ch}}[t] \leq 50, \,\, -p_{\text{ch}}[t] \leq 0  \quad \forall t$</p>
 
 <p>이는 $ p_{\text{disch}}[t]$, $ e_{\text{batt}}[t]$에 대해서도 마찬가지이다.</p>
 
 <p>단, $ e_{\text{batt}}[0]$의 경우 상한도 0으로 둔다. 또는 $ e_{\text{batt}}[0]$의 초기값을 따로 특정 수 $e_0$로 정한다고 하면, $ e_{\text{batt}}[0]$의 상한과 하한을 모두 $e_0$으로 둔다. 이런 제약조건을 두지 않으면, $ e_{\text{batt}}[0]$이 아무렇게나 정해질 수 있으며 비용 최소화를 위해 배터리의 용량 100 kWh와 같아질 것이다. 그러나 자정에 이미 배터리가 완충되어 있는 상황이 일반적이라고 보기는 어렵다.</p>
 
-<p>각 변수들의 상한을 모은 벡터 $\textbf{u}$에 대한 식은 각 변수들의 계수가 1이고 우변이 상한값들인 부등식 $\textbf{I} \textbf{x} \preceq \textbf{u}$, 하한을 모은 벡터 $\textbf{l}$에 대한 식은 각 변수들의 계수가 -1이고 우변이 하한값에 마이너스를 취한 값들인 부등식 $-\textbf{I} \textbf{x} \preceq -\textbf{l}$이다.</p>
+<p>각 변수들의 상한을 모은 벡터 $\textbf{u}$에 대한 식은 각 변수들의 계수가 1이고 우변이 상한값들인 부등식 $\textbf{I} \textbf{x} \preceq \textbf{u}$, 하한을 모은 벡터 $\boldsymbol{\ell}$에 대한 식은 각 변수들의 계수가 -1이고 우변이 하한값에 마이너스를 취한 값들인 부등식 $-\textbf{I} \textbf{x} \preceq -\boldsymbol{\ell}$이다.</p>
 
 <p>상한과 하한에 대한 코드는 아래와 같다.</p>
 
@@ -555,7 +555,7 @@
 
 <p>이 때 편의를 위해 $\texttt{b_lowerbound}$와 $\texttt{b_upperbound}$에 대응하는 행벡터들 $\texttt{lowerbounds}$와 $\texttt{upperbounds}$를 만들고, 여기에 실제 하한값과 상한값들을 입력하도록 만들었다. 위에서 $\texttt{Aeq}$를 만들 때 각 열이 각 변수에 대응되었으므로, 상한과 하한을 코딩할 때도 각 열을 각 변수로 보는 관점을 그대로 적용할 수 있도록 하였다.</p>
 
-<p>$\texttt{b_lowerbound}$의 73번째 원소 (0번째 시간의 배터리 내 에너지)만 주어진 초기값 \texttt{initialenergy_batt}이고, 나머지는 전부 0이다. 마찬가지로 $\texttt{b_upperbound}$의 73번째 원소 (0번째 시간의 배터리 내 에너지)만 주어진 초기값 \texttt{initialenergy_batt}이고, 나머지는 수전 전력에 대해서는 무한대 (즉 따로 상한이 없음), 충전과 방전 전력에 대해서는 배터리 용량에 c-rate를 곱한 값, $1 \sim 24$번째 시간의 배터리 내 에너지에 대해서는 배터리 용량이다.</p>
+<p>$\texttt{b_lowerbound}$의 73번째 원소 (0번째 시간의 배터리 내 에너지)만 주어진 초기값 $\texttt{initialenergy_batt}$이고, 나머지는 전부 0이다. 마찬가지로 $\texttt{b_upperbound}$의 73번째 원소 (0번째 시간의 배터리 내 에너지)만 주어진 초기값 $\texttt{initialenergy_batt}$이고, 나머지는 수전 전력에 대해서는 무한대 (즉 따로 상한이 없음), 충전과 방전 전력에 대해서는 배터리 용량에 c-rate를 곱한 값, 1~24번째 시간의 배터리 내 에너지에 대해서는 배터리 용량이다.</p>
 
 <p><br />
 마지막으로, 목적함수를 코딩한다. 목적함수에서 각 변수들에 붙는 계수들을 모은 벡터 $\texttt{c}$를 만든다.</p>
@@ -668,6 +668,10 @@
   
 
   
+
+  
+
+  
   	
   	
   	
@@ -697,6 +701,88 @@
     <div class="page__related">
       <h2 class="page__related-title">참고</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/monthlyenergythree.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-23T00:00:00+09:00">2023-04-23</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 `추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/monthlyenergytwo.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-22T00:00:00+09:00">2023-04-22</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서, 각 건물의 지번별/월별 전기와 도시가스 사용량 데이터를 소개하였다. 또한 이를 표제부와 결합해 건물 에너지 분석에 활용할 수 있으며, 그 결합 방법 또한 소개하였다.
+</p>
+  </article>
+</div>
+
         
           
 
@@ -776,86 +862,6 @@
 
     <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
 </p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/logo.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2023/04/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-19T00:00:00+09:00">2023-04-19</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learnin...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/logo.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2023/04/reinforcefour.html" rel="permalink">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 4) DDPG를 통한 continuous control 도출
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-18T00:00:00+09:00">2023-04-18</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 마이크로그리드에 discrete action 기반의 심층강화학습을 적용해 과거 시점의데이터 기반으로 control을 결정하는 방법을 알아보았다. 그러나 실제로는 continuous action이므로, continuous action을 다루는 심층강화학습 기법을 적...</p>
   </article>
 </div>
 

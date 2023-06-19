@@ -254,7 +254,7 @@
   <ul class="nav__items" id="category_tag_menu">
       <!--전체 글 수-->
       <li>
-            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">22</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
+            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">24</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
       </li>
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
@@ -303,7 +303,7 @@
                     
                 
                     
-                        <li><a href="/energy" class="">에너지 (15)</a></li>
+                        <li><a href="/energy" class="">에너지 (17)</a></li>
                     
                 
             </ul>
@@ -415,17 +415,17 @@
 
 <p>우선 조건들에서 명시된 요소들을 수식의 항으로 표현한다. 시간을 $t$라 하고 (이 경우 하루는 24시간이므로 $t=1,2,\cdots,24$이고, $t=1$은 0시~1시, $t=6$은 5시~6시 를 의미한다), 시간 $t$에서 계통(grid)으로부터의 전력 유입을 $p_{\text{grid}}[t]$ 라 하자. 마찬가지로 건물의 전기 부하(load)를 $p_{\text{load}}[t]$, 배터리 충전(charge)을 위해 배터리로 유입되는 전력을 $p_{\text{ch}}[t]$, 배터리에서 방전(discharge)되어 부하에 전달되는 전력을 $p_{\text{disch}}[t]$, 배터리 안에 저장되어 있는 에너지 양을 $e_{\text{batt}}[t]$라 하자. 배터리의 충/방전 효율은 90\%라 하자.</p>
 
-<p>1) $ p_{\text{load}}[t] = p_{\text{grid}}[t] - p_{\text{ch}}[t] + p_{\text{disch}}[t] $</p>
+<p>1) $ p_{\text{load}}[t] = p_{\text{grid}}[t] - p_{\text{ch}}[t] + p_{\text{disch}}[t] \quad \forall t$</p>
 
 <p>좌변은 전기 부하, 우변은 부하에 공급되는 전력이다.</p>
 
 <p>배터리가 충전될 경우 계통으로부터의 전력 중 일부를 제해야 하므로 $p_{\text{ch}}[t]$ 앞에 마이너스가 붙고, 배터리가 방전될 경우 계통으로부터의 전력에 더해져 부하를 충족하므로 $p_{\text{disch}}[t]$ 앞에 플러스가 붙었다.</p>
 
-<p>2) $ 0 \leq e_{\text{batt}}[t] \leq 100 $</p>
+<p>2) $ 0 \leq e_{\text{batt}}[t] \leq 100  \quad \forall t$</p>
 
-<p>3) $ 0 \leq p_{\text{ch}}[t] \leq 50, \quad 0 \leq p_{\text{disch}}[t] \leq 50 $</p>
+<p>3) $ 0 \leq p_{\text{ch}}[t] \leq 50, \quad 0 \leq p_{\text{disch}}[t] \leq 50  \quad \forall t$</p>
 
-<p>4) $ e_{\text{batt}}[t] = e_{\text{batt}}[t-1] + 0.9 p_{\text{ch}}[t] - p_{\text{disch}}[t]/0.9 $</p>
+<p>4) $ e_{\text{batt}}[t] = e_{\text{batt}}[t-1] + 0.9 p_{\text{ch}}[t] - p_{\text{disch}}[t]/0.9  \quad \forall t$</p>
 
 <p>조건 4)의 우변의 $t-1$에 주의할 것. 여기서는 충전될 경우 배터리 내 에너지가 증가하므로 $p_{\text{ch}}[t]$ 앞에 플러스가 붙고, 방전될 경우 배터리 내 에너지가 감소하므로 $p_{\text{disch}}[t]$ 앞에 마이너스가 붙었다. 배터리로 들어가는 에너지 중 충전효율만큼의 에너지만이 실제 배터리에 저장되므로, $p_{\text{ch}}[t]$에 $\mu$가 곱해진다. 마찬가지로 배터리에서 나오는 에너지 중 방전효율만큼의 에너지만이 실제 부하에 공급되므로, $p_{\text{disch}}[t]$에 $\mu$의 역수가 곱해진다.</p>
 
@@ -534,6 +534,10 @@
   
 
   
+
+  
+
+  
   	
   	
   	
@@ -563,6 +567,88 @@
     <div class="page__related">
       <h2 class="page__related-title">참고</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/monthlyenergythree.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-23T00:00:00+09:00">2023-04-23</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 `추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2023/04/monthlyenergytwo.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-22T00:00:00+09:00">2023-04-22</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서, 각 건물의 지번별/월별 전기와 도시가스 사용량 데이터를 소개하였다. 또한 이를 표제부와 결합해 건물 에너지 분석에 활용할 수 있으며, 그 결합 방법 또한 소개하였다.
+</p>
+  </article>
+</div>
+
         
           
 
@@ -642,86 +728,6 @@
 
     <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
 </p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/logo.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2023/04/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-19T00:00:00+09:00">2023-04-19</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learnin...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/logo.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2023/04/reinforcefour.html" rel="permalink">강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 4) DDPG를 통한 continuous control 도출
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-18T00:00:00+09:00">2023-04-18</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 마이크로그리드에 discrete action 기반의 심층강화학습을 적용해 과거 시점의데이터 기반으로 control을 결정하는 방법을 알아보았다. 그러나 실제로는 continuous action이므로, continuous action을 다루는 심층강화학습 기법을 적...</p>
   </article>
 </div>
 

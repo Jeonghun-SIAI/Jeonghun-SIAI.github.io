@@ -89,6 +89,14 @@
 <lastmod>2023-04-21T00:00:00+09:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/2023/04/monthlyenergytwo.html</loc>
+<lastmod>2023-04-22T00:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/2023/04/monthlyenergythree.html</loc>
+<lastmod>2023-04-23T00:00:00+09:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/aboutme/</loc>
 </url>
 <url>
@@ -125,6 +133,9 @@
 <loc>http://localhost:4000/energy/5/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/energy/6/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/theory/</loc>
 </url>
 <url>
@@ -144,6 +155,9 @@
 </url>
 <url>
 <loc>http://localhost:4000/energy/page5/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/energy/page6/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/etc/</loc>

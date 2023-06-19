@@ -130,4 +130,16 @@ var store = [{
         "tags": ["python","BeautifulSoup"],
         "url": "/2023/04/cudadudnn.html",
         "teaser": "/assets/images/logo.png"
+      },{
+        "title": "건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거",
+        "excerpt":"이전 포스팅에서, 각 건물의 지번별/월별 전기와 도시가스 사용량 데이터를 소개하였다. 또한 이를 표제부와 결합해 건물 에너지 분석에 활용할 수 있으며, 그 결합 방법 또한 소개하였다. 그렇다면 결합된 데이터를 그대로 쓰면 되는가? 그렇지 않다. 분명히 ‘이상한’ data point들이 존재할 것이기 때문이다. 데이터 기반의 연구개발을 한다면, 이러한 ‘이상한’ data point들을 제거하거나 수정하는...","categories": ["Energy"],
+        "tags": ["python","BeautifulSoup"],
+        "url": "/2023/04/monthlyenergytwo.html",
+        "teaser": "/assets/images/logo.png"
+      },{
+        "title": "건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거",
+        "excerpt":"저번 포스팅에서는 건물 월별 에너지 사용량의 `추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다. 상식적으로, 같은 용도의 건물이라면 크기가 큰 건물일수록 에너지 사용량이 큰 경향이 있을 것이다. 이를테면 서울 내 업무용 건물들의 1월 전기 사용량을 연면적 (모든 층의 바닥면적의...","categories": ["Energy"],
+        "tags": ["python","BeautifulSoup"],
+        "url": "/2023/04/monthlyenergythree.html",
+        "teaser": "/assets/images/logo.png"
       }]
