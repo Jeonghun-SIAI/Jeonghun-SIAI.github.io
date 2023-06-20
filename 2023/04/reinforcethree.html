@@ -398,7 +398,7 @@
 <p><br />
 심층신경망 구성은 아래 그림과 같다.</p>
 
-<p>(그림)</p>
+<p><img src="/assets/images/reinforcethree/nn.png" alt="nn" class="align-center" /></p>
 
 <p>직전 24시간의 태양광 발전량은 첫 번째 Conv1D 층에, 직전 24시간의 부하는 두 번째 Conv1D 층에, 그리고 직전 1시간의 배터리 내 에너지양은 위 두 Conv1D층과 연결되는 Dense층에 바로 연결된다. 그리고 Dense층이 하나 더 있고, 이 층을 거쳐서 최종적으로 3개의 output node가 각 action별 Q-value를 출력한다.</p>
 
