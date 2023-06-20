@@ -395,11 +395,13 @@
         
         <p>지난 포스팅에서 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내용은 <a href="https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf">Sutton의 Introduction</a> 참고 바람)</p>
 
-<p>먼저 Q-learning을 간단히 되짚고 넘어가자. 어떤 환경에서 시점 t에 상태 $s_{t}$에 있고, 이 때 action $a_{t}$를 수행하면 보상 $r_{t+1}$을 받으면서 상태 $s_{t+1}$로 전이된다고 하자. 해당 학위논문의 에너지시스템 사례에서는 상태는 $t-N, t-(N-1), …, t-1$ 시점들의 태양광발전량과 부하 및 $t-1$시점의 배터리 내 에너지량들의 벡터로 두었고, action은 $p_{\text{import}}[t]-p_{\text{export}}[t]$이다. 보상은 계통으로 송전시의 수익 (양의 보상) 또는 계통으로부터 수전하거나 loss of load가 발생할 때의 비용 (음의 보상) 이다.</p>
+<p><br />
+먼저 Q-learning을 간단히 되짚고 넘어가자. 어떤 환경에서 시점 t에 상태 $s_{t}$에 있고, 이 때 action $a_{t}$를 수행하면 보상 $r_{t+1}$을 받으면서 상태 $s_{t+1}$로 전이된다고 하자. 해당 학위논문의 에너지시스템 사례에서는 상태는 $t-N, t-(N-1), …, t-1$ 시점들의 태양광발전량과 부하 및 $t-1$시점의 배터리 내 에너지량들의 벡터로 두었고, action은 $p_{\text{import}}[t]-p_{\text{export}}[t]$이다. 보상은 계통으로 송전시의 수익 (양의 보상) 또는 계통으로부터 수전하거나 loss of load가 발생할 때의 비용 (음의 보상) 이다.</p>
 
 <p>참고로 ESS의 충/방전은 계통 수전/송전 값이 결정되면 에너지 밸런스를 맞추도록 자동으로 결정된다고 가정한다. 이런 식으로 action의 자유도(degree of freedom)을 줄여야 실제 계산이 용이해진다.</p>
 
-<p>이 때 ‘미래의 보상들을 합친 누적 보상의 기대값’ $Q(s_{t},a_{t})$는 다음과 같다.</p>
+<p><br />
+이 때 ‘미래의 보상들을 합친 누적 보상의 기대값’ $Q(s_{t},a_{t})$는 다음과 같다.</p>
 
 <p>$ Q(s_{t},a_{t}) = \mathbb{E} [r_{t+1} + \gamma r_{t+2} + \gamma^2 r_{t+3} + \cdots] $</p>
 
@@ -417,17 +419,29 @@
 
 <p>실제 수전량은 -1.1에서 +1.1 사이의 실수이지만 (마이너스값은 송전), 문제를 간단히 하기 위해 세 가지의 discrete action들로 구성된 action set을 가정한다. 1.1kW로 수전, 1.1kW로 송전, 수전도 송전도 하지 않음 (idle)이다. 각 action의 인덱스를 0,1,2라 하자.</p>
 
-<p>그러면 매 시점별로 $\hat{Q}(s_{t},0)$, $\hat{Q}(s_{t},1)$, $\hat{Q}(s_{t},2)$ 중에서 최대값에 대응하는 action을 선택하면, 누적보상을 최대화하는 control이 될 것이다. 그러나 ‘최대값에 대응하는 action 선택 (greedy policy)’ 은 ‘controller 훈련을 끝낸 후 validation case 및 실 사용 시’에는 맞지만, ‘훈련 중’에는 조금 다르다. 탐색을 시켜야 한다.</p>
+<p>그러면 매 시점별로 $\hat{Q}(s_{t},0)$, $\hat{Q}(s_{t},1)$, $\hat{Q}(s_{t},2)$ 중에서 최대값에 대응하는 action을 선택하면, 누적보상을 최대화하는 control이 될 것이다.</p>
+
+<p><br />
+그러나 ‘항상 $\hat{Q}$의 최대값에 대응하는 action 선택 (greedy policy)’ 은 controller 훈련을 끝낸 후 ‘validation 및 실 사용 시’에는 맞지만, ‘훈련 중’에는 조금 다르다.</p>
+
+<p>학습 초기에 아무 것도 학습하지 않은 controller가, 여러 가지의 action</p>
 
 <p>(탐색에 대한 epsilon-greedy policy 설명)</p>
 
-<p>지금까지 설명한 방법은 $s_{t}$가 discrete이고 그 수가 많지 않을 경우 각 state-action pair별 $\hat{Q}$값들을 담는 table을 만들어 적용할 수 있다. 이를테면 Gridworld 문제에서는 격자 수가 한정되어 있으므로 각 격자-이동(상하좌우) 별로 $\hat{Q}$값들을 따로 계산할 수 있다.</p>
+<p><br />
+지금까지 설명한 방법은 $s_{t}$가 discrete이고 그 수가 많지 않을 경우 각 state-action pair별 $\hat{Q}$값들을 담는 table을 만들어 그대로 적용할 수 있다. 이를테면 Gridworld 문제에서는 격자 수가 한정되어 있으므로 각 격자-이동(상하좌우) 별로 $\hat{Q}$값들을 따로 계산할 수 있다.</p>
 
-<p>하지만 이 케이스를 포함한 많은 경우 state가 continuous이거나, discrete라도 그 수가 매우 많다. 더군다나 이 케이스의 경우 state-action과 Q값 간의 관계식을 어떤 explicit한 식으로 나타낼 수 있을 것이라 기대되지도 않는다. 그러므로, 결국 state를 입력으로 받고 각 action 별 $\hat{Q}$값을 출력으로 하는 심층신경망 (Deep Neural Network) 모델을 훈련하는 것이 현실적인 방법이다 (계산비용이 높지만).</p>
+<p>하지만 많은 경우 state가 continuous이거나, discrete라도 그 수가 매우 많다. 이 포스팅 시리즈에서 다루는 마이크로그리드 케이스에서도 마찬가지이다. State (직전 $N$시간 동안의 시간별 부하와 태양광 발전량, 그리고 배터리에 저장된 에너지)가 $2N+1$차원의 continuous vector이기 때문이다. 이런 경우 ‘모든 state 각각에 대해’ $\hat{Q}$를 계산한다는 것은 사실상 불가능하다.</p>
 
-<p>이 심층신경망 모델은 매 훈련 주기 (꼭 매 시간은 아닐 수 있음) 마다 튜플 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다. 업데이트 시 최소화 대상 목적함수는 $\hat{Q}(s_{t},a_{t})$와 $r_{t+1} + \gamma \text{max}_{a_{t+1}} \hat{Q}(s_{t+1},a_{t+1})$ 간 차이의 제곱이다. 이를 Deep Q-learning이라 한다.</p>
+<p>만약 state-action pair와 Q값 간의 관계가 어떤 domain knowledge에 의해 명확하게 정의될 수 있다면, 해당 정의를 통해 $\hat{Q}$를 쉽게 계산할 수 있을 것이다. 그러나 이 케이스를 포함한 많은 경우, state-action과 Q값 간의 관계식을 어떤 explicit한 식으로 나타낼 수 있을 것이라 기대되지 않는다.</p>
 
-<p>다음 포스팅에서는 마이크로그리드 문제에 Deep Q-learning을 적용하는 과정과 결과에 대해 상세히 설명한다.</p>
+<p>그렇다면, state를 입력으로 받고 각 action 별 $\hat{Q}$값을 출력으로 하는 심층신경망 (Deep Neural Network, DNN) 모델을 훈련하는 것이 현실적인 방법이다. 심층신경망은 계산비용은 매우 높지만, node 수가 충분하면 어떤 비선형 함수도 근사할 수 있기 때문에 nonlinear function approximator로 기능한다는 점을 이용하는 것이다.</p>
+
+<p><img src="/assets/images/reinforcetwo/reinforcement_deep.png" alt="reinforcement_deep" class="align-center" /></p>
+
+<p>이 심층신경망 모델은 매 훈련 주기 (꼭 매 시간은 아닐 수 있음) 마다 튜플 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다. 업데이트 시 최소화 대상 목적함수는 $\hat{Q}(s_{t},a_{t})$와 $r_{t+1} + \gamma \text{max}_{a_{t+1}} \hat{Q}(s_{t+1},a_{t+1})$ 간 차이의 제곱이다. 이를 Deep Q-Network (DQN) 이라 한다.</p>
+
+<p>다음 포스팅에서는 마이크로그리드 문제에 Deep Q-Network를 적용하는 과정과 결과에 대해 상세히 설명한다.</p>
 
         
       </section>
@@ -571,7 +585,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 `추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
 </p>
   </article>
 </div>

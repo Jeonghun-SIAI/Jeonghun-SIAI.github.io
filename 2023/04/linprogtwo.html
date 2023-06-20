@@ -431,9 +431,10 @@
 
 <p>$t=1$일 경우 $t-1$은 0인데, $e_{\text{batt}}[0]$ 은 무엇일까? $e_{\text{batt}}[0]$는 해당 24시간 기간 직전에 배터리 안에 저장되어 있던 에너지 값, 일종의 initial point로써 따로 정의해야 한다. 여기서는 0이라고 하자. 이 경우 추가 제약조건으로 $ e_{\text{batt}}[0] = 0$을 둔다.</p>
 
-<p>위 제약 하에 24시간 동안의 전기요금의 합을 최소화해야 하므로, 24시간 동안의 전기요금의 합을 나타내는 식이 하나 있어야 한다. 한국전력의 전기요금표를 보면 아래와 같다.</p>
+<p>위 제약 하에 24시간 동안의 전기요금의 합을 최소화해야 하므로, 24시간 동안의 전기요금의 합을 나타내는 식이 하나 있어야 한다. <a href="https://cyber.kepco.co.kr/ckepco/front/jsp/CY/E/E/CYEEHP00102.jsp#">한국전력의 전기요금표</a>를 보면 아래와 같다.</p>
 
-<p>(사진)</p>
+<p><img src="/assets/images/linprogtwo/eleccosttable.png" alt="eleccosttable" class="align-center" />
+<img src="/assets/images/linprogtwo/eleccosttime.png" alt="eleccosttime" class="align-center" /></p>
 
 <p>이를 테면 여름에 대해, 경부하시간, 중간부하시간, 최대부하시간의 집합은 각각 아래와 같다.</p>
 
@@ -443,9 +444,9 @@
 
 <p>$T_{\text{peak}} \in { 12, 14, 15, 16, 17, 18 }   $</p>
 
-<p>그러면 24시간 동안의 전기요금의 합은 아래와 같다.</p>
+<p>그러면, 가장 보편적인 일반용 요금제인 일반(을) 고압A 선택II에 대해, 여름 평일 24시간 동안의 전기요금의 합은 아래와 같다.</p>
 
-<p>$ 67.9 \sum_{ T_{\text{base}} } p_{\text{grid}}[t] + 120.8 \sum_{ T_{\text{mid}} } p_{\text{grid}}[t] + 202.9 \sum_{ T_{\text{peak}} } p_{\text{grid}}[t] $</p>
+<p>$ 79.3 \sum_{ T_{\text{base}} } p_{\text{grid}}[t] + 132.2 \sum_{ T_{\text{mid}} } p_{\text{grid}}[t] + 214.3 \sum_{ T_{\text{peak}} } p_{\text{grid}}[t] $</p>
 
 <p>이는 변수들의 함수이자 최소화 대상(목적함수)이다.</p>
 
@@ -603,7 +604,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 `추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
 </p>
   </article>
 </div>

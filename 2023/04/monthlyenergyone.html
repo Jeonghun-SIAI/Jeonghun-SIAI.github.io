@@ -397,23 +397,25 @@
 
 <p>어떤 건물의 1년 12개월 간 월별 전기 사용량과 가스 사용량은, 대부분 아래 그림과 같은 형태를 띤다.</p>
 
-<p>(그림)</p>
+<p><img src="/assets/images/monthlyenergyone/typicalpattern.png" alt="typicalpattern" class="align-center" /></p>
 
 <p>전기 사용량은 7월/ 8월 즉 여름에 크고, 가스 사용량은 1월/ 2월/ 12월 즉 겨울에 큰 걸 볼 수 있다.</p>
 
 <p>이러한 개별 건물의 월별 에너지 사용량 데이터는, <a href="https://open.eais.go.kr/main/main.do">국토교통부의 건축데이터 민간개방 시스템</a>에서 제공한다.</p>
 
-<p>(웹사이트 스크린샷)</p>
+<p><img src="/assets/images/monthlyenergyone/webpage_monthlyenergy.png" alt="webpage_monthlyenergy" class="align-center" /></p>
 
 <p>각각이 수십(가스)~수백(전기) MB의 텍스트 파일이며, 구분자는 $|$ 이다. 이를 엑셀로 열어보면 아래 그림과 같다.</p>
 
-<p>(엑셀 그림)</p>
+<p><img src="/assets/images/monthlyenergyone/monthly_raw.png" alt="monthly_raw" class="align-center" /></p>
 
 <p>위에서 E~J열이 건물 주소, Q열이 에너지 사용량이다.</p>
 
 <p>필자는 박사과정 시절에 위 데이터셋을 이용해 공공건축물 신재생에너지 의무화 정책이 민간건물로까지 확대될 경우의 영향을 분석하고 및 도시 단위의 대규모 적용 시 영향을 예측하는 기법에 대한 연구를 수행해 박사학위를 받았고, 이 연구를 소재로 <a href="https://doi.org/10.1016/j.energy.2019.116132">Energy</a>와 <a href="https://doi.org/10.1016/j.apenergy.2020.115489">Applied Energy</a>에 논문도 게재했다.</p>
 
-<p>또한 최근에는, 위 데이터셋을 또 이용해 개별 건축물 내 월별 에너지 사용량의 결합확률분포를 모델링하는 연구를 수행하고 외부 발표를 하기도 했다 (<a href="https://rnd.gmdsa.org/building-energy-prediction/">MDSA 기사글</a>). (참고로 이 연구는 서울연구원에서 수행했던 비슷한 연구 (2014년 서울 표준모델 링크) 를 발전시킨 것이다.)</p>
+<p>또한 최근에는, 위 데이터셋을 또 이용해 개별 건축물 내 월별 에너지 사용량의 결합확률분포를 모델링하는 연구를 수행하고 외부 발표를 하기도 했다 (<a href="https://rnd.gmdsa.org/building-energy-prediction/">MDSA 기사글</a>).</p>
+
+<p><img src="/assets/images/monthlyenergyone/mdsaseminar.png" alt="mdsaseminar" class="align-center" /></p>
 
 <p>다만, 이 데이터셋을 제대로 활용하려면 몇 가지 사전 작업을 거쳐야 했다. 각 건축물 지번 별 속성 (각 건물별 연면적/ 용도/ 층수/ 건축연수/ 재질 등) 정보를 담은 데이터셋인 표제부와 결합을 해야 했다. 그리고 누락 데이터, 모양이 이상한 데이터, outlier 등을 제거해야 했다.</p>
 
@@ -473,14 +475,18 @@
 
 <p>파일 내에 건물 주소명이 기본적으로 시/구/번/지가 쪼개져 있는데, 표제부에서는 주소명이 합쳐져 있으므로 표제부 주소와 결합할 것을 상정하고 표제부와 같은 포맷이 되게, address 칼럼을 새로 만든다. address 같은 행들은 조사 결과 모두 같은 에너지 사용량 값들을 갖고 있어서, 단순 중복으로 간주하고 $\texttt{drop_duplicates}$로 삭제하였다.</p>
 
-<p>이렇게 address 칼럼을 각 데이터셋에 대해 만들고, 모든 데이터셋을 address 기준으로 outer join해 합친 데이터셋이 df가 되도록 하였다. Outer join을 한 이유는 한 개 데이터셋에라도 있는 건물은 우선 포함시키기 위함이다. 그리고 df에서 필요한 칼럼들만 남긴 후 csv 파일로 저장하였다. 2021년의 모든 월의 전기/가스 사용량들을 통합한 csv 파일을 열어보면 아래 그림과 같다.</p>
+<p>이렇게 address 칼럼을 각 데이터셋에 대해 만들고, 모든 데이터셋을 address 기준으로 outer join해 합친 데이터셋이 df가 되도록 하였다. Outer join을 한 이유는 한 개 데이터셋에라도 있는 건물은 우선 포함시키기 위함이다. 그리고 df에서 필요한 칼럼들만 남긴 후 csv 파일로 저장하였다. 2022년의 모든 월의 전기/가스 사용량들을 통합한 csv 파일을 열어보면 아래 그림과 같다.</p>
 
-<p>(그림)</p>
+<p><img src="/assets/images/monthlyenergyone/everymonth.png" alt="everymonth" class="align-center" /></p>
+
+<p>어떤 건물들은 가스 사용량이 모든 월에 대해 없는데, 이는 해당 건물이 도시가스를 공급받지 않기 때문이다 (해당 건물 내 일부 부대시설(음식점 등)이 LPG 가스를 사용하거나 할 수는 있다).</p>
 
 <p>다음으로, 모든 월의 에너지 사용량 통합 데이터를 표제부와 합치고 SQL DB로 저장한다.
 표제부의 스크린샷은 아래와 같다 (건축데이터 민간개방 시스템 웹사이트에서 직접 캡쳐함).</p>
 
-<p>(스크린샷들)</p>
+<p><img src="/assets/images/monthlyenergyone/pyoje_web_1.png" alt="pyoje_web_1" class="align-center" />
+<img src="/assets/images/monthlyenergyone/pyoje_web_2.png" alt="pyoje_web_2" class="align-center" />
+<img src="/assets/images/monthlyenergyone/pyoje_web_3.png" alt="pyoje_web_3" class="align-center" /></p>
 
 <p>대한민국 내 모든 건물들에 대한 표제부를 한 번에 받을 수 있으며, 이는 수 GB의 텍스트 파일이다. 각 열의 설명은 같이 다운받을 수 있는 데이터구조 파일에 있다 (그런데 실제 데이터의 순서와 다른 경우도 있어서, 결국 직접 확인해야 했다…). 이 파일의 표제부 데이터를 위에서 만든 csv 파일 내 에너지 사용량 데이터와 합치고 SQL DB로 저장하는 코드는 아래와 같다.</p>
 
@@ -577,30 +583,30 @@
      bjdongCd integer,
      bun integer,
      ji integer,
-     elec_202201 numeric,
-     elec_202202 numeric,
-     elec_202203 numeric,
-     elec_202204 numeric,
-     elec_202205 numeric,
-     elec_202206 numeric,
-     elec_202207 numeric,
-     elec_202208 numeric,
-     elec_202209 numeric,
-     elec_202210 numeric,
-     elec_202211 numeric,
-     elec_202212 numeric,
-     gas_202201 numeric,
-     gas_202202 numeric,
-     gas_202203 numeric,
-     gas_202204 numeric,
-     gas_202205 numeric,
-     gas_202206 numeric,
-     gas_202207 numeric,
-     gas_202208 numeric,
-     gas_202209 numeric,
-     gas_202210 numeric,
-     gas_202211 numeric,
-     gas_202212 numeric
+     elec_01 numeric,
+     elec_02 numeric,
+     elec_03 numeric,
+     elec_04 numeric,
+     elec_05 numeric,
+     elec_06 numeric,
+     elec_07 numeric,
+     elec_08 numeric,
+     elec_09 numeric,
+     elec_10 numeric,
+     elec_11 numeric,
+     elec_12 numeric,
+     gas_01 numeric,
+     gas_02 numeric,
+     gas_03 numeric,
+     gas_04 numeric,
+     gas_05 numeric,
+     gas_06 numeric,
+     gas_07 numeric,
+     gas_08 numeric,
+     gas_09 numeric,
+     gas_10 numeric,
+     gas_11 numeric,
+     gas_12 numeric
      )
     """</span>
     
@@ -615,7 +621,14 @@
 
 <p>표제부의 주소 중복 제거를 처리한 후, 에너지사용량 csv 파일을 불러오고, 표제부와 에너지사용량을 주소 기준으로 outer join으로 합친다. 그 결과물인 resultdata dataframe을 SQL table로 만드는 create table 쿼리를 sqlite3 패키지와 to_sql 함수를 이용해 실행했다. (이 때 $\texttt{sqlite3.connect()}$ 안에 DB 이름 쓸 때 $\texttt{.db}$ 까먹는 실수를 하기 쉬운데 주의해야 함)</p>
 
-<p>해당 SQLite DB로부터 필요한 데이터를 필터링해 추출할 수 있다. 이를테면 아래 코드는, 위에서 만든 SQLite DB로부터 서울 내 건물들 중 전기 사용량 및 연면적 값의 누락이 없는 행들만으로 table을 만들어 이를 별도의 DB 및 table로 저장하는 코드이다.</p>
+<p>서울 소재 건물들에 대해 구성한 SQLite DB의 스크린샷들은 아래와 같다.</p>
+
+<p><img src="/assets/images/monthlyenergyone/sql_1.png" alt="sql_1" class="align-center" />
+<img src="/assets/images/monthlyenergyone/sql_2.png" alt="sql_2" class="align-center" />
+<img src="/assets/images/monthlyenergyone/sql_3.png" alt="sql_3" class="align-center" />
+<img src="/assets/images/monthlyenergyone/sql_4.png" alt="sql_4" class="align-center" /></p>
+
+<p>서울 소재 건물들에 대한 DB 구성은 아래 코드를 통해 전체 SQLite DB로부터 서울 내 건물들 중 전기 사용량 및 연면적 값의 누락이 없는 행들만으로 table을 만들어 이를 별도의 DB 및 table로 저장하여 수행하였다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
 </span>
@@ -624,18 +637,18 @@
 <span class="n">your_query</span> <span class="o">=</span> <span class="s">"""
 select * from monthlyenergy_2022_pyoje
 where addresstxt like '서울특별시%'
-and elec_202201 not null
-and elec_202202 not null
-and elec_202203 not null
-and elec_202204 not null
-and elec_202205 not null
-and elec_202206 not null
-and elec_202207 not null
-and elec_202208 not null
-and elec_202209 not null
-and elec_202210 not null
-and elec_202211 not null
-and elec_202212 not null
+and elec_01 not null
+and elec_02 not null
+and elec_03 not null
+and elec_04 not null
+and elec_05 not null
+and elec_06 not null
+and elec_07 not null
+and elec_08 not null
+and elec_09 not null
+and elec_10 not null
+and elec_11 not null
+and elec_12 not null
 and netfloorarea not null
 and netfloorarea &gt; 0
 """</span>
@@ -653,17 +666,12 @@ and netfloorarea &gt; 0
 </span>
 <span class="n">conn</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>    
 
-<span class="n">connn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">"db_monthlyenergy_seoul.db"</span><span class="p">)</span>
-<span class="n">df_result</span><span class="p">.</span><span class="nf">to_sql</span><span class="p">(</span><span class="s">'seoul_2022'</span><span class="p">,</span> <span class="n">connn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s">'append'</span><span class="p">)</span> <span class="c1"># 별도의 SQLite DB로 저장
+<span class="n">conn_export</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">"db_monthlyenergy_seoul.db"</span><span class="p">)</span>
+<span class="n">df_result</span><span class="p">.</span><span class="nf">to_sql</span><span class="p">(</span><span class="s">'seoul_2022'</span><span class="p">,</span> <span class="n">conn_export</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s">'append'</span><span class="p">)</span> <span class="c1"># 별도의 SQLite DB로 저장
 </span>
 <span class="n">df_result</span><span class="p">.</span><span class="nf">to_csv</span><span class="p">(</span><span class="s">'seoul_2022.csv'</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s">','</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8-sig'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>서울 소재 건물들에 대해 구성한 SQLite DB의 스크린샷들은 아래와 같다.</p>
-
-<p>(첫 3개 row 정도에 대한 스크린샷들, column들을 다 볼 수 있게)</p>
-
-<p>어떤 건물들은 가스 사용량이 모든 월에 대해 없는데, 이는 해당 건물이 도시가스를 공급받지 않기 때문이다 (해당 건물 내 일부 부대시설(음식점 등)이 LPG 가스를 사용하거나 할 수는 있다).</p>
 
         
       </section>
@@ -799,7 +807,7 @@ and netfloorarea &gt; 0
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 `추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
 </p>
   </article>
 </div>

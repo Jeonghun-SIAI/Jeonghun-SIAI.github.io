@@ -400,14 +400,14 @@
 
 <p>출력제한은 필자가 논문을 쓰던 당시에는 ‘가까운 미래의 일’ 정도로 생각되었으나, 최근에는 실제로 이슈가 되고 있다. 대략 2021년 즈음부터 제주도에서 태양광과 풍력의 출력제한 증가가 본격적으로 언론에 보도되기 시작하였고, 재생발전 출력제한에 따른 사업자들의 손실 우려 및 보상 방안에 대한 논의가 필요한 상황이다.</p>
 
-<p>(구글 ‘제주도 출력제한’ 스크린샷)</p>
+<p><img src="/assets/images/mypaperone/news_jejucurtailment.png" alt="news_jejucurtailment" class="align-center" /></p>
 
 <p>이 포스팅에서는, 위 논문에 사용한 직관 및 수학 내용을 정리해 본다.</p>
 
 <p><br />
 대상 에너지시스템은 태양광 + 풍력 + 디젤 + ESS로 전기부하를 공급하며 중앙계통과는 분리되어 있다 (녹색섬이라 생각하자). 혹시 재생발전량이 0이더라도, 디젤발전기만으로 부하 충당 자체는 가능하다. 반대로 재생발전량이 너무 많아 부하 충족은 물론 ESS 완충까지 하더라도 전기가 남을 경우 이는 특별한 용도 없이 dump load에서 소비된다, 즉 출력제한(curtail)된다. 이 때 녹색섬이라 불리려면, 전체 전기에너지 수요의 일정 비율은 재생발전으로 충당해야 한다.</p>
 
-<p>(도식도)</p>
+<p><img src="/assets/images/mypaperone/islandsystem.png" alt="islandsystem" class="align-center" /></p>
 
 <p><br /></p>
 
@@ -478,7 +478,7 @@
 
 <p>필자는 이 문제를 해결하기 위해, 아래와 같은 프로세스를 제안하였다. correct solution에서는 모든 시간 각각에 대해 충전항과 방전항 둘 중 하나는 0임에 착안해, 조건들에 따라 각 시간별 충전항, 방전항들 중 특정 항의 upper bound를 강제로 0으로 만드는 과정을 반복한다.</p>
 
-<p><img src="/assets/images/2023-04-07-mypaperone/flowchart.png" alt="flowchart" class="align-center" /></p>
+<p><img src="/assets/images/mypaperone/flowchart.png" alt="flowchart" class="align-center" /></p>
 
 <p>이 방법을 쓰면, 시간별 이진수를 도입하지 않고도 5~30번 정도의 iteration이면 충분히 correct solution에 근접한 solution을 얻는 것을 확인하였다.</p>
 
@@ -640,7 +640,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 `추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
 </p>
   </article>
 </div>
