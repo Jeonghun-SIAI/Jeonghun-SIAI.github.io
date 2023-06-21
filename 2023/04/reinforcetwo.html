@@ -10,7 +10,7 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념 | A test page</title>
+<!-- begin _includes/seo.html --><title>강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념 | 에너지 데이터 연구소</title>
 <meta name="description" content="지난 포스팅에서 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내용은 Sutton의 Introduction 참고 바람)">
 
 
@@ -22,7 +22,7 @@
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:site_name" content="A test page">
+<meta property="og:site_name" content="에너지 데이터 연구소">
 <meta property="og:title" content="강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념">
 <meta property="og:url" content="http://localhost:4000/2023/04/reinforcetwo.html">
 
@@ -72,7 +72,7 @@
 
 
 
-  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="A test page Feed">
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="에너지 데이터 연구소 Feed">
 
 
 <!-- https://t.co/dKP3o1e -->
@@ -94,7 +94,7 @@
 <!-- insert favicons. use https://realfavicongenerator.net/ -->
 
 <head>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
@@ -148,11 +148,11 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="A test page"></a>
+          <a class="site-logo" href="/"><img src="/assets/images/clean.jpg" alt="에너지 데이터 연구소"></a>
         
         <a class="site-title" href="/">
-          A test page
-          <span class="site-subtitle">learning Github Page</span>
+          에너지 데이터 연구소
+          <span class="site-subtitle">스마트한 에너지전환에 기여하는 데이터 사이언티스트</span>
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a href="/aboutme/">About Me</a>
@@ -265,9 +265,9 @@
                     
                 
                     
-                
-                    
                         <li><a href="/code" class="">코드 (1)</a></li>
+                    
+                
                     
                 
                     
@@ -276,8 +276,6 @@
                 
             </ul>
             <ul>
-                
-                    
                 
                     
                         <li><a href="/theory" class="">이론 (2)</a></li>
@@ -289,10 +287,10 @@
                 
                     
                 
+                    
+                
             </ul>
             <ul>
-                
-                    
                 
                     
                 
@@ -304,11 +302,11 @@
                         <li><a href="/energy" class="">에너지 (17)</a></li>
                     
                 
+                    
+                
             </ul>
         <span class="nav__sub-title">범주2</span>
             <ul>
-                
-                    
                 
                     
                 
@@ -320,12 +318,12 @@
                 
                     
                 
+                    
+                
             </ul>
             <ul>
                 
                     
-                        <li><a href="/etc" class="">기타 (3)</a></li>
-                    
                 
                     
                 
@@ -333,6 +331,8 @@
                 
                     
                 
+                    
+                        <li><a href="/etc" class="">기타 (1)</a></li>
                     
                 
             </ul>
@@ -435,7 +435,8 @@
 
 <p>그렇다면, state를 입력으로 받고 각 action 별 $\hat{Q}$값을 출력으로 하는 심층신경망 (Deep Neural Network, DNN) 모델을 훈련하는 것이 현실적인 방법이다. 심층신경망은 계산비용은 매우 높지만, node 수가 충분하면 어떤 비선형 함수도 근사할 수 있기 때문에 nonlinear function approximator로 기능한다는 점을 이용하는 것이다.</p>
 
-<p><img src="/assets/images/reinforcetwo/reinforcement_deep.png" alt="reinforcement_deep" class="align-center" /></p>
+<p><img src="/assets/images/reinforcetwo/reinforcement_deep.png" alt="reinforcement_deep" class="align-center" width="80%" />
+<em>‘심층’강화학습 개요. Action 결정이 심층신경망에 기반해 이루어짐.</em></p>
 
 <p>이 심층신경망 모델은 매 훈련 주기 (꼭 매 시간은 아닐 수 있음) 마다 튜플 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다. 업데이트 시 최소화 대상 목적함수는 $\hat{Q}(s_{t},a_{t})$와 $r_{t+1} + \gamma \text{max}_{a_{t+1}} \hat{Q}(s_{t+1},a_{t+1})$ 간 차이의 제곱이다. 이를 Deep Q-Network (DQN) 이라 한다.</p>
 
@@ -456,9 +457,7 @@
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
     <span itemprop="keywords">
     
-      <a href="/tags/#beautifulsoup" class="page__taxonomy-item p-category" rel="tag">BeautifulSoup</a><span class="sep">, </span>
-    
-      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">python</a>
+      <a href="/tags/#%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5" class="page__taxonomy-item p-category" rel="tag">강화학습</a>
     
     </span>
   </p>

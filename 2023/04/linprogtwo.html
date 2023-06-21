@@ -10,7 +10,7 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>정수선형계획법 기반 분산에너지시스템 최적화 설명 - 2) 배터리의 충/방전 스케줄 정하기: 수식 | A test page</title>
+<!-- begin _includes/seo.html --><title>정수선형계획법 기반 분산에너지시스템 최적화 설명 - 2) 배터리의 충/방전 스케줄 정하기: 수식 | 에너지 데이터 연구소</title>
 <meta name="description" content="이제 본격적으로, 분산형 에너지시스템 도입의 경제적 안 도출을 위한 수학적 최적화 문제 구성을 알아보기로 한다.">
 
 
@@ -22,7 +22,7 @@
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:site_name" content="A test page">
+<meta property="og:site_name" content="에너지 데이터 연구소">
 <meta property="og:title" content="정수선형계획법 기반 분산에너지시스템 최적화 설명 - 2) 배터리의 충/방전 스케줄 정하기: 수식">
 <meta property="og:url" content="http://localhost:4000/2023/04/linprogtwo.html">
 
@@ -72,7 +72,7 @@
 
 
 
-  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="A test page Feed">
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="에너지 데이터 연구소 Feed">
 
 
 <!-- https://t.co/dKP3o1e -->
@@ -94,7 +94,7 @@
 <!-- insert favicons. use https://realfavicongenerator.net/ -->
 
 <head>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
@@ -148,11 +148,11 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="A test page"></a>
+          <a class="site-logo" href="/"><img src="/assets/images/clean.jpg" alt="에너지 데이터 연구소"></a>
         
         <a class="site-title" href="/">
-          A test page
-          <span class="site-subtitle">learning Github Page</span>
+          에너지 데이터 연구소
+          <span class="site-subtitle">스마트한 에너지전환에 기여하는 데이터 사이언티스트</span>
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a href="/aboutme/">About Me</a>
@@ -265,9 +265,9 @@
                     
                 
                     
-                
-                    
                         <li><a href="/code" class="">코드 (1)</a></li>
+                    
+                
                     
                 
                     
@@ -276,8 +276,6 @@
                 
             </ul>
             <ul>
-                
-                    
                 
                     
                         <li><a href="/theory" class="">이론 (2)</a></li>
@@ -289,10 +287,10 @@
                 
                     
                 
+                    
+                
             </ul>
             <ul>
-                
-                    
                 
                     
                 
@@ -304,11 +302,11 @@
                         <li><a href="/energy" class="">에너지 (17)</a></li>
                     
                 
+                    
+                
             </ul>
         <span class="nav__sub-title">범주2</span>
             <ul>
-                
-                    
                 
                     
                 
@@ -320,12 +318,12 @@
                 
                     
                 
+                    
+                
             </ul>
             <ul>
                 
                     
-                        <li><a href="/etc" class="">기타 (3)</a></li>
-                    
                 
                     
                 
@@ -333,6 +331,8 @@
                 
                     
                 
+                    
+                        <li><a href="/etc" class="">기타 (1)</a></li>
                     
                 
             </ul>
@@ -395,7 +395,8 @@
 
 <p>이 글에서 설명할 예시 문제는, 일반용 요금제를 적용받는 건물에 100 kWh급 배터리가 설치되어 있을 경우, 평일 내 24시간 동안 각 시간별 배터리의 최적 충/방전 스케줄을 도출하는 문제이다. 최적이라 함은, 24시간 동안의 전기요금의 합을 최소화함을 의미한다.</p>
 
-<p><img src="/assets/images/linprogtwo/system_batt.png" alt="system_batt" class="align-center" /></p>
+<p><img src="/assets/images/linprogtwo/system_batt.png" alt="system_batt" class="align-center" width="80%" />
+<em>배터리를 포함하는 건물 전기 공급 시스템 도식도.</em></p>
 
 <p>직관적으로 생각하면, 비용 최소화를 위해서는 요금이 상대적으로 낮은 경부하 시간대에 배터리를 가능한 많이 충전하고, 요금이 상대적으로 높은 최대부하 시간에 배터리를 완전히 방전해야 할 것이다.</p>
 
@@ -432,7 +433,8 @@
 <p>위 제약 하에 24시간 동안의 전기요금의 합을 최소화해야 하므로, 24시간 동안의 전기요금의 합을 나타내는 식이 하나 있어야 한다. <a href="https://cyber.kepco.co.kr/ckepco/front/jsp/CY/E/E/CYEEHP00102.jsp#">한국전력의 전기요금표</a>를 보면 아래와 같다.</p>
 
 <p><img src="/assets/images/linprogtwo/eleccosttable.png" alt="eleccosttable" class="align-center" />
-<img src="/assets/images/linprogtwo/eleccosttime.png" alt="eleccosttime" class="align-center" /></p>
+<img src="/assets/images/linprogtwo/eleccosttime.png" alt="eleccosttime" class="align-center" />
+<em>한국전력 전기요금표 (일반용). 시간대별로 전기요금이 다름.</em></p>
 
 <p>이를 테면 여름에 대해, 경부하시간, 중간부하시간, 최대부하시간의 집합은 각각 아래와 같다.</p>
 
@@ -467,9 +469,11 @@
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
     <span itemprop="keywords">
     
-      <a href="/tags/#beautifulsoup" class="page__taxonomy-item p-category" rel="tag">BeautifulSoup</a><span class="sep">, </span>
+      <a href="/tags/#%EA%B2%BD%EC%A0%9C%EC%84%B1%EB%B6%84%EC%84%9D" class="page__taxonomy-item p-category" rel="tag">경제성분석</a><span class="sep">, </span>
     
-      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">python</a>
+      <a href="/tags/#%EB%B6%80%ED%95%98%ED%8C%A8%ED%84%B4" class="page__taxonomy-item p-category" rel="tag">부하패턴</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95" class="page__taxonomy-item p-category" rel="tag">선형계획법</a>
     
     </span>
   </p>
