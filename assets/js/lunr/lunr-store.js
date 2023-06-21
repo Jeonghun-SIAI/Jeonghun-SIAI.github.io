@@ -89,31 +89,31 @@ var store = [{
         "url": "/2023/04/linprogfour.html",
         "teaser": "/assets/images/logo.png"
       },{
-        "title": "강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 1) 문제의식 및 케이스 소개",
+        "title": "강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개",
         "excerpt":"에너지 시스템에서 재생에너지의 비중이 높아질수록, 당장 몇 시간 뒤의 발전량이 얼마일지도 모르고 그 불확실성도 큰 상황에서 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 `잘’ 결정하는 것이 어려워진다. 그렇지만 이를 ‘잘’ 결정해야, 장기적인 에너지 공급 비용 및 화석연료 사용량 등을 줄일 수 있다. 그런데 선형계획법 등 전통적인 최적화 기반...","categories": ["Energy"],
         "tags": ["python","BeautifulSoup"],
         "url": "/2023/04/reinforceone.html",
         "teaser": "/assets/images/logo.png"
       },{
-        "title": "강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 2) Q-learning 개념",
+        "title": "강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념",
         "excerpt":"지난 포스팅에서 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내용은 Sutton의 Introduction 참고 바람) 먼저 Q-learning을 간단히 되짚고 넘어가자. 어떤 환경에서 시점 t에 상태 $s_{t}$에 있고, 이 때...","categories": ["Energy"],
         "tags": ["python","BeautifulSoup"],
         "url": "/2023/04/reinforcetwo.html",
         "teaser": "/assets/images/logo.png"
       },{
-        "title": "강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출",
+        "title": "강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출",
         "excerpt":"이전 포스팅에서도 언급했듯, 이 문제에서 state는 직전 24시간 동안의 태양광 발전량과 부하 및 직전 1시간의 배터리 내 에너지양이고, action은 1.1kW 수전/ 1.1kW 송전/ idle 3가지이다. (action 인덱스는 0,1,2라 하자). 이 때 심층신경망은 state를 입력받아 3개 action 각각의 Q-value의 추정치 $\\hat{Q}(s_{t},0), \\hat{Q} (s_{t},1), \\hat{Q} (s_{t},2)$ 를 출력으로 계산한다. 이 심층신경망은 매...","categories": ["Energy"],
         "tags": ["python","BeautifulSoup"],
         "url": "/2023/04/reinforcethree.html",
         "teaser": "/assets/images/logo.png"
       },{
-        "title": "강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 4) DDPG를 통한 continuous control 도출",
+        "title": "강화학습 기반 마이크로그리드 스케줄링 - 4) DDPG를 통한 continuous control 도출",
         "excerpt":"저번 포스팅에서는 마이크로그리드에 discrete action 기반의 심층강화학습을 적용해 과거 시점의데이터 기반으로 control을 결정하는 방법을 알아보았다. 그러나 실제로는 continuous action이므로, continuous action을 다루는 심층강화학습 기법을 적용해본다. 이번에는 continuous control의 기본적인 방법인 Deep Deterministic Policy Gradient (DDPG)를 적용한다. Continuous action인 경우 가능한 action의 수가 사실상 무한대이므로, Deep Q-learning에서처럼 state를 입력받아 각 action...","categories": ["Energy"],
         "tags": ["python","BeautifulSoup"],
         "url": "/2023/04/reinforcefour.html",
         "teaser": "/assets/images/logo.png"
       },{
-        "title": "강화학습 기반 마이크로그리드 내 배터리 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출",
+        "title": "강화학습 기반 마이크로그리드 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출",
         "excerpt":"저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learning (discrete action 3개) 대비 더 나은 결과를 보이지 못했다. Continuous control 학습에 대해 더 진보된 방법을 쓴다면 어떨까? 진보된 방법들의 대표 사례들로, Twin Delayed Deep...","categories": ["Energy"],
         "tags": ["python","BeautifulSoup"],
         "url": "/2023/04/reinforcefive.html",
