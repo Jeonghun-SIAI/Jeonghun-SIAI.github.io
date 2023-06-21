@@ -130,12 +130,6 @@
 <loc>http://localhost:4000/energy/4/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/energy/5/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/energy/6/</loc>
-</url>
-<url>
 <loc>http://localhost:4000/theory/</loc>
 </url>
 <url>
@@ -152,12 +146,6 @@
 </url>
 <url>
 <loc>http://localhost:4000/energy/page4/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/energy/page5/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/energy/page6/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/etc/</loc>

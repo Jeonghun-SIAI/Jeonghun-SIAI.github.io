@@ -48,8 +48,6 @@
   <link rel="prev" href="http://localhost:4000/energy/page3/">
 
 
-  <link rel="next" href="http://localhost:4000/energy/page5/">
-
 
 <script type="application/ld+json">
   {
@@ -193,17 +191,11 @@
     <button class="btn btn--inverse">팔로우</button>
     <ul class="author__urls social-icons">
       
-        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
-          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Somewhere</span>
-        </li>
-      
 
       
         
           
         
-          
-            <li><a href="https://blog.naver.com/song4energy" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
           
         
           
@@ -286,9 +278,7 @@
   <label for="ac-toc">카테고리 목록</label>
   <ul class="nav__items" id="category_tag_menu">
       <!--전체 글 수-->
-      <li>
-            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">24</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
-      </li>
+      
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
         <span class="nav__sub-title">범주1</span>
@@ -406,30 +396,22 @@
     
       <li>
         <h2>
-          <a class="post-link" href="/2023/04/linprogthree.html">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 3) 배터리의 충/방전 스케줄 정하기: Python 코드</a>
+          <a class="post-link" href="/2023/04/predictiontwo.html">건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?</a>
         </h2>
-        <span class="post-meta">Apr 13, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서 봤던 문제에서는 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었다. 이 경우, 선형계획법 (Linear Programming) 을 이용해서 풀 수 있다.
+        <span class="post-meta">Apr 6, 2023</span>
+        <p class="archive__item-excerpt" itemprop="description">Dense NN
+지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀로 구성하는 과정을 설명했다. 또한, 간단한 선형회귀로도 나름 괜찮은 예측 성능의 모델을 얻을 수 있음을 보였다.
 </p>
         
       </li>
     
       <li>
         <h2>
-          <a class="post-link" href="/2023/04/linprogtwo.html">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 2) 배터리의 충/방전 스케줄 정하기: 수식</a>
+          <a class="post-link" href="/2023/04/predictionone.html">건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝 대신 회귀분석으로</a>
         </h2>
-        <span class="post-meta">Apr 12, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">이제 본격적으로, 분산형 에너지시스템 도입의 경제적 안 도출을 위한 수학적 최적화 문제 구성을 알아보기로 한다.
+        <span class="post-meta">Apr 5, 2023</span>
+        <p class="archive__item-excerpt" itemprop="description">건물의 시간별 전기부하
 </p>
-        
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/2023/04/linprogone.html">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 1) 최소비용 시스템과 시간별 자료의 중요성</a>
-        </h2>
-        <span class="post-meta">Apr 11, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">우리의 일상 생활에서 전기와 냉/난방 `에너지’는 떼어 놓을 수 없는 요소가 되었다. 또한 산업 현장에서도 전기와 고온의 열 에너지는 제품을 만드는 데 필요하다. 버스/ 지하철/ 비행기 등 운송 수단도 연료 혹은 전기 에너지를 주입해야 움직인다. 이렇듯 에너지는 다양한 방식으로 우...</p>
         
       </li>
     
@@ -476,28 +458,17 @@
         <li><a href="/page3">3</a></li>
       
     
-      
-        <li><a href="/page4" class="disabled current">4</a></li>
-      
-    
-      
-        
-        
-        
-        <li><a href="/page5">5</a></li>
-      
-    
 
     
     
 
     
-      <li><a href="/page6">6</a></li>
+      <li><a href="#" class="disabled current">4</a></li>
     
 
     
     
-      <li><a href="/page5">다음</a></li>
+      <li><a href="#" class="disabled"><span aria-hidden="true">다음</span></a></li>
     
   </ul>
 </nav>
@@ -510,10 +481,6 @@
           <a href="/energy/page3/"><b>&#9664; Newer Posts</b></a>
       </li>
       
-      
-      <li class="next">
-          <a href="/energy/page5/"><b>Older Posts &#9654;</b></a>
-      </li>
       
   </ul>
   
@@ -544,7 +511,7 @@ layout: archive
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/linprogthree.html" rel="permalink">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 3) 배터리의 충/방전 스케줄 정하기: Python 코드
+        <a href="/2023/04/predictiontwo.html" rel="permalink">건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?
 </a>
       
     </h2>
@@ -556,7 +523,7 @@ layout: archive
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-13T00:00:00+09:00">2023-04-13</time>
+        <time datetime="2023-04-06T00:00:00+09:00">2023-04-06</time>
       </span>
     
 
@@ -566,7 +533,8 @@ layout: archive
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서 봤던 문제에서는 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었다. 이 경우, 선형계획법 (Linear Programming) 을 이용해서 풀 수 있다.
+    <p class="archive__item-excerpt" itemprop="description">Dense NN
+지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀로 구성하는 과정을 설명했다. 또한, 간단한 선형회귀로도 나름 괜찮은 예측 성능의 모델을 얻을 수 있음을 보였다.
 </p>
   </article>
 </div>
@@ -581,7 +549,7 @@ layout: archive
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/linprogtwo.html" rel="permalink">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 2) 배터리의 충/방전 스케줄 정하기: 수식
+        <a href="/2023/04/predictionone.html" rel="permalink">건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝 대신 회귀분석으로
 </a>
       
     </h2>
@@ -593,7 +561,7 @@ layout: archive
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-12T00:00:00+09:00">2023-04-12</time>
+        <time datetime="2023-04-05T00:00:00+09:00">2023-04-05</time>
       </span>
     
 
@@ -603,44 +571,8 @@ layout: archive
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">이제 본격적으로, 분산형 에너지시스템 도입의 경제적 안 도출을 위한 수학적 최적화 문제 구성을 알아보기로 한다.
+    <p class="archive__item-excerpt" itemprop="description">건물의 시간별 전기부하
 </p>
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/2023/04/linprogone.html" rel="permalink">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 1) 최소비용 시스템과 시간별 자료의 중요성
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-11T00:00:00+09:00">2023-04-11</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">우리의 일상 생활에서 전기와 냉/난방 `에너지’는 떼어 놓을 수 없는 요소가 되었다. 또한 산업 현장에서도 전기와 고온의 열 에너지는 제품을 만드는 데 필요하다. 버스/ 지하철/ 비행기 등 운송 수단도 연료 혹은 전기 에너지를 주입해야 움직인다. 이렇듯 에너지는 다양한 방식으로 우...</p>
   </article>
 </div>
 
@@ -685,28 +617,17 @@ layout: archive
         <li><a href="/page3">3</a></li>
       
     
-      
-        <li><a href="/page4" class="disabled current">4</a></li>
-      
-    
-      
-        
-        
-        
-        <li><a href="/page5">5</a></li>
-      
-    
 
     
     
 
     
-      <li><a href="/page6">6</a></li>
+      <li><a href="#" class="disabled current">4</a></li>
     
 
     
     
-      <li><a href="/page5">다음</a></li>
+      <li><a href="#" class="disabled"><span aria-hidden="true">다음</span></a></li>
     
   </ul>
 </nav>
@@ -737,7 +658,7 @@ layout: archive
     
       
         
-          <li><a href="https://blog.naver.com/song4energy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          <li><a href="https://github.com/Jeonghun-SIAI" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
         
       
     
