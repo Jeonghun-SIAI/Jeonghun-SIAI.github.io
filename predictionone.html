@@ -366,7 +366,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#건물의-시간별-전기부하">건물의 시간별 전기부하</a></li><li><a href="#회귀모델-weighted-least-squares-설명">회귀모델 (Weighted Least Squares) 설명</a></li><li><a href="#wls-회귀모델-결과">WLS 회귀모델 결과</a></li><li><a href="#오차의-자기상관을-arma로-모델링">오차의 자기상관을 ARMA로 모델링</a></li><li><a href="#오차의-자기상관-모델링을-통한-성능-향상">오차의 자기상관 모델링을 통한 성능 향상</a></li></ul>
+              <ul class="toc__menu"><li><a href="#건물의-시간별-전기부하">건물의 시간별 전기부하</a></li><li><a href="#회귀모델-weighted-least-squares-설명">회귀모델 (Weighted Least Squares) 설명</a></li><li><a href="#wls-회귀모델-결과">WLS 회귀모델 결과</a></li><li><a href="#오차의-자기상관을-seasonal-arma로-모델링">오차의 자기상관을 Seasonal ARMA로 모델링</a></li><li><a href="#오차의-자기상관-모델링을-통한-성능-향상">오차의 자기상관 모델링을 통한 성능 향상</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
@@ -443,37 +443,50 @@ K년도의 자료를 갖고, 4개 sub모델 각각에 대해 Weighted Least Squa
 
 <p><br /></p>
 
-<h2 id="오차의-자기상관을-arma로-모델링">오차의 자기상관을 ARMA로 모델링</h2>
+<h2 id="오차의-자기상관을-seasonal-arma로-모델링">오차의 자기상관을 Seasonal ARMA로 모델링</h2>
 <p>위 WLS에는 사실 오차의 자기상관 (autocorrelation in disturbances) 문제가 남아있다. 위 그림들에서 실제값과 예측값을 잘 보면, 예측값이 실제값보다 큰 시간이 어느 정도 연속되다가, 반대로 예측값이 실제값보다 작은 시간이 어느 정도 연속되는 것이 반복된다.</p>
 
-<p>실제로 각 sub모델별로 WLS의 잔차에 대해 ACF (AutoCorrelation Function) 및 PACF (Partial ACF) plot을 그려보면, 아래 왼쪽 그림의 ACF plot에서 보듯 오차의 자기상관이 뚜렷하다. Ljung-Box test를 수행 시 $p$-value가 사실상 0으로 계산되어서, 자기상관의 존재를 확신할 수 있다.</p>
+<p>실제로 각 sub모델별로 WLS의 잔차에 대해 ACF (AutoCorrelation Function) 및 PACF (Partial ACF) plot을 그려보면, 아래 왼쪽 그림의 ACF plot에서 보듯 오차의 자기상관이 뚜렷하다. Ljung-Box test를 수행 시 $p$-value가 사실상 0으로 계산되어서, 자기상관이 없다는 귀무가설이 기각된다.</p>
 
-<p><img src="/assets/images/predictionone/acfplot_before.png" alt="acfplot_before" class="align-center" />
+<p><img src="/assets/images/predictionone/acfplot_before.png" alt="acfplot_before" class="align-center" width="90%" />
 <em>하절기 sub모델의 WLS 잔차에 대한 ACF와 PACF plot.</em></p>
 
 <p>이러한 오차의 자기상관은, 아직 잔차로부터 얻을 수 있는 정보가 남아 있음을 의미한다. 그렇다면 각 sub모델별로 $K$년도의 WLS 잔차들에 대해 시계열 모델을 적합하고, 해당 모델로 $K+1$년도의 WLS 잔차들을 설명하면 최종 모델의 adjusted $R^2$를 증가시킬 수 있을 것으로 기대된다.</p>
 
-<p>통계처리용 언어 R에서 $\texttt{auto.arima()}$ 함수로 $K$년도 WLS 잔차에 ARMA 모델을 적합시키고 (차분은 하지 않음), ARMA 모델로 설명되는 맞춘값을 얻는다. 또한 $K+1$년도 WLS 잔차에 대해, $K$년도 WLS 잔차로 적합시킨 ARMA 모델로 설명되는 맞춘값을 얻는다. ($K+1$년도 WLS 잔차로 새 ARMA 모델을 적합시킨 것이 아님에 유의. 만약 그랬다면 그건 반칙이다.)</p>
+<p>통계처리용 언어 R에서 $\texttt{auto.arima()}$ 함수로 $K$년도 WLS 잔차에 ARMA 모델을 적합시키고 (차분은 하지 않음), ARMA 모델로 설명되는 맞춘값을 얻는다. 그리고 $K+1$년도 WLS 잔차에 대해, $K$년도 WLS 잔차로 적합시킨 ARMA 모델로 설명되는 맞춘값을 얻는다.</p>
 
-<p>WLS 잔차에 ARMA 모델을 적합시켜서 설명되지 않는, ARMA 모델의 잔차에 대해 ACF 및 PACF plot을 그려보면, 아래 그림과 같이 자기상관성이 거의 사라졌음을 확인할 수 있다. 이는 기존 전기부하 자료에 ‘강한’ non-linearity가 존재하지 않음도 암시한다 (선형 모델들도 다 설명이 되니까).</p>
+<p>($K+1$년도 WLS 잔차로 새로운 ARMA 모델을 적합시킨 것이 아님에 유의. 만약 그랬다면 그건 반칙이다. 회귀모델의 적합은 어떤 경우에도 $K$년도 데이터만으로 이루어져야 한다.)</p>
 
-<p><img src="/assets/images/predictionone/acfplot_after.png" alt="acfplot_before" class="align-center" />
+<p>$K$년도 WLS 잔차에 ARMA 모델을 적합 후 해당 ARMA 모델의 잔차에 대해 ACF 및 PACF plot을 아래와 같이 그려보면, 자기상관성이 ‘거의’ 사라졌으나, 아직 24시간 주기의 자기상관성은 남아있다.</p>
+
+<p><img src="/assets/images/predictionone/acfplot_after.png" alt="acfplot_before" class="align-center" width="90%" />
 <em>하절기 sub모델의 WLS 잔차에 대해 ARMA 모델을 적합시킨 후, ARMA 모델의 잔차에 대한 ACF와 PACF plot.</em></p>
 
-<p>ARMA 모델의 잔차에는 24시간 주기의 자기상관성만 남아있는데, 이는 전기 사용량 자체가 24시간 주기로 반복되는 특성이 있기 때문이다. 이를 반영할 수도 있겠지만, 그러면 모델의 차수가 너무 커지므로, $\texttt{auto.arima()}$의 결과로 타협한다. Ljung-Box test를 수행 시 $p$-value 또한 lag 23까지에 대해 전부 0.1 이상으로 계산되어서, 24시간 주기를 제외한 자기상관성이 ARMA 모델에 의해 설명되었음을 알 수 있다.</p>
+<p>이는 전기 사용량 자체가 24시간 주기로 반복되는 특성이 있기 때문이다. Ljung-Box test를 수행 시 $p$-value 또한 lag 23까지에 대해서는 전부 0.1 이상이나 lag 24에 대해서는 사실상 0이므로, 24시간 주기의 자기상관성이 존재한다.</p>
+
+<p>이는 seasonal ARMA (SARMA) 모델을 적합시켜 반영할 수 있다. 이를테면 $\texttt{auto.arima()}$로 ARMA 적합 결과 제안된 차수가 $(1,0,2)$였다고 하자. 그러면 $\texttt{Arima()}$ 함수를 통해 기본 차수 $(1,0,2)$에 더해, period 24의 seasonality 차수 $(1,0,1)$을 추가한 SARMA 모델을 적합한다.</p>
+
+<p>$K$년도 WLS의 잔차에 SARMA 모델을 적합 후 해당 SARIMA 모델의 잔차에 대해 ACF 및 PACF plot을 아래와 같이 그려보면, 드디어 자기상관성이 완전히 사라졌다.</p>
+
+<p><img src="/assets/images/predictionone/acfplot_sarima.png" alt="acfplot_sarima" class="align-center" width="90%" />
+<em>하절기 sub모델의 WLS 잔차에 대해 SARMA 모델을 적합시킨 후, SARMA 모델의 잔차에 대한 ACF와 PACF plot.</em></p>
+
+<p>Ljung-Box test를 수행 시 $p$-value 또한 lag 24까지에 대해서도 0.1 이상이다. 또한 log-likelihood, AIC, BIC 등 지표도 ARMA 대비 SARMA 모델에서 더 좋았다.</p>
+
+<p>WLS와 잔차에 대한 SARMA 적용 시 자기상관이 완전히 사라졌다는 것은, 기존 전기부하 자료에 ‘강한’ non-linearity가 존재하지 않음을 암시한다 (선형 모델로 거의 다 설명이 되니까).</p>
 
 <p><br /></p>
 <h2 id="오차의-자기상관-모델링을-통한-성능-향상">오차의 자기상관 모델링을 통한 성능 향상</h2>
-<p>$K$년도 잔차로 적합한 ARMA 모델로 설명되는 맞춘값들을 기존 WLS 맞춘값들에 더하면, adjusted $R^2$가 증가할까?</p>
+<p>$K$년도 잔차로 적합한 SARMA 모델로 설명되는 맞춘값들을 기존 WLS 맞춘값들에 더하면, adjusted $R^2$가 증가할까?</p>
 
-<p>그렇다. 훈련 set (K년도)에 대해서는 0.9263에서 0.9712로, 검증 set (K+1년도)에 대해서는 0.8716에서 0.9649로 증가한다. 아래 그림을 보면, 오차의 자기상관을 반영하기 전과 비교해서, 예측값이 실제값에 더 가까워졌다.</p>
+<p>그렇다. 훈련 set (K년도)에 대해서는 0.9263에서 0.9746로, 검증 set (K+1년도)에 대해서는 0.8716에서 0.9734로 증가한다. 아래 그림을 보면, 오차의 자기상관을 반영하기 전과 비교해서, 예측값이 실제값에 더 가까워졌다.</p>
 
-<p>(actual &amp; estimated 그림: ARMA 적용 시)</p>
+<p>(actual &amp; estimated 그림: SARMA 적용 시)</p>
 
 <p>Adjusted $R^2$가 꼭 절대적인 기준은 아니겠지만, 딥러닝을 쓰지 않고 전통적 회귀분석 기법만을 사용해서 검증 set에 대해 Adjusted $R^2$ 0.95 이상을 달성한 것은 상당히 고무적이다.</p>
 
 <p><br />
-그렇다면 딥러닝을 쓴다면 어떨까? Adjusted $R^2$ 0.98 정도는 쉽게 얻을 수 있을까?</p>
+그렇다면 딥러닝을 쓴다면 어떨까? Adjusted $R^2$ 0.99 정도는 쉽게 얻을 수 있을까?</p>
 
 <p>이는 다음 포스팅에서 확인해 본다.</p>
 

@@ -412,7 +412,7 @@
 
 <p>$ \sum_{t} p_{\text{diesel}}[t] \leq (1-\alpha_{\text{renewable}}) \sum_{t} p_{\text{load}}[t] $</p>
 
-<p>위에서 $s$는 용량, $p$는 전력, $e$는 저장된 에너지, $\mu$는 효율, $\alpha$는 규정 비율이며, pv는 태양광, wt는 풍력, batt는 배터리, load는 부하, diesel은 디젤엔진, ch는 충전, disch는 방전, dump는 출력제한이다. $S_{wt}$는 풍력 발전기의 대수이므로 nonnegative integer이며, 나머지는 nonnegative real number$들이다.</p>
+<p>위에서 $c$는 비용, $s$는 용량, $p$는 전력, $e$는 저장된 에너지, $\mu$는 효율, $\alpha$는 규정 비율이며, pv는 태양광, wt는 풍력, batt는 배터리, load는 부하, diesel은 디젤엔진, ch는 충전, disch는 방전, dump는 출력제한이다. $s_{\text{wt}}$는 풍력 발전기의 대수이므로 nonnegative integer이며, 나머지는 nonnegative real number$들이다. 비용은 태양광/ 풍력/ 배터리에 대해서는 단위 용량당 초기투자비, 디젤에 대해서는 연료비이다.</p>
 
 <p><br />
 위에서 제약조건 $ p_{\text{ch}}[t] p_{\text{disch}}[t] = 0$ 은, 한 time step 내에서 ESS는 충전 또는 방전 둘 중 하나만을 수행한다는 제약이다. 충전항과 방전항이 동시에 양수가 되지 않도록 두 항 간 곱이 0이라는 제약을 둔다.</p>
@@ -436,7 +436,7 @@
 
 <p>$ \sum_{t} p_{\text{dump}}[t] \leq \alpha_{\text{dump}} \sum_{t} p_{\text{load}}[t] $</p>
 
-<p>필자는 이 제약을 추가 시, 충전과 방전에 양수계수를 곱한 penalty term들을 목적함수에 추가해도 충전항과 방전항이 둘 다 양수가 되는 문제가 발생함을 발견했다.</p>
+<p>필자는 이 제약을 추가 시, 충전과 방전에 양수계수를 곱한 penalty term들을 목적함수에 추가해도 충전항과 방전항이 둘 다 양수가 되는 문제가 발생함을 발견했다. 필자가 다뤘던 케이스에서는 총 8,760시간 중 2,275시간에서 $ p_{\text{ch}}[t] p_{\text{disch}}[t] &gt; 0$ 이었다.</p>
 
 <p>필자의 분석 결과, 이는 충전과 방전 간 차이 $p_{\text{ch}}[t]-p_{\text{disch}}[t]$ 가 같을 때 둘 다 0보다 커질수록 생기는 일종의 가짜 curtailment 효과이다. 
 이를테면 $p_{\text{ch}}[t]-p_{\text{disch}}[t]=a$라 하면 (충전), 정상적인 답에서는 $p_{\text{ch}}[t]=a, p_{\text{disch}}[t]0$이어야 한다. 그러나 만약 $p_{\text{ch}}[t] = a+b, P_{\text{disch}}[t] = b$, 즉 충전과 방전 모두에 $b$가 더해진 경우 어떻게 될까?</p>
@@ -462,6 +462,9 @@
 <em>필자가 제안한, 출력제한의 총량 제약이 있더라도 동시 충/방전 문제가 없는 solution을 얻도록 하는 flowchart.</em></p>
 
 <p>이 방법을 쓰면, 시간별 이진수를 도입하지 않고도 5~30번 정도의 iteration이면 충분히 correct solution에 근접한 solution을 얻는 것을 확인하였다.</p>
+
+<p><img src="/assets/images/mypaperone/iteration.png" alt="iteration" class="align-center" width="60%" />
+<em>위 flowchart대로 수행 시, 5번의 iteration으로 동시 충/방전 문제가 없는 solution을 얻음.</em></p>
 
 <div class="notice--info">
 

@@ -11,7 +11,7 @@
   <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면? | 에너지 데이터 연구소</title>
-<meta name="description" content="지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀 (Weighted Least squares + 잔차에 대한 ARMA) 로 구성하는 과정을 설명했다. 또한, 전통적인 선형회귀로도 adjusted $R^2$ 0.95 이상의 우수한 모델을 얻을 수 있음을 보였다.">
+<meta name="description" content="지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA) 로 구성하는 과정을 설명했다. 또한, 전통적인 선형회귀로도 adjusted $R^2$ 0.95 이상의 우수한 모델을 얻을 수 있음을 보였다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://localhost:4000/predictiontwo.html">
 
 
-  <meta property="og:description" content="지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀 (Weighted Least squares + 잔차에 대한 ARMA) 로 구성하는 과정을 설명했다. 또한, 전통적인 선형회귀로도 adjusted $R^2$ 0.95 이상의 우수한 모델을 얻을 수 있음을 보였다.">
+  <meta property="og:description" content="지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA) 로 구성하는 과정을 설명했다. 또한, 전통적인 선형회귀로도 adjusted $R^2$ 0.95 이상의 우수한 모델을 얻을 수 있음을 보였다.">
 
 
 
@@ -329,7 +329,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?">
-    <meta itemprop="description" content="지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀 (Weighted Least squares + 잔차에 대한 ARMA) 로 구성하는 과정을 설명했다. 또한, 전통적인 선형회귀로도 adjusted $R^2$ 0.95 이상의 우수한 모델을 얻을 수 있음을 보였다.">
+    <meta itemprop="description" content="지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA) 로 구성하는 과정을 설명했다. 또한, 전통적인 선형회귀로도 adjusted $R^2$ 0.95 이상의 우수한 모델을 얻을 수 있음을 보였다.">
     <meta itemprop="datePublished" content="2023-04-06T00:00:00+09:00">
     
 
@@ -371,7 +371,7 @@
             </nav>
           </aside>
         
-        <p>지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀 (Weighted Least squares + 잔차에 대한 ARMA) 로 구성하는 과정을 설명했다. 또한, 전통적인 선형회귀로도 adjusted $R^2$ 0.95 이상의 우수한 모델을 얻을 수 있음을 보였다.</p>
+        <p>지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA) 로 구성하는 과정을 설명했다. 또한, 전통적인 선형회귀로도 adjusted $R^2$ 0.95 이상의 우수한 모델을 얻을 수 있음을 보였다.</p>
 
 <p>이번 포스팅에서는, 딥러닝을 써서 모델을 만들어 본다.</p>
 
@@ -546,9 +546,9 @@
 <span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p>Adjusted $R^2$를 계산해보면 훈련 set에 대한 값은 0.9509로, 선형회귀에서의 0.9263보다 더 높다.역시 딥러닝이 우월한 것일까?</p>
+<p>Adjusted $R^2$를 계산해보면 훈련 set에 대한 값은 0.9509이다. 이는 Weighted Least square (WLS) 만 했을 때의 결과인 0.9263보다는 더 높지만, WLS에 잔차의 SARMA 모델 적합까지 추가 수행 시 결과인 0.9746보다는 낮다. 한편 검증 set에 대한 값은 0.8642로, WLS만 했을 때의 결과인 0.8716보다도 낮다.</p>
 
-<p>그러나, 검증 set에 대한 값은 0.8642로 선형회귀에서의 0.8716보다 소폭이지만 낮다. 딥러닝 훈련에 드는 계산비용을 생각하면, 딥러닝이 우월하다고 볼 수 없다 (계산 시간만 따져도 2분 이상 vs. 몇 초).</p>
+<p>검증 set에 대한 결과와 딥러닝 훈련에 드는 계산비용을 생각하면, 딥러닝이 우월하다고 볼 수 없다 (계산 시간만 따져도 2분 이상 vs. 몇 초(WLS만 수행 시)).</p>
 
 <p>(그림: actual &amp; 선형회귀 &amp; DNN)</p>
 
@@ -649,7 +649,7 @@
 
 <p>당장 이번 사례에서 선형회귀와 DNN에 대해 sub모델 4개를 구성한 것을 생각해 보면, 1년간의 시간별 부하 데이터는 non-stationary data이다. 이를 고려하지 않고 non-stationary data에 대해 무작정 단일한 RNN 모델을 쓰면, 결과가 이상하게 나올 수밖에 없다 (일유형 dummy변수를 추가하기는 했지만, 그것으로는 부족했다).</p>
 
-<p>데이터의 non-stationarity를 고려해 sub모델 4개로 나누는 ‘데이터 전처리’와 오차의 자기상관성을 추가로 설명하는 과정을 거친 덕분에, 그리고 각 sub모델 별 구간 내의 non-linearity가 심하지 않았기에, 간단한 선형회귀 모델로 딥러닝보다 더 나은 결과를 빠르게 얻을 수 있었다.</p>
+<p>데이터의 non-stationarity를 고려해 sub모델 4개로 나누는 ‘데이터 전처리’와 오차의 자기상관성을 추가로 설명하는 과정을 거친 덕분에, 그리고 각 sub모델 별 구간 내의 non-linearity가 심하지 않았기에, 간단한 선형회귀 모델로 딥러닝보다 더 나은 결과를 빠르게 얻을 수 있었다. (거기에 더해, 선형회귀 모델은 딥러닝처럼 훈련 시마다 모델 parameter 값들이 다르게 나오지 않고 항상 같게 나온다는 장점도 있다.)</p>
 
 <p>이렇듯 계산 시간도 빠르면서 성능도 나은 경우 ‘computational efficiency’가 좋다고 한다. 내가 가진 데이터에 대해 더 잘 알수록, 그리고 가능한 기법들 각각의 장단점에 대해 더 잘 알수록, ‘conputationally efficient한’ 방법을 사용할 수 있을 가능성이 높다.</p>
 
