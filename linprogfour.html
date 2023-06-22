@@ -24,7 +24,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지 데이터 연구소">
 <meta property="og:title" content="정수선형계획법 기반 분산에너지시스템 최적화 설명 - 4) 태양광과 배터리의 용량 정하기">
-<meta property="og:url" content="http://localhost:4000/2023/04/linprogfour.html">
+<meta property="og:url" content="http://localhost:4000/linprogfour.html">
 
 
   <meta property="og:description" content="지난 포스팅에서는 `주어진 용량의’ 배터리가 건물에 설치된 경우의 시간별 최소비용 충/방전 스케줄을 구하기 위한 선형계획법 문제 수식 구성 및 코딩을 설명했다.">
@@ -46,7 +46,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/2023/04/linprogfour.html">
+<link rel="canonical" href="http://localhost:4000/linprogfour.html">
 
 
 
@@ -200,26 +200,6 @@
         <span class="sep">/</span>
       
       
-        
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="/categories/#2023" itemprop="item"><span itemprop="name">2023</span></a>
-          <meta itemprop="position" content="2" />
-        </li>
-        <span class="sep">/</span>
-      
-    
-      
-      
-        
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="/categories/#04" itemprop="item"><span itemprop="name">04</span></a>
-          <meta itemprop="position" content="3" />
-        </li>
-        <span class="sep">/</span>
-      
-    
-      
-      
         <li class="current">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 4) 태양광과 배터리의 용량 정하기</li>
       
     
@@ -357,7 +337,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/2023/04/linprogfour.html" class="u-url" itemprop="url">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 4) 태양광과 배터리의 용량 정하기
+            <a href="http://localhost:4000/linprogfour.html" class="u-url" itemprop="url">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 4) 태양광과 배터리의 용량 정하기
 </a>
           </h1>
           
@@ -513,8 +493,8 @@ $\vdots$
 
 <span class="n">p_load</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"load_hourly.txt"</span><span class="p">)</span>
 <span class="n">p_pv</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"pv_hourly.txt"</span><span class="p">)</span> <span class="c1"># 1kW 패널의 시간별 발전량
-</span><span class="n">eleccost</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"eleccost_hourly.txt"</span><span class="p">)</span>
-<span class="n">eleccost_demandcharge</span> <span class="o">=</span> <span class="mi">8320</span> <span class="c1"># kW당 기본요금
+</span><span class="n">eleccost</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"eleccost_hourly.txt"</span><span class="p">)</span> <span class="c1"># 시간별 kWh당 전기요금 (부가세/ 전력산업기반기금 반영 전 금액)
+</span><span class="n">eleccost_demandcharge</span> <span class="o">=</span> <span class="mi">8320</span> <span class="c1"># kW당 기본요금
 </span><span class="n">taxrate</span> <span class="o">=</span> <span class="mf">1.137</span>
 
 <span class="n">eff_batt</span> <span class="o">=</span> <span class="mf">0.94</span>
@@ -582,7 +562,7 @@ $\vdots$
 <span class="n">npvfactor</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">r</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">r</span><span class="p">))</span><span class="o">**</span><span class="mi">20</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">r</span><span class="p">)))</span> <span class="c1"># 초항이 (1+r)^{-1}, 마지막항이 (1+r)^{20}인 등비수열의 합
 </span><span class="n">costfun_pv</span> <span class="o">=</span> <span class="n">initialcost_pv</span> <span class="o">+</span> <span class="n">mtncost_pv</span> <span class="o">*</span> <span class="n">npvfactor</span> <span class="c1"># 초기투자비 + 매년 유지보수비(npvfactor를 곱해 현가화)
 </span><span class="n">costfun_batt</span> <span class="o">=</span> <span class="n">initialcost_batt</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">r</span><span class="p">))</span><span class="o">**</span><span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">mtncost_batt</span> <span class="o">*</span> <span class="n">npvfactor</span> <span class="c1"># 초기투자비 + 10년 후 재투자비(현가화) + 매년 유지보수비 (현가화)
-</span><span class="n">costfun_elec</span> <span class="o">=</span> <span class="n">taxrate</span> <span class="o">*</span> <span class="n">eleccost</span><span class="p">.</span><span class="nf">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">npvfactor</span> <span class="c1"># 전기 사용량 요금 (현가화)
+</span><span class="n">costfun_elec</span> <span class="o">=</span> <span class="n">taxrate</span> <span class="o">*</span> <span class="n">eleccost</span><span class="p">.</span><span class="nf">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">npvfactor</span> <span class="c1"># 전기 사용량 요금 (현가화), taxrate를 곱해 부가가치세/ 전력산업기반기금 반영
 </span><span class="n">costfun_elec_demand</span> <span class="o">=</span> <span class="n">taxrate</span> <span class="o">*</span> <span class="n">eleccost_demandcharge</span> <span class="o">*</span> <span class="mi">12</span> <span class="o">*</span> <span class="n">npvfactor</span> <span class="c1"># 전기 기본요금 (현가화), 매 월별이므로 12 곱함
 </span>
 <span class="n">c</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">([[</span><span class="nf">matrix</span><span class="p">(</span><span class="n">costfun_elec</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)],[</span><span class="nf">matrix</span><span class="p">([</span><span class="n">costfun_elec_demand</span><span class="p">])],[</span><span class="nf">matrix</span><span class="p">([</span><span class="n">costfun_pv</span><span class="p">])],[</span><span class="nf">matrix</span><span class="p">([</span><span class="n">costfun_batt</span><span class="p">])]])</span> 
@@ -600,7 +580,20 @@ $\vdots$
 <span class="n">plt</span><span class="p">.</span><span class="nf">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
 </code></pre></div></div>
 
+<p>위 코드의 초반부에서 시간별 전기 부하, 시간별 태양광 발전량, 시간별 전기 요금을 텍스트 파일로부터 불러왔다. 코드 내에 1년 (8,760시간) 내 각 시간별로 대응하는 수치들을 다 써 줄 수 없기 때문이다. 이 때 주의할 점은, <a href="https://cyber.kepco.co.kr/ckepco/front/jsp/CY/D/C/CYDCHP00403.jsp">공휴일의 최대수요전력 및 사용전력량은 경부하시간대로 계량하고, 공휴일이 아닌 토요일 최대부하시간대의 사용전력량은 중간부하시간대로 계량한다</a>는 것이다. $\texttt{eleccost_hourly.txt}$에 해당 사항이 반영되어 있는지 확인해야 한다. 그렇지 않으면 전기요금 및 전기요금 절감액이 과다계상된다.</p>
+
 <p>(계산 결과)</p>
+
+<div class="notice--info">
+
+정수선형계획법 기반 분산에너지시스템 최적화 설명<br /><br />
+
+1) <a href="/linprogone.html">최소비용 시스템과 시간별 자료의 중요성</a><br />
+2) <a href="/linprogtwo.html">배터리의 충/방전 스케줄 정하기: 수식</a> <br />
+3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 정하기: Python 코드</a> <br />
+4) <b>태양광과 배터리의 용량 정하기</b>
+
+</div>
 
         
       </section>
@@ -657,11 +650,11 @@ $\vdots$
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EC%88%98%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+%EC%84%A4%EB%AA%85+-+4%29+%ED%83%9C%EC%96%91%EA%B4%91%EA%B3%BC+%EB%B0%B0%ED%84%B0%EB%A6%AC%EC%9D%98+%EC%9A%A9%EB%9F%89+%EC%A0%95%ED%95%98%EA%B8%B0%20http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Flinprogfour.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EC%88%98%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+%EC%84%A4%EB%AA%85+-+4%29+%ED%83%9C%EC%96%91%EA%B4%91%EA%B3%BC+%EB%B0%B0%ED%84%B0%EB%A6%AC%EC%9D%98+%EC%9A%A9%EB%9F%89+%EC%A0%95%ED%95%98%EA%B8%B0%20http%3A%2F%2Flocalhost%3A4000%2Flinprogfour.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Flinprogfour.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flinprogfour.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Flinprogfour.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flinprogfour.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -697,10 +690,10 @@ $\vdots$
 
   
     
-      <a href="/2023/04/reinforceone.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개</a>
+      <a href="/reinforceone.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개</a>
     
     
-      <a href="/2023/04/linprogthree.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>정수선형계획법 기반 분산에너지시스템 최적화 설명 - 3) 배터리의 충/방전 스케줄 정하기: Python 코드</a>
+      <a href="/linprogthree.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>정수선형계획법 기반 분산에너지시스템 최적화 설명 - 3) 배터리의 충/방전 스케줄 정하기: Python 코드</a>
         
   
 
@@ -726,7 +719,7 @@ $\vdots$
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/monthlyenergythree.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거
+        <a href="/monthlyenergythree.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거
 </a>
       
     </h2>
@@ -763,7 +756,7 @@ $\vdots$
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/monthlyenergytwo.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거
+        <a href="/monthlyenergytwo.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거
 </a>
       
     </h2>
@@ -800,7 +793,7 @@ $\vdots$
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/cudadudnn.html" rel="permalink">WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기
+        <a href="/cudadudnn.html" rel="permalink">WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기
 </a>
       
     </h2>
@@ -837,7 +830,7 @@ $\vdots$
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/monthlyenergyone.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화
+        <a href="/monthlyenergyone.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화
 </a>
       
     </h2>
@@ -859,7 +852,7 @@ $\vdots$
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
+    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
 </p>
   </article>
 </div>

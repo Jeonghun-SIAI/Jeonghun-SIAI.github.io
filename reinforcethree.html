@@ -24,7 +24,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지 데이터 연구소">
 <meta property="og:title" content="강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출">
-<meta property="og:url" content="http://localhost:4000/2023/04/reinforcethree.html">
+<meta property="og:url" content="http://localhost:4000/reinforcethree.html">
 
 
   <meta property="og:description" content="이전 포스팅에서도 언급했듯, 이 문제에서 state는 직전 24시간 동안의 태양광 발전량과 부하 및 직전 1시간의 배터리 내 에너지양이고, action은 1.1kW 수전/ 1.1kW 송전/ idle 3가지이다. (action 인덱스는 0,1,2라 하자). 이 때 심층신경망은 state를 입력받아 3개 action 각각의 Q-value의 추정치 $\hat{Q}(s_{t},0), \hat{Q} (s_{t},1), \hat{Q} (s_{t},2)$ 를 출력으로 계산한다. 이 심층신경망은 매 훈련 주기마다 튜플 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다.">
@@ -46,7 +46,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/2023/04/reinforcethree.html">
+<link rel="canonical" href="http://localhost:4000/reinforcethree.html">
 
 
 
@@ -200,26 +200,6 @@
         <span class="sep">/</span>
       
       
-        
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="/categories/#2023" itemprop="item"><span itemprop="name">2023</span></a>
-          <meta itemprop="position" content="2" />
-        </li>
-        <span class="sep">/</span>
-      
-    
-      
-      
-        
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="/categories/#04" itemprop="item"><span itemprop="name">04</span></a>
-          <meta itemprop="position" content="3" />
-        </li>
-        <span class="sep">/</span>
-      
-    
-      
-      
         <li class="current">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출</li>
       
     
@@ -357,7 +337,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/2023/04/reinforcethree.html" class="u-url" itemprop="url">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출
+            <a href="http://localhost:4000/reinforcethree.html" class="u-url" itemprop="url">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출
 </a>
           </h1>
           
@@ -397,7 +377,7 @@
 심층신경망 구성은 아래 그림과 같다.</p>
 
 <p><img src="/assets/images/reinforcethree/nn.png" alt="nn" class="align-center" />
-<em>Vincent의 연구에서 사용된 심층신경망 구성. (학위논문의 그림을 필자가 재구성하였음)</em></p>
+<em>Vincent의 연구에서 사용된 심층신경망 구성. (논문의 그림을 필자가 재구성하였음)</em></p>
 
 <p>직전 24시간의 태양광 발전량은 첫 번째 Conv1D 층에, 직전 24시간의 부하는 두 번째 Conv1D 층에, 그리고 직전 1시간의 배터리 내 에너지양은 위 두 Conv1D층과 연결되는 Dense층에 바로 연결된다. 그리고 Dense층이 하나 더 있고, 이 층을 거쳐서 최종적으로 3개의 output node가 각 action별 Q-value를 출력한다.</p>
 
@@ -408,7 +388,7 @@
 <p><br />
 이제 훈련 concept는 대략 이해가 될 것이니, 코드를 보자.</p>
 
-<p>(이 코드는 본인이 직접 작성하였다. 마이크로그리드 케이스에 대한 학위논문에서 저자가 사용한 코드의 Github 링크를 제공하나, 각 모듈별로 코드 파일들을 지나치게 분리해 놓아 사용이 여의치 않았다. 이에 필자가 ‘모든 기능들을 한 파일에 넣은 공부용’ 코드를 따로 만들었다. 다만 코드 작성 시 <a href="https://product.kyobobook.co.kr/detail/S000001810262">핸즈온 머신러닝</a>의 강화학습 chapter의 Cartpole 예제에 대한 Deep Q-Network 코드를 많이 참고하였음을 밝힌다.)</p>
+<p>(이 코드는 본인이 직접 작성하였다. Vincent의 학위논문에서 해당 연구에 사용한 코드의 <a href="https://github.com/VinF/deer/tree/master/examples/MG_two_storages">Github 링크</a>를 제공하나, 각 모듈별로 코드 파일들을 지나치게 분리해 놓아 사용이 여의치 않았다. 이에 필자가 ‘모든 기능들을 한 파일에 넣은 공부용’ 코드를 따로 만들었다. 다만 코드 작성 시 <a href="https://product.kyobobook.co.kr/detail/S000001810262">핸즈온 머신러닝</a>의 강화학습 chapter의 Cartpole 예제에 대한 Deep Q-Network 코드를 많이 참고하였음을 밝힌다.)</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
 </span>
@@ -430,7 +410,8 @@
 
 <span class="c1">### microgrid system data
 </span>
-<span class="n">PV_prod_train</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="s">'BelgiumPV_prod_train.npy'</span><span class="p">)</span> <span class="c1"># [0,1] 구간 내로 scaled된 데이터임, unscaling은 play_one_step 함수 내에서 이루어짐
+<span class="c1"># 시간별 데이터 출처: https://github.com/VinF/deer/tree/master/examples/MG_two_storages/data
+</span><span class="n">PV_prod_train</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="s">'BelgiumPV_prod_train.npy'</span><span class="p">)</span> <span class="c1"># [0,1] 구간 내로 scaled된 데이터임, unscaling은 play_one_step 함수 내에서 이루어짐
 </span><span class="n">PV_prod_test</span>  <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="s">'BelgiumPV_prod_test.npy'</span><span class="p">)</span> 
 
 <span class="n">load_train</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="s">'example_nondeterminist_cons_train.npy'</span><span class="p">)</span> <span class="c1"># [0,1] 구간 내로 scaled된 데이터임, unscaling은 play_one_step 함수 내에서 이루어짐
@@ -618,7 +599,7 @@
             <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">profits_test</span><span class="p">:</span>
                 <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
                 
-        <span class="k">if</span> <span class="n">max_return_test</span> <span class="o">&lt;</span> <span class="n">epoch_return_test</span><span class="p">:</span> <span class="c1"># Validation set에서의 총 수익의 최대값값 갱신시마다 저장 (unlearn하게 되더라도 중간에 best performance였던 모델을 남김김)
+        <span class="k">if</span> <span class="n">max_return_test</span> <span class="o">&lt;</span> <span class="n">epoch_return_test</span><span class="p">:</span> <span class="c1"># Validation set에서의 총 수익의 최대값 갱신시마다 저장 (unlearn하게 되더라도 중간에 best performance였던 모델을 남김)
 </span>            <span class="n">max_return_test</span> <span class="o">=</span> <span class="n">epoch_return_test</span>
             <span class="n">model</span><span class="p">.</span><span class="nf">save_weights</span><span class="p">(</span><span class="s">'trainedmodel_dqn.h5'</span><span class="p">)</span> <span class="c1"># 모델 가중치 저장
 </span>                    
@@ -634,7 +615,7 @@
         <span class="n">elapsedtime_test</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">elapsed_time</span><span class="p">)</span>
         <span class="nf">print</span><span class="p">(</span><span class="s">"Validation: profit of epoch {} is {}, maximum profit is {}"</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span><span class="nf">round</span><span class="p">(</span><span class="n">epoch_return_test</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="nf">round</span><span class="p">(</span><span class="n">max_return_test</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
         <span class="nf">print</span><span class="p">(</span><span class="s">'one epoch 수행에 {}초 걸렸습니다'</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">elapsed_time</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
-        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'trajectory_time_test_dqn.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="c1"># 각 epoch별 소요시간 로그 장장
+        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'trajectory_time_test_dqn.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="c1"># 각 epoch별 소요시간 로그 저장
 </span>            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">elapsedtime_test</span><span class="p">:</span>
                 <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
 </code></pre></div></div>
@@ -670,6 +651,18 @@
 그렇다면 discrete action으로 단순화하지 않고, -1.1에서 +1.1 사이의 실수로 action을 도출하는 continuous control을 위한 심층강화학습 기법을 쓰면, 이런 최대량이 아닌 송전/수전까지 반영한 controller를 훈련함으로써 validation case에 대해 더 낮은 비용을 달성하는 것도 가능할 것으로 기대된다.</p>
 
 <p>다음 포스팅에서는 continuous control을 위한 심층강화학습 중 가장 기본적이면서 중요한 방법인 Deep Deterministic Policy Gradient (DDPG) 를 적용하는 방법 및 결과를 설명한다.</p>
+
+<div class="notice--info">
+
+강화학습 기반 마이크로그리드 스케줄링<br /><br />
+
+1) <a href="/reinforceone.html">문제의식 및 케이스 소개</a><br />
+2) <a href="/reinforcetwo.html">Q-learning 개념</a><br />
+3) <b>Deep Q-learning을 통한 discrete control 도출</b><br />
+4) <a href="/reinforcefour.html">DDPG를 통한 continuous control 도출</a><br />
+5) <a href="/reinforcefive.html">TD3, SAC를 통한 continuous control 도출</a>
+
+</div>
 
         
       </section>
@@ -724,11 +717,11 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5+%EA%B8%B0%EB%B0%98+%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EA%B7%B8%EB%A6%AC%EB%93%9C+%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81+-+3%29+Deep+Q-learning%EC%9D%84+%ED%86%B5%ED%95%9C+discrete+control+%EB%8F%84%EC%B6%9C%20http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Freinforcethree.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5+%EA%B8%B0%EB%B0%98+%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EA%B7%B8%EB%A6%AC%EB%93%9C+%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81+-+3%29+Deep+Q-learning%EC%9D%84+%ED%86%B5%ED%95%9C+discrete+control+%EB%8F%84%EC%B6%9C%20http%3A%2F%2Flocalhost%3A4000%2Freinforcethree.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Freinforcethree.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Freinforcethree.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Freinforcethree.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Freinforcethree.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -758,10 +751,10 @@
 
   
     
-      <a href="/2023/04/reinforcefour.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>강화학습 기반 마이크로그리드 스케줄링 - 4) DDPG를 통한 continuous control 도출</a>
+      <a href="/reinforcefour.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>강화학습 기반 마이크로그리드 스케줄링 - 4) DDPG를 통한 continuous control 도출</a>
     
     
-      <a href="/2023/04/reinforcetwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념</a>
+      <a href="/reinforcetwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념</a>
         
   
 
@@ -787,7 +780,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/monthlyenergythree.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거
+        <a href="/monthlyenergythree.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거
 </a>
       
     </h2>
@@ -824,7 +817,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/monthlyenergytwo.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거
+        <a href="/monthlyenergytwo.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거
 </a>
       
     </h2>
@@ -861,7 +854,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/cudadudnn.html" rel="permalink">WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기
+        <a href="/cudadudnn.html" rel="permalink">WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기
 </a>
       
     </h2>
@@ -898,7 +891,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/monthlyenergyone.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화
+        <a href="/monthlyenergyone.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화
 </a>
       
     </h2>
@@ -920,7 +913,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
+    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
 </p>
   </article>
 </div>

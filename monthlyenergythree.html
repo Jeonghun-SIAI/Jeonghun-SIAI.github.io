@@ -24,7 +24,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지 데이터 연구소">
 <meta property="og:title" content="건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거">
-<meta property="og:url" content="http://localhost:4000/2023/04/monthlyenergythree.html">
+<meta property="og:url" content="http://localhost:4000/monthlyenergythree.html">
 
 
   <meta property="og:description" content="저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.">
@@ -46,7 +46,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/2023/04/monthlyenergythree.html">
+<link rel="canonical" href="http://localhost:4000/monthlyenergythree.html">
 
 
 
@@ -200,26 +200,6 @@
         <span class="sep">/</span>
       
       
-        
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="/categories/#2023" itemprop="item"><span itemprop="name">2023</span></a>
-          <meta itemprop="position" content="2" />
-        </li>
-        <span class="sep">/</span>
-      
-    
-      
-      
-        
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="/categories/#04" itemprop="item"><span itemprop="name">04</span></a>
-          <meta itemprop="position" content="3" />
-        </li>
-        <span class="sep">/</span>
-      
-    
-      
-      
         <li class="current">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거</li>
       
     
@@ -357,7 +337,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/2023/04/monthlyenergythree.html" class="u-url" itemprop="url">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거
+            <a href="http://localhost:4000/monthlyenergythree.html" class="u-url" itemprop="url">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거
 </a>
           </h1>
           
@@ -444,6 +424,16 @@ $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Coo
 
 <p>만약 어떤 dataset에 대해 Cook’s D를 계산했더니 point $i$에 대해 Cook’s D가 가장 크고 $j$에 대해 Cook’s D가 두 번째로 크다고 하자. 이 때 point $j$에 대한 Cook’s D는, point $i$가 dataset에 있다는 가정 하에 계산된다. 그런데 우리는 outlier를 제거해나가야 하므로, Cook’s D가 가장 큰 outlier $i$가 dataset에 있다는 가정 하에 나머지 point들에 대한 outlier 여부를 판단하는 것은 부자연스럽다.</p>
 
+<div class="notice--info">
+
+건축물 별 월별 에너지 사용량 데이터셋<br /><br />
+
+1) <a href="/monthlyenergyone.html">모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화</a><br />
+2) <a href="/monthlyenergytwo.html">월별 사용 추이가 이상한 data point 제거</a><br />
+3) <b>월별 사용량 크기가 이상한 data point 제거</b>
+
+</div>
+
         
       </section>
 
@@ -495,11 +485,11 @@ $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Coo
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%EA%B1%B4%EC%B6%95%EB%AC%BC+%EB%B3%84+%EC%9B%94%EB%B3%84+%EC%97%90%EB%84%88%EC%A7%80+%EC%82%AC%EC%9A%A9%EB%9F%89+%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B+-+3%29+%EC%9B%94%EB%B3%84+%EC%82%AC%EC%9A%A9%EB%9F%89+%ED%81%AC%EA%B8%B0%EA%B0%80+%EC%9D%B4%EC%83%81%ED%95%9C+data+point+%EC%A0%9C%EA%B1%B0%20http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Fmonthlyenergythree.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EA%B1%B4%EC%B6%95%EB%AC%BC+%EB%B3%84+%EC%9B%94%EB%B3%84+%EC%97%90%EB%84%88%EC%A7%80+%EC%82%AC%EC%9A%A9%EB%9F%89+%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B+-+3%29+%EC%9B%94%EB%B3%84+%EC%82%AC%EC%9A%A9%EB%9F%89+%ED%81%AC%EA%B8%B0%EA%B0%80+%EC%9D%B4%EC%83%81%ED%95%9C+data+point+%EC%A0%9C%EA%B1%B0%20http%3A%2F%2Flocalhost%3A4000%2Fmonthlyenergythree.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Fmonthlyenergythree.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmonthlyenergythree.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2F2023%2F04%2Fmonthlyenergythree.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fmonthlyenergythree.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -522,7 +512,7 @@ $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Coo
       <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
     
     
-      <a href="/2023/04/monthlyenergytwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거</a>
+      <a href="/monthlyenergytwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거</a>
         
   
 
@@ -548,7 +538,7 @@ $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Coo
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/monthlyenergytwo.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거
+        <a href="/monthlyenergytwo.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거
 </a>
       
     </h2>
@@ -585,7 +575,7 @@ $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Coo
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/cudadudnn.html" rel="permalink">WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기
+        <a href="/cudadudnn.html" rel="permalink">WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기
 </a>
       
     </h2>
@@ -622,7 +612,7 @@ $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Coo
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/monthlyenergyone.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화
+        <a href="/monthlyenergyone.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화
 </a>
       
     </h2>
@@ -644,7 +634,7 @@ $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Coo
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
+    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
 </p>
   </article>
 </div>
@@ -659,7 +649,7 @@ $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Coo
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/2023/04/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출
+        <a href="/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출
 </a>
       
     </h2>
