@@ -11,7 +11,7 @@
   <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화 | 에너지 데이터 연구소</title>
-<meta name="description" content="필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.">
+<meta name="description" content="필자에게 있어 각별한 데이터가 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://localhost:4000/monthlyenergyone.html">
 
 
-  <meta property="og:description" content="필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.">
+  <meta property="og:description" content="필자에게 있어 각별한 데이터가 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터다.">
 
 
 
@@ -329,7 +329,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화">
-    <meta itemprop="description" content="필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.">
+    <meta itemprop="description" content="필자에게 있어 각별한 데이터가 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터다.">
     <meta itemprop="datePublished" content="2023-04-20T00:00:00+09:00">
     
 
@@ -371,7 +371,7 @@
             </nav>
           </aside>
         
-        <p>필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.</p>
+        <p>필자에게 있어 각별한 데이터가 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터다.</p>
 
 <p>어떤 건물의 1년 12개월 간 월별 전기 사용량과 가스 사용량은, 대부분 아래 그림과 같은 형태를 띤다.</p>
 
@@ -401,7 +401,7 @@
 
 <p>이번 포스팅은 에너지 사용량 데이터와 표제부를 Python의 pandas를 이용해 결합하고 SQL DB로 저장했던 과정에 대한 기록이다.</p>
 
-<p>지번별 월별 에너지 사용량 데이터는 각 월별로 흩어져 있는데, 먼저 공통된 연도의 월별 사용량 자료들을 Python의 pandas를 이용해 하나로 합쳤다. 2022년의 1~12월 전기 사용량과 가스 사용량 데이터들을 하나로 합치는 코드는 아래와 같다.</p>
+<p>지번별 월별 에너지 사용량 데이터는 각 월별로 흩어져 있는데, 먼저 공통된 연도의 월별 사용량 자료들을 Python의 pandas를 이용해 하나로 합쳤다. 2022년 1월의 전기 사용량 데이터 파일의 이름을 $\texttt{elec_202201.txt}$라 할 때, 2022년의 1~12월 전기 사용량과 가스 사용량 데이터들을 하나로 합치는 코드는 아래와 같다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
 </span>
@@ -469,7 +469,9 @@
 <img src="/assets/images/monthlyenergyone/pyoje_web_3.png" alt="pyoje_web_3" class="align-center" />
 <em>표제부에는 각 건물 별 주소/ 면적/ 건폐율/ 용적률/ 용도/ 재질/ 층수/ 사용허가일 등 정보가 있음.</em></p>
 
-<p>대한민국 내 모든 건물들에 대한 표제부를 한 번에 받을 수 있으며, 이는 수 GB의 텍스트 파일이다. 각 열의 설명은 같이 다운받을 수 있는 데이터구조 파일에 있다 (그런데 실제 데이터의 순서와 다른 경우도 있어서, 결국 직접 확인해야 했다…). 이 파일의 표제부 데이터를 위에서 만든 csv 파일 내 에너지 사용량 데이터와 합치고 SQL DB로 저장하는 코드는 아래와 같다.</p>
+<p>대한민국 내 모든 건물들에 대한 표제부를 한 번에 받을 수 있으며, 이는 수 GB의 텍스트 파일이다. 각 열의 설명은 같이 다운받을 수 있는 데이터구조 파일에 있다 (그런데 실제 데이터의 순서와 다른 경우도 있어서, 결국 직접 확인해야 했다…).</p>
+
+<p>이 파일의 표제부 데이터를 위에서 만든 csv 파일 내 에너지 사용량 데이터와 합치고, 필요한 칼럼들을 모아서 SQLite DB로 저장하는 코드는 아래와 같다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
 </span>
@@ -532,8 +534,8 @@
 
 <span class="c1"># SQLite query 실행
 </span><span class="kn">import</span> <span class="n">sqlite3</span>
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">'db_monthlyenergy_pyoje.db'</span><span class="p">)</span>
-
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">'db_monthlyenergy_pyoje.db'</span><span class="p">)</span> <span class="c1"># .db 잊어버리지 말 것
+</span>
 <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span> 
 
 <span class="k">with</span> <span class="n">conn</span><span class="p">:</span> 
@@ -541,10 +543,10 @@
     <span class="n">sql_create</span> <span class="o">=</span> <span class="s">"""
     create table monthlyenergy_2022_pyoje
     (addresstxt text primary key not null, /* 주소, primary key로써 고유해야 함 */
-     sitearea numeric,  /* 대지면적 */
-     buildingarea numeric, /* 건축면적 */
-     floorarea numeric, /* 연면적 */
-     netfloorarea numeric, /* 용적률산정용연면적 */
+     sitearea numeric,  /* 대지면적 [m2] */
+     buildingarea numeric, /* 건축면적 [m2] */
+     floorarea numeric, /* 연면적 [m2] */
+     netfloorarea numeric, /* 용적률산정용연면적 [m2] */
      voltolotratio numeric, /* 용적률 */        
      principaluse text, /* 주용도코드명 */  
      subuse text, /* 기타용도 */ 
@@ -564,7 +566,7 @@
      bjdongCd integer, /* 법정동코드 */
      bun integer, /* 번 */
      ji integer, /* 지 */
-     elec_01 numeric,
+     elec_01 numeric, /* 월별 전기 사용량 [kWh] */
      elec_02 numeric,
      elec_03 numeric,
      elec_04 numeric,
@@ -576,7 +578,7 @@
      elec_10 numeric,
      elec_11 numeric,
      elec_12 numeric,
-     gas_01 numeric,
+     gas_01 numeric, /* 월별 가스 사용량 [kWh] */
      gas_02 numeric,
      gas_03 numeric,
      gas_04 numeric,
@@ -598,9 +600,11 @@
 
 <p>에너지 사용량 데이터에서 중복 주소를 제거했기 때문에, 표제부에서도 중복주소는 제거해야 한다 (이 경우 주소가 primary key가 된다).</p>
 
-<p>이 때 같은 지번주소 내에 여러 건물들이 있는 경우가 있는데, 대지면적이나 연면적 (모든 층의 바닥면적들의 합) 등의 칼럼들에 대해서는 모든 건물들의 값을 다 더하면 된다 (이는 코드 내 $\texttt{data_tosum}$ 변수 정의에서 $\texttt{groupby}$와 $\texttt{sum}$으로 구현함). 그러나, 건물용도 (근린생활/ 업무/ 판매/ 의료 등) 또는 층수 등은 합칠 수 없는데, 미리 $\texttt{sort_values}$ 함수를 이용해 연면적 기준으로 내림차순 정렬을 해 놓음으로써 주소 중복 제거 시 건물용도나 층수 등이 가장 연면적이 큰 건물 기준으로 결정되게 했다 (코드 내 $\texttt{data_todrop}$ 변수 정의에서 $\texttt{drop_duplicates}$로 구현함). 참고로 표제부의 여러 칼럼들 중 필요한 칼럼들만 가져오는 것도 여기에 반영되어 있다.</p>
+<p>같은 지번주소 내에 실제로 여러 건물들이 있기도 하는데, 대지면적이나 연면적 (모든 층의 바닥면적들의 합) 등의 칼럼들에 대해서는 모든 건물들의 값을 다 더하면 된다 (이는 코드 내 $\texttt{data_tosum}$ 변수 정의에서 $\texttt{groupby}$와 $\texttt{sum}$으로 구현함).</p>
 
-<p>표제부의 주소 중복 제거를 처리한 후, 에너지사용량 csv 파일을 불러오고, 표제부와 에너지사용량을 주소 기준으로 outer join으로 합친다. 그 결과물인 resultdata dataframe을 SQL table로 만드는 create table 쿼리를 sqlite3 패키지와 to_sql 함수를 이용해 실행했다. (이 때 $\texttt{sqlite3.connect()}$ 안에 DB 이름 쓸 때 $\texttt{.db}$ 까먹는 실수를 하기 쉬운데 주의해야 함)</p>
+<p>그러나, 건물용도 (근린생활/ 업무/ 판매/ 의료 등) 또는 층수 등은 합칠 수 없는데, 미리 $\texttt{sort_values}$ 함수를 이용해 연면적 기준으로 내림차순 정렬을 해 놓음으로써 주소 중복 제거 시 건물용도나 층수 등이 가장 연면적이 큰 건물 기준으로 결정되게 했다 (코드 내 $\texttt{data_todrop}$ 변수 정의에서 $\texttt{drop_duplicates}$로 구현함). 참고로 표제부의 여러 칼럼들 중 필요한 칼럼들만 가져오는 것도 여기에 반영되어 있다.</p>
+
+<p>표제부의 주소 중복 제거를 처리한 후, 에너지사용량 csv 파일을 불러오고, 표제부와 에너지사용량을 주소 기준으로 outer join으로 합친다. 그 결과물인 resultdata dataframe을 SQL table로 만드는 create table 쿼리를 sqlite3 패키지와 to_sql 함수를 이용해 실행했다.</p>
 
 <p>서울 소재 건물들에 대해 구성한 SQLite DB의 스크린샷들은 아래와 같다.</p>
 
@@ -637,7 +641,7 @@ and netfloorarea &gt; 0
 <span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
 <span class="kn">import</span> <span class="n">sqlite3</span>
 
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">"db_monthlyenergy_pyoje.db"</span><span class="p">)</span> <span class="c1"># .db 까먹지 말 것
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">"db_monthlyenergy_pyoje.db"</span><span class="p">)</span> <span class="c1"># .db 잊어버리지 말 것
 </span>
 <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
 
@@ -870,7 +874,7 @@ and netfloorarea &gt; 0
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 다운로드 웹페이지 찾아서 윈도우에서 설치
+    <p class="archive__item-excerpt" itemprop="description">이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.
 </p>
   </article>
 </div>
@@ -907,7 +911,7 @@ and netfloorarea &gt; 0
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learnin...</p>
+    <p class="archive__item-excerpt" itemprop="description">Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 ...</p>
   </article>
 </div>
 

@@ -11,7 +11,7 @@
   <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>강화학습 기반 마이크로그리드 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출 | 에너지 데이터 연구소</title>
-<meta name="description" content="저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learning (discrete action 3개) 대비 더 나은 결과를 보이지 못했다.">
+<meta name="description" content="Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 (3개 action들은 각각 1.1kW 수전/ 1.1kW 송전/ idle) .">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://localhost:4000/reinforcefive.html">
 
 
-  <meta property="og:description" content="저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learning (discrete action 3개) 대비 더 나은 결과를 보이지 못했다.">
+  <meta property="og:description" content="Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 (3개 action들은 각각 1.1kW 수전/ 1.1kW 송전/ idle) .">
 
 
 
@@ -329,7 +329,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="강화학습 기반 마이크로그리드 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출">
-    <meta itemprop="description" content="저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learning (discrete action 3개) 대비 더 나은 결과를 보이지 못했다.">
+    <meta itemprop="description" content="Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 (3개 action들은 각각 1.1kW 수전/ 1.1kW 송전/ idle) .">
     <meta itemprop="datePublished" content="2023-04-19T00:00:00+09:00">
     
 
@@ -371,9 +371,14 @@
             </nav>
           </aside>
         
-        <p>저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learning (discrete action 3개) 대비 더 나은 결과를 보이지 못했다.</p>
+        <p>Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 (3개 action들은 각각 1.1kW 수전/ 1.1kW 송전/ idle) .</p>
 
-<p>Continuous control 학습에 대해 더 진보된 방법을 쓴다면 어떨까? 진보된 방법들의 대표 사례들로, <a href="https://arxiv.org/abs/1802.09477">Twin Delayed Deep Deterministic policy gradient (TD3)</a>와 <a href="https://arxiv.org/abs/1812.05905">Soft Actor-Critic (SAC)</a>이 있다.</p>
+<p><img src="/assets/images/reinforceone/system.png" alt="system" class="align-center" />
+<em>Vincent의 연구에서 가정된 마이크로그리드.</em></p>
+
+<p>그렇다면 continuous control 도출을 위해 DDPG 이후에 개발된 더 진보된 방법을 쓴다면 어떨까?</p>
+
+<p>진보된 방법들의 대표 사례들로, <a href="https://arxiv.org/abs/1802.09477">Twin Delayed Deep Deterministic policy gradient (TD3)</a>와 <a href="https://arxiv.org/abs/1812.05905">Soft Actor-Critic (SAC)</a>이 있다.</p>
 
 <p><br /></p>
 <h2 id="td3">TD3</h2>
@@ -1036,16 +1041,20 @@
 
 <h2 id="결과">결과</h2>
 
-<p>결과를 보면, TD3에서도 여전히 DDPG처럼 일부송전/일부수전 이 있으며, 낮에 송전하는 기간에 쭉 최대송전에 가깝게 하지 않고 송전량을 줄였다가 다시 늘리는 패턴이 보인다. 한편 SAC의 경우 최대송전과 최대수전까지 가는 경우가 거의 없다.</p>
+<p>결과를 보면, TD3 control에서는 낮 송전 기간에 쭉 최대송전에 가깝게 하지 않고 송전량을 줄였다가 다시 늘리는 패턴이 보인다. 한편 SAC control에서는 최대송전과 최대수전을 하는 경우가 거의 없다.</p>
 
 <p>(그림)</p>
 
-<p>TD3와 SAC로 훈련 시 validation case에 대한 누적 비용은 각각 85유로, 118유로이다. 이는 DDPG (125유로) 보다는 조금 나은 결과지만, 여전히 Deep Q-learning (50유로) 에 뒤진다.</p>
+<p>TD3와 SAC으로 도출한 control 적용 시 validation case에 대한 누적 비용은 각각 85유로, 118유로이다. 이는 DDPG control (125유로) 보다는 조금 나은 결과지만, 여전히 DQN control (50유로) 에 뒤진다.</p>
 
-<p>해당 마이크로그리드 case에서는 LP solution에서의 action이 엄밀히는 continuous지만 거의 discrete에 가까운 모습이기 때문에, action을 state의 continuous function으로 근사하는 DDPG/ TD3/ SAC보다는 discrete function으로 근사하는 DQN이 더 나은 것으로 추정된다. 심지어 이는 시뮬레이션에서 계산되는 누적비용 측면에서만 생각한 것이며, 계산 시간까지 고려하면 DQN의 계산 효율 (computational efficiency) 이 훨씬 높다.
-(계산 시간을 비교해 보여주는 그래프 또는 표)</p>
+<p>Vincent의 마이크로그리드 사례에서는, 미래를 안다는 가정 하에 도출한 LP solution에서의 action이 (엄밀히는 continuous지만) 거의 discrete에 가까운 모습이다. 그러므로, action을 state의 continuous function으로 근사하는 DDPG/ TD3/ SAC보다는, discrete function으로 근사하는 DQN이 더 나은 것으로 추정된다.</p>
 
-<p>실제로 에너지기술연구원에서 히트펌프 제어기를 심층강화학습으로 훈련시킨 연구에서도, SAC 기반 continuous control 대신 DQN으로 discrete control을 한 것으로 알려져 있다 (히트펌프의 경우 여러 대를 설치 후 매 시간별로 몇 대나 가동할 것이냐를 결정하는 discrete control이 가능하기도 하다).</p>
+<p>심지어 이는 시뮬레이션으로 계산되는 마이크로그리드의 누적비용 측면에서만 생각한 것이며, 계산 시간까지 고려하면 DQN의 computational efficiency가 DDPG/ TD3/ SAC 대비 훨씬 높다.</p>
+
+<p>(계산 시간을 비교해 보여주는 그래프 또는 표)</p>
+
+<p><br />
+실제로 에너지기술연구원에서 히트펌프 제어기를 심층강화학습으로 훈련시킨 연구에서도 (아래 Youtube 영상), SAC 기반 continuous control을 연구과정에서 시도하기는 했으나 최종적으로는 DQN으로 도출한 discrete control을 사용 및 논문화하였다 (히트펌프의 경우 여러 대를 설치 후 매 시간별로 몇 대나 가동할 것이냐를 결정하는 discrete control이 가능하기도 하다).</p>
 
 <!-- Courtesy of embedresponsively.com -->
 
@@ -1281,7 +1290,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 다운로드 웹페이지 찾아서 윈도우에서 설치
+    <p class="archive__item-excerpt" itemprop="description">이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.
 </p>
   </article>
 </div>
@@ -1318,7 +1327,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
+    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터가 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터다.
 </p>
   </article>
 </div>

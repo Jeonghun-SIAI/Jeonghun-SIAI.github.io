@@ -11,7 +11,7 @@
   <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기 | 에너지 데이터 연구소</title>
-<meta name="description" content="자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 다운로드 웹페이지 찾아서 윈도우에서 설치">
+<meta name="description" content="이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://localhost:4000/cudadudnn.html">
 
 
-  <meta property="og:description" content="자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 다운로드 웹페이지 찾아서 윈도우에서 설치">
+  <meta property="og:description" content="이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.">
 
 
 
@@ -329,7 +329,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기">
-    <meta itemprop="description" content="자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 다운로드 웹페이지 찾아서 윈도우에서 설치">
+    <meta itemprop="description" content="이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.">
     <meta itemprop="datePublished" content="2023-04-21T00:00:00+09:00">
     
 
@@ -371,7 +371,12 @@
             </nav>
           </aside>
         
-        <p>자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 <a href="https://www.nvidia.co.kr/Download/index.aspx?lang=kr">다운로드 웹페이지</a> 찾아서 윈도우에서 설치</p>
+        <p>이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.</p>
+
+<p>이에, 필자가 WSL2 Ubuntu 22.04 환경에 CUDA &amp; cuDNN을 설치하는 데 거쳤던 스텝들을 해당 포스팅으로 남긴다. 필자가 나중에 다른 컴퓨터에 CUDA를 설치하게 될 경우, 이 기록이 필자 본인에게라도 도움이 되길 바란다.</p>
+
+<p><br />
+자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 <a href="https://www.nvidia.co.kr/Download/index.aspx?lang=kr">다운로드 웹페이지</a> 찾아서 윈도우에서 설치</p>
 
 <p>ubuntu bash에서 $\texttt{nvidia-smi}$ 실행 시, 드라이버 설치 확인 가능</p>
 
@@ -472,7 +477,6 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 <p>만약 tensorflow를 사용하지만 GPU를 사용하지는 않을 경우, Python 기준으로 코드 상단에 아래 코드 추가</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 </code></pre></div></div>
-
 
         
       </section>
@@ -668,7 +672,7 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
+    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터가 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터다.
 </p>
   </article>
 </div>
@@ -705,7 +709,7 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learnin...</p>
+    <p class="archive__item-excerpt" itemprop="description">Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 ...</p>
   </article>
 </div>
 

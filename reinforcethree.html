@@ -10,8 +10,8 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출 | 에너지 데이터 연구소</title>
-<meta name="description" content="이전 포스팅에서도 언급했듯, 이 문제에서 state는 직전 24시간 동안의 태양광 발전량과 부하 및 직전 1시간의 배터리 내 에너지양이고, action은 1.1kW 수전/ 1.1kW 송전/ idle 3가지이다. (action 인덱스는 0,1,2라 하자). 이 때 심층신경망은 state를 입력받아 3개 action 각각의 Q-value의 추정치 $\hat{Q}(s_{t},0), \hat{Q} (s_{t},1), \hat{Q} (s_{t},2)$ 를 출력으로 계산한다. 이 심층신경망은 매 훈련 주기마다 튜플 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다.">
+<!-- begin _includes/seo.html --><title>강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출 | 에너지 데이터 연구소</title>
+<meta name="description" content="Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0,1,2라 하자.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -23,11 +23,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지 데이터 연구소">
-<meta property="og:title" content="강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출">
+<meta property="og:title" content="강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출">
 <meta property="og:url" content="http://localhost:4000/reinforcethree.html">
 
 
-  <meta property="og:description" content="이전 포스팅에서도 언급했듯, 이 문제에서 state는 직전 24시간 동안의 태양광 발전량과 부하 및 직전 1시간의 배터리 내 에너지양이고, action은 1.1kW 수전/ 1.1kW 송전/ idle 3가지이다. (action 인덱스는 0,1,2라 하자). 이 때 심층신경망은 state를 입력받아 3개 action 각각의 Q-value의 추정치 $\hat{Q}(s_{t},0), \hat{Q} (s_{t},1), \hat{Q} (s_{t},2)$ 를 출력으로 계산한다. 이 심층신경망은 매 훈련 주기마다 튜플 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다.">
+  <meta property="og:description" content="Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0,1,2라 하자.">
 
 
 
@@ -200,7 +200,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출</li>
+        <li class="current">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출</li>
       
     
   </ol>
@@ -328,8 +328,8 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출">
-    <meta itemprop="description" content="이전 포스팅에서도 언급했듯, 이 문제에서 state는 직전 24시간 동안의 태양광 발전량과 부하 및 직전 1시간의 배터리 내 에너지양이고, action은 1.1kW 수전/ 1.1kW 송전/ idle 3가지이다. (action 인덱스는 0,1,2라 하자). 이 때 심층신경망은 state를 입력받아 3개 action 각각의 Q-value의 추정치 $\hat{Q}(s_{t},0), \hat{Q} (s_{t},1), \hat{Q} (s_{t},2)$ 를 출력으로 계산한다. 이 심층신경망은 매 훈련 주기마다 튜플 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다.">
+    <meta itemprop="headline" content="강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출">
+    <meta itemprop="description" content="Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0,1,2라 하자.">
     <meta itemprop="datePublished" content="2023-04-17T00:00:00+09:00">
     
 
@@ -337,7 +337,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/reinforcethree.html" class="u-url" itemprop="url">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출
+            <a href="http://localhost:4000/reinforcethree.html" class="u-url" itemprop="url">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출
 </a>
           </h1>
           
@@ -371,7 +371,12 @@
             </nav>
           </aside>
         
-        <p>이전 포스팅에서도 언급했듯, 이 문제에서 state는 직전 24시간 동안의 태양광 발전량과 부하 및 직전 1시간의 배터리 내 에너지양이고, action은 1.1kW 수전/ 1.1kW 송전/ idle 3가지이다. (action 인덱스는 0,1,2라 하자). 이 때 심층신경망은 state를 입력받아 3개 action 각각의 Q-value의 추정치 $\hat{Q}(s_{t},0), \hat{Q} (s_{t},1), \hat{Q} (s_{t},2)$ 를 출력으로 계산한다. 이 심층신경망은 매 훈련 주기마다 튜플 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다.</p>
+        <p>Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0,1,2라 하자.</p>
+
+<p><img src="/assets/images/reinforceone/system.png" alt="system" class="align-center" />
+<em>Vincent의 연구에서 가정된 마이크로그리드.</em></p>
+
+<p>이 때 심층신경망은 state를 입력받아 3개 action 각각의 Q-value의 추정치 $\hat{Q}(s_{t},0), \hat{Q} (s_{t},1), \hat{Q} (s_{t},2)$ 를 출력으로 계산한다. 이 심층신경망은 매 훈련 주기마다 튜플 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다.</p>
 
 <p><br />
 심층신경망 구성은 아래 그림과 같다.</p>
@@ -456,7 +461,7 @@
 
 
 <span class="k">def</span> <span class="nf">e_greedy_policy</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span> <span class="c1"># epsilon-greedy policy
-</span>    <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span> <span class="c1"># exploration
+</span>    <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span> <span class="c1"># epsilon의 확률로 exploration
 </span>        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># action을 랜덤하게 선택
 </span>    <span class="k">else</span><span class="p">:</span> <span class="c1"># exploitation
 </span>        <span class="n">input_load</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">inputlen_load</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">inputlen_load</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Conv1D의 input이므로 채널 수 1 명시
@@ -469,7 +474,7 @@
 
 
 <span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
-<span class="n">replay_buffer</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">buffer_size</span><span class="p">)</span> <span class="c1"># replay buffer 정의의
+<span class="n">replay_buffer</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">buffer_size</span><span class="p">)</span> <span class="c1"># replay buffer 정의
 </span>
 <span class="k">def</span> <span class="nf">sample_experiences</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span> <span class="c1"># batch_size만큼의 경험들의 state들, action들, reward들, nextstate들의 리스트들을 반환
 </span>    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">replay_buffer</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span> <span class="c1"># replay buffer 내 경험들 중 랜덤하게 batch_size만큼의 경험들을 지정 (인덱스 불러옴)
@@ -481,8 +486,8 @@
 
 
 
-<span class="k">def</span> <span class="nf">play_one_step</span><span class="p">(</span><span class="n">profile_load</span><span class="p">,</span><span class="n">profile_pv</span><span class="p">,</span><span class="n">hour</span><span class="p">,</span><span class="n">energy_batt</span><span class="p">,</span><span class="n">epsilon</span><span class="p">,</span><span class="n">training</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        
+<span class="k">def</span> <span class="nf">play_one_step</span><span class="p">(</span><span class="n">profile_load</span><span class="p">,</span><span class="n">profile_pv</span><span class="p">,</span><span class="n">hour</span><span class="p">,</span><span class="n">energy_batt</span><span class="p">,</span><span class="n">epsilon</span><span class="p">,</span><span class="n">training</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span> <span class="c1"># 마이크로그리드 시스템의 시간별 operation 모델링
+</span>        
     <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span> <span class="p">(</span><span class="n">profile_load</span><span class="p">[</span><span class="n">hour</span><span class="o">-</span><span class="n">inputlen_load</span><span class="p">:</span><span class="n">hour</span><span class="p">],</span> <span class="n">profile_pv</span><span class="p">[</span><span class="n">hour</span><span class="o">-</span><span class="n">inputlen_pv</span><span class="p">:</span><span class="n">hour</span><span class="p">],</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="n">energy_batt</span><span class="p">]))</span> <span class="p">)</span>
     
     <span class="n">action</span> <span class="o">=</span> <span class="nf">e_greedy_policy</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="n">epsilon</span><span class="p">)</span> <span class="c1"># epsilon-greedy policy에 따라 action 도출
@@ -526,8 +531,8 @@
 </span>
 
 
-<span class="k">def</span> <span class="nf">training_step</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
-
+<span class="k">def</span> <span class="nf">training_step</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span> <span class="c1"># 심층신경망에 대해 Gradient descent 기반 가중치 업데이트 수행
+</span>
     <span class="n">states</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">next_states</span> <span class="o">=</span> <span class="nf">sample_experiences</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
         
     <span class="n">input_load</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">inputlen_load</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">inputlen_load</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
@@ -562,9 +567,8 @@
     <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># 맨 첫 번째 epoch에서는 훈련을 시작하지 않고 buffer를 채움, 두 번째 epoch부터는 buffer에 sample들이 채워졌으므로 훈련함
 </span>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
     
-    <span class="c1">### Train for each epoch
-</span>    
-    <span class="n">hour</span> <span class="o">=</span> <span class="mi">24</span> <span class="c1"># 시작시점
+    <span class="c1">### Train for each epoch  
+</span>    <span class="n">hour</span> <span class="o">=</span> <span class="mi">24</span> <span class="c1"># 시작시점
 </span>    <span class="n">energy_batt</span> <span class="o">=</span> <span class="n">initialenergy_batt</span>  <span class="c1"># 배터리 내 에너지의 초기값
 </span>    
     <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">load_train</span><span class="p">)</span><span class="o">-</span><span class="mi">25</span><span class="p">):</span> <span class="c1"># 데이터 내의 마지막 시점이 nextstate에만 포함될 때까지 (대신 termination state는 따로 없음)
@@ -573,7 +577,7 @@
 </span>        <span class="n">energy_batt</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="nf">play_one_step</span><span class="p">(</span><span class="n">load_train</span><span class="p">,</span><span class="n">PV_prod_train</span><span class="p">,</span><span class="n">hour</span><span class="p">,</span><span class="n">energy_batt</span><span class="p">,</span><span class="n">epsilon</span><span class="p">,</span><span class="n">training</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># energy_batt가 반복 갱신됨
 </span>        <span class="n">hour</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># 다음 시간으로  
 </span>
-        <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">count_step_fortrain</span> <span class="o">&gt;</span> <span class="n">period_step_fortrain</span><span class="p">:</span> <span class="c1"># 훈련 주기
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">count_step_fortrain</span> <span class="o">&gt;</span> <span class="n">period_step_fortrain</span><span class="p">:</span> <span class="c1"># 훈련 주기, 매 시간마다 train하면 epoch당 시간이 너무 길어지고 overfitting 우려도 있어, 매 24시간마다 훈련함, 첫 epoch에서는 replay buffer를 채우기만 하고, 나머지 99 epoch 동안 심층신경망 가중치를 업데이트함
 </span>                <span class="nf">training_step</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span> <span class="c1"># DNN 훈련을 위한 Gradient Descent 수행
 </span>                <span class="n">count_step_fortrain</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -620,37 +624,27 @@
                 <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>코드의 주요 부분은 다음과 같다.</p>
-
-<p>(하이퍼파라미터들 설정 -&gt; 훈련이 안 될 경우 바꿔줌, 이를테면 learning rate를 너무 크게 하면 발산하므로 충분히 작게 해야 함)</p>
-
-<p>(시스템 파라미터 및 데이터)</p>
-
-<p>(심층신경망 정의)</p>
-
-<p>(epsilon-greedy policy 수행: epsilon의 확률로 0,1,2 중 하나의 action을 완전 랜덤하게, 1-epsilon의 확률로 심층신경망의 계산 결과 중 가장 큰 값에 대응하는 action을 선택. 이 때 model.predict()가 아니라 model()을 써야 함에 주의. model.predict()를 쓰면 메모리 누수가 발생한다.)</p>
-
-<p>(훈련 동안 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 튜플들을 저장하는 replay buffer 정의)</p>
-
-<p>(시스템 모델, 즉 매 시간별로 state를 알고 action을 결정했을 때 에너지시스템 내의 에너지 흐름을 계산하고, 그 결과인 손익 및 배터리 내 에너지 저장량을 계산함, 훈련 시 이를 replay buffer에도 저장함. 데이터가 미리 0~1 사이로 스케일링되어 있으므로 에너지 흐름 계산을 위해서는 unscaling해주며, replay buffer에 대한 tuple은 다시 scaled된 값으로 둠에 주의)</p>
-
-<p>(심층신경망 훈련을 Gradient descent로 진행. 목적함수는 $\hat{Q}(s_{t},a_{t})$와 $r_{t+1} + \gamma \text{max}_{a_{t+1}} \hat{Q}(s_{t+1},a_{t+1})$ 간 차이의 평균제곱합임, input이 0~1 사이로 스케일된 데이터임에 주의)</p>
-
-<p>(training과 validation을 반복문으로 수행, Exploration은 DQN에서는 e-greedy (epsilon 값을 1부터 시작해서 일정 수준까지 낮춤, 매 시간마다 train하면 1epoch 시간이 너무 길어지고 overfitting 우려도 있어, 매 24시간마다 훈련함, 첫 epoch는 replay buffer를 채우고 나머지 99 epoch 동안 훈련함, 1epoch 계산 시간이 긴 이유: 매 step별로 action 결정시마다 Qnet 또는 actor로 계산해야 하기 때문 (이를 8760x2-24번 해야 하므로), 심지어 validation set에 대한 metric 계산 시에도 마찬가지이므로 (여기서 또 8760-24번)</p>
+<p>Epoch당 계산 시간이 긴데, 이유는 매 시간 별 action을 결정할 때마다 심층신경망에 state를 입력해 Q-value들을 계산하는 과정을, training case에 대해서는 이를 8760x2-24번, validation case에 대해서는 8760-24번을 수행해야 하기 때문이다.</p>
 
 <p><br />
-훈련을 수행하면, validation case 기준으로 불과 몇 epoch만에 누적 비용이 200유로 이하로 줄어든다 (random control에서 누적비용이 2500~2700유로였음). 그리고 99 epoch 훈련 동안 validation case에 대해 가장 좋은 결과를 보인 모델의 경우 누적 비용이 27유로이다. Random control 대비해서, 이상적인 선형계획처럼 미래를 알 때의) control 시의 비용 -50유로에 근접했다. 과거 24시간 정보만 갖고 control한 것 치고는 훌륭해 보인다.</p>
+훈련을 수행하면, validation case 기준으로 불과 몇 epoch만에 누적 비용이 200유로 이하로 줄어든다. 그리고 99 epoch 훈련 동안 validation case에 대해 가장 좋은 결과를 보인 모델의 경우 누적 비용이 27유로이다.</p>
 
-<p>Action인 계통 수전/송전 패턴이 선형계획과 DQN에서 각각 어떻게 결정되었는지를 아래 그림과 같이 보자.</p>
+<p>미래를 모르면서 과거 24시간 정보만 갖고 도출한 ‘discrete’ control 것 치고는, 훌륭해 보인다. Random control 시의 누적비용 2500~2700유로 대비 매우 낮을 뿐 아니라, 미래를 안다고 가정하고 선형계획법 (Linear Programming, LP) 으로 도출한 control 시의 누적비용 -50유로에 근접하기 때문이다.</p>
+
+<p>시간별 action (계통으로부터의 수전) 이 선형계획법과 DQN에서 각각 어떻게 결정되었는지를 아래 그림과 같이 보자.</p>
 
 <p>(그림)</p>
 
-<p>대체로 비슷한 편임, LP 솔루션 기준으로 수전하는 시간대에 DQN 솔루션에서도 수전하고, LP에서 송전하는 시간대에 DQN에서도 송전하고, LP에서 idle인 시간대에 DQN에서도 idle임, LP는 continuous임에도 최대송전/최대수전/idle인 경우도 많다는 점이 특기할 만함. 그래도 송전/수전/idle의 지속시간은 차이가 있고, 이 3개 값이 아닌 다른 값인 경우도 분명히 존재함, 즉 최대량이 아닌 양으로 송전/수전하는 경우가 있음.</p>
+<p>LP와 DQN으로 도출한 두 control들이 생각보다는 비슷하다. ‘대체로’ LP control에서서 수전하는 시간대에 DQN control에서도 수전하고, LP control에서 송전하는 시간대에 DQN control에서도 송전하며, LP control에서 idle인 시간대에 DQN control에서도 idle이다.</p>
+
+<p>특히 LP control은 [-1.1,1.1] 범위 내의 실수로 주어지는 ‘continuous’ control임에도 불구하고, DQN의 action들에 대응하는 최대치 송전/최대치 수전/ idle인 경우가 많다는 점이 특기할 만하다. 이 덕분에, 3-action DQN으로 우수한 economic control을 얻을 수 있는 것으로 보인다.</p>
 
 <p><br />
-그렇다면 discrete action으로 단순화하지 않고, -1.1에서 +1.1 사이의 실수로 action을 도출하는 continuous control을 위한 심층강화학습 기법을 쓰면, 이런 최대량이 아닌 송전/수전까지 반영한 controller를 훈련함으로써 validation case에 대해 더 낮은 비용을 달성하는 것도 가능할 것으로 기대된다.</p>
+그렇지만, LP control에서와 DQN control 간에 최대치 송전/ 최대치 수전/ idle 지속시간의 차이가 있고, LP control에서 이 3개 값이 아닌 다른 값인 경우도 (즉 최대치가 아닌 양으로 송전/수전하는 경우도) 분명히 많이 존재한다.</p>
 
-<p>다음 포스팅에서는 continuous control을 위한 심층강화학습 중 가장 기본적이면서 중요한 방법인 Deep Deterministic Policy Gradient (DDPG) 를 적용하는 방법 및 결과를 설명한다.</p>
+<p>그렇다면 [-1.1,1.1] 범위 내의 실수로 action을 도출하는, continuous control 심층강화학습 기법을 쓰면 어떨까? 최대치가 아닌 송전/ 수전의 가능성까지 반영한 controller를 훈련함으로써, validation case에 대해 더 낮은 누적비용을 달성하는 control 도출이 가능할까?.</p>
+
+<p>다음 포스팅에서는, continuous control을 위한 심층강화학습 중 가장 기본적이면서 중요한 방법인 Deep Deterministic Policy Gradient (DDPG) 를 적용하는 방법 및 결과를 설명한다.</p>
 
 <div class="notice--info">
 
@@ -658,7 +652,7 @@
 
 1) <a href="/reinforceone.html">문제의식 및 케이스 소개</a><br />
 2) <a href="/reinforcetwo.html">Q-learning 개념</a><br />
-3) <b>Deep Q-learning을 통한 discrete control 도출</b><br />
+3) <b>Deep Q-Network를 통한 discrete control 도출</b><br />
 4) <a href="/reinforcefour.html">DDPG를 통한 continuous control 도출</a><br />
 5) <a href="/reinforcefive.html">TD3, SAC를 통한 continuous control 도출</a>
 
@@ -717,7 +711,7 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5+%EA%B8%B0%EB%B0%98+%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EA%B7%B8%EB%A6%AC%EB%93%9C+%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81+-+3%29+Deep+Q-learning%EC%9D%84+%ED%86%B5%ED%95%9C+discrete+control+%EB%8F%84%EC%B6%9C%20http%3A%2F%2Flocalhost%3A4000%2Freinforcethree.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5+%EA%B8%B0%EB%B0%98+%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EA%B7%B8%EB%A6%AC%EB%93%9C+%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81+-+3%29+Deep+Q-Network%EB%A5%BC+%ED%86%B5%ED%95%9C+discrete+control+%EB%8F%84%EC%B6%9C%20http%3A%2F%2Flocalhost%3A4000%2Freinforcethree.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Freinforcethree.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -876,7 +870,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 다운로드 웹페이지 찾아서 윈도우에서 설치
+    <p class="archive__item-excerpt" itemprop="description">이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.
 </p>
   </article>
 </div>
@@ -913,7 +907,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
+    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터가 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터다.
 </p>
   </article>
 </div>

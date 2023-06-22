@@ -11,7 +11,7 @@
   <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면? | 에너지 데이터 연구소</title>
-<meta name="description" content="Dense NN 지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀로 구성하는 과정을 설명했다. 또한, 간단한 선형회귀로도 나름 괜찮은 예측 성능의 모델을 얻을 수 있음을 보였다.">
+<meta name="description" content="지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀 (Weighted Least squares + 잔차에 대한 ARMA) 로 구성하는 과정을 설명했다. 또한, 전통적인 선형회귀로도 adjusted $R^2$ 0.95 이상의 우수한 모델을 얻을 수 있음을 보였다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://localhost:4000/predictiontwo.html">
 
 
-  <meta property="og:description" content="Dense NN 지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀로 구성하는 과정을 설명했다. 또한, 간단한 선형회귀로도 나름 괜찮은 예측 성능의 모델을 얻을 수 있음을 보였다.">
+  <meta property="og:description" content="지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀 (Weighted Least squares + 잔차에 대한 ARMA) 로 구성하는 과정을 설명했다. 또한, 전통적인 선형회귀로도 adjusted $R^2$ 0.95 이상의 우수한 모델을 얻을 수 있음을 보였다.">
 
 
 
@@ -329,7 +329,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?">
-    <meta itemprop="description" content="Dense NN지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀로 구성하는 과정을 설명했다. 또한, 간단한 선형회귀로도 나름 괜찮은 예측 성능의 모델을 얻을 수 있음을 보였다.">
+    <meta itemprop="description" content="지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀 (Weighted Least squares + 잔차에 대한 ARMA) 로 구성하는 과정을 설명했다. 또한, 전통적인 선형회귀로도 adjusted $R^2$ 0.95 이상의 우수한 모델을 얻을 수 있음을 보였다.">
     <meta itemprop="datePublished" content="2023-04-06T00:00:00+09:00">
     
 
@@ -371,20 +371,24 @@
             </nav>
           </aside>
         
-        <h2 id="dense-nn">Dense NN</h2>
-<p>지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀로 구성하는 과정을 설명했다. 또한, 간단한 선형회귀로도 나름 괜찮은 예측 성능의 모델을 얻을 수 있음을 보였다.</p>
+        <p>지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀 (Weighted Least squares + 잔차에 대한 ARMA) 로 구성하는 과정을 설명했다. 또한, 전통적인 선형회귀로도 adjusted $R^2$ 0.95 이상의 우수한 모델을 얻을 수 있음을 보였다.</p>
 
 <p>이번 포스팅에서는, 딥러닝을 써서 모델을 만들어 본다.</p>
 
-<p><br />
-전기부하 데이터는 시계열 데이터이므로 Recurrent Neural Network (RNN) 을 쓸 수 있으나, 먼저 단순한 Dense Neural Network (DNN) 을 사용해 보자. 
-이 경우 지난 포스팅의 선형회귀와 제대로 비교하기 위해서는, 선형회귀에서처럼 유형별 sub모델 4개를 만들고 predictor들도 이차항과 교차항을 제외하면 선형회귀에서와 똑같이 두어야 한다 (이차항과 교차항은 빼도 된다, NN이 제대로 적합된다면 기온/조도와 전기부하 간의 적절한 nonlinear function을 찾아줄 것이므로).</p>
+<p><br /></p>
+
+<h2 id="dense-nn">Dense NN</h2>
+
+<p>전기부하 데이터는 시계열 데이터이므로 Recurrent Neural Network (RNN) 을 쓸 수 있으나, 먼저 단순한 Dense Neural Network (DNN) 을 사용해 보자.</p>
+
+<p>이 경우 지난 포스팅의 선형회귀와 제대로 비교하기 위해서는, 선형회귀에서처럼 유형별 sub모델 4개를 만들고 predictor들도 이차항과 교차항을 제외하면 선형회귀에서와 똑같이 두어야 한다 (이차항과 교차항은 빼도 된다, NN이 제대로 적합된다면 기온/조도와 전기부하 간의 적절한 nonlinear function을 찾아줄 것이므로).</p>
 
 <p>여기서는 DNN은 2개의 Dense layer로 이루어져 있고 첫 layer의 node는 20개, 두 번째 layer의 node는 10개로 둔다. 훈련 epoch 수는 1000이고, optimizer는 특별한 이슈가 없으므로 가장 일반적인 Adam을 쓴다.</p>
 
 <p>구체적인 코드는 아래와 같다 (전기부하 데이터를 최대값이 1 이하가 되게 scaling하였음에 주의한다. Scaling하지 않으면 적합 결과가 상수함수가 되어 전혀 추정을 하지 못한다).</p>
 
 <p><br /></p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
 </span>
 <span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
@@ -549,6 +553,7 @@
 <p>(그림: actual &amp; 선형회귀 &amp; DNN)</p>
 
 <p><br /></p>
+
 <h2 id="recurrent-nn">Recurrent NN</h2>
 <p>그럼, RNN을 쓰면 어떨까?</p>
 
@@ -559,6 +564,7 @@
 <p>코드는 아래와 같다.</p>
 
 <p><br /></p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
 </span>
 <span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
@@ -622,7 +628,6 @@
 <span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">((</span><span class="n">data_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_fit</span><span class="p">))</span>
-
 </code></pre></div></div>
 
 <p>계산에 걸리는 시간은 수십 분으로, 당연히 DNN보다도 훨씬 길다. 그렇다면 적합 결과는?</p>
@@ -636,10 +641,17 @@
 <p>혹시 LSTM이나 GRU 같은 ‘진보된’ 방법들을 쓰면 제대로 될까? 이 ‘진보된’ 방법들도 계산 시간은 훨씬 더 많이 요구하면서, 전기부하 데이터와 predictor들 간 관계를 제대로 학습하지 못한다. (계산해보고 $R^2$ 적기)</p>
 
 <p><br /></p>
-<h2 id="나가며">나가며</h2>
-<p>딥러닝이 음성인식과 자연어 처리에서 큰 진보를 이뤄내서 그런지, 이런 시계열 데이터 예측은 RNN으로 하면 다 해결될 거라 생각하는 경우가 많다. 그러나 간단한 선형회귀 모델도 잘 구성하면 NN보다 좋은 경우도 많고, 특히 RNN은 매우 복잡한 패턴이 stationary한 분포를 갖고 반복적으로 나타날 때 의미가 있지 (같은 나라/ 문법/ 분야 하의 문장들 등), 그렇지 않으면 계산 비용만 크게 소비하고 별 효과가 없다는 것은 계산과학 필드에서는 상식이다. 이러한 상식은 에너지 부하 데이터에 대해서도 마찬가지로 적용됨을 확인해 볼 수 있었다.</p>
 
-<p>당장 이번 사례에서 선형회귀와 DNN에 대해 sub모델 4개를 구성한 것을 생각해 보면, 1년간의 시간별 부하 데이터는 non-stationary data이다. 이를 고려하지 않고 non-stationary data에 대해 무작정 단일한 RNN 모델을 쓰면, 결과가 이상하게 나올 수밖에 없다. 이를 고려해 sub모델 4개로 나누는 `데이터 전처리’를 한 덕분에, 간단한 선형회귀 모델로 RNN보다 더 만족스러운 결과를 얻을 수 있었다.</p>
+<h2 id="나가며">나가며</h2>
+<p>딥러닝이 음성인식과 자연어 처리에서 큰 진보를 이뤄내서 그런지, 이런 시계열 데이터 예측은 RNN으로 하면 다 해결될 거라 생각하는 경우가 많다.</p>
+
+<p>그러나 간단한 선형회귀 모델도 잘 구성하면 NN보다 좋은 경우도 많고, 특히 RNN은 매우 복잡한 패턴이 stationary한 분포를 갖고 반복적으로 나타날 때 의미가 있지 (같은 나라/ 문법/ 분야 하의 문장들 등), 그렇지 않으면 계산 비용만 크게 소비하고 별 효과가 없다는 것은 계산과학 필드에서는 상식이다. 이러한 상식은 에너지 부하 데이터에 대해서도 마찬가지로 적용됨을 확인해 볼 수 있었다.</p>
+
+<p>당장 이번 사례에서 선형회귀와 DNN에 대해 sub모델 4개를 구성한 것을 생각해 보면, 1년간의 시간별 부하 데이터는 non-stationary data이다. 이를 고려하지 않고 non-stationary data에 대해 무작정 단일한 RNN 모델을 쓰면, 결과가 이상하게 나올 수밖에 없다 (일유형 dummy변수를 추가하기는 했지만, 그것으로는 부족했다).</p>
+
+<p>데이터의 non-stationarity를 고려해 sub모델 4개로 나누는 ‘데이터 전처리’와 오차의 자기상관성을 추가로 설명하는 과정을 거친 덕분에, 그리고 각 sub모델 별 구간 내의 non-linearity가 심하지 않았기에, 간단한 선형회귀 모델로 딥러닝보다 더 나은 결과를 빠르게 얻을 수 있었다.</p>
+
+<p>이렇듯 계산 시간도 빠르면서 성능도 나은 경우 ‘computational efficiency’가 좋다고 한다. 내가 가진 데이터에 대해 더 잘 알수록, 그리고 가능한 기법들 각각의 장단점에 대해 더 잘 알수록, ‘conputationally efficient한’ 방법을 사용할 수 있을 가능성이 높다.</p>
 
 <p><a href="https://pdsi.pabii.com/data-scientists-future-2/">(RNN과 전통적인 시계열 모델에 대해 참고할 만한 글)</a></p>
 
@@ -884,7 +896,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 다운로드 웹페이지 찾아서 윈도우에서 설치
+    <p class="archive__item-excerpt" itemprop="description">이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.
 </p>
   </article>
 </div>
@@ -921,7 +933,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
+    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터가 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터다.
 </p>
   </article>
 </div>

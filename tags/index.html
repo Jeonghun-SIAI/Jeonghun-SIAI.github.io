@@ -860,7 +860,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 다운로드 웹페이지 찾아서 윈도우에서 설치
+    <p class="archive__item-excerpt" itemprop="description">이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.
 </p>
   </article>
 </div>
@@ -897,7 +897,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
+    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터가 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터다.
 </p>
   </article>
 </div>
@@ -934,7 +934,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learnin...</p>
+    <p class="archive__item-excerpt" itemprop="description">Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 ...</p>
   </article>
 </div>
 
@@ -970,7 +970,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 마이크로그리드에 discrete action 기반의 심층강화학습을 적용해 과거 시점의데이터 기반으로 control을 결정하는 방법을 알아보았다. 그러나 실제로는 continuous action이므로, continuous action을 다루는 심층강화학습 기법을 적...</p>
+    <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에 discrete action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic c...</p>
   </article>
 </div>
 
@@ -984,7 +984,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/reinforcethree.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출
+        <a href="/reinforcethree.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출
 </a>
       
     </h2>
@@ -1006,7 +1006,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서도 언급했듯, 이 문제에서 state는 직전 24시간 동안의 태양광 발전량과 부하 및 직전 1시간의 배터리 내 에너지양이고, action은 1.1kW 수전/ 1.1kW 송전/ idle 3가지이다. (action 인덱스는 0,1,2라 하자). 이 때 심층신경망은 sta...</p>
+    <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0,1,...</p>
   </article>
 </div>
 
@@ -1042,7 +1042,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 높아질수록, 당장 몇 시간 뒤의 발전량이 얼마일지도 모르고 그 불확실성도 큰 상황에서 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 `잘’ 결정하는 것이 어려워진다. 그렇지만 이를 ‘잘’ 결정해야, 장기적인 에너...</p>
+    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할...</p>
   </article>
 </div>
 
@@ -1167,7 +1167,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/scrapper.html" rel="permalink">Web scrapper example
+        <a href="/scrapper.html" rel="permalink">Python 크롤링 코드 예시 (PubMed 사이트에서 논문 정보 크롤링)
 </a>
       
     </h2>
@@ -1189,9 +1189,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">소개
-아래는 PubMed 사이트에서 원하는 논문 정보들을 수집하는 Web scrapping 코드입니다. 친구한테 만들어줬었습니다.
-</p>
+    <p class="archive__item-excerpt" itemprop="description">의사인 절친이 PubMed 사이트에서 수동으로 논문을 수집하고 있길래, 총합 두 시간 정도를 써서 Python으로 아래의 web scrapper를 만들어 준 적이 있다. 아래의 web scrapper로 검색어에 대응하는 논문들의 URL/ 출판일/ 저자/ 소속/ 키워드/ 저널명 수집...</p>
   </article>
 </div>
 
@@ -1305,7 +1303,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 높아질수록, 당장 몇 시간 뒤의 발전량이 얼마일지도 모르고 그 불확실성도 큰 상황에서 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 `잘’ 결정하는 것이 어려워진다. 그렇지만 이를 ‘잘’ 결정해야, 장기적인 에너...</p>
+    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할...</p>
   </article>
 </div>
 
@@ -1452,7 +1450,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">우리의 일상 생활에서 전기와 냉/난방 `에너지’는 떼어 놓을 수 없는 요소가 되었다. 또한 산업 현장에서도 전기와 고온의 열 에너지는 제품을 만드는 데 필요하다. 버스/ 지하철/ 비행기 등 운송 수단도 연료 혹은 전기 에너지를 주입해야 움직인다. 이렇듯 에너지는 다양한 방식으로 우...</p>
+    <p class="archive__item-excerpt" itemprop="description">우리의 일상 생활에서 전기와 냉/난방 ‘에너지’는 떼어 놓을 수 없는 요소가 되었다. 또한 산업 현장에서도 전기와 고온의 열 ‘에너지’는 제품 생산에 필요하다. 버스/ 지하철/ 비행기 등 운송 수단도 연료 혹은 전기 ‘에너지’를 주입해야 움직인다. 이렇듯 에너지는 다양한 방식으로 ...</p>
   </article>
 </div>
 
@@ -1525,9 +1523,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Dense NN
-지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀로 구성하는 과정을 설명했다. 또한, 간단한 선형회귀로도 나름 괜찮은 예측 성능의 모델을 얻을 수 있음을 보였다.
-</p>
+    <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀 (Weighted Least squares + 잔차에 대한 ARMA) 로 구성하는 과정을 설명했다. 또한, 전통적인 선형회귀로도 adjusted $R^2$ 0.95 이상의 우수한 모델을 얻을 수 있음을 보...</p>
   </article>
 </div>
 
@@ -1563,7 +1559,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">건물의 시간별 전기부하
+    <p class="archive__item-excerpt" itemprop="description">시계열 데이터에 대해, 경우에 따라서는 전통적인 선형회귀가 딥러닝보다 더 좋은 예측력을 보인다는 놀라운(?) 사실을 아는가?
 </p>
   </article>
 </div>
@@ -1646,7 +1642,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 높아질수록, 당장 몇 시간 뒤의 발전량이 얼마일지도 모르고 그 불확실성도 큰 상황에서 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 `잘’ 결정하는 것이 어려워진다. 그렇지만 이를 ‘잘’ 결정해야, 장기적인 에너...</p>
+    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할...</p>
   </article>
 </div>
 
@@ -1793,7 +1789,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">우리의 일상 생활에서 전기와 냉/난방 `에너지’는 떼어 놓을 수 없는 요소가 되었다. 또한 산업 현장에서도 전기와 고온의 열 에너지는 제품을 만드는 데 필요하다. 버스/ 지하철/ 비행기 등 운송 수단도 연료 혹은 전기 에너지를 주입해야 움직인다. 이렇듯 에너지는 다양한 방식으로 우...</p>
+    <p class="archive__item-excerpt" itemprop="description">우리의 일상 생활에서 전기와 냉/난방 ‘에너지’는 떼어 놓을 수 없는 요소가 되었다. 또한 산업 현장에서도 전기와 고온의 열 ‘에너지’는 제품 생산에 필요하다. 버스/ 지하철/ 비행기 등 운송 수단도 연료 혹은 전기 ‘에너지’를 주입해야 움직인다. 이렇듯 에너지는 다양한 방식으로 ...</p>
   </article>
 </div>
 
@@ -2076,9 +2072,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Dense NN
-지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀로 구성하는 과정을 설명했다. 또한, 간단한 선형회귀로도 나름 괜찮은 예측 성능의 모델을 얻을 수 있음을 보였다.
-</p>
+    <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀 (Weighted Least squares + 잔차에 대한 ARMA) 로 구성하는 과정을 설명했다. 또한, 전통적인 선형회귀로도 adjusted $R^2$ 0.95 이상의 우수한 모델을 얻을 수 있음을 보...</p>
   </article>
 </div>
 
@@ -2114,7 +2108,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">건물의 시간별 전기부하
+    <p class="archive__item-excerpt" itemprop="description">시계열 데이터에 대해, 경우에 따라서는 전통적인 선형회귀가 딥러닝보다 더 좋은 예측력을 보인다는 놀라운(?) 사실을 아는가?
 </p>
   </article>
 </div>
@@ -2165,7 +2159,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learnin...</p>
+    <p class="archive__item-excerpt" itemprop="description">Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 ...</p>
   </article>
 </div>
 
@@ -2201,7 +2195,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 마이크로그리드에 discrete action 기반의 심층강화학습을 적용해 과거 시점의데이터 기반으로 control을 결정하는 방법을 알아보았다. 그러나 실제로는 continuous action이므로, continuous action을 다루는 심층강화학습 기법을 적...</p>
+    <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에 discrete action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic c...</p>
   </article>
 </div>
 
@@ -2215,7 +2209,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/reinforcethree.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출
+        <a href="/reinforcethree.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출
 </a>
       
     </h2>
@@ -2237,7 +2231,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서도 언급했듯, 이 문제에서 state는 직전 24시간 동안의 태양광 발전량과 부하 및 직전 1시간의 배터리 내 에너지양이고, action은 1.1kW 수전/ 1.1kW 송전/ idle 3가지이다. (action 인덱스는 0,1,2라 하자). 이 때 심층신경망은 sta...</p>
+    <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0,1,...</p>
   </article>
 </div>
 
@@ -2273,7 +2267,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 높아질수록, 당장 몇 시간 뒤의 발전량이 얼마일지도 모르고 그 불확실성도 큰 상황에서 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 `잘’ 결정하는 것이 어려워진다. 그렇지만 이를 ‘잘’ 결정해야, 장기적인 에너...</p>
+    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할...</p>
   </article>
 </div>
 
@@ -2436,7 +2430,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
+    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터가 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터다.
 </p>
   </article>
 </div>
@@ -2563,7 +2557,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 높아질수록, 당장 몇 시간 뒤의 발전량이 얼마일지도 모르고 그 불확실성도 큰 상황에서 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 `잘’ 결정하는 것이 어려워진다. 그렇지만 이를 ‘잘’ 결정해야, 장기적인 에너...</p>
+    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할...</p>
   </article>
 </div>
 
@@ -2710,7 +2704,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">우리의 일상 생활에서 전기와 냉/난방 `에너지’는 떼어 놓을 수 없는 요소가 되었다. 또한 산업 현장에서도 전기와 고온의 열 에너지는 제품을 만드는 데 필요하다. 버스/ 지하철/ 비행기 등 운송 수단도 연료 혹은 전기 에너지를 주입해야 움직인다. 이렇듯 에너지는 다양한 방식으로 우...</p>
+    <p class="archive__item-excerpt" itemprop="description">우리의 일상 생활에서 전기와 냉/난방 ‘에너지’는 떼어 놓을 수 없는 요소가 되었다. 또한 산업 현장에서도 전기와 고온의 열 ‘에너지’는 제품 생산에 필요하다. 버스/ 지하철/ 비행기 등 운송 수단도 연료 혹은 전기 ‘에너지’를 주입해야 움직인다. 이렇듯 에너지는 다양한 방식으로 ...</p>
   </article>
 </div>
 
@@ -2756,7 +2750,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 continuous control을 위한 기본적인 심층강화학습 방법, Deep Deterministic Policy Gradient (DDPG) 를 적용해 보았다. 놀랍게도(?) 이 시리즈에서 다루는 마이크로그리드 문제에서는, DDPG가 Deep Q-learnin...</p>
+    <p class="archive__item-excerpt" itemprop="description">Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 ...</p>
   </article>
 </div>
 
@@ -2792,7 +2786,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 마이크로그리드에 discrete action 기반의 심층강화학습을 적용해 과거 시점의데이터 기반으로 control을 결정하는 방법을 알아보았다. 그러나 실제로는 continuous action이므로, continuous action을 다루는 심층강화학습 기법을 적...</p>
+    <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에 discrete action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic c...</p>
   </article>
 </div>
 
@@ -2806,7 +2800,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/reinforcethree.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-learning을 통한 discrete control 도출
+        <a href="/reinforcethree.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출
 </a>
       
     </h2>
@@ -2828,7 +2822,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서도 언급했듯, 이 문제에서 state는 직전 24시간 동안의 태양광 발전량과 부하 및 직전 1시간의 배터리 내 에너지양이고, action은 1.1kW 수전/ 1.1kW 송전/ idle 3가지이다. (action 인덱스는 0,1,2라 하자). 이 때 심층신경망은 sta...</p>
+    <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0,1,...</p>
   </article>
 </div>
 
@@ -2864,7 +2858,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내용은 Sutton의...</p>
+    <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내...</p>
   </article>
 </div>
 
@@ -2900,7 +2894,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 높아질수록, 당장 몇 시간 뒤의 발전량이 얼마일지도 모르고 그 불확실성도 큰 상황에서 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 `잘’ 결정하는 것이 어려워진다. 그렇지만 이를 ‘잘’ 결정해야, 장기적인 에너...</p>
+    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할...</p>
   </article>
 </div>
 
@@ -2986,7 +2980,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 다운로드 웹페이지 찾아서 윈도우에서 설치
+    <p class="archive__item-excerpt" itemprop="description">이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.
 </p>
   </article>
 </div>
@@ -3023,9 +3017,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Dense NN
-지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀로 구성하는 과정을 설명했다. 또한, 간단한 선형회귀로도 나름 괜찮은 예측 성능의 모델을 얻을 수 있음을 보였다.
-</p>
+    <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 선형회귀 (Weighted Least squares + 잔차에 대한 ARMA) 로 구성하는 과정을 설명했다. 또한, 전통적인 선형회귀로도 adjusted $R^2$ 0.95 이상의 우수한 모델을 얻을 수 있음을 보...</p>
   </article>
 </div>
 
@@ -3061,7 +3053,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">건물의 시간별 전기부하
+    <p class="archive__item-excerpt" itemprop="description">시계열 데이터에 대해, 경우에 따라서는 전통적인 선형회귀가 딥러닝보다 더 좋은 예측력을 보인다는 놀라운(?) 사실을 아는가?
 </p>
   </article>
 </div>
@@ -3154,7 +3146,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
+    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터가 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터다.
 </p>
   </article>
 </div>
@@ -3224,7 +3216,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/scrapper.html" rel="permalink">Web scrapper example
+        <a href="/scrapper.html" rel="permalink">Python 크롤링 코드 예시 (PubMed 사이트에서 논문 정보 크롤링)
 </a>
       
     </h2>
@@ -3246,9 +3238,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">소개
-아래는 PubMed 사이트에서 원하는 논문 정보들을 수집하는 Web scrapping 코드입니다. 친구한테 만들어줬었습니다.
-</p>
+    <p class="archive__item-excerpt" itemprop="description">의사인 절친이 PubMed 사이트에서 수동으로 논문을 수집하고 있길래, 총합 두 시간 정도를 써서 Python으로 아래의 web scrapper를 만들어 준 적이 있다. 아래의 web scrapper로 검색어에 대응하는 논문들의 URL/ 출판일/ 저자/ 소속/ 키워드/ 저널명 수집...</p>
   </article>
 </div>
 

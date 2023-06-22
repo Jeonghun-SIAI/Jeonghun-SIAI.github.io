@@ -10,8 +10,8 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Web scrapper example | 에너지 데이터 연구소</title>
-<meta name="description" content="소개 아래는 PubMed 사이트에서 원하는 논문 정보들을 수집하는 Web scrapping 코드입니다. 친구한테 만들어줬었습니다.">
+<!-- begin _includes/seo.html --><title>Python 크롤링 코드 예시 (PubMed 사이트에서 논문 정보 크롤링) | 에너지 데이터 연구소</title>
+<meta name="description" content="의사인 절친이 PubMed 사이트에서 수동으로 논문을 수집하고 있길래, 총합 두 시간 정도를 써서 Python으로 아래의 web scrapper를 만들어 준 적이 있다. 아래의 web scrapper로 검색어에 대응하는 논문들의 URL/ 출판일/ 저자/ 소속/ 키워드/ 저널명 수집이 가능하다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -23,11 +23,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지 데이터 연구소">
-<meta property="og:title" content="Web scrapper example">
+<meta property="og:title" content="Python 크롤링 코드 예시 (PubMed 사이트에서 논문 정보 크롤링)">
 <meta property="og:url" content="http://localhost:4000/scrapper.html">
 
 
-  <meta property="og:description" content="소개 아래는 PubMed 사이트에서 원하는 논문 정보들을 수집하는 Web scrapping 코드입니다. 친구한테 만들어줬었습니다.">
+  <meta property="og:description" content="의사인 절친이 PubMed 사이트에서 수동으로 논문을 수집하고 있길래, 총합 두 시간 정도를 써서 Python으로 아래의 web scrapper를 만들어 준 적이 있다. 아래의 web scrapper로 검색어에 대응하는 논문들의 URL/ 출판일/ 저자/ 소속/ 키워드/ 저널명 수집이 가능하다.">
 
 
 
@@ -177,7 +177,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Web scrapper example</li>
+        <li class="current">Python 크롤링 코드 예시 (PubMed 사이트에서 논문 정보 크롤링)</li>
       
     
   </ol>
@@ -305,8 +305,8 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Web scrapper example">
-    <meta itemprop="description" content="소개아래는 PubMed 사이트에서 원하는 논문 정보들을 수집하는 Web scrapping 코드입니다. 친구한테 만들어줬었습니다.">
+    <meta itemprop="headline" content="Python 크롤링 코드 예시 (PubMed 사이트에서 논문 정보 크롤링)">
+    <meta itemprop="description" content="의사인 절친이 PubMed 사이트에서 수동으로 논문을 수집하고 있길래, 총합 두 시간 정도를 써서 Python으로 아래의 web scrapper를 만들어 준 적이 있다. 아래의 web scrapper로 검색어에 대응하는 논문들의 URL/ 출판일/ 저자/ 소속/ 키워드/ 저널명 수집이 가능하다.">
     <meta itemprop="datePublished" content="2023-04-04T00:00:00+09:00">
     
 
@@ -314,7 +314,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/scrapper.html" class="u-url" itemprop="url">Web scrapper example
+            <a href="http://localhost:4000/scrapper.html" class="u-url" itemprop="url">Python 크롤링 코드 예시 (PubMed 사이트에서 논문 정보 크롤링)
 </a>
           </h1>
           
@@ -343,15 +343,18 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#소개">소개</a></li><li><a href="#코드">코드</a></li></ul>
+              <ul class="toc__menu"><li><a href="#코드">코드</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <h2 id="소개">소개</h2>
-<p>아래는 PubMed 사이트에서 원하는 논문 정보들을 수집하는 Web scrapping 코드입니다. 친구한테 만들어줬었습니다.</p>
+        <p>의사인 절친이 PubMed 사이트에서 수동으로 논문을 수집하고 있길래, 총합 두 시간 정도를 써서 Python으로 아래의 web scrapper를 만들어 준 적이 있다. 아래의 web scrapper로 검색어에 대응하는 논문들의 URL/ 출판일/ 저자/ 소속/ 키워드/ 저널명 수집이 가능하다.</p>
 
+<p>특히 검색 option을 포함한 상세 검색도 가능하다. 또한 $\texttt{urlopen}$ 라이브러리를 사용했기에, $\texttt{requests}$ 라이브러리를 통한 크롤링이 막혀 있는 컴퓨터들에서도 사용이 가능하다.</p>
+
+<p><br /></p>
 <h2 id="코드">코드</h2>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">from</span> <span class="n">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span>
 <span class="kn">from</span> <span class="n">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
@@ -369,8 +372,6 @@ Venoms[mesh] AND pathology[affiliation]
 Turtle[mesh] AND pathology[affiliation]
 """</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
 <span class="p">]</span> 
-
-
 
 <span class="c1">### Below is the code for scrapping
 </span>
@@ -456,7 +457,6 @@ Turtle[mesh] AND pathology[affiliation]
 </span>    <span class="nf">print</span><span class="p">(</span><span class="s">"Excel file exported."</span><span class="p">)</span>
 </code></pre></div></div>
 
-
         
       </section>
 
@@ -508,7 +508,7 @@ Turtle[mesh] AND pathology[affiliation]
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=Web+scrapper+example%20http%3A%2F%2Flocalhost%3A4000%2Fscrapper.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=Python+%ED%81%AC%EB%A1%A4%EB%A7%81+%EC%BD%94%EB%93%9C+%EC%98%88%EC%8B%9C+%28PubMed+%EC%82%AC%EC%9D%B4%ED%8A%B8%EC%97%90%EC%84%9C+%EB%85%BC%EB%AC%B8+%EC%A0%95%EB%B3%B4+%ED%81%AC%EB%A1%A4%EB%A7%81%29%20http%3A%2F%2Flocalhost%3A4000%2Fscrapper.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fscrapper.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -651,7 +651,7 @@ Turtle[mesh] AND pathology[affiliation]
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 다운로드 웹페이지 찾아서 윈도우에서 설치
+    <p class="archive__item-excerpt" itemprop="description">이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.
 </p>
   </article>
 </div>
@@ -688,7 +688,7 @@ Turtle[mesh] AND pathology[affiliation]
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터셋이 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터셋이다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
+    <p class="archive__item-excerpt" itemprop="description">필자에게 있어 각별한 데이터가 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터다.
 </p>
   </article>
 </div>
