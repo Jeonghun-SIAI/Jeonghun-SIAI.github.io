@@ -11,7 +11,7 @@
   <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거 | 에너지 데이터 연구소</title>
-<meta name="description" content="저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.">
+<meta name="description" content="저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://localhost:4000/monthlyenergythree.html">
 
 
-  <meta property="og:description" content="저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.">
+  <meta property="og:description" content="저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.">
 
 
 
@@ -236,8 +236,25 @@
       
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
-        <span class="nav__sub-title">범주1</span>
+        <span class="nav__sub-title">Categories</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
@@ -245,8 +262,6 @@
                     
                 
                     
-                        <li><a href="/code" class="">코드 (1)</a></li>
-                    
                 
                     
                 
@@ -254,19 +269,8 @@
                 
                     
                 
-            </ul>
-            <ul>
-                
                     
-                        <li><a href="/theory" class="">이론 (2)</a></li>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
+                        <li><a href="/energymanagement" class="">EMS (5)</a></li>
                     
                 
             </ul>
@@ -277,23 +281,9 @@
                     
                 
                     
-                
-                    
-                        <li><a href="/energy" class="">에너지 (17)</a></li>
+                        <li><a href="/estimation" class="">Estimation (2)</a></li>
                     
                 
-                    
-                
-            </ul>
-        <span class="nav__sub-title">범주2</span>
-            <ul>
-                
-                    
-                
-                    
-                
-                    
-                        <li><a href="/project" class="">프로젝트 (1)</a></li>
                     
                 
                     
@@ -312,7 +302,58 @@
                     
                 
                     
-                        <li><a href="/etc" class="">기타 (1)</a></li>
+                        <li><a href="/dataset" class="">Dataset (4)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
                     
                 
             </ul>
@@ -329,7 +370,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거">
-    <meta itemprop="description" content="저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.">
+    <meta itemprop="description" content="저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.">
     <meta itemprop="datePublished" content="2023-04-23T00:00:00+09:00">
     
 
@@ -366,15 +407,19 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              
+              <ul class="toc__menu"><li><a href="#에너지-사용량-크기-측면에서의-outlier">에너지 사용량 크기 측면에서의 outlier</a></li><li><a href="#outlier-판별-방법">Outlier 판별 방법</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <p>저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.</p>
+        <p>저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.</p>
 
-<p><br />
-상식적으로, 같은 용도의 건물이라면 크기가 큰 건물일수록 에너지 사용량이 큰 경향이 있을 것이다. 이를테면 서울 내 업무용 건물들의 1월 전기 사용량을 연면적 (모든 층의 바닥면적의 합, 단 주차장이나 공용시설 등은 제외) 에 대해 scatter plot하면 아래 그림과 같다.</p>
+<p>이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.</p>
+
+<p><br /></p>
+
+<h2 id="에너지-사용량-크기-측면에서의-outlier">에너지 사용량 크기 측면에서의 outlier</h2>
+<p>상식적으로, 같은 용도의 건물이라면 크기가 큰 건물일수록 에너지 사용량이 큰 경향이 있을 것이다. 이를테면 서울 내 업무용 건물들의 1월 전기 사용량을 연면적 (모든 층의 바닥면적의 합, 단 주차장이나 공용시설 등은 제외) 에 대해 scatter plot하면 아래 그림과 같다.</p>
 
 <p><img src="/assets/images/monthlyenergythree/outliers.png" alt="outliers" class="align-center" width="70%" />
 <em>x축이 연면적, y축이 1월 전기 사용량. 위쪽에 outlier들이 보임 (붉은 점들).</em></p>
@@ -384,8 +429,12 @@
 <p><br />
 그런데, 위 그림의 붉은 점들은 딱 봐도 ‘크기가 이상한’ data point, 소위 말해서 ‘outlier’이다. 건물 연면적을 고려했을 때 전기 사용량의 값이 지나치게 크다.</p>
 
-<p>이는 측정/기재 오류일 수도 있고, 어쩌면 정말로 저만큼 많은 전기를 쓰는 것일 수도 있다. 그러나 만에 하나 정말로 저렇게 많은 전기를 사용한다고 하더라도, 그런 건물은 일반적이지 않으므로 따로 떼어서 별도의 모델링을 하는 것이 맞다. 즉, ‘일반적인’ 건물들에 대한 통계적 연구 수행을 위해서는 위 outlier들은 제거해야 한다.</p>
+<p>이는 측정/기재 오류일 수도 있고, 어쩌면 정말로 저만큼 많은 전기를 쓰는 것일 수도 있다. 그러나 만에 하나 정말로 저렇게 많은 전기를 사용한다고 하더라도, 그런 건물은 일반적이지 않으므로 따로 떼어서 별도의 모델링을 하는 것이 맞다.</p>
 
+<p>즉, ‘일반적인’ 건물들에 대한 통계적 연구 수행을 위해서는 위 outlier들은 제거해야 한다.</p>
+
+<p><br /></p>
+<h2 id="outlier-판별-방법">Outlier 판별 방법</h2>
 <p>그럼 outlier는 어떻게 판별하나? 데이터의 size가 그렇게 크지 않고 설명변수가 하나라면, 그냥 그래프를 그려서 눈으로 보고 제거할 수도 있을 것이다. 그러나 데이터 size도 커지고 설명변수도 둘 이상이 되면, 눈으로 보기 매우 힘들다 (이를 테면 반응변수를 에너지 사용량으로 하는 회귀모델에 대해, 설명변수가 건물 연면적 뿐 아니라 건물 층수, 사용연수, 재질 등 여러 가지가 될 수 있다.</p>
 
 <p>그러므로 시각화를 필요로 하지 않으면서 outlier를 판별할 수 있는, 이전 포스팅에서처럼 지표(metric)에 기반해서 판별하는 방법이 필요하다.</p>
@@ -468,7 +517,7 @@ $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Coo
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#energy" class="page__taxonomy-item p-category" rel="tag">Energy</a>
+      <a href="/categories/#dataset" class="page__taxonomy-item p-category" rel="tag">dataset</a>
     
     </span>
   </p>
@@ -494,7 +543,7 @@ $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Coo
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>Energy</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <h4 class="page__meta-title"><span>dataset</span> <span>카테고리 내 다른 글 보러가기</span></h4>
         
 
 

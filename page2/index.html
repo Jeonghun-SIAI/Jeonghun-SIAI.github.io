@@ -283,8 +283,25 @@
       
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
-        <span class="nav__sub-title">범주1</span>
+        <span class="nav__sub-title">Categories</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
@@ -292,8 +309,6 @@
                     
                 
                     
-                        <li><a href="/code" class="">코드 (1)</a></li>
-                    
                 
                     
                 
@@ -301,19 +316,8 @@
                 
                     
                 
-            </ul>
-            <ul>
-                
                     
-                        <li><a href="/theory" class="">이론 (2)</a></li>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
+                        <li><a href="/energymanagement" class="">EMS (5)</a></li>
                     
                 
             </ul>
@@ -324,23 +328,9 @@
                     
                 
                     
-                
-                    
-                        <li><a href="/energy" class="">에너지 (17)</a></li>
+                        <li><a href="/estimation" class="">Estimation (2)</a></li>
                     
                 
-                    
-                
-            </ul>
-        <span class="nav__sub-title">범주2</span>
-            <ul>
-                
-                    
-                
-                    
-                
-                    
-                        <li><a href="/project" class="">프로젝트 (1)</a></li>
                     
                 
                     
@@ -359,7 +349,58 @@
                     
                 
                     
-                        <li><a href="/etc" class="">기타 (1)</a></li>
+                        <li><a href="/dataset" class="">Dataset (4)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
                     
                 
             </ul>
@@ -419,7 +460,8 @@
           <a class="post-link" href="/reinforcetwo.html">강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념</a>
         </h2>
         <span class="post-meta">Apr 16, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내...</p>
+        <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하에서 control을 얻게 됨을 논했다.
+</p>
         
       </li>
     
@@ -428,7 +470,8 @@
           <a class="post-link" href="/reinforceone.html">강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개</a>
         </h2>
         <span class="post-meta">Apr 15, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할...</p>
+        <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다.
+</p>
         
       </li>
     
@@ -640,7 +683,8 @@ layout: archive
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내...</p>
+    <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하에서 control을 얻게 됨을 논했다.
+</p>
   </article>
 </div>
 
@@ -676,7 +720,8 @@ layout: archive
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할...</p>
+    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다.
+</p>
   </article>
 </div>
 

@@ -236,8 +236,25 @@
       
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
-        <span class="nav__sub-title">범주1</span>
+        <span class="nav__sub-title">Categories</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
@@ -245,8 +262,6 @@
                     
                 
                     
-                        <li><a href="/code" class="">코드 (1)</a></li>
-                    
                 
                     
                 
@@ -254,19 +269,8 @@
                 
                     
                 
-            </ul>
-            <ul>
-                
                     
-                        <li><a href="/theory" class="">이론 (2)</a></li>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
+                        <li><a href="/energymanagement" class="">EMS (5)</a></li>
                     
                 
             </ul>
@@ -277,23 +281,9 @@
                     
                 
                     
-                
-                    
-                        <li><a href="/energy" class="">에너지 (17)</a></li>
+                        <li><a href="/estimation" class="">Estimation (2)</a></li>
                     
                 
-                    
-                
-            </ul>
-        <span class="nav__sub-title">범주2</span>
-            <ul>
-                
-                    
-                
-                    
-                
-                    
-                        <li><a href="/project" class="">프로젝트 (1)</a></li>
                     
                 
                     
@@ -312,7 +302,58 @@
                     
                 
                     
-                        <li><a href="/etc" class="">기타 (1)</a></li>
+                        <li><a href="/dataset" class="">Dataset (4)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
                     
                 
             </ul>
@@ -366,7 +407,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#dense-nn">Dense NN</a></li><li><a href="#recurrent-nn">Recurrent NN</a></li><li><a href="#나가며">나가며</a></li></ul>
+              <ul class="toc__menu"><li><a href="#dense-neural-net">Dense Neural Net</a></li><li><a href="#recurrent-neural-net">Recurrent Neural Net</a></li><li><a href="#나가며">나가며</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
@@ -377,7 +418,7 @@
 
 <p><br /></p>
 
-<h2 id="dense-nn">Dense NN</h2>
+<h2 id="dense-neural-net">Dense Neural Net</h2>
 
 <p>전기부하 데이터는 시계열 데이터이므로 Recurrent Neural Network (RNN) 을 쓸 수 있으나, 먼저 단순한 Dense Neural Network (DNN) 을 사용해 보자.</p>
 
@@ -550,11 +591,13 @@
 
 <p>검증 set에 대한 결과와 딥러닝 훈련에 드는 계산비용을 생각하면, 딥러닝이 우월하다고 볼 수 없다 (계산 시간만 따져도 2분 이상 vs. 몇 초(WLS만 수행 시)).</p>
 
-<p>(그림: actual &amp; 선형회귀 &amp; DNN)</p>
+<p><img src="/assets/images/predictiontwo/fit_dnn.png" alt="fit_dnn" class="align-center" />
+<img src="/assets/images/predictiontwo/predict_dnn.png" alt="predict_dnn" class="align-center" />
+<em>$K$년도 데이터로 적합한 DNN 모델 기반 전기부하 추정.</em></p>
 
 <p><br /></p>
 
-<h2 id="recurrent-nn">Recurrent NN</h2>
+<h2 id="recurrent-neural-net">Recurrent Neural Net</h2>
 <p>그럼, RNN을 쓰면 어떨까?</p>
 
 <p>RNN의 경우 이전 시간의 전기부하가 predictor로 포함되는 구조이므로, 일 유형별로 sub모델을 4개 만들 수는 없다. 1번째 시간의 data point부터 8,760번째 시간의 point까지 연속적으로 모델에 흘러들어가야 하므로, 하나의 모델로 모든 시간의 전기부하를 예측해야 한다. 그러므로 RNN의 predictor로는 일 유형(평일/휴일) dummy도 추가한다.</p>
@@ -634,11 +677,11 @@
 
 <p>Adjusted $R^2$를 계산해보면 훈련 set에 대한 값은 0.6941, 검증 set에 대한 값은 0.4890으로, 처참한 수준이다. 심지어 훈련 set에 대해서조차 그렇다.</p>
 
-<p>(그림: actual &amp; 선형회귀 &amp; RNN)</p>
+<p><img src="/assets/images/predictiontwo/fit_rnn.png" alt="fit_rnn" class="align-center" />
+<img src="/assets/images/predictiontwo/predict_rnn.png" alt="predict_rnn" class="align-center" />
+<em>$K$년도 데이터로 적합한 RNN 모델 기반 전기부하 추정.</em></p>
 
-<p>훈련 set에 대해서도 예측성능이 형편없는 것을 보면 underfitting이니 layer와 node를 더 추가해야 하는 것이 아니냐 물을 수 있는데, 이미 WLS와 DNN으로 제대로 된 예측이 가능한 문제를 굳이 계산비용을 더 추가해서 다시 RNN으로 해 보고 싶진 않다.</p>
-
-<p>혹시 LSTM이나 GRU 같은 ‘진보된’ 방법들을 쓰면 제대로 될까? 이 ‘진보된’ 방법들도 계산 시간은 훨씬 더 많이 요구하면서, 전기부하 데이터와 predictor들 간 관계를 제대로 학습하지 못한다. (계산해보고 $R^2$ 적기)</p>
+<p>위 그림을 보면, RNN으로 추정한 부하 그래프가 매우 울퉁불퉁하다. 이는 복잡한 모델 사용에 의한 overfitting을 암시한다. (그러므로 RNN에 layer 또는 node를 추가하거나, 더 복잡한 방법인 LSTM/ GRU 등을 시도하는 것은 의미가 없다고 판단된다.)</p>
 
 <p><br /></p>
 
@@ -700,7 +743,7 @@
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#energy" class="page__taxonomy-item p-category" rel="tag">Energy</a>
+      <a href="/categories/#estimation" class="page__taxonomy-item p-category" rel="tag">estimation</a>
     
     </span>
   </p>
@@ -726,39 +769,9 @@
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>Energy</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <h4 class="page__meta-title"><span>estimation</span> <span>카테고리 내 다른 글 보러가기</span></h4>
         
 
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
   
   	
@@ -771,7 +784,7 @@
 
   
     
-      <a href="/mypaperone.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>내 Applied Energy 논문의 수학 설명 - '가짜' curtailment 문제</a>
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
     
     
       <a href="/predictionone.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝 대신 회귀분석으로</a>
@@ -822,7 +835,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.
 </p>
   </article>
 </div>

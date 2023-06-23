@@ -283,8 +283,25 @@
       
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
-        <span class="nav__sub-title">범주1</span>
+        <span class="nav__sub-title">Categories</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
@@ -292,8 +309,6 @@
                     
                 
                     
-                        <li><a href="/code" class="">코드 (1)</a></li>
-                    
                 
                     
                 
@@ -301,19 +316,8 @@
                 
                     
                 
-            </ul>
-            <ul>
-                
                     
-                        <li><a href="/theory" class="">이론 (2)</a></li>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
+                        <li><a href="/energymanagement" class="">EMS (5)</a></li>
                     
                 
             </ul>
@@ -324,23 +328,9 @@
                     
                 
                     
-                
-                    
-                        <li><a href="/energy" class="">에너지 (17)</a></li>
+                        <li><a href="/estimation" class="">Estimation (2)</a></li>
                     
                 
-                    
-                
-            </ul>
-        <span class="nav__sub-title">범주2</span>
-            <ul>
-                
-                    
-                
-                    
-                
-                    
-                        <li><a href="/project" class="">프로젝트 (1)</a></li>
                     
                 
                     
@@ -359,7 +349,58 @@
                     
                 
                     
-                        <li><a href="/etc" class="">기타 (1)</a></li>
+                        <li><a href="/dataset" class="">Dataset (4)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
                     
                 
             </ul>
@@ -401,7 +442,7 @@
           <a class="post-link" href="/linprogthree.html">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 3) 배터리의 충/방전 스케줄 정하기: Python 코드</a>
         </h2>
         <span class="post-meta">Apr 13, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서 봤던 문제에서는 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었다. 이 경우, 선형계획법 (Linear Programming) 을 이용해서 풀 수 있다.
+        <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서 봤던 건물 내 배터리 스케줄링 문제에서는, 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었으며, 두 개의 변수들 간의 곱도 없었다.
 </p>
         
       </li>
@@ -412,6 +453,7 @@
         </h2>
         <span class="post-meta">Apr 12, 2023</span>
         <p class="archive__item-excerpt" itemprop="description">이제 본격적으로, 분산형 에너지시스템 도입의 경제적 안 도출을 위한 수학적 최적화 문제 구성을 알아보기로 한다.
+
 </p>
         
       </li>
@@ -430,8 +472,7 @@
           <a class="post-link" href="/overconfidence.html">로지스틱 회귀에서의 over-confidence에 대한 이해</a>
         </h2>
         <span class="post-meta">Apr 10, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">Over-confidence란
-</p>
+        <p class="archive__item-excerpt" itemprop="description">Logistic regression에서는 각 point 별로 response $y$가 0과 1 중 1일 확률 추정값 $\hat{y}$를 제공한다 (물론 실제 $y$값들은 알려져 있다). 한편, feature space에서 response가 1인 point들과 0인 point들이 완...</p>
         
       </li>
     
@@ -440,7 +481,7 @@
           <a class="post-link" href="/preprocessmocanu.html">데이터 전처리 예시 - 주택의 분 단위 전기부하 자료</a>
         </h2>
         <span class="post-meta">Apr 9, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">데이터 소개
+        <p class="archive__item-excerpt" itemprop="description">스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 ‘스마트그리드 빅데이터 분석의 활용’ 이 있다. (링크)
 </p>
         
       </li>
@@ -571,7 +612,7 @@ layout: archive
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서 봤던 문제에서는 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었다. 이 경우, 선형계획법 (Linear Programming) 을 이용해서 풀 수 있다.
+    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서 봤던 건물 내 배터리 스케줄링 문제에서는, 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었으며, 두 개의 변수들 간의 곱도 없었다.
 </p>
   </article>
 </div>
@@ -609,6 +650,7 @@ layout: archive
 
 
     <p class="archive__item-excerpt" itemprop="description">이제 본격적으로, 분산형 에너지시스템 도입의 경제적 안 도출을 위한 수학적 최적화 문제 구성을 알아보기로 한다.
+
 </p>
   </article>
 </div>
@@ -681,8 +723,7 @@ layout: archive
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Over-confidence란
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Logistic regression에서는 각 point 별로 response $y$가 0과 1 중 1일 확률 추정값 $\hat{y}$를 제공한다 (물론 실제 $y$값들은 알려져 있다). 한편, feature space에서 response가 1인 point들과 0인 point들이 완...</p>
   </article>
 </div>
 
@@ -718,7 +759,7 @@ layout: archive
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">데이터 소개
+    <p class="archive__item-excerpt" itemprop="description">스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 ‘스마트그리드 빅데이터 분석의 활용’ 이 있다. (링크)
 </p>
   </article>
 </div>

@@ -236,8 +236,25 @@
       
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
-        <span class="nav__sub-title">범주1</span>
+        <span class="nav__sub-title">Categories</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
@@ -245,8 +262,6 @@
                     
                 
                     
-                        <li><a href="/code" class="">코드 (1)</a></li>
-                    
                 
                     
                 
@@ -254,19 +269,8 @@
                 
                     
                 
-            </ul>
-            <ul>
-                
                     
-                        <li><a href="/theory" class="">이론 (2)</a></li>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
+                        <li><a href="/energymanagement" class="">EMS (5)</a></li>
                     
                 
             </ul>
@@ -277,23 +281,9 @@
                     
                 
                     
-                
-                    
-                        <li><a href="/energy" class="">에너지 (17)</a></li>
+                        <li><a href="/estimation" class="">Estimation (2)</a></li>
                     
                 
-                    
-                
-            </ul>
-        <span class="nav__sub-title">범주2</span>
-            <ul>
-                
-                    
-                
-                    
-                
-                    
-                        <li><a href="/project" class="">프로젝트 (1)</a></li>
                     
                 
                     
@@ -312,7 +302,58 @@
                     
                 
                     
-                        <li><a href="/etc" class="">기타 (1)</a></li>
+                        <li><a href="/dataset" class="">Dataset (4)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
                     
                 
             </ul>
@@ -376,17 +417,17 @@
 <p>이에, 필자가 WSL2 Ubuntu 22.04 환경에 CUDA &amp; cuDNN을 설치하는 데 거쳤던 스텝들을 해당 포스팅으로 남긴다. 필자가 나중에 다른 컴퓨터에 CUDA를 설치하게 될 경우, 이 기록이 필자 본인에게라도 도움이 되길 바란다.</p>
 
 <p><br />
-자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 <a href="https://www.nvidia.co.kr/Download/index.aspx?lang=kr">다운로드 웹페이지</a> 찾아서 윈도우에서 설치</p>
+자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 <a href="https://www.nvidia.co.kr/Download/index.aspx?lang=kr">다운로드 웹페이지</a> 찾아서 윈도우에서 설치.</p>
 
-<p>ubuntu bash에서 $\texttt{nvidia-smi}$ 실행 시, 드라이버 설치 확인 가능</p>
-
-<p><br />
-<a href="https://www.tensorflow.org/install/gpu?hl=ko">Tensorflow 웹페이지</a>에서 호환되는 CUDA 버전 확인 (‘소프트웨어 요구사항’ 항목을 보면, Tensorflow의 경우 CUDA 11.2 지원)</p>
+<p>ubuntu bash에서 $\texttt{nvidia-smi}$ 실행 시, 드라이버 설치 확인 가능.</p>
 
 <p><br />
-<a href="https://developer.nvidia.com/cuda-11.2.0-download-archive?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=WSLUbuntu&amp;target_version=20&amp;target_type=runfilelocal">CUDA Toolkit Downloads 웹페이지</a>에서 Linux - x86_64 - WSL-Ubuntu - 2.0 - runtime (local) 선택 시 보여주는 명령어를 ubuntu bash에 쳐서 CUDA를 다운로드</p>
+<a href="https://www.tensorflow.org/install/gpu?hl=ko">Tensorflow 웹페이지</a>에서 호환되는 CUDA 버전 확인 (‘소프트웨어 요구사항’ 항목을 보면, Tensorflow의 경우 CUDA 11.2 지원).</p>
 
-<p>명령어는 아래와 같음</p>
+<p><br />
+<a href="https://developer.nvidia.com/cuda-11.2.0-download-archive?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=WSLUbuntu&amp;target_version=20&amp;target_type=runfilelocal">CUDA Toolkit Downloads 웹페이지</a>에서 Linux - x86_64 - WSL-Ubuntu - 2.0 - runtime (local) 선택 시 보여주는 명령어를 ubuntu bash에 쳐서 CUDA를 다운로드.</p>
+
+<p>명령어는 아래와 같음.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://developer.download.nvidia.com/compute/cuda/11.2.0/local_installers/cuda_11.2.0_460.27.04_linux.run
 sudo sh cuda_11.2.0_460.27.04_linux.run
@@ -397,17 +438,15 @@ sudo sh cuda_11.2.0_460.27.04_linux.run
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Failed to verify gcc version. See log at /var/log/cuda-installer.log for details.
 </code></pre></div></div>
 <p>라는 gcc 버전 오류가 뜬다면, gcc를 버전 9로 낮춰야 함,
-<a href="https://gooopy.tistory.com/134">이 포스트</a>에서 소개하는 명령어들에서 버전 숫자를 8에서 9로만 바꿔서 입력 (버전 8까지는 apt 다운로드 서버에서 없어진 듯함), 명령어는 아래와 같음</p>
+<a href="https://gooopy.tistory.com/134">이 포스트</a>에서 소개하는 명령어들에서 버전 숫자를 8에서 9로만 바꿔서 입력 (버전 8까지는 apt 다운로드 서버에서 없어진 듯함), 명령어는 아래와 같음.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt -y install gcc-9 g++-9
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
 </code></pre></div></div>
 <p>그리고 다시 $\texttt{sudo sh cuda_11.2.0_460.27.04_linux.run}$ 를 bash에서 실행하면
-라이선스 관련 큰 창, 그리고 거기서 accept를 입력하면 설치 옵션 관련 큰 창이 뜰 것임</p>
+라이선스 관련 큰 창, 그리고 거기서 accept를 입력하면 설치 옵션 관련 큰 창이 뜰 것임 (미리 terminal 높이를 최대한 높여놓길 권장, 너무 낮으면 안 보임).</p>
 
-<p>(미리 terminal 높이를 최대한 높여놓길 권장, 너무 낮으면 안 보임)</p>
-
-<p>선택하고 좀 기다리면 설치됨, 필자의 경우 설치 직후 아래의 메시지가 떴음</p>
+<p>선택하고 좀 기다리면 설치됨, 필자의 경우 설치 직후 아래의 메시지가 떴음.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>= Summary =
 ===========
 
@@ -428,39 +467,39 @@ Logfile is /var/log/cuda-installer.log
 </code></pre></div></div>
 
 <p><br />
-ubuntu bash에 $\texttt{vi /etc/profile}$ 입력 후 vi 에디터에서 $\texttt{i}$ 누르면 편집 가능</p>
+ubuntu bash에 $\texttt{vi /etc/profile}$ 입력 후 vi 에디터에서 $\texttt{i}$ 누르면 편집 가능.</p>
 
 <p>(vi 에디터 명령은 <a href="https://kkalkkalparrot.tistory.com/36">이 포스팅</a> 참고)</p>
 
-<p>etc/profile에 아래 코드 입력 (<a href="https://nirsa.tistory.com/332">이 포스팅 참고</a>)</p>
+<p>etc/profile에 아래 코드 입력 (<a href="https://nirsa.tistory.com/332">이 포스팅 참고</a>).</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export PATH=$PATH:/usr/local/cuda-11.2/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.2/lib64
 export CUDADIR=/usr/local/cuda-11.2
 </code></pre></div></div>
 
-<p>입력 후 Esc 눌러 편집 모드에서 나오고 $\texttt{:w}$ 입력 시 저장됨</p>
+<p>입력 후 Esc 눌러 편집 모드에서 나오고 $\texttt{:w}$ 입력 시 저장됨.</p>
 
-<p>그리고 $\texttt{source /etc/profile}$ 입력</p>
+<p>그리고 $\texttt{source /etc/profile}$ 입력.</p>
 
-<p>CUDA 설치 버전 확인은 bash에서 $\texttt{nvcc -V}$ 실행</p>
+<p>CUDA 설치 버전 확인은 bash에서 $\texttt{nvcc -V}$ 실행.</p>
 
 <p><br />
-cuDNN 설치는 <a href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html">공식 가이드</a> 참고</p>
+cuDNN 설치는 <a href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html">공식 가이드</a> 참고.</p>
 
-<p>가이드의 1.1.3 항목대로 $\texttt{Zlib}$를 다운받기 위해, $\texttt{sudo apt-get install zlib1g}$ 를 bash에서 실행</p>
+<p>가이드의 1.1.3 항목대로 $\texttt{Zlib}$를 다운받기 위해, $\texttt{sudo apt-get install zlib1g}$ 를 bash에서 실행.</p>
 
-<p>가이드의 1.2 항목대로 cudNN을 다운로드 <a href="https://developer.nvidia.com/rdp/cudnn-download">(다운로드 링크)</a></p>
+<p>가이드의 1.2 항목대로 cudNN을 다운로드 <a href="https://developer.nvidia.com/rdp/cudnn-download">(다운로드 링크).</a></p>
 
-<p>다운받으려면 NVIDIA 계정 필요하므로 없을 경우 생성</p>
+<p>다운받으려면 NVIDIA 계정 필요하므로 없을 경우 생성.</p>
 
 <p>for CUDA 11.x 에 있는 Local Installer for Linux x86_64 (Tar) 를 우선 윈도우즈에서 다운받고,
 다운로드 완료되면 ubuntu shell에서 $\texttt{mtn}$으로 접근, 파일 확인 후 $\texttt{home}$ 내 폴더로 복사해 감</p>
 
-<p>이를테면 $\texttt{D:\Downloads}$ 에 받았다고 하면 ubuntu bash에서 아래 명령 실행</p>
+<p>이를테면 $\texttt{D:\Downloads}$ 에 받았다고 하면 ubuntu bash에서 아래 명령 실행.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp "/mnt/d/Downloads/cudnn-linux-x86_64-8.9.0.131_cuda11-archive.tar.xz" "/home/ubuntu/workspaces"
 </code></pre></div></div>
-<p>그리고 복사된 파일의 위치에서, 공식 가이드대로 아래 명령들 실행</p>
+<p>그리고 복사된 파일의 위치에서, 공식 가이드대로 아래 명령들 실행.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -xvf cudnn-linux-x86_64-8.9.0.131_cuda11-archive.tar.xz
 sudo cp cudnn-*-archive/include/cudnn*.h /usr/local/cuda/include
@@ -469,12 +508,14 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 </code></pre></div></div>
 
 <p><br />
-이후 재부팅한 후 ubuntu에서 tensorflow 쓰는 파이썬 코드 실행 시, 아래와 같은 맥락의 메시지를 본다면 성공임</p>
+이후 재부팅한 후 ubuntu에서 tensorflow 쓰는 파이썬 코드 실행 시, 아래와 같은 맥락의 메시지를 본다면 성공임.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I tensorflow/core/common_runtime/gpu/gpu_device.cc:1635] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 2029 MB memory:  -&gt; device: 0, name: NVIDIA GeForce GTX 1650 SUPER, pci bus id: 0000:01:00.0, compute capability: 7.5
 </code></pre></div></div>
 
-<p>만약 tensorflow를 사용하지만 GPU를 사용하지는 않을 경우, Python 기준으로 코드 상단에 아래 코드 추가</p>
+<p>CUDA 설치 후 GPU 사용 시, Python에서 $\texttt{Tensorflow}$ 라이브러리를 사용할 경우 RNN 모델인 LSTM과 GRU 훈련의 속도가 매우 빨라졌음을 확인함.</p>
+
+<p>만약 tensorflow를 사용하지만 GPU를 사용하지는 않을 경우, Python 기준으로 코드 상단에 아래 코드를 추가함.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 </code></pre></div></div>
 
@@ -551,8 +592,14 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 
 <nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
 
-  <a href="#" class="pagination_prev_next--pager disabled-first-child">첫 번째 글입니다</a>
-  <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
+  
+    
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
+    
+    
+      <a href="/scrapper.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>Python 크롤링 코드 예시 (PubMed 사이트에서 논문 정보 크롤링)</a>
+        
+  
 
 </nav>
       <p></p>
@@ -598,7 +645,7 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.
 </p>
   </article>
 </div>

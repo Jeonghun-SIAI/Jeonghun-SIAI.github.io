@@ -11,7 +11,7 @@
   <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념 | 에너지 데이터 연구소</title>
-<meta name="description" content="지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내용은 Sutton의 Introduction 참고 바람)">
+<meta name="description" content="지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하에서 control을 얻게 됨을 논했다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://localhost:4000/reinforcetwo.html">
 
 
-  <meta property="og:description" content="지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내용은 Sutton의 Introduction 참고 바람)">
+  <meta property="og:description" content="지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하에서 control을 얻게 됨을 논했다.">
 
 
 
@@ -236,8 +236,25 @@
       
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
-        <span class="nav__sub-title">범주1</span>
+        <span class="nav__sub-title">Categories</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
@@ -245,8 +262,6 @@
                     
                 
                     
-                        <li><a href="/code" class="">코드 (1)</a></li>
-                    
                 
                     
                 
@@ -254,19 +269,8 @@
                 
                     
                 
-            </ul>
-            <ul>
-                
                     
-                        <li><a href="/theory" class="">이론 (2)</a></li>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
+                        <li><a href="/energymanagement" class="">EMS (5)</a></li>
                     
                 
             </ul>
@@ -277,23 +281,9 @@
                     
                 
                     
-                
-                    
-                        <li><a href="/energy" class="">에너지 (17)</a></li>
+                        <li><a href="/estimation" class="">Estimation (2)</a></li>
                     
                 
-                    
-                
-            </ul>
-        <span class="nav__sub-title">범주2</span>
-            <ul>
-                
-                    
-                
-                    
-                
-                    
-                        <li><a href="/project" class="">프로젝트 (1)</a></li>
                     
                 
                     
@@ -312,7 +302,58 @@
                     
                 
                     
-                        <li><a href="/etc" class="">기타 (1)</a></li>
+                        <li><a href="/dataset" class="">Dataset (4)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
                     
                 
             </ul>
@@ -329,7 +370,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념">
-    <meta itemprop="description" content="지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내용은 Sutton의 Introduction 참고 바람)">
+    <meta itemprop="description" content="지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하에서 control을 얻게 됨을 논했다.">
     <meta itemprop="datePublished" content="2023-04-16T00:00:00+09:00">
     
 
@@ -366,15 +407,19 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              
+              <ul class="toc__menu"><li><a href="#누적-보상의-개념">누적 보상의 개념</a></li><li><a href="#exploration탐색의-필요성">Exploration(탐색)의 필요성</a></li><li><a href="#stateaction이-무한할-경우">State/action이 무한할 경우</a></li><li><a href="#q-value-근사를-위한-딥러닝과-강화학습의-결합">Q-value 근사를 위한 딥러닝과 강화학습의 결합</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <p>지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내용은 <a href="https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf">Sutton의 Introduction</a> 참고 바람)</p>
+        <p>지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하에서 control을 얻게 됨을 논했다.</p>
 
-<p><br />
-먼저 Q-learning을 간단히 되짚고 넘어가자. 어떤 환경에서 시점 t에 상태 $s_{t}$에 있고, 이 때 action $a_{t}$를 수행하면 보상 $r_{t+1}$을 받으면서 상태 $s_{t+1}$로 전이된다고 하자.</p>
+<p>이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내용은 <a href="https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf">Sutton의 Introduction</a> 참고 바람)</p>
+
+<p><br /></p>
+
+<h2 id="누적-보상의-개념">누적 보상의 개념</h2>
+<p>먼저 Q-learning을 간단히 되짚고 넘어가자. 어떤 환경에서 시점 t에 상태 $s_{t}$에 있고, 이 때 action $a_{t}$를 수행하면 보상 $r_{t+1}$을 받으면서 상태 $s_{t+1}$로 전이된다고 하자.</p>
 
 <p><img src="/assets/images/reinforceone/reinforcement_basic.png" alt="reinforcement_basic" class="align-center" width="70%" />
 <em>강화학습 개요. State $S_t$에서 Action $A_t$를 취하면 Reward $R_{t+1}$을 얻으면서 State $S_{t+1}$로 전이됨.</em></p>
@@ -408,8 +453,10 @@
 
 <p>그러면 매 시점별로 $\hat{Q}(s_{t},0)$, $\hat{Q}(s_{t},1)$, $\hat{Q}(s_{t},2)$ 중에서 최대값에 대응하는 action을 선택하면 (greedy policy), 누적보상을 최대화하는 control이 될 것이다.</p>
 
-<p><br />
-그러나 greedy policy는 controller 훈련을 끝낸 후 ‘validation 및 실제 구동 시’에 적용해야지, ‘훈련 중’에 적용하는 것은 적절하지 않다.</p>
+<p><br /></p>
+
+<h2 id="exploration탐색의-필요성">Exploration(탐색)의 필요성</h2>
+<p>그러나 greedy policy는 controller 훈련을 끝낸 후 ‘validation 및 실제 구동 시’에 적용해야지, ‘훈련 중’에 적용하는 것은 적절하지 않다.</p>
 
 <p>학습 초기에 아직 아무 정보도 학습하지 못했는데 단순히 $\hat{Q}$ 값이 가장 큰 action만을 계속 하는 것은, 마치 평균적 보상이 다른 여러 개의 슬롯머신을 눈 앞에 두고도, 처음에 고른 한두개의 슬롯머신만 계속 눌러보는 것과 비슷하다.</p>
 
@@ -421,8 +468,10 @@
 
 <p>(Exploration/ exploitation에 대해 제대로 이해하고 싶으면, Sutton의 책 2장의 ‘Multi-armed Bandits’를 공부하기 바란다)</p>
 
-<p><br />
-지금까지 설명한 방법은, state-action pair의 수가 많지 않을 경우 각 state-action pair별 $\hat{Q}$값들을 담는 table을 만들어 그대로 적용할 수 있다. 이를테면 아래와 같은 공간에서 상하좌우로 한 칸씩 이동 가능한 환경에서 최단거리를 찾는 문제 (Gridworld) 에서는, 격자 수가 한정되어 있으므로 각 격자(state)-이동방향(action) pair 별로 $\hat{Q}$값들을 따로 계산할 수 있다.</p>
+<p><br /></p>
+
+<h2 id="stateaction이-무한할-경우">State/action이 무한할 경우</h2>
+<p>지금까지 설명한 방법은, state-action pair의 수가 많지 않을 경우 각 state-action pair별 $\hat{Q}$값들을 담는 table을 만들어 그대로 적용할 수 있다. 이를테면 아래와 같은 공간에서 상하좌우로 한 칸씩 이동 가능한 환경에서 최단거리를 찾는 문제 (Gridworld) 에서는, 격자 수가 한정되어 있으므로 각 격자(state)-이동방향(action) pair 별로 $\hat{Q}$값들을 따로 계산할 수 있다.</p>
 
 <p><img src="/assets/images/reinforcetwo/gridworld.png" alt="gridworld" class="align-center" />
 <em>Gridworld 환경. 각 칸-이동방향 pair에 대해 Q-value를 정의할 수 있다. 이 경우 칸이 38개이고 action은 상하좌우 4개이므로, Q-value가 총 152개이다.</em></p>
@@ -436,8 +485,10 @@
 
 <p>이런 경우 ‘모든 state-action pair 각각에 대해’ $\hat{Q}$를 계산한다는 것은 사실상 불가능하다. 그렇다면 어떻게 해야 하나?</p>
 
-<p><br />
-만약 state-action pair와 Q값 간의 관계가 어떤 domain knowledge에 의해 명확하게 정의될 수 있다면, 해당 관계를 명확한 수식으로 표현하여 $\hat{Q}$를 쉽게 계산할 수 있을 것이다. 그러나 이 케이스를 포함한 많은 경우, state-action과 Q값 간의 관계식을 명확한 수식으로 나타낼 수 있을 것이라 기대되지 않는다.</p>
+<p><br /></p>
+
+<h2 id="q-value-근사를-위한-딥러닝과-강화학습의-결합">Q-value 근사를 위한 딥러닝과 강화학습의 결합</h2>
+<p>만약 state-action pair와 Q값 간의 관계가 어떤 domain knowledge에 의해 명확하게 정의될 수 있다면, 해당 관계를 명확한 수식으로 표현하여 $\hat{Q}$를 쉽게 계산할 수 있을 것이다. 그러나 이 케이스를 포함한 많은 경우, state-action과 Q값 간의 관계식을 명확한 수식으로 나타낼 수 있을 것이라 기대되지 않는다.</p>
 
 <p>그렇다면, state를 입력으로 받고 각 action 별 $\hat{Q}$값을 출력으로 하는 심층신경망 (Deep Neural Network, DNN) 모델을 훈련하는 것이 현실적인 방법이다. 심층신경망은 계산비용은 매우 높지만, node 수가 충분하면 어떤 비선형 함수도 근사할 수 있기 때문에 nonlinear function approximator로 기능한다는 점을 이용하는 것이다.</p>
 
@@ -492,7 +543,7 @@
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#energy" class="page__taxonomy-item p-category" rel="tag">Energy</a>
+      <a href="/categories/#energymanagement" class="page__taxonomy-item p-category" rel="tag">energymanagement</a>
     
     </span>
   </p>
@@ -518,15 +569,9 @@
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>Energy</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <h4 class="page__meta-title"><span>energymanagement</span> <span>카테고리 내 다른 글 보러가기</span></h4>
         
 
-
-  
-
-  
-
-  
 
   
 
@@ -596,7 +641,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.
 </p>
   </article>
 </div>

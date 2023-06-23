@@ -236,8 +236,25 @@
       
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
-        <span class="nav__sub-title">범주1</span>
+        <span class="nav__sub-title">Categories</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
@@ -245,8 +262,6 @@
                     
                 
                     
-                        <li><a href="/code" class="">코드 (1)</a></li>
-                    
                 
                     
                 
@@ -254,19 +269,8 @@
                 
                     
                 
-            </ul>
-            <ul>
-                
                     
-                        <li><a href="/theory" class="">이론 (2)</a></li>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
+                        <li><a href="/energymanagement" class="">EMS (5)</a></li>
                     
                 
             </ul>
@@ -277,23 +281,9 @@
                     
                 
                     
-                
-                    
-                        <li><a href="/energy" class="">에너지 (17)</a></li>
+                        <li><a href="/estimation" class="">Estimation (2)</a></li>
                     
                 
-                    
-                
-            </ul>
-        <span class="nav__sub-title">범주2</span>
-            <ul>
-                
-                    
-                
-                    
-                
-                    
-                        <li><a href="/project" class="">프로젝트 (1)</a></li>
                     
                 
                     
@@ -312,7 +302,58 @@
                     
                 
                     
-                        <li><a href="/etc" class="">기타 (1)</a></li>
+                        <li><a href="/dataset" class="">Dataset (4)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
                     
                 
             </ul>
@@ -366,7 +407,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              
+              <ul class="toc__menu"><li><a href="#actor와-critic-신경망">Actor와 critic 신경망</a></li><li><a href="#target-신경망">Target 신경망</a></li><li><a href="#ddpg-코드">DDPG 코드</a></li><li><a href="#ddpg를-통한-continuous-control-결과">DDPG를 통한 continuous control 결과</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
@@ -380,8 +421,10 @@
 
 <p>이번에는 continuous control의 기본적인 방법인 <a href="https://arxiv.org/abs/1509.02971">Deep Deterministic Policy Gradient (DDPG)</a>를 적용해서, 수전/송전에 대한 continuous control을 도출해본다.</p>
 
-<p><br />
-Continuous action인 경우 가능한 action의 수가 사실상 무한대이므로, DQN에서처럼 state를 입력받아 각 action 별 Q-value를 모두 계산하는 신경망을 구성할 수는 없다.</p>
+<p><br /></p>
+
+<h2 id="actor와-critic-신경망">Actor와 critic 신경망</h2>
+<p>Continuous action인 경우 가능한 action의 수가 사실상 무한대이므로, DQN에서처럼 state를 입력받아 각 action 별 Q-value를 모두 계산하는 신경망을 구성할 수는 없다.</p>
 
 <p>대신에, 두 개의 신경망을 구성하되 하나는 state를 입력받고 continuous action의 값을 출력하고, 다른 하나는 state와 action을 입력받아 그 state-action pair의 Q-value를 출력하도록 한다. 두 신경망 중 전자를 actor (action을 결정함), 후자를 critic (value를 평가함) 이라 부른다.</p>
 
@@ -389,8 +432,10 @@ Continuous action인 경우 가능한 action의 수가 사실상 무한대이므
 
 <p>특히 이 마이크로그리드 사례에서 action은 하한이 -1.1, 상한이 1.1로 정해져 있다. 이러한 ‘bounded’ action을 구현하기 위해, actor의 output layer에 tanh (하이퍼볼릭 탄젠트) activation function을 걸어준다.</p>
 
-<p><br />
-한편, DDPG에서는 ‘target’ 신경망을 구성해서 학습의 안정성을 향상시킨다. Actor와 critic 각각의 target 신경망들은 원래 actor와 critic의 복사본으로 시작해서, Q-learning에서 next state에 대한 값을 도출하는 데 이용된 후 천천히 업데이트된다.</p>
+<p><br /></p>
+
+<h2 id="target-신경망">Target 신경망</h2>
+<p>한편, DDPG에서는 ‘target’ 신경망을 구성해서 학습의 안정성을 향상시킨다. Actor와 critic 각각의 target 신경망들은 원래 actor와 critic의 복사본으로 시작해서, Q-learning에서 next state에 대한 값을 도출하는 데 이용된 후 천천히 업데이트된다.</p>
 
 <p>구체적으로, 원래 신경망들의 parameter를 $\theta$, target 신경망들의 parameter를 $\theta’$라 하고, 원래 actor와 target actor를 각각 $\mu(s)$와 $\mu’(s)$, 원래 critic과 target critic을 각각 $\hat{Q}(s,a)$와 $\hat{Q}’(s,a)$라 하자.</p>
 
@@ -406,8 +451,10 @@ Continuous action인 경우 가능한 action의 수가 사실상 무한대이므
 
 <p>(보다 더 상세한 내용은 <a href="https://arxiv.org/abs/1509.02971">논문 원문</a>을 참고하길 바란다)</p>
 
-<p><br />
-이제 DDPG를 적용하여 continuous controller를 훈련하는 코드를 보자 <a href="https://antonai.blog/reinforcement-learning-in-continuous-action-spaces-part-1-ddpg/">(해당 코드 작성에 참고한 DDPG 코딩 설명 포스트).</a> 코드 내 주석은 지난 포스팅의 DQN 코드 대비 다른 부분에 대해서만 추가하였다.</p>
+<p><br /></p>
+
+<h2 id="ddpg-코드">DDPG 코드</h2>
+<p>이제 DDPG를 적용하여 continuous controller를 훈련하는 코드를 보자 <a href="https://antonai.blog/reinforcement-learning-in-continuous-action-spaces-part-1-ddpg/">(해당 코드 작성에 참고한 DDPG 코딩 설명 포스트).</a> 코드 내 주석은 지난 포스팅의 DQN 코드 대비 다른 부분에 대해서만 추가하였다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
 </span>
@@ -689,18 +736,21 @@ Continuous action인 경우 가능한 action의 수가 사실상 무한대이므
                 <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><br />
-DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</p>
+<p><br /></p>
+
+<h2 id="ddpg를-통한-continuous-control-결과">DDPG를 통한 continuous control 결과</h2>
+<p>DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</p>
 
 <p>놀랍게도(?), continuous control (DDPG) 의 결과가 3-action discrete control (DQN) 의 결과 (누적비용 50유로) 보다 나쁘다. 어떻게 된 걸까?</p>
 
 <p>아래 그림으로 action을 비교해 보자.</p>
 
+<p><img src="/assets/images/reinforcefour/result_ddpg.png" alt="result_ddpg" class="align-center" />
+<em>DDPG로 도출한 수전/송전 control. LP control과는 차이가 있음.</em></p>
+
 <p>태양광 발전량이 많아 낮에 송전하는 기간의 밤 시간대에 LP와 DQN에선 action의 값이 0, 즉 idle이다. 그러나 DDPG에서는 수전을 한다. 반대로 태양광 발전량이 적어 낮에 수전하는 기간의 밤 시간대에도 LP와 DQN에선 action이 idle인데 DDPG에서는 일부 송전을 한다.</p>
 
 <p>즉 LP와 DQN control에서는 수 시간 연속으로 idle인 기간에, DDPG control에서는 송전 혹은 수전을 행한다. 그런데 이것이 sub-optimal control인 것으로 보인다.</p>
-
-<p>(그림 -&gt; 그래프상에 해당 구간들을 원으로 표시해서 같이 보여주기)</p>
 
 <p>이는 state를 input으로 하는 nonlinear continuous function 근사로는, 대부분의 input에 대해 output이 0, -1, +1 셋 중 하나이고 그 외 일부 input에 대해서만 값이 -1~0 또는 0~1 사이의 값을 출력하는 function을 (LP control에서처럼) 만들어내기 어렵기 때문인 것으로 추측된다.</p>
 
@@ -759,7 +809,7 @@ DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#energy" class="page__taxonomy-item p-category" rel="tag">Energy</a>
+      <a href="/categories/#energymanagement" class="page__taxonomy-item p-category" rel="tag">energymanagement</a>
     
     </span>
   </p>
@@ -785,15 +835,9 @@ DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>Energy</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <h4 class="page__meta-title"><span>energymanagement</span> <span>카테고리 내 다른 글 보러가기</span></h4>
         
 
-
-  
-
-  
-
-  
 
   
 
@@ -859,7 +903,7 @@ DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.
 </p>
   </article>
 </div>

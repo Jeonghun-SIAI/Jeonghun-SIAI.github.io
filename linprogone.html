@@ -236,8 +236,25 @@
       
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
-        <span class="nav__sub-title">범주1</span>
+        <span class="nav__sub-title">Categories</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
@@ -245,8 +262,6 @@
                     
                 
                     
-                        <li><a href="/code" class="">코드 (1)</a></li>
-                    
                 
                     
                 
@@ -254,19 +269,8 @@
                 
                     
                 
-            </ul>
-            <ul>
-                
                     
-                        <li><a href="/theory" class="">이론 (2)</a></li>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
+                        <li><a href="/energymanagement" class="">EMS (5)</a></li>
                     
                 
             </ul>
@@ -277,23 +281,9 @@
                     
                 
                     
-                
-                    
-                        <li><a href="/energy" class="">에너지 (17)</a></li>
+                        <li><a href="/estimation" class="">Estimation (2)</a></li>
                     
                 
-                    
-                
-            </ul>
-        <span class="nav__sub-title">범주2</span>
-            <ul>
-                
-                    
-                
-                    
-                
-                    
-                        <li><a href="/project" class="">프로젝트 (1)</a></li>
                     
                 
                     
@@ -312,7 +302,58 @@
                     
                 
                     
-                        <li><a href="/etc" class="">기타 (1)</a></li>
+                        <li><a href="/dataset" class="">Dataset (4)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
                     
                 
             </ul>
@@ -366,7 +407,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              
+              <ul class="toc__menu"><li><a href="#분산형-에너지시스템">분산형 에너지시스템</a></li><li><a href="#분산에너지시스템의-경제성을-고려한-도입">분산에너지시스템의 ‘경제성’을 고려한 도입</a></li><li><a href="#시간-단위-데이터의-중요성">시간 단위 데이터의 중요성</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
@@ -377,8 +418,10 @@
 
 <p>그러므로, `가장 경제적으로’ 에너지 수요를 만족시키는 (+ 계통 안정성, 탄소 배출량 등의 필요한 제약들을 만족하는) 대안 도출에 대한 니즈가 항상 존재해 왔다. 이를테면 전통적인 전력공학에서는, 주된 분야 중 하나로 경제적 운전 안 도출 (Unit commitment, Economic dispatch, Optimal power flow 등) 이 있다.</p>
 
-<p><br />
-특히 지금은 ‘에너지 전환기’이다. 기존의 전통적인 대형 화력/ 원자력 발전소 위주의 에너지 공급 시스템에 변화의 바람이 불고 있다. 점차 에너지 수요처 인근에 신재생 에너지설비, 중소형 열병합설비, 에너지저장장치를 설치하고 에너지 수요의 일부를 자체 충당하는 ‘분산형’ 에너지시스템이 늘고 있다.</p>
+<p><br /></p>
+
+<h2 id="분산형-에너지시스템">분산형 에너지시스템</h2>
+<p>특히 지금은 ‘에너지 전환기’이다. 기존의 전통적인 대형 화력/ 원자력 발전소 위주의 에너지 공급 시스템에 변화의 바람이 불고 있다. 점차 에너지 수요처 인근에 신재생 에너지설비, 중소형 열병합설비, 에너지저장장치를 설치하고 에너지 수요의 일부를 자체 충당하는 ‘분산형’ 에너지시스템이 늘고 있다.</p>
 
 <p>분산형 에너지시스템의 확산은 초기에는 공공 주도 설치로 이루어졌다. 최근에는, 에너지 요금은 증가하는 반면 분산형 에너지시스템 구성 요소들의 단가가 하락하고, ESG와 RE100 등 비즈니스에서도 에너지 전환 이슈가 반영되면서, 민간분야로도 분산형 에너지시스템이 확산되고 있다.</p>
 
@@ -394,8 +437,10 @@
 <p><img src="/assets/images/linprogone/article.png" alt="article" class="align-center" />
 <em>분산에너지는 기후변화 뿐 아니라 송전망 포화 문제에 대한 해법이기도 하다.</em></p>
 
-<p><br />
-이러한 분산형 에너지시스템 도입 시에도 설치비/ 가동비/ 유지보수비 등 비용이 든다. 대신 중앙계통으로부터 에너지를 덜 공급받음으로써 에너지 요금 절감이 가능할 것이고, 이를 수익으로 볼 수 있다.</p>
+<p><br /></p>
+
+<h2 id="분산에너지시스템의-경제성을-고려한-도입">분산에너지시스템의 ‘경제성’을 고려한 도입</h2>
+<p>이러한 분산형 에너지시스템 도입 시에도 설치비/ 가동비/ 유지보수비 등 비용이 든다. 대신 중앙계통으로부터 에너지를 덜 공급받음으로써 에너지 요금 절감이 가능할 것이고, 이를 수익으로 볼 수 있다.</p>
 
 <p>분산형 에너지시스템을 도입할 때에는 이러한 비용과 수익을 정교하게 저울질해서, 가장 경제성이 높은 안을 도출할 수 있어야 한다. 설령 손익을 따지자면 손해임이 확실하지만 의무적으로 도입해야 하는 경우라도, 비용을 최소화하는 안이 무엇인지 도출해야 하는 것은 마찬가지이다.</p>
 
@@ -448,8 +493,10 @@
 
 <p>이런 문제는 수학적 최적화 문제로 구성하고, 필요한 데이터를 넣고 해당 문제를 코드화하고 풀어내서 답을 도출해야 한다. 여기서 필요한 데이터는 에너지 수요, 에너지 설비의 비용과 성능, 에너지 계통으로부터 에너지를 공급받을 경우의 요금, 태양광/ 풍력 등의 경우 햇빛과 바람에 의한 에너지 생산량 등이 있다.</p>
 
-<p><br />
-특히, ‘시간별’ 자료가 중요하다. 연 단위, 월 단위 에너지 수요 또는 공급량이 같더라도, 매 시간별 에너지 수요의 ‘패턴’이 어떻냐에 따라 경제성 및 필요한 시스템 구성은 천차만별일 수 있다.</p>
+<p><br /></p>
+
+<h2 id="시간-단위-데이터의-중요성">시간 단위 데이터의 중요성</h2>
+<p>이러한 분산에너지 경제성 관련 문제를 풀 때는, 특히 ‘시간별’ 자료가 중요하다. 연 단위, 월 단위 에너지 수요 또는 공급량이 같더라도, 매 시간별 에너지 수요의 ‘패턴’이 어떻냐에 따라 경제성 및 필요한 시스템 구성은 천차만별일 수 있다.</p>
 
 <p>예시 1: 아래 두 그림은 시간별 냉방 수요이고, 이를 냉방용 설비로 공급한다고 하자. 두 경우의 `24시간 동안의 난방 수요의 합’은 같다. 그러나 공급에 필요한 설비 용량은 같을까? 같지 않다 (냉열을 저장했다 나중에 공급하는 설비가 없는 한). 전자보다 후자가 훨씬 큰 용량을 필요로 한다. 가장 부하가 높은 시간에도 냉방을 공급해야 하기 때문이다. 더 큰 용량을 필요로 한다는 것은 설비비도 더 크다는 말이 된다.</p>
 
@@ -520,7 +567,7 @@
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#energy" class="page__taxonomy-item p-category" rel="tag">Energy</a>
+      <a href="/categories/#optimalsystem" class="page__taxonomy-item p-category" rel="tag">optimalsystem</a>
     
     </span>
   </p>
@@ -546,25 +593,9 @@
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>Energy</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <h4 class="page__meta-title"><span>optimalsystem</span> <span>카테고리 내 다른 글 보러가기</span></h4>
         
 
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
   
 
@@ -586,7 +617,7 @@
       <a href="/linprogtwo.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>정수선형계획법 기반 분산에너지시스템 최적화 설명 - 2) 배터리의 충/방전 스케줄 정하기: 수식</a>
     
     
-      <a href="/preprocessmocanu.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>데이터 전처리 예시 - 주택의 분 단위 전기부하 자료</a>
+      <a href="/mypapertwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>내 Applied Energy 논문의 수학 설명 - 도심지 건축물 신재생 설치 확대 영향을 '빨리' 분석하기</a>
         
   
 
@@ -634,7 +665,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.
 </p>
   </article>
 </div>

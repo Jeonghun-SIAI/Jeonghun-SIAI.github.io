@@ -11,7 +11,7 @@
   <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>로지스틱 회귀에서의 over-confidence에 대한 이해 | 에너지 데이터 연구소</title>
-<meta name="description" content="Over-confidence란">
+<meta name="description" content="Logistic regression에서는 각 point 별로 response $y$가 0과 1 중 1일 확률 추정값 $\hat{y}$를 제공한다 (물론 실제 $y$값들은 알려져 있다). 한편, feature space에서 response가 1인 point들과 0인 point들이 완전히 linearly separable하면 (즉 $\hat{y}=0.5$를 기준으로 misclassified point가 하나도 없으면), logistic regression 추정이 되지 않음이 잘 알려져 있다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://localhost:4000/overconfidence.html">
 
 
-  <meta property="og:description" content="Over-confidence란">
+  <meta property="og:description" content="Logistic regression에서는 각 point 별로 response $y$가 0과 1 중 1일 확률 추정값 $\hat{y}$를 제공한다 (물론 실제 $y$값들은 알려져 있다). 한편, feature space에서 response가 1인 point들과 0인 point들이 완전히 linearly separable하면 (즉 $\hat{y}=0.5$를 기준으로 misclassified point가 하나도 없으면), logistic regression 추정이 되지 않음이 잘 알려져 있다.">
 
 
 
@@ -236,8 +236,25 @@
       
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
-        <span class="nav__sub-title">범주1</span>
+        <span class="nav__sub-title">Categories</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
@@ -245,8 +262,6 @@
                     
                 
                     
-                        <li><a href="/code" class="">코드 (1)</a></li>
-                    
                 
                     
                 
@@ -254,19 +269,8 @@
                 
                     
                 
-            </ul>
-            <ul>
-                
                     
-                        <li><a href="/theory" class="">이론 (2)</a></li>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
+                        <li><a href="/energymanagement" class="">EMS (5)</a></li>
                     
                 
             </ul>
@@ -277,23 +281,9 @@
                     
                 
                     
-                
-                    
-                        <li><a href="/energy" class="">에너지 (17)</a></li>
+                        <li><a href="/estimation" class="">Estimation (2)</a></li>
                     
                 
-                    
-                
-            </ul>
-        <span class="nav__sub-title">범주2</span>
-            <ul>
-                
-                    
-                
-                    
-                
-                    
-                        <li><a href="/project" class="">프로젝트 (1)</a></li>
                     
                 
                     
@@ -312,7 +302,58 @@
                     
                 
                     
-                        <li><a href="/etc" class="">기타 (1)</a></li>
+                        <li><a href="/dataset" class="">Dataset (4)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
                     
                 
             </ul>
@@ -329,7 +370,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="로지스틱 회귀에서의 over-confidence에 대한 이해">
-    <meta itemprop="description" content="Over-confidence란">
+    <meta itemprop="description" content="Logistic regression에서는 각 point 별로 response $y$가 0과 1 중 1일 확률 추정값 $\hat{y}$를 제공한다 (물론 실제 $y$값들은 알려져 있다). 한편, feature space에서 response가 1인 point들과 0인 point들이 완전히 linearly separable하면 (즉 $\hat{y}=0.5$를 기준으로 misclassified point가 하나도 없으면), logistic regression 추정이 되지 않음이 잘 알려져 있다.">
     <meta itemprop="datePublished" content="2023-04-10T00:00:00+09:00">
     
 
@@ -371,10 +412,9 @@
             </nav>
           </aside>
         
-        <h2 id="over-confidence란">Over-confidence란</h2>
+        <p>Logistic regression에서는 각 point 별로 response $y$가 0과 1 중 1일 확률 추정값 $\hat{y}$를 제공한다 (물론 실제 $y$값들은 알려져 있다). 한편, feature space에서 response가 1인 point들과 0인 point들이 완전히 linearly separable하면 (즉 $\hat{y}=0.5$를 기준으로 misclassified point가 하나도 없으면), logistic regression 추정이 되지 않음이 잘 알려져 있다.</p>
 
-<p>Logistic regression에서는 각 point 별로 response $y$가 0과 1 중 1일 확률 추정값 $\hat{y}$를 제공한다 (물론 실제 $y$값들은 알려져 있다). 한편, feature space에서 response가 1인 point들과 0인 point들이 완전히 linearly separable하면 (즉 $\hat{y}=0.5$를 기준으로 misclassified point가 하나도 없으면), logistic regression 추정이 되지 않음이 잘 알려져 있다.</p>
-
+<h2 id="over-confidence란">Over-confidence란</h2>
 <p>Feature space에서 response가 1인 point들과 0인 point들이 ‘거의’ linearly separable인 경우 (즉 $\hat{y}=0.5$를 기준으로 misclassified point들이 ‘거의’ 없는 경우) 에도 문제가 발생한다. 이 경우 계수추정량들의 magnitude가 매우 커지고, 그 결과 추정값들이 모든 경우에 대해 1 또는 0에 아주 가까워진다. 이를 어느 class에 속할지에 대해 지나치게 확신한다고 해서, over-confidence라 한다.</p>
 
 <p>Toy problem을 예시로 들면, 아래와 같은 두 class의 point들을 분류하는 plane을 ($\hat{y}=0.5$를 기준으로) logistic regression으로 찾는다고 하자.</p>
@@ -394,8 +434,11 @@
 
 <p>먼저 수학적으로는 다음과 같다.</p>
 
-<p>로지스틱 회귀에서의 cost function은 ‘negative’ log-likelihood $-\sum_{i=1}^{N}[y_{i} \text{log}\hat{y}_{i} + (1-y_{i})\text{log}(1-\hat{y}_{i})]$ 이고 $ y_{i} \in \lbrace 0,1 \rbrace$이며 $0 \leq \hat{y}_{i}\leq 1$이므로, 
-실제 response가 1인 점을 기준으로 추정값이 1에서 멀어지고 0으로 가까워질수록, 모델에 대한 penalty가 exponential하게 증가한다. 이는 실제 response가 0인데 추정값이 1에 가까워질 경우에도 마찬가지이다. 이 때 $\hat{y}=0.5$ 기준으로 misclassified point가 여럿 있는 경우에는, 해당 point들 때문에 생기는 exponential penalty를 줄이기 위해 추정값들이 1 또는 0에 너무 가까워지지 않도록 계수의 magnitude를 작게 설정해야 한다.</p>
+<p>로지스틱 회귀에서의 cost function은 ‘negative’ log-likelihood $-\sum_{i=1}^{N}[y_{i} \text{log}\hat{y}_{i} + (1-y_{i})\text{log}(1-\hat{y}_{i})]$ 이고 $ y_{i} \in \lbrace 0,1 \rbrace$이며 $0 \leq \hat{y}_{i}\leq 1$이다.</p>
+
+<p>그러므로 실제 response가 1인 점을 기준으로 추정값이 1에서 멀어지고 0으로 가까워질수록, 모델에 대한 penalty가 exponential하게 증가한다. 이는 실제 response가 0인데 추정값이 1에 가까워질 경우에도 마찬가지이다.</p>
+
+<p>이 때 $\hat{y}=0.5$ 기준으로 misclassified point가 여럿 있는 경우에는, 해당 point들 때문에 생기는 exponential penalty를 줄이기 위해 추정값들이 1 또는 0에 너무 가까워지지 않도록 계수의 magnitude를 작게 설정해야 한다.</p>
 
 <p>그러나 계수의 magnitude를 작게 할수록, 실제 값이 1이고 추정값이 1에 가까운 경우에도 완전히 1에 매우 가깝기보다는 1보다 어느 정도는 작은 값이 될 것이다. 실제 값이 0이고 추정값이 0인 경우에도 0보다 어느 정도는 큰 값이 될 것이다. 이 차이 또한 작게나마 penalty로 계산된다.</p>
 
@@ -440,7 +483,7 @@
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#theory" class="page__taxonomy-item p-category" rel="tag">Theory</a>
+      <a href="/categories/#mathstat" class="page__taxonomy-item p-category" rel="tag">mathstat</a>
     
     </span>
   </p>
@@ -466,7 +509,7 @@
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>Theory</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <h4 class="page__meta-title"><span>mathstat</span> <span>카테고리 내 다른 글 보러가기</span></h4>
         
 
 
@@ -532,7 +575,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.
 </p>
   </article>
 </div>

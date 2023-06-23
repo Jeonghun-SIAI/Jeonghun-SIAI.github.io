@@ -11,7 +11,7 @@
   <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>정수선형계획법 기반 분산에너지시스템 최적화 설명 - 3) 배터리의 충/방전 스케줄 정하기: Python 코드 | 에너지 데이터 연구소</title>
-<meta name="description" content="이전 포스팅에서 봤던 문제에서는 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었다. 이 경우, 선형계획법 (Linear Programming) 을 이용해서 풀 수 있다.">
+<meta name="description" content="이전 포스팅에서 봤던 건물 내 배터리 스케줄링 문제에서는, 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었으며, 두 개의 변수들 간의 곱도 없었다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://localhost:4000/linprogthree.html">
 
 
-  <meta property="og:description" content="이전 포스팅에서 봤던 문제에서는 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었다. 이 경우, 선형계획법 (Linear Programming) 을 이용해서 풀 수 있다.">
+  <meta property="og:description" content="이전 포스팅에서 봤던 건물 내 배터리 스케줄링 문제에서는, 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었으며, 두 개의 변수들 간의 곱도 없었다.">
 
 
 
@@ -236,8 +236,25 @@
       
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
-        <span class="nav__sub-title">범주1</span>
+        <span class="nav__sub-title">Categories</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
@@ -245,8 +262,6 @@
                     
                 
                     
-                        <li><a href="/code" class="">코드 (1)</a></li>
-                    
                 
                     
                 
@@ -254,19 +269,8 @@
                 
                     
                 
-            </ul>
-            <ul>
-                
                     
-                        <li><a href="/theory" class="">이론 (2)</a></li>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
+                        <li><a href="/energymanagement" class="">EMS (5)</a></li>
                     
                 
             </ul>
@@ -277,23 +281,9 @@
                     
                 
                     
-                
-                    
-                        <li><a href="/energy" class="">에너지 (17)</a></li>
+                        <li><a href="/estimation" class="">Estimation (2)</a></li>
                     
                 
-                    
-                
-            </ul>
-        <span class="nav__sub-title">범주2</span>
-            <ul>
-                
-                    
-                
-                    
-                
-                    
-                        <li><a href="/project" class="">프로젝트 (1)</a></li>
                     
                 
                     
@@ -312,7 +302,58 @@
                     
                 
                     
-                        <li><a href="/etc" class="">기타 (1)</a></li>
+                        <li><a href="/dataset" class="">Dataset (4)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
                     
                 
             </ul>
@@ -329,7 +370,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="정수선형계획법 기반 분산에너지시스템 최적화 설명 - 3) 배터리의 충/방전 스케줄 정하기: Python 코드">
-    <meta itemprop="description" content="이전 포스팅에서 봤던 문제에서는 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었다. 이 경우, 선형계획법 (Linear Programming) 을 이용해서 풀 수 있다.">
+    <meta itemprop="description" content="이전 포스팅에서 봤던 건물 내 배터리 스케줄링 문제에서는, 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었으며, 두 개의 변수들 간의 곱도 없었다.">
     <meta itemprop="datePublished" content="2023-04-13T00:00:00+09:00">
     
 
@@ -366,19 +407,24 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              
+              <ul class="toc__menu"><li><a href="#등호-제약조건-코딩">등호 제약조건 코딩</a></li><li><a href="#부등호-제약조건-코딩">부등호 제약조건 코딩</a></li><li><a href="#목적함수-코딩-및-solver로-풀이">목적함수 코딩 및 solver로 풀이</a></li><li><a href="#풀이-결과">풀이 결과</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <p>이전 포스팅에서 봤던 문제에서는 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었다. 이 경우, 선형계획법 (Linear Programming) 을 이용해서 풀 수 있다.</p>
+        <p><a href="/linprogtwo.html">이전 포스팅에서 봤던 건물 내 배터리 스케줄링 문제</a>에서는, 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었으며, 두 개의 변수들 간의 곱도 없었다.</p>
+
+<p>이 경우, 선형계획법 (Linear Programming) 을 이용해서 풀 수 있다.</p>
 
 <p>선형계획법을 ‘무료로’ 수행하기 위해서는, Python에서 cvxopt 패키지 설치 후 glpk 모듈을 쓸 수 있다 <a href="https://cvxopt.org/install/">(설치 방법 링크)</a>. 무료인 만큼 계산 시간이 많이 필요하지만, 그래도 적절한 가정들 하에 간소화된 에너지 최적화 문제들은 푸는 것 자체는 가능하다.</p>
 
 <p>‘유료로’ 수행하는 방법으로는 MATLAB optimization toolbox 사용, 또는 값비싼 상용 solver들 (CPLEX, Gurobi) 사용 등이 있다. 박사과정 때 MATLAB에 Gurobi academic license를 연계해서 써 봤는데, 정말 빠르긴 빨랐다. (다만 Gurobi commercial license의 permanent version 가격이 천만원 단위였던 것으로 기억하는데… 최근에는 cloud 접속 방식으로 필요한 만큼만 사용할 수 있는 서비스가 있다고 얼핏 듣기는 했다.)</p>
 
-<p><br />
-이 포스팅에서는 Python cvxopt 패키지의 glpk 모듈로 선형계획법 문제를 코딩해 푸는 과정을 설명한다.</p>
+<p>이 포스팅에서는 Python cvxopt 패키지의 glpk 모듈로 선형계획법 문제를 코딩해 푸는 과정을 설명한다.</p>
+
+<p><br /></p>
+
+<h2 id="등호-제약조건-코딩">등호 제약조건 코딩</h2>
 
 <p>코딩 시, 각 제약조건들을 개별적으로 입력하는 것이 아니라 등호 제약조건들을 하나의 큰 행렬로 통합해야 하고, 별도로 부등호 제약조건들도 하나의 행렬로 통합해야 한다. (사실 수식으로 입력하면 자동으로 행렬로 변환해주는 프로그램이 있다고 듣기는 했는데, 필자는 이를 써 본 적이 없으며, 지금도 필요성을 느끼지 않는다.)</p>
 
@@ -494,8 +540,11 @@
 
 <p>여기서 $\texttt{Aeq_balance}$와 $\texttt{Aeq_batteryenergy}$는 세로로 이어붙여진다. 이 때는 각 요소를 대괄호로 감싸지 않음에 주의. ($\texttt{beq_balance}$와 $\texttt{beq_batteryenergy}$ 에 대해서도 마찬가지이다)</p>
 
-<p><br />
-다음으로 이 문제의 부등호 제약을 보자. 해당 제약들은 배터리 충전전력/ 방전전력/ 저장에너지의 하한과 상한이다. 그리고 부등호 제약들은 모두 $\textbf{A}\textbf{x} \preceq \textbf{b}$ 꼴로 나타내야 한다 (부등호 방향이 틀리지 않도록 매우 주의해야 한다! 결과가 이상한 경우, 어떤 식에서 부등호 방향을 거꾸로 했기 때문일 경우가 많다).</p>
+<p><br /></p>
+
+<h2 id="부등호-제약조건-코딩">부등호 제약조건 코딩</h2>
+
+<p>다음으로 이 문제의 부등호 제약을 보자. 해당 제약들은 배터리 충전전력/ 방전전력/ 저장에너지의 하한과 상한이다. 그리고 부등호 제약들은 모두 $\textbf{A}\textbf{x} \preceq \textbf{b}$ 꼴로 나타내야 한다 (부등호 방향이 틀리지 않도록 매우 주의해야 한다! 결과가 이상한 경우, 어떤 식에서 부등호 방향을 거꾸로 했기 때문일 경우가 많다).</p>
 
 <p>그러므로 $ p_{\text{ch}}[t]$의 하한과 상한 조건은 아래와 같이 표현하는 것이 좋다.</p>
 
@@ -534,8 +583,11 @@
 
 <p>$\texttt{b_lowerbound}$의 73번째 원소 (0번째 시간의 배터리 내 에너지)만 주어진 초기값 $\texttt{initialenergy_batt}$이고, 나머지는 전부 0이다. 마찬가지로 $\texttt{b_upperbound}$의 73번째 원소 (0번째 시간의 배터리 내 에너지)만 주어진 초기값 $\texttt{initialenergy_batt}$이고, 나머지는 수전 전력에 대해서는 무한대 (즉 따로 상한이 없음), 충전과 방전 전력에 대해서는 배터리 용량에 c-rate를 곱한 값, 1~24번째 시간의 배터리 내 에너지에 대해서는 배터리 용량이다.</p>
 
-<p><br />
-마지막으로, 목적함수를 코딩한다. 목적함수에서 각 변수들에 붙는 계수들을 모은 벡터 $\texttt{c}$를 만든다.</p>
+<p><br /></p>
+
+<h2 id="목적함수-코딩-및-solver로-풀이">목적함수 코딩 및 solver로 풀이</h2>
+
+<p>마지막으로, 목적함수를 코딩한다. 목적함수에서 각 변수들에 붙는 계수들을 모은 벡터 $\texttt{c}$를 만든다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">eleccost_offpeak</span> <span class="o">=</span> <span class="mf">87.3</span><span class="o">*</span><span class="mf">1.137</span> <span class="c1"># 경부하 시간의 전력요금 (1.137을 곱해 부가가치세, 전력산업기반기금 고려)
 </span><span class="n">eleccost_mid</span> <span class="o">=</span> <span class="mf">140.2</span><span class="o">*</span><span class="mf">1.137</span> <span class="c1"># 중간부하 시간의 전력요금
@@ -562,8 +614,11 @@
 </span><span class="n">p_discharge</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">48</span><span class="p">:</span><span class="mi">72</span><span class="p">])</span> <span class="c1"># 시간별 배터리 방전을 통해 부하에 전달되는 전기 (방전에 따른 손실 발생 후)
 </span><span class="n">e_batt</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">72</span><span class="p">:])</span> <span class="c1"># 시간별 배터리 내 저장된 에너지 (t=0 포함함)
 </span></code></pre></div></div>
-<p><br />
-배터리의 충전/방전 스케줄이 어떤지, 그리고 배터리 내 에너지가 어떻게 변화하는지 그래프로 보자</p>
+<p><br /></p>
+
+<h2 id="풀이-결과">풀이 결과</h2>
+
+<p>배터리의 충전/방전 스케줄이 어떤지, 그리고 배터리 내 에너지가 어떻게 변화하는지 그래프로 보자</p>
 
 <p><img src="/assets/images/linprogthree/result_24hour.png" alt="result_24hour" class="align-center" />
 <em>24시간 동안의 시스템 operation plot.</em></p>
@@ -625,7 +680,7 @@
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#energy" class="page__taxonomy-item p-category" rel="tag">Energy</a>
+      <a href="/categories/#optimalsystem" class="page__taxonomy-item p-category" rel="tag">optimalsystem</a>
     
     </span>
   </p>
@@ -651,25 +706,9 @@
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>Energy</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <h4 class="page__meta-title"><span>optimalsystem</span> <span>카테고리 내 다른 글 보러가기</span></h4>
         
 
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
   
 
@@ -735,7 +774,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.
 </p>
   </article>
 </div>

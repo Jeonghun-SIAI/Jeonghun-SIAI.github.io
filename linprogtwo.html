@@ -236,8 +236,25 @@
       
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
-        <span class="nav__sub-title">범주1</span>
+        <span class="nav__sub-title">Categories</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
@@ -245,8 +262,6 @@
                     
                 
                     
-                        <li><a href="/code" class="">코드 (1)</a></li>
-                    
                 
                     
                 
@@ -254,19 +269,8 @@
                 
                     
                 
-            </ul>
-            <ul>
-                
                     
-                        <li><a href="/theory" class="">이론 (2)</a></li>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
+                        <li><a href="/energymanagement" class="">EMS (5)</a></li>
                     
                 
             </ul>
@@ -277,23 +281,9 @@
                     
                 
                     
-                
-                    
-                        <li><a href="/energy" class="">에너지 (17)</a></li>
+                        <li><a href="/estimation" class="">Estimation (2)</a></li>
                     
                 
-                    
-                
-            </ul>
-        <span class="nav__sub-title">범주2</span>
-            <ul>
-                
-                    
-                
-                    
-                
-                    
-                        <li><a href="/project" class="">프로젝트 (1)</a></li>
                     
                 
                     
@@ -312,7 +302,58 @@
                     
                 
                     
-                        <li><a href="/etc" class="">기타 (1)</a></li>
+                        <li><a href="/dataset" class="">Dataset (4)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
                     
                 
             </ul>
@@ -366,12 +407,15 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              
+              <ul class="toc__menu"><li><a href="#대상-시스템-개요">대상 시스템 개요</a></li><li><a href="#시스템-제약조건-수식화">시스템 제약조건 수식화</a></li><li><a href="#비용을-목적함수로-표현">비용을 목적함수로 표현</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <p>이제 본격적으로, 분산형 에너지시스템 도입의 경제적 안 도출을 위한 수학적 최적화 문제 구성을 알아보기로 한다.</p>
+        <p>이제 본격적으로, 분산형 에너지시스템 도입의 경제적 안 도출을 위한 수학적 최적화 문제 구성을 알아보기로 한다.
+<br /></p>
+
+<h2 id="대상-시스템-개요">대상 시스템 개요</h2>
 
 <p>이 글에서 설명할 예시 문제는, 일반용 요금제를 적용받는 건물에 100 kWh급 배터리가 설치되어 있을 경우, 평일 내 24시간 동안 각 시간별 배터리의 최적 충/방전 스케줄을 도출하는 문제이다. 최적이라 함은, 24시간 동안의 전기요금의 합을 최소화함을 의미한다.</p>
 
@@ -389,6 +433,10 @@
 <p>3) 1시간 동안 배터리에 최대로 충전되거나 배터리로부터 최대로 방전될 수 있는 에너지 양에는 상한이 있다. 이를테면 c-rate라는 지표가 0.5인 경우 1시간 동안 충전 또는 방전될 수 있는 양의 상한은 100 kWh x 0.5 = 50 kWh이다. 이 경우 방전된 배터리를 완전히 충전하는 데 걸리는 시간은 c-rate의 역수인 2시간이다. 이는 마치 양동이에 물을 채우더라도 순식간에 꽉 채울 수 있는 게 아니라 호스의 크기 및 수압에 따라 꽉 채우는 데 일정 시간이 걸리는 것과 같다.</p>
 
 <p>4) 현재 시간의 배터리 내에 충전된 에너지의 양은, 직전 시간의 배터리 내 에너지 양에, 현재 계통에서 배터리로 흘러들어가는 충전에너지에 충전효율을 곱한 양을 더하거나, 배터리로부터 부하로 최종 전달되는 방전에너지를 방전효율로 나눈 값과 같아야 한다. (배터리단에서 방전된 에너지에 방전효율을 곱하면 부하로 최종 전달되는 에너지와 같다는 식의 양 변을 방전효율로 나눈 것)</p>
+
+<p><br /></p>
+
+<h2 id="시스템-제약조건-수식화">시스템 제약조건 수식화</h2>
 
 <p>각 조건들을 선형 등식 및 부등식으로 표현해보자.</p>
 
@@ -409,6 +457,10 @@
 <p>조건 4)의 우변의 $t-1$에 주의할 것. 여기서는 충전될 경우 배터리 내 에너지가 증가하므로 $p_{\text{ch}}[t]$ 앞에 플러스가 붙고, 방전될 경우 배터리 내 에너지가 감소하므로 $p_{\text{disch}}[t]$ 앞에 마이너스가 붙었다. 배터리로 들어가는 에너지 중 충전효율만큼의 에너지만이 실제 배터리에 저장되므로, $p_{\text{ch}}[t]$에 $\mu$가 곱해진다. 마찬가지로 배터리에서 나오는 에너지 중 방전효율만큼의 에너지만이 실제 부하에 공급되므로, $p_{\text{disch}}[t]$에 $\mu$의 역수가 곱해진다.</p>
 
 <p>$t=1$일 경우 $t-1$은 0인데, $e_{\text{batt}}[0]$ 은 무엇일까? $e_{\text{batt}}[0]$는 해당 24시간 기간 직전에 배터리 안에 저장되어 있던 에너지 값, 일종의 initial point로써 따로 정의해야 한다. 여기서는 0이라고 하자. 이 경우 추가 제약조건으로 $ e_{\text{batt}}[0] = 0$을 둔다.</p>
+
+<p><br /></p>
+
+<h2 id="비용을-목적함수로-표현">비용을 목적함수로 표현</h2>
 
 <p>위 제약 하에 24시간 동안의 전기요금의 합을 최소화해야 하므로, 24시간 동안의 전기요금의 합을 나타내는 식이 하나 있어야 한다. <a href="https://cyber.kepco.co.kr/ckepco/front/jsp/CY/E/E/CYEEHP00102.jsp#">한국전력의 전기요금표</a>를 보면 아래와 같다.</p>
 
@@ -486,7 +538,7 @@
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#energy" class="page__taxonomy-item p-category" rel="tag">Energy</a>
+      <a href="/categories/#optimalsystem" class="page__taxonomy-item p-category" rel="tag">optimalsystem</a>
     
     </span>
   </p>
@@ -512,25 +564,9 @@
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>Energy</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <h4 class="page__meta-title"><span>optimalsystem</span> <span>카테고리 내 다른 글 보러가기</span></h4>
         
 
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
   
 
@@ -598,7 +634,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.
 </p>
   </article>
 </div>

@@ -236,8 +236,25 @@
       
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
-        <span class="nav__sub-title">범주1</span>
+        <span class="nav__sub-title">Categories</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
@@ -245,8 +262,6 @@
                     
                 
                     
-                        <li><a href="/code" class="">코드 (1)</a></li>
-                    
                 
                     
                 
@@ -254,19 +269,8 @@
                 
                     
                 
-            </ul>
-            <ul>
-                
                     
-                        <li><a href="/theory" class="">이론 (2)</a></li>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
+                        <li><a href="/energymanagement" class="">EMS (5)</a></li>
                     
                 
             </ul>
@@ -277,23 +281,9 @@
                     
                 
                     
-                
-                    
-                        <li><a href="/energy" class="">에너지 (17)</a></li>
+                        <li><a href="/estimation" class="">Estimation (2)</a></li>
                     
                 
-                    
-                
-            </ul>
-        <span class="nav__sub-title">범주2</span>
-            <ul>
-                
-                    
-                
-                    
-                
-                    
-                        <li><a href="/project" class="">프로젝트 (1)</a></li>
                     
                 
                     
@@ -312,7 +302,58 @@
                     
                 
                     
-                        <li><a href="/etc" class="">기타 (1)</a></li>
+                        <li><a href="/dataset" class="">Dataset (4)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
                     
                 
             </ul>
@@ -366,7 +407,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              
+              <ul class="toc__menu"><li><a href="#심층신경망-구성-및-훈련-컨셉">심층신경망 구성 및 훈련 컨셉</a></li><li><a href="#dqn-코드">DQN 코드</a></li><li><a href="#dqn을-통한-discrete-control-결과">DQN을 통한 discrete control 결과</a></li><li><a href="#continuous-control을-한다면">Continuous control을 한다면?</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
@@ -378,8 +419,10 @@
 
 <p>이 때 심층신경망은 state를 입력받아 3개 action 각각의 Q-value의 추정치 $\hat{Q}(s_{t},0), \hat{Q} (s_{t},1), \hat{Q} (s_{t},2)$ 를 출력으로 계산한다. 이 심층신경망은 매 훈련 주기마다 튜플 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다.</p>
 
-<p><br />
-심층신경망 구성은 아래 그림과 같다.</p>
+<p><br /></p>
+
+<h2 id="심층신경망-구성-및-훈련-컨셉">심층신경망 구성 및 훈련 컨셉</h2>
+<p>심층신경망 구성은 아래 그림과 같다.</p>
 
 <p><img src="/assets/images/reinforcethree/nn.png" alt="nn" class="align-center" />
 <em>Vincent의 연구에서 사용된 심층신경망 구성. (논문의 그림을 필자가 재구성하였음)</em></p>
@@ -390,8 +433,10 @@
 
 <p>Training set에 대해서는 epsilon-greedy policy를, validation set에 대해서는 greedy policy를 적용해 action을 결정한다. 매 시간별로 에너지 흐름을 계산하고, 매 24시간 주기로 심층신경망 훈련을 gradient descent로 수행한다. 이를 training set의 17,520-24 시간에 대해 수행하면 1 epoch이다.</p>
 
-<p><br />
-이제 훈련 concept는 대략 이해가 될 것이니, 코드를 보자.</p>
+<p><br /></p>
+
+<h2 id="dqn-코드">DQN 코드</h2>
+<p>이제 훈련 concept는 대략 이해가 될 것이니, 코드를 보자.</p>
 
 <p>(이 코드는 본인이 직접 작성하였다. Vincent의 학위논문에서 해당 연구에 사용한 코드의 <a href="https://github.com/VinF/deer/tree/master/examples/MG_two_storages">Github 링크</a>를 제공하나, 각 모듈별로 코드 파일들을 지나치게 분리해 놓아 사용이 여의치 않았다. 이에 필자가 ‘모든 기능들을 한 파일에 넣은 공부용’ 코드를 따로 만들었다. 다만 코드 작성 시 <a href="https://product.kyobobook.co.kr/detail/S000001810262">핸즈온 머신러닝</a>의 강화학습 chapter의 Cartpole 예제에 대한 Deep Q-Network 코드를 많이 참고하였음을 밝힌다.)</p>
 
@@ -626,21 +671,29 @@
 
 <p>Epoch당 계산 시간이 긴데, 이유는 매 시간 별 action을 결정할 때마다 심층신경망에 state를 입력해 Q-value들을 계산하는 과정을, training case에 대해서는 이를 8760x2-24번, validation case에 대해서는 8760-24번을 수행해야 하기 때문이다.</p>
 
-<p><br />
-훈련을 수행하면, validation case 기준으로 불과 몇 epoch만에 누적 비용이 200유로 이하로 줄어든다. 그리고 99 epoch 훈련 동안 validation case에 대해 가장 좋은 결과를 보인 모델의 경우 누적 비용이 27유로이다.</p>
+<p><br /></p>
 
-<p>미래를 모르면서 과거 24시간 정보만 갖고 도출한 ‘discrete’ control 것 치고는, 훌륭해 보인다. Random control 시의 누적비용 2500~2700유로 대비 매우 낮을 뿐 아니라, 미래를 안다고 가정하고 선형계획법 (Linear Programming, LP) 으로 도출한 control 시의 누적비용 -50유로에 근접하기 때문이다.</p>
+<h2 id="dqn을-통한-discrete-control-결과">DQN을 통한 discrete control 결과</h2>
+<p>훈련을 수행하면, validation case 기준으로 불과 몇 epoch만에 누적 비용이 200유로 이하로 줄어든다. 그리고 99 epoch 훈련 동안 validation case에 대해 가장 좋은 결과를 보인 모델의 경우 누적 비용이 27유로이다.</p>
+
+<p><img src="/assets/images/reinforcethree/trainingrecord.png" alt="trainingrecord" class="align-center" width="80%" />
+<em>훈련 epoch 별 validation case의 누적 ‘수익’.</em></p>
+
+<p>누적비용 27유로는, 미래를 안다고 가정하고 선형계획법 (Linear Programming, LP) 으로 도출한 control 시의 누적비용 -50유로에 근접한 값이다. 그러므로, 미래를 모르면서 과거 24시간 정보만 갖고 도출한 ‘discrete’ control 것 치고는 훌륭해 보인다. (Random control 시의 누적비용 2500~2700유로 대비 매우 낮기도 하고)</p>
 
 <p>시간별 action (계통으로부터의 수전) 이 선형계획법과 DQN에서 각각 어떻게 결정되었는지를 아래 그림과 같이 보자.</p>
 
-<p>(그림)</p>
+<p><img src="/assets/images/reinforcethree/result_dqn.png" alt="result_dqn" class="align-center" />
+<em>DQN으로 도출한 수전/송전 control. LP control과 어느 정도 비슷함.</em></p>
 
 <p>LP와 DQN으로 도출한 두 control들이 생각보다는 비슷하다. ‘대체로’ LP control에서서 수전하는 시간대에 DQN control에서도 수전하고, LP control에서 송전하는 시간대에 DQN control에서도 송전하며, LP control에서 idle인 시간대에 DQN control에서도 idle이다.</p>
 
 <p>특히 LP control은 [-1.1,1.1] 범위 내의 실수로 주어지는 ‘continuous’ control임에도 불구하고, DQN의 action들에 대응하는 최대치 송전/최대치 수전/ idle인 경우가 많다는 점이 특기할 만하다. 이 덕분에, 3-action DQN으로 우수한 economic control을 얻을 수 있는 것으로 보인다.</p>
 
-<p><br />
-그렇지만, LP control에서와 DQN control 간에 최대치 송전/ 최대치 수전/ idle 지속시간의 차이가 있고, LP control에서 이 3개 값이 아닌 다른 값인 경우도 (즉 최대치가 아닌 양으로 송전/수전하는 경우도) 분명히 많이 존재한다.</p>
+<p><br /></p>
+
+<h2 id="continuous-control을-한다면">Continuous control을 한다면?</h2>
+<p>그렇지만, LP control에서와 DQN control 간에 최대치 송전/ 최대치 수전/ idle 지속시간의 차이가 있고, LP control에서 이 3개 값이 아닌 다른 값인 경우도 (즉 최대치가 아닌 양으로 송전/수전하는 경우도) 분명히 많이 존재한다.</p>
 
 <p>그렇다면 [-1.1,1.1] 범위 내의 실수로 action을 도출하는, continuous control 심층강화학습 기법을 쓰면 어떨까? 최대치가 아닌 송전/ 수전의 가능성까지 반영한 controller를 훈련함으로써, validation case에 대해 더 낮은 누적비용을 달성하는 control 도출이 가능할까?.</p>
 
@@ -694,7 +747,7 @@
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#energy" class="page__taxonomy-item p-category" rel="tag">Energy</a>
+      <a href="/categories/#energymanagement" class="page__taxonomy-item p-category" rel="tag">energymanagement</a>
     
     </span>
   </p>
@@ -720,15 +773,9 @@
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>Energy</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <h4 class="page__meta-title"><span>energymanagement</span> <span>카테고리 내 다른 글 보러가기</span></h4>
         
 
-
-  
-
-  
-
-  
 
   
 
@@ -796,7 +843,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.
 </p>
   </article>
 </div>

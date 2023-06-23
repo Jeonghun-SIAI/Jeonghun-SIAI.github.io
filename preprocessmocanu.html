@@ -11,7 +11,7 @@
   <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>데이터 전처리 예시 - 주택의 분 단위 전기부하 자료 | 에너지 데이터 연구소</title>
-<meta name="description" content="데이터 소개">
+<meta name="description" content="스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 ‘스마트그리드 빅데이터 분석의 활용’ 이 있다. (링크)">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://localhost:4000/preprocessmocanu.html">
 
 
-  <meta property="og:description" content="데이터 소개">
+  <meta property="og:description" content="스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 ‘스마트그리드 빅데이터 분석의 활용’ 이 있다. (링크)">
 
 
 
@@ -236,8 +236,25 @@
       
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
-        <span class="nav__sub-title">범주1</span>
+        <span class="nav__sub-title">Categories</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
@@ -245,8 +262,6 @@
                     
                 
                     
-                        <li><a href="/code" class="">코드 (1)</a></li>
-                    
                 
                     
                 
@@ -254,19 +269,8 @@
                 
                     
                 
-            </ul>
-            <ul>
-                
                     
-                        <li><a href="/theory" class="">이론 (2)</a></li>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
+                        <li><a href="/energymanagement" class="">EMS (5)</a></li>
                     
                 
             </ul>
@@ -277,23 +281,9 @@
                     
                 
                     
-                
-                    
-                        <li><a href="/energy" class="">에너지 (17)</a></li>
+                        <li><a href="/estimation" class="">Estimation (2)</a></li>
                     
                 
-                    
-                
-            </ul>
-        <span class="nav__sub-title">범주2</span>
-            <ul>
-                
-                    
-                
-                    
-                
-                    
-                        <li><a href="/project" class="">프로젝트 (1)</a></li>
                     
                 
                     
@@ -312,7 +302,58 @@
                     
                 
                     
-                        <li><a href="/etc" class="">기타 (1)</a></li>
+                        <li><a href="/dataset" class="">Dataset (4)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
                     
                 
             </ul>
@@ -329,7 +370,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="데이터 전처리 예시 - 주택의 분 단위 전기부하 자료">
-    <meta itemprop="description" content="데이터 소개">
+    <meta itemprop="description" content="스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 ‘스마트그리드 빅데이터 분석의 활용’ 이 있다. (링크)">
     <meta itemprop="datePublished" content="2023-04-09T00:00:00+09:00">
     
 
@@ -366,14 +407,12 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#데이터-소개">데이터 소개</a></li><li><a href="#데이터-전처리">데이터 전처리</a></li></ul>
+              <ul class="toc__menu"><li><a href="#sqlite-db로-변환">SQLite DB로 변환</a></li><li><a href="#누락치-메꾸기">누락치 메꾸기</a></li><li><a href="#기간별-평균-데이터로-변환">기간별 평균 데이터로 변환</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <h2 id="데이터-소개">데이터 소개</h2>
-
-<p>스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 ‘스마트그리드 빅데이터 분석의 활용’ 이 있다. <a href="https://www.yes24.com/Product/Goods/86365343">(링크)<a></a></a></p>
+        <p>스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 ‘스마트그리드 빅데이터 분석의 활용’ 이 있다. <a href="https://www.yes24.com/Product/Goods/86365343">(링크)<a></a></a></p>
 
 <p>이 책의 7장 ‘딥러닝을 이용한 스마트그리드 데이터 분석’ 에서는, 널리 알려진 backpropagation 기반 ANN 모델 뿐 아니라 (Factored Conditional) Restricted Boltzmann Machine 기반 모델을 이용해 전력 부하를 예측하는 연구를 소개한다. <a href="https://www.sciencedirect.com/science/article/abs/pii/S2352467716000163">(원본 논문 링크)<a></a></a></p>
 
@@ -386,7 +425,7 @@
 
 <p><br /></p>
 
-<h2 id="데이터-전처리">데이터 전처리</h2>
+<h2 id="sqlite-db로-변환">SQLite DB로 변환</h2>
 
 <p>먼저 다운받은 txt 파일을 SQL DB 파일로 변환한다.</p>
 
@@ -421,6 +460,8 @@
     
 <span class="n">data</span><span class="p">.</span><span class="nf">to_sql</span><span class="p">(</span><span class="s">'Individualhousehold'</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s">'append'</span><span class="p">)</span>
 </code></pre></div></div>
+
+<h2 id="누락치-메꾸기">누락치 메꾸기</h2>
 
 <p>다음으로 누락치를 메꾼다. 원본 파일 및 SQL table을 불러온 파일에는 누락치가 ?로 표기되어 있다.</p>
 
@@ -494,6 +535,8 @@ select date, time, global_active_power from Individualhousehold
 <p>논문에서는 특정 시점의 누락치를, 타 년도의 같은 시점 (같은 월/ 일/ 시간/ 분) 의 값들의 산술평균으로 대체했다. (참고로 이 데이터에는 특정 시점의 전기부하 값의 누락은 있어도, 시점 자체의 누락은 없다, 즉 시작 시점부터 끝 시점까지의 모든 1분 간격 시간들이 각 row로써 존재한다.)</p>
 
 <p>이를 수행하기 위해, is_dropped에 누락 시점들을 모으고, 데이터셋에 해당 누락 시점과 연도만 다르고 나머지는 같은 시간이 각 연도별로 있는지, 있다면 전기부하 값이 0이 아닌지를 확인해서 그 값들을 num_for_impute에 모으고 평균을 내서 누락치를 대체한다.</p>
+
+<h2 id="기간별-평균-데이터로-변환">기간별 평균 데이터로 변환</h2>
 
 <p>마지막으로, 누락치를 대체한 데이터셋을 논문 내 시나리오 (15분 평균, 1시간 평균, 1주일 평균) 에 따라 쓸 수 있도록 시나리오별 timestep 단위 평균 데이터를 만든다.</p>
 
@@ -584,7 +627,7 @@ select * from active_corrected_Individualhousehold
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#energy" class="page__taxonomy-item p-category" rel="tag">Energy</a>
+      <a href="/categories/#dataset" class="page__taxonomy-item p-category" rel="tag">dataset</a>
     
     </span>
   </p>
@@ -610,27 +653,9 @@ select * from active_corrected_Individualhousehold
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>Energy</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <h4 class="page__meta-title"><span>dataset</span> <span>카테고리 내 다른 글 보러가기</span></h4>
         
 
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
   
 
@@ -649,10 +674,10 @@ select * from active_corrected_Individualhousehold
 
   
     
-      <a href="/linprogone.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>정수선형계획법 기반 분산에너지시스템 최적화 설명 - 1) 최소비용 시스템과 시간별 자료의 중요성</a>
+      <a href="/monthlyenergyone.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화</a>
     
     
-      <a href="/mypapertwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>내 Applied Energy 논문의 수학 설명 - 도심지 건축물 신재생 설치 확대 영향을 '빨리' 분석하기</a>
+      <a href="#" class="pagination_prev_next--pager disabled-first-child">첫 번째 글입니다</a>
         
   
 
@@ -700,7 +725,7 @@ select * from active_corrected_Individualhousehold
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.
 </p>
   </article>
 </div>

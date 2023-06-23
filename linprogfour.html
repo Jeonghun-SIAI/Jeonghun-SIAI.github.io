@@ -236,8 +236,25 @@
       
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
-        <span class="nav__sub-title">범주1</span>
+        <span class="nav__sub-title">Categories</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
@@ -245,8 +262,6 @@
                     
                 
                     
-                        <li><a href="/code" class="">코드 (1)</a></li>
-                    
                 
                     
                 
@@ -254,19 +269,8 @@
                 
                     
                 
-            </ul>
-            <ul>
-                
                     
-                        <li><a href="/theory" class="">이론 (2)</a></li>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
+                        <li><a href="/energymanagement" class="">EMS (5)</a></li>
                     
                 
             </ul>
@@ -277,23 +281,9 @@
                     
                 
                     
-                
-                    
-                        <li><a href="/energy" class="">에너지 (17)</a></li>
+                        <li><a href="/estimation" class="">Estimation (2)</a></li>
                     
                 
-                    
-                
-            </ul>
-        <span class="nav__sub-title">범주2</span>
-            <ul>
-                
-                    
-                
-                    
-                
-                    
-                        <li><a href="/project" class="">프로젝트 (1)</a></li>
                     
                 
                     
@@ -312,7 +302,58 @@
                     
                 
                     
-                        <li><a href="/etc" class="">기타 (1)</a></li>
+                        <li><a href="/dataset" class="">Dataset (4)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
                     
                 
             </ul>
@@ -366,7 +407,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              
+              <ul class="toc__menu"><li><a href="#용량-결정-문제에서의-목적함수-npv">용량 결정 문제에서의 목적함수: NPV</a></li><li><a href="#제약조건들">제약조건들</a></li><li><a href="#코드">코드</a></li><li><a href="#계산-결과">계산 결과</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
@@ -378,8 +419,10 @@
 <p><img src="/assets/images/linprogfour/system_pvbatt.png" alt="system_pvbatt" class="align-center" width="80%" />
 <em>태양광과 배터리를 포함하는 건물 전기 공급 시스템 도식도.</em></p>
 
-<p><br />
-이 때, 태양광과 배터리 용량까지 고려한 `최소비용’은 무엇을 의미할까? 태양광과 배터리에 들어가는 비용은 대략적으로 보면 초기투자비(설비비, 설치비 등), 그리고 설비의 수명이 다 할 때까지 매년 발생하는 유지보수비이다. 태양광과 배터리는 따로 연료를 필요로 하지는 않으므로 연료비는 없다. 한편 계통으로부터의 수전으로도 전기부하를 충족하므로, 전기요금은 매 시간별로 계속 발생한다.</p>
+<p><br /></p>
+
+<h2 id="용량-결정-문제에서의-목적함수-npv">용량 결정 문제에서의 목적함수: NPV</h2>
+<p>이 때, 태양광과 배터리 용량까지 고려한 `최소비용’은 무엇을 의미할까? 태양광과 배터리에 들어가는 비용은 대략적으로 보면 초기투자비(설비비, 설치비 등), 그리고 설비의 수명이 다 할 때까지 매년 발생하는 유지보수비이다. 태양광과 배터리는 따로 연료를 필요로 하지는 않으므로 연료비는 없다. 한편 계통으로부터의 수전으로도 전기부하를 충족하므로, 전기요금은 매 시간별로 계속 발생한다.</p>
 
 <p>그러므로, 이 문제는 `태양광과 배터리 시스템의 초기투자비, 시스템 수명 동안의 설비 유지보수비, 시스템 수명 동안의 전기요금’ 의 합을 최소화하는 변수 결정 문제가 된다. 예를 들어 시스템 운영 기간은 태양광의 수명 20년과 같고, 배터리의 수명은 10년이며 운영 시작 10년 후 같은 용량으로 재설치한다고 가정하자. 이 때, 대략적인 비용 구조는 아래와 같다 (실제 프로젝트에서는 더 상세할 수 있음).</p>
 
@@ -406,7 +449,8 @@ $\vdots$
 <p><br />
 위 비용들을 그냥 다 더하면 될까? 보통은 그렇지 않다. 시간에 따른 화폐가치 하락을 고려해야 하기 때문이다. 은행에서 이자율 3%의 예금을 든다면, 1년 후의 103만원은 현재의 100만원과 같은 가치로 볼 수 있는 것처럼 말이다. 혹시 아래 그림 같은 도식을 본 적 이 있는가?</p>
 
-<p>(현가 설명 도식)</p>
+<p><img src="/assets/images/linprogfour/npv.png" alt="npv" class="align-center" width="70%" />
+<em>Net Present Value (NPV) 도식. <br />(출처: https://www.investopedia.com/retirement/calculating-present-and-future-value-of-annuities/)</em></p>
 
 <p>이런 도식을 봤다면 ‘총 현재가치’ (Net Present Value, NPV) 를 들어봤을 것이다. 그렇지 않더라도, 아마 ‘할인율을 $r$이라 할 때, $n$년 뒤의 화폐가치 기준 돈의 액수 $C$는 현재의 화폐가치로 환산하면 $c (1+r)^{-n}$이다’ 라는 내용을 어디서 비슷하게라도 들어봤을 것이다.</p>
 
@@ -433,8 +477,10 @@ $\vdots$
 
 <p>그러므로 kW당 기본요금을 $c_{\text{grid}}^{\text{base}}$라 하면, 목적함수의 세 번째 항의 분자에 $ c_{\text{grid}}^{\text{base}} \text{max}{ p_{\text{grid}}[n,t] }$ 가 추가되어야 한다. (단, $\text{max} [p_{\text{grid}}[n,t]]$의 값을 최적화 계산에서 실제로 구하려면 새로운 변수 $q$를 도입한 추가적인 제약조건이 필요하며, 이는 포스팅 하단에서 따로 설명한다.)</p>
 
-<p><br />
-위에서 목적함수가 포함하는 시점들은 연도 $n=1,2,\cdots,20$, 그리고 각 연도 내의 시간 $t=1,2,\cdots,8760$이다. 그러므로, 에너지 밸런스 식도 아래와 같이 표현된다.</p>
+<p><br /></p>
+
+<h2 id="제약조건들">제약조건들</h2>
+<p>위에서 목적함수가 포함하는 시점들은 연도 $n=1,2,\cdots,20$, 그리고 각 연도 내의 시간 $t=1,2,\cdots,8760$이다. 그러므로, 에너지 밸런스 식도 아래와 같이 표현된다.</p>
 
 <p>$ p_{\text{load}}[n,t] = p_{\text{grid}}[n,t] - p_{\text{ch}}[n,t] + p_{\text{disch}}[n,t] + s_{\text{pv}} p_{\text{pv}}[n,t]$
 시간 인덱스 $t$ 뿐 아니라 연도 인덱스 $n$이 추가되었다. 여기서 맨 마지막에 추가된 항 $s_{\text{pv}} p_{\text{pv}}[n,t]$은 태양광 발전량이다. $p_{\text{pv}}[n,t]$는 `태양광 1kW’가 $n$년도의 $t$번째 시간에 발전하는 전력이고, 여기에 용량 $s_{\text{pv}}$를 곱한 것이다. 용량 $s_{\text{pv}}$는 아직 값이 결정되지 않은, 최적화 문제를 풀어 결정해야 하는 변수임에 유의한다. 용량의 계수는$p_{\text{pv}}[n,t]$이다 (시간별 태양광 발전량 자료를 input으로 받는다).</p>
@@ -484,8 +530,10 @@ $\vdots$
 
 <p>더 현실적으로는 ‘태양광 설치가 가능한 면적 제약’, 즉 어떤 상수 $A$에 대해 $s_{\text{pv}} \leq A$도 고려할 수 있다. 지붕 등 설치 가능 면적이 크지 않다면 이는 중요한 제약이다. 또한 <a href="https://cyber.kepco.co.kr/ckepco/front/jsp/CY/H/B/CYHBHP00101.jsp">태양광 잉여분을 역송할 경우의 상계거래</a> 등도 제약조건으로 둘 수 있다. 다만 이 포스팅의 예제는 선형계획 계산 자체를 설명하는 것이 목적이므로, 이러한 심화적 조건들은 적용하지 않는다.</p>
 
-<p><br />
-지금까지의 내용을 반영해, 1년치 자료를 입력으로 받아서 태양광과 배터리 용량을 결정하는 최적화 문제를 구성하고 풀어내는 Python 코드는 아래와 같다.</p>
+<p><br /></p>
+
+<h2 id="코드">코드</h2>
+<p>지금까지의 내용을 반영해, 1년치 자료를 입력으로 받아서 태양광과 배터리 용량을 결정하는 최적화 문제를 구성하고 풀어내는 Python 코드는 아래와 같다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
 </span>
@@ -586,6 +634,9 @@ $\vdots$
 
 <p>이 때 주의할 점은, <a href="https://cyber.kepco.co.kr/ckepco/front/jsp/CY/D/C/CYDCHP00403.jsp">공휴일의 최대수요전력 및 사용전력량은 경부하시간대로 계량하고, 공휴일이 아닌 토요일 최대부하시간대의 사용전력량은 중간부하시간대로 계량한다</a>는 것이다. $\texttt{eleccost_hourly.txt}$에 해당 사항이 반영되어 있는지 확인해야 한다. 그렇지 않으면 전기요금 및 전기요금 절감액이 과다계상된다.</p>
 
+<p><br /></p>
+
+<h2 id="계산-결과">계산 결과</h2>
 <p>(계산 결과)</p>
 
 <div class="notice--info">
@@ -637,7 +688,7 @@ $\vdots$
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#energy" class="page__taxonomy-item p-category" rel="tag">Energy</a>
+      <a href="/categories/#optimalsystem" class="page__taxonomy-item p-category" rel="tag">optimalsystem</a>
     
     </span>
   </p>
@@ -663,25 +714,9 @@ $\vdots$
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>Energy</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <h4 class="page__meta-title"><span>optimalsystem</span> <span>카테고리 내 다른 글 보러가기</span></h4>
         
 
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
   
   	
@@ -694,7 +729,7 @@ $\vdots$
 
   
     
-      <a href="/reinforceone.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개</a>
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
     
     
       <a href="/linprogthree.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>정수선형계획법 기반 분산에너지시스템 최적화 설명 - 3) 배터리의 충/방전 스케줄 정하기: Python 코드</a>
@@ -745,7 +780,7 @@ $\vdots$
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+    <p class="archive__item-excerpt" itemprop="description">저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.
 </p>
   </article>
 </div>

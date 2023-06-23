@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-06-23T12:22:27+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">에너지 데이터 연구소</title><subtitle>스마트한 에너지 전환에 기여하는 데이터 사이언티스트를 지향합니다.</subtitle><author><name>Jeonghun Song</name></author><entry><title type="html">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거</title><link href="http://localhost:4000/monthlyenergythree.html" rel="alternate" type="text/html" title="건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거" /><published>2023-04-23T00:00:00+09:00</published><updated>2023-04-23T00:00:00+09:00</updated><id>http://localhost:4000/monthlyenergythree</id><content type="html" xml:base="http://localhost:4000/monthlyenergythree.html"><![CDATA[<p>저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-06-23T17:55:05+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">에너지 데이터 연구소</title><subtitle>스마트한 에너지 전환에 기여하는 데이터 사이언티스트를 지향합니다.</subtitle><author><name>Jeonghun Song</name></author><entry><title type="html">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거</title><link href="http://localhost:4000/monthlyenergythree.html" rel="alternate" type="text/html" title="건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거" /><published>2023-04-23T00:00:00+09:00</published><updated>2023-04-23T00:00:00+09:00</updated><id>http://localhost:4000/monthlyenergythree</id><content type="html" xml:base="http://localhost:4000/monthlyenergythree.html"><![CDATA[<p>저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.</p>
 
-<p><br />
-상식적으로, 같은 용도의 건물이라면 크기가 큰 건물일수록 에너지 사용량이 큰 경향이 있을 것이다. 이를테면 서울 내 업무용 건물들의 1월 전기 사용량을 연면적 (모든 층의 바닥면적의 합, 단 주차장이나 공용시설 등은 제외) 에 대해 scatter plot하면 아래 그림과 같다.</p>
+<p>이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.</p>
+
+<p><br /></p>
+
+<h2 id="에너지-사용량-크기-측면에서의-outlier">에너지 사용량 크기 측면에서의 outlier</h2>
+<p>상식적으로, 같은 용도의 건물이라면 크기가 큰 건물일수록 에너지 사용량이 큰 경향이 있을 것이다. 이를테면 서울 내 업무용 건물들의 1월 전기 사용량을 연면적 (모든 층의 바닥면적의 합, 단 주차장이나 공용시설 등은 제외) 에 대해 scatter plot하면 아래 그림과 같다.</p>
 
 <p><img src="/assets/images/monthlyenergythree/outliers.png" alt="outliers" class="align-center" width="70%" />
 <em>x축이 연면적, y축이 1월 전기 사용량. 위쪽에 outlier들이 보임 (붉은 점들).</em></p>
@@ -11,8 +15,12 @@
 <p><br />
 그런데, 위 그림의 붉은 점들은 딱 봐도 ‘크기가 이상한’ data point, 소위 말해서 ‘outlier’이다. 건물 연면적을 고려했을 때 전기 사용량의 값이 지나치게 크다.</p>
 
-<p>이는 측정/기재 오류일 수도 있고, 어쩌면 정말로 저만큼 많은 전기를 쓰는 것일 수도 있다. 그러나 만에 하나 정말로 저렇게 많은 전기를 사용한다고 하더라도, 그런 건물은 일반적이지 않으므로 따로 떼어서 별도의 모델링을 하는 것이 맞다. 즉, ‘일반적인’ 건물들에 대한 통계적 연구 수행을 위해서는 위 outlier들은 제거해야 한다.</p>
+<p>이는 측정/기재 오류일 수도 있고, 어쩌면 정말로 저만큼 많은 전기를 쓰는 것일 수도 있다. 그러나 만에 하나 정말로 저렇게 많은 전기를 사용한다고 하더라도, 그런 건물은 일반적이지 않으므로 따로 떼어서 별도의 모델링을 하는 것이 맞다.</p>
 
+<p>즉, ‘일반적인’ 건물들에 대한 통계적 연구 수행을 위해서는 위 outlier들은 제거해야 한다.</p>
+
+<p><br /></p>
+<h2 id="outlier-판별-방법">Outlier 판별 방법</h2>
 <p>그럼 outlier는 어떻게 판별하나? 데이터의 size가 그렇게 크지 않고 설명변수가 하나라면, 그냥 그래프를 그려서 눈으로 보고 제거할 수도 있을 것이다. 그러나 데이터 size도 커지고 설명변수도 둘 이상이 되면, 눈으로 보기 매우 힘들다 (이를 테면 반응변수를 에너지 사용량으로 하는 회귀모델에 대해, 설명변수가 건물 연면적 뿐 아니라 건물 층수, 사용연수, 재질 등 여러 가지가 될 수 있다.</p>
 
 <p>그러므로 시각화를 필요로 하지 않으면서 outlier를 판별할 수 있는, 이전 포스팅에서처럼 지표(metric)에 기반해서 판별하는 방법이 필요하다.</p>
@@ -59,11 +67,13 @@ $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Coo
 2) <a href="/monthlyenergytwo.html">월별 사용 추이가 이상한 data point 제거</a><br />
 3) <b>월별 사용량 크기가 이상한 data point 제거</b>
 
-</div>]]></content><author><name>Jeonghun Song</name></author><category term="Energy" /><category term="건물 에너지 데이터" /><category term="회귀분석" /><summary type="html"><![CDATA[저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.]]></summary></entry><entry><title type="html">건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거</title><link href="http://localhost:4000/monthlyenergytwo.html" rel="alternate" type="text/html" title="건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거" /><published>2023-04-22T00:00:00+09:00</published><updated>2023-04-22T00:00:00+09:00</updated><id>http://localhost:4000/monthlyenergytwo</id><content type="html" xml:base="http://localhost:4000/monthlyenergytwo.html"><![CDATA[<p>이전 포스팅에서, 각 건물의 지번별/월별 전기와 도시가스 사용량 데이터를 소개하였다. 또한 이를 표제부와 결합해 건물 에너지 분석에 활용할 수 있으며, 그 결합 방법 또한 소개하였다.</p>
+</div>]]></content><author><name>Jeonghun Song</name></author><category term="dataset" /><category term="건물 에너지 데이터" /><category term="회귀분석" /><summary type="html"><![CDATA[저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.]]></summary></entry><entry><title type="html">건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거</title><link href="http://localhost:4000/monthlyenergytwo.html" rel="alternate" type="text/html" title="건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거" /><published>2023-04-22T00:00:00+09:00</published><updated>2023-04-22T00:00:00+09:00</updated><id>http://localhost:4000/monthlyenergytwo</id><content type="html" xml:base="http://localhost:4000/monthlyenergytwo.html"><![CDATA[<p>이전 포스팅에서, 각 건물의 지번별/월별 전기와 도시가스 사용량 데이터를 소개하였다. 또한 이를 표제부와 결합해 건물 에너지 분석에 활용할 수 있으며, 그 결합 방법 또한 소개하였다.</p>
 
 <p>그렇다면 결합된 데이터를 그대로 쓰면 되는가? 그렇지 않다. 분명히 ‘이상한’ data point들이 존재할 것이기 때문이다. 데이터 기반의 연구개발을 한다면, 이러한 ‘이상한’ data point들을 제거하거나 수정하는 데이터 전처리는 필수이다.</p>
 
 <p>각 건물의 지번별 데이터는 row의 수가 많다. 서울의 경우 데이터 전처리를 해도 만 단위이다. 데이터가 이 정도로 크면, 회귀분석 등을 할 때 모델을 잘 구성했다는 전제 하에 일관성(consistency)에 의해 계수추정량이 실제 값에 가까울 확률이 매우 높다. 그러므로 이 포스팅에서는, ‘이상한’ data point는 전부 삭제한다고 하자.</p>
+
+<h2 id="데이터-전처리-종류">데이터 전처리 종류</h2>
 
 <p>가장 먼저 떠올릴 전처리는, 누락이 있는 point 제거이다. 이미 이전 포스팅의 마지막 부분에서 SQLite DB로부터 서울 내 건물들 중 ‘전기 사용량 및 연면적 값의 누락이 없는’ point들만 불러왔다. 여기에 더해, 봄~가을의 도시가스 사용 내역이 있는데 겨울(12, 1, 2월)의 도시가스 사용 내역이 없는 point는 ‘이상한’ point로 보고 제거한다 (상식적으로 도시가스를 쓴다면 겨울에 집중적으로 쓰는 것이 정상이므로).</p>
 
@@ -78,8 +88,10 @@ $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Coo
 
 <p>이번 포스팅에서는 건물 월별 에너지 사용량의 `추이’가 이상한 data point를 판별하는 방법을 설명한다.</p>
 
-<p><br />
-건물 월별 에너지 사용량의 ‘정상적인’ 추이는 아래 그림과 같다.</p>
+<p><br /></p>
+
+<h2 id="건물-월별-에너지-사용량의-추이">건물 월별 에너지 사용량의 ‘추이’</h2>
+<p>건물 월별 에너지 사용량의 ‘정상적인’ 추이는 아래 그림과 같다.</p>
 
 <p><img src="/assets/images/monthlyenergytwo/normalpattern.png" alt="normalpattern" class="align-center" />
 <em>일반적인 월별 전기 사용량 추이(좌) 와 가스 사용량 추이(우)</em></p>
@@ -97,8 +109,10 @@ $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Coo
 <p>정확히는, 위 그림은 `각 월별 사용량이 연간 사용량에서 차지하는 비중’을 나타낸 그림이다. 각 월별 전기 사용량을 원소로 하는 12차원 열벡터를 $y_{i}$라 할 때, 위 그림은 $y_{i} / \Vert y_{i} \Vert_{1}$이다.
 위 그림에서 보이는 월별 사용량 추이는, 일반적인 추이와 거리가 멀다. 그러므로 해당 data point를 삭제해야 한다.</p>
 
-<p><br />
-그러면, 이상한 추이를 보이는 data point들은 어떻게 판별할 수 있을까? 월별 비중 그림을 일일이 다 그려서? 데이터 size (data point의 개수) 가 수천개만 되어도 이는 불가능하다. 각 data point 별로 어떤 지표(metric)를 계산 후 그 지표의 크기로 이상한 point를 판별하는 방법이 필요하다.</p>
+<p><br /></p>
+
+<h2 id="비정상적인-추이를-보이는-data-point-판별-방법">비정상적인 추이를 보이는 data point 판별 방법</h2>
+<p>그러면, 이상한 추이를 보이는 data point들은 어떻게 판별할 수 있을까? 월별 비중 그림을 일일이 다 그려서? 데이터 size (data point의 개수) 가 수천개만 되어도 이는 불가능하다. 각 data point 별로 어떤 지표(metric)를 계산 후 그 지표의 크기로 이상한 point를 판별하는 방법이 필요하다.</p>
 
 <p>위에서 언급한 각 월별 사용량 비중을 나타내는 벡터 $y_{i} / \Vert y_{i} \Vert_{1}$를 $\tilde{y}_{i}$라 하자. 그리고 모든 건물들에 대한 $\tilde{y}_{i}$들을 ‘행벡터들을 쌓는 방식으로’ 결합하여 만든 행렬 $\tilde{Y} = [\tilde{y}_{1},\tilde{y}_{2},\cdots, \tilde{y}_{N}]^{\top}$ 을 생각하자.</p>
 
@@ -132,22 +146,22 @@ $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Coo
 2) <b>월별 사용 추이가 이상한 data point 제거</b><br />
 3) <a href="/monthlyenergythree.html">월별 사용량 크기가 이상한 data point 제거</a>
 
-</div>]]></content><author><name>Jeonghun Song</name></author><category term="Energy" /><category term="건물 에너지 데이터" /><category term="회귀분석" /><summary type="html"><![CDATA[이전 포스팅에서, 각 건물의 지번별/월별 전기와 도시가스 사용량 데이터를 소개하였다. 또한 이를 표제부와 결합해 건물 에너지 분석에 활용할 수 있으며, 그 결합 방법 또한 소개하였다.]]></summary></entry><entry><title type="html">WSL2 Ubuntu 22.04에 CUDA &amp;amp; cuDNN 설치하기</title><link href="http://localhost:4000/cudadudnn.html" rel="alternate" type="text/html" title="WSL2 Ubuntu 22.04에 CUDA &amp;amp; cuDNN 설치하기" /><published>2023-04-21T00:00:00+09:00</published><updated>2023-04-21T00:00:00+09:00</updated><id>http://localhost:4000/cudadudnn</id><content type="html" xml:base="http://localhost:4000/cudadudnn.html"><![CDATA[<p>이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.</p>
+</div>]]></content><author><name>Jeonghun Song</name></author><category term="dataset" /><category term="건물 에너지 데이터" /><category term="회귀분석" /><summary type="html"><![CDATA[이전 포스팅에서, 각 건물의 지번별/월별 전기와 도시가스 사용량 데이터를 소개하였다. 또한 이를 표제부와 결합해 건물 에너지 분석에 활용할 수 있으며, 그 결합 방법 또한 소개하였다.]]></summary></entry><entry><title type="html">WSL2 Ubuntu 22.04에 CUDA &amp;amp; cuDNN 설치하기</title><link href="http://localhost:4000/cudadudnn.html" rel="alternate" type="text/html" title="WSL2 Ubuntu 22.04에 CUDA &amp;amp; cuDNN 설치하기" /><published>2023-04-21T00:00:00+09:00</published><updated>2023-04-21T00:00:00+09:00</updated><id>http://localhost:4000/cudadudnn</id><content type="html" xml:base="http://localhost:4000/cudadudnn.html"><![CDATA[<p>이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.</p>
 
 <p>이에, 필자가 WSL2 Ubuntu 22.04 환경에 CUDA &amp; cuDNN을 설치하는 데 거쳤던 스텝들을 해당 포스팅으로 남긴다. 필자가 나중에 다른 컴퓨터에 CUDA를 설치하게 될 경우, 이 기록이 필자 본인에게라도 도움이 되길 바란다.</p>
 
 <p><br />
-자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 <a href="https://www.nvidia.co.kr/Download/index.aspx?lang=kr">다운로드 웹페이지</a> 찾아서 윈도우에서 설치</p>
+자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 <a href="https://www.nvidia.co.kr/Download/index.aspx?lang=kr">다운로드 웹페이지</a> 찾아서 윈도우에서 설치.</p>
 
-<p>ubuntu bash에서 $\texttt{nvidia-smi}$ 실행 시, 드라이버 설치 확인 가능</p>
-
-<p><br />
-<a href="https://www.tensorflow.org/install/gpu?hl=ko">Tensorflow 웹페이지</a>에서 호환되는 CUDA 버전 확인 (‘소프트웨어 요구사항’ 항목을 보면, Tensorflow의 경우 CUDA 11.2 지원)</p>
+<p>ubuntu bash에서 $\texttt{nvidia-smi}$ 실행 시, 드라이버 설치 확인 가능.</p>
 
 <p><br />
-<a href="https://developer.nvidia.com/cuda-11.2.0-download-archive?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=WSLUbuntu&amp;target_version=20&amp;target_type=runfilelocal">CUDA Toolkit Downloads 웹페이지</a>에서 Linux - x86_64 - WSL-Ubuntu - 2.0 - runtime (local) 선택 시 보여주는 명령어를 ubuntu bash에 쳐서 CUDA를 다운로드</p>
+<a href="https://www.tensorflow.org/install/gpu?hl=ko">Tensorflow 웹페이지</a>에서 호환되는 CUDA 버전 확인 (‘소프트웨어 요구사항’ 항목을 보면, Tensorflow의 경우 CUDA 11.2 지원).</p>
 
-<p>명령어는 아래와 같음</p>
+<p><br />
+<a href="https://developer.nvidia.com/cuda-11.2.0-download-archive?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=WSLUbuntu&amp;target_version=20&amp;target_type=runfilelocal">CUDA Toolkit Downloads 웹페이지</a>에서 Linux - x86_64 - WSL-Ubuntu - 2.0 - runtime (local) 선택 시 보여주는 명령어를 ubuntu bash에 쳐서 CUDA를 다운로드.</p>
+
+<p>명령어는 아래와 같음.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://developer.download.nvidia.com/compute/cuda/11.2.0/local_installers/cuda_11.2.0_460.27.04_linux.run
 sudo sh cuda_11.2.0_460.27.04_linux.run
@@ -158,17 +172,15 @@ sudo sh cuda_11.2.0_460.27.04_linux.run
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Failed to verify gcc version. See log at /var/log/cuda-installer.log for details.
 </code></pre></div></div>
 <p>라는 gcc 버전 오류가 뜬다면, gcc를 버전 9로 낮춰야 함,
-<a href="https://gooopy.tistory.com/134">이 포스트</a>에서 소개하는 명령어들에서 버전 숫자를 8에서 9로만 바꿔서 입력 (버전 8까지는 apt 다운로드 서버에서 없어진 듯함), 명령어는 아래와 같음</p>
+<a href="https://gooopy.tistory.com/134">이 포스트</a>에서 소개하는 명령어들에서 버전 숫자를 8에서 9로만 바꿔서 입력 (버전 8까지는 apt 다운로드 서버에서 없어진 듯함), 명령어는 아래와 같음.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt -y install gcc-9 g++-9
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
 </code></pre></div></div>
 <p>그리고 다시 $\texttt{sudo sh cuda_11.2.0_460.27.04_linux.run}$ 를 bash에서 실행하면
-라이선스 관련 큰 창, 그리고 거기서 accept를 입력하면 설치 옵션 관련 큰 창이 뜰 것임</p>
+라이선스 관련 큰 창, 그리고 거기서 accept를 입력하면 설치 옵션 관련 큰 창이 뜰 것임 (미리 terminal 높이를 최대한 높여놓길 권장, 너무 낮으면 안 보임).</p>
 
-<p>(미리 terminal 높이를 최대한 높여놓길 권장, 너무 낮으면 안 보임)</p>
-
-<p>선택하고 좀 기다리면 설치됨, 필자의 경우 설치 직후 아래의 메시지가 떴음</p>
+<p>선택하고 좀 기다리면 설치됨, 필자의 경우 설치 직후 아래의 메시지가 떴음.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>= Summary =
 ===========
 
@@ -189,39 +201,39 @@ Logfile is /var/log/cuda-installer.log
 </code></pre></div></div>
 
 <p><br />
-ubuntu bash에 $\texttt{vi /etc/profile}$ 입력 후 vi 에디터에서 $\texttt{i}$ 누르면 편집 가능</p>
+ubuntu bash에 $\texttt{vi /etc/profile}$ 입력 후 vi 에디터에서 $\texttt{i}$ 누르면 편집 가능.</p>
 
 <p>(vi 에디터 명령은 <a href="https://kkalkkalparrot.tistory.com/36">이 포스팅</a> 참고)</p>
 
-<p>etc/profile에 아래 코드 입력 (<a href="https://nirsa.tistory.com/332">이 포스팅 참고</a>)</p>
+<p>etc/profile에 아래 코드 입력 (<a href="https://nirsa.tistory.com/332">이 포스팅 참고</a>).</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export PATH=$PATH:/usr/local/cuda-11.2/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.2/lib64
 export CUDADIR=/usr/local/cuda-11.2
 </code></pre></div></div>
 
-<p>입력 후 Esc 눌러 편집 모드에서 나오고 $\texttt{:w}$ 입력 시 저장됨</p>
+<p>입력 후 Esc 눌러 편집 모드에서 나오고 $\texttt{:w}$ 입력 시 저장됨.</p>
 
-<p>그리고 $\texttt{source /etc/profile}$ 입력</p>
+<p>그리고 $\texttt{source /etc/profile}$ 입력.</p>
 
-<p>CUDA 설치 버전 확인은 bash에서 $\texttt{nvcc -V}$ 실행</p>
+<p>CUDA 설치 버전 확인은 bash에서 $\texttt{nvcc -V}$ 실행.</p>
 
 <p><br />
-cuDNN 설치는 <a href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html">공식 가이드</a> 참고</p>
+cuDNN 설치는 <a href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html">공식 가이드</a> 참고.</p>
 
-<p>가이드의 1.1.3 항목대로 $\texttt{Zlib}$를 다운받기 위해, $\texttt{sudo apt-get install zlib1g}$ 를 bash에서 실행</p>
+<p>가이드의 1.1.3 항목대로 $\texttt{Zlib}$를 다운받기 위해, $\texttt{sudo apt-get install zlib1g}$ 를 bash에서 실행.</p>
 
-<p>가이드의 1.2 항목대로 cudNN을 다운로드 <a href="https://developer.nvidia.com/rdp/cudnn-download">(다운로드 링크)</a></p>
+<p>가이드의 1.2 항목대로 cudNN을 다운로드 <a href="https://developer.nvidia.com/rdp/cudnn-download">(다운로드 링크).</a></p>
 
-<p>다운받으려면 NVIDIA 계정 필요하므로 없을 경우 생성</p>
+<p>다운받으려면 NVIDIA 계정 필요하므로 없을 경우 생성.</p>
 
 <p>for CUDA 11.x 에 있는 Local Installer for Linux x86_64 (Tar) 를 우선 윈도우즈에서 다운받고,
 다운로드 완료되면 ubuntu shell에서 $\texttt{mtn}$으로 접근, 파일 확인 후 $\texttt{home}$ 내 폴더로 복사해 감</p>
 
-<p>이를테면 $\texttt{D:\Downloads}$ 에 받았다고 하면 ubuntu bash에서 아래 명령 실행</p>
+<p>이를테면 $\texttt{D:\Downloads}$ 에 받았다고 하면 ubuntu bash에서 아래 명령 실행.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp "/mnt/d/Downloads/cudnn-linux-x86_64-8.9.0.131_cuda11-archive.tar.xz" "/home/ubuntu/workspaces"
 </code></pre></div></div>
-<p>그리고 복사된 파일의 위치에서, 공식 가이드대로 아래 명령들 실행</p>
+<p>그리고 복사된 파일의 위치에서, 공식 가이드대로 아래 명령들 실행.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -xvf cudnn-linux-x86_64-8.9.0.131_cuda11-archive.tar.xz
 sudo cp cudnn-*-archive/include/cudnn*.h /usr/local/cuda/include
@@ -230,12 +242,14 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 </code></pre></div></div>
 
 <p><br />
-이후 재부팅한 후 ubuntu에서 tensorflow 쓰는 파이썬 코드 실행 시, 아래와 같은 맥락의 메시지를 본다면 성공임</p>
+이후 재부팅한 후 ubuntu에서 tensorflow 쓰는 파이썬 코드 실행 시, 아래와 같은 맥락의 메시지를 본다면 성공임.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I tensorflow/core/common_runtime/gpu/gpu_device.cc:1635] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 2029 MB memory:  -&gt; device: 0, name: NVIDIA GeForce GTX 1650 SUPER, pci bus id: 0000:01:00.0, compute capability: 7.5
 </code></pre></div></div>
 
-<p>만약 tensorflow를 사용하지만 GPU를 사용하지는 않을 경우, Python 기준으로 코드 상단에 아래 코드 추가</p>
+<p>CUDA 설치 후 GPU 사용 시, Python에서 $\texttt{Tensorflow}$ 라이브러리를 사용할 경우 RNN 모델인 LSTM과 GRU 훈련의 속도가 매우 빨라졌음을 확인함.</p>
+
+<p>만약 tensorflow를 사용하지만 GPU를 사용하지는 않을 경우, Python 기준으로 코드 상단에 아래 코드를 추가함.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 </code></pre></div></div>]]></content><author><name>Jeonghun Song</name></author><category term="etc" /><category term="딥러닝" /><category term="Python" /><summary type="html"><![CDATA[이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.]]></summary></entry><entry><title type="html">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화</title><link href="http://localhost:4000/monthlyenergyone.html" rel="alternate" type="text/html" title="건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화" /><published>2023-04-20T00:00:00+09:00</published><updated>2023-04-20T00:00:00+09:00</updated><id>http://localhost:4000/monthlyenergyone</id><content type="html" xml:base="http://localhost:4000/monthlyenergyone.html"><![CDATA[<p>필자에게 있어 각별한 데이터가 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터다.</p>
 
@@ -246,6 +260,9 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 
 <p>전기 사용량은 7월/ 8월 즉 여름에 크고, 가스 사용량은 1월/ 2월/ 12월 즉 겨울에 큰 걸 볼 수 있다.</p>
 
+<p><br /></p>
+
+<h2 id="지번별-에너지-사용량-데이터">지번별 에너지 사용량 데이터</h2>
 <p>이러한 개별 건물의 월별 에너지 사용량 데이터는, <a href="https://open.eais.go.kr/main/main.do">국토교통부의 건축데이터 민간개방 시스템</a>에서 제공한다.</p>
 
 <p><img src="/assets/images/monthlyenergyone/webpage_monthlyenergy.png" alt="webpage_monthlyenergy" class="align-center" />
@@ -267,6 +284,9 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 
 <p>이번 포스팅은 에너지 사용량 데이터와 표제부를 Python의 pandas를 이용해 결합하고 SQL DB로 저장했던 과정에 대한 기록이다.</p>
 
+<p><br /></p>
+
+<h2 id="각-월별-에너지-사용량-데이터들의-통합-1년-단위">각 월별 에너지 사용량 데이터들의 통합 (1년 단위)</h2>
 <p>지번별 월별 에너지 사용량 데이터는 각 월별로 흩어져 있는데, 먼저 공통된 연도의 월별 사용량 자료들을 Python의 pandas를 이용해 하나로 합쳤다. 2022년 1월의 전기 사용량 데이터 파일의 이름을 $\texttt{elec_202201.txt}$라 할 때, 2022년의 1~12월 전기 사용량과 가스 사용량 데이터들을 하나로 합치는 코드는 아래와 같다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
@@ -328,6 +348,9 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 
 <p>어떤 건물들은 가스 사용량이 모든 월에 대해 없는데, 이는 해당 건물이 도시가스를 공급받지 않기 때문이다 (해당 건물 내 일부 부대시설(음식점 등)이 LPG 가스를 사용하거나 할 수는 있다).</p>
 
+<p><br /></p>
+
+<h2 id="에너지-사용량-데이터와-표제부-결합">에너지 사용량 데이터와 표제부 결합</h2>
 <p>다음으로, 모든 월의 에너지 사용량 통합 데이터를 표제부와 합치고 SQL DB로 저장한다.</p>
 
 <p><img src="/assets/images/monthlyenergyone/pyoje_web_1.png" alt="pyoje_web_1" class="align-center" />
@@ -532,7 +555,7 @@ and netfloorarea &gt; 0
 2) <a href="/monthlyenergytwo.html">월별 사용 추이가 이상한 data point 제거</a><br />
 3) <a href="/monthlyenergythree.html">월별 사용량 크기가 이상한 data point 제거</a>
 
-</div>]]></content><author><name>Jeonghun Song</name></author><category term="Energy" /><category term="SQL" /><category term="건물 에너지 데이터" /><category term="Python" /><summary type="html"><![CDATA[필자에게 있어 각별한 데이터가 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터다.]]></summary></entry><entry><title type="html">강화학습 기반 마이크로그리드 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출</title><link href="http://localhost:4000/reinforcefive.html" rel="alternate" type="text/html" title="강화학습 기반 마이크로그리드 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출" /><published>2023-04-19T00:00:00+09:00</published><updated>2023-04-19T00:00:00+09:00</updated><id>http://localhost:4000/reinforcefive</id><content type="html" xml:base="http://localhost:4000/reinforcefive.html"><![CDATA[<p>Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 (3개 action들은 각각 1.1kW 수전/ 1.1kW 송전/ idle) .</p>
+</div>]]></content><author><name>Jeonghun Song</name></author><category term="dataset" /><category term="SQL" /><category term="건물 에너지 데이터" /><category term="Python" /><summary type="html"><![CDATA[필자에게 있어 각별한 데이터가 있다. (비주거용) 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터다.]]></summary></entry><entry><title type="html">강화학습 기반 마이크로그리드 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출</title><link href="http://localhost:4000/reinforcefive.html" rel="alternate" type="text/html" title="강화학습 기반 마이크로그리드 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출" /><published>2023-04-19T00:00:00+09:00</published><updated>2023-04-19T00:00:00+09:00</updated><id>http://localhost:4000/reinforcefive</id><content type="html" xml:base="http://localhost:4000/reinforcefive.html"><![CDATA[<p>Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 (3개 action들은 각각 1.1kW 수전/ 1.1kW 송전/ idle).</p>
 
 <p><img src="/assets/images/reinforceone/system.png" alt="system" class="align-center" />
 <em>Vincent의 연구에서 가정된 마이크로그리드.</em></p>
@@ -542,15 +565,14 @@ and netfloorarea &gt; 0
 <p>진보된 방법들의 대표 사례들로, <a href="https://arxiv.org/abs/1802.09477">Twin Delayed Deep Deterministic policy gradient (TD3)</a>와 <a href="https://arxiv.org/abs/1812.05905">Soft Actor-Critic (SAC)</a>이 있다.</p>
 
 <p><br /></p>
-<h2 id="td3">TD3</h2>
+
+<h2 id="twin-delayed-ddpg-td3">Twin Delayed DDPG (TD3)</h2>
 
 <p>TD3가 DDPG와 비교해 갖는 차이점은 대략 아래와 같다 (항상 그렇지만 상세한 내용은 논문 원문을 참고하자).</p>
 
-<ul>
-  <li>critic 신경망 한 개가 아닌 두 개를 사용함. 그리고 $Q(s_{t+1},a_{t+1})$을 두 개의 target critic 신경망 각각에 대해 계산하고 그 중 ‘더 작은 값’을 사용함. 마찬가지로 actor 훈련시의 목적함수 내 $Q(s_{t},a_{t})$ 또한 두 critic 신경망 각각에 대해 계산하고 그 중 ‘더 작은 값’을 사용함. 이를 통해 Q-learning 특유의 overestimation 문제를 경감할 수 있음.</li>
-  <li>$a_{t+1}$을 결정 시 actor의 결과를 그대로 쓰는 게 아니라, clipped noise를 추가하여 smoothing regularization 효과를 얻음.</li>
-  <li>Critic이 두 번 업데이트될 동안 actor는 한 번 업데이트됨, 이러한 `delayed’ policy update를 통해 value estimation의 variance를 줄임.</li>
-</ul>
+<p>1) critic 신경망 한 개가 아닌 두 개를 사용함. 그리고 $Q(s_{t+1},a_{t+1})$을 두 개의 target critic 신경망 각각에 대해 계산하고 그 중 ‘더 작은 값’을 사용함. 마찬가지로 actor 훈련시의 목적함수 내 $Q(s_{t},a_{t})$ 또한 두 critic 신경망 각각에 대해 계산하고 그 중 ‘더 작은 값’을 사용함. 이를 통해 Q-learning 특유의 overestimation 문제를 경감할 수 있음.<br />
+2) $a_{t+1}$을 결정 시 actor의 결과를 그대로 쓰는 게 아니라, clipped noise를 추가하여 smoothing regularization 효과를 얻음.<br />
+3) Critic이 두 번 업데이트될 동안 actor는 한 번 업데이트됨, 이러한 `delayed’ policy update를 통해 value estimation의 variance를 줄임.</p>
 
 <p>TD3 훈련 코드는 아래와 같다. 코드 내 주석은 지난 포스팅의 DDPG 코드 대비 다른 부분에 대해서만 추가하였다.</p>
 
@@ -858,7 +880,8 @@ and netfloorarea &gt; 0
 </code></pre></div></div>
 
 <p><br /></p>
-<h2 id="sac">SAC</h2>
+
+<h2 id="soft-actor-critic-sac">Soft Actor-Critic (SAC)</h2>
 
 <p>SAC에서는 `stochastic’ actor를 가정한다. 즉 actor는 특정 확률분포로부터 action을 도출한다. $a_{t} \sim \pi_{\phi}(a|s_{t})$ 인 것이다. 보통 Actor의 직접적인 출력은 정규분포의 평균값 그리고 표준편차의 로그값이고, 이로부터 정의되는 정규분포로부터 샘플을 뽑거나 (training) 평균값을 (validation) 뽑는다. 만약 bounded action인 경우 tanh kernel을 추가해서 action을 결정한다. Stochastic actor를 쓰기 때문에, DQN/ DDPG/ TD3에서 그랬던 것처럼 hand-crafted noise를 따로 추가하지 않아도 자동으로 훈련 과정에서 exploration이 된다는 장점이 있다.</p>
 
@@ -1200,19 +1223,18 @@ and netfloorarea &gt; 0
 
 <p><br /></p>
 
-<h2 id="결과">결과</h2>
+<h2 id="td3-sac를-통한-continuous-control-결과">TD3/ SAC를 통한 continuous control 결과</h2>
 
 <p>결과를 보면, TD3 control에서는 낮 송전 기간에 쭉 최대송전에 가깝게 하지 않고 송전량을 줄였다가 다시 늘리는 패턴이 보인다. 한편 SAC control에서는 최대송전과 최대수전을 하는 경우가 거의 없다.</p>
 
-<p>(그림)</p>
+<p><img src="/assets/images/reinforcefive/result_td3sac.png" alt="result_td3sac" class="align-center" />
+<em>TD3/ SAC로 도출한 수전/송전 control. LP control과는 차이가 있음.</em></p>
 
 <p>TD3와 SAC으로 도출한 control 적용 시 validation case에 대한 누적 비용은 각각 85유로, 118유로이다. 이는 DDPG control (125유로) 보다는 조금 나은 결과지만, 여전히 DQN control (50유로) 에 뒤진다.</p>
 
 <p>Vincent의 마이크로그리드 사례에서는, 미래를 안다는 가정 하에 도출한 LP solution에서의 action이 (엄밀히는 continuous지만) 거의 discrete에 가까운 모습이다. 그러므로, action을 state의 continuous function으로 근사하는 DDPG/ TD3/ SAC보다는, discrete function으로 근사하는 DQN이 더 나은 것으로 추정된다.</p>
 
 <p>심지어 이는 시뮬레이션으로 계산되는 마이크로그리드의 누적비용 측면에서만 생각한 것이며, 계산 시간까지 고려하면 DQN의 computational efficiency가 DDPG/ TD3/ SAC 대비 훨씬 높다.</p>
-
-<p>(계산 시간을 비교해 보여주는 그래프 또는 표)</p>
 
 <p><br />
 실제로 에너지기술연구원에서 히트펌프 제어기를 심층강화학습으로 훈련시킨 연구에서도 (아래 Youtube 영상), SAC 기반 continuous control을 연구과정에서 시도하기는 했으나 최종적으로는 DQN으로 도출한 discrete control을 사용 및 논문화하였다 (히트펌프의 경우 여러 대를 설치 후 매 시간별로 몇 대나 가동할 것이냐를 결정하는 discrete control이 가능하기도 하다).</p>
@@ -1231,6 +1253,10 @@ and netfloorarea &gt; 0
 
 <p>미래를 모두 안다는 가정 하에 선형계획법으로 얻은 optimal solution에서의 action이 discrete action과 상당히 유사함을, 강화학습 계산 전이 미리 알 수 있었다. 그렇다면 이 문제에 있어 더 맞는 강화학습 방법은 discrete control 방법이며, 굳이 continuous control 방법을 시도해도 discrete 대비 더 나은 결과를 얻지 못하는 것이 놀랍지 않은 것이다.</p>
 
+<p><br />
+(사족: 그런데, 사실 Vincent의 마이크로그리드 사례처럼 계통으로부터의 수전/송전 한도가 ‘peak 부하 밑으로’ 제한되어 있는 경우가 결코 흔치는 않을 것이다. 솔직히 말하면, 실제 현실에서 일반적인 case라기보다는, DQN 적용이 용이하도록 어느 정도 꾸며낸 case라는 느낌을 받는다. <br />
+실제로는 열병합발전기/ 냉난방설비 등 제어 가능한 설비의 출력을 action으로 두고, 계통으로부터의 수전/송전은 action에 따라 자동으로 결정되는 환경변수들로 두는 것이 더 합리적으로 보인다. 다만 이는 강화학습으로 안정적인 economic control을 도출하기가 쉽지 않아 보이는데, 이에 관련된 논문을 향후 찾아볼 생각이다.)</p>
+
 <div class="notice--info">
 
 강화학습 기반 마이크로그리드 스케줄링<br /><br />
@@ -1241,7 +1267,7 @@ and netfloorarea &gt; 0
 4) <a href="/reinforcefour.html">DDPG를 통한 continuous control 도출</a><br />
 5) <b>TD3, SAC를 통한 continuous control 도출</b>
 
-</div>]]></content><author><name>Jeonghun Song</name></author><category term="Energy" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 (3개 action들은 각각 1.1kW 수전/ 1.1kW 송전/ idle) .]]></summary></entry><entry><title type="html">강화학습 기반 마이크로그리드 스케줄링 - 4) DDPG를 통한 continuous control 도출</title><link href="http://localhost:4000/reinforcefour.html" rel="alternate" type="text/html" title="강화학습 기반 마이크로그리드 스케줄링 - 4) DDPG를 통한 continuous control 도출" /><published>2023-04-18T00:00:00+09:00</published><updated>2023-04-18T00:00:00+09:00</updated><id>http://localhost:4000/reinforcefour</id><content type="html" xml:base="http://localhost:4000/reinforcefour.html"><![CDATA[<p>Vincent의 마이크로그리드 사례에 discrete action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic control이 가능했다.</p>
+</div>]]></content><author><name>Jeonghun Song</name></author><category term="energymanagement" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 (3개 action들은 각각 1.1kW 수전/ 1.1kW 송전/ idle).]]></summary></entry><entry><title type="html">강화학습 기반 마이크로그리드 스케줄링 - 4) DDPG를 통한 continuous control 도출</title><link href="http://localhost:4000/reinforcefour.html" rel="alternate" type="text/html" title="강화학습 기반 마이크로그리드 스케줄링 - 4) DDPG를 통한 continuous control 도출" /><published>2023-04-18T00:00:00+09:00</published><updated>2023-04-18T00:00:00+09:00</updated><id>http://localhost:4000/reinforcefour</id><content type="html" xml:base="http://localhost:4000/reinforcefour.html"><![CDATA[<p>Vincent의 마이크로그리드 사례에 discrete action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic control이 가능했다.</p>
 
 <p><img src="/assets/images/reinforceone/system.png" alt="system" class="align-center" />
 <em>Vincent의 연구에서 가정된 마이크로그리드.</em></p>
@@ -1250,8 +1276,10 @@ and netfloorarea &gt; 0
 
 <p>이번에는 continuous control의 기본적인 방법인 <a href="https://arxiv.org/abs/1509.02971">Deep Deterministic Policy Gradient (DDPG)</a>를 적용해서, 수전/송전에 대한 continuous control을 도출해본다.</p>
 
-<p><br />
-Continuous action인 경우 가능한 action의 수가 사실상 무한대이므로, DQN에서처럼 state를 입력받아 각 action 별 Q-value를 모두 계산하는 신경망을 구성할 수는 없다.</p>
+<p><br /></p>
+
+<h2 id="actor와-critic-신경망">Actor와 critic 신경망</h2>
+<p>Continuous action인 경우 가능한 action의 수가 사실상 무한대이므로, DQN에서처럼 state를 입력받아 각 action 별 Q-value를 모두 계산하는 신경망을 구성할 수는 없다.</p>
 
 <p>대신에, 두 개의 신경망을 구성하되 하나는 state를 입력받고 continuous action의 값을 출력하고, 다른 하나는 state와 action을 입력받아 그 state-action pair의 Q-value를 출력하도록 한다. 두 신경망 중 전자를 actor (action을 결정함), 후자를 critic (value를 평가함) 이라 부른다.</p>
 
@@ -1259,8 +1287,10 @@ Continuous action인 경우 가능한 action의 수가 사실상 무한대이므
 
 <p>특히 이 마이크로그리드 사례에서 action은 하한이 -1.1, 상한이 1.1로 정해져 있다. 이러한 ‘bounded’ action을 구현하기 위해, actor의 output layer에 tanh (하이퍼볼릭 탄젠트) activation function을 걸어준다.</p>
 
-<p><br />
-한편, DDPG에서는 ‘target’ 신경망을 구성해서 학습의 안정성을 향상시킨다. Actor와 critic 각각의 target 신경망들은 원래 actor와 critic의 복사본으로 시작해서, Q-learning에서 next state에 대한 값을 도출하는 데 이용된 후 천천히 업데이트된다.</p>
+<p><br /></p>
+
+<h2 id="target-신경망">Target 신경망</h2>
+<p>한편, DDPG에서는 ‘target’ 신경망을 구성해서 학습의 안정성을 향상시킨다. Actor와 critic 각각의 target 신경망들은 원래 actor와 critic의 복사본으로 시작해서, Q-learning에서 next state에 대한 값을 도출하는 데 이용된 후 천천히 업데이트된다.</p>
 
 <p>구체적으로, 원래 신경망들의 parameter를 $\theta$, target 신경망들의 parameter를 $\theta’$라 하고, 원래 actor와 target actor를 각각 $\mu(s)$와 $\mu’(s)$, 원래 critic과 target critic을 각각 $\hat{Q}(s,a)$와 $\hat{Q}’(s,a)$라 하자.</p>
 
@@ -1276,8 +1306,10 @@ Continuous action인 경우 가능한 action의 수가 사실상 무한대이므
 
 <p>(보다 더 상세한 내용은 <a href="https://arxiv.org/abs/1509.02971">논문 원문</a>을 참고하길 바란다)</p>
 
-<p><br />
-이제 DDPG를 적용하여 continuous controller를 훈련하는 코드를 보자 <a href="https://antonai.blog/reinforcement-learning-in-continuous-action-spaces-part-1-ddpg/">(해당 코드 작성에 참고한 DDPG 코딩 설명 포스트).</a> 코드 내 주석은 지난 포스팅의 DQN 코드 대비 다른 부분에 대해서만 추가하였다.</p>
+<p><br /></p>
+
+<h2 id="ddpg-코드">DDPG 코드</h2>
+<p>이제 DDPG를 적용하여 continuous controller를 훈련하는 코드를 보자 <a href="https://antonai.blog/reinforcement-learning-in-continuous-action-spaces-part-1-ddpg/">(해당 코드 작성에 참고한 DDPG 코딩 설명 포스트).</a> 코드 내 주석은 지난 포스팅의 DQN 코드 대비 다른 부분에 대해서만 추가하였다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
 </span>
@@ -1559,18 +1591,21 @@ Continuous action인 경우 가능한 action의 수가 사실상 무한대이므
                 <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><br />
-DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</p>
+<p><br /></p>
+
+<h2 id="ddpg를-통한-continuous-control-결과">DDPG를 통한 continuous control 결과</h2>
+<p>DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</p>
 
 <p>놀랍게도(?), continuous control (DDPG) 의 결과가 3-action discrete control (DQN) 의 결과 (누적비용 50유로) 보다 나쁘다. 어떻게 된 걸까?</p>
 
 <p>아래 그림으로 action을 비교해 보자.</p>
 
+<p><img src="/assets/images/reinforcefour/result_ddpg.png" alt="result_ddpg" class="align-center" />
+<em>DDPG로 도출한 수전/송전 control. LP control과는 차이가 있음.</em></p>
+
 <p>태양광 발전량이 많아 낮에 송전하는 기간의 밤 시간대에 LP와 DQN에선 action의 값이 0, 즉 idle이다. 그러나 DDPG에서는 수전을 한다. 반대로 태양광 발전량이 적어 낮에 수전하는 기간의 밤 시간대에도 LP와 DQN에선 action이 idle인데 DDPG에서는 일부 송전을 한다.</p>
 
 <p>즉 LP와 DQN control에서는 수 시간 연속으로 idle인 기간에, DDPG control에서는 송전 혹은 수전을 행한다. 그런데 이것이 sub-optimal control인 것으로 보인다.</p>
-
-<p>(그림 -&gt; 그래프상에 해당 구간들을 원으로 표시해서 같이 보여주기)</p>
 
 <p>이는 state를 input으로 하는 nonlinear continuous function 근사로는, 대부분의 input에 대해 output이 0, -1, +1 셋 중 하나이고 그 외 일부 input에 대해서만 값이 -1~0 또는 0~1 사이의 값을 출력하는 function을 (LP control에서처럼) 만들어내기 어렵기 때문인 것으로 추측된다.</p>
 
@@ -1591,15 +1626,17 @@ DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</
 4) <b>DDPG를 통한 continuous control 도출</b><br />
 5) <a href="/reinforcefive.html">TD3, SAC를 통한 continuous control 도출</a>
 
-</div>]]></content><author><name>Jeonghun Song</name></author><category term="Energy" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[Vincent의 마이크로그리드 사례에 discrete action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic control이 가능했다.]]></summary></entry><entry><title type="html">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출</title><link href="http://localhost:4000/reinforcethree.html" rel="alternate" type="text/html" title="강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출" /><published>2023-04-17T00:00:00+09:00</published><updated>2023-04-17T00:00:00+09:00</updated><id>http://localhost:4000/reinforcethree</id><content type="html" xml:base="http://localhost:4000/reinforcethree.html"><![CDATA[<p>Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0,1,2라 하자.</p>
+</div>]]></content><author><name>Jeonghun Song</name></author><category term="energymanagement" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[Vincent의 마이크로그리드 사례에 discrete action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic control이 가능했다.]]></summary></entry><entry><title type="html">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출</title><link href="http://localhost:4000/reinforcethree.html" rel="alternate" type="text/html" title="강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출" /><published>2023-04-17T00:00:00+09:00</published><updated>2023-04-17T00:00:00+09:00</updated><id>http://localhost:4000/reinforcethree</id><content type="html" xml:base="http://localhost:4000/reinforcethree.html"><![CDATA[<p>Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0,1,2라 하자.</p>
 
 <p><img src="/assets/images/reinforceone/system.png" alt="system" class="align-center" />
 <em>Vincent의 연구에서 가정된 마이크로그리드.</em></p>
 
 <p>이 때 심층신경망은 state를 입력받아 3개 action 각각의 Q-value의 추정치 $\hat{Q}(s_{t},0), \hat{Q} (s_{t},1), \hat{Q} (s_{t},2)$ 를 출력으로 계산한다. 이 심층신경망은 매 훈련 주기마다 튜플 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다.</p>
 
-<p><br />
-심층신경망 구성은 아래 그림과 같다.</p>
+<p><br /></p>
+
+<h2 id="심층신경망-구성-및-훈련-컨셉">심층신경망 구성 및 훈련 컨셉</h2>
+<p>심층신경망 구성은 아래 그림과 같다.</p>
 
 <p><img src="/assets/images/reinforcethree/nn.png" alt="nn" class="align-center" />
 <em>Vincent의 연구에서 사용된 심층신경망 구성. (논문의 그림을 필자가 재구성하였음)</em></p>
@@ -1610,8 +1647,10 @@ DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</
 
 <p>Training set에 대해서는 epsilon-greedy policy를, validation set에 대해서는 greedy policy를 적용해 action을 결정한다. 매 시간별로 에너지 흐름을 계산하고, 매 24시간 주기로 심층신경망 훈련을 gradient descent로 수행한다. 이를 training set의 17,520-24 시간에 대해 수행하면 1 epoch이다.</p>
 
-<p><br />
-이제 훈련 concept는 대략 이해가 될 것이니, 코드를 보자.</p>
+<p><br /></p>
+
+<h2 id="dqn-코드">DQN 코드</h2>
+<p>이제 훈련 concept는 대략 이해가 될 것이니, 코드를 보자.</p>
 
 <p>(이 코드는 본인이 직접 작성하였다. Vincent의 학위논문에서 해당 연구에 사용한 코드의 <a href="https://github.com/VinF/deer/tree/master/examples/MG_two_storages">Github 링크</a>를 제공하나, 각 모듈별로 코드 파일들을 지나치게 분리해 놓아 사용이 여의치 않았다. 이에 필자가 ‘모든 기능들을 한 파일에 넣은 공부용’ 코드를 따로 만들었다. 다만 코드 작성 시 <a href="https://product.kyobobook.co.kr/detail/S000001810262">핸즈온 머신러닝</a>의 강화학습 chapter의 Cartpole 예제에 대한 Deep Q-Network 코드를 많이 참고하였음을 밝힌다.)</p>
 
@@ -1846,21 +1885,29 @@ DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</
 
 <p>Epoch당 계산 시간이 긴데, 이유는 매 시간 별 action을 결정할 때마다 심층신경망에 state를 입력해 Q-value들을 계산하는 과정을, training case에 대해서는 이를 8760x2-24번, validation case에 대해서는 8760-24번을 수행해야 하기 때문이다.</p>
 
-<p><br />
-훈련을 수행하면, validation case 기준으로 불과 몇 epoch만에 누적 비용이 200유로 이하로 줄어든다. 그리고 99 epoch 훈련 동안 validation case에 대해 가장 좋은 결과를 보인 모델의 경우 누적 비용이 27유로이다.</p>
+<p><br /></p>
 
-<p>미래를 모르면서 과거 24시간 정보만 갖고 도출한 ‘discrete’ control 것 치고는, 훌륭해 보인다. Random control 시의 누적비용 2500~2700유로 대비 매우 낮을 뿐 아니라, 미래를 안다고 가정하고 선형계획법 (Linear Programming, LP) 으로 도출한 control 시의 누적비용 -50유로에 근접하기 때문이다.</p>
+<h2 id="dqn을-통한-discrete-control-결과">DQN을 통한 discrete control 결과</h2>
+<p>훈련을 수행하면, validation case 기준으로 불과 몇 epoch만에 누적 비용이 200유로 이하로 줄어든다. 그리고 99 epoch 훈련 동안 validation case에 대해 가장 좋은 결과를 보인 모델의 경우 누적 비용이 27유로이다.</p>
+
+<p><img src="/assets/images/reinforcethree/trainingrecord.png" alt="trainingrecord" class="align-center" width="80%" />
+<em>훈련 epoch 별 validation case의 누적 ‘수익’.</em></p>
+
+<p>누적비용 27유로는, 미래를 안다고 가정하고 선형계획법 (Linear Programming, LP) 으로 도출한 control 시의 누적비용 -50유로에 근접한 값이다. 그러므로, 미래를 모르면서 과거 24시간 정보만 갖고 도출한 ‘discrete’ control 것 치고는 훌륭해 보인다. (Random control 시의 누적비용 2500~2700유로 대비 매우 낮기도 하고)</p>
 
 <p>시간별 action (계통으로부터의 수전) 이 선형계획법과 DQN에서 각각 어떻게 결정되었는지를 아래 그림과 같이 보자.</p>
 
-<p>(그림)</p>
+<p><img src="/assets/images/reinforcethree/result_dqn.png" alt="result_dqn" class="align-center" />
+<em>DQN으로 도출한 수전/송전 control. LP control과 어느 정도 비슷함.</em></p>
 
 <p>LP와 DQN으로 도출한 두 control들이 생각보다는 비슷하다. ‘대체로’ LP control에서서 수전하는 시간대에 DQN control에서도 수전하고, LP control에서 송전하는 시간대에 DQN control에서도 송전하며, LP control에서 idle인 시간대에 DQN control에서도 idle이다.</p>
 
 <p>특히 LP control은 [-1.1,1.1] 범위 내의 실수로 주어지는 ‘continuous’ control임에도 불구하고, DQN의 action들에 대응하는 최대치 송전/최대치 수전/ idle인 경우가 많다는 점이 특기할 만하다. 이 덕분에, 3-action DQN으로 우수한 economic control을 얻을 수 있는 것으로 보인다.</p>
 
-<p><br />
-그렇지만, LP control에서와 DQN control 간에 최대치 송전/ 최대치 수전/ idle 지속시간의 차이가 있고, LP control에서 이 3개 값이 아닌 다른 값인 경우도 (즉 최대치가 아닌 양으로 송전/수전하는 경우도) 분명히 많이 존재한다.</p>
+<p><br /></p>
+
+<h2 id="continuous-control을-한다면">Continuous control을 한다면?</h2>
+<p>그렇지만, LP control에서와 DQN control 간에 최대치 송전/ 최대치 수전/ idle 지속시간의 차이가 있고, LP control에서 이 3개 값이 아닌 다른 값인 경우도 (즉 최대치가 아닌 양으로 송전/수전하는 경우도) 분명히 많이 존재한다.</p>
 
 <p>그렇다면 [-1.1,1.1] 범위 내의 실수로 action을 도출하는, continuous control 심층강화학습 기법을 쓰면 어떨까? 최대치가 아닌 송전/ 수전의 가능성까지 반영한 controller를 훈련함으로써, validation case에 대해 더 낮은 누적비용을 달성하는 control 도출이 가능할까?.</p>
 
@@ -1876,10 +1923,14 @@ DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</
 4) <a href="/reinforcefour.html">DDPG를 통한 continuous control 도출</a><br />
 5) <a href="/reinforcefive.html">TD3, SAC를 통한 continuous control 도출</a>
 
-</div>]]></content><author><name>Jeonghun Song</name></author><category term="Energy" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0,1,2라 하자.]]></summary></entry><entry><title type="html">강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념</title><link href="http://localhost:4000/reinforcetwo.html" rel="alternate" type="text/html" title="강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념" /><published>2023-04-16T00:00:00+09:00</published><updated>2023-04-16T00:00:00+09:00</updated><id>http://localhost:4000/reinforcetwo</id><content type="html" xml:base="http://localhost:4000/reinforcetwo.html"><![CDATA[<p>지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내용은 <a href="https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf">Sutton의 Introduction</a> 참고 바람)</p>
+</div>]]></content><author><name>Jeonghun Song</name></author><category term="energymanagement" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0,1,2라 하자.]]></summary></entry><entry><title type="html">강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념</title><link href="http://localhost:4000/reinforcetwo.html" rel="alternate" type="text/html" title="강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념" /><published>2023-04-16T00:00:00+09:00</published><updated>2023-04-16T00:00:00+09:00</updated><id>http://localhost:4000/reinforcetwo</id><content type="html" xml:base="http://localhost:4000/reinforcetwo.html"><![CDATA[<p>지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하에서 control을 얻게 됨을 논했다.</p>
 
-<p><br />
-먼저 Q-learning을 간단히 되짚고 넘어가자. 어떤 환경에서 시점 t에 상태 $s_{t}$에 있고, 이 때 action $a_{t}$를 수행하면 보상 $r_{t+1}$을 받으면서 상태 $s_{t+1}$로 전이된다고 하자.</p>
+<p>이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내용은 <a href="https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf">Sutton의 Introduction</a> 참고 바람)</p>
+
+<p><br /></p>
+
+<h2 id="누적-보상의-개념">누적 보상의 개념</h2>
+<p>먼저 Q-learning을 간단히 되짚고 넘어가자. 어떤 환경에서 시점 t에 상태 $s_{t}$에 있고, 이 때 action $a_{t}$를 수행하면 보상 $r_{t+1}$을 받으면서 상태 $s_{t+1}$로 전이된다고 하자.</p>
 
 <p><img src="/assets/images/reinforceone/reinforcement_basic.png" alt="reinforcement_basic" class="align-center" width="70%" />
 <em>강화학습 개요. State $S_t$에서 Action $A_t$를 취하면 Reward $R_{t+1}$을 얻으면서 State $S_{t+1}$로 전이됨.</em></p>
@@ -1913,8 +1964,10 @@ DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</
 
 <p>그러면 매 시점별로 $\hat{Q}(s_{t},0)$, $\hat{Q}(s_{t},1)$, $\hat{Q}(s_{t},2)$ 중에서 최대값에 대응하는 action을 선택하면 (greedy policy), 누적보상을 최대화하는 control이 될 것이다.</p>
 
-<p><br />
-그러나 greedy policy는 controller 훈련을 끝낸 후 ‘validation 및 실제 구동 시’에 적용해야지, ‘훈련 중’에 적용하는 것은 적절하지 않다.</p>
+<p><br /></p>
+
+<h2 id="exploration탐색의-필요성">Exploration(탐색)의 필요성</h2>
+<p>그러나 greedy policy는 controller 훈련을 끝낸 후 ‘validation 및 실제 구동 시’에 적용해야지, ‘훈련 중’에 적용하는 것은 적절하지 않다.</p>
 
 <p>학습 초기에 아직 아무 정보도 학습하지 못했는데 단순히 $\hat{Q}$ 값이 가장 큰 action만을 계속 하는 것은, 마치 평균적 보상이 다른 여러 개의 슬롯머신을 눈 앞에 두고도, 처음에 고른 한두개의 슬롯머신만 계속 눌러보는 것과 비슷하다.</p>
 
@@ -1926,8 +1979,10 @@ DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</
 
 <p>(Exploration/ exploitation에 대해 제대로 이해하고 싶으면, Sutton의 책 2장의 ‘Multi-armed Bandits’를 공부하기 바란다)</p>
 
-<p><br />
-지금까지 설명한 방법은, state-action pair의 수가 많지 않을 경우 각 state-action pair별 $\hat{Q}$값들을 담는 table을 만들어 그대로 적용할 수 있다. 이를테면 아래와 같은 공간에서 상하좌우로 한 칸씩 이동 가능한 환경에서 최단거리를 찾는 문제 (Gridworld) 에서는, 격자 수가 한정되어 있으므로 각 격자(state)-이동방향(action) pair 별로 $\hat{Q}$값들을 따로 계산할 수 있다.</p>
+<p><br /></p>
+
+<h2 id="stateaction이-무한할-경우">State/action이 무한할 경우</h2>
+<p>지금까지 설명한 방법은, state-action pair의 수가 많지 않을 경우 각 state-action pair별 $\hat{Q}$값들을 담는 table을 만들어 그대로 적용할 수 있다. 이를테면 아래와 같은 공간에서 상하좌우로 한 칸씩 이동 가능한 환경에서 최단거리를 찾는 문제 (Gridworld) 에서는, 격자 수가 한정되어 있으므로 각 격자(state)-이동방향(action) pair 별로 $\hat{Q}$값들을 따로 계산할 수 있다.</p>
 
 <p><img src="/assets/images/reinforcetwo/gridworld.png" alt="gridworld" class="align-center" />
 <em>Gridworld 환경. 각 칸-이동방향 pair에 대해 Q-value를 정의할 수 있다. 이 경우 칸이 38개이고 action은 상하좌우 4개이므로, Q-value가 총 152개이다.</em></p>
@@ -1941,8 +1996,10 @@ DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</
 
 <p>이런 경우 ‘모든 state-action pair 각각에 대해’ $\hat{Q}$를 계산한다는 것은 사실상 불가능하다. 그렇다면 어떻게 해야 하나?</p>
 
-<p><br />
-만약 state-action pair와 Q값 간의 관계가 어떤 domain knowledge에 의해 명확하게 정의될 수 있다면, 해당 관계를 명확한 수식으로 표현하여 $\hat{Q}$를 쉽게 계산할 수 있을 것이다. 그러나 이 케이스를 포함한 많은 경우, state-action과 Q값 간의 관계식을 명확한 수식으로 나타낼 수 있을 것이라 기대되지 않는다.</p>
+<p><br /></p>
+
+<h2 id="q-value-근사를-위한-딥러닝과-강화학습의-결합">Q-value 근사를 위한 딥러닝과 강화학습의 결합</h2>
+<p>만약 state-action pair와 Q값 간의 관계가 어떤 domain knowledge에 의해 명확하게 정의될 수 있다면, 해당 관계를 명확한 수식으로 표현하여 $\hat{Q}$를 쉽게 계산할 수 있을 것이다. 그러나 이 케이스를 포함한 많은 경우, state-action과 Q값 간의 관계식을 명확한 수식으로 나타낼 수 있을 것이라 기대되지 않는다.</p>
 
 <p>그렇다면, state를 입력으로 받고 각 action 별 $\hat{Q}$값을 출력으로 하는 심층신경망 (Deep Neural Network, DNN) 모델을 훈련하는 것이 현실적인 방법이다. 심층신경망은 계산비용은 매우 높지만, node 수가 충분하면 어떤 비선형 함수도 근사할 수 있기 때문에 nonlinear function approximator로 기능한다는 점을 이용하는 것이다.</p>
 
@@ -1963,12 +2020,14 @@ DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</
 4) <a href="/reinforcefour.html">DDPG를 통한 continuous control 도출</a><br />
 5) <a href="/reinforcefive.html">TD3, SAC를 통한 continuous control 도출</a>
 
-</div>]]></content><author><name>Jeonghun Song</name></author><category term="Energy" /><category term="강화학습" /><summary type="html"><![CDATA[지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내용은 Sutton의 Introduction 참고 바람)]]></summary></entry><entry><title type="html">강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개</title><link href="http://localhost:4000/reinforceone.html" rel="alternate" type="text/html" title="강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개" /><published>2023-04-15T00:00:00+09:00</published><updated>2023-04-15T00:00:00+09:00</updated><id>http://localhost:4000/reinforceone</id><content type="html" xml:base="http://localhost:4000/reinforceone.html"><![CDATA[<p>에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할 수 있어야 한다. 그래야 장기적인 에너지 공급 비용 및 화석연료 사용량 등을 줄일 수 있다.</p>
+</div>]]></content><author><name>Jeonghun Song</name></author><category term="energymanagement" /><category term="강화학습" /><summary type="html"><![CDATA[지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하에서 control을 얻게 됨을 논했다.]]></summary></entry><entry><title type="html">강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개</title><link href="http://localhost:4000/reinforceone.html" rel="alternate" type="text/html" title="강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개" /><published>2023-04-15T00:00:00+09:00</published><updated>2023-04-15T00:00:00+09:00</updated><id>http://localhost:4000/reinforceone</id><content type="html" xml:base="http://localhost:4000/reinforceone.html"><![CDATA[<p>에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다.</p>
 
 <p><img src="/assets/images/reinforceone/renewableuncertainty.png" alt="renewableuncertainty" class="align-center" width="80%" />
 <em>풍력발전 예측 시의 신뢰구간이 큼. 즉, 재생발전 비중이 높으면 전기 발전량을 단기적으로도 정확히 예측하기 어려움. (출처: http://www.ningzhang.net/Renewables.html)</em></p>
 
-<p>그런데 선형계획법 등 전통적인 최적화 기반 에너지시스템 스케줄링 관련 연구들에서는, 미래의 발전량과 부하를 정확히 알 경우의 control을 도출한다는 한계점이 있다 (실제로는 미래를 정확히 알 수 없음에도). 최적화문제의 변수들이 각 시간별 수전/ 충전/ 방전 등이라 할 때, 해당 문제의 제약조건들로 모든 시간에 대한 에너지 밸런스 제약이 포함된 상태에서 최적화를 수행하기 때문이다.</p>
+<p>이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할 수 있어야 한다. 그래야 장기적인 에너지 공급 비용 및 화석연료 사용량 등을 줄일 수 있다.</p>
+
+<p>그런데 선형계획법 등 전통적인 최적화 기반 에너지시스템 스케줄링 관련 연구들에서는, ‘미래’의 발전량과 부하를 정확히 알 경우의 control을 도출한다는 한계점이 있다 (실제로는 미래를 정확히 알 수 없음에도). 최적화문제의 변수들이 각 시간별 수전/ 충전/ 방전 등이라 할 때, 해당 문제의 제약조건들로 ‘모든 시간에 대한’ 에너지 밸런스 제약이 포함된 상태에서 최적화를 수행하기 때문이다.</p>
 
 <p><br />
 예시를 하나 들자. Vincent의 Liege 대학 박사학위논문 <a href="https://orbi.uliege.be/handle/2268/214216">‘Contributions to deep reinforcement learning and its applications in smartgrids’</a> 에서 연구대상으로 삼은 가상의 마이크로그리드 시스템은 아래와 같다.</p>
@@ -2109,15 +2168,17 @@ DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</
 4) <a href="/reinforcefour.html">DDPG를 통한 continuous control 도출</a><br />
 5) <a href="/reinforcefive.html">TD3, SAC를 통한 continuous control 도출</a>
 
-</div>]]></content><author><name>Jeonghun Song</name></author><category term="Energy" /><category term="선형계획법" /><category term="부하패턴" /><category term="경제성분석" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할 수 있어야 한다. 그래야 장기적인 에너지 공급 비용 및 화석연료 사용량 등을 줄일 수 있다.]]></summary></entry><entry><title type="html">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 4) 태양광과 배터리의 용량 정하기</title><link href="http://localhost:4000/linprogfour.html" rel="alternate" type="text/html" title="정수선형계획법 기반 분산에너지시스템 최적화 설명 - 4) 태양광과 배터리의 용량 정하기" /><published>2023-04-14T00:00:00+09:00</published><updated>2023-04-14T00:00:00+09:00</updated><id>http://localhost:4000/linprogfour</id><content type="html" xml:base="http://localhost:4000/linprogfour.html"><![CDATA[<p>지난 포스팅에서는 `주어진 용량의’ 배터리가 건물에 설치된 경우의 시간별 최소비용 충/방전 스케줄을 구하기 위한 선형계획법 문제 수식 구성 및 코딩을 설명했다.</p>
+</div>]]></content><author><name>Jeonghun Song</name></author><category term="energymanagement" /><category term="선형계획법" /><category term="부하패턴" /><category term="경제성분석" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다.]]></summary></entry><entry><title type="html">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 4) 태양광과 배터리의 용량 정하기</title><link href="http://localhost:4000/linprogfour.html" rel="alternate" type="text/html" title="정수선형계획법 기반 분산에너지시스템 최적화 설명 - 4) 태양광과 배터리의 용량 정하기" /><published>2023-04-14T00:00:00+09:00</published><updated>2023-04-14T00:00:00+09:00</updated><id>http://localhost:4000/linprogfour</id><content type="html" xml:base="http://localhost:4000/linprogfour.html"><![CDATA[<p>지난 포스팅에서는 `주어진 용량의’ 배터리가 건물에 설치된 경우의 시간별 최소비용 충/방전 스케줄을 구하기 위한 선형계획법 문제 수식 구성 및 코딩을 설명했다.</p>
 
 <p>그런데, 실제로는 그 용량도 결정해야 한다. 그래서 이번 포스팅에서는 용량까지 결정하는 문제를 설명한다. 더불어, 건물에 배터리 뿐 아니라 태양광 패널도 설치해서 태양광+배터리 연계 시스템을 구축 시 각각의 용량을 결정하는 경우를 상정한다.</p>
 
 <p><img src="/assets/images/linprogfour/system_pvbatt.png" alt="system_pvbatt" class="align-center" width="80%" />
 <em>태양광과 배터리를 포함하는 건물 전기 공급 시스템 도식도.</em></p>
 
-<p><br />
-이 때, 태양광과 배터리 용량까지 고려한 `최소비용’은 무엇을 의미할까? 태양광과 배터리에 들어가는 비용은 대략적으로 보면 초기투자비(설비비, 설치비 등), 그리고 설비의 수명이 다 할 때까지 매년 발생하는 유지보수비이다. 태양광과 배터리는 따로 연료를 필요로 하지는 않으므로 연료비는 없다. 한편 계통으로부터의 수전으로도 전기부하를 충족하므로, 전기요금은 매 시간별로 계속 발생한다.</p>
+<p><br /></p>
+
+<h2 id="용량-결정-문제에서의-목적함수-npv">용량 결정 문제에서의 목적함수: NPV</h2>
+<p>이 때, 태양광과 배터리 용량까지 고려한 `최소비용’은 무엇을 의미할까? 태양광과 배터리에 들어가는 비용은 대략적으로 보면 초기투자비(설비비, 설치비 등), 그리고 설비의 수명이 다 할 때까지 매년 발생하는 유지보수비이다. 태양광과 배터리는 따로 연료를 필요로 하지는 않으므로 연료비는 없다. 한편 계통으로부터의 수전으로도 전기부하를 충족하므로, 전기요금은 매 시간별로 계속 발생한다.</p>
 
 <p>그러므로, 이 문제는 `태양광과 배터리 시스템의 초기투자비, 시스템 수명 동안의 설비 유지보수비, 시스템 수명 동안의 전기요금’ 의 합을 최소화하는 변수 결정 문제가 된다. 예를 들어 시스템 운영 기간은 태양광의 수명 20년과 같고, 배터리의 수명은 10년이며 운영 시작 10년 후 같은 용량으로 재설치한다고 가정하자. 이 때, 대략적인 비용 구조는 아래와 같다 (실제 프로젝트에서는 더 상세할 수 있음).</p>
 
@@ -2144,7 +2205,8 @@ $\vdots$
 <p><br />
 위 비용들을 그냥 다 더하면 될까? 보통은 그렇지 않다. 시간에 따른 화폐가치 하락을 고려해야 하기 때문이다. 은행에서 이자율 3%의 예금을 든다면, 1년 후의 103만원은 현재의 100만원과 같은 가치로 볼 수 있는 것처럼 말이다. 혹시 아래 그림 같은 도식을 본 적 이 있는가?</p>
 
-<p>(현가 설명 도식)</p>
+<p><img src="/assets/images/linprogfour/npv.png" alt="npv" class="align-center" width="70%" />
+<em>Net Present Value (NPV) 도식. <br />(출처: https://www.investopedia.com/retirement/calculating-present-and-future-value-of-annuities/)</em></p>
 
 <p>이런 도식을 봤다면 ‘총 현재가치’ (Net Present Value, NPV) 를 들어봤을 것이다. 그렇지 않더라도, 아마 ‘할인율을 $r$이라 할 때, $n$년 뒤의 화폐가치 기준 돈의 액수 $C$는 현재의 화폐가치로 환산하면 $c (1+r)^{-n}$이다’ 라는 내용을 어디서 비슷하게라도 들어봤을 것이다.</p>
 
@@ -2171,8 +2233,10 @@ $\vdots$
 
 <p>그러므로 kW당 기본요금을 $c_{\text{grid}}^{\text{base}}$라 하면, 목적함수의 세 번째 항의 분자에 $ c_{\text{grid}}^{\text{base}} \text{max}{ p_{\text{grid}}[n,t] }$ 가 추가되어야 한다. (단, $\text{max} [p_{\text{grid}}[n,t]]$의 값을 최적화 계산에서 실제로 구하려면 새로운 변수 $q$를 도입한 추가적인 제약조건이 필요하며, 이는 포스팅 하단에서 따로 설명한다.)</p>
 
-<p><br />
-위에서 목적함수가 포함하는 시점들은 연도 $n=1,2,\cdots,20$, 그리고 각 연도 내의 시간 $t=1,2,\cdots,8760$이다. 그러므로, 에너지 밸런스 식도 아래와 같이 표현된다.</p>
+<p><br /></p>
+
+<h2 id="제약조건들">제약조건들</h2>
+<p>위에서 목적함수가 포함하는 시점들은 연도 $n=1,2,\cdots,20$, 그리고 각 연도 내의 시간 $t=1,2,\cdots,8760$이다. 그러므로, 에너지 밸런스 식도 아래와 같이 표현된다.</p>
 
 <p>$ p_{\text{load}}[n,t] = p_{\text{grid}}[n,t] - p_{\text{ch}}[n,t] + p_{\text{disch}}[n,t] + s_{\text{pv}} p_{\text{pv}}[n,t]$
 시간 인덱스 $t$ 뿐 아니라 연도 인덱스 $n$이 추가되었다. 여기서 맨 마지막에 추가된 항 $s_{\text{pv}} p_{\text{pv}}[n,t]$은 태양광 발전량이다. $p_{\text{pv}}[n,t]$는 `태양광 1kW’가 $n$년도의 $t$번째 시간에 발전하는 전력이고, 여기에 용량 $s_{\text{pv}}$를 곱한 것이다. 용량 $s_{\text{pv}}$는 아직 값이 결정되지 않은, 최적화 문제를 풀어 결정해야 하는 변수임에 유의한다. 용량의 계수는$p_{\text{pv}}[n,t]$이다 (시간별 태양광 발전량 자료를 input으로 받는다).</p>
@@ -2222,8 +2286,10 @@ $\vdots$
 
 <p>더 현실적으로는 ‘태양광 설치가 가능한 면적 제약’, 즉 어떤 상수 $A$에 대해 $s_{\text{pv}} \leq A$도 고려할 수 있다. 지붕 등 설치 가능 면적이 크지 않다면 이는 중요한 제약이다. 또한 <a href="https://cyber.kepco.co.kr/ckepco/front/jsp/CY/H/B/CYHBHP00101.jsp">태양광 잉여분을 역송할 경우의 상계거래</a> 등도 제약조건으로 둘 수 있다. 다만 이 포스팅의 예제는 선형계획 계산 자체를 설명하는 것이 목적이므로, 이러한 심화적 조건들은 적용하지 않는다.</p>
 
-<p><br />
-지금까지의 내용을 반영해, 1년치 자료를 입력으로 받아서 태양광과 배터리 용량을 결정하는 최적화 문제를 구성하고 풀어내는 Python 코드는 아래와 같다.</p>
+<p><br /></p>
+
+<h2 id="코드">코드</h2>
+<p>지금까지의 내용을 반영해, 1년치 자료를 입력으로 받아서 태양광과 배터리 용량을 결정하는 최적화 문제를 구성하고 풀어내는 Python 코드는 아래와 같다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
 </span>
@@ -2324,6 +2390,9 @@ $\vdots$
 
 <p>이 때 주의할 점은, <a href="https://cyber.kepco.co.kr/ckepco/front/jsp/CY/D/C/CYDCHP00403.jsp">공휴일의 최대수요전력 및 사용전력량은 경부하시간대로 계량하고, 공휴일이 아닌 토요일 최대부하시간대의 사용전력량은 중간부하시간대로 계량한다</a>는 것이다. $\texttt{eleccost_hourly.txt}$에 해당 사항이 반영되어 있는지 확인해야 한다. 그렇지 않으면 전기요금 및 전기요금 절감액이 과다계상된다.</p>
 
+<p><br /></p>
+
+<h2 id="계산-결과">계산 결과</h2>
 <p>(계산 결과)</p>
 
 <div class="notice--info">
@@ -2335,4 +2404,4 @@ $\vdots$
 3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 정하기: Python 코드</a> <br />
 4) <b>태양광과 배터리의 용량 정하기</b>
 
-</div>]]></content><author><name>Jeonghun Song</name></author><category term="Energy" /><category term="선형계획법" /><category term="부하패턴" /><category term="경제성분석" /><category term="Python" /><summary type="html"><![CDATA[지난 포스팅에서는 `주어진 용량의’ 배터리가 건물에 설치된 경우의 시간별 최소비용 충/방전 스케줄을 구하기 위한 선형계획법 문제 수식 구성 및 코딩을 설명했다.]]></summary></entry></feed>
+</div>]]></content><author><name>Jeonghun Song</name></author><category term="optimalsystem" /><category term="선형계획법" /><category term="부하패턴" /><category term="경제성분석" /><category term="Python" /><summary type="html"><![CDATA[지난 포스팅에서는 `주어진 용량의’ 배터리가 건물에 설치된 경우의 시간별 최소비용 충/방전 스케줄을 구하기 위한 선형계획법 문제 수식 구성 및 코딩을 설명했다.]]></summary></entry></feed>
