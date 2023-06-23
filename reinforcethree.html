@@ -427,7 +427,7 @@
 <p><img src="/assets/images/reinforcethree/nn.png" alt="nn" class="align-center" />
 <em>Vincent의 연구에서 사용된 심층신경망 구성. (논문의 그림을 필자가 재구성하였음)</em></p>
 
-<p>직전 24시간의 태양광 발전량은 첫 번째 Conv1D 층에, 직전 24시간의 부하는 두 번째 Conv1D 층에, 그리고 직전 1시간의 배터리 내 에너지양은 위 두 Conv1D층과 연결되는 Dense층에 바로 연결된다. 그리고 Dense층이 하나 더 있고, 이 층을 거쳐서 최종적으로 3개의 output node가 각 action별 Q-value를 출력한다.</p>
+<p>직전 24시간의 태양광 발전량은 첫 번째 Conv1D 층에, 직전 24시간의 부하는 두 번째 Conv1D 층에, 그리고 직전 1시간의 배터리 내 에너지양은 위 두 Conv1D층과 연결되는 Dense층에 바로 연결된다. 그리고 Dense층이 하나 더 있고, 이 층을 거쳐서 최종적으로 3개의 output node가 각 action별 Q-value를 출력한다. Conv1D 층을 쓰는 이유는, 태양광 발전량과 부하가 시간적인 정보를 갖고 있으므로 이를 반영하기 위함이다.</p>
 
 <p>해당 심층신경망 훈련을 위한 training set은 특정 2년 (17,520시간) 동안의 시간별 태양광발전량과 부하 자료이다. 해당 모델이 직전 24시간의 정보를 state로 사용하므로 control은 $t=25,26,\cdots, 17520$ 에 대해 정해진다. Validation set은 별도의 특정 1년 (8,760시간) 동안의 시간별 태양광 발전량과 부하 자료이다.</p>
 

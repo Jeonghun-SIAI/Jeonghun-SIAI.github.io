@@ -10,8 +10,8 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>정수선형계획법 기반 분산에너지시스템 최적화 설명 - 3) 배터리의 충/방전 스케줄 정하기: Python 코드 | 에너지 데이터 연구소</title>
-<meta name="description" content="이전 포스팅에서 봤던 건물 내 배터리 스케줄링 문제에서는, 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었으며, 두 개의 변수들 간의 곱도 없었다.">
+<!-- begin _includes/seo.html --><title>선형계획법 기반 분산에너지시스템 최적화 - 3) 배터리의 충/방전 스케줄 결정: Python 코드 | 에너지 데이터 연구소</title>
+<meta name="description" content="이번 포스팅에서는, 건물 내 배터리 최적 스케줄 도출 문제를 선형계획법 (Linear Programming) 을 이용해서 풀어본다. Python에서 무료로 쓸 수 있는 cvxopt 패키지의 glpk 모듈로 문제를 풀 것이며, 문제를 코딩하는 방법을 상세히 설명한다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -23,11 +23,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지 데이터 연구소">
-<meta property="og:title" content="정수선형계획법 기반 분산에너지시스템 최적화 설명 - 3) 배터리의 충/방전 스케줄 정하기: Python 코드">
+<meta property="og:title" content="선형계획법 기반 분산에너지시스템 최적화 - 3) 배터리의 충/방전 스케줄 결정: Python 코드">
 <meta property="og:url" content="http://localhost:4000/linprogthree.html">
 
 
-  <meta property="og:description" content="이전 포스팅에서 봤던 건물 내 배터리 스케줄링 문제에서는, 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었으며, 두 개의 변수들 간의 곱도 없었다.">
+  <meta property="og:description" content="이번 포스팅에서는, 건물 내 배터리 최적 스케줄 도출 문제를 선형계획법 (Linear Programming) 을 이용해서 풀어본다. Python에서 무료로 쓸 수 있는 cvxopt 패키지의 glpk 모듈로 문제를 풀 것이며, 문제를 코딩하는 방법을 상세히 설명한다.">
 
 
 
@@ -200,7 +200,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 3) 배터리의 충/방전 스케줄 정하기: Python 코드</li>
+        <li class="current">선형계획법 기반 분산에너지시스템 최적화 - 3) 배터리의 충/방전 스케줄 결정: Python 코드</li>
       
     
   </ol>
@@ -369,8 +369,8 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="정수선형계획법 기반 분산에너지시스템 최적화 설명 - 3) 배터리의 충/방전 스케줄 정하기: Python 코드">
-    <meta itemprop="description" content="이전 포스팅에서 봤던 건물 내 배터리 스케줄링 문제에서는, 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었으며, 두 개의 변수들 간의 곱도 없었다.">
+    <meta itemprop="headline" content="선형계획법 기반 분산에너지시스템 최적화 - 3) 배터리의 충/방전 스케줄 결정: Python 코드">
+    <meta itemprop="description" content="이번 포스팅에서는, 건물 내 배터리 최적 스케줄 도출 문제를 선형계획법 (Linear Programming) 을 이용해서 풀어본다. Python에서 무료로 쓸 수 있는 cvxopt 패키지의 glpk 모듈로 문제를 풀 것이며, 문제를 코딩하는 방법을 상세히 설명한다.">
     <meta itemprop="datePublished" content="2023-04-13T00:00:00+09:00">
     
 
@@ -378,7 +378,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/linprogthree.html" class="u-url" itemprop="url">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 3) 배터리의 충/방전 스케줄 정하기: Python 코드
+            <a href="http://localhost:4000/linprogthree.html" class="u-url" itemprop="url">선형계획법 기반 분산에너지시스템 최적화 - 3) 배터리의 충/방전 스케줄 결정: Python 코드
 </a>
           </h1>
           
@@ -412,15 +412,11 @@
             </nav>
           </aside>
         
-        <p><a href="/linprogtwo.html">이전 포스팅에서 봤던 건물 내 배터리 스케줄링 문제</a>에서는, 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었으며, 두 개의 변수들 간의 곱도 없었다.</p>
+        <p>이번 포스팅에서는, <a href="/linprogtwo.html">건물 내 배터리 최적 스케줄 도출 문제</a>를 선형계획법 (Linear Programming) 을 이용해서 풀어본다. Python에서 무료로 쓸 수 있는 <a href="https://cvxopt.org/install/">cvxopt 패키지</a>의 glpk 모듈로 문제를 풀 것이며, 문제를 코딩하는 방법을 상세히 설명한다.</p>
 
-<p>이 경우, 선형계획법 (Linear Programming) 을 이용해서 풀 수 있다.</p>
-
-<p>선형계획법을 ‘무료로’ 수행하기 위해서는, Python에서 cvxopt 패키지 설치 후 glpk 모듈을 쓸 수 있다 <a href="https://cvxopt.org/install/">(설치 방법 링크)</a>. 무료인 만큼 계산 시간이 많이 필요하지만, 그래도 적절한 가정들 하에 간소화된 에너지 최적화 문제들은 푸는 것 자체는 가능하다.</p>
+<p>cvxopt는 무료인 만큼 계산 시간이 많이 필요하지만, 그래도 적절한 가정들 하에 간소화된 에너지 최적화 문제들은 푸는 것 자체는 가능하므로 유료 라이선스가 없는 상태에서 선형계획법을 배우는 데 쓸 수 있다.</p>
 
 <p>‘유료로’ 수행하는 방법으로는 MATLAB optimization toolbox 사용, 또는 값비싼 상용 solver들 (CPLEX, Gurobi) 사용 등이 있다. 박사과정 때 MATLAB에 Gurobi academic license를 연계해서 써 봤는데, 정말 빠르긴 빨랐다. (다만 Gurobi commercial license의 permanent version 가격이 천만원 단위였던 것으로 기억하는데… 최근에는 cloud 접속 방식으로 필요한 만큼만 사용할 수 있는 서비스가 있다고 얼핏 듣기는 했다.)</p>
-
-<p>이 포스팅에서는 Python cvxopt 패키지의 glpk 모듈로 선형계획법 문제를 코딩해 푸는 과정을 설명한다.</p>
 
 <p><br /></p>
 
@@ -633,12 +629,12 @@
 
 <div class="notice--info">
 
-정수선형계획법 기반 분산에너지시스템 최적화 설명<br /><br />
+선형계획법 기반 분산에너지시스템 최적화<br /><br />
 
 1) <a href="/linprogone.html">최소비용 시스템과 시간별 자료의 중요성</a><br />
-2) <a href="/linprogtwo.html">배터리의 충/방전 스케줄 정하기: 수식</a> <br />
-3) <b>배터리의 충/방전 스케줄 정하기: Python 코드</b> <br />
-4) <a href="/linprogfour.html">태양광과 배터리의 용량 정하기</a>
+2) <a href="/linprogtwo.html">배터리의 충/방전 스케줄 결정: 수식</a> <br />
+3) <b>배터리의 충/방전 스케줄 결정: Python 코드</b> <br />
+4) <a href="/linprogfour.html">태양광과 배터리의 용량 결정</a>
 
 </div>
 
@@ -697,7 +693,7 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EC%88%98%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+%EC%84%A4%EB%AA%85+-+3%29+%EB%B0%B0%ED%84%B0%EB%A6%AC%EC%9D%98+%EC%B6%A9%2F%EB%B0%A9%EC%A0%84+%EC%8A%A4%EC%BC%80%EC%A4%84+%EC%A0%95%ED%95%98%EA%B8%B0%3A+Python+%EC%BD%94%EB%93%9C%20http%3A%2F%2Flocalhost%3A4000%2Flinprogthree.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+-+3%29+%EB%B0%B0%ED%84%B0%EB%A6%AC%EC%9D%98+%EC%B6%A9%2F%EB%B0%A9%EC%A0%84+%EC%8A%A4%EC%BC%80%EC%A4%84+%EA%B2%B0%EC%A0%95%3A+Python+%EC%BD%94%EB%93%9C%20http%3A%2F%2Flocalhost%3A4000%2Flinprogthree.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flinprogthree.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -723,10 +719,10 @@
 
   
     
-      <a href="/linprogfour.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>정수선형계획법 기반 분산에너지시스템 최적화 설명 - 4) 태양광과 배터리의 용량 정하기</a>
+      <a href="/linprogfour.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 용량 결정</a>
     
     
-      <a href="/linprogtwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>정수선형계획법 기반 분산에너지시스템 최적화 설명 - 2) 배터리의 충/방전 스케줄 정하기: 수식</a>
+      <a href="/linprogtwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>선형계획법 기반 분산에너지시스템 최적화 - 2) 배터리의 충/방전 스케줄 결정: 수식</a>
         
   
 

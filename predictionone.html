@@ -508,7 +508,7 @@ K년도의 자료를 갖고, 4개 sub모델 각각에 대해 Weighted Least Squa
 
 <p>이는 전기 사용량 자체가 24시간 주기로 반복되는 특성이 있기 때문이다. Ljung-Box test를 수행 시 $p$-value 또한 lag 23까지에 대해서는 전부 0.1 이상이나 lag 24에 대해서는 사실상 0이므로, 24시간 주기의 자기상관성이 존재한다.</p>
 
-<p>이는 seasonal ARMA (SARMA) 모델을 적합시켜 반영할 수 있다. 이를테면 $\texttt{auto.arima()}$로 ARMA 적합 결과 제안된 차수가 $(1,0,2)$였다고 하자. 그러면 $\texttt{Arima()}$ 함수를 통해 기본 차수 $(1,0,2)$에 더해, period 24의 seasonality 차수 $(1,0,1)$을 추가한 SARMA 모델을 적합한다.</p>
+<p>이는 seasonal ARMA (SARMA) 모델을 적합시켜 반영할 수 있다. 이를테면 $\texttt{auto.arima()}$로 적합된 모델이 ARIMA$(1,0,2)$라 하자. 그러면 $\texttt{Arima()}$ 함수를 사용해 SARIMA$(1,0,2)(1,0,1)_{24}$ 모델을 적합한다.</p>
 
 <p>$K$년도 WLS의 잔차에 SARMA 모델을 적합 후 해당 SARIMA 모델의 잔차에 대해 ACF 및 PACF plot을 아래와 같이 그려보면, 드디어 자기상관성이 완전히 사라졌다.</p>
 

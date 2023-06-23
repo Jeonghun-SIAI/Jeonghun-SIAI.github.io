@@ -406,7 +406,7 @@
         
           <aside class="sidebar__right sticky">
             <nav class="toc">
-              <header><h4 class="nav__title"><i class="fas fa-fas fa-smile-beam"></i> Contents</h4></header> 
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
               <ul class="toc__menu"><li><a href="#over-confidence란">Over-confidence란</a></li><li><a href="#over-confidence가-발생하는-이유">Over-confidence가 발생하는 이유</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
@@ -419,13 +419,16 @@
 
 <p>Toy problem을 예시로 들면, 아래와 같은 두 class의 point들을 분류하는 plane을 ($\hat{y}=0.5$를 기준으로) logistic regression으로 찾는다고 하자.</p>
 
-<p>(그림들 3개)</p>
+<p><img src="/assets/images/overconfidence/overconfidence.png" alt="overconfidence" class="align-center" />
+<em>두 class의 point들을 분류하는 plane을 찾는 문제, 각 경우에 대해 misclassified point 개수가 다름.</em></p>
 
-<p>각 경우에 대해 계수추정량들 및 계수의 표준오차들을 구하면 아래 표와 같다.</p>
+<p>Plane을 $\beta_1 x_1 + \beta_2 x_2 + \beta_0 = 0$ 이라 할 때, 기울기가 -1이고 원점을 지나는 직선일 것이므로 $\beta_1 \approx \beta_2$,$\beta_0 \approx 0$임은 자명하다. 각 경우에 대해 $\beta_1$의 계수추정량들 및 계수추정량의 $t$-value들을 구하면 아래와 같다.</p>
 
-<p>(계수추정량, 표)</p>
+<p>1) Many misclassifications: $\hat{\beta_1} = 8.85$, $t$-value는 $18.4$ <br /><br />
+2) A few misclassifications: $\hat{\beta_1} = 29.6$, $t$-value는 $13.8$ <br /><br />
+3) Perfect separation: $\hat{\beta_1} = 9,824$, $t$-value는 $0.8$ <br /></p>
 
-<p>Misclassified point의 비중이 적을수록 계수추정량의 magnitude는 커지고, t-value는 작아진다. Python에서는 perfectly separable case에 대해서도 결과를 제공하기는 하는데, t-value를 보면 계수의 값에 별 의미는 없는 것으로 보인다.</p>
+<p>Misclassified point의 비중이 적을수록 계수추정량의 magnitude는 커지고, $t$-value는 작아진다. Python에서는 perfectly separable case에 대해서도 결과를 제공하기는 하는데, t-value를 보면 계수의 값에 별 의미는 없는 것으로 보인다.</p>
 
 <p><br /></p>
 <h2 id="over-confidence가-발생하는-이유">Over-confidence가 발생하는 이유</h2>
@@ -436,7 +439,7 @@
 
 <p>로지스틱 회귀에서의 cost function은 ‘negative’ log-likelihood $-\sum_{i=1}^{N}[y_{i} \text{log}\hat{y}_{i} + (1-y_{i})\text{log}(1-\hat{y}_{i})]$ 이고 $ y_{i} \in \lbrace 0,1 \rbrace$이며 $0 \leq \hat{y}_{i}\leq 1$이다.</p>
 
-<p>그러므로 실제 response가 1인 점을 기준으로 추정값이 1에서 멀어지고 0으로 가까워질수록, 모델에 대한 penalty가 exponential하게 증가한다. 이는 실제 response가 0인데 추정값이 1에 가까워질 경우에도 마찬가지이다.</p>
+<p>그러므로 실제 response가 1인 점을 기준으로, 추정값이 1에서 멀어지고 0으로 가까워질수록 penalty가 exponential하게 증가한다. 이는 실제 response가 0인데 추정값이 1에 가까워질 경우에도 마찬가지이다.</p>
 
 <p>이 때 $\hat{y}=0.5$ 기준으로 misclassified point가 여럿 있는 경우에는, 해당 point들 때문에 생기는 exponential penalty를 줄이기 위해 추정값들이 1 또는 0에 너무 가까워지지 않도록 계수의 magnitude를 작게 설정해야 한다.</p>
 

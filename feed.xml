@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-06-23T17:55:05+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">에너지 데이터 연구소</title><subtitle>스마트한 에너지 전환에 기여하는 데이터 사이언티스트를 지향합니다.</subtitle><author><name>Jeonghun Song</name></author><entry><title type="html">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거</title><link href="http://localhost:4000/monthlyenergythree.html" rel="alternate" type="text/html" title="건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거" /><published>2023-04-23T00:00:00+09:00</published><updated>2023-04-23T00:00:00+09:00</updated><id>http://localhost:4000/monthlyenergythree</id><content type="html" xml:base="http://localhost:4000/monthlyenergythree.html"><![CDATA[<p>저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-06-23T22:43:54+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">에너지 데이터 연구소</title><subtitle>스마트한 에너지 전환에 기여하는 데이터 사이언티스트를 지향합니다.</subtitle><author><name>Jeonghun Song</name></author><entry><title type="html">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거</title><link href="http://localhost:4000/monthlyenergythree.html" rel="alternate" type="text/html" title="건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거" /><published>2023-04-23T00:00:00+09:00</published><updated>2023-04-23T00:00:00+09:00</updated><id>http://localhost:4000/monthlyenergythree</id><content type="html" xml:base="http://localhost:4000/monthlyenergythree.html"><![CDATA[<p>저번 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다.</p>
 
 <p>이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.</p>
 
@@ -1641,7 +1641,7 @@ and netfloorarea &gt; 0
 <p><img src="/assets/images/reinforcethree/nn.png" alt="nn" class="align-center" />
 <em>Vincent의 연구에서 사용된 심층신경망 구성. (논문의 그림을 필자가 재구성하였음)</em></p>
 
-<p>직전 24시간의 태양광 발전량은 첫 번째 Conv1D 층에, 직전 24시간의 부하는 두 번째 Conv1D 층에, 그리고 직전 1시간의 배터리 내 에너지양은 위 두 Conv1D층과 연결되는 Dense층에 바로 연결된다. 그리고 Dense층이 하나 더 있고, 이 층을 거쳐서 최종적으로 3개의 output node가 각 action별 Q-value를 출력한다.</p>
+<p>직전 24시간의 태양광 발전량은 첫 번째 Conv1D 층에, 직전 24시간의 부하는 두 번째 Conv1D 층에, 그리고 직전 1시간의 배터리 내 에너지양은 위 두 Conv1D층과 연결되는 Dense층에 바로 연결된다. 그리고 Dense층이 하나 더 있고, 이 층을 거쳐서 최종적으로 3개의 output node가 각 action별 Q-value를 출력한다. Conv1D 층을 쓰는 이유는, 태양광 발전량과 부하가 시간적인 정보를 갖고 있으므로 이를 반영하기 위함이다.</p>
 
 <p>해당 심층신경망 훈련을 위한 training set은 특정 2년 (17,520시간) 동안의 시간별 태양광발전량과 부하 자료이다. 해당 모델이 직전 24시간의 정보를 state로 사용하므로 control은 $t=25,26,\cdots, 17520$ 에 대해 정해진다. Validation set은 별도의 특정 1년 (8,760시간) 동안의 시간별 태양광 발전량과 부하 자료이다.</p>
 
@@ -2134,10 +2134,6 @@ and netfloorarea &gt; 0
 <span class="nf">print</span><span class="p">(</span><span class="n">profit</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>최적화 문제를 풀면 아래와 같은 최적 스케줄링을 구할 수 있다.</p>
-
-<p>(그림)</p>
-
 <p>특정 1년의 1월 2일~12월 31일에 대해 최적화 수행 시, 비용은 -50유로, 즉 누적해서 50유로의 수익을 낸다 (이는 다음 포스팅에서부터 소개할 강화학습에 대한 validation case이며, 왜 1월 2일부터인지는 다음 포스팅에서 설명함).</p>
 
 <p>여기서 t=1일 때의 $p_{\text{export}}[1]$와 $p_{\text{import}}[1]$을 결정하는 데 $p_{\text{pv}}[1], p_{\text{pv}}[2], \cdots, p_{\text{pv}}[T]$ 즉 모든 시간의 태양광 발전량 값들 및 $p_{\text{load}}[1], p_{\text{load}}[2], \cdots, p_{\text{load}}[T]$ 즉 모든 시간의 부하 값들이 정보로 쓰인다. 즉 ‘미래를 정확히 아는 상황’ 이 된다.</p>
@@ -2168,9 +2164,9 @@ and netfloorarea &gt; 0
 4) <a href="/reinforcefour.html">DDPG를 통한 continuous control 도출</a><br />
 5) <a href="/reinforcefive.html">TD3, SAC를 통한 continuous control 도출</a>
 
-</div>]]></content><author><name>Jeonghun Song</name></author><category term="energymanagement" /><category term="선형계획법" /><category term="부하패턴" /><category term="경제성분석" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다.]]></summary></entry><entry><title type="html">정수선형계획법 기반 분산에너지시스템 최적화 설명 - 4) 태양광과 배터리의 용량 정하기</title><link href="http://localhost:4000/linprogfour.html" rel="alternate" type="text/html" title="정수선형계획법 기반 분산에너지시스템 최적화 설명 - 4) 태양광과 배터리의 용량 정하기" /><published>2023-04-14T00:00:00+09:00</published><updated>2023-04-14T00:00:00+09:00</updated><id>http://localhost:4000/linprogfour</id><content type="html" xml:base="http://localhost:4000/linprogfour.html"><![CDATA[<p>지난 포스팅에서는 `주어진 용량의’ 배터리가 건물에 설치된 경우의 시간별 최소비용 충/방전 스케줄을 구하기 위한 선형계획법 문제 수식 구성 및 코딩을 설명했다.</p>
+</div>]]></content><author><name>Jeonghun Song</name></author><category term="energymanagement" /><category term="선형계획법" /><category term="부하패턴" /><category term="경제성분석" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다.]]></summary></entry><entry><title type="html">선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 용량 결정</title><link href="http://localhost:4000/linprogfour.html" rel="alternate" type="text/html" title="선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 용량 결정" /><published>2023-04-14T00:00:00+09:00</published><updated>2023-04-14T00:00:00+09:00</updated><id>http://localhost:4000/linprogfour</id><content type="html" xml:base="http://localhost:4000/linprogfour.html"><![CDATA[<p>지난 포스팅에서는 ‘주어진 용량의’ 배터리가 건물에 설치된 경우의 스케줄링을 설명했다. 그런데, 실제 상황에서는 배터리의 ‘용량도 결정’해야 하는 경우가 대부분이다. 그것도 경제성을 고려한 최적 용량으로 말이다.</p>
 
-<p>그런데, 실제로는 그 용량도 결정해야 한다. 그래서 이번 포스팅에서는 용량까지 결정하는 문제를 설명한다. 더불어, 건물에 배터리 뿐 아니라 태양광 패널도 설치해서 태양광+배터리 연계 시스템을 구축 시 각각의 용량을 결정하는 경우를 상정한다.</p>
+<p>그래서 이번 포스팅에서는 용량까지 결정하는 문제를 설명한다. 더불어, 건물에 배터리 뿐 아니라 태양광 패널도 설치해서 태양광+배터리 연계 시스템을 구축 시 각각의 용량을 결정하는 경우를 상정한다.</p>
 
 <p><img src="/assets/images/linprogfour/system_pvbatt.png" alt="system_pvbatt" class="align-center" width="80%" />
 <em>태양광과 배터리를 포함하는 건물 전기 공급 시스템 도식도.</em></p>
@@ -2307,7 +2303,7 @@ $\vdots$
 <span class="n">c_rate_batt</span> <span class="o">=</span> <span class="mf">0.5</span>
 <span class="n">initialenergy_batt</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="c1"># 화폐가치 하락에 대한 할인율
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="c1"># 화폐가치 하락 반영을 위한 할인율
 </span>
 <span class="n">initialcost_pv</span> <span class="o">=</span> <span class="mi">1400000</span> <span class="c1"># 태양광 1kW당 초기투자비
 </span><span class="n">initialcost_batt</span> <span class="o">=</span> <span class="mi">600000</span> <span class="c1"># 배터리 1kWh당 초기투자비 (SOC 고려한 실용량 가정)
@@ -2378,6 +2374,8 @@ $\vdots$
 <span class="n">capa_pv</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
 <span class="n">capa_batt</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">p_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="n">t</span><span class="p">])</span>
+<span class="n">p_ch</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][(</span><span class="n">t</span><span class="p">):(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)])</span> <span class="c1"># Python에서는 t+1:2*t+1 이 아님에 주의
+</span><span class="n">p_disch</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">):(</span><span class="mi">3</span><span class="o">*</span><span class="n">t</span><span class="p">)])</span>
 
 <span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">73</span><span class="p">).</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">p_load</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">72</span><span class="p">])</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">73</span><span class="p">).</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">p_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">72</span><span class="p">]</span><span class="o">+</span><span class="n">p_pv</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">72</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">capa_pv</span><span class="p">)</span>
@@ -2393,15 +2391,20 @@ $\vdots$
 <p><br /></p>
 
 <h2 id="계산-결과">계산 결과</h2>
-<p>(계산 결과)</p>
+<p>필자가 지정한 케이스 (Peak 부하 약 2MW, 태양광 용량 제한 없다고 가정) 에 대해 계산한 결과, 최적 용량은 태양광 812kW + 배터리 435kWh로 도출되었다. 또한 특정 3일에 대한 전력 공급 패턴은 아래 그림과 같다.</p>
+
+<p><img src="/assets/images/linprogfour/result_year.png" alt="result_year" class="align-center" />
+<em>대상 건물에 최적 용량의 태양광과 배터리 설치 시 전력 공급 패턴.</em></p>
+
+<p>노란 영역은 태양광으로 공급되는 전기에너지, 파란 영역은 수전으로 공급되는 전기에너지, 빨간 영역은 배터리 방전으로 공급되는 에너지이다. 굵은 검정 곡선은 시간별 부하이며, 태양광과 수전의 합이 시간별 부하를 초과한 경우 그 초과분은 배터리로 충전된다.</p>
 
 <div class="notice--info">
 
-정수선형계획법 기반 분산에너지시스템 최적화 설명<br /><br />
+선형계획법 기반 분산에너지시스템 최적화<br /><br />
 
 1) <a href="/linprogone.html">최소비용 시스템과 시간별 자료의 중요성</a><br />
-2) <a href="/linprogtwo.html">배터리의 충/방전 스케줄 정하기: 수식</a> <br />
-3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 정하기: Python 코드</a> <br />
-4) <b>태양광과 배터리의 용량 정하기</b>
+2) <a href="/linprogtwo.html">배터리의 충/방전 스케줄 결정: 수식</a> <br />
+3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드</a> <br />
+4) <b>태양광과 배터리의 용량 결정</b>
 
-</div>]]></content><author><name>Jeonghun Song</name></author><category term="optimalsystem" /><category term="선형계획법" /><category term="부하패턴" /><category term="경제성분석" /><category term="Python" /><summary type="html"><![CDATA[지난 포스팅에서는 `주어진 용량의’ 배터리가 건물에 설치된 경우의 시간별 최소비용 충/방전 스케줄을 구하기 위한 선형계획법 문제 수식 구성 및 코딩을 설명했다.]]></summary></entry></feed>
+</div>]]></content><author><name>Jeonghun Song</name></author><category term="optimalsystem" /><category term="선형계획법" /><category term="부하패턴" /><category term="경제성분석" /><category term="Python" /><summary type="html"><![CDATA[지난 포스팅에서는 ‘주어진 용량의’ 배터리가 건물에 설치된 경우의 스케줄링을 설명했다. 그런데, 실제 상황에서는 배터리의 ‘용량도 결정’해야 하는 경우가 대부분이다. 그것도 경제성을 고려한 최적 용량으로 말이다.]]></summary></entry></feed>
