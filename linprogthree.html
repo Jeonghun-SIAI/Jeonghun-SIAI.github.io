@@ -373,9 +373,9 @@
         
         <p>이전 포스팅에서 봤던 문제에서는 목적함수와 제약조건식들이 모두 선형이었다. 제곱항, 로그항 등은 없었다. 이 경우, 선형계획법 (Linear Programming) 을 이용해서 풀 수 있다.</p>
 
-<p>선형계획법을 `무료로’ 수행하기 위해서는, Python에서 cvxopt 패키지 설치 후 glpk 모듈을 쓸 수 있다 <a href="https://cvxopt.org/install/">(설치 방법 링크)</a>. 무료인 만큼 계산 시간이 많이 필요하지만, 그래도 적절한 가정들 하에 간소화된 에너지 최적화 문제들은 푸는 것 자체는 가능하다.</p>
+<p>선형계획법을 ‘무료로’ 수행하기 위해서는, Python에서 cvxopt 패키지 설치 후 glpk 모듈을 쓸 수 있다 <a href="https://cvxopt.org/install/">(설치 방법 링크)</a>. 무료인 만큼 계산 시간이 많이 필요하지만, 그래도 적절한 가정들 하에 간소화된 에너지 최적화 문제들은 푸는 것 자체는 가능하다.</p>
 
-<p>`유료로’ 수행하는 방법으로는 MATLAB optimization toolbox 사용, 또는 값비싼 상용 solver들 (CPLEX, Gurobi) 사용 등이 있다. 박사과정 때 MATLAB에 Gurobi academic license를 연계해서 써 봤는데, 정말 빠르긴 빨랐다. (다만 Gurobi commercial license의 permanent version 가격이 천만원 단위였던 것으로 기억하는데… 최근에는 cloud 접속 방식으로 필요한 만큼만 사용할 수 있는 서비스가 있다고 얼핏 듣기는 했다.)</p>
+<p>‘유료로’ 수행하는 방법으로는 MATLAB optimization toolbox 사용, 또는 값비싼 상용 solver들 (CPLEX, Gurobi) 사용 등이 있다. 박사과정 때 MATLAB에 Gurobi academic license를 연계해서 써 봤는데, 정말 빠르긴 빨랐다. (다만 Gurobi commercial license의 permanent version 가격이 천만원 단위였던 것으로 기억하는데… 최근에는 cloud 접속 방식으로 필요한 만큼만 사용할 수 있는 서비스가 있다고 얼핏 듣기는 했다.)</p>
 
 <p><br />
 이 포스팅에서는 Python cvxopt 패키지의 glpk 모듈로 선형계획법 문제를 코딩해 푸는 과정을 설명한다.</p>
@@ -537,9 +537,9 @@
 <p><br />
 마지막으로, 목적함수를 코딩한다. 목적함수에서 각 변수들에 붙는 계수들을 모은 벡터 $\texttt{c}$를 만든다.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">eleccost_offpeak</span> <span class="o">=</span> <span class="mf">79.3</span><span class="o">*</span><span class="mf">1.137</span> <span class="c1"># 경부하 시간의 전력요금 (1.137을 곱해 부가가치세, 전력산업기반기금 고려)
-</span><span class="n">eleccost_mid</span> <span class="o">=</span> <span class="mf">132.2</span><span class="o">*</span><span class="mf">1.137</span> <span class="c1"># 중간부하 시간의 전력요금
-</span><span class="n">eleccost_peak</span> <span class="o">=</span> <span class="mf">214.3</span><span class="o">*</span><span class="mf">1.137</span> <span class="c1"># 최대부하 시간의 전력요금
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">eleccost_offpeak</span> <span class="o">=</span> <span class="mf">87.3</span><span class="o">*</span><span class="mf">1.137</span> <span class="c1"># 경부하 시간의 전력요금 (1.137을 곱해 부가가치세, 전력산업기반기금 고려)
+</span><span class="n">eleccost_mid</span> <span class="o">=</span> <span class="mf">140.2</span><span class="o">*</span><span class="mf">1.137</span> <span class="c1"># 중간부하 시간의 전력요금
+</span><span class="n">eleccost_peak</span> <span class="o">=</span> <span class="mf">222.3</span><span class="o">*</span><span class="mf">1.137</span> <span class="c1"># 최대부하 시간의 전력요금
 </span><span class="n">eleccost</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">hstack</span><span class="p">([</span><span class="n">eleccost_offpeak</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">)),</span>
                       <span class="n">eleccost_mid</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)),</span>
                       <span class="n">eleccost_peak</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span>
@@ -562,9 +562,19 @@
 </span><span class="n">p_discharge</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">48</span><span class="p">:</span><span class="mi">72</span><span class="p">])</span> <span class="c1"># 시간별 배터리 방전을 통해 부하에 전달되는 전기 (방전에 따른 손실 발생 후)
 </span><span class="n">e_batt</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">72</span><span class="p">:])</span> <span class="c1"># 시간별 배터리 내 저장된 에너지 (t=0 포함함)
 </span></code></pre></div></div>
+<p><br />
+배터리의 충전/방전 스케줄이 어떤지, 그리고 배터리 내 에너지가 어떻게 변화하는지 그래프로 보자</p>
 
-<p>배터리의 충전/방전 스케줄이 어떤지, 그리고 배터리 내 에너지가 어떻게 변화하는지 그래프로 보자
-(계산 결과를 그래프와 같이 보여주기)</p>
+<p><img src="/assets/images/linprogthree/result_24hour.png" alt="result_24hour" class="align-center" />
+<em>24시간 동안의 시스템 operation plot.</em></p>
+
+<p>경부하 시간대인 5~6시, 6~7시, 7~8시에 수전 (power from grid) 이 부하 (power load) 보다 크며 배터리 내 에너지 (energy from battery) 가 증가한다. 즉 요금이 저렴한 시간에 배터리가 충전된다.</p>
+
+<p>그리고 중간부하 시간대인 8~9시, 9~10시, 10~11시에는 충전도 방전도 되지 않다가, 요금이 가장 비싼 최대부하 시간대인 11~12시에 배터리가 방전되어 수전을 감소시킨다.</p>
+
+<p>그리고 중간부하 시간대인 12~13시에 다시 충전된 후, 다시 최대부하 시간대인 13~14시, 14~15시에 완전히 방전된다. 12~13시에는 경부하가 아닌 중간부하 시간대임에도 불구하고, 바로 뒤에 최대부하 시간대가 오기 때문에 배터리가 충전되었다.</p>
+
+<p>즉 선형계획법으로 구한 충/방전 스케줄은, 예상했던 대로 시간대별 전기요금 차이에 따른 ‘차익거래’를 추구하는 스케줄이다.</p>
 
 <div class="notice--info">
 
