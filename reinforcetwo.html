@@ -474,7 +474,7 @@
 <p>지금까지 설명한 방법은, state-action pair의 수가 많지 않을 경우 각 state-action pair별 $\hat{Q}$값들을 담는 table을 만들어 그대로 적용할 수 있다. 이를테면 아래와 같은 공간에서 상하좌우로 한 칸씩 이동 가능한 환경에서 최단거리를 찾는 문제 (Gridworld) 에서는, 격자 수가 한정되어 있으므로 각 격자(state)-이동방향(action) pair 별로 $\hat{Q}$값들을 따로 계산할 수 있다.</p>
 
 <p><img src="/assets/images/reinforcetwo/gridworld.png" alt="gridworld" class="align-center" />
-<em>Gridworld 환경. 각 칸-이동방향 pair에 대해 Q-value를 정의할 수 있다. 이 경우 칸이 38개이고 action은 상하좌우 4개이므로, Q-value가 총 152개이다.</em></p>
+<em>Gridworld 환경. 칸이 38개이고 action은 상하좌우 4개이므로, state-action pair 총 152개 각각에 대해 Q-value를 추정할 수 있다.</em></p>
 
 <p>하지만 많은 경우 state가 continuous이거나, discrete라도 그 수가 매우 많다. 잘 알려진 cartpole 문제의 경우, action은 ‘수레를 정해진 힘으로 왼쪽으로 가속/ 오른쪽으로 가속’ 딱 두 개의 값 중 하나를 가지는 이진수로 볼 수 있으나, state는 ‘수레의 위치와 속도, 막대의 각도와 각속도’로 4차원의 연속된 벡터로 볼 수 있다. State의 수가 무한하므로, 각 state-action pair에 대해 table 방식으로 $\hat{Q}$값들을 따로 계산할 수는 없다.</p>
 
