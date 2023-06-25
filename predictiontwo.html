@@ -178,7 +178,7 @@
   <div class="initial-content">
     
 
-
+<!-- 
 
 
   
@@ -207,7 +207,7 @@
 </nav>
 
   
-
+ -->
 
 <div id="main" role="main">
   
@@ -247,7 +247,7 @@
                     
                 
                     
-                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                        <li><a href="/optimalsystem" class="">Optimal system (7)</a></li>
                     
                 
                     
@@ -422,7 +422,9 @@
 
 <p>전기부하 데이터는 시계열 데이터이므로 Recurrent Neural Network (RNN) 을 쓸 수 있으나, 먼저 단순한 Dense Neural Network (DNN) 을 사용해 보자.</p>
 
-<p>이 경우 지난 포스팅의 선형회귀와 제대로 비교하기 위해서는, 선형회귀에서처럼 유형별 sub모델 4개를 만들고 predictor들도 이차항과 교차항을 제외하면 선형회귀에서와 똑같이 두어야 한다 (이차항과 교차항은 빼도 된다, NN이 제대로 적합된다면 기온/조도와 전기부하 간의 적절한 nonlinear function을 찾아줄 것이므로).</p>
+<p>이 경우 지난 포스팅의 선형회귀와 제대로 비교하기 위해서는, 선형회귀에서처럼 유형별 sub모델 4개를 만들고 predictor들도 이차항과 교차항을 제외하면 선형회귀에서와 똑같이 두어야 한다.</p>
+
+<p>(단, 이차항과 교차항은 빼도 된다. NN이 제대로 적합된다면 기온/조도와 전기부하 간의 적절한 nonlinear function을 찾아줄 것이므로.)</p>
 
 <p>여기서는 DNN은 2개의 Dense layer로 이루어져 있고 첫 layer의 node는 20개, 두 번째 layer의 node는 10개로 둔다. 훈련 epoch 수는 1000이고, optimizer는 특별한 이슈가 없으므로 가장 일반적인 Adam을 쓴다.</p>
 
@@ -589,7 +591,7 @@
 
 <p>Adjusted $R^2$를 계산해보면 훈련 set에 대한 값은 0.9509이다. 이는 Weighted Least square (WLS) 만 했을 때의 결과인 0.9263보다는 더 높지만, WLS에 잔차의 SARMA 모델 적합까지 추가 수행 시 결과인 0.9746보다는 낮다. 한편 검증 set에 대한 값은 0.8642로, WLS만 했을 때의 결과인 0.8716보다도 낮다.</p>
 
-<p>검증 set에 대한 결과와 딥러닝 훈련에 드는 계산비용을 생각하면, 딥러닝이 우월하다고 볼 수 없다 (계산 시간만 따져도 2분 이상 vs. 몇 초(WLS만 수행 시)).</p>
+<p>검증 set에 대한 결과와 딥러닝 훈련에 드는 계산비용을 생각하면, 딥러닝이 우월하다고 볼 수 없다 (계산 시간만 따져도 몇 분 vs. 몇 초(WLS만 수행 시)).</p>
 
 <p><img src="/assets/images/predictiontwo/fit_dnn.png" alt="fit_dnn" class="align-center" />
 <img src="/assets/images/predictiontwo/predict_dnn.png" alt="predict_dnn" class="align-center" />
@@ -600,7 +602,7 @@
 <h2 id="recurrent-neural-net">Recurrent Neural Net</h2>
 <p>그럼, RNN을 쓰면 어떨까?</p>
 
-<p>RNN의 경우 이전 시간의 전기부하가 predictor로 포함되는 구조이므로, 일 유형별로 sub모델을 4개 만들 수는 없다. 1번째 시간의 data point부터 8,760번째 시간의 point까지 연속적으로 모델에 흘러들어가야 하므로, 하나의 모델로 모든 시간의 전기부하를 예측해야 한다. 그러므로 RNN의 predictor로는 일 유형(평일/휴일) dummy도 추가한다.</p>
+<p>RNN의 경우 이전 시간의 전기 부하가 predictor로 포함되는 구조이므로, 일 유형별로 sub모델을 4개 만들 수는 없다. 1번째 시간의 data point부터 8,760번째 시간의 point까지 연속적으로 모델에 흘러들어가야 하므로, 하나의 모델로 모든 시간의 전기 부하를 예측해야 한다. 그러므로 RNN의 predictor로는 일 유형(평일/휴일) dummy도 추가한다.</p>
 
 <p>Layer 수와 node 수는 DNN에서와 같게 둔다. DNN에서 그래도 선형회귀와 비슷한 수준의 예측 성능을 보였으므로, layer 수와 node 수 결정이 잘못된 것은 아니라 판단했다.</p>
 
@@ -696,7 +698,7 @@
 
 <p>데이터의 non-stationarity를 고려해 sub모델 4개로 나누는 ‘데이터 전처리’와 오차의 자기상관성을 추가로 설명하는 과정을 거친 덕분에, 그리고 각 sub모델 별 구간 내의 non-linearity가 심하지 않았기에, 간단한 선형회귀 모델로 딥러닝보다 더 나은 결과를 빠르게 얻을 수 있었다. (거기에 더해, 선형회귀 모델은 딥러닝처럼 훈련 시마다 모델 parameter 값들이 다르게 나오지 않고 항상 같게 나온다는 장점도 있다.)</p>
 
-<p>이렇듯 계산 시간도 빠르면서 성능도 나은 경우 ‘computational efficiency’가 좋다고 한다. 내가 가진 데이터에 대해 더 잘 알수록, 그리고 가능한 기법들 각각의 장단점에 대해 더 잘 알수록, ‘conputationally efficient한’ 방법을 사용할 수 있을 가능성이 높다.</p>
+<p>이렇듯 계산 시간도 빠르면서 성능도 나은 경우 ‘computational efficiency’가 좋다고 한다. 내가 가진 데이터에 대해 더 잘 알수록, 그리고 가능한 기법들 각각의 장단점에 대해 더 잘 알수록, ‘computationally efficient한’ 방법을 사용할 수 있을 가능성이 높다.</p>
 
 <p><a href="https://pdsi.pabii.com/data-scientists-future-2/">(RNN과 전통적인 시계열 모델에 대해 참고할 만한 글)</a></p>
 
@@ -815,6 +817,43 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
+        <a href="/linprogfive.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-24T00:00:00+09:00">2023-04-24</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
         <a href="/monthlyenergythree.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거
 </a>
       
@@ -916,43 +955,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/monthlyenergyone.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-20T00:00:00+09:00">2023-04-20</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">필자의 박사과정 무사 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div> -->
   
@@ -981,7 +983,7 @@
     
       
         
-          <li><a href="https://github.com/Jeonghun-SIAI" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
         
       
     

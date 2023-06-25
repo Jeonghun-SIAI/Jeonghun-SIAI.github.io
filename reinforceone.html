@@ -11,7 +11,7 @@
   <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개 | 에너지 데이터 연구소</title>
-<meta name="description" content="에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다.">
+<meta name="description" content="에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할 수 있어야 한다. 그래야 장기적인 에너지 공급 비용 및 화석연료 사용량 등을 줄일 수 있다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://localhost:4000/reinforceone.html">
 
 
-  <meta property="og:description" content="에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다.">
+  <meta property="og:description" content="에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할 수 있어야 한다. 그래야 장기적인 에너지 공급 비용 및 화석연료 사용량 등을 줄일 수 있다.">
 
 
 
@@ -178,7 +178,7 @@
   <div class="initial-content">
     
 
-
+<!-- 
 
 
   
@@ -207,7 +207,7 @@
 </nav>
 
   
-
+ -->
 
 <div id="main" role="main">
   
@@ -247,7 +247,7 @@
                     
                 
                     
-                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                        <li><a href="/optimalsystem" class="">Optimal system (7)</a></li>
                     
                 
                     
@@ -370,7 +370,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개">
-    <meta itemprop="description" content="에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다.">
+    <meta itemprop="description" content="에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할 수 있어야 한다. 그래야 장기적인 에너지 공급 비용 및 화석연료 사용량 등을 줄일 수 있다.">
     <meta itemprop="datePublished" content="2023-04-15T00:00:00+09:00">
     
 
@@ -412,12 +412,10 @@
             </nav>
           </aside>
         
-        <p>에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다.</p>
+        <p>에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할 수 있어야 한다. 그래야 장기적인 에너지 공급 비용 및 화석연료 사용량 등을 줄일 수 있다.</p>
 
 <p><img src="/assets/images/reinforceone/renewableuncertainty.png" alt="renewableuncertainty" class="align-center" width="80%" />
 <em>풍력발전 예측 시의 신뢰구간이 큼. 즉, 재생발전 비중이 높으면 전기 발전량을 단기적으로도 정확히 예측하기 어려움. (출처: http://www.ningzhang.net/Renewables.html)</em></p>
-
-<p>이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할 수 있어야 한다. 그래야 장기적인 에너지 공급 비용 및 화석연료 사용량 등을 줄일 수 있다.</p>
 
 <p>그런데 선형계획법 등 전통적인 최적화 기반 에너지시스템 스케줄링 관련 연구들에서는, ‘미래’의 발전량과 부하를 정확히 알 경우의 control을 도출한다는 한계점이 있다 (실제로는 미래를 정확히 알 수 없음에도). 최적화문제의 변수들이 각 시간별 수전/ 충전/ 방전 등이라 할 때, 해당 문제의 제약조건들로 ‘모든 시간에 대한’ 에너지 밸런스 제약이 포함된 상태에서 최적화를 수행하기 때문이다.</p>
 
@@ -530,10 +528,14 @@
 
 <p>여기서 t=1일 때의 $p_{\text{export}}[1]$와 $p_{\text{import}}[1]$을 결정하는 데 $p_{\text{pv}}[1], p_{\text{pv}}[2], \cdots, p_{\text{pv}}[T]$ 즉 모든 시간의 태양광 발전량 값들 및 $p_{\text{load}}[1], p_{\text{load}}[2], \cdots, p_{\text{load}}[T]$ 즉 모든 시간의 부하 값들이 정보로 쓰인다. 즉 ‘미래를 정확히 아는 상황’ 이 된다.</p>
 
-<p>그러나 이는 이상적인, 비현실적인 가정이다. $p_{\text{export}}[1]$와 $p_{\text{import}}[1]$을 결정하는 데 실제로 쓰이는 정보는 과거의 정보 즉 $p_{\text{pv}}[1], \cdots, p_{\text{pv}}[k-1], p_{\text{load}}[1], \cdots, p_{\text{load}}[k-1]$로 한정되어야 한다. 그러면 어떻게 해야 과거 정보만으로 ‘미래의 누적비용까지 고려한’ 최적의 control을 계산해낼 수 있을까?</p>
+<p>그러나 이는 이상적인, 비현실적인 가정이다. 시점 $k$의 $p_{\text{export}}[k]$와 $p_{\text{import}}[k]$를 결정하는 데 실제로 쓰이는 정보는 과거의 정보 즉 $p_{\text{pv}}[1], \cdots, p_{\text{pv}}[k-1], p_{\text{load}}[1], \cdots, p_{\text{load}}[k-1]$로 한정되어야 한다.</p>
+
+<p>그러면 어떻게 해야 과거 정보만으로 ‘미래의 누적비용까지 고려한’ 최적의 control을 계산해낼 수 있을까?</p>
 
 <p><br />
-강화학습이라는 말은 아마 알파고의 학습 원리 등으로 들어보았을 것이다 (실제로 학습해 본 사람들은 아마 Cartpole이나 Gridworld 문제들 정도는 풀어봤을 수도 있다). 강화학습은 환경의 상태가 주어질 때 특정 행동을 함으로써 얻는 당장의 보상 뿐 아니라 미래 보상의 누적합의 기대값을 최대화할 수 있도록 행동을 정하는 policy를 도출하는 방법이다.</p>
+강화학습이라는 말은 아마 알파고의 학습 원리 등으로 들어보았을 것이다.</p>
+
+<p>강화학습은, 주어진 환경에서 특정 상태에 처했을 때 할 수 있는 행동들 중 특정 행동을 함으로써 얻는 보상 (특히 당장의 보상 뿐 아니라 중/장기적 관점에서 미래 보상의 누적 합)의 기대값을 최대화할 수 있도록, 상태 별 행동을 정하는 규칙 (policy) 을 도출하도록 agent를 학습시키는 방법이다.</p>
 
 <p><img src="/assets/images/reinforceone/reinforcement_basic.png" alt="reinforcement_basic" class="align-center" width="70%" />
 <em>강화학습 개요. State $S_t$에서 Action $A_t$를 취하면 Reward $R_{t+1}$을 얻으면서 State $S_{t+1}$로 전이됨.</em></p>
@@ -678,6 +680,43 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
+        <a href="/linprogfive.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-24T00:00:00+09:00">2023-04-24</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
         <a href="/monthlyenergythree.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거
 </a>
       
@@ -779,43 +818,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/monthlyenergyone.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-20T00:00:00+09:00">2023-04-20</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">필자의 박사과정 무사 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div> -->
   
@@ -844,7 +846,7 @@
     
       
         
-          <li><a href="https://github.com/Jeonghun-SIAI" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
         
       
     

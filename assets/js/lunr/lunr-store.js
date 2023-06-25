@@ -35,7 +35,7 @@ var store = [{
         "url": "/mypapertwo.html",
         "teaser": null
       },{
-        "title": "데이터 전처리 예시 - 주택의 분 단위 전기부하 자료",
+        "title": "데이터 결측치 처리 예시 - 주택의 분 단위 전기 부하 자료",
         "excerpt":"스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 ‘스마트그리드 빅데이터 분석의 활용’ 이 있다. (링크) 이 책의 7장 ‘딥러닝을 이용한 스마트그리드 데이터 분석’ 에서는, 널리 알려진 backpropagation 기반 ANN 모델 뿐 아니라 (Factored Conditional) Restricted Boltzmann Machine 기반 모델을 이용해 전력 부하를 예측하는 연구를 소개한다....","categories": ["dataset"],
         "tags": ["SQL","부하패턴","건물 에너지 데이터","데이터 전처리","Python"],
         "url": "/preprocessmocanu.html",
@@ -72,7 +72,7 @@ var store = [{
         "teaser": null
       },{
         "title": "강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개",
-        "excerpt":"에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 풍력발전 예측 시의 신뢰구간이 큼. 즉, 재생발전 비중이 높으면 전기 발전량을 단기적으로도 정확히 예측하기 어려움. (출처: http://www.ningzhang.net/Renewables.html) 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’...","categories": ["energymanagement"],
+        "excerpt":"에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할 수 있어야 한다. 그래야 장기적인 에너지 공급 비용 및 화석연료 사용량 등을 줄일 수 있다. 풍력발전...","categories": ["energymanagement"],
         "tags": ["선형계획법","부하패턴","경제성분석","강화학습","녹색섬","Python"],
         "url": "/reinforceone.html",
         "teaser": null
@@ -90,19 +90,19 @@ var store = [{
         "teaser": null
       },{
         "title": "강화학습 기반 마이크로그리드 스케줄링 - 4) DDPG를 통한 continuous control 도출",
-        "excerpt":"Vincent의 마이크로그리드 사례에 discrete action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic control이 가능했다. Vincent의 연구에서 가정된 마이크로그리드. 그러나 실제로는 수전/송전이 continuous action이다. 그러므로, continuous action을 다루는 심층강화학습 기법을 적용하면 더 우수한...","categories": ["energymanagement"],
+        "excerpt":"Vincent의 마이크로그리드 사례에 ‘discrete’ action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic control이 가능했다. Vincent의 연구에서 가정된 마이크로그리드. 그러나 실제로는 수전/송전이 continuous action이다. 그러므로, continuous action을 다루는 심층강화학습 기법을 적용하면 더 우수한...","categories": ["energymanagement"],
         "tags": ["강화학습","녹색섬","Python"],
         "url": "/reinforcefour.html",
         "teaser": null
       },{
-        "title": "강화학습 기반 마이크로그리드 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출",
+        "title": "강화학습 기반 마이크로그리드 스케줄링 - 5) TD3/ SAC를 통한 continuous control 도출",
         "excerpt":"Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 (3개 action들은 각각 1.1kW 수전/ 1.1kW 송전/ idle). Vincent의 연구에서 가정된 마이크로그리드. 그렇다면 continuous control 도출을 위해 DDPG 이후에 개발된 더 진보된 방법을 쓴다면 어떨까? 진보된 방법들의...","categories": ["energymanagement"],
         "tags": ["강화학습","녹색섬","Python"],
         "url": "/reinforcefive.html",
         "teaser": null
       },{
         "title": "건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화",
-        "excerpt":"필자의 박사과정 무사 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다. 어떤 건물의 1년 12개월 간 월별 전기 사용량과 가스 사용량은, 대부분 아래 그림과 같은 형태를 띤다. 특정 건물의...","categories": ["dataset"],
+        "excerpt":"필자의 박사과정 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다. 어떤 건물의 1년 12개월 간 월별 전기 사용량과 가스 사용량은, 대부분 아래 그림과 같은 형태를 띤다. 특정 건물의 1월부터...","categories": ["dataset"],
         "tags": ["SQL","건물 에너지 데이터","Python"],
         "url": "/monthlyenergyone.html",
         "teaser": null
@@ -123,5 +123,11 @@ var store = [{
         "excerpt":"이전 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다. 에너지 사용량 크기 측면에서의 outlier 상식적으로, 같은 용도의 건물이라면 크기가 큰 건물일수록 에너지 사용량이 큰 경향이 있을 것이다. 이를테면 서울 내 업무용 건물들의 1월 전기...","categories": ["dataset"],
         "tags": ["건물 에너지 데이터","회귀분석"],
         "url": "/monthlyenergythree.html",
+        "teaser": null
+      },{
+        "title": "선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대",
+        "excerpt":"지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다. 이런 발전기의 ‘대수’는 정수 (integer) 이기 때문에, 현실적인 결과를 원한다면 최적해에서도 정수로 도출되어야 한다. 이번 포스팅에서는...","categories": ["optimalsystem"],
+        "tags": ["선형계획법","부하패턴","경제성분석","Python"],
+        "url": "/linprogfive.html",
         "teaser": null
       }]

@@ -11,7 +11,7 @@
   <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화 | 에너지 데이터 연구소</title>
-<meta name="description" content="필자의 박사과정 무사 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.">
+<meta name="description" content="필자의 박사과정 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://localhost:4000/monthlyenergyone.html">
 
 
-  <meta property="og:description" content="필자의 박사과정 무사 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.">
+  <meta property="og:description" content="필자의 박사과정 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.">
 
 
 
@@ -178,7 +178,7 @@
   <div class="initial-content">
     
 
-
+<!-- 
 
 
   
@@ -207,7 +207,7 @@
 </nav>
 
   
-
+ -->
 
 <div id="main" role="main">
   
@@ -247,7 +247,7 @@
                     
                 
                     
-                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                        <li><a href="/optimalsystem" class="">Optimal system (7)</a></li>
                     
                 
                     
@@ -370,7 +370,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화">
-    <meta itemprop="description" content="필자의 박사과정 무사 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.">
+    <meta itemprop="description" content="필자의 박사과정 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.">
     <meta itemprop="datePublished" content="2023-04-20T00:00:00+09:00">
     
 
@@ -412,7 +412,7 @@
             </nav>
           </aside>
         
-        <p>필자의 박사과정 무사 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.</p>
+        <p>필자의 박사과정 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.</p>
 
 <p>어떤 건물의 1년 12개월 간 월별 전기 사용량과 가스 사용량은, 대부분 아래 그림과 같은 형태를 띤다.</p>
 
@@ -500,14 +500,14 @@
 
 <p>filelist에 각 파일명을 미리 적어놓고, colname에 각 열 이름을 코드 내에서 어떻게 명시할 지 적어놓았다 (각 열에 대한 설명은, 같이 다운받을 수 있는 데이터셋_정의서 파일에 있다). 그리고 모든 데이터들을 반복문을 이용해 순서대로 불러온다.</p>
 
-<p>파일 내에 건물 주소명이 기본적으로 시/구/번/지가 쪼개져 있는데, 표제부에서는 주소명이 합쳐져 있으므로 표제부 주소와 결합할 것을 상정하고 표제부와 같은 포맷이 되게, address 칼럼을 새로 만든다. address 같은 행들은 조사 결과 모두 같은 에너지 사용량 값들을 갖고 있어서, 단순 중복으로 간주하고 $\texttt{drop_duplicates}$로 삭제하였다.</p>
+<p>파일 내 건물 주소명은 기본적으로 시/구/번/지 로 쪼개져 있는데, 표제부에서는 주소명이 합쳐져 있으므로 표제부 주소와 결합할 것을 상정하고 표제부와 같은 포맷이 되게, address 칼럼을 새로 만든다. address 같은 행들은 조사 결과 모두 같은 에너지 사용량 값들을 갖고 있어서, 단순 중복으로 간주하고 $\texttt{drop_duplicates}$로 삭제하였다.</p>
 
 <p>이렇게 address 칼럼을 각 데이터셋에 대해 만들고, 모든 데이터셋을 address 기준으로 outer join해 합친 데이터셋이 df가 되도록 하였다. Outer join을 한 이유는 한 개 데이터셋에라도 있는 건물은 우선 포함시키기 위함이다. 그리고 df에서 필요한 칼럼들만 남긴 후 csv 파일로 저장하였다. .</p>
 
 <p><img src="/assets/images/monthlyenergyone/everymonth.png" alt="everymonth" class="align-center" />
 <em>2022년의 모든 월의 전기/가스 사용량들을 통합 후 csv 파일로 저장함.</em></p>
 
-<p>어떤 건물들은 가스 사용량이 모든 월에 대해 없는데, 이는 해당 건물이 도시가스를 공급받지 않기 때문이다 (해당 건물 내 일부 부대시설(음식점 등)이 LPG 가스를 사용하거나 할 수는 있다).</p>
+<p>어떤 건물들은 가스 사용량이 모든 월에 대해 없는데, 이는 해당 건물이 도시가스를 공급받지 않기 때문이다 (해당 건물 내 일부 부대시설(음식점 등)이 LPG 가스를 사용하거나 할 수는 있지만, 그 양은 알 수 없다).</p>
 
 <p><br /></p>
 
@@ -519,7 +519,7 @@
 <img src="/assets/images/monthlyenergyone/pyoje_web_3.png" alt="pyoje_web_3" class="align-center" />
 <em>표제부에는 각 건물 별 주소/ 면적/ 건폐율/ 용적률/ 용도/ 재질/ 층수/ 사용허가일 등 정보가 있음.</em></p>
 
-<p>대한민국 내 모든 건물들에 대한 표제부를 한 번에 받을 수 있으며, 이는 수 GB의 텍스트 파일이다. 각 열의 설명은 같이 다운받을 수 있는 데이터구조 파일에 있다 (그런데 실제 데이터의 순서와 다른 경우도 있어서, 결국 직접 확인해야 했다…).</p>
+<p>대한민국 내 모든 건물들에 대한 표제부 정보를 포함하는 수 GB의 텍스트 파일을 다운받을 수 있다. 각 열의 설명은 같이 다운받을 수 있는 데이터구조 파일에 있다 (그런데 실제 데이터의 순서와 다른 경우도 있어서, 결국 직접 확인해야 했다…).</p>
 
 <p>이 파일의 표제부 데이터를 위에서 만든 csv 파일 내 에너지 사용량 데이터와 합치고, 필요한 칼럼들을 모아서 SQLite DB로 저장하는 코드는 아래와 같다.</p>
 
@@ -802,7 +802,7 @@ and netfloorarea &gt; 0
       <a href="/monthlyenergytwo.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거</a>
     
     
-      <a href="/preprocessmocanu.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>데이터 전처리 예시 - 주택의 분 단위 전기부하 자료</a>
+      <a href="/preprocessmocanu.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>데이터 결측치 처리 예시 - 주택의 분 단위 전기 부하 자료</a>
         
   
 
@@ -818,6 +818,43 @@ and netfloorarea &gt; 0
     <div class="page__related">
       <h2 class="page__related-title">참고</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/linprogfive.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-24T00:00:00+09:00">2023-04-24</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다.
+</p>
+  </article>
+</div>
+
         
           
 
@@ -929,42 +966,6 @@ and netfloorarea &gt; 0
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 5) TD3, SAC를 통한 continuous control 도출
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-19T00:00:00+09:00">2023-04-19</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 ...</p>
-  </article>
-</div>
-
-        
       </div>
     </div> -->
   
@@ -993,7 +994,7 @@ and netfloorarea &gt; 0
     
       
         
-          <li><a href="https://github.com/Jeonghun-SIAI" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
         
       
     

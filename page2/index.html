@@ -294,7 +294,7 @@
                     
                 
                     
-                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                        <li><a href="/optimalsystem" class="">Optimal system (7)</a></li>
                     
                 
                     
@@ -439,10 +439,19 @@
     
       <li>
         <h2>
+          <a class="post-link" href="/reinforcefive.html">강화학습 기반 마이크로그리드 스케줄링 - 5) TD3/ SAC를 통한 continuous control 도출</a>
+        </h2>
+        <span class="post-meta">Apr 19, 2023</span>
+        <p class="archive__item-excerpt" itemprop="description">Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 ...</p>
+        
+      </li>
+    
+      <li>
+        <h2>
           <a class="post-link" href="/reinforcefour.html">강화학습 기반 마이크로그리드 스케줄링 - 4) DDPG를 통한 continuous control 도출</a>
         </h2>
         <span class="post-meta">Apr 18, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에 discrete action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic c...</p>
+        <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에 ‘discrete’ action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic...</p>
         
       </li>
     
@@ -470,18 +479,7 @@
           <a class="post-link" href="/reinforceone.html">강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개</a>
         </h2>
         <span class="post-meta">Apr 15, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다.
-</p>
-        
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/linprogfour.html">선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 용량 결정</a>
-        </h2>
-        <span class="post-meta">Apr 14, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서는 ‘주어진 용량의’ 배터리가 건물에 설치된 경우의 스케줄링을 설명했다. 그런데, 실제 상황에서는 배터리의 ‘용량도 결정’해야 하는 경우가 대부분이다. 그것도 경제성을 고려한 최적 용량으로 말이다.
-</p>
+        <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할...</p>
         
       </li>
     
@@ -589,6 +587,42 @@ layout: archive
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
+        <a href="/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 5) TD3/ SAC를 통한 continuous control 도출
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-19T00:00:00+09:00">2023-04-19</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 ...</p>
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
         <a href="/reinforcefour.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 4) DDPG를 통한 continuous control 도출
 </a>
       
@@ -611,7 +645,7 @@ layout: archive
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에 discrete action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic c...</p>
+    <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에 ‘discrete’ action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic...</p>
   </article>
 </div>
 
@@ -720,45 +754,7 @@ layout: archive
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다.
-</p>
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/linprogfour.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 용량 결정
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-14T00:00:00+09:00">2023-04-14</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서는 ‘주어진 용량의’ 배터리가 건물에 설치된 경우의 스케줄링을 설명했다. 그런데, 실제 상황에서는 배터리의 ‘용량도 결정’해야 하는 경우가 대부분이다. 그것도 경제성을 고려한 최적 용량으로 말이다.
-</p>
+    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할...</p>
   </article>
 </div>
 
@@ -848,7 +844,7 @@ layout: archive
     
       
         
-          <li><a href="https://github.com/Jeonghun-SIAI" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
         
       
     

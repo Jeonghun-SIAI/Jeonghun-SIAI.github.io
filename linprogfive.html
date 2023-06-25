@@ -10,8 +10,8 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기 | 에너지 데이터 연구소</title>
-<meta name="description" content="이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.">
+<!-- begin _includes/seo.html --><title>선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대 | 에너지 데이터 연구소</title>
+<meta name="description" content="지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -23,30 +23,30 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지 데이터 연구소">
-<meta property="og:title" content="WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기">
-<meta property="og:url" content="http://localhost:4000/cudadudnn.html">
+<meta property="og:title" content="선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대">
+<meta property="og:url" content="http://localhost:4000/linprogfive.html">
 
 
-  <meta property="og:description" content="이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2023-04-21T00:00:00+09:00">
+  <meta property="og:description" content="지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다.">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2023-04-24T00:00:00+09:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/cudadudnn.html">
+
+<link rel="canonical" href="http://localhost:4000/linprogfive.html">
 
 
 
@@ -200,7 +200,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">WSL2 Ubuntu 22.04에 CUDA & cuDNN 설치하기</li>
+        <li class="current">선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대</li>
       
     
   </ol>
@@ -369,16 +369,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기">
-    <meta itemprop="description" content="이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.">
-    <meta itemprop="datePublished" content="2023-04-21T00:00:00+09:00">
+    <meta itemprop="headline" content="선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대">
+    <meta itemprop="description" content="지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다.">
+    <meta itemprop="datePublished" content="2023-04-24T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/cudadudnn.html" class="u-url" itemprop="url">WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기
+            <a href="http://localhost:4000/linprogfive.html" class="u-url" itemprop="url">선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대
 </a>
           </h1>
           
@@ -389,7 +389,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-21T00:00:00+09:00">2023-04-21</time>
+        <time datetime="2023-04-24T00:00:00+09:00">2023-04-24</time>
       </span>
     
 
@@ -407,117 +407,75 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              
+              <ul class="toc__menu"><li><a href="#정수-변수-예시-풍력-발전기의-대수">정수 변수 예시: 풍력 발전기의 ‘대수’</a></li><li><a href="#이진수-도입을-통한-모델-현실-설명력-증가">‘이진수’ 도입을 통한 모델 현실 설명력 증가</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <p>이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.</p>
+        <p>지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다.</p>
 
-<p>이에, 필자가 WSL2 Ubuntu 22.04 환경에 CUDA &amp; cuDNN을 설치하는 데 거쳤던 스텝들을 해당 포스팅으로 남긴다. 필자가 나중에 다른 컴퓨터에 CUDA를 설치하게 될 경우, 이 기록이 필자 본인에게라도 도움이 되길 바란다.</p>
+<p>이런 발전기의 ‘대수’는 정수 (integer) 이기 때문에, 현실적인 결과를 원한다면 최적해에서도 정수로 도출되어야 한다. 이번 포스팅에서는 특정 변수가 정수로 강제되는 선형계획 문제에 대해 설명한다.</p>
+
+<p><br /></p>
+
+<h2 id="정수-변수-예시-풍력-발전기의-대수">정수 변수 예시: 풍력 발전기의 ‘대수’</h2>
+
+<p>정수 변수 사용 예시로, 필자가 <a href="https://doi.org/10.1016/j.apenergy.2018.04.131">Applied Energy에 제1저자로써 게재했던 논문</a>의 최적화 문제를 들고자 한다.</p>
+
+<p>(배경/수식 설명)</p>
+
+<p>이 때 풍력 대수 변수 $s_{\text{wt}}$는 정수로 강제한다.</p>
+
+<p>(태양광과 배터리의 경우 구성 단위인 모듈 당 용량이 작으므로, $s_{\text{pv}}$와 $s_{\text{batt}}$를 연속변수로 봐도 실제 설치 가능 용량과 큰 차이가 나지 않을 것이라 보았다.)</p>
+
+<p>이 문제를 Python cvxopt로 푸는 코드는 아래와 같다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<p>위 코드에서 주목할 부분은, $\texttt{glpk.ilp}$ 이다. 정수 변수가 없을 때의 메서드는 $\texttt{glpk.lp}$ 였는데, 마침표 뒤에 $\texttt{i}$가 추가되었다. i는 integer를 의미하며, 이 메서드로 ‘정수’선형계획 (Mixed-integer Linear Programming, MILP) 문제를 푼다.</p>
+
+<p>또한 메서드의 마지막 인수로 $\texttt{ I=set([43802]) }$ 가 추가되었다. 이는 최적화 문제의 모든 변수들을 담는 벡터 $\textbf{x}$ 내에서 정수 변수들의 위치를 담는 리스트이다. 즉 $s_{\text{wt}}$가  $\textbf{x}$의 43803번째 원소임을 의미한다 (Python에서는 배열의 인덱스가 0부터 시작하므로).</p>
+
+<p><br /></p>
+
+<h2 id="이진수-도입을-통한-모델-현실-설명력-증가">‘이진수’ 도입을 통한 모델 현실 설명력 증가</h2>
+
+<p>정수 변수 활용 사례는 이 외에도 많다. 여기서는 ‘최적화 문제의 현실 설명력을 높이기 위한 이진수 변수 활용’ 사례를 하나 설명한다.</p>
+
+<p>지금까지의 분석에서는 초기투자비가 설비 용량에 정비례한다고 암묵적으로 가정했다. 그러나 실제로는 용량에 정비례하지 않는 비용이 존재할 수 있다. 경우에 따라선 이 비용을 경제성 분석에 반영해야 할 수 있다.</p>
+
+<p>이를 테면 위 사례에서, 풍력을 설치하지 않으면 전혀 들지 않지만, 풍력을 한 대라도 설치하면 고정적으로 필요한 유관 비용 $c_{\text{misc}}$가 존재한다고 가정하자. 그리고 일단 풍력을 도입한다면, 이 유관 비용은 풍력 대수가 몇 대이든 비슷하다고 가정하자.</p>
+
+<p>(이는 풍력발전 도입 사업 준비 과정에서의 풍황계측/ 타당성조사/ 인허가취득 관련 soft cost일 수도 있고, 안전 관련 비용일 수도, 부지 관련 공사 비용일 수도 있다. 필자도 사실 정확히 아는 건 아니다만… 아무튼 일반적으로 설비 규모보다는 설비 도입 여부 자체에 크게 좌우되는 비용이 존재할 수 있다.)</p>
+
+<p>즉 $s_{\text{wt}}=0$이면 목적함수에 $c_{\text{misc}}$가 더해지면 안 되지만, $s_{\text{wt}}&gt;0$이면 목적함수에 $c_{\text{misc}}$가 더해져야 한다.</p>
 
 <p><br />
-자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 <a href="https://www.nvidia.co.kr/Download/index.aspx?lang=kr">다운로드 웹페이지</a> 찾아서 윈도우에서 설치.</p>
+이를 반영하기 위해서는, ‘이진수’ 변수 $b_{\text{wt}} \in \lbrace 0,1 \rbrace$와 ‘매우 큰 양수 계수 $M$’을 도입해 아래 제약을 추가한다.</p>
 
-<p>ubuntu bash에서 $\texttt{nvidia-smi}$ 실행 시, 드라이버 설치 확인 가능.</p>
+<p>$ s_{\text{wt}} \leq M b_{\text{wt}} $</p>
 
-<p><br />
-<a href="https://www.tensorflow.org/install/gpu?hl=ko">Tensorflow 웹페이지</a>에서 호환되는 CUDA 버전 확인 (‘소프트웨어 요구사항’ 항목을 보면, Tensorflow의 경우 CUDA 11.2 지원).</p>
+<p>만약 $b_{\text{wt}}=0$이면, $s_{\text{wt}} \leq 0$이 되므로 반드시 $s_{\text{wt}} = 0$이다. 반대로 $b_{\text{wt}}=1$이면, $s_{\text{wt}} \leq M$이고 $M$은 매우 큰 양수이므로 사실상 $s_{\text{wt}}$에 대한 추가 제약이 없는 셈이다.</p>
 
-<p><br />
-<a href="https://developer.nvidia.com/cuda-11.2.0-download-archive?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=WSLUbuntu&amp;target_version=20&amp;target_type=runfilelocal">CUDA Toolkit Downloads 웹페이지</a>에서 Linux - x86_64 - WSL-Ubuntu - 2.0 - runtime (local) 선택 시 보여주는 명령어를 ubuntu bash에 쳐서 CUDA를 다운로드.</p>
+<p>그리고 기존의 목적함수에는 $c_{\text{misc}} b_{\text{wt}}$ 를 더한다. 그러면 풍력발전기가 한 대도 도입되지 않을 경우 목적함수 최소화를 위해 $b_{\text{wt}}=0$이 되어 $c_{\text{misc}}$가 비용에 반영되지 않고, 한 대라도 도입되면 반드시 $b_{\text{wt}}=1$이므로 $c_{\text{misc}}$가 비용에 반영된다.</p>
 
-<p>명령어는 아래와 같음.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://developer.download.nvidia.com/compute/cuda/11.2.0/local_installers/cuda_11.2.0_460.27.04_linux.run
-sudo sh cuda_11.2.0_460.27.04_linux.run
-</code></pre></div></div>
+<p>마지막으로, 변수 $b_{\text{wt}}$에 대한 상한 (upper bound) 을 1로 설정하는 것, 그리고 정수 인덱스 리스트에 $b_{\text{wt}}$의 인덱스를 추가하는 것을 잊지 않도록 한다.</p>
 
 <p><br />
-혹시 $\texttt{sudo sh cuda_11.2.0_460.27.04_linux.run}$ 입력 시</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Failed to verify gcc version. See log at /var/log/cuda-installer.log for details.
-</code></pre></div></div>
-<p>라는 gcc 버전 오류가 뜬다면, gcc를 버전 9로 낮춰야 함,
-<a href="https://gooopy.tistory.com/134">이 포스트</a>에서 소개하는 명령어들에서 버전 숫자를 8에서 9로만 바꿔서 입력 (버전 8까지는 apt 다운로드 서버에서 없어진 듯함), 명령어는 아래와 같음.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt -y install gcc-9 g++-9
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
-</code></pre></div></div>
-<p>그리고 다시 $\texttt{sudo sh cuda_11.2.0_460.27.04_linux.run}$ 를 bash에서 실행하면
-라이선스 관련 큰 창, 그리고 거기서 accept를 입력하면 설치 옵션 관련 큰 창이 뜰 것임 (미리 terminal 높이를 최대한 높여놓길 권장, 너무 낮으면 안 보임).</p>
+(이런 식의 이진수 활용 사례는 몇 가지가 더 있다. 특히 추후에 ‘화석연료를 소비하는 중대형 발전기’의 운전 조건에 대해 설명하는 포스팅에서 다시 등장할 예정이다.)</p>
 
-<p>선택하고 좀 기다리면 설치됨, 필자의 경우 설치 직후 아래의 메시지가 떴음.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>= Summary =
-===========
+<div class="notice--info">
 
-Driver:   Not Selected
-Toolkit:  Installed in /usr/local/cuda-11.2/
-Samples:  Installed in /home/ubuntu/, but missing recommended libraries
+선형계획법 기반 분산에너지시스템 최적화<br /><br />
 
-Please make sure that
- -   PATH includes /usr/local/cuda-11.2/bin
- -   LD_LIBRARY_PATH includes /usr/local/cuda-11.2/lib64, or, add /usr/local/cuda-11.2/lib64 to /etc/ld.so.conf and run ldconfig as root
+1) <a href="/linprogone.html">최소비용 시스템과 시간별 자료의 중요성</a><br />
+2) <a href="/linprogtwo.html">배터리의 충/방전 스케줄 결정: 수식</a> <br />
+3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드</a> <br />
+4) <a href="/linprogfour.html">태양광과 배터리의 용량 결정</a> <br />
+5) <b>정수 (integer) 변수 도입으로 현실 설명력 증대</b>
 
-To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-11.2/bin
-***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least 460.00 is required for CUDA 11.2 functionality to work.
-To install the driver using this installer, run the following command, replacing &lt;CudaInstaller&gt; with the name of this run file:
-    sudo &lt;CudaInstaller&gt;.run --silent --driver
-
-Logfile is /var/log/cuda-installer.log
-</code></pre></div></div>
-
-<p><br />
-ubuntu bash에 $\texttt{vi /etc/profile}$ 입력 후 vi 에디터에서 $\texttt{i}$ 누르면 편집 가능.</p>
-
-<p>(vi 에디터 명령은 <a href="https://kkalkkalparrot.tistory.com/36">이 포스팅</a> 참고)</p>
-
-<p>etc/profile에 아래 코드 입력 (<a href="https://nirsa.tistory.com/332">이 포스팅 참고</a>).</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export PATH=$PATH:/usr/local/cuda-11.2/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.2/lib64
-export CUDADIR=/usr/local/cuda-11.2
-</code></pre></div></div>
-
-<p>입력 후 Esc 눌러 편집 모드에서 나오고 $\texttt{:w}$ 입력 시 저장됨.</p>
-
-<p>그리고 $\texttt{source /etc/profile}$ 입력.</p>
-
-<p>CUDA 설치 버전 확인은 bash에서 $\texttt{nvcc -V}$ 실행.</p>
-
-<p><br />
-cuDNN 설치는 <a href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html">공식 가이드</a> 참고.</p>
-
-<p>가이드의 1.1.3 항목대로 $\texttt{Zlib}$를 다운받기 위해, $\texttt{sudo apt-get install zlib1g}$ 를 bash에서 실행.</p>
-
-<p>가이드의 1.2 항목대로 cudNN을 다운로드 <a href="https://developer.nvidia.com/rdp/cudnn-download">(다운로드 링크).</a></p>
-
-<p>다운받으려면 NVIDIA 계정 필요하므로 없을 경우 생성.</p>
-
-<p>for CUDA 11.x 에 있는 Local Installer for Linux x86_64 (Tar) 를 우선 윈도우즈에서 다운받고,
-다운로드 완료되면 ubuntu shell에서 $\texttt{mtn}$으로 접근, 파일 확인 후 $\texttt{home}$ 내 폴더로 복사해 감</p>
-
-<p>이를테면 $\texttt{D:\Downloads}$ 에 받았다고 하면 ubuntu bash에서 아래 명령 실행.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp "/mnt/d/Downloads/cudnn-linux-x86_64-8.9.0.131_cuda11-archive.tar.xz" "/home/ubuntu/workspaces"
-</code></pre></div></div>
-<p>그리고 복사된 파일의 위치에서, 공식 가이드대로 아래 명령들 실행.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -xvf cudnn-linux-x86_64-8.9.0.131_cuda11-archive.tar.xz
-sudo cp cudnn-*-archive/include/cudnn*.h /usr/local/cuda/include
-sudo cp -P cudnn-*-archive/lib/libcudnn* /usr/local/cuda/lib64
-sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-</code></pre></div></div>
-
-<p><br />
-이후 재부팅한 후 ubuntu에서 tensorflow 쓰는 파이썬 코드 실행 시, 아래와 같은 맥락의 메시지를 본다면 성공임.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I tensorflow/core/common_runtime/gpu/gpu_device.cc:1635] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 2029 MB memory:  -&gt; device: 0, name: NVIDIA GeForce GTX 1650 SUPER, pci bus id: 0000:01:00.0, compute capability: 7.5
-</code></pre></div></div>
-
-<p>CUDA 설치 후 GPU 사용 시, Python에서 $\texttt{Tensorflow}$ 라이브러리를 사용할 경우 RNN 모델인 LSTM과 GRU 훈련의 속도가 매우 빨라졌음을 확인함.</p>
-
-<p>만약 tensorflow를 사용하지만 GPU를 사용하지는 않을 경우, Python 기준으로 코드 상단에 아래 코드를 추가함.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-</code></pre></div></div>
+</div>
 
         
       </section>
@@ -536,7 +494,11 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
     
       <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">Python</a><span class="sep">, </span>
     
-      <a href="/tags/#%EB%94%A5%EB%9F%AC%EB%8B%9D" class="page__taxonomy-item p-category" rel="tag">딥러닝</a>
+      <a href="/tags/#%EA%B2%BD%EC%A0%9C%EC%84%B1%EB%B6%84%EC%84%9D" class="page__taxonomy-item p-category" rel="tag">경제성분석</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EB%B6%80%ED%95%98%ED%8C%A8%ED%84%B4" class="page__taxonomy-item p-category" rel="tag">부하패턴</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95" class="page__taxonomy-item p-category" rel="tag">선형계획법</a>
     
     </span>
   </p>
@@ -553,7 +515,7 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#etc" class="page__taxonomy-item p-category" rel="tag">etc</a>
+      <a href="/categories/#optimalsystem" class="page__taxonomy-item p-category" rel="tag">optimalsystem</a>
     
     </span>
   </p>
@@ -561,7 +523,7 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
  -->
         <!-- 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-04-21T00:00:00+09:00">2023-04-21</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-04-24T00:00:00+09:00">2023-04-24</time></p>
  -->
       </footer>
 
@@ -570,16 +532,16 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=WSL2+Ubuntu+22.04%EC%97%90+CUDA+%26+cuDNN+%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0%20http%3A%2F%2Flocalhost%3A4000%2Fcudadudnn.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+-+5%29+%EC%A0%95%EC%88%98+%28integer%29+%EB%B3%80%EC%88%98+%EB%8F%84%EC%9E%85%EC%9C%BC%EB%A1%9C+%ED%98%84%EC%8B%A4+%EC%84%A4%EB%AA%85%EB%A0%A5+%EC%A6%9D%EB%8C%80%20http%3A%2F%2Flocalhost%3A4000%2Flinprogfive.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcudadudnn.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flinprogfive.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcudadudnn.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flinprogfive.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>etc</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <h4 class="page__meta-title"><span>optimalsystem</span> <span>카테고리 내 다른 글 보러가기</span></h4>
         
 
 
@@ -597,7 +559,7 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
       <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
     
     
-      <a href="/scrapper.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>Python 크롤링 코드 예시 (PubMed 사이트에서 논문 정보 크롤링)</a>
+      <a href="/linprogfour.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 용량 결정</a>
         
   
 
@@ -613,43 +575,6 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
     <div class="page__related">
       <h2 class="page__related-title">참고</h2>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/linprogfive.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-24T00:00:00+09:00">2023-04-24</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다.
-</p>
-  </article>
-</div>
-
         
           
 
@@ -720,6 +645,43 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 
 
     <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서 건물 에너지 관련 연구를 위한, 각 건물의 지번별/월별 전기/도시가스 사용량 데이터와 표제부의 결합을 소개했다. 그렇다면 결합된 데이터를 그대로 쓰면 되는가? 그렇지 않다. 분명히 ‘이상한’ data point들이 존재할 것이기 때문이다. 데이터 기반의 연구개발을 ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/cudadudnn.html" rel="permalink">WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-21T00:00:00+09:00">2023-04-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.
+</p>
   </article>
 </div>
 

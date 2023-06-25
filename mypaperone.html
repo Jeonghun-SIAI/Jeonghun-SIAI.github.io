@@ -178,7 +178,7 @@
   <div class="initial-content">
     
 
-
+<!-- 
 
 
   
@@ -207,7 +207,7 @@
 </nav>
 
   
-
+ -->
 
 <div id="main" role="main">
   
@@ -247,7 +247,7 @@
                     
                 
                     
-                        <li><a href="/optimalsystem" class="">Optimal system (6)</a></li>
+                        <li><a href="/optimalsystem" class="">Optimal system (7)</a></li>
                     
                 
                     
@@ -407,7 +407,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#논문-배경">논문 배경</a></li><li><a href="#최적화-모델링">최적화 모델링</a></li><li><a href="#curtailment-제한-제약-추가-시-발생한-문제">Curtailment 제한 제약 추가 시 발생한 문제</a></li><li><a href="#문제의-원인-및-해결책">문제의 원인 및 해결책</a></li></ul>
+              <ul class="toc__menu"><li><a href="#논문-배경">논문 배경</a></li><li><a href="#최적화-문제">최적화 문제</a></li><li><a href="#충전방전-같은-시간엔-둘-중-하나는-0이어야">충전/방전: 같은 시간엔 둘 중 하나는 0이어야</a></li><li><a href="#curtailment-제한-제약-추가-시-발생한-문제">Curtailment 제한 제약 추가 시 발생한 문제</a></li><li><a href="#문제의-원인-및-해결책">문제의 원인 및 해결책</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
@@ -416,9 +416,12 @@
 
 <p>(조금 자기PR 하자면, Applied Energy의 Impact Factor는 2020년 이전에도 7~8이었고 지금은 10이 넘으며, SJR에서 Energy(Miscellaneous) 부문에 속하는 100개 이상의 저널들 중 한 자리 등수를 유지해오고 있다. 필자의 논문들도 지금까지 각각 10번 이상 인용되었다.)</p>
 
+<p><br /></p>
 <h2 id="논문-배경">논문 배경</h2>
 
-<p>출력제한은 필자가 논문을 쓰던 2018년에는 ‘가까운 미래의 일’ 정도로 생각되었으나, 최근에는 실제로 이슈가 되고 있다. 대략 2021년 즈음부터 제주도에서 태양광과 풍력의 출력제한이 본격적으로 증가하며 언론에 보도되기 시작하였고, 재생발전 출력제한에 따른 사업자들의 손실 우려 및 보상 방안에 대한 논의가 필요한 상황이다. (출력제한 이슈에 관심이 있는 독자는 <a href="https://www.keei.re.kr/main.nsf/index.html?open&amp;p=%2Fweb_keei%2Fd_results.nsf%2F0%2F658da030a2d53c7849258980001754ae&amp;s=%3FOpenDocument%26menucode%3DS0%26category%3D%25EC%25A0%2584%25EC%25B2%25B4%2520%25EC%2597%25B0%25EA%25B5%25AC%25EC%259E%2590%25EB%25A3%258C%26viewname%3Dmain_all%26Click%3D">에너지경제연구원의 관련 연구</a>를 참고하길 바란다.)</p>
+<p>출력제한은 필자가 논문을 쓰던 2018년에는 ‘가까운 미래의 일’ 정도로 생각되었으나, 최근에는 실제로 이슈가 되고 있다.</p>
+
+<p>대략 2021년 즈음부터 제주도에서 태양광과 풍력의 출력제한이 본격적으로 증가하며 언론에 보도되기 시작하였고, 재생발전 출력제한에 따른 사업자들의 손실 우려 및 보상 방안에 대한 논의가 필요한 상황이다. (출력제한 이슈에 관심이 있는 독자는 <a href="https://www.keei.re.kr/main.nsf/index.html?open&amp;p=%2Fweb_keei%2Fd_results.nsf%2F0%2F658da030a2d53c7849258980001754ae&amp;s=%3FOpenDocument%26menucode%3DS0%26category%3D%25EC%25A0%2584%25EC%25B2%25B4%2520%25EC%2597%25B0%25EA%25B5%25AC%25EC%259E%2590%25EB%25A3%258C%26viewname%3Dmain_all%26Click%3D">에너지경제연구원의 관련 연구</a>를 참고하길 바란다.)</p>
 
 <p><img src="/assets/images/mypaperone/news_jejucurtailment.png" alt="news_jejucurtailment" class="align-center" />
 <em>2020년대 들어서, 제주도 재생발전의 출력제한 문제가 대두되고 있음.</em></p>
@@ -433,7 +436,7 @@
 
 <p><br /></p>
 
-<h2 id="최적화-모델링">최적화 모델링</h2>
+<h2 id="최적화-문제">최적화 문제</h2>
 <p>그러면 태양광/ 풍력/ ESS는 각각 어느 정도의 용량으로 설치해야 할까? 이는 특정 기간의 시간별 전기부하, 일사량, 풍속을 input 자료로 사용하여, 재생발전기 초기설치비용과 운영기간 내 디젤 연료비의 총 합을 최소화하는 태양광/ 풍력/ ESS 각각의 용량을 도출하는 최적화 문제를 풀어서 결정할 수 있다. 수식은 아래와 같다.</p>
 
 <p>Minimize $c_{\text{pv}} s_{\text{pv}} + c_{\text{wt}} s_{\text{wt}} + c_{\text{batt}} s_{\text{batt}} + c_{\text{diesel}} \sum_{t} p_{\text{diesel}}[t]$</p>
@@ -456,8 +459,12 @@
 
 <p>위에서 $c$는 비용, $s$는 용량, $p$는 전력, $e$는 저장된 에너지, $\mu$는 효율, $\alpha$는 규정 비율이며, pv는 태양광, wt는 풍력, batt는 배터리, load는 부하, diesel은 디젤엔진, ch는 충전, disch는 방전, dump는 출력제한이다. $s_{\text{wt}}$는 풍력 발전기의 대수이므로 음이 아닌 정수(nonnegative integer)이며, 나머지는 음이 아닌 실수들이다. 비용은 태양광/ 풍력/ 배터리에 대해서는 단위 용량당 초기투자비, 디젤에 대해서는 연료비이다.</p>
 
-<p><br />
-위에서 제약조건 $ p_{\text{ch}}[t] p_{\text{disch}}[t] = 0$ 은, 한 time step 내에서 ESS는 충전 또는 방전 둘 중 하나만을 수행한다는 제약이다. 충전항과 방전항이 동시에 양수가 되지 않도록 두 항 간 곱이 0이라는 제약을 둔다.</p>
+<p>이 문제에서 도출한 태양광/ 풍력/ 배터리 용량은, 디젤 발전기를 통해 공급되는 전기에너지의 비중이 전체의 $1-\alpha_{\text{renewable}}$ 이하가 되게 만드는 용량이다. 이를테면 $\alpha_{\text{renewable}}=0.6$인 경우, 연간 총 전기에너지 수요 중 최대 40%까지만 디젤 발전기로 충당될 수 있다는 제약 하에 시스템 구성을 도출한다.</p>
+
+<p><br /></p>
+
+<h2 id="충전방전-같은-시간엔-둘-중-하나는-0이어야">충전/방전: 같은 시간엔 둘 중 하나는 0이어야</h2>
+<p>위에서 제약조건 $ p_{\text{ch}}[t] p_{\text{disch}}[t] = 0$ 은, 한 time step 내에서 ESS는 충전 또는 방전 둘 중 하나만을 수행한다는 제약이다. 충전항과 방전항이 동시에 양수가 되지 않도록 두 항 간 곱이 0이라는 제약을 둔다.</p>
 
 <p>문제는, 이 제약조건이 비선형 등호제약이므로 non-convex 최적화 문제가 된다는 것이다. Non-convex 최적화 문제는 일반적으로 global optimum을 달성하기 매우 어렵다.</p>
 
@@ -482,8 +489,9 @@
 
 <p>필자는 이 제약을 추가 시, 충전과 방전에 양수계수를 곱한 penalty term들을 목적함수에 추가해도 충전항과 방전항이 둘 다 양수가 되는 문제가 발생함을 발견했다. 필자가 다뤘던 케이스에서는 총 8,760시간 중 2,275시간에서 $ p_{\text{ch}}[t] p_{\text{disch}}[t] &gt; 0$ 이었다.</p>
 
-<p>필자의 분석 결과, 이는 충전과 방전 간 차이 $p_{\text{ch}}[t]-p_{\text{disch}}[t]$ 가 같을 때 둘 다 0보다 커질수록 생기는 일종의 가짜 curtailment 효과이다. 
-이를테면 $p_{\text{ch}}[t]-p_{\text{disch}}[t]=a$라 하면 (충전), 정상적인 답에서는 $p_{\text{ch}}[t]=a, p_{\text{disch}}[t]0$이어야 한다. 그러나 만약 $p_{\text{ch}}[t] = a+b, P_{\text{disch}}[t] = b$, 즉 충전과 방전 모두에 $b$가 더해진 경우 어떻게 될까?</p>
+<p>필자의 분석 결과, 이는 충전과 방전 간 차이 $p_{\text{ch}}[t]-p_{\text{disch}}[t]$ 가 같을 때 둘 다 0보다 커질수록 생기는 일종의 ‘가짜’ curtailment 효과이다.</p>
+
+<p>이를테면 $p_{\text{ch}}[t]-p_{\text{disch}}[t]=a$라 하면 (충전), 정상적인 답에서는 $p_{\text{ch}}[t]=a, p_{\text{disch}}[t]=0$이어야 한다. 그러나 만약 $p_{\text{ch}}[t] = a+b, P_{\text{disch}}[t] = b$, 즉 충전과 방전 모두에 $b$가 더해진 경우 어떻게 될까?</p>
 
 <p>배터리 내 에너지의 변화를 $\triangle e(P_{\text{ch}}[t], p_{\text{disch}}[t]) = e_{\text{batt}}[t+1] – e_{\text{batt}}[t] = \mu p_{\text{ch}}[t] - p_{\text{disch}}[t]/\mu$라 하면, $\triangle e(a+b,b) - \triangle e(a,0) = b (\mu – 1/\mu) &lt; 0$ 이 된다 ($0&lt;\mu&lt;1$ 이니까). 즉, 충전과 방전 모두에 $b$가 더해지면 충전에 의한 배터리 내 에너지 증가분이 $b (\mu – 1/\mu)$ 만큼 더 작게 계산된다.</p>
 
@@ -500,7 +508,8 @@
 
 <p>그래서 ‘수학적으로 목적함수가 최소화되는’ 해를 찾는 과정에서 저런 문제가 발생하는 것이다. 실제로 한 case에 대해 계산 결과 원래는 배터리 용량이 220 kWh로 도출되어야 하나, 가짜 curtailment 문제가 발생한 경우 178 kWh로 도출되었다.</p>
 
-<p>필자는 이 문제를 해결하기 위해, 아래와 같은 프로세스를 제안하였다. correct solution에서는 모든 시간 각각에 대해 충전항과 방전항 둘 중 하나는 0임에 착안해, 조건들에 따라 각 시간별 충전항, 방전항들 중 특정 항의 upper bound를 강제로 0으로 만드는 과정을 반복한다.</p>
+<p><br />
+필자는 이 문제를 해결하기 위해, 아래와 같은 프로세스를 제안하였다. correct solution에서는 모든 시간 각각에 대해 충전항과 방전항 둘 중 하나는 0임에 착안해, 조건들에 따라 각 시간별 충전항, 방전항들 중 특정 항의 upper bound를 강제로 0으로 만드는 과정을 반복한다.</p>
 
 <p><img src="/assets/images/mypaperone/flowchart.png" alt="flowchart" class="align-center" />
 <em>필자가 제안한, 출력제한의 총량 제약이 있더라도 동시 충/방전 문제가 없는 solution을 얻도록 하는 flowchart.</em></p>
@@ -515,7 +524,7 @@
 내 Applied Energy 논문의 수학 설명<br /><br />
 
 1) <b>'가짜' curtailment 문제</b><br />
-2) <a href="/mypapertwo.html">도심지 건축물 신재생 설치 확대 영향을 ‘빨리’ 분석하기</a>
+2) <a href="/mypapertwo.html">도심지 건축물 신재생 확대 영향 분석 시의 계산비용 절감</a>
 
 </div>
 
@@ -596,6 +605,8 @@
   
 
   
+
+  
   	
   	
   	
@@ -625,6 +636,43 @@
     <div class="page__related">
       <h2 class="page__related-title">참고</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/linprogfive.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-24T00:00:00+09:00">2023-04-24</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다.
+</p>
+  </article>
+</div>
+
         
           
 
@@ -736,43 +784,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/monthlyenergyone.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-20T00:00:00+09:00">2023-04-20</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">필자의 박사과정 무사 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div> -->
   
@@ -801,7 +812,7 @@
     
       
         
-          <li><a href="https://github.com/Jeonghun-SIAI" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
         
       
     
