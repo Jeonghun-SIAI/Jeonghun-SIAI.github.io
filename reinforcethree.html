@@ -152,7 +152,7 @@
         
         <a class="site-title" href="/">
           에너지엔데이터연구소
-          <span class="site-subtitle">스마트한 에너지 전환엔 데이터의 활용이 필요합니다</span>
+          <span class="site-subtitle">스마트한 에너지 전환에 기여하는 데이터 사이언티스트</span>
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a href="/aboutme/">About Me</a>
@@ -404,7 +404,9 @@
 
 <p>해당 심층신경망 훈련을 위한 training set은 특정 2년 (17,520시간) 동안의 시간별 태양광발전량과 부하 자료이다. 해당 모델이 직전 24시간의 정보를 state로 사용하므로 control은 $t=25,26,\cdots, 17520$ 에 대해 정해진다. Validation set은 별도의 특정 1년 (8,760시간) 동안의 시간별 태양광 발전량과 부하 자료이다.</p>
 
-<p>Training set에 대해서는 epsilon-greedy policy를, validation set에 대해서는 greedy policy를 적용해 action을 결정한다. 매 시간별로 에너지 흐름을 계산하고, 매 24시간 주기로 심층신경망 훈련을 gradient descent로 수행한다. 이를 training set의 17,520-24 시간에 대해 수행하면 1 epoch이다.</p>
+<p>Training set에 대해서는 epsilon-greedy policy를, validation set에 대해서는 greedy policy를 적용해 action을 결정한다. 매 time step (데이터에서의 1시간) 별로 state와 action에 따른 마이크로그리드 내 에너지 흐름 및 수전/송전에 따른 손익 (reward) 와 이번 시점의 배터리 내 에너지 (다음 시점에서의 state임) 를 계산하고, 매 24시간 주기로 심층신경망 훈련을 gradient descent로 수행한다. 이를 training set의 17,520-24 시간에 대해 수행하면 1 epoch이다.</p>
+
+<p>매 심층신경망 훈련 시 사용하는 데이터는 기본적으로 (state, action, reward, next state) 를 묶은 튜플로, 일종의 ‘경험’으로 볼 수 있다. 즉 시점 $t$에서 ($s_{t},a_{t},r_{t+1},s_{t+1}$) 를 추후 훈련에 쓸 수 있도록 buffer에 저장한다. 그리고 24시간 주기의 훈련에서는 직전 24시간의 튜플들이 아닌, buffer 내에서 랜덤하게 뽑은 32개 시간의 튜플들을 이용해 훈련시킨다. 이를 통해 훈련에 쓰이는 튜플들 간의 ‘시간적 상관성’을 감소시켜, 훈련의 효율성을 높일 수 있다.</p>
 
 <p><br /></p>
 
@@ -954,7 +956,7 @@
       <div class="page__footer-follow">
   <ul class="social-icons">
     
-      <li><strong>팔로우:</strong></li>
+      <li><strong>E-mail</strong></li>
     
 
     

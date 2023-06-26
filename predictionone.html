@@ -152,7 +152,7 @@
         
         <a class="site-title" href="/">
           에너지엔데이터연구소
-          <span class="site-subtitle">스마트한 에너지 전환엔 데이터의 활용이 필요합니다</span>
+          <span class="site-subtitle">스마트한 에너지 전환에 기여하는 데이터 사이언티스트</span>
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a href="/aboutme/">About Me</a>
@@ -497,6 +497,11 @@ K년도의 자료를 갖고, 4개 sub모델 각각에 대해 Weighted Least Squa
 
 <p>WLS와 잔차에 대한 SARMA 적용 시 자기상관이 완전히 사라졌다는 것은, 기존 전기부하 자료에 강한 non-linearity가 존재하지 않음을 암시한다 (선형 모델로 거의 다 설명이 되니까).</p>
 
+<p><br />
+일부 독자는 ‘WLS 모델의 오차에 자기상관성 문제가 있으면, 시점 $t$의 전기 부하 예측 시의 설명변수로 과거 시점 ($t-1, t-2, \cdots$) 의 전기부하를 넣으면 되는 것 아닌가?’라고 생각할지도 모르겠다.</p>
+
+<p>그러나 그 반대이다. 오차항에 자기상관이 있는 경우 과거 시점의 반응변수 (lagged dependent) 를 설명변수로 추가하면, 계수추정량이 ‘inconsistent’ 해진다는 것이 알려져 있다. Inconsistent란, ‘데이터가 많아져도 계수 추정량이 계수의 (숨겨진) 참값으로부터 벗어남’ 을 의미한다. (주로 계량경제 side의 회귀분석 강의에서 이를 가르친다)</p>
+
 <p><br /></p>
 <h2 id="오차의-자기상관-모델링을-통한-예측력-향상">오차의 자기상관 모델링을 통한 예측력 향상</h2>
 <p>$K$년도 잔차로 적합한 SARMA 모델로 설명되는 맞춘값들을 기존 WLS 맞춘값들에 더하면, adjusted $R^2$가 증가할까?</p>
@@ -791,7 +796,7 @@ K년도의 자료를 갖고, 4개 sub모델 각각에 대해 Weighted Least Squa
       <div class="page__footer-follow">
   <ul class="social-icons">
     
-      <li><strong>팔로우:</strong></li>
+      <li><strong>E-mail</strong></li>
     
 
     
