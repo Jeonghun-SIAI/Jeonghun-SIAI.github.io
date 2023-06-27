@@ -10,8 +10,8 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>로지스틱 회귀에서의 over-confidence에 대한 이해 | 에너지엔데이터연구소</title>
-<meta name="description" content="Logistic regression에서는 각 point 별로 response $y$가 0과 1 중 1일 확률 추정값 $\hat{y}$를 제공한다 (물론 실제 $y$값들은 알려져 있다). 한편, feature space에서 response가 1인 point들과 0인 point들이 완전히 linearly separable하면 (즉 $\hat{y}=0.5$를 기준으로 misclassified point가 하나도 없으면), logistic regression 추정이 되지 않음이 잘 알려져 있다.">
+<!-- begin _includes/seo.html --><title>[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) ‘부분’부하 성능 | 에너지엔데이터연구소</title>
+<meta name="description" content="발전기의 효율, 냉난방설비의 COP (성능계수) 를 상수로 가정했었음">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -23,30 +23,30 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="로지스틱 회귀에서의 over-confidence에 대한 이해">
-<meta property="og:url" content="http://localhost:4000/overconfidence.html">
+<meta property="og:title" content="[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) ‘부분’부하 성능">
+<meta property="og:url" content="http://localhost:4000/linprognine.html">
 
 
-  <meta property="og:description" content="Logistic regression에서는 각 point 별로 response $y$가 0과 1 중 1일 확률 추정값 $\hat{y}$를 제공한다 (물론 실제 $y$값들은 알려져 있다). 한편, feature space에서 response가 1인 point들과 0인 point들이 완전히 linearly separable하면 (즉 $\hat{y}=0.5$를 기준으로 misclassified point가 하나도 없으면), logistic regression 추정이 되지 않음이 잘 알려져 있다.">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2023-04-10T00:00:00+09:00">
+  <meta property="og:description" content="발전기의 효율, 냉난방설비의 COP (성능계수) 를 상수로 가정했었음">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2023-04-28T00:00:00+09:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/overconfidence.html">
+
+<link rel="canonical" href="http://localhost:4000/linprognine.html">
 
 
 
@@ -344,198 +344,19 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="로지스틱 회귀에서의 over-confidence에 대한 이해">
-    <meta itemprop="description" content="Logistic regression에서는 각 point 별로 response $y$가 0과 1 중 1일 확률 추정값 $\hat{y}$를 제공한다 (물론 실제 $y$값들은 알려져 있다). 한편, feature space에서 response가 1인 point들과 0인 point들이 완전히 linearly separable하면 (즉 $\hat{y}=0.5$를 기준으로 misclassified point가 하나도 없으면), logistic regression 추정이 되지 않음이 잘 알려져 있다.">
-    <meta itemprop="datePublished" content="2023-04-10T00:00:00+09:00">
+    <meta itemprop="headline" content="[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) ‘부분’부하 성능">
+    <meta itemprop="description" content="발전기의 효율, 냉난방설비의 COP (성능계수) 를 상수로 가정했었음">
+    <meta itemprop="datePublished" content="2023-04-28T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/overconfidence.html" class="u-url" itemprop="url">로지스틱 회귀에서의 over-confidence에 대한 이해
+            <a href="http://localhost:4000/linprognine.html" class="u-url" itemprop="url">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) ‘부분’부하 성능
 </a>
           </h1>
           
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-10T00:00:00+09:00">2023-04-10</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-        </header>
-      
-
-      <section class="page__content e-content" itemprop="text">
-        
-          <aside class="sidebar__right sticky">
-            <nav class="toc">
-              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#over-confidence란">Over-confidence란</a></li><li><a href="#over-confidence가-발생하는-이유">Over-confidence가 발생하는 이유</a></li></ul>
- <!-- 우측 TOC -->
-            </nav>
-          </aside>
-        
-        <p>Logistic regression에서는 각 point 별로 response $y$가 0과 1 중 1일 확률 추정값 $\hat{y}$를 제공한다 (물론 실제 $y$값들은 알려져 있다). 한편, feature space에서 response가 1인 point들과 0인 point들이 완전히 linearly separable하면 (즉 $\hat{y}=0.5$를 기준으로 misclassified point가 하나도 없으면), logistic regression 추정이 되지 않음이 잘 알려져 있다.</p>
-
-<h2 id="over-confidence란">Over-confidence란</h2>
-<p>Feature space에서 response가 1인 point들과 0인 point들이 ‘거의’ linearly separable인 경우 (즉 $\hat{y}=0.5$를 기준으로 misclassified point들이 ‘거의’ 없는 경우) 에도 문제가 발생한다. 이 경우 계수추정량들의 magnitude가 매우 커지고, 그 결과 추정값들이 모든 경우에 대해 1 또는 0에 아주 가까워진다. 이를 어느 class에 속할지에 대해 지나치게 확신한다고 해서, over-confidence라 한다.</p>
-
-<p>Toy problem을 예시로 들면, 아래와 같은 두 class의 point들을 분류하는 plane을 ($\hat{y}=0.5$를 기준으로) logistic regression으로 찾는다고 하자.</p>
-
-<p><img src="/assets/images/overconfidence/overconfidence.png" alt="overconfidence" class="align-center" />
-<em>두 class의 point들을 분류하는 plane을 찾는 문제, 각 경우에 대해 misclassified point 개수가 다름.</em></p>
-
-<p>Plane을 $\beta_1 x_1 + \beta_2 x_2 + \beta_0 = 0$ 이라 할 때, 기울기가 -1이고 원점을 지나는 직선일 것이므로 $\beta_1 \approx \beta_2$,$\beta_0 \approx 0$임은 자명하다. 각 경우에 대해 $\beta_1$의 계수추정량들 및 계수추정량의 $t$-value들을 구하면 아래와 같다.</p>
-
-<p>1) Many misclassifications: $\hat{\beta_1} = 8.85$, $t$-value는 $18.4$ <br /><br />
-2) A few misclassifications: $\hat{\beta_1} = 29.6$, $t$-value는 $13.8$ <br /><br />
-3) Perfect separation: $\hat{\beta_1} = 9,824$, $t$-value는 $0.8$ <br /></p>
-
-<p>Misclassified point의 비중이 적을수록 계수추정량의 magnitude는 커지고, $t$-value는 작아진다. Python에서는 perfectly separable case에 대해서도 결과를 제공하기는 하는데, t-value를 보면 계수의 값에 별 의미는 없는 것으로 보인다.</p>
-
-<p><br /></p>
-<h2 id="over-confidence가-발생하는-이유">Over-confidence가 발생하는 이유</h2>
-
-<p>Over-confidence에 대해 아주 엄밀한 설명은 아직 만나보지 못했지만, 필자가 간단히 수학적으로/ 직관적으로 생각해 본 바는 아래와 같다.</p>
-
-<p>먼저 수학적으로는 다음과 같다.</p>
-
-<p>로지스틱 회귀에서의 cost function은 ‘negative’ log-likelihood $-\sum_{i=1}^{N}[y_{i} \text{log}\hat{y}_{i} + (1-y_{i})\text{log}(1-\hat{y}_{i})]$ 이고 $ y_{i} \in \lbrace 0,1 \rbrace$이며 $0 \leq \hat{y}_{i}\leq 1$이다.</p>
-
-<p>그러므로 실제 response가 1인 점을 기준으로, 추정값이 1에서 멀어지고 0으로 가까워질수록 penalty가 exponential하게 증가한다. 이는 실제 response가 0인데 추정값이 1에 가까워질 경우에도 마찬가지이다.</p>
-
-<p>이 때 $\hat{y}=0.5$ 기준으로 misclassified point가 여럿 있는 경우에는, 해당 point들 때문에 생기는 exponential penalty를 줄이기 위해 추정값들이 1 또는 0에 너무 가까워지지 않도록 계수의 magnitude를 작게 설정해야 한다.</p>
-
-<p>그러나 계수의 magnitude를 작게 할수록, 실제 값이 1이고 추정값이 1에 가까운 경우에도 완전히 1에 매우 가깝기보다는 1보다 어느 정도는 작은 값이 될 것이다. 실제 값이 0이고 추정값이 0인 경우에도 0보다 어느 정도는 큰 값이 될 것이다. 이 차이 또한 작게나마 penalty로 계산된다.</p>
-
-<p>misclassified point가 매우 조금밖에 없을 경우에는, misclassified point의 penalty가 아무리 exponential하게 증가한다고 해도 그 숫자 자체가 매우 적기 때문에, 올바르게 분류된 point들에 대한 $\hat{y}$가 1 또는 0에 매우 가까워지도록 계수의 magnitude를 크게 설정하는 것이 total penalty를 더 작게 만드는 선택일 수 있는 것이다.</p>
-
-<p><br />
-다음으로 직관적으로는 아래와 같다.</p>
-
-<p>Misclassified point가 여럿 있는 경우에는, boundary 근처 point들에 대해 이 분류가 맞다는 확신을 가지기가 어려울 것이다 (말 그대로 misclassification이 많으니까). 그래서 확률 추정값을 0.5에 가깝게 주는 것이 자연스럽다.</p>
-
-<p>그러나 misclassified point가 거의 없는 경우에는, 분류가 잘 되니 boundary 근처 point들에 대해서도 보다 더 확신을 가질 것이다. 그러므로 확률 추정값도 0 또는 1에 가깝게 준다고 보는 것이 자연스럽다.</p>
-
-        
-      </section>
-
-      <footer class="page__meta">
-        
-        
-  
-
-
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
-    <span itemprop="keywords">
-    
-      <a href="/tags/#%ED%9A%8C%EA%B7%80%EB%B6%84%EC%84%9D" class="page__taxonomy-item p-category" rel="tag">회귀분석</a>
-    
-    </span>
-  </p>
-
-
-
-<!-- 
-  
-
-
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
-    <span itemprop="keywords">
-    
-      <a href="/categories/#mathstat" class="page__taxonomy-item p-category" rel="tag">mathstat</a>
-    
-    </span>
-  </p>
-
- -->
-        <!-- 
-
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-04-10T00:00:00+09:00">2023-04-10</time></p>
- -->
-      </footer>
-
-      <section class="page__share">
-  
-    <h4 class="page__share-title">공유하기</h4>
-  
-
-  <!-- <a href="https://twitter.com/intent/tweet?text=%EB%A1%9C%EC%A7%80%EC%8A%A4%ED%8B%B1+%ED%9A%8C%EA%B7%80%EC%97%90%EC%84%9C%EC%9D%98+over-confidence%EC%97%90+%EB%8C%80%ED%95%9C+%EC%9D%B4%ED%95%B4%20http%3A%2F%2Flocalhost%3A4000%2Foverconfidence.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
-
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Foverconfidence.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
-
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Foverconfidence.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
-</section>
-
-
-      <p></p>
-        <h4 class="page__meta-title"><span>mathstat</span> <span>카테고리 내 다른 글 보러가기</span></h4>
-        
-
-
-  
-  	
-  	
-  	
-  	
-  	
-
-<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
-
-  
-    
-      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
-    
-    
-      <a href="/regression.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>회귀분석 관련 정리</a>
-        
-  
-
-</nav>
-      <p></p>
-    </div>
-
-    
-  </article>
-
-  
-  <!-- 
-    <div class="page__related">
-      <h2 class="page__related-title">참고</h2>
-      <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/linprognine.html" rel="permalink">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) ‘부분’부하 성능
-</a>
-      
-    </h2>
-    
 
   <p class="page__meta">
     
@@ -553,11 +374,189 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">발전기의 효율, 냉난방설비의 COP (성능계수) 를 상수로 가정했었음
-</p>
-  </article>
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#발전기의-부분부하-성능을-고려한-수식">발전기의 부분부하 성능을 고려한 수식</a></li><li><a href="#냉방기기의-부분부하-성능을-고려한-수식">냉방기기의 부분부하 성능을 고려한 수식</a></li></ul>
+ <!-- 우측 TOC -->
+            </nav>
+          </aside>
+        
+        <p>발전기의 효율, 냉난방설비의 COP (성능계수) 를 상수로 가정했었음</p>
+
+<p>그러나 실제로는 부하율에 따라 달라짐</p>
+
+<p>발전기의 경우 아래 그림처럼 낮은 부하에서 효율이 저하된다.</p>
+
+<p><img src="/assets/images/linprognine/chp_eff.png" alt="chp_eff" class="align-center" />
+<em>열병합발전기의 통상적인 부하율-효율 그래프. 낮은 부하율에서 효율이 저하됨.<br />출처: <a href="https://doi.org/10.1016/j.apenergy.2015.03.053">“Modeling of non-linear CHP efficiency curves in distributed energy systems”</a></em></p>
+
+<p>반대로 (중대형) 냉방기기의 경우 아래 그림처럼 낮은 부하에서 COP가 더 높다.</p>
+
+<p><img src="/assets/images/linprognine/cop.png" alt="cop" class="align-center" />
+<em>LG전자의 지열기반 chiller의 부하율별 COP. 일반적인 turbo chiller, 흡수식냉동기도 비슷한 추이를 보임.</em></p>
+
+<h2 id="발전기의-부분부하-성능을-고려한-수식">발전기의 부분부하 성능을 고려한 수식</h2>
+
+<p>아래 그림을 보자, 정격출력이 100이고 최소부하율이 50%인 가상의 발전기의 연료입력-발전출력 그래프다 (앞의 부하율-효율 그래프와는 가로축, 세로축이 다름에 주의).</p>
+
+<p><img src="/assets/images/linprognine/chp.png" alt="chp" class="align-center" />
+<em>연료 입력 - 발전 출력 그래프.</em></p>
+
+<p>시점 $t$의 연료 소비량을 $f[t]$, 발전량을 $p[t]$라 하자.
+위 검정 그래프는 상수 효율 $\eta$을 가정한 경우로, 절편이 없는 직선 $p[t]=\eta f[t]$상의 선분이다.</p>
+
+<p>그러나 부분부하 성능 저하를 고려 시, 위 빨간 그래프처럼, 음의 절편이 있는 직선상의 선분이 된다. 해당 설비의 기동/정지를 나타내는 이진수 $u[t]$를 다시 도입하면 (기동 시 1, 정지 시 0), 위 빨간 그래프는 $p[t] = \eta f[t] + \psi u[t]$로 표현된다.</p>
+
+<p>(여기서는 연료입력-발전출력 관계를, 최소부하율과 정격출력 두 지점에서의 연료입력-발전출력이 주어질 때 두 점을 잇는 선분으로 근사하였다. 선형계획법을 적용하기 위함이며, 해당 근사가 실제 발전기 특성에서 크게 벗어나지 않음이 알려져 있다.)</p>
+
+<p><br /></p>
+
+<h2 id="냉방기기의-부분부하-성능을-고려한-수식">냉방기기의 부분부하 성능을 고려한 수식</h2>
+
+<p>냉방기기의 경우 아래 그래프와 같음</p>
+
+<p><img src="/assets/images/linprognine/chiller.png" alt="chiller" class="align-center" width="70%" />
+<em>위 LG전자의 지열기반 chiller와 같은 부하율별 COP를 갖는 150kW(냉방출력)급 chiller의 전기 입력 - 냉방 출력 그래프.</em></p>
+
+<p>냉방기기에는 대해서 보통 위처럼 부하율 25%, 50%, 75%, 100%에 대한 성능이 주어진다. 즉 4개의 (전기입력,냉방출력) 점이 주어지는데, 4개의 점이 모두 한 선분 위에 있지 않다. 그러므로 더 이상 하나의 선분으로는 표현할 수 없으며, 선형계획을 적용하기 위해서는 3개의 연속된 선분으로 표현되어야 한다.</p>
+
+<p>냉방기기의 (시점 $t$의) 냉방 출력을 $q_{c}[t]$, 전기 입력을 $p_c[t]$라 하자. 그리고 위 그래프의 3개의 선분을 나타내는 일차식들을 각각 $q_c[t]=\alpha_1 + \beta_1 p_c[t]$ (출력기준 부하율 25%~50%), $q_c[t]=\alpha_2 + \beta_2 p_c[t]$ (부하율 50%~75%), $q_c[t]=\alpha_3 + \beta_3 p_c[t]$ (부하율 75%~100%)이라 하자.</p>
+
+<p>그러면 각 시간별로 냉방기기가 가동된다면 위 3개 구간 중 어디에 속하는지 (혹은 가동이 되지 않는지) 여부를 표현하는 이진수 3개의 세트가 있어야 한다. 각각을 $u_1[t]$, $u_2[t]$, $u_3[t]$이라 하자.</p>
+
+<p>또한 전기 입력 변수도 위 3개 구간 각각에 대응하는 3개의 변수 $p_1[t]$, $p_2[t]$, $p_3[t]$으로 두자. 또한 냉방기준 부하율 25%, 50%, 75%, 100%에 대응하는 전기 입력을 각각 $\tilde{p}_1$, $\tilde{p}_2$, $\tilde{p}_3$, $\tilde{p}_{\text{max}}$라 하자. 그러면, 위 그래프는 아래 제약조건들로 표현된다.</p>
+
+<p>$q_c[t] = \alpha_1 u_1[t] + \beta_1 p_1[t] + \alpha_2 u_2[t] + \beta_2 p_2[t] + \alpha_3 u_3[t] + \beta_3 p_3[t] $</p>
+
+<p>$ \tilde{p}_1 u_1[t] \leq p_1[t] \leq \tilde{p}_2 u_1[t] $</p>
+
+<p>$ \tilde{p}_2 u_2[t] \leq p_2[t] \leq \tilde{p}_3 u_2[t] $</p>
+
+<p>$ \tilde{p}_3 u_3[t] \leq p_3[t] \leq \tilde{p}_{\text{max}} u_3[t] $</p>
+
+<p>$ u_1[t] + u_2[t] + u_3[t] \leq 1 $</p>
+
+<p><br />
+(주의: 이전 포스팅에서의 출력조정 관련 제약처럼 여기서도 시간별 이진수가 들어가므로 이진수가 많아지고, 이 때문에 고려 대상 발전기 수가 많아지거나 전체 고려 기간이 길어지면 풀기 어려운 문제가 됨.<br />
+이 경우 시간별 이진수가 들어가는 조건들을 무시하고 용량을 구한 후, 해당 용량을 가정할 때 짧은 기간 (하루~일주일)에 대한 시간별 스케줄링을 도출하는 것을 전체에 대해 반복하는 방법으로 구할 수 있음)</p>
+
+<div class="notice--info">
+
+선형계획법 기반 분산에너지시스템 최적화<br /><br />
+
+1) <a href="/linprogone.html">최소비용 시스템과 시간별 자료의 중요성</a><br />
+2) <a href="/linprogtwo.html">배터리의 충/방전 스케줄 결정: 수식</a> <br />
+3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드</a> <br />
+4) <a href="/linprogfour.html">태양광과 배터리의 용량 결정</a> <br />
+5) <a href="/linprogfive.html">정수 (integer) 변수 도입으로 현실 설명력 증대</a> <br />
+6) <b>공동주택의 '누진제' 전기요금 (단일계약) 수식</b>
+
 </div>
 
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">Python</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EA%B2%BD%EC%A0%9C%EC%84%B1%EB%B6%84%EC%84%9D" class="page__taxonomy-item p-category" rel="tag">경제성분석</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EB%B6%80%ED%95%98%ED%8C%A8%ED%84%B4" class="page__taxonomy-item p-category" rel="tag">부하패턴</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95" class="page__taxonomy-item p-category" rel="tag">선형계획법</a>
+    
+    </span>
+  </p>
+
+
+
+<!-- 
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#optimalsystem" class="page__taxonomy-item p-category" rel="tag">optimalsystem</a>
+    
+    </span>
+  </p>
+
+ -->
+        <!-- 
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-04-28T00:00:00+09:00">2023-04-28</time></p>
+ -->
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <!-- <a href="https://twitter.com/intent/tweet?text=%5B%EC%9E%91%EC%84%B1%EC%A4%91%5D+%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+-+9%29+%27%EB%B6%80%EB%B6%84%27%EB%B6%80%ED%95%98+%EC%84%B1%EB%8A%A5%20http%3A%2F%2Flocalhost%3A4000%2Flinprognine.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flinprognine.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flinprognine.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      <p></p>
+        <h4 class="page__meta-title"><span>optimalsystem</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        
+
+
+  
+  	
+  	
+  	
+  	
+  	
+
+<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
+
+  
+    
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
+    
+    
+      <a href="/linprogeight.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 8) 출력조정 관련 제약들</a>
+        
+  
+
+</nav>
+      <p></p>
+    </div>
+
+    
+  </article>
+
+  
+  <!-- 
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
         
           
 
@@ -665,6 +664,43 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">이전에 건물 내 태양광/배터리 설치 시의 최적 용량/스케줄 도출에 대해 설명했는데, 이는 ‘시간별 요금제를 적용받는 일반용 건물’에 대한 내용이었다. 그런데 주택에서는, ‘누진제’라 불리는, 전기를 많이 쓰면 단가가 올라가 요금이 급증하는 요금 체계를 적용한다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/linprogfive.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-24T00:00:00+09:00">2023-04-24</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다.
 </p>
   </article>
 </div>

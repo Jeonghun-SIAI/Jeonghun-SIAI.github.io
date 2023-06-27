@@ -1,4 +1,192 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-06-26T23:49:18+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">에너지엔데이터연구소</title><subtitle>에너지 전환기를 성공적으로 지나기 위해서는 스마트 에너지 인프라의 데이터를 활용해 가치를 창출해야 합니다.</subtitle><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><entry><title type="html">선형계획법 기반 분산에너지시스템 최적화 - 6) 공동주택의 ‘누진제’ 전기요금 (단일계약) 구현</title><link href="http://localhost:4000/linprogsix.html" rel="alternate" type="text/html" title="선형계획법 기반 분산에너지시스템 최적화 - 6) 공동주택의 ‘누진제’ 전기요금 (단일계약) 구현" /><published>2023-04-25T00:00:00+09:00</published><updated>2023-04-25T00:00:00+09:00</updated><id>http://localhost:4000/linprogsix</id><content type="html" xml:base="http://localhost:4000/linprogsix.html"><![CDATA[<p>이전에 건물 내 태양광/배터리 설치 시의 최적 용량/스케줄 도출에 대해 설명했는데, 이는 ‘시간별 요금제를 적용받는 일반용 건물’에 대한 내용이었다. 그런데 주택에서는, ‘누진제’라 불리는, 전기를 많이 쓰면 단가가 올라가 요금이 급증하는 요금 체계를 적용한다.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-06-27T22:13:28+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">에너지엔데이터연구소</title><subtitle>에너지 데이터를 수리모델링에 활용해 최적 에너지 시스템/ 정책/ 시장 등에 관한 유익한 결과물들을 도출하여, 스마트한 에너지 전환에 기여하고자 하는 데이터 사이언티스트입니다.</subtitle><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><entry><title type="html">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) ‘부분’부하 성능</title><link href="http://localhost:4000/linprognine.html" rel="alternate" type="text/html" title="[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) ‘부분’부하 성능" /><published>2023-04-28T00:00:00+09:00</published><updated>2023-04-28T00:00:00+09:00</updated><id>http://localhost:4000/linprognine</id><content type="html" xml:base="http://localhost:4000/linprognine.html"><![CDATA[<p>발전기의 효율, 냉난방설비의 COP (성능계수) 를 상수로 가정했었음</p>
+
+<p>그러나 실제로는 부하율에 따라 달라짐</p>
+
+<p>발전기의 경우 아래 그림처럼 낮은 부하에서 효율이 저하된다.</p>
+
+<p><img src="/assets/images/linprognine/chp_eff.png" alt="chp_eff" class="align-center" />
+<em>열병합발전기의 통상적인 부하율-효율 그래프. 낮은 부하율에서 효율이 저하됨.<br />출처: <a href="https://doi.org/10.1016/j.apenergy.2015.03.053">“Modeling of non-linear CHP efficiency curves in distributed energy systems”</a></em></p>
+
+<p>반대로 (중대형) 냉방기기의 경우 아래 그림처럼 낮은 부하에서 COP가 더 높다.</p>
+
+<p><img src="/assets/images/linprognine/cop.png" alt="cop" class="align-center" />
+<em>LG전자의 지열기반 chiller의 부하율별 COP. 일반적인 turbo chiller, 흡수식냉동기도 비슷한 추이를 보임.</em></p>
+
+<h2 id="발전기의-부분부하-성능을-고려한-수식">발전기의 부분부하 성능을 고려한 수식</h2>
+
+<p>아래 그림을 보자, 정격출력이 100이고 최소부하율이 50%인 가상의 발전기의 연료입력-발전출력 그래프다 (앞의 부하율-효율 그래프와는 가로축, 세로축이 다름에 주의).</p>
+
+<p><img src="/assets/images/linprognine/chp.png" alt="chp" class="align-center" />
+<em>연료 입력 - 발전 출력 그래프.</em></p>
+
+<p>시점 $t$의 연료 소비량을 $f[t]$, 발전량을 $p[t]$라 하자.
+위 검정 그래프는 상수 효율 $\eta$을 가정한 경우로, 절편이 없는 직선 $p[t]=\eta f[t]$상의 선분이다.</p>
+
+<p>그러나 부분부하 성능 저하를 고려 시, 위 빨간 그래프처럼, 음의 절편이 있는 직선상의 선분이 된다. 해당 설비의 기동/정지를 나타내는 이진수 $u[t]$를 다시 도입하면 (기동 시 1, 정지 시 0), 위 빨간 그래프는 $p[t] = \eta f[t] + \psi u[t]$로 표현된다.</p>
+
+<p>(여기서는 연료입력-발전출력 관계를, 최소부하율과 정격출력 두 지점에서의 연료입력-발전출력이 주어질 때 두 점을 잇는 선분으로 근사하였다. 선형계획법을 적용하기 위함이며, 해당 근사가 실제 발전기 특성에서 크게 벗어나지 않음이 알려져 있다.)</p>
+
+<p><br /></p>
+
+<h2 id="냉방기기의-부분부하-성능을-고려한-수식">냉방기기의 부분부하 성능을 고려한 수식</h2>
+
+<p>냉방기기의 경우 아래 그래프와 같음</p>
+
+<p><img src="/assets/images/linprognine/chiller.png" alt="chiller" class="align-center" width="70%" />
+<em>위 LG전자의 지열기반 chiller와 같은 부하율별 COP를 갖는 150kW(냉방출력)급 chiller의 전기 입력 - 냉방 출력 그래프.</em></p>
+
+<p>냉방기기에는 대해서 보통 위처럼 부하율 25%, 50%, 75%, 100%에 대한 성능이 주어진다. 즉 4개의 (전기입력,냉방출력) 점이 주어지는데, 4개의 점이 모두 한 선분 위에 있지 않다. 그러므로 더 이상 하나의 선분으로는 표현할 수 없으며, 선형계획을 적용하기 위해서는 3개의 연속된 선분으로 표현되어야 한다.</p>
+
+<p>냉방기기의 (시점 $t$의) 냉방 출력을 $q_{c}[t]$, 전기 입력을 $p_c[t]$라 하자. 그리고 위 그래프의 3개의 선분을 나타내는 일차식들을 각각 $q_c[t]=\alpha_1 + \beta_1 p_c[t]$ (출력기준 부하율 25%~50%), $q_c[t]=\alpha_2 + \beta_2 p_c[t]$ (부하율 50%~75%), $q_c[t]=\alpha_3 + \beta_3 p_c[t]$ (부하율 75%~100%)이라 하자.</p>
+
+<p>그러면 각 시간별로 냉방기기가 가동된다면 위 3개 구간 중 어디에 속하는지 (혹은 가동이 되지 않는지) 여부를 표현하는 이진수 3개의 세트가 있어야 한다. 각각을 $u_1[t]$, $u_2[t]$, $u_3[t]$이라 하자.</p>
+
+<p>또한 전기 입력 변수도 위 3개 구간 각각에 대응하는 3개의 변수 $p_1[t]$, $p_2[t]$, $p_3[t]$으로 두자. 또한 냉방기준 부하율 25%, 50%, 75%, 100%에 대응하는 전기 입력을 각각 $\tilde{p}_1$, $\tilde{p}_2$, $\tilde{p}_3$, $\tilde{p}_{\text{max}}$라 하자. 그러면, 위 그래프는 아래 제약조건들로 표현된다.</p>
+
+<p>$q_c[t] = \alpha_1 u_1[t] + \beta_1 p_1[t] + \alpha_2 u_2[t] + \beta_2 p_2[t] + \alpha_3 u_3[t] + \beta_3 p_3[t] $</p>
+
+<p>$ \tilde{p}_1 u_1[t] \leq p_1[t] \leq \tilde{p}_2 u_1[t] $</p>
+
+<p>$ \tilde{p}_2 u_2[t] \leq p_2[t] \leq \tilde{p}_3 u_2[t] $</p>
+
+<p>$ \tilde{p}_3 u_3[t] \leq p_3[t] \leq \tilde{p}_{\text{max}} u_3[t] $</p>
+
+<p>$ u_1[t] + u_2[t] + u_3[t] \leq 1 $</p>
+
+<p><br />
+(주의: 이전 포스팅에서의 출력조정 관련 제약처럼 여기서도 시간별 이진수가 들어가므로 이진수가 많아지고, 이 때문에 고려 대상 발전기 수가 많아지거나 전체 고려 기간이 길어지면 풀기 어려운 문제가 됨.<br />
+이 경우 시간별 이진수가 들어가는 조건들을 무시하고 용량을 구한 후, 해당 용량을 가정할 때 짧은 기간 (하루~일주일)에 대한 시간별 스케줄링을 도출하는 것을 전체에 대해 반복하는 방법으로 구할 수 있음)</p>
+
+<div class="notice--info">
+
+선형계획법 기반 분산에너지시스템 최적화<br /><br />
+
+1) <a href="/linprogone.html">최소비용 시스템과 시간별 자료의 중요성</a><br />
+2) <a href="/linprogtwo.html">배터리의 충/방전 스케줄 결정: 수식</a> <br />
+3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드</a> <br />
+4) <a href="/linprogfour.html">태양광과 배터리의 용량 결정</a> <br />
+5) <a href="/linprogfive.html">정수 (integer) 변수 도입으로 현실 설명력 증대</a> <br />
+6) <b>공동주택의 '누진제' 전기요금 (단일계약) 수식</b>
+
+</div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="optimalsystem" /><category term="선형계획법" /><category term="부하패턴" /><category term="경제성분석" /><category term="Python" /><summary type="html"><![CDATA[발전기의 효율, 냉난방설비의 COP (성능계수) 를 상수로 가정했었음]]></summary></entry><entry><title type="html">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 8) 출력조정 관련 제약들</title><link href="http://localhost:4000/linprogeight.html" rel="alternate" type="text/html" title="[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 8) 출력조정 관련 제약들" /><published>2023-04-27T00:00:00+09:00</published><updated>2023-04-27T00:00:00+09:00</updated><id>http://localhost:4000/linprogeight</id><content type="html" xml:base="http://localhost:4000/linprogeight.html"><![CDATA[<p>분산형에너지 패러다임 이전의 전통적 발전 포트폴리오에서도, 원자력/ 석탄/ 가스/ 유류 등 다양한 발전기 믹스를 구성한 이유 - 발전기별로 연료단가와 부하추종 성능에 차이가 있기 때문</p>
+
+<p>부하추종 성능은 낮으나 연료단가도 낮은 설비는 기저설비로, 연료단가는 높으나 부하추종 성능은 높은 설비는 첨두설비로</p>
+
+<p><img src="/assets/images/linprogeight/portfolio.png" alt="portfolio" class="align-center" />
+<em>시간대별 발전 포트폴리오. 일정 출력을 유지하는 기저설비, 특정 시간대에만 가동되는 첨두설비로 구성됨.<br />(출처: 전력거래소)</em></p>
+
+<p>이 포스팅에서는 부하추종을 위한 출력 조정 관련 제약들을 설명함</p>
+
+<h2 id="최소-부하">최소 부하</h2>
+
+<p>자동차가 고속도로를 달릴 경우 ‘최저 속도’ 제한이 있다. 해당 속도 미만으로 달리면 교통 흐름에 악영향을 주기 때문이다.</p>
+
+<p>발전기의 경우에도 최소 출력이 있으며, 최소 출력 미만으로 억지로 출력을 낮출 경우, (전체 계통에 악영향을 주는 것은 아니지만) 해당 발전기에 걸리는 스트레스가 증가해 기기 수명을 저하시킨다. 그러므로 최소 출력 이상으로 운전할 것이 권장된다.</p>
+
+<p>어떤 설비의 정격출력을 $S$, 최소부하율을 $\gamma$라 하자. 이를테면 어떤 분산형 발전기의 정격용량이 300kW 이고 최소부하율이 20% (즉 0.2)인 경우, 해당 설비는 가동 중에 60~300kW의 범위에서만 발전을 할 수 있다. 60kW 미만의 출력은 내지 못하도록 제한된다.</p>
+
+<p>특정 설비의 시간 별 가동 여부를 표현하는 ‘이진’변수 $u[t]$를 정의하자. 그리고 시간 $t$에 해당 설비가 가동 중이면 $u[t]=1$, 정지 상태이면 $u[t]=0$이라 하자. 이 때 최소부하 제약의 수식은 아래와 같다.</p>
+
+<p>$ u[t] \gamma_{min} S \leq p_{gen}[t] \leq u[t] S $</p>
+
+<p><br /></p>
+
+<h2 id="ramp-rate">Ramp rate</h2>
+
+<p>차를 몰 때 악셀을 밟아도 1초당 늘릴 수 있는 속력에는 한계가 있다. 또한 급브레이크를 밟아도 1초당 줄일 수 있는 속력에는 한계가 있다. 무리해서 급브레이크를 계속 밟으면 차량 수명에 악영향을 끼치기도 한다.</p>
+
+<p>마찬가지로 발전기의 출력 또한 갑자기 크게 늘리거나 줄이는 것에는 한계가 있고 그 한계를 무리해서 넘으면 수명에 악영향을 끼친다. 그래서, 변동폭을 제한함.</p>
+
+<p>시점 $t-1$에서 $t$까지 (즉 1 time step 동안) 발전기의 출력을 증가시키는 데는 한계가 있음, 마찬가지로 1 time step 동안 발전기의 출력을 감소시키는 데에도 한계가 있음.</p>
+
+<p>해당 한계값들을 정격출력으로 나눈 값을 각각 $\delta_{up}$, $\delta_{down}$이라 할 때 수식은 아래와 같다.</p>
+
+<p>$ -\delta_{down} S \leq p_{gen}[t] - p_{gen}[t-1] \leq \delta_{up} S $</p>
+
+<p><br /></p>
+
+<h2 id="최소-기동유지시간정지유지시간">최소 기동유지시간/정지유지시간</h2>
+
+<p>어떤 기계든, 지나치게 껐다 켰다를 빨리 반복하면 해당 기계에 좋지 않은 영향을 줄 것이라는 것을 짐작할 수 있다. 이는 발전기도 마찬가지로, 빈번하게 기동-정지 전환 시 기기 수명에 악영향을 미친다.</p>
+
+<p>발전기가 정지 상태에서 기동 상태로 전환하면, 일정 시간 동안 기동 상태를 유지해 줘야 함. 또한 기동 상태에서 정지 상태로 전환하면, 일정 시간 동안 정지 상태를 유지해 줘야 함.</p>
+
+<p>특히 출력이 높고 기저설비에 가깝게 설계된 경우, 이런 최소 기동유지시간/정지유지시간이 2 time step 이상일 수 있음.</p>
+
+<p><br />
+어떤 발전설비가 정지상태에서 기동상태로 전환 시 ‘최소한 3시간은’ 기동상태를 유지해야 한다고 가정하자.</p>
+
+<p>해당 발전설비가 시점 $t-1$에서 정지상태였다가 시점 $t$에서 기동상태로 전환된 경우, 위 조건에 의해 최소한 시점 $t+1, t+2$에서는 기동상태를 유지해야 한다. 즉 $u[t-1]=0$이면서 $u[t]=1$이라면, 반드시 $u[t+1]=u[t+2]=1$이어야 한다.</p>
+
+<p>위 제약조건을 수식으로 표현하면 아래와 같다.</p>
+
+<p>$ 3 (u[t]-u[t-1]) \leq u[t]+u[t+1]+u[t+2]  $</p>
+
+<p>$u[t]=1$이고 $u[t-1]=0$인 경우 좌변은 3이 되는데, 우변에는 이진수 3개만 있으므로 반드시 셋 다 1이 되어야 한다. 그러므로 $u[t+1]=u[t+2]=1$이어야만 식이 성립한다. 이외의 경우에는 좌변이 0 또는 -3이 되므로, $u[t+1]$과 $u[t+2]$가 어떤 값을 가져도 식이 성립한다.</p>
+
+<p><br />
+이번에는 해당 발전설비가 기동상태에서 정지상태로 전환 시 ‘최소한 2시간은’ 정지상태를 유지해야 한다고 가정하자.</p>
+
+<p>한편 해당 발전설비가 시점 $t-1$에서 기동상태였다가 시점 $t$에서 정지상태로 전환된 경우, 위 조건에 의해 최소한 시점 $t+1$에서는 정지상태를 유지해야 한다. 즉 $u[t-1]=1$이면서 $u[t]=0$이라면, 반드시 $u[t+1]=0$이어야 한다.</p>
+
+<p>위 제약조건을 수식으로 표현하면 아래와 같다.</p>
+
+<p>$ 2 (u[t-1]-u[t]) \leq 2 - (u[t]+u[t+1])  $</p>
+
+<p>$u[t]=0$이고 $u[t-1]=1$인 경우 좌변은 2가 되는데, 우변에서 $u[t]=u[t+1]=0$이어야만 식이 성립한다. 이외의 경우에는 좌변이 0 또는 -2가 되므로, $u[t+1]$이 어떤 값을 가져도 식이 성립한다.</p>
+
+<p><br /></p>
+
+<h2 id="시동-비용-start-up-cost">시동 비용 (start-up cost)</h2>
+
+<p>일정 규모 이상의 발전기의 경우, 정지 상태에서 기동 상태로 전환시키는 ‘시동’ 시 무시할 수 없는 수준의 시동비용이 발생하기도 한다. 이는 전력 생산을 위한 연료비용과는 별개의 비용으로 반영하여야 한다.</p>
+
+<p>시점 $t$에서 시동을 한다는 것은 $u[t-1]=0$이면서 $u[t]=1$임을 의미한다. 즉 시동 여부를 의미하는 새로운 이진수 $v[t]$를 도입해서, $u[t-1]=0$이면서 $u[t]=1$일 때는 반드시 $v[t]=1$이 되도록 제약을 걸고, $v[t]$에 시동비용 계수를 곱한 항을 목적함수에 추가해야 한다.</p>
+
+<p>필요한 제약식은 아래와 같다.</p>
+
+<p>$u[t] - u[t-1] \leq v[t]$</p>
+
+<p>$u[t]=1$이고 $u[t-1]=0$인 경우 좌변은 1이 되는데, $v[t]$는 이진수이므로 반드시 $v[t]=1$이어야 식이 성립한다. 이외의 경우에는 좌변이 0 또는 -1이므로 $v[t]$가 0이어도 상관이 없으며, 목적함수를 최소화하기 위해 $v[t]=0$이 될 것이다.</p>
+
+<div class="notice--info">
+
+선형계획법 기반 분산에너지시스템 최적화<br /><br />
+
+1) <a href="/linprogone.html">최소비용 시스템과 시간별 자료의 중요성</a><br />
+2) <a href="/linprogtwo.html">배터리의 충/방전 스케줄 결정: 수식</a> <br />
+3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드</a> <br />
+4) <a href="/linprogfour.html">태양광과 배터리의 용량 결정</a> <br />
+5) <a href="/linprogfive.html">정수 (integer) 변수 도입으로 현실 설명력 증대</a> <br />
+6) <b>공동주택의 '누진제' 전기요금 (단일계약) 수식</b>
+
+</div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="optimalsystem" /><category term="선형계획법" /><category term="부하패턴" /><category term="경제성분석" /><category term="Python" /><summary type="html"><![CDATA[분산형에너지 패러다임 이전의 전통적 발전 포트폴리오에서도, 원자력/ 석탄/ 가스/ 유류 등 다양한 발전기 믹스를 구성한 이유 - 발전기별로 연료단가와 부하추종 성능에 차이가 있기 때문]]></summary></entry><entry><title type="html">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 7) 전기와 열의 수요/공급을 동시에 고려 (섹터커플링)</title><link href="http://localhost:4000/linprogseven.html" rel="alternate" type="text/html" title="[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 7) 전기와 열의 수요/공급을 동시에 고려 (섹터커플링)" /><published>2023-04-26T00:00:00+09:00</published><updated>2023-04-26T00:00:00+09:00</updated><id>http://localhost:4000/linprogseven</id><content type="html" xml:base="http://localhost:4000/linprogseven.html"><![CDATA[<p>지금까지는 전기에 대해서만 다룸, 그러나 건물의 경우 난방과 냉방을 쓰고, 지역에너지의 경우에도 지역난방 등이 있음</p>
+
+<p>최근에는 ‘섹터커플링’이란 이름으로 주목받고 있음, 전기를 열, 수소 등 다른 에너지 형태로 상호 변환</p>
+
+<p>이번 포스팅에서는 전기와 열 수요-공급을 동시에 고려하는 경우 소개</p>
+
+<p>가장 간단한 케이스: 전기는 일반전기부하+에어컨냉방부하, 열은 보일러로 공급
+이건 섹터커플링은 아님, 전기 수전 스케줄링을 구하는 데 열을 고려하지 않아도 되고, 반대로 보일러 용량 및 스케줄링을 구하는 데 전기를 고려하지 않아도 되기 때문</p>
+
+<p>섹터커플링 예시로, 전기로 난방까지 하는 히트펌프, 온열을 냉열로 변환하는 흡수식냉동기, 전기와 열을 동시에 생산하는 열병합발전기(연료전지 포함) 등을 들 수 있음</p>
+
+<p>(각 설비에 대한 대략적인 설명, 특히 열병합과 가스직화식 흡수식냉동기는 연료를 소비하므로 시간별 연료비가 목적함수에 추가됨을 강조)</p>
+
+<p>(수식들: 일단 효율 등은 상수 가정, 최소부하 등 제약 무시, 열 변환 시 COP가 0인 시점에 대해 설명, 열저장조 포함)</p>
+
+<div class="notice--info">
+
+선형계획법 기반 분산에너지시스템 최적화<br /><br />
+
+1) <a href="/linprogone.html">최소비용 시스템과 시간별 자료의 중요성</a><br />
+2) <a href="/linprogtwo.html">배터리의 충/방전 스케줄 결정: 수식</a> <br />
+3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드</a> <br />
+4) <a href="/linprogfour.html">태양광과 배터리의 용량 결정</a> <br />
+5) <a href="/linprogfive.html">정수 (integer) 변수 도입으로 현실 설명력 증대</a> <br />
+6) <b>공동주택의 '누진제' 전기요금 (단일계약) 수식</b>
+
+</div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="optimalsystem" /><category term="선형계획법" /><category term="부하패턴" /><category term="경제성분석" /><category term="Python" /><summary type="html"><![CDATA[지금까지는 전기에 대해서만 다룸, 그러나 건물의 경우 난방과 냉방을 쓰고, 지역에너지의 경우에도 지역난방 등이 있음]]></summary></entry><entry><title type="html">선형계획법 기반 분산에너지시스템 최적화 - 6) 공동주택의 ‘누진제’ 전기요금 (단일계약) 수식</title><link href="http://localhost:4000/linprogsix.html" rel="alternate" type="text/html" title="선형계획법 기반 분산에너지시스템 최적화 - 6) 공동주택의 ‘누진제’ 전기요금 (단일계약) 수식" /><published>2023-04-25T00:00:00+09:00</published><updated>2023-04-25T00:00:00+09:00</updated><id>http://localhost:4000/linprogsix</id><content type="html" xml:base="http://localhost:4000/linprogsix.html"><![CDATA[<p>이전에 건물 내 태양광/배터리 설치 시의 최적 용량/스케줄 도출에 대해 설명했는데, 이는 ‘시간별 요금제를 적용받는 일반용 건물’에 대한 내용이었다. 그런데 주택에서는, ‘누진제’라 불리는, 전기를 많이 쓰면 단가가 올라가 요금이 급증하는 요금 체계를 적용한다.</p>
 
 <p>다들 여름에 집에서 에어컨을 빵빵하게 틀기 부담스러워했던 기억이 있을 것이다. 이는 에어컨 때문에 전기 사용량이 많아지면, 일정 구간부터는 누진제 하에서 높은 kWh당 단가를 적용받아 요금이 급증한다는 것을 어렴풋이나마 알기 때문이다.</p>
 
@@ -23,7 +211,7 @@
 
 <p>사용량이 증가함에 따라 구간이 변경되면서 기울기가 증가함을 볼 수 있다. 이렇듯 ‘많이 쓰면 단가가 높아지기’ 때문에, 누진제는 전기 과소비를 억제하는 효과가 있다.</p>
 
-<p>(참고로 7월/ 8월과 기타계절의 구간 기준이 다르다. 원래는 같았으나, 여름철의 가정 내 냉방기기 사용으로 인한 서민들의 전기요금 부담을 완화하기 위해 정부에서 2019년부터 7월/ 8월의 구간 기준을 완화를 상시화하였다.)</p>
+<p>(참고로 7월/ 8월과 기타계절의 구간 기준이 다르다. 원래는 같았으나, 여름철의 가정 내 냉방기기 사용으로 인한 서민들의 전기요금 부담을 완화하기 위해 정부에서 2019년부터 7월/ 8월의 구간 기준 완화를 상시화하였다.)</p>
 
 <p><br /></p>
 
@@ -62,9 +250,9 @@
 
 <p>$ p_{0}[1] \leq 200h$, $ p_{1}[1] \leq 200h$</p>
 
-<p>위에서 $p_{0}[1]$와 $p_{1}[1]$의 상한이 $200$이 아니라 $200h$로, 세대 수 $h$가 곱해졌음에 주의한다.</p>
+<p>위에서 $p_{0}[1]$와 $p_{1}[1]$의 상한이 $200$이 아니라 $200h$로, 세대 수 $h$가 곱해졌음에 주의한다. $p_{\text{grid}}[t]$가 ‘아파트 전체’의 전기 사용량이기 때문에 세대 수를 곱해야 한다.</p>
 
-<p>이 때 3개 구간 각각의 전력량 요금 단가를 $c_{0}^{\text{energy}}$, $c_{1}^{\text{energy}}$, $c_{2}^{\text{energy}}$ 라 하면, 1월의 총 전력량 요금은 아래와 같이 계산되어 목적함수에 포함될 것이다.</p>
+<p>이 때 3개 구간 각각의 전력량 요금 단가를 $c_{0}^{\text{energy}}$, $c_{1}^{\text{energy}}$, $c_{2}^{\text{energy}}$ 라 하면, ‘아파트 전체가 지불하는’ 1월의 총 전력량 요금은 아래와 같이 계산되어 목적함수에 포함될 것이다.</p>
 
 <p>$ c_{0}^{\text{energy}} p_{0}[1] + c_{1}^{\text{energy}} p_{1}[1] + c_{2}^{\text{energy}} p_{2}[1]$</p>
 
@@ -77,11 +265,11 @@
 
 <p>$ p_{0}[1] \leq 200h$, $ p_{1}[1] \leq 200h b_{1}[1]$, $ p_{2}[1] \leq M b_{2}[1]$</p>
 
-<p>그리고 3개 구간 각각의 세대당 월 기본요금을 $c_{0}^{\text{demand}}$, $c_{1}^{\text{demand}}$, $c_{2}^{\text{demand}}$ 라 하면, 1월의 총 기본 요금은 아래와 같이 계산되어 목적함수에 포함될 것이다.</p>
+<p>그리고 3개 구간 각각의 세대당 월 기본요금을 $c_{0}^{\text{demand}}$, $c_{1}^{\text{demand}}$, $c_{2}^{\text{demand}}$ 라 하면, ‘아파트 전체가 지불하는’ 1월의 총 기본 요금은 아래와 같이 계산되어 목적함수에 포함될 것이다.</p>
 
 <p>$ \lbrace c_{0}^{\text{demand}} + (c_{1}^{\text{demand}}-c_{0}^{\text{demand}}) b_{1}[1] + (c_{2}^{\text{demand}}-c_{1}^{\text{demand}}) b_{2}[1] \rbrace h$</p>
 
-<p>세대당 전력량이 200~400kWh면 $b_{1}[1]=1$이 되므로 $c_{0}^{\text{demand}}$이 cancel out되어 $c_{1}^{\text{demand}}$만 남는다. 마찬가지로 세대당 전력량이 400kWh를 초과면 $b_{1}[1]=1$, $b_{2}[1]=1$이 되므로 $c_{1}^{\text{demand}}$도 cancel out되어 $c_{2}^{\text{demand}}$만 남는다. 한편, 위에서 맨 마지막에 세대 수 $h$를 곱함에 주의한다.</p>
+<p>세대당 전력량이 200~400kWh면 $b_{1}[1]=1$이 되므로 $c_{0}^{\text{demand}}$이 cancel out되어 $c_{1}^{\text{demand}}$만 남는다. 마찬가지로 세대당 전력량이 400kWh를 초과하면 $b_{1}[1]=1$, $b_{2}[1]=1$이 되므로 $c_{1}^{\text{demand}}$도 cancel out되어 $c_{2}^{\text{demand}}$만 남는다. 한편, 위에서 맨 마지막에 세대 수 $h$를 곱함에 주의한다.</p>
 
 <div class="notice--info">
 
@@ -92,7 +280,7 @@
 3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드</a> <br />
 4) <a href="/linprogfour.html">태양광과 배터리의 용량 결정</a> <br />
 5) <a href="/linprogfive.html">정수 (integer) 변수 도입으로 현실 설명력 증대</a> <br />
-6) <b>공동주택의 '누진제' 전기요금 (단일계약) 구현</b>
+6) <b>공동주택의 '누진제' 전기요금 (단일계약) 수식</b>
 
 </div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="optimalsystem" /><category term="선형계획법" /><category term="부하패턴" /><category term="경제성분석" /><category term="Python" /><summary type="html"><![CDATA[이전에 건물 내 태양광/배터리 설치 시의 최적 용량/스케줄 도출에 대해 설명했는데, 이는 ‘시간별 요금제를 적용받는 일반용 건물’에 대한 내용이었다. 그런데 주택에서는, ‘누진제’라 불리는, 전기를 많이 쓰면 단가가 올라가 요금이 급증하는 요금 체계를 적용한다.]]></summary></entry><entry><title type="html">선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대</title><link href="http://localhost:4000/linprogfive.html" rel="alternate" type="text/html" title="선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대" /><published>2023-04-24T00:00:00+09:00</published><updated>2023-04-24T00:00:00+09:00</updated><id>http://localhost:4000/linprogfive</id><content type="html" xml:base="http://localhost:4000/linprogfive.html"><![CDATA[<p>지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다.</p>
 
@@ -309,7 +497,7 @@
 3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드</a> <br />
 4) <a href="/linprogfour.html">태양광과 배터리의 용량 결정</a> <br />
 5) <b>정수 (integer) 변수 도입으로 현실 설명력 증대</b> <br />
-6) <a href="/linprogsix.html">공동주택의 '누진제' 전기요금 (단일계약) 구현</a>
+6) <a href="/linprogsix.html">공동주택의 '누진제' 전기요금 (단일계약) 수식</a>
 
 </div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="optimalsystem" /><category term="선형계획법" /><category term="부하패턴" /><category term="경제성분석" /><category term="Python" /><summary type="html"><![CDATA[지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다.]]></summary></entry><entry><title type="html">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거</title><link href="http://localhost:4000/monthlyenergythree.html" rel="alternate" type="text/html" title="건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거" /><published>2023-04-23T00:00:00+09:00</published><updated>2023-04-23T00:00:00+09:00</updated><id>http://localhost:4000/monthlyenergythree</id><content type="html" xml:base="http://localhost:4000/monthlyenergythree.html"><![CDATA[<p><a href="/monthlyenergytwo.html">이전 포스팅</a>에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.</p>
 
@@ -346,7 +534,10 @@
 <p>이러한 ‘특정 점 $i$의 유무에 따른 회귀계수 간 표준화된 차이’를 Cook’s Distance라 한다. 
 $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Cook’s Distance의 수식은 아래와 같다.</p>
 
-<p>$ D_{i}^{elec,m}=\frac{\left({\hat{\beta}}^{elec,m}-{\hat{\beta}}_{-i}^{elec,m}\right)^{\top}X^{\top}X\left({\hat{\beta}}^{elec,m}-{\hat{\beta}}_{-i}^{elec,m}\right)}{k \cdot MSR^{elec,m}}$</p>
+<p>\begin{align} 
+D_{i}^{elec,m}=\frac{\left({\hat{\beta}}^{elec,m}-{\hat{\beta}}_{-i}^{elec,m}\right)^{\top}X^{\top}X\left({\hat{\beta}}^{elec,m}-{\hat{\beta}}_{-i}^{elec,m}\right)}{k \cdot MSR^{elec,m}} 
+\notag
+\end{align}</p>
 
 <p>$\hat{\beta}$는 data point $i$를 포함해 모든 data point들이 있을 때 구한 회귀계수이고, $\hat{\beta}_{-i}$는 data point $i$만을 dataset으로부터 뺐을 때 구한 회귀계수이다. $X$는 설명변수 행렬로, $i$번째 행이 $i$번째 data point에 대한 설명변수들로 구성된 행벡터이다 (여기서 설명변수는 연면적, 층수, 사용연도, 재질, …, 그리고 상수항 표현을 위한 1). 분모의 $k$는 설명변수 개수이고, $MSR$은 잔차의 평균제곱합이다.</p>
 
@@ -355,7 +546,10 @@ $m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Coo
 
 <p>다행히도 그렇지 않다. 단 한 번의 회귀분석과 한 번의 행렬 연산으로, 모든 data point 각각에 대한 Cook’s Distance들을 계산할 수 있다. Cook’s Distance의 다른 식은 아래와 같다.</p>
 
-<p>$D_{i}^{elec,m}=\frac{\hat{\epsilon}_{i}^{elec,m}h_{ii}}{k \cdot MSR^{elec,m}\left(1-h_{ii}\right)^2}$</p>
+<p>\begin{align} 
+D_{i}^{elec,m}=\frac{\hat{\epsilon}_{i}^{elec,m}h_{ii}}{k \cdot MSR^{elec,m}\left(1-h_{ii}\right)^2}
+\notag
+\end{align}</p>
 
 <p>여기서 $\hat{\epsilon}_{i}^{elec,m}$는 $i$번째 잔차, $h_{ii}$는 hat matrix $X\left(X^{\top} X \right)^{-1}X^{\top}$의 $i$번째 대각성분이다.</p>
 
@@ -1578,761 +1772,4 @@ and netfloorarea &gt; 0
 4) <a href="/reinforcefour.html">DDPG를 통한 continuous control 도출</a><br />
 5) <b>TD3, SAC를 통한 continuous control 도출</b>
 
-</div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="energymanagement" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 (3개 action들은 각각 1.1kW 수전/ 1.1kW 송전/ idle).]]></summary></entry><entry><title type="html">강화학습 기반 마이크로그리드 스케줄링 - 4) DDPG를 통한 continuous control 도출</title><link href="http://localhost:4000/reinforcefour.html" rel="alternate" type="text/html" title="강화학습 기반 마이크로그리드 스케줄링 - 4) DDPG를 통한 continuous control 도출" /><published>2023-04-18T00:00:00+09:00</published><updated>2023-04-18T00:00:00+09:00</updated><id>http://localhost:4000/reinforcefour</id><content type="html" xml:base="http://localhost:4000/reinforcefour.html"><![CDATA[<p>Vincent의 마이크로그리드 사례에 ‘discrete’ action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic control이 가능했다.</p>
-
-<p><img src="/assets/images/reinforceone/system.png" alt="system" class="align-center" />
-<em>Vincent의 연구에서 가정된 마이크로그리드.</em></p>
-
-<p>그러나 실제로는 수전/송전이 continuous action이다. 그러므로, continuous action을 다루는 심층강화학습 기법을 적용하면 더 우수한 economic control이 가능할 지 궁금해진다.</p>
-
-<p>이번에는 continuous control의 기본적인 방법인 <a href="https://arxiv.org/abs/1509.02971">Deep Deterministic Policy Gradient (DDPG)</a>를 적용해서, 수전/송전에 대한 continuous control을 도출해본다.</p>
-
-<p><br /></p>
-
-<h2 id="actor와-critic-신경망">Actor와 critic 신경망</h2>
-<p>Continuous action인 경우 가능한 action의 수가 사실상 무한대이므로, DQN에서처럼 state를 입력받아 각 action 별 Q-value를 모두 계산하는 신경망을 구성할 수는 없다.</p>
-
-<p>대신에, 두 개의 신경망을 구성하되 하나는 state를 입력받고 continuous action의 값을 출력하고, 다른 하나는 state와 action을 입력받아 그 state-action pair의 Q-value를 출력하도록 한다. 두 신경망 중 전자를 actor (action을 결정함), 후자를 critic (value를 평가함) 이라 부른다.</p>
-
-<p>이 때 actor는 state를 받고 deterministic한 action을 출력하는 policy로 볼 수 있다. 그래서 이 방법에는 Deep Deterministic Policy Gradient (DDPG) 라는 이름이 붙었다.</p>
-
-<p>특히 이 마이크로그리드 사례에서 action은 하한이 -1.1, 상한이 1.1로 정해져 있다. 이러한 ‘bounded’ action을 구현하기 위해, actor의 output layer에 tanh (하이퍼볼릭 탄젠트) activation function을 걸어준다.</p>
-
-<p><br /></p>
-
-<h2 id="target-신경망">Target 신경망</h2>
-<p>한편, DDPG에서는 ‘target’ 신경망을 구성해서 학습의 안정성을 향상시킨다. Actor와 critic 각각의 target 신경망들은 원래 actor와 critic의 복사본으로 시작해서, Q-learning에서 next state에 대한 값을 도출하는 데 이용된 후 천천히 업데이트된다.</p>
-
-<p>구체적으로, 원래 신경망들의 parameter를 $\theta$, target 신경망들의 parameter를 $\theta’$라 하고, 원래 actor와 target actor를 각각 $\mu(s)$와 $\mu’(s)$, 원래 critic과 target critic을 각각 $\hat{Q}(s,a)$와 $\hat{Q}’(s,a)$라 하자.</p>
-
-<p>그러면, critic 신경망 훈련 시의 목적함수는 $\hat{Q}(s_{t},a_{t})$와 $r_{t+1} + \gamma \text{max}_{\mu’} \hat{Q}’(s_{t+1},\mu’(s_{t+1}))$ 간 차이의 평균제곱합이다. 두 번째 항이 target 신경망에 의해 계산되었음에 주목한다.</p>
-
-<p>한편 actor 신경망 훈련 시의 목적함수는 $-\hat{Q}(s_{t},\mu(s_{t}))$, 즉 음의 Q-value이다. Actor는 Q-value를 최대화하는 action을 도출해야 하기 때문이다. Actor 훈련 시의 목적함수는 target 신경망에 의해 계산되지 않았다.</p>
-
-<p>원래 critic과 actor에 대해 가중치 업데이트를 수행한 후, target critic과 actor에 대한 가중치 업데이트는 작은 양수 $\tau$에 대해 아래와 같이 수행한다. $\tau$가 작으므로 (대략 0.05 전후), $\theta’$는 ‘느리게’ 업데이트된다.</p>
-
-<p>$\theta’ \leftarrow \tau \theta + (1-\tau) \theta’$</p>
-
-<p>Q-learning에서 Q-value에 대한 두 추정치 $\hat{Q}(s_{t},a_{t})$와 $r_{t+1} + \gamma \text{max}_{a_{t+1}} \hat{Q}(s_{t+1},a_{t+1})$가 말 그대로 ‘둘 다 추정치’이다. 즉 추정치를 추정치 기반으로 추정한다 (이를 bootstrap이라고도 한다).</p>
-
-<p>이 때문에 운 나쁘게 추정이 잘못된 방향으로 진행되기 시작하면, 훈련이 발산해버리기 쉽다. Target 신경망 구성을 통해, Q-value 추정의 변화를 완화하여 훈련이 발산할 가능성을 크게 줄일 수 있다.</p>
-
-<p>(보다 더 상세한 내용은 <a href="https://arxiv.org/abs/1509.02971">논문 원문</a>을 참고하길 바란다)</p>
-
-<p><br /></p>
-
-<h2 id="ddpg-코드">DDPG 코드</h2>
-<p>이제 DDPG를 적용하여 continuous controller를 훈련하는 코드를 보자 <a href="https://antonai.blog/reinforcement-learning-in-continuous-action-spaces-part-1-ddpg/">(해당 코드 작성에 참고한 DDPG 코딩 설명 포스트).</a> 코드 내 주석은 지난 포스팅의 DQN 코드 대비 다른 부분에 대해서만 추가하였다.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
-</span>
-<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="n">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
-<span class="kn">from</span> <span class="n">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
-<span class="kn">from</span> <span class="n">keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Conv1D</span><span class="p">,</span> <span class="n">concatenate</span><span class="p">,</span> <span class="n">Flatten</span>
-<span class="kn">import</span> <span class="n">time</span>
-
-<span class="c1">### hyperparameters
-</span>
-<span class="n">actor_lr</span> <span class="o">=</span> <span class="mf">0.0005</span> <span class="c1"># actor NN의 learning rate
-</span><span class="n">critic_lr</span> <span class="o">=</span> <span class="mf">0.001</span> <span class="c1"># critic NN의 learning rate
-</span><span class="n">tau</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="c1"># target NN 업데이트 속도 조절 계수
-</span><span class="n">rewardscalefactor</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">buffer_size</span> <span class="o">=</span> <span class="mi">20000</span>
-<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="n">discount_factor</span> <span class="o">=</span> <span class="mf">0.98</span>
-<span class="n">period_step_fortrain</span> <span class="o">=</span> <span class="mi">24</span>
-
-
-
-<span class="c1">### microgrid system data
-</span>
-<span class="n">PV_prod_train</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="s">'BelgiumPV_prod_train.npy'</span><span class="p">)</span> 
-<span class="n">PV_prod_test</span>  <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="s">'BelgiumPV_prod_test.npy'</span><span class="p">)</span> 
-
-<span class="n">load_train</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="s">'example_nondeterminist_cons_train.npy'</span><span class="p">)</span>
-<span class="n">load_test</span>  <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="s">'example_nondeterminist_cons_test.npy'</span><span class="p">)</span>
-
-<span class="n">prate_h2</span> <span class="o">=</span> <span class="mf">1.1</span>
-<span class="n">eff_h2</span> <span class="o">=</span> <span class="mf">0.65</span>
-
-<span class="n">capa_batt</span> <span class="o">=</span> <span class="mi">15</span>
-<span class="n">eff_batt</span> <span class="o">=</span> <span class="mf">0.9</span>
-<span class="n">initialenergy_batt</span> <span class="o">=</span> <span class="mf">0.0</span>
-
-<span class="n">price_h2</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">cost_loss</span> <span class="o">=</span> <span class="mi">2</span>
-
-<span class="n">load_peak</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">pv_peak</span> <span class="o">=</span> <span class="mi">12</span>
-
-<span class="n">inputlen_load</span> <span class="o">=</span> <span class="mi">24</span>
-<span class="n">inputlen_pv</span> <span class="o">=</span> <span class="mi">24</span>
-
-
-
-<span class="c1">### Neural net configuration
-</span>
-<span class="k">class</span> <span class="nc">Critic</span><span class="p">(</span><span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span> <span class="c1"># Q-value를 추정하는 NN (action이 continuous)
-</span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
-        <span class="nf">super</span><span class="p">(</span><span class="n">Critic</span><span class="p">,</span> <span class="n">self</span><span class="p">).</span><span class="nf">__init__</span><span class="p">()</span> <span class="c1"># tf.Keras.Model 상속받는 이유는 main코드에서 get_weights, set_weights 등을 매번 model 메서드를 불러오지 않고도 편하게 쓰기 위함          
-</span>        <span class="n">self</span><span class="p">.</span><span class="n">input_load</span> <span class="o">=</span> <span class="nc">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">inputlen_load</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> 
-        <span class="n">self</span><span class="p">.</span><span class="n">input_pv</span> <span class="o">=</span> <span class="nc">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">inputlen_pv</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">hidden_conv_load</span> <span class="o">=</span> <span class="nc">Conv1D</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">self</span><span class="p">.</span><span class="n">input_load</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">hidden_conv_pv</span> <span class="o">=</span> <span class="nc">Conv1D</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">self</span><span class="p">.</span><span class="n">input_pv</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">concat_conv</span> <span class="o">=</span> <span class="nf">concatenate</span><span class="p">([</span><span class="n">self</span><span class="p">.</span><span class="n">hidden_conv_load</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">hidden_conv_pv</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">hidden_conv_concat</span> <span class="o">=</span> <span class="nc">Conv1D</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">self</span><span class="p">.</span><span class="n">concat_conv</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">flatten_conv</span> <span class="o">=</span> <span class="nc">Flatten</span><span class="p">()(</span><span class="n">self</span><span class="p">.</span><span class="n">hidden_conv_concat</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">input_others</span> <span class="o">=</span> <span class="nc">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">input_action</span> <span class="o">=</span> <span class="nc">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># action 값 (state 뿐 아니라 action도 input임)
-</span>        <span class="n">self</span><span class="p">.</span><span class="n">concat_all</span> <span class="o">=</span> <span class="nf">concatenate</span><span class="p">([</span><span class="n">self</span><span class="p">.</span><span class="n">flatten_conv</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">input_others</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">input_action</span><span class="p">])</span> 
-        <span class="n">self</span><span class="p">.</span><span class="n">hidden_dense_1</span> <span class="o">=</span> <span class="nc">Dense</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">self</span><span class="p">.</span><span class="n">concat_all</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">hidden_dense_2</span> <span class="o">=</span> <span class="nc">Dense</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">self</span><span class="p">.</span><span class="n">hidden_dense_1</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">output_qval</span> <span class="o">=</span> <span class="nc">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="n">self</span><span class="p">.</span><span class="n">hidden_dense_2</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="nc">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">input_load</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">input_pv</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">input_others</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">input_action</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">output_qval</span><span class="p">])</span>     
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">input_load</span><span class="p">,</span><span class="n">input_pv</span><span class="p">,</span><span class="n">input_others</span><span class="p">,</span><span class="n">input_action</span><span class="p">):</span> <span class="c1"># state 뿐 아니라 action도 input임        
-</span>        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">model</span><span class="p">((</span><span class="n">input_load</span><span class="p">,</span><span class="n">input_pv</span><span class="p">,</span><span class="n">input_others</span><span class="p">,</span><span class="n">input_action</span><span class="p">))</span> <span class="c1"># output은 입력된 state-action pair에 대한 Q-value '단일값'
-</span>
-<span class="k">class</span> <span class="nc">Actor</span><span class="p">(</span><span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span> <span class="c1"># (Continuous) Action을 결정하는 policy NN
-</span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
-        <span class="nf">super</span><span class="p">(</span><span class="n">Actor</span><span class="p">,</span> <span class="n">self</span><span class="p">).</span><span class="nf">__init__</span><span class="p">()</span>        
-        <span class="n">self</span><span class="p">.</span><span class="n">input_load</span> <span class="o">=</span> <span class="nc">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">inputlen_load</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> 
-        <span class="n">self</span><span class="p">.</span><span class="n">input_pv</span> <span class="o">=</span> <span class="nc">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">inputlen_pv</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> 
-        <span class="n">self</span><span class="p">.</span><span class="n">hidden_conv_load</span> <span class="o">=</span> <span class="nc">Conv1D</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">self</span><span class="p">.</span><span class="n">input_load</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">hidden_conv_pv</span> <span class="o">=</span> <span class="nc">Conv1D</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">self</span><span class="p">.</span><span class="n">input_pv</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">concat_conv</span> <span class="o">=</span> <span class="nf">concatenate</span><span class="p">([</span><span class="n">self</span><span class="p">.</span><span class="n">hidden_conv_load</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">hidden_conv_pv</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">hidden_conv_concat</span> <span class="o">=</span> <span class="nc">Conv1D</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">self</span><span class="p">.</span><span class="n">concat_conv</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">flatten_conv</span> <span class="o">=</span> <span class="nc">Flatten</span><span class="p">()(</span><span class="n">self</span><span class="p">.</span><span class="n">hidden_conv_concat</span><span class="p">)</span> 
-        <span class="n">self</span><span class="p">.</span><span class="n">input_others</span> <span class="o">=</span> <span class="nc">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">concat_all</span> <span class="o">=</span> <span class="nf">concatenate</span><span class="p">([</span><span class="n">self</span><span class="p">.</span><span class="n">flatten_conv</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">input_others</span><span class="p">])</span> 
-        <span class="n">self</span><span class="p">.</span><span class="n">hidden_dense_1</span> <span class="o">=</span> <span class="nc">Dense</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">self</span><span class="p">.</span><span class="n">concat_all</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">hidden_dense_2</span> <span class="o">=</span> <span class="nc">Dense</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">self</span><span class="p">.</span><span class="n">hidden_dense_1</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">output_action</span> <span class="o">=</span> <span class="nc">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">'tanh'</span><span class="p">)(</span><span class="n">self</span><span class="p">.</span><span class="n">hidden_dense_2</span><span class="p">)</span> <span class="c1"># Node 갯수는 action의 자유도이며, tanh activation은 action(충/방전) 이 [-1,1] 범위의 bounded action임을 반영함
-</span>        <span class="n">self</span><span class="p">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="nc">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">input_load</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">input_pv</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">input_others</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">output_action</span><span class="p">])</span>     
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">input_load</span><span class="p">,</span><span class="n">input_pv</span><span class="p">,</span><span class="n">input_others</span><span class="p">):</span> <span class="c1"># state가 input임        
-</span>        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">model</span><span class="p">((</span><span class="n">input_load</span><span class="p">,</span><span class="n">input_pv</span><span class="p">,</span><span class="n">input_others</span><span class="p">))</span>
-
-<span class="n">critic_one_learning</span> <span class="o">=</span> <span class="nc">Critic</span><span class="p">()</span> 
-<span class="n">critic_one_target</span> <span class="o">=</span> <span class="nc">Critic</span><span class="p">()</span> <span class="c1"># target 신경망 정의
-</span><span class="n">critic_one_learning</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">keras</span><span class="p">.</span><span class="n">optimizers</span><span class="p">.</span><span class="nc">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">critic_lr</span><span class="p">))</span>
-<span class="n">critic_one_target</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">keras</span><span class="p">.</span><span class="n">optimizers</span><span class="p">.</span><span class="nc">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">critic_lr</span><span class="p">))</span>
-<span class="n">critic_one_target</span><span class="p">.</span><span class="nf">set_weights</span><span class="p">(</span><span class="n">critic_one_learning</span><span class="p">.</span><span class="nf">get_weights</span><span class="p">())</span> <span class="c1"># target 신경망의 가중치의 초기값은 원래 신경망의 가중치와 같게 둠.
-</span>
-<span class="n">actor_learning</span> <span class="o">=</span> <span class="nc">Actor</span><span class="p">()</span>
-<span class="n">actor_target</span> <span class="o">=</span> <span class="nc">Actor</span><span class="p">()</span> <span class="c1"># target 신경망 정의
-</span><span class="n">actor_learning</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">keras</span><span class="p">.</span><span class="n">optimizers</span><span class="p">.</span><span class="nc">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">actor_lr</span><span class="p">))</span>
-<span class="n">actor_target</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">keras</span><span class="p">.</span><span class="n">optimizers</span><span class="p">.</span><span class="nc">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">actor_lr</span><span class="p">))</span>
-<span class="n">actor_target</span><span class="p">.</span><span class="nf">set_weights</span><span class="p">(</span><span class="n">actor_learning</span><span class="p">.</span><span class="nf">get_weights</span><span class="p">())</span> <span class="c1"># target 신경망의 가중치의 초기값은 원래 신경망의 가중치와 같게 둠.
-</span>
-
-
-<span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
-<span class="n">replay_buffer</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">buffer_size</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">sample_experiences</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span> 
-    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">replay_buffer</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span> 
-    <span class="n">batch</span> <span class="o">=</span> <span class="p">[</span><span class="n">replay_buffer</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span> 
-    <span class="n">states</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">next_states</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="n">experience</span><span class="p">[</span><span class="n">field_index</span><span class="p">]</span> <span class="k">for</span> <span class="n">experience</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">])</span> 
-        <span class="k">for</span> <span class="n">field_index</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
-    <span class="k">return</span> <span class="n">states</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">next_states</span>
-
-
-
-<span class="k">def</span> <span class="nf">play_one_step</span><span class="p">(</span><span class="n">profile_load</span><span class="p">,</span><span class="n">profile_pv</span><span class="p">,</span><span class="n">hour</span><span class="p">,</span><span class="n">energy_batt</span><span class="p">,</span><span class="n">epsilon</span><span class="p">,</span><span class="n">training</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        
-    <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span> <span class="p">(</span><span class="n">profile_load</span><span class="p">[</span><span class="n">hour</span><span class="o">-</span><span class="n">inputlen_load</span><span class="p">:</span><span class="n">hour</span><span class="p">],</span> <span class="n">profile_pv</span><span class="p">[</span><span class="n">hour</span><span class="o">-</span><span class="n">inputlen_pv</span><span class="p">:</span><span class="n">hour</span><span class="p">],</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="n">energy_batt</span><span class="p">]))</span> <span class="p">)</span>
-    
-    <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">epsilon</span> <span class="ow">and</span> <span class="n">training</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="c1"># exploration during training
-</span>        <span class="n">action</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># exploration 시 -1~+1 사이의 실수를 균등분포에서 추출
-</span>    <span class="k">else</span><span class="p">:</span> <span class="c1"># exploitation
-</span>        <span class="n">action</span> <span class="o">=</span> <span class="nf">actor_learning</span><span class="p">(</span><span class="n">profile_load</span><span class="p">[</span><span class="n">hour</span><span class="o">-</span><span class="n">inputlen_load</span><span class="p">:</span><span class="n">hour</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">inputlen_load</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">profile_pv</span><span class="p">[</span><span class="n">hour</span><span class="o">-</span><span class="n">inputlen_pv</span><span class="p">:</span><span class="n">hour</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">inputlen_pv</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="n">energy_batt</span><span class="p">]).</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)).</span><span class="nf">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># action net의 output은 tensor이므로, 이를 numpy 변환 후 [0][0]으로 불러와야 int 변수가 됨
-</span>    
-    <span class="c1"># Unscaling
-</span>    <span class="n">p_h2_send</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">p_h2_receive</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="n">action</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">p_h2_receive</span> <span class="o">=</span> <span class="n">prate_h2</span><span class="o">*</span><span class="n">action</span> <span class="c1"># 여기서 action은 전기 '수전'에 대해 양수라고 가정, action은 [-1,1] 구간의 실수이므로 prate_h2를 곱해 [-1.1,1.1] 구간의 실수가 되도록 함
-</span>    <span class="k">else</span><span class="p">:</span>
-        <span class="n">p_h2_send</span> <span class="o">=</span> <span class="o">-</span><span class="n">prate_h2</span><span class="o">*</span><span class="n">action</span> <span class="c1"># action은 전기 '송전'에 대해 음수
-</span>    <span class="n">p_load</span> <span class="o">=</span> <span class="n">profile_load</span><span class="p">[</span><span class="n">hour</span><span class="p">]</span><span class="o">*</span><span class="n">load_peak</span> 
-    <span class="n">p_pv</span> <span class="o">=</span> <span class="n">profile_pv</span><span class="p">[</span><span class="n">hour</span><span class="p">]</span><span class="o">*</span><span class="n">pv_peak</span> 
-    <span class="n">energy_batt</span> <span class="o">=</span> <span class="n">energy_batt</span><span class="o">*</span><span class="n">capa_batt</span> 
-        
-    <span class="c1">#p_curtail = 0
-</span>    <span class="n">p_loss</span> <span class="o">=</span> <span class="mi">0</span>
-    
-    <span class="n">p_net_beforebatt</span> <span class="o">=</span> <span class="n">p_pv</span> <span class="o">-</span> <span class="n">p_load</span> <span class="o">+</span> <span class="n">p_h2_receive</span> <span class="o">-</span> <span class="n">p_h2_send</span> 
-    
-    <span class="k">if</span> <span class="n">p_net_beforebatt</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">capa_batt</span> <span class="o">&gt;=</span> <span class="n">energy_batt</span> <span class="o">+</span> <span class="n">p_net_beforebatt</span><span class="o">*</span><span class="n">eff_batt</span><span class="p">:</span> 
-            <span class="n">energy_batt_after</span> <span class="o">=</span> <span class="n">energy_batt</span> <span class="o">+</span> <span class="n">p_net_beforebatt</span><span class="o">*</span><span class="n">eff_batt</span>
-        <span class="k">else</span><span class="p">:</span> 
-            <span class="n">energy_batt_after</span> <span class="o">=</span> <span class="n">capa_batt</span>
-            <span class="c1"># p_curtail = (energy_batt + p_net_beforebatt*eff_batt - capa_batt)/eff_batt 
-</span>    <span class="k">else</span><span class="p">:</span> 
-        <span class="k">if</span> <span class="n">energy_batt</span><span class="o">*</span><span class="n">eff_batt</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="n">p_net_beforebatt</span><span class="p">:</span> 
-            <span class="n">energy_batt_after</span> <span class="o">=</span> <span class="n">energy_batt</span> <span class="o">+</span> <span class="n">p_net_beforebatt</span><span class="o">/</span><span class="n">eff_batt</span> 
-        <span class="k">else</span><span class="p">:</span> 
-            <span class="n">energy_batt_after</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">p_loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">p_net_beforebatt</span> <span class="o">-</span> <span class="n">energy_batt</span><span class="o">*</span><span class="n">eff_batt</span>           
-    
-    <span class="n">reward</span> <span class="o">=</span> <span class="n">price_h2</span><span class="o">*</span><span class="n">p_h2_send</span><span class="o">*</span><span class="n">eff_h2</span> <span class="o">-</span> <span class="n">price_h2</span><span class="o">*</span><span class="n">p_h2_receive</span><span class="o">/</span><span class="n">eff_h2</span> <span class="o">-</span> <span class="n">cost_loss</span><span class="o">*</span><span class="n">p_loss</span> 
-    <span class="n">energy_batt_after</span> <span class="o">=</span> <span class="n">energy_batt_after</span><span class="o">/</span><span class="n">capa_batt</span> 
-    
-    <span class="k">if</span> <span class="n">training</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">next_state</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span> <span class="p">(</span><span class="n">profile_load</span><span class="p">[</span><span class="n">hour</span><span class="o">-</span><span class="p">(</span><span class="n">inputlen_load</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span><span class="n">hour</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">profile_pv</span><span class="p">[</span><span class="n">hour</span><span class="o">-</span><span class="p">(</span><span class="n">inputlen_pv</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span><span class="n">hour</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="n">energy_batt_after</span><span class="p">]))</span> <span class="p">)</span>         
-        <span class="n">replay_buffer</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="o">*</span><span class="n">rewardscalefactor</span><span class="p">,</span> <span class="n">next_state</span><span class="p">))</span> 
-    <span class="k">return</span> <span class="n">energy_batt_after</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">action</span>
-
-
-
-<span class="k">def</span> <span class="nf">training_step</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span><span class="n">actorupdate</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-    
-    <span class="n">states</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">next_states</span> <span class="o">=</span> <span class="nf">sample_experiences</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
-        
-    <span class="n">input_load</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">inputlen_load</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">inputlen_load</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
-    <span class="n">input_pv</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,</span><span class="n">inputlen_load</span><span class="p">:(</span><span class="n">inputlen_load</span><span class="o">+</span><span class="n">inputlen_pv</span><span class="p">)].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">inputlen_pv</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">input_others</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,(</span><span class="n">inputlen_load</span><span class="o">+</span><span class="n">inputlen_pv</span><span class="p">)].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-    
-    <span class="n">input_load_next</span> <span class="o">=</span> <span class="n">next_states</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">inputlen_load</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">inputlen_load</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">input_pv_next</span> <span class="o">=</span> <span class="n">next_states</span><span class="p">[:,</span><span class="n">inputlen_load</span><span class="p">:(</span><span class="n">inputlen_load</span><span class="o">+</span><span class="n">inputlen_pv</span><span class="p">)].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">inputlen_pv</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">input_others_next</span> <span class="o">=</span> <span class="n">next_states</span><span class="p">[:,(</span><span class="n">inputlen_load</span><span class="o">+</span><span class="n">inputlen_pv</span><span class="p">)].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-        
-    <span class="n">actions_by_target</span> <span class="o">=</span> <span class="nf">actor_target</span><span class="p">(</span><span class="n">input_load_next</span><span class="p">,</span><span class="n">input_pv_next</span><span class="p">,</span><span class="n">input_others_next</span><span class="p">).</span><span class="nf">numpy</span><span class="p">().</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># nextstate에 대한 action은 target net으로 도출
-</span>    <span class="n">actions_by_target</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">clip</span><span class="p">(</span><span class="n">actions_by_target</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># [-1,1] 범위로 제한
-</span>    
-    <span class="n">Q_values_one_by_target</span> <span class="o">=</span> <span class="nf">critic_one_target</span><span class="p">(</span><span class="n">input_load_next</span><span class="p">,</span><span class="n">input_pv_next</span><span class="p">,</span><span class="n">input_others_next</span><span class="p">,</span><span class="n">actions_by_target</span><span class="p">)</span> <span class="c1"># nextstate에 대한 Q-value는 target net으로 도출
-</span>    <span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="nf">stop_gradient</span><span class="p">(</span><span class="n">rewards</span> <span class="o">+</span> <span class="n">discount_factor</span> <span class="o">*</span> <span class="n">Q_values_one_by_target</span><span class="p">)</span>
-    
-    <span class="k">with</span> <span class="n">tf</span><span class="p">.</span><span class="nc">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span> <span class="c1"># critic net 업데이트를 위한 자동미분 (actor net 업데이트와 별개로 둠)        
-</span>        <span class="n">Q_values_one</span> <span class="o">=</span> <span class="nf">critic_one_learning</span><span class="p">(</span><span class="n">input_load</span><span class="p">,</span><span class="n">input_pv</span><span class="p">,</span><span class="n">input_others</span><span class="p">,</span><span class="n">actions</span><span class="p">.</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># critic_one_learning을 gradient descent로 훈련시키려면, GradientTape 구문 내에서 현재 state-action에 대한 Q_value Tensor를 critic_one_learning으로 다시 불러와야 함
-</span>        <span class="n">loss_critic_one</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="nf">reduce_mean</span><span class="p">(</span><span class="n">keras</span><span class="p">.</span><span class="n">losses</span><span class="p">.</span><span class="nf">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">Q_values_one</span><span class="p">))</span> <span class="c1"># 평균제곱오차 계산
-</span>    <span class="n">grads</span> <span class="o">=</span> <span class="n">tape</span><span class="p">.</span><span class="nf">gradient</span><span class="p">(</span><span class="n">loss_critic_one</span><span class="p">,</span> <span class="n">critic_one_learning</span><span class="p">.</span><span class="n">trainable_variables</span><span class="p">)</span> 
-    <span class="n">critic_one_learning</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="nf">apply_gradients</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="n">critic_one_learning</span><span class="p">.</span><span class="n">trainable_variables</span><span class="p">))</span>
-     
-    <span class="k">if</span> <span class="n">actorupdate</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>    
-        <span class="k">with</span> <span class="n">tf</span><span class="p">.</span><span class="nc">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span> <span class="c1"># actor net 업데이트를 위한 자동미분 (critic net 업데이트와 별개로 둠)  
-</span>            <span class="n">actions_by_learner</span> <span class="o">=</span> <span class="nf">actor_learning</span><span class="p">(</span><span class="n">input_load</span><span class="p">,</span><span class="n">input_pv</span><span class="p">,</span><span class="n">input_others</span><span class="p">)</span> <span class="c1"># actor_learning을 gradient descent로 훈련시키려면, GradientTape 구문 내에서 현재 state에 대한 action Tensor를 actor_learning으로 다시 불러와야 함
-</span>            <span class="n">Q_values_one</span> <span class="o">=</span> <span class="nf">critic_one_learning</span><span class="p">(</span><span class="n">input_load</span><span class="p">,</span><span class="n">input_pv</span><span class="p">,</span><span class="n">input_others</span><span class="p">,</span><span class="n">actions_by_learner</span><span class="p">)</span> <span class="c1"># actor_learning으로 다시 불러온 action 기반으로 Q-value 계산
-</span>            <span class="n">loss_actor</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="nf">reduce_mean</span><span class="p">(</span><span class="o">-</span><span class="n">Q_values_one</span><span class="p">)</span> <span class="c1"># 음의 Q-value 최소화, 즉 Q-value를 최대화하도록 actor를 업데이트함
-</span>        <span class="n">grads</span> <span class="o">=</span> <span class="n">tape</span><span class="p">.</span><span class="nf">gradient</span><span class="p">(</span><span class="n">loss_actor</span><span class="p">,</span> <span class="n">actor_learning</span><span class="p">.</span><span class="n">trainable_variables</span><span class="p">)</span>
-        <span class="n">actor_learning</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="nf">apply_gradients</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="n">actor_learning</span><span class="p">.</span><span class="n">trainable_variables</span><span class="p">))</span>
-        
-        <span class="n">actor_weights</span> <span class="o">=</span> <span class="n">actor_learning</span><span class="p">.</span><span class="n">weights</span> <span class="c1"># 원래 net의 weight 불러옴 (연산을 위해)
-</span>        <span class="n">target_actor_weights</span> <span class="o">=</span> <span class="n">actor_target</span><span class="p">.</span><span class="n">weights</span> <span class="c1"># target net의 weight 불러옴
-</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">actor_weights</span><span class="p">)):</span> <span class="c1"># Target net 가중치 업데이트
-</span>            <span class="n">target_actor_weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">actor_weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">tau</span><span class="p">)</span> <span class="o">*</span> <span class="n">target_actor_weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1"># tau가 작으므로 target net이 '천천히' 업데이트됨
-</span>        <span class="n">actor_target</span><span class="p">.</span><span class="nf">set_weights</span><span class="p">(</span><span class="n">target_actor_weights</span><span class="p">)</span> <span class="c1"># 업데이트된 가중치로 설정
-</span>        
-        <span class="n">critic_one_weights</span> <span class="o">=</span> <span class="n">critic_one_learning</span><span class="p">.</span><span class="n">weights</span> <span class="c1"># 원래 net의 weight 불러옴 (연산을 위해)        
-</span>        <span class="n">target_critic_one_weights</span> <span class="o">=</span> <span class="n">critic_one_target</span><span class="p">.</span><span class="n">weights</span> <span class="c1"># target net의 weight 불러옴
-</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">critic_one_weights</span><span class="p">)):</span>  <span class="c1"># Target net 가중치 업데이트
-</span>            <span class="n">target_critic_one_weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">critic_one_weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">tau</span><span class="p">)</span> <span class="o">*</span> <span class="n">target_critic_one_weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1"># tau가 작으므로 target net이 '천천히' 업데이트됨          
-</span>        <span class="n">critic_one_target</span><span class="p">.</span><span class="nf">set_weights</span><span class="p">(</span><span class="n">target_critic_one_weights</span><span class="p">)</span> <span class="c1"># 업데이트된 가중치로 설정  
-</span>
-
-
-<span class="n">profits_test</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">elapsedtime_test</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">max_return_test</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">inf</span>
-<span class="n">count_step_fortrain</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">bool_fortrain</span> <span class="o">=</span> <span class="bp">False</span>
-
-
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span> 
-    <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
-        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
-    
-    <span class="c1">### Train for each epoch
-</span>    
-    <span class="n">hour</span> <span class="o">=</span> <span class="mi">24</span> 
-    <span class="n">energy_batt</span> <span class="o">=</span> <span class="n">initialenergy_batt</span>  
-    
-    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">load_train</span><span class="p">)</span><span class="o">-</span><span class="mi">25</span><span class="p">):</span> 
-        <span class="n">count_step_fortrain</span> <span class="o">+=</span> <span class="mi">1</span>  
-        <span class="n">epsilon</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">epoch</span> <span class="o">/</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span> 
-        <span class="n">energy_batt</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="nf">play_one_step</span><span class="p">(</span><span class="n">load_train</span><span class="p">,</span><span class="n">PV_prod_train</span><span class="p">,</span><span class="n">hour</span><span class="p">,</span><span class="n">energy_batt</span><span class="p">,</span><span class="n">epsilon</span><span class="p">,</span><span class="n">training</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">hour</span> <span class="o">+=</span> <span class="mi">1</span>     
-
-        <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">count_step_fortrain</span> <span class="o">&gt;</span> <span class="n">period_step_fortrain</span><span class="p">:</span> 
-                <span class="nf">training_step</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span><span class="n">actorupdate</span><span class="o">=</span><span class="n">bool_fortrain</span><span class="p">)</span>
-                <span class="n">count_step_fortrain</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">bool_fortrain</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">bool_fortrain</span> <span class="c1"># 한 번은 critic만, 한 번은 actor &amp; target까지 전부 업데이트하는 과정을 교대로 진행
-</span>                
-                
-    <span class="c1">### Validation for each epoch  
-</span>    <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">testcase_actions</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">testcase_battenergy</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">epoch_return_test</span> <span class="o">=</span> <span class="mi">0</span>
-        
-        <span class="n">hour</span> <span class="o">=</span> <span class="mi">24</span> <span class="c1"># 시작시점   
-</span>        <span class="n">energy_batt</span> <span class="o">=</span> <span class="n">initialenergy_batt</span>
-        
-        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">load_test</span><span class="p">)</span><span class="o">-</span><span class="mi">24</span><span class="p">):</span> 
-            <span class="n">energy_batt</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="nf">play_one_step</span><span class="p">(</span><span class="n">load_test</span><span class="p">,</span><span class="n">PV_prod_test</span><span class="p">,</span><span class="n">hour</span><span class="p">,</span><span class="n">energy_batt</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">training</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> 
-            <span class="n">testcase_actions</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-            <span class="n">testcase_battenergy</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">energy_batt</span><span class="p">)</span>
-            <span class="n">epoch_return_test</span> <span class="o">+=</span> <span class="n">reward</span> 
-            <span class="n">hour</span> <span class="o">+=</span> <span class="mi">1</span>
-        
-        <span class="n">profits_test</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">epoch_return_test</span><span class="p">)</span>    
-        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'trajectory_profit_test_ddpg.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">profits_test</span><span class="p">:</span>
-                <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
-    
-        <span class="k">if</span> <span class="n">max_return_test</span> <span class="o">&lt;</span> <span class="n">epoch_return_test</span><span class="p">:</span>
-            <span class="n">max_return_test</span> <span class="o">=</span> <span class="n">epoch_return_test</span>
-            <span class="n">actor_learning</span><span class="p">.</span><span class="nf">save_weights</span><span class="p">(</span><span class="s">'actor_trainedmodel_ddpg.h5'</span><span class="p">)</span>
-            <span class="n">critic_one_learning</span><span class="p">.</span><span class="nf">save_weights</span><span class="p">(</span><span class="s">'critic_one_trainedmodel_ddpg.h5'</span><span class="p">)</span>
-                    
-            <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'trajectory_actions_test_ddpg.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">testcase_actions</span><span class="p">:</span>
-                        <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
-            
-            <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'trajectory_battenergy_test_ddpg.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">testcase_battenergy</span><span class="p">:</span>
-                        <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
-                        
-        <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>   
-        <span class="n">elapsedtime_test</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">elapsed_time</span><span class="p">)</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"Validation: profit of epoch {} is {}, maximum profit is {}"</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span><span class="nf">round</span><span class="p">(</span><span class="n">epoch_return_test</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="nf">round</span><span class="p">(</span><span class="n">max_return_test</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">'one epoch 수행에 {}초 걸렸습니다'</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">elapsed_time</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
-        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'trajectory_time_test_ddpg.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">elapsedtime_test</span><span class="p">:</span>
-                <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p><br /></p>
-
-<h2 id="ddpg를-통한-continuous-control-결과">DDPG를 통한 continuous control 결과</h2>
-<p>DDPG 훈련 결과, validation case에서의 누적 비용은 125유로이다.</p>
-
-<p>놀랍게도(?), continuous control (DDPG) 의 결과가 3-action discrete control (DQN) 의 결과 (누적비용 50유로) 보다 나쁘다. 어떻게 된 걸까?</p>
-
-<p>아래 그림으로 action을 비교해 보자.</p>
-
-<p><img src="/assets/images/reinforcefour/result_ddpg.png" alt="result_ddpg" class="align-center" />
-<em>DDPG로 도출한 수전/송전 control. LP control과는 차이가 있음.</em></p>
-
-<p>태양광 발전량이 많아 낮에 송전하는 기간의 밤 시간대에 LP와 DQN에선 action의 값이 0, 즉 idle이다. 그러나 DDPG에서는 수전을 한다. 반대로 태양광 발전량이 적어 낮에 수전하는 기간의 밤 시간대에도 LP와 DQN에선 action이 idle인데 DDPG에서는 일부 송전을 한다.</p>
-
-<p>즉 LP와 DQN control에서는 수 시간 연속으로 idle인 기간에, DDPG control에서는 송전 혹은 수전을 행한다. 그런데 이것이 sub-optimal control인 것으로 보인다.</p>
-
-<p>이는 state를 input으로 하는 nonlinear continuous function 근사로는, 대부분의 input에 대해 output이 0, -1, +1 셋 중 하나이고 그 외 일부 input에 대해서만 값이 -1~0 또는 0~1 사이의 값을 출력하는 function을 (LP control에서처럼) 만들어내기 어렵기 때문인 것으로 추측된다.</p>
-
-<p>즉, 미래를 모두 안다고 가정했을 때의 LP control은 DDPG로 도출한 control과는 거리가 있으며 DQN으로 도출한 control에 더 가까운 형태를 띤다. 그렇기 때문에, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는 DQN의 discrete control이 DDPG의 continuous control 대비 더 나은 것으로 보인다.</p>
-
-<p><br />
-그러나 누군가는 이렇게 반박할 수 있다. “DDPG는 초창기 기법이다. 몇 년 뒤 Twin Delayed Deep Deterministic policy gradient (TD3)나 Soft Actor-Critic (SAC)처럼, 더 진보된 continuous control 방법들이 나왔다. 더 진보된 방법을 쓰면, 완벽한 continuous control을 얻을 것이다.”</p>
-
-<p>과연 어떨까? 다음 포스팅에서 확인해 보겠다.</p>
-
-<div class="notice--info">
-
-강화학습 기반 마이크로그리드 스케줄링<br /><br />
-
-1) <a href="/reinforceone.html">문제의식 및 케이스 소개</a><br />
-2) <a href="/reinforcetwo.html">Q-learning 개념</a><br />
-3) <a href="/reinforcethree.html">Deep Q-learning을 통한 discrete control 도출</a><br />
-4) <b>DDPG를 통한 continuous control 도출</b><br />
-5) <a href="/reinforcefive.html">TD3, SAC를 통한 continuous control 도출</a>
-
-</div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="energymanagement" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[Vincent의 마이크로그리드 사례에 ‘discrete’ action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic control이 가능했다.]]></summary></entry><entry><title type="html">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출</title><link href="http://localhost:4000/reinforcethree.html" rel="alternate" type="text/html" title="강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출" /><published>2023-04-17T00:00:00+09:00</published><updated>2023-04-17T00:00:00+09:00</updated><id>http://localhost:4000/reinforcethree</id><content type="html" xml:base="http://localhost:4000/reinforcethree.html"><![CDATA[<p>Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0,1,2라 하자.</p>
-
-<p><img src="/assets/images/reinforceone/system.png" alt="system" class="align-center" />
-<em>Vincent의 연구에서 가정된 마이크로그리드.</em></p>
-
-<p>이 때 심층신경망은 state를 입력받아 3개 action 각각의 Q-value의 추정치 $\hat{Q}(s_{t},0), \hat{Q} (s_{t},1), \hat{Q} (s_{t},2)$ 를 출력으로 계산한다. 이 심층신경망은 매 훈련 주기마다 튜플 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다.</p>
-
-<p><br /></p>
-
-<h2 id="심층신경망-구성-및-훈련-컨셉">심층신경망 구성 및 훈련 컨셉</h2>
-<p>심층신경망 구성은 아래 그림과 같다.</p>
-
-<p><img src="/assets/images/reinforcethree/nn.png" alt="nn" class="align-center" />
-<em>Vincent의 연구에서 사용된 심층신경망 구성. (논문의 그림을 필자가 재구성하였음)</em></p>
-
-<p>직전 24시간의 태양광 발전량은 첫 번째 Conv1D 층에, 직전 24시간의 부하는 두 번째 Conv1D 층에, 그리고 직전 1시간의 배터리 내 에너지양은 위 두 Conv1D층과 연결되는 Dense층에 바로 연결된다. 그리고 Dense층이 하나 더 있고, 이 층을 거쳐서 최종적으로 3개의 output node가 각 action별 Q-value를 출력한다. Conv1D 층을 쓰는 이유는, 태양광 발전량과 부하가 시간적인 정보를 갖고 있으므로 이를 반영하기 위함이다.</p>
-
-<p>해당 심층신경망 훈련을 위한 training set은 특정 2년 (17,520시간) 동안의 시간별 태양광발전량과 부하 자료이다. 해당 모델이 직전 24시간의 정보를 state로 사용하므로 control은 $t=25,26,\cdots, 17520$ 에 대해 정해진다. Validation set은 별도의 특정 1년 (8,760시간) 동안의 시간별 태양광 발전량과 부하 자료이다.</p>
-
-<p>Training set에 대해서는 epsilon-greedy policy를, validation set에 대해서는 greedy policy를 적용해 action을 결정한다. 매 time step (데이터에서의 1시간) 별로 state와 action에 따른 마이크로그리드 내 에너지 흐름 및 수전/송전에 따른 손익 (reward) 와 이번 시점의 배터리 내 에너지 (다음 시점에서의 state임) 를 계산하고, 매 24시간 주기로 심층신경망 훈련을 gradient descent로 수행한다. 이를 training set의 17,520-24 시간에 대해 수행하면 1 epoch이다.</p>
-
-<p>매 심층신경망 훈련 시 사용하는 데이터는 기본적으로 (state, action, reward, next state) 를 묶은 튜플로, 일종의 ‘경험’으로 볼 수 있다. 즉 시점 $t$에서 ($s_{t},a_{t},r_{t+1},s_{t+1}$) 를 추후 훈련에 쓸 수 있도록 buffer에 저장한다. 그리고 24시간 주기의 훈련에서는 직전 24시간의 튜플들이 아닌, buffer 내에서 랜덤하게 뽑은 32개 시간의 튜플들을 이용해 훈련시킨다. 이를 통해 훈련에 쓰이는 튜플들 간의 ‘시간적 상관성’을 감소시켜, 훈련의 효율성을 높일 수 있다.</p>
-
-<p><br /></p>
-
-<h2 id="dqn-코드">DQN 코드</h2>
-<p>이제 훈련 concept는 대략 이해가 될 것이니, 코드를 보자.</p>
-
-<p>(이 코드는 본인이 직접 작성하였다. Vincent의 학위논문에서 해당 연구에 사용한 코드의 <a href="https://github.com/VinF/deer/tree/master/examples/MG_two_storages">Github 링크</a>를 제공하나, 각 모듈별로 코드 파일들을 지나치게 분리해 놓아 사용이 여의치 않았다. 이에 필자가 ‘모든 기능들을 한 파일에 넣은 공부용’ 코드를 따로 만들었다. 다만 코드 작성 시 <a href="https://product.kyobobook.co.kr/detail/S000001810262">핸즈온 머신러닝</a>의 강화학습 chapter의 Cartpole 예제에 대한 Deep Q-Network 코드를 많이 참고하였음을 밝힌다.)</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
-</span>
-<span class="kn">import</span> <span class="n">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
-<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">from</span> <span class="n">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
-<span class="kn">import</span> <span class="n">time</span>
-
-<span class="c1">### hyperparameters
-</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">optimizers</span><span class="p">.</span><span class="nc">Adam</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.005</span><span class="p">)</span> <span class="c1"># learning rate 너무 높으면 발산할 수 있음에 주의
-</span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="n">discount_factor</span> <span class="o">=</span> <span class="mf">0.98</span>
-<span class="n">period_step_fortrain</span> <span class="o">=</span> <span class="mi">24</span>
-<span class="n">rewardscalefactor</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">6</span>
-<span class="n">buffer_size</span> <span class="o">=</span> <span class="mi">20000</span>
-
-
-
-<span class="c1">### microgrid system data
-</span>
-<span class="c1"># 시간별 데이터 출처: https://github.com/VinF/deer/tree/master/examples/MG_two_storages/data
-</span><span class="n">PV_prod_train</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="s">'BelgiumPV_prod_train.npy'</span><span class="p">)</span> <span class="c1"># [0,1] 구간 내로 scaled된 데이터임, unscaling은 play_one_step 함수 내에서 이루어짐
-</span><span class="n">PV_prod_test</span>  <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="s">'BelgiumPV_prod_test.npy'</span><span class="p">)</span> 
-
-<span class="n">load_train</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="s">'example_nondeterminist_cons_train.npy'</span><span class="p">)</span> <span class="c1"># [0,1] 구간 내로 scaled된 데이터임, unscaling은 play_one_step 함수 내에서 이루어짐
-</span><span class="n">load_test</span>  <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="s">'example_nondeterminist_cons_test.npy'</span><span class="p">)</span>
-
-<span class="n">prate_h2</span> <span class="o">=</span> <span class="mf">1.1</span> <span class="c1"># 수전/송전 상한
-</span><span class="n">eff_h2</span> <span class="o">=</span> <span class="mf">0.65</span> <span class="c1"># 수소-전기 변환효율
-</span>
-<span class="n">capa_batt</span> <span class="o">=</span> <span class="mi">15</span> <span class="c1"># 배터리 용량 (겉보기용량 말고 SOC 상하한 고려한 실용량이라 가정)
-</span><span class="n">eff_batt</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="c1"># 배터리 충방전 효율
-</span><span class="n">initialenergy_batt</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="c1"># epoch의 시작에서 배터리 내 에너지량 (최대저장가능량 대비 상대비율, Qval NN에는 이 상대비율이 입력되며, play_one_step 함수 내에서의 에너지시스템 밸런스 수식에서는 실제 에너지값으로 변환됨
-</span>
-<span class="n">price_h2</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">cost_loss</span> <span class="o">=</span> <span class="mi">2</span>
-
-<span class="n">load_peak</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">pv_peak</span> <span class="o">=</span> <span class="mi">12</span>
-
-<span class="n">inputlen_load</span> <span class="o">=</span> <span class="mi">24</span>
-<span class="n">inputlen_pv</span> <span class="o">=</span> <span class="mi">24</span>
-
-
-
-<span class="c1">### Neural net configuration
-</span>
-<span class="n">n_outputs</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">input_load</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">inputlen_load</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># 과거 24시간의 부하, shape의 두번째 숫자는 채널 수 (컬러사진의 RGB 등), 채널 수를 정의해야 Conv1D가 작동함
-</span><span class="n">input_pv</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">inputlen_pv</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># 과거 24시간의 태양광발전량
-</span><span class="n">hidden_conv_load</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Conv1D</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">input_load</span><span class="p">)</span>
-<span class="n">hidden_conv_pv</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Conv1D</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">input_pv</span><span class="p">)</span>
-<span class="n">concat_conv</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">([</span><span class="n">hidden_conv_load</span><span class="p">,</span><span class="n">hidden_conv_pv</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">hidden_conv_concat</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Conv1D</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">concat_conv</span><span class="p">)</span>
-<span class="n">flatten_conv</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Flatten</span><span class="p">()(</span><span class="n">hidden_conv_concat</span><span class="p">)</span> <span class="c1"># Dense층 직전에 Conv층을 Flatten해야 함
-</span><span class="n">input_others</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># 직전 시간의 배터리 내 에너지량
-</span><span class="n">concat_all</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">([</span><span class="n">flatten_conv</span><span class="p">,</span><span class="n">input_others</span><span class="p">])</span> 
-<span class="n">hidden_dense_1</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Dense</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">"relu"</span><span class="p">)(</span><span class="n">concat_all</span><span class="p">)</span>
-<span class="n">hidden_dense_2</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Dense</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">"relu"</span><span class="p">)(</span><span class="n">hidden_dense_1</span><span class="p">)</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Dense</span><span class="p">(</span><span class="n">n_outputs</span><span class="p">)(</span><span class="n">hidden_dense_2</span><span class="p">)</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="nc">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">input_load</span><span class="p">,</span><span class="n">input_pv</span><span class="p">,</span><span class="n">input_others</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">output</span><span class="p">])</span>
-
-
-
-<span class="k">def</span> <span class="nf">e_greedy_policy</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span> <span class="c1"># epsilon-greedy policy
-</span>    <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span> <span class="c1"># epsilon의 확률로 exploration
-</span>        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># action을 랜덤하게 선택
-</span>    <span class="k">else</span><span class="p">:</span> <span class="c1"># exploitation
-</span>        <span class="n">input_load</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">inputlen_load</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">inputlen_load</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Conv1D의 input이므로 채널 수 1 명시
-</span>        <span class="n">input_pv</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="n">inputlen_load</span><span class="p">:(</span><span class="n">inputlen_load</span><span class="o">+</span><span class="n">inputlen_pv</span><span class="p">)].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">inputlen_pv</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">input_others</span> <span class="o">=</span><span class="n">state</span><span class="p">[(</span><span class="n">inputlen_load</span><span class="o">+</span><span class="n">inputlen_pv</span><span class="p">)].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Dense층의 input이므로 채널 수는 필요 없음
-</span>        <span class="n">Q_values</span> <span class="o">=</span> <span class="nf">model</span><span class="p">((</span><span class="n">input_load</span><span class="p">,</span><span class="n">input_pv</span><span class="p">,</span><span class="n">input_others</span><span class="p">))</span> <span class="c1"># 각 action 별 Q-value 도출
-</span>        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nf">argmax</span><span class="p">(</span><span class="n">Q_values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># 가장 큰 Q-value에 대응하는 action 선택      
-</span>        <span class="c1"># 주의: for loop 안에서 DNN에 input을 입력해 output 계산 시 model()로 해야지, model.predict()로 하면 안 됨! 메모리 누수가 발생함 (model.predict는 대량의 input data를 'model.predict를 한 번만 호출해서' 처리하는 데 특화됨, https://www.tensorflow.org/api_docs/python/tf/keras/Model#predict 참고)
-</span>
-
-
-<span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
-<span class="n">replay_buffer</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">buffer_size</span><span class="p">)</span> <span class="c1"># replay buffer 정의
-</span>
-<span class="k">def</span> <span class="nf">sample_experiences</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span> <span class="c1"># batch_size만큼의 경험들의 state들, action들, reward들, nextstate들의 리스트들을 반환
-</span>    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">replay_buffer</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span> <span class="c1"># replay buffer 내 경험들 중 랜덤하게 batch_size만큼의 경험들을 지정 (인덱스 불러옴)
-</span>    <span class="n">batch</span> <span class="o">=</span> <span class="p">[</span><span class="n">replay_buffer</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span> <span class="c1"># 위에서 불러온 인덱스를 이용해 batch_size 만큼의 경험들을 batch 리스트에 담음
-</span>    <span class="n">states</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">next_states</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="n">experience</span><span class="p">[</span><span class="n">field_index</span><span class="p">]</span> <span class="k">for</span> <span class="n">experience</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">])</span> <span class="c1"># 하나의 array 안에 batch 내 각 경험별 값들이 들어감 
-</span>        <span class="k">for</span> <span class="n">field_index</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span> <span class="c1"># 총 4개의 array를 반환, 각각은 (batch 내 sample경험들의) state들, action들, reward들, nextstate들의 리스트임
-</span>    <span class="k">return</span> <span class="n">states</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">next_states</span>
-
-
-
-<span class="k">def</span> <span class="nf">play_one_step</span><span class="p">(</span><span class="n">profile_load</span><span class="p">,</span><span class="n">profile_pv</span><span class="p">,</span><span class="n">hour</span><span class="p">,</span><span class="n">energy_batt</span><span class="p">,</span><span class="n">epsilon</span><span class="p">,</span><span class="n">training</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span> <span class="c1"># 마이크로그리드 시스템의 시간별 operation 모델링
-</span>        
-    <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span> <span class="p">(</span><span class="n">profile_load</span><span class="p">[</span><span class="n">hour</span><span class="o">-</span><span class="n">inputlen_load</span><span class="p">:</span><span class="n">hour</span><span class="p">],</span> <span class="n">profile_pv</span><span class="p">[</span><span class="n">hour</span><span class="o">-</span><span class="n">inputlen_pv</span><span class="p">:</span><span class="n">hour</span><span class="p">],</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="n">energy_batt</span><span class="p">]))</span> <span class="p">)</span>
-    
-    <span class="n">action</span> <span class="o">=</span> <span class="nf">e_greedy_policy</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="n">epsilon</span><span class="p">)</span> <span class="c1"># epsilon-greedy policy에 따라 action 도출
-</span>    <span class="n">p_h2_send</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">p_h2_receive</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># 수소로 생산된 전기 수전
-</span>        <span class="n">p_h2_receive</span> <span class="o">=</span> <span class="n">prate_h2</span>
-    <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># 수소 생산용 전기 송전
-</span>        <span class="n">p_h2_send</span> <span class="o">=</span> <span class="n">prate_h2</span>
-       
-
-    <span class="n">p_load</span> <span class="o">=</span> <span class="n">profile_load</span><span class="p">[</span><span class="n">hour</span><span class="p">]</span><span class="o">*</span><span class="n">load_peak</span> <span class="c1"># 현재 시간의 부하 (action 결정 기준이 아님!), 입력자료가 [0,1]로 scaled된 걸 unscaling
-</span>    <span class="n">p_pv</span> <span class="o">=</span> <span class="n">profile_pv</span><span class="p">[</span><span class="n">hour</span><span class="p">]</span><span class="o">*</span><span class="n">pv_peak</span> <span class="c1"># 현재 시간의 발전량 (action 결정 기준이 아님!), 입력자료가 [0,1]로 scaled된 걸 unscaling  
-</span>    <span class="n">energy_batt</span> <span class="o">=</span> <span class="n">energy_batt</span><span class="o">*</span><span class="n">capa_batt</span> <span class="c1"># 입력자료가 [0,1]로 scaled된 걸 unscaling
-</span>    
-    <span class="c1">#p_curtail = 0
-</span>    <span class="n">p_loss</span> <span class="o">=</span> <span class="mi">0</span>
-    
-    <span class="n">p_net_beforebatt</span> <span class="o">=</span> <span class="n">p_pv</span> <span class="o">-</span> <span class="n">p_load</span> <span class="o">+</span> <span class="n">p_h2_receive</span> <span class="o">-</span> <span class="n">p_h2_send</span> <span class="c1"># 태양광 생산, 부하 충족, H2 보내거나 받은 후 수용가 입장에서 전기에너지가 남으면 양수, 부족하면 음수
-</span>    
-    <span class="k">if</span> <span class="n">p_net_beforebatt</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># 전기에너지가 남으므로 배터리에 저장하고, 만약 배터리도 꽉 찬다면 curtail함
-</span>        <span class="k">if</span> <span class="n">capa_batt</span> <span class="o">&gt;=</span> <span class="n">energy_batt</span> <span class="o">+</span> <span class="n">p_net_beforebatt</span><span class="o">*</span><span class="n">eff_batt</span><span class="p">:</span> <span class="c1"># 배터리에 잔여 충전 가능한 에너지가 위에서 남은 에너지(에서 변환손실 제한 에너지) 이상일 경우
-</span>            <span class="n">energy_batt_after</span> <span class="o">=</span> <span class="n">energy_batt</span> <span class="o">+</span> <span class="n">p_net_beforebatt</span><span class="o">*</span><span class="n">eff_batt</span>
-        <span class="k">else</span><span class="p">:</span> <span class="c1"># 남은 에너지를 배터리에 다 충전하면 꽉 차고도 남아서, curtail해야 함
-</span>            <span class="n">energy_batt_after</span> <span class="o">=</span> <span class="n">capa_batt</span>
-            <span class="c1">#p_curtail = (energy_batt + p_net_beforebatt*eff_batt - capa_batt)/eff_batt # 괄호 안은 배터리 내부 기준이며, 수용가 모선 기준 양을 구하려면 eff_batt로 나눠줘야 함
-</span>    <span class="k">else</span><span class="p">:</span> <span class="c1"># 전기에너지가 부족하므로 배터리 에너지를 써야 함, 배터리 에너지로도 부족하면 loss임
-</span>        <span class="k">if</span> <span class="n">energy_batt</span><span class="o">*</span><span class="n">eff_batt</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="n">p_net_beforebatt</span><span class="p">:</span> <span class="c1"># 배터리 에너지로 충당 가능한 경우
-</span>            <span class="n">energy_batt_after</span> <span class="o">=</span> <span class="n">energy_batt</span> <span class="o">+</span> <span class="n">p_net_beforebatt</span><span class="o">/</span><span class="n">eff_batt</span> <span class="c1"># p_net_beforebatt가 음수이므로 마이너스값이 부족한 에너지'량'이고 그걸 '빼'므로 결과적으로 플러스
-</span>        <span class="k">else</span><span class="p">:</span> <span class="c1"># 부족해 loss 발생
-</span>            <span class="n">energy_batt_after</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">p_loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">p_net_beforebatt</span> <span class="o">-</span> <span class="n">energy_batt</span><span class="o">*</span><span class="n">eff_batt</span>           
-    
-    <span class="n">reward</span> <span class="o">=</span> <span class="n">price_h2</span><span class="o">*</span><span class="n">p_h2_send</span><span class="o">*</span><span class="n">eff_h2</span> <span class="o">-</span> <span class="n">price_h2</span><span class="o">*</span><span class="n">p_h2_receive</span><span class="o">/</span><span class="n">eff_h2</span> <span class="o">-</span> <span class="n">cost_loss</span><span class="o">*</span><span class="n">p_loss</span>
-    <span class="n">energy_batt_after</span> <span class="o">=</span> <span class="n">energy_batt_after</span><span class="o">/</span><span class="n">capa_batt</span> <span class="c1"># 배터리 내 저장량을 [0,1] 범위로 scaling함
-</span>    
-    <span class="k">if</span> <span class="n">training</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">next_state</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span> <span class="p">(</span><span class="n">profile_load</span><span class="p">[</span><span class="n">hour</span><span class="o">-</span><span class="p">(</span><span class="n">inputlen_load</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span><span class="n">hour</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">profile_pv</span><span class="p">[</span><span class="n">hour</span><span class="o">-</span><span class="p">(</span><span class="n">inputlen_pv</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span><span class="n">hour</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="n">energy_batt_after</span><span class="p">]))</span> <span class="p">)</span>         
-        <span class="n">replay_buffer</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="o">*</span><span class="n">rewardscalefactor</span><span class="p">,</span> <span class="n">next_state</span><span class="p">))</span> <span class="c1"># replay buffer에는 scaled reward를 넣으며, tuple을 append함에 주의
-</span>    <span class="k">return</span> <span class="n">energy_batt_after</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">action</span> <span class="c1"># scaled 배터리 내 저장량, unscaled reward, action index 반환
-</span>
-
-
-<span class="k">def</span> <span class="nf">training_step</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span> <span class="c1"># 심층신경망에 대해 Gradient descent 기반 가중치 업데이트 수행
-</span>
-    <span class="n">states</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">next_states</span> <span class="o">=</span> <span class="nf">sample_experiences</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
-        
-    <span class="n">input_load</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">inputlen_load</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">inputlen_load</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
-    <span class="n">input_pv</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,</span><span class="n">inputlen_load</span><span class="p">:(</span><span class="n">inputlen_load</span><span class="o">+</span><span class="n">inputlen_pv</span><span class="p">)].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">inputlen_pv</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">input_others</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,(</span><span class="n">inputlen_load</span><span class="o">+</span><span class="n">inputlen_pv</span><span class="p">)].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-    
-    <span class="n">input_load_next</span> <span class="o">=</span> <span class="n">next_states</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">inputlen_load</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">inputlen_load</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">input_pv_next</span> <span class="o">=</span> <span class="n">next_states</span><span class="p">[:,</span><span class="n">inputlen_load</span><span class="p">:(</span><span class="n">inputlen_load</span><span class="o">+</span><span class="n">inputlen_pv</span><span class="p">)].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">inputlen_pv</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">input_others_next</span> <span class="o">=</span> <span class="n">next_states</span><span class="p">[:,(</span><span class="n">inputlen_load</span><span class="o">+</span><span class="n">inputlen_pv</span><span class="p">)].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-      
-    <span class="n">next_Q_values</span> <span class="o">=</span> <span class="nf">model</span><span class="p">((</span><span class="n">input_load_next</span><span class="p">,</span><span class="n">input_pv_next</span><span class="p">,</span><span class="n">input_others_next</span><span class="p">))</span> <span class="c1"># Q-learning을 위해, 'next'state에서의 각 action 별 Q-value 추정치들 반환
-</span>    <span class="n">max_next_Q_values</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="n">next_Q_values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 각 경험별로 nextstate에 대한 Q-value가 더 높은 행동의 Q-value 사용
-</span>    <span class="n">target_Q_values</span> <span class="o">=</span> <span class="p">(</span><span class="n">rewards</span> <span class="o">+</span> <span class="n">discount_factor</span> <span class="o">*</span> <span class="n">max_next_Q_values</span><span class="p">)</span> <span class="c1"># Q-value를 reward와 nextstate에 대한 Q-value(discounted)의 합으로 표현
-</span>    <span class="n">target_Q_values</span> <span class="o">=</span> <span class="n">target_Q_values</span><span class="p">.</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 뒤의 Q_values와 차원 맞춰줌
-</span>    <span class="n">mask</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="nf">one_hot</span><span class="p">(</span><span class="n">actions</span><span class="p">,</span> <span class="n">n_outputs</span><span class="p">)</span> <span class="c1"># 각 경험 별 action을 one-hot encoding 형태로 만들어줌 (각 행이 경험)
-</span>    <span class="k">with</span> <span class="n">tf</span><span class="p">.</span><span class="nc">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span> <span class="c1"># 자동 미분
-</span>        <span class="n">all_Q_values</span> <span class="o">=</span> <span class="nf">model</span><span class="p">((</span><span class="n">input_load</span><span class="p">,</span><span class="n">input_pv</span><span class="p">,</span><span class="n">input_others</span><span class="p">))</span> 
-        <span class="n">Q_values</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="nf">reduce_sum</span><span class="p">(</span><span class="n">all_Q_values</span> <span class="o">*</span> <span class="n">mask</span><span class="p">,</span> <span class="c1"># mask를 곱해서, 각 경험별로 그 state에서 취하지 않은 action에 대해서는 Q-value에 0이 곱해지도록 함
-</span>                                 <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># 각 행 별 합을 구함, 위의 masking 덕분에 그 state에서 취한 action에 대한 Q-value가 됨, keepdims를 True로 설정해 2차원 행렬 형태 유지
-</span>        <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="nf">reduce_mean</span><span class="p">(</span><span class="n">keras</span><span class="p">.</span><span class="n">losses</span><span class="p">.</span><span class="nf">mean_squared_error</span><span class="p">(</span><span class="n">target_Q_values</span><span class="p">,</span><span class="n">Q_values</span><span class="p">))</span> <span class="c1"># 평균제곱오차 계산
-</span>    <span class="n">grads</span> <span class="o">=</span> <span class="n">tape</span><span class="p">.</span><span class="nf">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">model</span><span class="p">.</span><span class="n">trainable_variables</span><span class="p">)</span> <span class="c1"># loss 함수를 model의 trainable variables 전체에 대해 미분
-</span>    <span class="n">optimizer</span><span class="p">.</span><span class="nf">apply_gradients</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="n">model</span><span class="p">.</span><span class="n">trainable_variables</span><span class="p">))</span> <span class="c1"># Adam optimizer로 parameter update 수행, zip으로 gradient와 parameter pair를 맞춰줌
-</span>
-
-
-<span class="n">profits_test</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">elapsedtime_test</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">count_step_fortrain</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">max_return_test</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">inf</span>
-
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span> 
-    <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># 맨 첫 번째 epoch에서는 훈련을 시작하지 않고 buffer를 채움, 두 번째 epoch부터는 buffer에 sample들이 채워졌으므로 훈련함
-</span>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
-    
-    <span class="c1">### Train for each epoch  
-</span>    <span class="n">hour</span> <span class="o">=</span> <span class="mi">24</span> <span class="c1"># 시작시점
-</span>    <span class="n">energy_batt</span> <span class="o">=</span> <span class="n">initialenergy_batt</span>  <span class="c1"># 배터리 내 에너지의 초기값
-</span>    
-    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">load_train</span><span class="p">)</span><span class="o">-</span><span class="mi">25</span><span class="p">):</span> <span class="c1"># 데이터 내의 마지막 시점이 nextstate에만 포함될 때까지 (대신 termination state는 따로 없음)
-</span>        <span class="n">count_step_fortrain</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">epsilon</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">epoch</span> <span class="o">/</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span> <span class="c1"># epsilon을 1에서 시작해 조금씩 선형적으로 줄임, 이 경우 초반에는 거의 다 exploration이므로 한 epoch가 매우 빨리 계산되나, 중반을 넘어가면 거의 exploitation이며 이 때 매 step마다 DNN을 call하므로 느려짐
-</span>        <span class="n">energy_batt</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="nf">play_one_step</span><span class="p">(</span><span class="n">load_train</span><span class="p">,</span><span class="n">PV_prod_train</span><span class="p">,</span><span class="n">hour</span><span class="p">,</span><span class="n">energy_batt</span><span class="p">,</span><span class="n">epsilon</span><span class="p">,</span><span class="n">training</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># energy_batt가 반복 갱신됨
-</span>        <span class="n">hour</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># 다음 시간으로  
-</span>
-        <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">count_step_fortrain</span> <span class="o">&gt;</span> <span class="n">period_step_fortrain</span><span class="p">:</span> <span class="c1"># 훈련 주기, 매 시간마다 train하면 epoch당 시간이 너무 길어지고 overfitting 우려도 있어, 매 24시간마다 훈련함, 첫 epoch에서는 replay buffer를 채우기만 하고, 나머지 99 epoch 동안 심층신경망 가중치를 업데이트함
-</span>                <span class="nf">training_step</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span> <span class="c1"># DNN 훈련을 위한 Gradient Descent 수행
-</span>                <span class="n">count_step_fortrain</span> <span class="o">=</span> <span class="mi">0</span>
-
-
-    <span class="c1">### Validation for each epoch  
-</span>    <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">testcase_actions</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">testcase_battenergy</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">epoch_return_test</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># return (각 시점별 수익의 총 합) 초기화
-</span>        
-        <span class="n">hour</span> <span class="o">=</span> <span class="mi">24</span> <span class="c1"># 시작시점   
-</span>        <span class="n">energy_batt</span> <span class="o">=</span> <span class="n">initialenergy_batt</span> <span class="c1"># 배터리 내 에너지의 초기값
-</span>        
-        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">load_test</span><span class="p">)</span><span class="o">-</span><span class="mi">24</span><span class="p">):</span> <span class="c1"># 데이터 내의 마지막 시점이 nextstate에만 포함될 때까지 (대신 termination state는 따로 없음)
-</span>            <span class="n">energy_batt</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="nf">play_one_step</span><span class="p">(</span><span class="n">load_test</span><span class="p">,</span><span class="n">PV_prod_test</span><span class="p">,</span><span class="n">hour</span><span class="p">,</span><span class="n">energy_batt</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">training</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="c1"># energy_batt가 반복 갱신됨
-</span>            <span class="n">testcase_actions</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-            <span class="n">testcase_battenergy</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">energy_batt</span><span class="p">)</span>
-            <span class="n">epoch_return_test</span> <span class="o">+=</span> <span class="n">reward</span> <span class="c1"># 누적보상 계산
-</span>            <span class="n">hour</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># 다음 시간으로    
-</span>        
-        <span class="n">profits_test</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">epoch_return_test</span><span class="p">)</span> <span class="c1"># 각 epoch별 총 수익 로그 저장
-</span>        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'trajectory_profit_test_dqn.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">profits_test</span><span class="p">:</span>
-                <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
-                
-        <span class="k">if</span> <span class="n">max_return_test</span> <span class="o">&lt;</span> <span class="n">epoch_return_test</span><span class="p">:</span> <span class="c1"># Validation set에서의 총 수익의 최대값 갱신시마다 저장 (unlearn하게 되더라도 중간에 best performance였던 모델을 남김)
-</span>            <span class="n">max_return_test</span> <span class="o">=</span> <span class="n">epoch_return_test</span>
-            <span class="n">model</span><span class="p">.</span><span class="nf">save_weights</span><span class="p">(</span><span class="s">'trainedmodel_dqn.h5'</span><span class="p">)</span> <span class="c1"># 모델 가중치 저장
-</span>                    
-            <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'trajectory_actions_test_dqn.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="c1"># Validation case에서의 시간별 action 로그 저장
-</span>                    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">testcase_actions</span><span class="p">:</span>
-                        <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
-            
-            <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'trajectory_battenergy_test_dqn.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="c1"># Validation case에서의 시간별 배터리 내 저장된 에너지 로그 저장
-</span>                    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">testcase_battenergy</span><span class="p">:</span>
-                        <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
-                        
-        <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>   
-        <span class="n">elapsedtime_test</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">elapsed_time</span><span class="p">)</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"Validation: profit of epoch {} is {}, maximum profit is {}"</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span><span class="nf">round</span><span class="p">(</span><span class="n">epoch_return_test</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="nf">round</span><span class="p">(</span><span class="n">max_return_test</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">'one epoch 수행에 {}초 걸렸습니다'</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">elapsed_time</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
-        <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'trajectory_time_test_dqn.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="c1"># 각 epoch별 소요시간 로그 저장
-</span>            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">elapsedtime_test</span><span class="p">:</span>
-                <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>Epoch당 계산 시간이 긴데, 이유는 매 시간 별 action을 결정할 때마다 심층신경망에 state를 입력해 Q-value들을 계산하는 과정을, training case에 대해서는 이를 8760x2-24번, validation case에 대해서는 8760-24번을 수행해야 하기 때문이다.</p>
-
-<p><br /></p>
-
-<h2 id="dqn을-통한-discrete-control-결과">DQN을 통한 discrete control 결과</h2>
-<p>훈련을 수행하면, validation case 기준으로 불과 몇 epoch만에 누적 비용이 200유로 이하로 줄어든다. 그리고 99 epoch 훈련 동안 validation case에 대해 가장 좋은 결과를 보인 모델의 경우 누적 비용이 27유로이다.</p>
-
-<p><img src="/assets/images/reinforcethree/trainingrecord.png" alt="trainingrecord" class="align-center" width="80%" />
-<em>훈련 epoch 별 validation case의 누적 ‘수익’.</em></p>
-
-<p>누적비용 27유로는, 미래를 안다고 가정하고 선형계획법 (Linear Programming, LP) 으로 도출한 control 시의 누적비용 -50유로에 근접한 값이다. 그러므로, 미래를 모르면서 과거 24시간 정보만 갖고 도출한 ‘discrete’ control 것 치고는 훌륭해 보인다. (Random control 시의 누적비용 2500~2700유로 대비 매우 낮기도 하고)</p>
-
-<p>시간별 action (계통으로부터의 수전) 이 선형계획법과 DQN에서 각각 어떻게 결정되었는지를 아래 그림과 같이 보자.</p>
-
-<p><img src="/assets/images/reinforcethree/result_dqn.png" alt="result_dqn" class="align-center" />
-<em>DQN으로 도출한 수전/송전 control. LP control과 어느 정도 비슷함.</em></p>
-
-<p>LP와 DQN으로 도출한 두 control들이 생각보다는 비슷하다. ‘대체로’ LP control에서서 수전하는 시간대에 DQN control에서도 수전하고, LP control에서 송전하는 시간대에 DQN control에서도 송전하며, LP control에서 idle인 시간대에 DQN control에서도 idle이다.</p>
-
-<p>특히 LP control은 [-1.1,1.1] 범위 내의 실수로 주어지는 ‘continuous’ control임에도 불구하고, DQN의 action들에 대응하는 최대치 송전/최대치 수전/ idle인 경우가 많다는 점이 특기할 만하다. 이 덕분에, 3-action DQN으로 우수한 economic control을 얻을 수 있는 것으로 보인다.</p>
-
-<p><br /></p>
-
-<h2 id="continuous-control을-한다면">Continuous control을 한다면?</h2>
-<p>그렇지만, LP control에서와 DQN control 간에 최대치 송전/ 최대치 수전/ idle 지속시간의 차이가 있고, LP control에서 이 3개 값이 아닌 다른 값인 경우도 (즉 최대치가 아닌 양으로 송전/수전하는 경우도) 분명히 많이 존재한다.</p>
-
-<p>그렇다면 [-1.1,1.1] 범위 내의 실수로 action을 도출하는, continuous control 심층강화학습 기법을 쓰면 어떨까? 최대치가 아닌 송전/ 수전의 가능성까지 반영한 controller를 훈련함으로써, validation case에 대해 더 낮은 누적비용을 달성하는 control 도출이 가능할까?</p>
-
-<p>다음 포스팅에서는, continuous control을 위한 심층강화학습 중 가장 기본적이면서 중요한 방법인 Deep Deterministic Policy Gradient (DDPG) 를 적용하는 방법 및 결과를 설명한다.</p>
-
-<div class="notice--info">
-
-강화학습 기반 마이크로그리드 스케줄링<br /><br />
-
-1) <a href="/reinforceone.html">문제의식 및 케이스 소개</a><br />
-2) <a href="/reinforcetwo.html">Q-learning 개념</a><br />
-3) <b>Deep Q-Network를 통한 discrete control 도출</b><br />
-4) <a href="/reinforcefour.html">DDPG를 통한 continuous control 도출</a><br />
-5) <a href="/reinforcefive.html">TD3, SAC를 통한 continuous control 도출</a>
-
-</div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="energymanagement" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0,1,2라 하자.]]></summary></entry><entry><title type="html">강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념</title><link href="http://localhost:4000/reinforcetwo.html" rel="alternate" type="text/html" title="강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념" /><published>2023-04-16T00:00:00+09:00</published><updated>2023-04-16T00:00:00+09:00</updated><id>http://localhost:4000/reinforcetwo</id><content type="html" xml:base="http://localhost:4000/reinforcetwo.html"><![CDATA[<p>지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하에서 control을 얻게 됨을 논했다.</p>
-
-<p>이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내용은 <a href="https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf">Sutton의 Introduction</a> 참고 바람)</p>
-
-<p><br /></p>
-
-<h2 id="누적-보상의-개념">누적 보상의 개념</h2>
-<p>먼저 Q-learning을 간단히 되짚고 넘어가자. 어떤 환경에서 시점 t에 상태 $s_{t}$에 있고, 이 때 action $a_{t}$를 수행하면 보상 $r_{t+1}$을 받으면서 상태 $s_{t+1}$로 전이된다고 하자.</p>
-
-<p><img src="/assets/images/reinforceone/reinforcement_basic.png" alt="reinforcement_basic" class="align-center" width="70%" />
-<em>강화학습 개요. State $S_t$에서 Action $A_t$를 취하면 Reward $R_{t+1}$을 얻으면서 State $S_{t+1}$로 전이됨.</em></p>
-
-<p>Vincent의 마이크로그리드 사례에서는, 상태는 $t-N, t-(N-1), …, t-1$ 시점들의 태양광발전량과 부하 및 $t-1$시점의 배터리 내 에너지량들의 총 $2N+1$차원 벡터로 두었고, action은 net 수전량 $p_{\text{import}}[t]-p_{\text{export}}[t]$이다 (net 송전 시 마이너스). 보상은 계통으로 송전시의 수익 (양의 보상) 또는 계통으로부터 수전하거나 loss of load가 발생할 때의 비용 (음의 보상) 이다.</p>
-
-<p>참고로 ESS의 충/방전은 계통 수전/송전 값이 결정되면 에너지 밸런스를 맞추도록 자동으로 결정된다고 가정한다. 이런 식으로 action의 자유도(degree of freedom)을 줄여야 실제 계산이 용이해진다.</p>
-
-<p><br />
-이 때 ‘미래의 보상들을 합친 누적 보상의 기대값’ $Q(s_{t},a_{t})$는 다음과 같다.</p>
-
-<p>$ Q(s_{t},a_{t}) = \mathbb{E} [r_{t+1} + \gamma r_{t+2} + \gamma^2 r_{t+3} + \cdots] $</p>
-
-<p>우변에 기대값 기호 $ \mathbb{E}$가 붙은 이유는, 일반적으로는 같은 $s_{t}$에서 같은 $a_{t}$를 수행하더라도, 그 결과인 $r_{t+1}$과 $s_{t+1}$는 그때그때 다를 수 있으며 (즉 random, stochastic일 수 있음), 이에 따라 $t+1$시점 이후의 보상과 상태 전이도 달라질 수 있기 때문이다. 이번 마이크로그리드 케이스의 경우에도, 태양광 발전량과 부하는 외생적으로 random하게 결정되며 이에 따라 수전/송전량이 결정되므로 보상도 random하게 결정된다.</p>
-
-<p>$\gamma$는 1보다는 작되 1에 가까운 양수로 discount factor이다. 이걸 곱하는 이유는 곱하지 않으면, 환경에서의 행동이 특정 시점에 반드시 끝나는 게 아닌 한 누적비용이 무한대가 될 수 있기 때문이다. Discount factor를 곱해줘야 누적비용이 유한한 값으로 보장된다.</p>
-
-<p>그런데 시점 $t+1$에 대해서도 미래 누적 보상의 기대값 $Q(s_{t+1},a_{t+1})$이 정의되므로, 위 식은 아래와 같이 쓸 수 있다.</p>
-
-<p>$ Q(s_{t},a_{t}) = \mathbb{E} [r_{t+1} + \gamma Q(s_{t+1},a_{t+1}) ] $</p>
-
-<p>이 관계를 이용해서, 각 state-action pair $(s_{t},a_{t})$에 대해 $\hat{Q}(s_{t},a_{t})$를 iterative하게 계산한다. 실제로는 $Q(s_{t},a_{t})$의 정확한 값을 모르니까 모든 state-action pair들에 대해 0으로 초기화하고, 시점 $t$에서 action을 결정해서 $t+1$로 넘어갈 때마다 아래와 같이 업데이트 한다.</p>
-
-<p>$ \hat{Q}(s_{t},a_{t}) \leftarrow (1-\alpha) \hat{Q}(s_{t},a_{t}) + \alpha [r_{t+1} + \gamma \text{max}_{a_{t+1}} \hat{Q}(s_{t+1},a_{t+1})] $</p>
-
-<p>여기서 $\alpha$는 작은 양수로, learning rate이다. 우변의 max는 상태 $s_{t+1}$에서 누적보상을 최대화하는 행동을 선택한다는 가정이 반영된 결과이다. 이렇게 현재 state에서 가능한 모든 action들 중 state-action pair의 Q-value를 최대화하는 action만을 고르는 정책 (각 state에 대해 action을 도출하는 함수) 을 greedy policy라 한다.</p>
-
-<p>시뮬레이션을 계속 함에 따라 실제 보상 $r_{t+1}$ 정보가 계속 반영되면서, $\hat{Q}(s_{t},a_{t})$이 점차 실제 $Q(s_{t},a_{t})$에 가까워짐이 알려져 있다. 이를 Q-learning이라 한다.</p>
-
-<p>Vincent의 마이크로그리드 사례에서 실제 수전량은 -1.1에서 +1.1 사이의 실수이지만 (마이너스값은 송전), 문제를 간단히 하기 위해 세 가지의 discrete action들로 구성된 action set을 가정한다. 1.1kW로 수전, 1.1kW로 송전, 수전도 송전도 하지 않음 (0, idle)이다. 각 action의 인덱스를 0,1,2라 하자.</p>
-
-<p>그러면 매 시점별로 $\hat{Q}(s_{t},0)$, $\hat{Q}(s_{t},1)$, $\hat{Q}(s_{t},2)$ 중에서 최대값에 대응하는 action을 선택하면 (greedy policy), 누적보상을 최대화하는 control이 될 것이다.</p>
-
-<p><br /></p>
-
-<h2 id="exploration탐색의-필요성">Exploration(탐색)의 필요성</h2>
-<p>그러나 greedy policy는 controller 훈련을 끝낸 후 ‘validation 및 실제 구동 시’에 적용해야지, ‘훈련 중’에 적용하는 것은 적절하지 않다.</p>
-
-<p>학습 초기에 아직 아무 정보도 학습하지 못했는데 단순히 $\hat{Q}$ 값이 가장 큰 action만을 계속 하는 것은, 마치 평균적 보상이 다른 여러 개의 슬롯머신을 눈 앞에 두고도, 처음에 고른 한두개의 슬롯머신만 계속 눌러보는 것과 비슷하다.</p>
-
-<p>누적 보상을 최대화하려면 어떤 슬롯머신이 가장 (평균적으로) 큰 보상을 주는지 확인하는 절차가 먼저 필요하며, 이를 위해 초반에는 여러 슬롯머신들을 random하게 눌러봐야 한다. 강화학습에서는 이를 exploration(탐색)이라 한다.</p>
-
-<p>탐색을 통해 어떤 슬롯머신이 보상을 많이 주는지 감이 잡히면 그때부터 보상을 많이 주는 슬롯머신을 계속 누르면 되며, 이를 exploitation이라 한다. Q-learning에서도 greedy policy는 exploitation’만’ 하는 것에 해당한다.</p>
-
-<p>훈련 시에는 (특히 초반에는) exploration을 겸해서 해 줘야 더 좋은 action을 판별할 가능성이 열리기 때문에, 보통 주어진 확률 $\epsilon$으로 action을 $\hat{Q}$ 값에 상관없이 random하게 결정한다 ($1-\epsilon$의 확률로 $\hat{Q}$ 값이 최대가 되는 action을 고른다). 이를 epsilon-greedy policy라 한다. (물론 훈련을 끝낸 신경망을 validation/ test case에 적용할 때는 greedy policy를 따른다)</p>
-
-<p>(Exploration/ exploitation에 대해 제대로 이해하고 싶으면, Sutton의 책 2장의 ‘Multi-armed Bandits’를 공부하기 바란다)</p>
-
-<p><br /></p>
-
-<h2 id="stateaction이-무한할-경우">State/action이 무한할 경우</h2>
-<p>지금까지 설명한 방법은, state-action pair의 수가 많지 않을 경우 각 state-action pair별 $\hat{Q}$값들을 담는 table을 만들어 그대로 적용할 수 있다. 이를테면 아래와 같은 공간에서 상하좌우로 한 칸씩 이동 가능한 환경에서 최단거리를 찾는 문제 (Gridworld) 에서는, 격자 수가 한정되어 있으므로 각 격자(state)-이동방향(action) pair 별로 $\hat{Q}$값들을 따로 계산할 수 있다.</p>
-
-<p><img src="/assets/images/reinforcetwo/gridworld.png" alt="gridworld" class="align-center" />
-<em>Gridworld 환경. 칸이 38개이고 action은 상하좌우 4개이므로, state-action pair 총 152개 각각에 대해 Q-value를 추정할 수 있다.</em></p>
-
-<p>하지만 많은 경우 state가 continuous이거나, discrete라도 그 수가 매우 많다. 잘 알려진 cartpole 문제의 경우, action은 ‘수레를 정해진 힘으로 왼쪽으로 가속/ 오른쪽으로 가속’ 딱 두 개의 값 중 하나를 가지는 이진수로 볼 수 있으나, state는 ‘수레의 위치와 속도, 막대의 각도와 각속도’로 4차원의 연속된 벡터로 볼 수 있다. State의 수가 무한하므로, 각 state-action pair에 대해 table 방식으로 $\hat{Q}$값들을 따로 계산할 수는 없다.</p>
-
-<p><img src="/assets/images/reinforcetwo/cart_pole.gif" alt="cart_pole" class="align-center" width="70%" />
-<em>Cartpole 환경. State 수가 무한하므로, 각 state-action pair에 대해 Q-value를 정의할 수 없다.</em></p>
-
-<p>이 포스팅 시리즈에서 다루는 마이크로그리드 케이스에서도 마찬가지이다. State (직전 $N$시간 동안의 시간별 부하와 태양광 발전량, 그리고 배터리에 저장된 에너지)가 $2N+1$차원의 continuous vector이기 때문이다.</p>
-
-<p>이런 경우 ‘모든 state-action pair 각각에 대해’ $\hat{Q}$를 계산한다는 것은 사실상 불가능하다. 그렇다면 어떻게 해야 하나?</p>
-
-<p><br /></p>
-
-<h2 id="q-value-근사를-위한-딥러닝과-강화학습의-결합">Q-value 근사를 위한 딥러닝과 강화학습의 결합</h2>
-<p>만약 state-action pair와 Q값 간의 관계가 어떤 domain knowledge에 의해 명확하게 정의될 수 있다면, 해당 관계를 명확한 수식으로 표현하여 $\hat{Q}$를 쉽게 계산할 수 있을 것이다. 그러나 이 케이스를 포함한 많은 경우, state-action과 Q값 간의 관계식을 명확한 수식으로 나타낼 수 있을 것이라 기대되지 않는다.</p>
-
-<p>그렇다면, state를 입력으로 받고 각 action 별 $\hat{Q}$값을 출력으로 하는 심층신경망 (Deep Neural Network, DNN) 모델을 훈련하는 것이 현실적인 방법이다. 심층신경망은 계산비용은 매우 높지만, node 수가 충분하면 어떤 비선형 함수도 근사할 수 있기 때문에 nonlinear function approximator로 기능한다는 점을 이용하는 것이다.</p>
-
-<p><img src="/assets/images/reinforcetwo/reinforcement_deep.png" alt="reinforcement_deep" class="align-center" width="80%" />
-<em>‘심층’강화학습 개요. Action 결정이 심층신경망에 기반해 이루어짐.</em></p>
-
-<p>이 심층신경망 모델은 매 훈련 주기 (꼭 매 시간은 아닐 수 있음) 마다 튜플 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다. 업데이트 시 최소화 대상 목적함수는 $\hat{Q}(s_{t},a_{t})$와 $r_{t+1} + \gamma \text{max}_{a_{t+1}} \hat{Q}(s_{t+1},a_{t+1})$ 간 차이의 제곱이다. 이를 Deep Q-Network (DQN) 이라 한다. 위 cartpole 문제를 푸는 데에도 DQN이 적용된다.</p>
-
-<p>다음 포스팅에서는 마이크로그리드 문제에 Deep Q-Network를 적용하는 과정과 결과에 대해 상세히 설명한다.</p>
-
-<div class="notice--info">
-
-강화학습 기반 마이크로그리드 스케줄링<br /><br />
-
-1) <a href="/reinforceone.html">문제의식 및 케이스 소개</a><br />
-2) <b>Q-learning 개념</b><br />
-3) <a href="/reinforcethree.html">Deep Q-learning을 통한 discrete control 도출</a><br />
-4) <a href="/reinforcefour.html">DDPG를 통한 continuous control 도출</a><br />
-5) <a href="/reinforcefive.html">TD3, SAC를 통한 continuous control 도출</a>
-
-</div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="energymanagement" /><category term="강화학습" /><summary type="html"><![CDATA[지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하에서 control을 얻게 됨을 논했다.]]></summary></entry></feed>
+</div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="energymanagement" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 (3개 action들은 각각 1.1kW 수전/ 1.1kW 송전/ idle).]]></summary></entry></feed>

@@ -1,0 +1,791 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+
+<head>
+  <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 8) 출력조정 관련 제약들 | 에너지엔데이터연구소</title>
+<meta name="description" content="분산형에너지 패러다임 이전의 전통적 발전 포트폴리오에서도, 원자력/ 석탄/ 가스/ 유류 등 다양한 발전기 믹스를 구성한 이유 - 발전기별로 연료단가와 부하추종 성능에 차이가 있기 때문">
+
+
+  <meta name="author" content="Jeonghun Song">
+  
+  <meta property="article:author" content="Jeonghun Song">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="에너지엔데이터연구소">
+<meta property="og:title" content="[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 8) 출력조정 관련 제약들">
+<meta property="og:url" content="http://localhost:4000/linprogeight.html">
+
+
+  <meta property="og:description" content="분산형에너지 패러다임 이전의 전통적 발전 포트폴리오에서도, 원자력/ 석탄/ 가스/ 유류 등 다양한 발전기 믹스를 구성한 이유 - 발전기별로 연료단가와 부하추종 성능에 차이가 있기 때문">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-04-27T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/linprogeight.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Jeonghun Song",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="naver-site-verification" content="7dda6777a2acc897ba51668ac7c58c380307dd6c">
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="에너지엔데이터연구소 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<head>
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<!-- end custom head snippets -->
+</head>
+
+<body
+  class="layout--single">
+  <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+  
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/clean.jpg" alt="에너지엔데이터연구소"></a>
+        
+        <a class="site-title" href="/">
+          에너지엔데이터연구소
+          <span class="site-subtitle">스마트한 에너지 전환에 기여하는 데이터 사이언티스트</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/aboutme/">About Me</a>
+            </li><li class="masthead__menu-item">
+              <a href="/search/">Search</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tag</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">카테고리 목록</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+  <div class="initial-content">
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+    
+  
+  
+  
+  
+    
+    
+      
+    
+    
+  
+  
+   <!-- three lines added by Jeonghun  -->
+    
+
+<nav class="nav__list">
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">카테고리 목록</label>
+  <ul class="nav__items" id="category_tag_menu">
+      <!--전체 글 수-->
+      
+      <li>
+        <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
+        <span class="nav__sub-title">Categories</span>
+            <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">Optimal system (11)</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
+                <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/energymanagement" class="">EMS (5)</a></li>
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/estimation" class="">Estimation (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/dataset" class="">Dataset (4)</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+      </li>
+  </ul>
+</nav>
+  
+  
+
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 8) 출력조정 관련 제약들">
+    <meta itemprop="description" content="분산형에너지 패러다임 이전의 전통적 발전 포트폴리오에서도, 원자력/ 석탄/ 가스/ 유류 등 다양한 발전기 믹스를 구성한 이유 - 발전기별로 연료단가와 부하추종 성능에 차이가 있기 때문">
+    <meta itemprop="datePublished" content="2023-04-27T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/linprogeight.html" class="u-url" itemprop="url">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 8) 출력조정 관련 제약들
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-27T00:00:00+09:00">2023-04-27</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#최소-부하">최소 부하</a></li><li><a href="#ramp-rate">Ramp rate</a></li><li><a href="#최소-기동유지시간정지유지시간">최소 기동유지시간/정지유지시간</a></li><li><a href="#시동-비용-start-up-cost">시동 비용 (start-up cost)</a></li></ul>
+ <!-- 우측 TOC -->
+            </nav>
+          </aside>
+        
+        <p>분산형에너지 패러다임 이전의 전통적 발전 포트폴리오에서도, 원자력/ 석탄/ 가스/ 유류 등 다양한 발전기 믹스를 구성한 이유 - 발전기별로 연료단가와 부하추종 성능에 차이가 있기 때문</p>
+
+<p>부하추종 성능은 낮으나 연료단가도 낮은 설비는 기저설비로, 연료단가는 높으나 부하추종 성능은 높은 설비는 첨두설비로</p>
+
+<p><img src="/assets/images/linprogeight/portfolio.png" alt="portfolio" class="align-center" />
+<em>시간대별 발전 포트폴리오. 일정 출력을 유지하는 기저설비, 특정 시간대에만 가동되는 첨두설비로 구성됨.<br />(출처: 전력거래소)</em></p>
+
+<p>이 포스팅에서는 부하추종을 위한 출력 조정 관련 제약들을 설명함</p>
+
+<h2 id="최소-부하">최소 부하</h2>
+
+<p>자동차가 고속도로를 달릴 경우 ‘최저 속도’ 제한이 있다. 해당 속도 미만으로 달리면 교통 흐름에 악영향을 주기 때문이다.</p>
+
+<p>발전기의 경우에도 최소 출력이 있으며, 최소 출력 미만으로 억지로 출력을 낮출 경우, (전체 계통에 악영향을 주는 것은 아니지만) 해당 발전기에 걸리는 스트레스가 증가해 기기 수명을 저하시킨다. 그러므로 최소 출력 이상으로 운전할 것이 권장된다.</p>
+
+<p>어떤 설비의 정격출력을 $S$, 최소부하율을 $\gamma$라 하자. 이를테면 어떤 분산형 발전기의 정격용량이 300kW 이고 최소부하율이 20% (즉 0.2)인 경우, 해당 설비는 가동 중에 60~300kW의 범위에서만 발전을 할 수 있다. 60kW 미만의 출력은 내지 못하도록 제한된다.</p>
+
+<p>특정 설비의 시간 별 가동 여부를 표현하는 ‘이진’변수 $u[t]$를 정의하자. 그리고 시간 $t$에 해당 설비가 가동 중이면 $u[t]=1$, 정지 상태이면 $u[t]=0$이라 하자. 이 때 최소부하 제약의 수식은 아래와 같다.</p>
+
+<p>$ u[t] \gamma_{min} S \leq p_{gen}[t] \leq u[t] S $</p>
+
+<p><br /></p>
+
+<h2 id="ramp-rate">Ramp rate</h2>
+
+<p>차를 몰 때 악셀을 밟아도 1초당 늘릴 수 있는 속력에는 한계가 있다. 또한 급브레이크를 밟아도 1초당 줄일 수 있는 속력에는 한계가 있다. 무리해서 급브레이크를 계속 밟으면 차량 수명에 악영향을 끼치기도 한다.</p>
+
+<p>마찬가지로 발전기의 출력 또한 갑자기 크게 늘리거나 줄이는 것에는 한계가 있고 그 한계를 무리해서 넘으면 수명에 악영향을 끼친다. 그래서, 변동폭을 제한함.</p>
+
+<p>시점 $t-1$에서 $t$까지 (즉 1 time step 동안) 발전기의 출력을 증가시키는 데는 한계가 있음, 마찬가지로 1 time step 동안 발전기의 출력을 감소시키는 데에도 한계가 있음.</p>
+
+<p>해당 한계값들을 정격출력으로 나눈 값을 각각 $\delta_{up}$, $\delta_{down}$이라 할 때 수식은 아래와 같다.</p>
+
+<p>$ -\delta_{down} S \leq p_{gen}[t] - p_{gen}[t-1] \leq \delta_{up} S $</p>
+
+<p><br /></p>
+
+<h2 id="최소-기동유지시간정지유지시간">최소 기동유지시간/정지유지시간</h2>
+
+<p>어떤 기계든, 지나치게 껐다 켰다를 빨리 반복하면 해당 기계에 좋지 않은 영향을 줄 것이라는 것을 짐작할 수 있다. 이는 발전기도 마찬가지로, 빈번하게 기동-정지 전환 시 기기 수명에 악영향을 미친다.</p>
+
+<p>발전기가 정지 상태에서 기동 상태로 전환하면, 일정 시간 동안 기동 상태를 유지해 줘야 함. 또한 기동 상태에서 정지 상태로 전환하면, 일정 시간 동안 정지 상태를 유지해 줘야 함.</p>
+
+<p>특히 출력이 높고 기저설비에 가깝게 설계된 경우, 이런 최소 기동유지시간/정지유지시간이 2 time step 이상일 수 있음.</p>
+
+<p><br />
+어떤 발전설비가 정지상태에서 기동상태로 전환 시 ‘최소한 3시간은’ 기동상태를 유지해야 한다고 가정하자.</p>
+
+<p>해당 발전설비가 시점 $t-1$에서 정지상태였다가 시점 $t$에서 기동상태로 전환된 경우, 위 조건에 의해 최소한 시점 $t+1, t+2$에서는 기동상태를 유지해야 한다. 즉 $u[t-1]=0$이면서 $u[t]=1$이라면, 반드시 $u[t+1]=u[t+2]=1$이어야 한다.</p>
+
+<p>위 제약조건을 수식으로 표현하면 아래와 같다.</p>
+
+<p>$ 3 (u[t]-u[t-1]) \leq u[t]+u[t+1]+u[t+2]  $</p>
+
+<p>$u[t]=1$이고 $u[t-1]=0$인 경우 좌변은 3이 되는데, 우변에는 이진수 3개만 있으므로 반드시 셋 다 1이 되어야 한다. 그러므로 $u[t+1]=u[t+2]=1$이어야만 식이 성립한다. 이외의 경우에는 좌변이 0 또는 -3이 되므로, $u[t+1]$과 $u[t+2]$가 어떤 값을 가져도 식이 성립한다.</p>
+
+<p><br />
+이번에는 해당 발전설비가 기동상태에서 정지상태로 전환 시 ‘최소한 2시간은’ 정지상태를 유지해야 한다고 가정하자.</p>
+
+<p>한편 해당 발전설비가 시점 $t-1$에서 기동상태였다가 시점 $t$에서 정지상태로 전환된 경우, 위 조건에 의해 최소한 시점 $t+1$에서는 정지상태를 유지해야 한다. 즉 $u[t-1]=1$이면서 $u[t]=0$이라면, 반드시 $u[t+1]=0$이어야 한다.</p>
+
+<p>위 제약조건을 수식으로 표현하면 아래와 같다.</p>
+
+<p>$ 2 (u[t-1]-u[t]) \leq 2 - (u[t]+u[t+1])  $</p>
+
+<p>$u[t]=0$이고 $u[t-1]=1$인 경우 좌변은 2가 되는데, 우변에서 $u[t]=u[t+1]=0$이어야만 식이 성립한다. 이외의 경우에는 좌변이 0 또는 -2가 되므로, $u[t+1]$이 어떤 값을 가져도 식이 성립한다.</p>
+
+<p><br /></p>
+
+<h2 id="시동-비용-start-up-cost">시동 비용 (start-up cost)</h2>
+
+<p>일정 규모 이상의 발전기의 경우, 정지 상태에서 기동 상태로 전환시키는 ‘시동’ 시 무시할 수 없는 수준의 시동비용이 발생하기도 한다. 이는 전력 생산을 위한 연료비용과는 별개의 비용으로 반영하여야 한다.</p>
+
+<p>시점 $t$에서 시동을 한다는 것은 $u[t-1]=0$이면서 $u[t]=1$임을 의미한다. 즉 시동 여부를 의미하는 새로운 이진수 $v[t]$를 도입해서, $u[t-1]=0$이면서 $u[t]=1$일 때는 반드시 $v[t]=1$이 되도록 제약을 걸고, $v[t]$에 시동비용 계수를 곱한 항을 목적함수에 추가해야 한다.</p>
+
+<p>필요한 제약식은 아래와 같다.</p>
+
+<p>$u[t] - u[t-1] \leq v[t]$</p>
+
+<p>$u[t]=1$이고 $u[t-1]=0$인 경우 좌변은 1이 되는데, $v[t]$는 이진수이므로 반드시 $v[t]=1$이어야 식이 성립한다. 이외의 경우에는 좌변이 0 또는 -1이므로 $v[t]$가 0이어도 상관이 없으며, 목적함수를 최소화하기 위해 $v[t]=0$이 될 것이다.</p>
+
+<div class="notice--info">
+
+선형계획법 기반 분산에너지시스템 최적화<br /><br />
+
+1) <a href="/linprogone.html">최소비용 시스템과 시간별 자료의 중요성</a><br />
+2) <a href="/linprogtwo.html">배터리의 충/방전 스케줄 결정: 수식</a> <br />
+3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드</a> <br />
+4) <a href="/linprogfour.html">태양광과 배터리의 용량 결정</a> <br />
+5) <a href="/linprogfive.html">정수 (integer) 변수 도입으로 현실 설명력 증대</a> <br />
+6) <b>공동주택의 '누진제' 전기요금 (단일계약) 수식</b>
+
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">Python</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EA%B2%BD%EC%A0%9C%EC%84%B1%EB%B6%84%EC%84%9D" class="page__taxonomy-item p-category" rel="tag">경제성분석</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EB%B6%80%ED%95%98%ED%8C%A8%ED%84%B4" class="page__taxonomy-item p-category" rel="tag">부하패턴</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95" class="page__taxonomy-item p-category" rel="tag">선형계획법</a>
+    
+    </span>
+  </p>
+
+
+
+<!-- 
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#optimalsystem" class="page__taxonomy-item p-category" rel="tag">optimalsystem</a>
+    
+    </span>
+  </p>
+
+ -->
+        <!-- 
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-04-27T00:00:00+09:00">2023-04-27</time></p>
+ -->
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <!-- <a href="https://twitter.com/intent/tweet?text=%5B%EC%9E%91%EC%84%B1%EC%A4%91%5D+%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+-+8%29+%EC%B6%9C%EB%A0%A5%EC%A1%B0%EC%A0%95+%EA%B4%80%EB%A0%A8+%EC%A0%9C%EC%95%BD%EB%93%A4%20http%3A%2F%2Flocalhost%3A4000%2Flinprogeight.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flinprogeight.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flinprogeight.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      <p></p>
+        <h4 class="page__meta-title"><span>optimalsystem</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        
+
+
+  
+
+  
+  	
+  	
+  	
+  	
+  	
+
+<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
+
+  
+    
+      <a href="/linprognine.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) '부분'부하 성능</a>
+    
+    
+      <a href="/linprogseven.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 7) 전기와 열의 수요/공급을 동시에 고려 (섹터커플링)</a>
+        
+  
+
+</nav>
+      <p></p>
+    </div>
+
+    
+  </article>
+
+  
+  <!-- 
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/linprognine.html" rel="permalink">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) ‘부분’부하 성능
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-28T00:00:00+09:00">2023-04-28</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">발전기의 효율, 냉난방설비의 COP (성능계수) 를 상수로 가정했었음
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/linprogseven.html" rel="permalink">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 7) 전기와 열의 수요/공급을 동시에 고려 (섹터커플링)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-26T00:00:00+09:00">2023-04-26</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">지금까지는 전기에 대해서만 다룸, 그러나 건물의 경우 난방과 냉방을 쓰고, 지역에너지의 경우에도 지역난방 등이 있음
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/linprogsix.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 6) 공동주택의 ‘누진제’ 전기요금 (단일계약) 수식
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-25T00:00:00+09:00">2023-04-25</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이전에 건물 내 태양광/배터리 설치 시의 최적 용량/스케줄 도출에 대해 설명했는데, 이는 ‘시간별 요금제를 적용받는 일반용 건물’에 대한 내용이었다. 그런데 주택에서는, ‘누진제’라 불리는, 전기를 많이 쓰면 단가가 올라가 요금이 급증하는 요금 체계를 적용한다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/linprogfive.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-24T00:00:00+09:00">2023-04-24</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div> -->
+  
+  <!--  -->
+</div>
+
+  </div>
+
+  
+
+  <aside class="sidebar__top">
+    <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside>
+
+  <div id="footer" class="page__footer">
+    <footer>
+      <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+      <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>E-mail</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Jeonghun Song. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+    </footer>
+  </div>
+
+  
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
