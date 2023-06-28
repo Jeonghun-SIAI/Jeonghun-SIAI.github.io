@@ -398,9 +398,40 @@
 
 <p>섹터커플링 예시로, 전기로 난방까지 하는 히트펌프, 온열을 냉열로 변환하는 흡수식냉동기, 전기와 열을 동시에 생산하는 열병합발전기(연료전지 포함) 등을 들 수 있음</p>
 
+<p><img src="/assets/images/linprogseven/systemfigure.png" alt="systemfigure" class="align-center" />
+<em>건물의 전기/ 냉방/ 난방 에너지 공급 시스템 개요.</em></p>
+
 <p>(각 설비에 대한 대략적인 설명, 특히 열병합과 가스직화식 흡수식냉동기는 연료를 소비하므로 시간별 연료비가 목적함수에 추가됨을 강조)</p>
 
 <p>(수식들: 일단 효율 등은 상수 가정, 최소부하 등 제약 무시, 열 변환 시 COP가 0인 시점에 대해 설명, 열저장조 포함)</p>
+
+<p>전기는 계통으로부터의 수전과 자가열병합발전에 의해 공급된다. 이 때 히트펌프를 구동하기 위한 전기도 공급되어야 함에 주의한다.</p>
+
+<p>$ p_{\text{load}}[t] = p_{\text{grid}}[t] + p_{\text{cogen}}[t] - p_{\text{hpump}}[t]$</p>
+
+<p>냉방 부하가 있는 기간에는, 히트펌프와 흡수식냉동기가 냉방을 공급한다. 냉방 수요가 있는 기간이더라도 온수 등의 일부 난방 수요가 존재할 수 있는데, 이는 보일러와 열병합 배열로 공급한다.</p>
+
+<p>냉방 수요가 없는 기간에는, 보일러와 열병합 배열 뿐 아니라 히트펌프도 난방을 공급한다. 흡수식냉동기는 작동하지 않는다.</p>
+
+<p>$ q_{\text{load.c}}[t] = q_{\text{hpump.c}}[t] + q_{\text{absorp.c}}[t] $</p>
+
+<p>$ q_{\text{load.h}}[t] = q_{\text{boiler.h}}[t] + q_{\text{cogen.h}}[t] $</p>
+
+<p>$ q_{\text{hpump.c}}[t] = \text{COP}_{\text{hpump.c}} p_{\text{hpump}}[t] $</p>
+
+<p>$ q_{\text{absorp.c}}[t] = \text{COP}_{\text{absorp.c}} p_{\text{hpump}}[t] $</p>
+
+<p>$ p_{\text{cogen}}[t] = \eta_{\text{cogen.p}}[t] f_{\text{cogen}}[t] $</p>
+
+<p>$ q_{\text{cogen.h}}[t] = \eta_{\text{cogen.h}}[t] f_{\text{cogen}}[t] $</p>
+
+<p>$ q_{\text{boiler.h}}[t] = \eta_{\text{boiler.h}}[t] f_{\text{boiler}}[t] $</p>
+
+<p>$ q_{\text{hpump.h}}[t] = \text{COP}_{\text{hpump.h}} p_{\text{hpump}}[t] $</p>
+
+<p>연료비용도 목적함수에 포함된다. 도시가스로 가정 시, <a href="http://www.citygas.or.kr/info/charge.jsp">동절기/ 하절기/ 기타월 별로 요금이 다르다.</a></p>
+
+<p>(실제로는 운전시의 제약, 부분부하 효율 저하 등이 있는데 이는 다음 두 포스팅에서 설명한다)</p>
 
 <div class="notice--info">
 
