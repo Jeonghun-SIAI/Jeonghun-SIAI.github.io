@@ -10,8 +10,8 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 8) 출력조정 관련 제약들 | 에너지엔데이터연구소</title>
-<meta name="description" content="분산형에너지 패러다임 이전의 전통적 발전 포트폴리오에서도, 원자력/ 석탄/ 가스/ 유류 등 다양한 발전기 믹스를 구성한 이유 - 발전기별로 연료단가와 부하추종 성능에 차이가 있기 때문">
+<!-- begin _includes/seo.html --><title>선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 성능 관련 제약들 | 에너지엔데이터연구소</title>
+<meta name="description" content="지난 포스팅에서는 설비의 효율과 COP(성능계수)를 상수로 가정했지만, 실제로는 부하율에 따라 효율과 COP가 달라진다. 이를테면 열병합발전기의 경우, 최대 출력(정격 출력)으로 운전할 때 비해 더 낮은 출력으로 ‘부분부하’운전 시 발전효율이 저하됨이 알려져 있다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -23,11 +23,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 8) 출력조정 관련 제약들">
+<meta property="og:title" content="선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 성능 관련 제약들">
 <meta property="og:url" content="http://localhost:4000/linprogeight.html">
 
 
-  <meta property="og:description" content="분산형에너지 패러다임 이전의 전통적 발전 포트폴리오에서도, 원자력/ 석탄/ 가스/ 유류 등 다양한 발전기 믹스를 구성한 이유 - 발전기별로 연료단가와 부하추종 성능에 차이가 있기 때문">
+  <meta property="og:description" content="지난 포스팅에서는 설비의 효율과 COP(성능계수)를 상수로 가정했지만, 실제로는 부하율에 따라 효율과 COP가 달라진다. 이를테면 열병합발전기의 경우, 최대 출력(정격 출력)으로 운전할 때 비해 더 낮은 출력으로 ‘부분부하’운전 시 발전효율이 저하됨이 알려져 있다.">
 
 
 
@@ -344,8 +344,8 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 8) 출력조정 관련 제약들">
-    <meta itemprop="description" content="분산형에너지 패러다임 이전의 전통적 발전 포트폴리오에서도, 원자력/ 석탄/ 가스/ 유류 등 다양한 발전기 믹스를 구성한 이유 - 발전기별로 연료단가와 부하추종 성능에 차이가 있기 때문">
+    <meta itemprop="headline" content="선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 성능 관련 제약들">
+    <meta itemprop="description" content="지난 포스팅에서는 설비의 효율과 COP(성능계수)를 상수로 가정했지만, 실제로는 부하율에 따라 효율과 COP가 달라진다. 이를테면 열병합발전기의 경우, 최대 출력(정격 출력)으로 운전할 때 비해 더 낮은 출력으로 ‘부분부하’운전 시 발전효율이 저하됨이 알려져 있다.">
     <meta itemprop="datePublished" content="2023-04-27T00:00:00+09:00">
     
 
@@ -353,7 +353,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/linprogeight.html" class="u-url" itemprop="url">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 8) 출력조정 관련 제약들
+            <a href="http://localhost:4000/linprogeight.html" class="u-url" itemprop="url">선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 성능 관련 제약들
 </a>
           </h1>
           
@@ -382,91 +382,82 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#최소-부하">최소 부하</a></li><li><a href="#ramp-rate">Ramp rate</a></li><li><a href="#최소-기동유지시간정지유지시간">최소 기동유지시간/정지유지시간</a></li><li><a href="#시동-비용-start-up-cost">시동 비용 (start-up cost)</a></li></ul>
+              <ul class="toc__menu"><li><a href="#발전기의-부분부하-성능을-고려한-수식">발전기의 부분부하 성능을 고려한 수식</a></li><li><a href="#냉방기기의-부분부하-성능을-고려한-수식">냉방기기의 부분부하 성능을 고려한 수식</a></li><li><a href="#시간별-설비별-이진변수에-의한-계산시간-증가-문제">‘시간별/ 설비별’ 이진변수에 의한 계산시간 증가 문제</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <p>분산형에너지 패러다임 이전의 전통적 발전 포트폴리오에서도, 원자력/ 석탄/ 가스/ 유류 등 다양한 발전기 믹스를 구성한 이유 - 발전기별로 연료단가와 부하추종 성능에 차이가 있기 때문</p>
+        <p>지난 포스팅에서는 설비의 효율과 COP(성능계수)를 상수로 가정했지만, 실제로는 부하율에 따라 효율과 COP가 달라진다. 이를테면 열병합발전기의 경우, 최대 출력(정격 출력)으로 운전할 때 비해 더 낮은 출력으로 ‘부분부하’운전 시 발전효율이 저하됨이 알려져 있다.</p>
 
-<p>부하추종 성능은 낮으나 연료단가도 낮은 설비는 기저설비로, 연료단가는 높으나 부하추종 성능은 높은 설비는 첨두설비로</p>
+<p><img src="/assets/images/linprognine/chp_eff.png" alt="chp_eff" class="align-center" />
+<em>열병합발전기의 통상적인 부하율-효율 그래프. 낮은 부하율에서 효율이 저하됨.<br />출처: <a href="https://doi.org/10.1016/j.apenergy.2015.03.053">“Modeling of non-linear CHP efficiency curves in distributed energy systems”</a></em></p>
 
-<p><img src="/assets/images/linprogeight/portfolio.png" alt="portfolio" class="align-center" />
-<em>시간대별 발전 포트폴리오. 일정 출력을 유지하는 기저설비, 특정 시간대에만 가동되는 첨두설비로 구성됨.<br />(출처: 전력거래소)</em></p>
+<p>반대로 냉방기기의 경우, 정격부하 대비 부분부하에서 COP가 더 높다.</p>
 
-<p>이 포스팅에서는 부하추종을 위한 출력 조정 관련 제약들을 설명함</p>
+<p><img src="/assets/images/linprognine/cop.png" alt="cop" class="align-center" />
+<em>LG전자의 지열기반 chiller의 부하율별 COP. 일반적인 turbo chiller, 흡수식냉동기도 비슷한 추이를 보임.</em></p>
 
-<h2 id="최소-부하">최소 부하</h2>
-
-<p>자동차가 고속도로를 달릴 경우 ‘최저 속도’ 제한이 있다. 해당 속도 미만으로 달리면 교통 흐름에 악영향을 주기 때문이다.</p>
-
-<p>발전기의 경우에도 최소 출력이 있으며, 최소 출력 미만으로 억지로 출력을 낮출 경우, (전체 계통에 악영향을 주는 것은 아니지만) 해당 발전기에 걸리는 스트레스가 증가해 기기 수명을 저하시킨다. 그러므로 최소 출력 이상으로 운전할 것이 권장된다.</p>
-
-<p>어떤 설비의 정격출력을 $S$, 최소부하율을 $\gamma$라 하자. 이를테면 어떤 분산형 발전기의 정격용량이 300kW 이고 최소부하율이 20% (즉 0.2)인 경우, 해당 설비는 가동 중에 60~300kW의 범위에서만 발전을 할 수 있다. 60kW 미만의 출력은 내지 못하도록 제한된다.</p>
-
-<p>특정 설비의 시간 별 가동 여부를 표현하는 ‘이진’변수 $u[t]$를 정의하자. 그리고 시간 $t$에 해당 설비가 가동 중이면 $u[t]=1$, 정지 상태이면 $u[t]=0$이라 하자. 이 때 최소부하 제약의 수식은 아래와 같다.</p>
-
-<p>$ u[t] \gamma_{min} S \leq p_{gen}[t] \leq u[t] S $</p>
+<p>이번 포스팅에서는, 선형계획법 문제에서 이러한 ‘부분부하’에서의 효율과 COP를 고려하여 설비의 input-output 관계를 보다 더 현실적으로 모델링하는 수식을 설명한다.</p>
 
 <p><br /></p>
 
-<h2 id="ramp-rate">Ramp rate</h2>
+<h2 id="발전기의-부분부하-성능을-고려한-수식">발전기의 부분부하 성능을 고려한 수식</h2>
 
-<p>차를 몰 때 악셀을 밟아도 1초당 늘릴 수 있는 속력에는 한계가 있다. 또한 급브레이크를 밟아도 1초당 줄일 수 있는 속력에는 한계가 있다. 무리해서 급브레이크를 계속 밟으면 차량 수명에 악영향을 끼치기도 한다.</p>
+<p>아래 그림은, 정격출력이 100이고 최소부하율이 50%인 가상의 발전기의 연료입력-발전출력 그래프다. 위에서 보인 열병합발전기의 부하율-효율 그래프와는 가로축, 세로축이 다름에 주의한다.</p>
 
-<p>마찬가지로 발전기의 출력 또한 갑자기 크게 늘리거나 줄이는 것에는 한계가 있고 그 한계를 무리해서 넘으면 수명에 악영향을 끼친다. 그래서, 변동폭을 제한함.</p>
+<p><img src="/assets/images/linprognine/chp.png" alt="chp" class="align-center" />
+<em>연료 입력 - 발전 출력 그래프.</em></p>
 
-<p>시점 $t-1$에서 $t$까지 (즉 1 time step 동안) 발전기의 출력을 증가시키는 데는 한계가 있음, 마찬가지로 1 time step 동안 발전기의 출력을 감소시키는 데에도 한계가 있음.</p>
+<p>시점 $t$의 연료 소비량을 $f[t]$, 발전량을 $p[t]$라 하자.
+위 검정 그래프는 상수 효율 $\eta$을 가정한 경우로, 절편이 없는 직선 $p[t]=\eta f[t]$상의 선분이다.</p>
 
-<p>해당 한계값들을 정격출력으로 나눈 값을 각각 $\delta_{up}$, $\delta_{down}$이라 할 때 수식은 아래와 같다.</p>
+<p>그러나 부분부하 성능 저하를 고려 시, 위 빨간 그래프처럼, 음의 절편이 있는 직선상의 선분이 된다. 해당 설비의 기동/정지를 나타내는 이진수 $u[t]$를 다시 도입하면 (기동 시 1, 정지 시 0), 위 빨간 그래프는 $p[t] = \eta f[t] + \psi u[t]$로 표현된다 ($\psi$가 절편).</p>
 
-<p>$ -\delta_{down} S \leq p_{gen}[t] - p_{gen}[t-1] \leq \delta_{up} S $</p>
+<p>여기서는 연료입력-발전출력 관계를, 최소부하율과 정격출력 두 지점에서의 연료입력-발전출력이 주어질 때 두 점을 잇는 선분으로 근사하였다. $\eta$와 $\psi$를 계산하면 선형계획법을 적용할 수 있다. (해당 ‘선형’ 근사가 실제 발전기 특성에서 크게 벗어나지 않음이 알려져 있다.)</p>
 
 <p><br /></p>
 
-<h2 id="최소-기동유지시간정지유지시간">최소 기동유지시간/정지유지시간</h2>
+<h2 id="냉방기기의-부분부하-성능을-고려한-수식">냉방기기의 부분부하 성능을 고려한 수식</h2>
 
-<p>어떤 기계든, 지나치게 껐다 켰다를 빨리 반복하면 해당 기계에 좋지 않은 영향을 줄 것이라는 것을 짐작할 수 있다. 이는 발전기도 마찬가지로, 빈번하게 기동-정지 전환 시 기기 수명에 악영향을 미친다.</p>
+<p>아래 그림은, 정격출력(냉방)이 150kW인 가상의 냉방설비의 전기입력-냉방출력 그래프다. 위에서 보인 chiller의 부하율 별 COP를 적용하였다.</p>
 
-<p>발전기가 정지 상태에서 기동 상태로 전환하면, 일정 시간 동안 기동 상태를 유지해 줘야 함. 또한 기동 상태에서 정지 상태로 전환하면, 일정 시간 동안 정지 상태를 유지해 줘야 함.</p>
+<p><img src="/assets/images/linprognine/chiller.png" alt="chiller" class="align-center" width="70%" />
+<em>위 LG전자의 지열기반 chiller와 같은 부하율별 COP를 갖는 150kW(냉방출력)급 chiller의 전기 입력 - 냉방 출력 그래프.</em></p>
 
-<p>특히 출력이 높고 기저설비에 가깝게 설계된 경우, 이런 최소 기동유지시간/정지유지시간이 2 time step 이상일 수 있음.</p>
+<p>냉방기기에 대해서는 보통 부하율 25%, 50%, 75%, 100%에 대한 성능이 주어진다. 즉 4개의 (전기입력,냉방출력) 점이 주어지는데, 4개의 점이 모두 한 선분 위에 있지 않다. 그러므로 더 이상 하나의 선분으로는 표현할 수 없으며, 선형계획을 적용하기 위해서는 3개의 연속된 선분으로 표현되어야 한다.</p>
+
+<p>냉방기기의 (시점 $t$의) 냉방 출력을 $q_{c}[t]$, 전기 입력을 $p_c[t]$라 하자. 그리고 위 그래프의 3개의 선분을 나타내는 일차식들을 각각 $q_c[t]=\alpha_1 + \beta_1 p_c[t]$ (출력기준 부하율 25%~50%), $q_c[t]=\alpha_2 + \beta_2 p_c[t]$ (부하율 50%~75%), $q_c[t]=\alpha_3 + \beta_3 p_c[t]$ (부하율 75%~100%)이라 하자.</p>
+
+<p>그러면 각 시간별로 냉방기기가 가동된다면 위 3개 구간 중 어디에 속하는지 (혹은 가동이 되지 않는지) 여부를 표현하는 이진수 3개의 세트가 있어야 한다. 각각을 $u_1[t]$, $u_2[t]$, $u_3[t]$이라 하자.</p>
+
+<p>또한 전기 입력 변수도 위 3개 구간 각각에 대응하는 3개의 변수 $p_1[t]$, $p_2[t]$, $p_3[t]$으로 두자. 또한 냉방기준 부하율 25%, 50%, 75%, 100%에 대응하는 전기 입력을 각각 $\tilde{p}_1$, $\tilde{p}_2$, $\tilde{p}_3$, $\tilde{p}_{\text{max}}$라 하자. 그러면, 위 그래프는 아래 제약조건들로 표현된다.</p>
+
+<p>$q_c[t] = \alpha_1 u_1[t] + \beta_1 p_1[t] + \alpha_2 u_2[t] + \beta_2 p_2[t] + \alpha_3 u_3[t] + \beta_3 p_3[t] $</p>
+
+<p>$ \tilde{p}_1 u_1[t] \leq p_1[t] \leq \tilde{p}_2 u_1[t] $</p>
+
+<p>$ \tilde{p}_2 u_2[t] \leq p_2[t] \leq \tilde{p}_3 u_2[t] $</p>
+
+<p>$ \tilde{p}_3 u_3[t] \leq p_3[t] \leq \tilde{p}_{\text{max}} u_3[t] $</p>
+
+<p>$ u_1[t] + u_2[t] + u_3[t] \leq 1 $</p>
+
+<p><br /></p>
+
+<h2 id="시간별-설비별-이진변수에-의한-계산시간-증가-문제">‘시간별/ 설비별’ 이진변수에 의한 계산시간 증가 문제</h2>
+
+<p>위 방법 사용 시 ‘각 시간별/ 설비별’ 이진변수가 사용되므로 이진변수의 총 갯수가 커진다. 고려 대상 발전기 수가 많아지거나 전체 고려 기간이 길어지면, 풀이에 요구되는 시간이 오래 걸리고 심지어는 사실상 풀리지 않는 문제가 될 수도 있다.</p>
+
+<p>이를테면 1년치 자료를 기반으로 용량을 정하는 문제의 경우, 위 이진변수 기반 제약조건들을 그대로 적용하면 이진변수의 총 갯수가 8,760의 몇 배 이상에 달한다. 이를 그대로 푸는 것은 cvxopt의 glpk 모듈 혹은 MATLAB의 optimization toolbox 정도로는 불가능하며, CPLEX/ Gurobi 등 값비싼 상용 solver로도 꽤나 시간이 걸리는 일이다.</p>
 
 <p><br />
-어떤 발전설비가 정지상태에서 기동상태로 전환 시 ‘최소한 3시간은’ 기동상태를 유지해야 한다고 가정하자.</p>
+이 경우, 아래와 같은 two-stage 기반으로 문제를 푸는 것이 현실적인 접근법이다.</p>
 
-<p>해당 발전설비가 시점 $t-1$에서 정지상태였다가 시점 $t$에서 기동상태로 전환된 경우, 위 조건에 의해 최소한 시점 $t+1, t+2$에서는 기동상태를 유지해야 한다. 즉 $u[t-1]=0$이면서 $u[t]=1$이라면, 반드시 $u[t+1]=u[t+2]=1$이어야 한다.</p>
+<p>1) 시간별 이진수가 들어가는 조건들을 무시하고 선형계획 문제를 구성해 풀어, 설비 별 용량을 구한다.</p>
 
-<p>위 제약조건을 수식으로 표현하면 아래와 같다.</p>
+<p>2) 위에서 구한 설비 별 용량을 전제로, 일정 기간 (대략 24시간의 몇 배수) 의 최적 스케줄링 및 경제성을 위 이진변수 기반 제약조건들을 적용해 도출한다.</p>
 
-<p>$ 3 (u[t]-u[t-1]) \leq u[t]+u[t+1]+u[t+2]  $</p>
-
-<p>$u[t]=1$이고 $u[t-1]=0$인 경우 좌변은 3이 되는데, 우변에는 이진수 3개만 있으므로 반드시 셋 다 1이 되어야 한다. 그러므로 $u[t+1]=u[t+2]=1$이어야만 식이 성립한다. 이외의 경우에는 좌변이 0 또는 -3이 되므로, $u[t+1]$과 $u[t+2]$가 어떤 값을 가져도 식이 성립한다.</p>
-
-<p><br />
-이번에는 해당 발전설비가 기동상태에서 정지상태로 전환 시 ‘최소한 2시간은’ 정지상태를 유지해야 한다고 가정하자.</p>
-
-<p>한편 해당 발전설비가 시점 $t-1$에서 기동상태였다가 시점 $t$에서 정지상태로 전환된 경우, 위 조건에 의해 최소한 시점 $t+1$에서는 정지상태를 유지해야 한다. 즉 $u[t-1]=1$이면서 $u[t]=0$이라면, 반드시 $u[t+1]=0$이어야 한다.</p>
-
-<p>위 제약조건을 수식으로 표현하면 아래와 같다.</p>
-
-<p>$ 2 (u[t-1]-u[t]) \leq 2 - (u[t]+u[t+1])  $</p>
-
-<p>$u[t]=0$이고 $u[t-1]=1$인 경우 좌변은 2가 되는데, 우변에서 $u[t]=u[t+1]=0$이어야만 식이 성립한다. 이외의 경우에는 좌변이 0 또는 -2가 되므로, $u[t+1]$이 어떤 값을 가져도 식이 성립한다.</p>
-
-<p><br /></p>
-
-<h2 id="시동-비용-start-up-cost">시동 비용 (start-up cost)</h2>
-
-<p>일정 규모 이상의 발전기의 경우, 정지 상태에서 기동 상태로 전환시키는 ‘시동’ 시 무시할 수 없는 수준의 시동비용이 발생하기도 한다. 이는 전력 생산을 위한 연료비용과는 별개의 비용으로 반영하여야 한다.</p>
-
-<p>시점 $t$에서 시동을 한다는 것은 $u[t-1]=0$이면서 $u[t]=1$임을 의미한다. 즉 시동 여부를 의미하는 새로운 이진수 $v[t]$를 도입해서, $u[t-1]=0$이면서 $u[t]=1$일 때는 반드시 $v[t]=1$이 되도록 제약을 걸고, $v[t]$에 시동비용 계수를 곱한 항을 목적함수에 추가해야 한다.</p>
-
-<p>필요한 제약식은 아래와 같다.</p>
-
-<p>$u[t] - u[t-1] \leq v[t]$</p>
-
-<p>$u[t]=1$이고 $u[t-1]=0$인 경우 좌변은 1이 되는데, $v[t]$는 이진수이므로 반드시 $v[t]=1$이어야 식이 성립한다. 이외의 경우에는 좌변이 0 또는 -1이므로 $v[t]$가 0이어도 상관이 없으며, 목적함수를 최소화하기 위해 $v[t]=0$이 될 것이다.</p>
+<p>실제로는 1)에서 구한 용량이 전역 최적(global optimum)이 아닐 수 있으므로, 해당 용량에서 약간씩 변화시킨 후 다시 2)의 방법으로 최적 스케줄링을 구해, 더 나은 해가 있는지 탐색해 보는 것이 좋다. 특히 용량이 큰 설비의 대수가 용량변수에 포함되어 있을 경우, 대수를 줄이거나 늘려서 경제성을 원안과 비교해 보는 것이 좋다.</p>
 
 <div class="notice--info">
 
@@ -477,7 +468,11 @@
 3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드</a> <br />
 4) <a href="/linprogfour.html">태양광과 배터리의 용량 결정</a> <br />
 5) <a href="/linprogfive.html">정수 (integer) 변수 도입으로 현실 설명력 증대</a> <br />
-6) <b>공동주택의 '누진제' 전기요금 (단일계약) 수식</b>
+6) <a href="/linprogsix.html">공동주택의 '누진제' 전기요금 (단일계약) 수식</a> <br />
+7) <a href="/linprogseven.html"> 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)</a> <br />
+8) <b> '부분'부하 성능 관련 제약들</b> <br />
+9) <a href="/linprognine.html"> 중/대형 설비의 출력 조정 관련 제약들</a>
+
 
 </div>
 
@@ -536,7 +531,7 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%5B%EC%9E%91%EC%84%B1%EC%A4%91%5D+%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+-+8%29+%EC%B6%9C%EB%A0%A5%EC%A1%B0%EC%A0%95+%EA%B4%80%EB%A0%A8+%EC%A0%9C%EC%95%BD%EB%93%A4%20http%3A%2F%2Flocalhost%3A4000%2Flinprogeight.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+-+8%29+%27%EB%B6%80%EB%B6%84%27%EB%B6%80%ED%95%98+%EC%84%B1%EB%8A%A5+%EA%B4%80%EB%A0%A8+%EC%A0%9C%EC%95%BD%EB%93%A4%20http%3A%2F%2Flocalhost%3A4000%2Flinprogeight.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flinprogeight.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -562,10 +557,10 @@
 
   
     
-      <a href="/linprognine.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) '부분'부하 성능</a>
+      <a href="/linprognine.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) 중/대형 설비의 출력 조정 관련 제약들</a>
     
     
-      <a href="/linprogseven.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 7) 전기와 열의 수요/공급을 동시에 고려 (섹터커플링)</a>
+      <a href="/linprogseven.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 7) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)</a>
         
   
 
@@ -591,7 +586,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprognine.html" rel="permalink">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) ‘부분’부하 성능
+        <a href="/linprognine.html" rel="permalink">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) 중/대형 설비의 출력 조정 관련 제약들
 </a>
       
     </h2>
@@ -613,7 +608,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">발전기의 효율, 냉난방설비의 COP (성능계수) 를 상수로 가정했었음
+    <p class="archive__item-excerpt" itemprop="description">전기는 배터리 등 별도의 비싼 저장용 설비가 없다면 저장할 수 없으므로, 발전설비 포트폴리오에는 부하의 시간적 변동을 고려해 최대수요까지 감당할 수 있는 설비가 포함되어야 한다.
 </p>
   </article>
 </div>
@@ -628,7 +623,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprogseven.html" rel="permalink">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 7) 전기와 열의 수요/공급을 동시에 고려 (섹터커플링)
+        <a href="/linprogseven.html" rel="permalink">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 7) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)
 </a>
       
     </h2>
