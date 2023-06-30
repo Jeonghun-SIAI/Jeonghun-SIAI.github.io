@@ -10,7 +10,7 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 용량 결정 | 에너지엔데이터연구소</title>
+<!-- begin _includes/seo.html --><title>선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 ‘용량’ 결정 (코드 및 결과 포함) | 에너지엔데이터연구소</title>
 <meta name="description" content="지난 포스팅에서는 ‘주어진 용량의’ 배터리가 건물에 설치된 경우의 스케줄링을 설명했다. 그런데, 실제 상황에서는 배터리의 ‘용량도 결정’해야 하는 경우가 대부분이다. 그것도 경제성을 고려한 최적 용량으로 말이다.">
 
 
@@ -23,13 +23,15 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 용량 결정">
+<meta property="og:title" content="선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 ‘용량’ 결정 (코드 및 결과 포함)">
 <meta property="og:url" content="http://localhost:4000/linprogfour.html">
 
 
   <meta property="og:description" content="지난 포스팅에서는 ‘주어진 용량의’ 배터리가 건물에 설치된 경우의 스케줄링을 설명했다. 그런데, 실제 상황에서는 배터리의 ‘용량도 결정’해야 하는 경우가 대부분이다. 그것도 경제성을 고려한 최적 용량으로 말이다.">
 
 
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/linprogfour/result_year.png">
 
 
 
@@ -344,7 +346,7 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 용량 결정">
+    <meta itemprop="headline" content="선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 ‘용량’ 결정 (코드 및 결과 포함)">
     <meta itemprop="description" content="지난 포스팅에서는 ‘주어진 용량의’ 배터리가 건물에 설치된 경우의 스케줄링을 설명했다. 그런데, 실제 상황에서는 배터리의 ‘용량도 결정’해야 하는 경우가 대부분이다. 그것도 경제성을 고려한 최적 용량으로 말이다.">
     <meta itemprop="datePublished" content="2023-04-14T00:00:00+09:00">
     
@@ -353,7 +355,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/linprogfour.html" class="u-url" itemprop="url">선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 용량 결정
+            <a href="http://localhost:4000/linprogfour.html" class="u-url" itemprop="url">선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 ‘용량’ 결정 (코드 및 결과 포함)
 </a>
           </h1>
           
@@ -397,9 +399,9 @@
 <p><br /></p>
 
 <h2 id="용량-결정-문제의-목적함수-현재가치로-환산된-총-비용">용량 결정 문제의 목적함수: 현재가치로 환산된 총 비용</h2>
-<p>이 때, 태양광과 배터리 용량까지 고려한 `최소비용’은 무엇을 의미할까? 태양광과 배터리에 들어가는 비용은 대략적으로 보면 초기투자비(설비비, 설치비 등), 그리고 시간이 지남에 따른 설비의 성능 저하 (degradation) 를 완화하기 위해 매년 발생하는 유지보수비이다. 태양광과 배터리는 따로 연료를 필요로 하지는 않으므로 연료비는 없다. 한편 계통으로부터의 수전으로도 전기부하를 충족하므로, 전기요금은 매 시간별로 계속 발생한다.</p>
+<p>이 때, 태양광과 배터리 용량까지 고려한 ‘최소비용’은 무엇을 의미할까? 태양광과 배터리에 들어가는 비용은 대략적으로 보면 초기투자비(설비비, 설치비 등), 그리고 시간이 지남에 따른 설비의 성능 저하 (degradation) 를 완화하기 위해 매년 발생하는 유지보수비이다. 태양광과 배터리는 따로 연료를 필요로 하지는 않으므로 연료비는 없다. 한편 계통으로부터의 수전으로도 전기부하를 충족하므로, 전기요금은 매 시간별로 계속 발생한다.</p>
 
-<p>그러므로, 이 문제는 `태양광과 배터리 시스템의 초기투자비, 시스템 수명 동안의 설비 유지보수비, 시스템 수명 동안의 전기요금’ 의 합을 최소화하는 변수 결정 문제가 된다.</p>
+<p>그러므로, 이 문제는 ‘태양광과 배터리 시스템의 초기투자비 (패널과 배터리 뿐 아니라 이에 수반되는 인버터, 보호장치 등 포함), 시스템 수명 동안의 설비 유지보수비, 시스템 수명 동안의 전기요금’ 의 합을 최소화하는 변수 결정 문제가 된다.</p>
 
 <p>예를 들어 시스템 운영 기간은 태양광의 수명 20년과 같고, 배터리의 수명은 10년이며 운영 시작 10년 후 같은 용량으로 재설치한다고 가정하자.</p>
 
@@ -425,8 +427,10 @@ $\vdots$
 
 </div>
 
+<p>태양광/ 배터리 시스템 도입 시, 설비 투자비 및 유지보수비가 발생하지만 대신 전기요금이 절감된다. 즉, 전기요금 절감의 합이 태양광/ 배터리 시스템의 설비 투자비 및 유지보수비의 합보다 크다면, 태양광/ 배터리 시스템 도입은 타당성이 있다. (실제로는 투자회수기간이 짧아야 설득력이 있는데, 투자회수기간 계산에 대해서는 포스팅의 맨 마지막 문단에서 소개한다.)</p>
+
 <p><br />
-위 비용들을 그냥 다 더하면 될까? 보통은 그렇지 않다. 시간에 따른 화폐가치 하락을 고려해야 하기 때문이다. 은행에서 이자율 3%의 예금을 든다면, 1년 후의 103만원은 현재의 100만원과 같은 가치로 볼 수 있는 것처럼 말이다. 혹시 아래 그림 같은 도식을 본 적 이 있는가?</p>
+그렇다면 계산을 위해, 위 비용들을 그냥 다 더하면 될까? 보통은 그렇지 않다. 시간에 따른 화폐가치 하락을 고려해야 하기 때문이다. 은행에서 이자율 3%의 예금을 든다면, 1년 후의 103만원은 현재의 100만원과 같은 가치로 볼 수 있는 것처럼 말이다. 혹시 아래 그림 같은 도식을 본 적 이 있는가?</p>
 
 <p><img src="/assets/images/linprogfour/npv.png" alt="npv" class="align-center" width="70%" />
 <em>Net Present Value (NPV) 도식. <br />(출처: https://www.investopedia.com/retirement/calculating-present-and-future-value-of-annuities/)</em></p>
@@ -470,7 +474,11 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
 
 <p>$ p_{\text{load}}[n,t] = p_{\text{grid}}[n,t] - p_{\text{ch}}[n,t] + p_{\text{disch}}[n,t] + s_{\text{pv}} p_{\text{pv}}[n,t]$</p>
 
-<p>시간 인덱스 $t$ 뿐 아니라 연도 인덱스 $n$이 추가되었다. 여기서 맨 마지막에 추가된 항 $s_{\text{pv}} p_{\text{pv}}[n,t]$은 태양광 발전량이다. $p_{\text{pv}}[n,t]$는 `태양광 1kW’가 $n$년도의 $t$번째 시간에 발전하는 전력이고, 여기에 용량 $s_{\text{pv}}$를 곱한 것이다. 용량 $s_{\text{pv}}$는 아직 값이 결정되지 않은, 최적화 문제를 풀어 결정해야 하는 변수임에 유의한다. 용량의 계수는$p_{\text{pv}}[n,t]$이다 (시간별 태양광 발전량 자료를 input으로 받는다).</p>
+<p>시간 인덱스 $t$ 뿐 아니라 연도 인덱스 $n$이 추가되었다.</p>
+
+<p>여기서 맨 마지막에 추가된 항 $s_{\text{pv}} p_{\text{pv}}[n,t]$은 태양광 발전량이다. $p_{\text{pv}}[n,t]$는 `태양광 1kW’가 $n$년도의 $t$번째 시간에 발전하는 전력이고, 여기에 용량 $s_{\text{pv}}$를 곱한 것이다. 용량 $s_{\text{pv}}$는 아직 값이 결정되지 않은, 최적화 문제를 풀어 결정해야 하는 변수임에 유의한다. 용량 변수의 계수가 $p_{\text{pv}}[n,t]$이다 (시간별 태양광 발전량 자료를 input으로 받는다).</p>
+
+<p>(참고: 여기서의 $p_{\text{pv}}[n,t]$는 태양으로부터의 일사량을 패널을 통해 직류 전기로 변환 후, 이를 다시 인버터를 통해 교류로 변환시켜 얻은 전기, 즉 최종적으로 부하에 전달되는 교류전력이다.)</p>
 
 <p>나머지 제약조건들도 연도 인덱스 $n$을 추가하고, 배터리 용량 $S_{batt}$를 추가해 표현하면 아래와 같다.</p>
 
@@ -626,6 +634,10 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
 
 <p>이 때 주의할 점은, <a href="https://cyber.kepco.co.kr/ckepco/front/jsp/CY/D/C/CYDCHP00403.jsp">공휴일의 최대수요전력 및 사용전력량은 경부하시간대로 계량하고, 공휴일이 아닌 토요일 최대부하시간대의 사용전력량은 중간부하시간대로 계량한다</a>는 것이다. $\texttt{eleccost_hourly.txt}$에 해당 사항이 반영되어 있는지 확인해야 한다. 그렇지 않으면 전기요금 및 전기요금 절감액이 과다계상된다.</p>
 
+<p>또한 태양광 발전량 데이터가 이상하지 않은지 확인하기 위해, ‘이용률’을 계산해 보아야 한다. 태양광 패널의 이용률은, 정격출력에 8,760시간 (1년) 을 곱한 값 대비 1년간 실제로 발전한 전기 에너지의 양의 비율이다.</p>
+
+<p>이 포스팅 기준으로는, 이용률은 $\sum_{t=1}^{8760} p_{\text{pv}}[t]$, 즉 단순히 $\texttt{pv_hourly.txt}$의 수치들의 합이다. 일반적으로 국내에서는 태양광 이용률이 대략 11~16% 범위 내에 있으며, 이 범위를 크게 벗어날 경우 데이터 출처를 다시 확인해 보아야 한다.</p>
+
 <p><br /></p>
 
 <h2 id="최적-용량-도출-결과">최적 용량 도출 결과</h2>
@@ -634,8 +646,9 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
 <p><img src="/assets/images/linprogfour/result_year.png" alt="result_year" class="align-center" />
 <em>대상 건물에 최적 용량의 태양광과 배터리 설치 시 전력 공급 패턴.</em></p>
 
-<p>노란 영역은 태양광으로 공급되는 전기에너지, 파란 영역은 수전으로 공급되는 전기에너지, 빨간 영역은 배터리 방전으로 공급되는 에너지이다. 굵은 검정 곡선은 시간별 부하이며, 태양광과 수전의 합이 시간별 부하를 초과한 경우 그 초과분은 배터리로 충전된다.
-<br /></p>
+<p>노란 영역은 태양광으로 공급되는 전기에너지, 파란 영역은 수전으로 공급되는 전기에너지, 빨간 영역은 배터리 방전으로 공급되는 에너지이다. 굵은 검정 곡선은 시간별 부하이며, 태양광과 수전의 합이 시간별 부하를 초과한 경우 그 초과분은 배터리로 충전된다.</p>
+
+<p><br /></p>
 
 <h2 id="투자회수기간-계산">투자회수기간 계산</h2>
 
@@ -671,15 +684,18 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
 
 1) <a href="/linprogone.html">최소비용 시스템과 시간별 자료의 중요성</a><br />
 2) <a href="/linprogtwo.html">배터리의 충/방전 스케줄 결정: 수식</a> <br />
-3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드</a> <br />
-4) <b>태양광과 배터리의 용량 결정</b> <br />
+3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드 및 결과</a> <br />
+4) <b>태양광과 배터리의 '용량' 결정 (코드 및 결과 포함)</b> <br />
 5) <a href="/linprogfive.html">정수 (integer) 변수 도입으로 현실 설명력 증대</a> <br />
 6) <a href="/linprogsix.html">공동주택의 '누진제' 전기요금 (단일계약) 수식</a> <br />
 7) <a href="/linprogseven.html"> 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)</a> <br />
 8) <a href="/linprogeight.html"> '부분'부하 성능 관련 제약들</a> <br />
-9) <a href="/linprognine.html"> 중/대형 설비의 출력 조정 관련 제약들</a>
+9) <a href="/linprognine.html"> 출력 조정 관련 제약들</a>
 
 </div>
+
+<p><br />
+(선형계획법 시리즈의 지식들은, 필자가 2012년부터 <a href="http://www.besico.co.kr/">(주)블루이코노미전략연구원 (대표: 오시덕 박사)</a>과 함께 선형계획법 기반으로 신재생 및 열병합 에너지 시스템 경제성분석/ 최적 에너지시스템 도출 Tool 개발/ 에너지 정책 효과 분석 관련 프로젝트들을 여러 건 수행하며 축적한 ‘기본 지식’에 해당하는 부분임을 밝힌다.)</p>
 
         
       </section>
@@ -736,7 +752,7 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+-+4%29+%ED%83%9C%EC%96%91%EA%B4%91%EA%B3%BC+%EB%B0%B0%ED%84%B0%EB%A6%AC%EC%9D%98+%EC%9A%A9%EB%9F%89+%EA%B2%B0%EC%A0%95%20http%3A%2F%2Flocalhost%3A4000%2Flinprogfour.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+-+4%29+%ED%83%9C%EC%96%91%EA%B4%91%EA%B3%BC+%EB%B0%B0%ED%84%B0%EB%A6%AC%EC%9D%98+%27%EC%9A%A9%EB%9F%89%27+%EA%B2%B0%EC%A0%95+%28%EC%BD%94%EB%93%9C+%EB%B0%8F+%EA%B2%B0%EA%B3%BC+%ED%8F%AC%ED%95%A8%29%20http%3A%2F%2Flocalhost%3A4000%2Flinprogfour.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flinprogfour.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -773,7 +789,7 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
       <a href="/linprogfive.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대</a>
     
     
-      <a href="/linprogthree.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>선형계획법 기반 분산에너지시스템 최적화 - 3) 배터리의 충/방전 스케줄 결정: Python 코드</a>
+      <a href="/linprogthree.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>선형계획법 기반 분산에너지시스템 최적화 - 3) 배터리의 충/방전 스케줄 결정: Python 코드 및 결과</a>
         
   
 
@@ -797,9 +813,13 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src="/assets/images/linprognine/portfolio.png" alt="">
+      </div>
+    
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprognine.html" rel="permalink">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) 중/대형 설비의 출력 조정 관련 제약들
+        <a href="/linprognine.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 9) 출력 조정 관련 제약들
 </a>
       
     </h2>
@@ -821,7 +841,7 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">전기는 배터리 등 별도의 비싼 저장용 설비가 없다면 저장할 수 없으므로, 발전설비 포트폴리오에는 부하의 시간적 변동을 고려해 최대수요까지 감당할 수 있는 설비가 포함되어야 한다.
+    <p class="archive__item-excerpt" itemprop="description">에너지 전환기 이전의 전통적 발전 포트폴리오에서도, 연료비가 저렴하고 탄소 배출이 적은 원자력’만’을 쓰지 않고 석탄/ 가스(LNG)/ 중유/ 양수발전 등을 결합해 구성했다. 이는 시간별로 전기 부하가 달라지며, 전원별로 ‘부하 변동에 대응하는 출력 조정 능력’이 다르기 때문이다.
 </p>
   </article>
 </div>
@@ -834,9 +854,13 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src="/assets/images/linprogeight/chp_eff.png" alt="">
+      </div>
+    
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprogeight.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 성능 관련 제약들
+        <a href="/linprogeight.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 관련 제약들
 </a>
       
     </h2>
@@ -871,9 +895,13 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src="/assets/images/linprogseven/systemfigure.png" alt="">
+      </div>
+    
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprogseven.html" rel="permalink">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 7) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)
+        <a href="/linprogseven.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 7) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)
 </a>
       
     </h2>
@@ -895,7 +923,7 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">지금까지는 전기에 대해서만 다룸, 그러나 건물의 경우 난방과 냉방을 쓰고, 지역에너지의 경우에도 지역난방 등이 있음
+    <p class="archive__item-excerpt" itemprop="description">이전 포스팅들에서는 전기 부하만을 다루었으나, 실제로는 냉방/난방/급탕 등 열 부하 또한 에너지 소비에서 상당한 비중을 차지한다. 따라서 ‘전기와 열을 모두’ 공급하는 분산형 에너지시스템의 최적 구성 및 스케줄을 도출할 수 있어야 한다.
 </p>
   </article>
 </div>
@@ -907,6 +935,10 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
 
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/linprogsix/graph.png" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -960,10 +992,14 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
       <div class="page__footer-follow">
   <ul class="social-icons">
     
-      <li><strong>E-mail</strong></li>
+      <li><strong>Contact:</strong></li>
     
 
     
+      
+        
+          <li><a href="mailto:song4energy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
       
         
           <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>

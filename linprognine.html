@@ -10,8 +10,8 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) 중/대형 설비의 출력 조정 관련 제약들 | 에너지엔데이터연구소</title>
-<meta name="description" content="전기는 배터리 등 별도의 비싼 저장용 설비가 없다면 저장할 수 없으므로, 발전설비 포트폴리오에는 부하의 시간적 변동을 고려해 최대수요까지 감당할 수 있는 설비가 포함되어야 한다.">
+<!-- begin _includes/seo.html --><title>선형계획법 기반 분산에너지시스템 최적화 - 9) 출력 조정 관련 제약들 | 에너지엔데이터연구소</title>
+<meta name="description" content="에너지 전환기 이전의 전통적 발전 포트폴리오에서도, 연료비가 저렴하고 탄소 배출이 적은 원자력’만’을 쓰지 않고 석탄/ 가스(LNG)/ 중유/ 양수발전 등을 결합해 구성했다. 이는 시간별로 전기 부하가 달라지며, 전원별로 ‘부하 변동에 대응하는 출력 조정 능력’이 다르기 때문이다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -23,13 +23,15 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) 중/대형 설비의 출력 조정 관련 제약들">
+<meta property="og:title" content="선형계획법 기반 분산에너지시스템 최적화 - 9) 출력 조정 관련 제약들">
 <meta property="og:url" content="http://localhost:4000/linprognine.html">
 
 
-  <meta property="og:description" content="전기는 배터리 등 별도의 비싼 저장용 설비가 없다면 저장할 수 없으므로, 발전설비 포트폴리오에는 부하의 시간적 변동을 고려해 최대수요까지 감당할 수 있는 설비가 포함되어야 한다.">
+  <meta property="og:description" content="에너지 전환기 이전의 전통적 발전 포트폴리오에서도, 연료비가 저렴하고 탄소 배출이 적은 원자력’만’을 쓰지 않고 석탄/ 가스(LNG)/ 중유/ 양수발전 등을 결합해 구성했다. 이는 시간별로 전기 부하가 달라지며, 전원별로 ‘부하 변동에 대응하는 출력 조정 능력’이 다르기 때문이다.">
 
 
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/linprognine/portfolio.png">
 
 
 
@@ -344,8 +346,8 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) 중/대형 설비의 출력 조정 관련 제약들">
-    <meta itemprop="description" content="전기는 배터리 등 별도의 비싼 저장용 설비가 없다면 저장할 수 없으므로, 발전설비 포트폴리오에는 부하의 시간적 변동을 고려해 최대수요까지 감당할 수 있는 설비가 포함되어야 한다.">
+    <meta itemprop="headline" content="선형계획법 기반 분산에너지시스템 최적화 - 9) 출력 조정 관련 제약들">
+    <meta itemprop="description" content="에너지 전환기 이전의 전통적 발전 포트폴리오에서도, 연료비가 저렴하고 탄소 배출이 적은 원자력’만’을 쓰지 않고 석탄/ 가스(LNG)/ 중유/ 양수발전 등을 결합해 구성했다. 이는 시간별로 전기 부하가 달라지며, 전원별로 ‘부하 변동에 대응하는 출력 조정 능력’이 다르기 때문이다.">
     <meta itemprop="datePublished" content="2023-04-28T00:00:00+09:00">
     
 
@@ -353,7 +355,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/linprognine.html" class="u-url" itemprop="url">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) 중/대형 설비의 출력 조정 관련 제약들
+            <a href="http://localhost:4000/linprognine.html" class="u-url" itemprop="url">선형계획법 기반 분산에너지시스템 최적화 - 9) 출력 조정 관련 제약들
 </a>
           </h1>
           
@@ -382,73 +384,67 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#최소-부하">최소 부하</a></li><li><a href="#ramp-rate">Ramp rate</a></li><li><a href="#최소-기동유지시간정지유지시간">최소 기동유지시간/정지유지시간</a></li><li><a href="#시동-비용-start-up-cost">시동 비용 (start-up cost)</a></li></ul>
+              <ul class="toc__menu"><li><a href="#ramp-rate--duck-curve">Ramp rate (+ duck curve)</a></li><li><a href="#최소-기동유지시간정지유지시간">최소 기동유지시간/정지유지시간</a></li><li><a href="#시동-비용-start-up-cost">시동 비용 (start-up cost)</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <p>전기는 배터리 등 별도의 비싼 저장용 설비가 없다면 저장할 수 없으므로, 발전설비 포트폴리오에는 부하의 시간적 변동을 고려해 최대수요까지 감당할 수 있는 설비가 포함되어야 한다.</p>
+        <p>에너지 전환기 이전의 전통적 발전 포트폴리오에서도, 연료비가 저렴하고 탄소 배출이 적은 원자력’만’을 쓰지 않고 석탄/ 가스(LNG)/ 중유/ 양수발전 등을 결합해 구성했다. 이는 시간별로 전기 부하가 달라지며, 전원별로 ‘부하 변동에 대응하는 출력 조정 능력’이 다르기 때문이다.</p>
 
-<p>이 때 24시간 내내 정격출력으로 운전하여 기저부하(base load)를 담당하는 데는 연료비가 상대적으로 저렴한 원자력, 석탄화력을 사용하고, 낮에만 발전하여 첨두부하(peak load)를 담당하는 데는 부하변동에 대한 응답성이 좋은 LNG/ 중유/ 양수발전 등을 사용한다.</p>
-
-<p><img src="/assets/images/linprogeight/portfolio.png" alt="portfolio" class="align-center" />
+<p><img src="/assets/images/linprognine/portfolio.png" alt="portfolio" class="align-center" />
 <em>시간대별 발전 포트폴리오. 일정 출력을 유지하는 기저설비, 특정 시간대에만 가동되는 첨두설비로 구성됨.<br />(출처: 전력거래소)</em></p>
 
-<p>이 때, 부하 변동에 대한 응답성이 좋다는 것은 아래와 같이 구체화할 수 있음</p>
+<p>위 그림에서 보듯, 24시간 내내 거의 일정하게 운전하여 기저부하(base load)를 담당하는 데는 연료비가 상대적으로 저렴한 원자력, 석탄화력을 사용하고, 낮에만 발전하여 첨두부하(peak load)를 담당하는 데는 부하변동에 대한 응답성이 좋은 LNG/ 중유/ 양수발전 등을 사용한다.</p>
 
-<p>1) 시간당 변화시킬 수 있는 출력 범위가 넓다</p>
+<p>이 때, 부하 변동에 대한 응답성이 좋다는 것은 아래와 같이 구체화할 수 있다.</p>
 
-<p>2) 최소 가능 출력과 정격출력 간 차이가 크다</p>
+<p>1) 시간당 변화시킬 수 있는 출력 범위가 넓다.</p>
 
-<p>3) 기동/정지 상태의 전환을 비교적 빈번하게 할 수 있다</p>
+<p>2) 기동/정지 상태의 전환을 비교적 빈번하게 할 수 있다.</p>
 
-<p>4) 연료비와는 별도로 기동 시 발생하는 비용이 크지 않다</p>
+<p>3) 연료비와는 별도로 시동 (정지에서 기동상태로 전환) 시 발생하는 비용이 크지 않다.</p>
 
-<p>위에서 최소 가능 출력은, 마지 자전거의 속도가 너무 낮아지면 넘어지므로 최소한의 속력은 유지해야 하는 것에 비유할 수 있다</p>
+<p>중/대형 발전설비들은 대개 이러한 ‘응답성’이 아주 좋지는 않다. 그러므로 시간별 수요/공급을 고려하는 선형계획법을 중/대형 발전설비 대상으로 적용 시, 이러한 ‘응답성’ 또한 제약조건으로 추가해야 한다. (이를테면 시/구 단위 지역난방 시스템을 대상으로 할 경우, 이러한 제약이 중요하다.)</p>
 
-<p>어떤 발전 설비가 부하변동에 대해 응답성이 좋으며 응답을 위해 출력 및 기동/정지 상태를 자주 바꿔도 설비에 무리가 가지 않는다면, 이전 글까지의 제약으로도 충분함.</p>
+<p>사실 이는 중/대형 발전설비에만 국한되지 않는다. 이를테면 연료전지의 경우에도 소규모 설치가 가능한 발전 설비이지만, 부하 응답성이 기본적으로 나쁘다. 그래서 정격출력이 반강제되고, 정지 후 재기동 및 기동 유지에 장시간을 요구한다.</p>
 
-<p>그러나 상당수의 설비는 그렇지 않음.</p>
-
-<p>전통적인 발전설비 뿐 아니라, 연료전지의 경우에도 발전 설비이지만 부하 응답성이 기본적으로 좋지 않아 정격출력이 반강제되고, 정지 후 재기동 및 기동 유지에 장시간을 요구한다.</p>
-
-<p>이 포스팅에서는 부하추종을 위한 출력 조정 관련 제약들을 설명함</p>
-
-<h2 id="최소-부하">최소 부하</h2>
-
-<p>자동차가 고속도로를 달릴 경우 ‘최저 속도’ 제한이 있다. 해당 속도 미만으로 달리면 교통 흐름에 악영향을 주기 때문이다.</p>
-
-<p>발전기의 경우에도 최소 출력이 있으며, 최소 출력 미만으로 억지로 출력을 낮출 경우, (전체 계통에 악영향을 주는 것은 아니지만) 해당 발전기에 걸리는 스트레스가 증가해 기기 수명을 저하시킨다. 그러므로 최소 출력 이상으로 운전할 것이 권장된다.</p>
-
-<p>어떤 설비의 정격출력을 $S$, 최소부하율을 $\gamma$라 하자. 이를테면 어떤 분산형 발전기의 정격용량이 300kW 이고 최소부하율이 20% (즉 0.2)인 경우, 해당 설비는 가동 중에 60~300kW의 범위에서만 발전을 할 수 있다. 60kW 미만의 출력은 내지 못하도록 제한된다.</p>
-
-<p>특정 설비의 시간 별 가동 여부를 표현하는 ‘이진’변수 $u[t]$를 정의하자. 그리고 시간 $t$에 해당 설비가 가동 중이면 $u[t]=1$, 정지 상태이면 $u[t]=0$이라 하자. 이 때 최소부하 제약의 수식은 아래와 같다.</p>
-
-<p>$ u[t] \gamma_{min} S \leq p_{gen}[t] \leq u[t] S $</p>
+<p>이 포스팅에서는 ‘응답성’을 나타내는 출력 조정 관련 제약들을 설명한다.</p>
 
 <p><br /></p>
 
-<h2 id="ramp-rate">Ramp rate</h2>
+<h2 id="ramp-rate--duck-curve">Ramp rate (+ duck curve)</h2>
 
 <p>차를 몰 때 악셀을 밟아도 1초당 늘릴 수 있는 속력에는 한계가 있다. 또한 급브레이크를 밟아도 1초당 줄일 수 있는 속력에는 한계가 있다. 무리해서 급브레이크를 계속 밟으면 차량 수명에 악영향을 끼치기도 한다.</p>
 
-<p>마찬가지로 발전기의 출력 또한 갑자기 크게 늘리거나 줄이는 것에는 한계가 있고 그 한계를 무리해서 넘으면 수명에 악영향을 끼친다. 그래서, 변동폭을 제한함.</p>
+<p>마찬가지로 발전기의 출력 또한 갑자기 크게 늘리거나 줄이는 것에는 한계가 있고 그 한계를 무리해서 넘으면 수명에 악영향을 끼친다. 그래서, 단위 시간 동안의 출력 증가/ 감소 각각에 대해 최대값을 설정하며, 이를  ramp rate라 한다.</p>
 
-<p>시점 $t-1$에서 $t$까지 (즉 1 time step 동안) 발전기의 출력을 증가시키는 데는 한계가 있음, 마찬가지로 1 time step 동안 발전기의 출력을 감소시키는 데에도 한계가 있음.</p>
+<p>해당 최대값들을 정격출력 $s$로 나눈 값을 각각 $\delta_{up}$, $\delta_{down}$이라 할 때, ramp rate 제약은 아래와 같다.</p>
 
-<p>해당 한계값들을 정격출력으로 나눈 값을 각각 $\delta_{up}$, $\delta_{down}$이라 할 때 수식은 아래와 같다.</p>
+<p>$ -\delta_{down} s \leq p_{gen}[t] - p_{gen}[t-1] \leq \delta_{up} s $</p>
 
-<p>$ -\delta_{down} S \leq p_{gen}[t] - p_{gen}[t-1] \leq \delta_{up} S $</p>
+<p>즉 시간 $t-1$ 대비 시간 $t$에서 출력을 증가시키더라도 그 증가분은 $\delta_{up} s$를 초과할 수 없다. 반대로 시간 $t$에서 출력을 감소시키더라도 그 감소분은 $ \delta_{down} s$를 초과할 수 없다.</p>
+
+<p><br />
+한편 계통 내에 태양광 발전의 비중이 증가하면서, ramp rate가 큰 발전 설비에 대한 수요가 증가할 전망이다.</p>
+
+<p>이는 아래 그림과 같이, 태양광 비중이 증가할수록 낮 시간의 ‘태양광 발전량을 제한 순 부하 (net load)’가 작아지면서, 아침의 단위 시간 당 부하 감소량/ 오후의 단위 시간 당 부하 증가량이 커지기 때문이다.</p>
+
+<p><img src="/assets/images/linprognine/duckcurve.jpg" alt="duckcurve" class="align-center" />
+<em>시간에 따라 태양광 발전 비중 증가 가정 시, 태양광 발전량을 제한 순 부하의 변화. 이를 duck curve라 부른다.<br />(출처: https://www.synergy.net.au/Blog/2021/10/Everything-you-need-to-know-about-the-Duck-Curve)</em></p>
+
+<p>이러한 부하의 급격한 변동은 화력발전 설비들의 급격한 출력 변동으로 이어지고, 이는 시스템 불안정성을 야기한다. 그러므로 이에 대응할 수 있도록 ramp rate가 큰 발전 설비/ 전기 저장 설비/ 잉여전력을 활용하는 섹터커플링/ 다른 시간의 전기 부하 이전 등 ‘유연성 자원’ 확보의 필요성이 증가하고 있다.</p>
+
+<p>Ramp rate에 대한 제약을 응용해서, 만약 시점 $t$에서의 화력발전의 합을 $p_{\text{gen}}[t]$라 할 때, $p_{\text{gen}}[t] - p_{\text{gen}}[t-1]$ 의 상한값과 하한값을 설정할 수 있다. 이러한 제약은 화력발전의 출력 변동을 허용 선 이하로 제한할 경우의 적정 태양광 보급 안/ 유연성 자원 요구량 산출 등의 정책 연구에 활용할 수 있다.</p>
 
 <p><br /></p>
 
 <h2 id="최소-기동유지시간정지유지시간">최소 기동유지시간/정지유지시간</h2>
 
-<p>어떤 기계든, 지나치게 껐다 켰다를 빨리 반복하면 해당 기계에 좋지 않은 영향을 줄 것이라는 것을 짐작할 수 있다. 이는 발전기도 마찬가지로, 빈번하게 기동-정지 전환 시 기기 수명에 악영향을 미친다.</p>
+<p>어떤 기계든, 지나치게 껐다 켰다를 빨리 반복하면 해당 기계 수명에 악영향을 미칠 것이다. 이는 발전기도 마찬가지로, 빈번하게 기동-정지 전환 시 기기 수명에 악영향을 미친다.</p>
 
-<p>발전기가 정지 상태에서 기동 상태로 전환하면, 일정 시간 동안 기동 상태를 유지해 줘야 함. 또한 기동 상태에서 정지 상태로 전환하면, 일정 시간 동안 정지 상태를 유지해 줘야 함.</p>
+<p>이 때문에, 발전기가 정지 상태에서 기동 상태로 전환하면, 일정 시간 동안 기동 상태를 유지해 줘야 한다. 또한 기동 상태에서 정지 상태로 전환하면, 일정 시간 동안 정지 상태를 유지해 줘야 한다.</p>
 
-<p>특히 출력이 높고 기저설비에 가깝게 설계된 경우, 이런 최소 기동유지시간/정지유지시간이 2 time step 이상일 수 있음.</p>
+<p>특히 규모가 크고 기저설비에 가깝게 설계된 경우, 이런 최소 기동유지시간/정지유지시간이 수 시간 이상일 수 있다.</p>
 
 <p><br />
 어떤 발전설비가 정지상태에서 기동상태로 전환 시 ‘최소한 3시간은’ 기동상태를 유지해야 한다고 가정하자.</p>
@@ -476,7 +472,7 @@
 
 <h2 id="시동-비용-start-up-cost">시동 비용 (start-up cost)</h2>
 
-<p>일정 규모 이상의 발전기의 경우, 정지 상태에서 기동 상태로 전환시키는 ‘시동’ 시 무시할 수 없는 수준의 시동비용이 발생하기도 한다. 이는 전력 생산을 위한 연료비용과는 별개의 비용으로 반영하여야 한다.</p>
+<p>일정 규모 이상의 발전기를 정지 상태에서 기동 상태로 전환, 즉 ‘시동’ 시, 무시할 수 없는 수준의 시동비용이 발생하기도 한다. 이는 전력 생산을 위한 연료 비용과는 별개의 비용으로 반영하여야 한다.</p>
 
 <p>시점 $t$에서 시동을 한다는 것은 $u[t-1]=0$이면서 $u[t]=1$임을 의미한다. 즉 시동 여부를 의미하는 새로운 이진수 $v[t]$를 도입해서, $u[t-1]=0$이면서 $u[t]=1$일 때는 반드시 $v[t]=1$이 되도록 제약을 걸고, $v[t]$에 시동비용 계수를 곱한 항을 목적함수에 추가해야 한다.</p>
 
@@ -492,15 +488,18 @@
 
 1) <a href="/linprogone.html">최소비용 시스템과 시간별 자료의 중요성</a><br />
 2) <a href="/linprogtwo.html">배터리의 충/방전 스케줄 결정: 수식</a> <br />
-3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드</a> <br />
-4) <a href="/linprogfour.html">태양광과 배터리의 용량 결정</a> <br />
+3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드 및 결과</a> <br />
+4) <a href="/linprogfour.html">태양광과 배터리의 '용량' 결정 (코드 및 결과 포함)</a> <br />
 5) <a href="/linprogfive.html">정수 (integer) 변수 도입으로 현실 설명력 증대</a> <br />
 6) <a href="/linprogsix.html">공동주택의 '누진제' 전기요금 (단일계약) 수식</a> <br />
 7) <a href="/linprogseven.html"> 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)</a> <br />
 8) <a href="/linprogeight.html"> '부분'부하 성능 관련 제약들</a> <br />
-9) <b> 중/대형 설비의 출력 조정 관련 제약들</b>
+9) <b> 출력 조정 관련 제약들</b>
 
 </div>
+
+<p><br />
+(선형계획법 시리즈의 지식들은, 필자가 2012년부터 <a href="http://www.besico.co.kr/">(주)블루이코노미전략연구원 (대표: 오시덕 박사)</a>과 함께 선형계획법 기반으로 신재생 및 열병합 에너지 시스템 경제성분석/ 최적 에너지시스템 도출 Tool 개발/ 에너지 정책 효과 분석 관련 프로젝트들을 여러 건 수행하며 축적한 ‘기본 지식’에 해당하는 부분임을 밝힌다.)</p>
 
         
       </section>
@@ -557,7 +556,7 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%5B%EC%9E%91%EC%84%B1%EC%A4%91%5D+%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+-+9%29+%EC%A4%91%2F%EB%8C%80%ED%98%95+%EC%84%A4%EB%B9%84%EC%9D%98+%EC%B6%9C%EB%A0%A5+%EC%A1%B0%EC%A0%95+%EA%B4%80%EB%A0%A8+%EC%A0%9C%EC%95%BD%EB%93%A4%20http%3A%2F%2Flocalhost%3A4000%2Flinprognine.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+-+9%29+%EC%B6%9C%EB%A0%A5+%EC%A1%B0%EC%A0%95+%EA%B4%80%EB%A0%A8+%EC%A0%9C%EC%95%BD%EB%93%A4%20http%3A%2F%2Flocalhost%3A4000%2Flinprognine.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flinprognine.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -584,7 +583,7 @@
       <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
     
     
-      <a href="/linprogeight.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>선형계획법 기반 분산에너지시스템 최적화 - 8) '부분'부하 성능 관련 제약들</a>
+      <a href="/linprogeight.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>선형계획법 기반 분산에너지시스템 최적화 - 8) '부분'부하 관련 제약들</a>
         
   
 
@@ -608,9 +607,13 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src="/assets/images/linprogeight/chp_eff.png" alt="">
+      </div>
+    
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprogeight.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 성능 관련 제약들
+        <a href="/linprogeight.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 관련 제약들
 </a>
       
     </h2>
@@ -645,9 +648,13 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src="/assets/images/linprogseven/systemfigure.png" alt="">
+      </div>
+    
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprogseven.html" rel="permalink">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 7) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)
+        <a href="/linprogseven.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 7) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)
 </a>
       
     </h2>
@@ -669,7 +676,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">지금까지는 전기에 대해서만 다룸, 그러나 건물의 경우 난방과 냉방을 쓰고, 지역에너지의 경우에도 지역난방 등이 있음
+    <p class="archive__item-excerpt" itemprop="description">이전 포스팅들에서는 전기 부하만을 다루었으나, 실제로는 냉방/난방/급탕 등 열 부하 또한 에너지 소비에서 상당한 비중을 차지한다. 따라서 ‘전기와 열을 모두’ 공급하는 분산형 에너지시스템의 최적 구성 및 스케줄을 도출할 수 있어야 한다.
 </p>
   </article>
 </div>
@@ -681,6 +688,10 @@
 
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/linprogsix/graph.png" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -718,6 +729,10 @@
 
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/mypaperone/islandsystem.png" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -771,10 +786,14 @@
       <div class="page__footer-follow">
   <ul class="social-icons">
     
-      <li><strong>E-mail</strong></li>
+      <li><strong>Contact:</strong></li>
     
 
     
+      
+        
+          <li><a href="mailto:song4energy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
       
         
           <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>

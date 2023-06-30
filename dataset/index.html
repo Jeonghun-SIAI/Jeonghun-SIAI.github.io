@@ -107,7 +107,7 @@
 </head>
 
 <body
-  class="layout--home">
+  class="layout--category_dataset">
   <nav class="skip-links">
   <ul>
     <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
@@ -186,13 +186,11 @@
   </div>
 
   <div class="author__urls-wrapper">
-    <button class="btn btn--inverse">E-mail</button>
+    <!-- <button class="btn btn--inverse">Contact</button>
     <ul class="author__urls social-icons">
       
 
       
-        
-          
         
           
         
@@ -212,7 +210,7 @@
         <li>
           <a href="mailto:song4energy@gmail.com" rel="me" class="u-email">
             <meta itemprop="email" content="song4energy@gmail.com" />
-            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">E-mail</span>
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
           </a>
         </li>
       
@@ -259,7 +257,7 @@
 
       
 
-      
+       // 주석처리해서, 화면 줄일 경우 나타나는 '팔로우' 버튼 없앰--> 
 
       <!--
   <li>
@@ -422,11 +420,176 @@
     
       <h1 id="page-title" class="page__title">Dataset</h1>
     
-    <!-- Just some nice to have styles for the pager buttons -->
+    
+
+<!-- 
+<div class="entries-grid">
+  
+</div> -->
+
+<!-- 
+ 
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/monthlyenergythree/outliers.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/monthlyenergythree.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-23T00:00:00+09:00">2023-04-23</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
+</p>
+  </article>
+</div>
+  
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/monthlyenergytwo/abnormalpattern.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/monthlyenergytwo.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-22T00:00:00+09:00">2023-04-22</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서 건물 에너지 관련 연구를 위한, 각 건물의 지번별/월별 전기/도시가스 사용량 데이터와 표제부의 결합을 소개했다. 그렇다면 결합된 데이터를 그대로 쓰면 되는가? 그렇지 않다. 분명히 ‘이상한’ data point들이 존재할 것이기 때문이다. 데이터 기반의 연구개발을 ...</p>
+  </article>
+</div>
+  
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/monthlyenergyone/typicalpattern.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/monthlyenergyone.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-20T00:00:00+09:00">2023-04-20</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">필자의 박사과정 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
+</p>
+  </article>
+</div>
+  
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/preprocessmocanu/data_questionmarks.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/preprocessmocanu.html" rel="permalink">데이터 결측치 처리 예시 - 주택의 분 단위 전기 부하 자료
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-09T00:00:00+09:00">2023-04-09</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 ‘스마트그리드 빅데이터 분석의 활용’ 이 있다. (링크)
+</p>
+  </article>
+</div>
+  -->
+
 <style>
-  ul.pager { text-align: center; list-style: none; }
+  ul.pager { text-align: center; list-style: none; clear: both;} 
   ul.pager li {display: inline;border: 1px solid black; padding: 10px; margin: 5px;}
 </style>
+<!-- 위 ul.pager { } 안에 clear: both; 를 넣어 줘야 pagination 버튼들이 글 목록 밑으로 감 -->
 
 <div class="home">
 
@@ -440,77 +603,16 @@
         All calls to site.posts should be replaced by paginator.posts 
     -->
     
-      <li>
-        <h2>
-          <a class="post-link" href="/monthlyenergythree.html">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거</a>
-        </h2>
-        <span class="post-meta">Apr 23, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
-</p>
-        
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/monthlyenergytwo.html">건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거</a>
-        </h2>
-        <span class="post-meta">Apr 22, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서 건물 에너지 관련 연구를 위한, 각 건물의 지번별/월별 전기/도시가스 사용량 데이터와 표제부의 결합을 소개했다. 그렇다면 결합된 데이터를 그대로 쓰면 되는가? 그렇지 않다. 분명히 ‘이상한’ data point들이 존재할 것이기 때문이다. 데이터 기반의 연구개발을 ...</p>
-        
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/monthlyenergyone.html">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화</a>
-        </h2>
-        <span class="post-meta">Apr 20, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">필자의 박사과정 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
-</p>
-        
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/preprocessmocanu.html">데이터 결측치 처리 예시 - 주택의 분 단위 전기 부하 자료</a>
-        </h2>
-        <span class="post-meta">Apr 9, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 ‘스마트그리드 빅데이터 분석의 활용’ 이 있다. (링크)
-</p>
-        
-      </li>
-    
-  </ul>
-  
-  <!-- 
-    Showing buttons to move to the next and to the previous list of posts (pager buttons).
-  -->
-  <!-- 
- -->
-  
-
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
-
-</div>
-
-<!-- ---
-layout: archive
----
+      
 
 
 
-<h3 class="archive__subtitle">최근 포스트</h3>
-
-
-
-
-<div class="entries-list">
-  
-    
-
-
-
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/monthlyenergythree/outliers.png" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -541,13 +643,17 @@ layout: archive
   </article>
 </div>
 
-  
     
+      
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/monthlyenergytwo/abnormalpattern.png" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -577,13 +683,17 @@ layout: archive
   </article>
 </div>
 
-  
     
+      
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/monthlyenergyone/typicalpattern.png" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -614,13 +724,17 @@ layout: archive
   </article>
 </div>
 
-  
     
+      
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/preprocessmocanu/data_questionmarks.png" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -651,11 +765,19 @@ layout: archive
   </article>
 </div>
 
+    
+  </ul>
+
+    <!-- 
+    Showing buttons to move to the next and to the previous list of posts (pager buttons).
+  -->
+  <!-- 
+ -->
   
+
 </div>
 
 
- -->
 
   </div>
 </div>
@@ -675,10 +797,14 @@ layout: archive
       <div class="page__footer-follow">
   <ul class="social-icons">
     
-      <li><strong>E-mail</strong></li>
+      <li><strong>Contact:</strong></li>
     
 
     
+      
+        
+          <li><a href="mailto:song4energy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
       
         
           <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>

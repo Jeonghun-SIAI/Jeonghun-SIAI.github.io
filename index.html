@@ -188,13 +188,11 @@
   </div>
 
   <div class="author__urls-wrapper">
-    <button class="btn btn--inverse">E-mail</button>
+    <!-- <button class="btn btn--inverse">Contact</button>
     <ul class="author__urls social-icons">
       
 
       
-        
-          
         
           
         
@@ -214,7 +212,7 @@
         <li>
           <a href="mailto:song4energy@gmail.com" rel="me" class="u-email">
             <meta itemprop="email" content="song4energy@gmail.com" />
-            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">E-mail</span>
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
           </a>
         </li>
       
@@ -261,7 +259,7 @@
 
       
 
-      
+       // 주석처리해서, 화면 줄일 경우 나타나는 '팔로우' 버튼 없앰--> 
 
       <!--
   <li>
@@ -444,17 +442,17 @@
     
       <li>
         <h2>
-          <a class="post-link" href="/linprognine.html">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) 중/대형 설비의 출력 조정 관련 제약들</a>
+          <a class="post-link" href="/linprognine.html">선형계획법 기반 분산에너지시스템 최적화 - 9) 출력 조정 관련 제약들</a>
         </h2>
         <span class="post-meta">Apr 28, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">전기는 배터리 등 별도의 비싼 저장용 설비가 없다면 저장할 수 없으므로, 발전설비 포트폴리오에는 부하의 시간적 변동을 고려해 최대수요까지 감당할 수 있는 설비가 포함되어야 한다.
+        <p class="archive__item-excerpt" itemprop="description">에너지 전환기 이전의 전통적 발전 포트폴리오에서도, 연료비가 저렴하고 탄소 배출이 적은 원자력’만’을 쓰지 않고 석탄/ 가스(LNG)/ 중유/ 양수발전 등을 결합해 구성했다. 이는 시간별로 전기 부하가 달라지며, 전원별로 ‘부하 변동에 대응하는 출력 조정 능력’이 다르기 때문이다.
 </p>
         
       </li>
     
       <li>
         <h2>
-          <a class="post-link" href="/linprogeight.html">선형계획법 기반 분산에너지시스템 최적화 - 8) &#39;부분&#39;부하 성능 관련 제약들</a>
+          <a class="post-link" href="/linprogeight.html">선형계획법 기반 분산에너지시스템 최적화 - 8) &#39;부분&#39;부하 관련 제약들</a>
         </h2>
         <span class="post-meta">Apr 27, 2023</span>
         <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서는 설비의 효율과 COP(성능계수)를 상수로 가정했지만, 실제로는 부하율에 따라 효율과 COP가 달라진다. 이를테면 열병합발전기의 경우, 최대 출력(정격 출력)으로 운전할 때 비해 더 낮은 출력으로 ‘부분부하’운전 시 발전효율이 저하됨이 알려져 있다.
@@ -464,10 +462,10 @@
     
       <li>
         <h2>
-          <a class="post-link" href="/linprogseven.html">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 7) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)</a>
+          <a class="post-link" href="/linprogseven.html">선형계획법 기반 분산에너지시스템 최적화 - 7) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)</a>
         </h2>
         <span class="post-meta">Apr 26, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">지금까지는 전기에 대해서만 다룸, 그러나 건물의 경우 난방과 냉방을 쓰고, 지역에너지의 경우에도 지역난방 등이 있음
+        <p class="archive__item-excerpt" itemprop="description">이전 포스팅들에서는 전기 부하만을 다루었으나, 실제로는 냉방/난방/급탕 등 열 부하 또한 에너지 소비에서 상당한 비중을 차지한다. 따라서 ‘전기와 열을 모두’ 공급하는 분산형 에너지시스템의 최적 구성 및 스케줄을 도출할 수 있어야 한다.
 </p>
         
       </li>
@@ -478,16 +476,6 @@
         </h2>
         <span class="post-meta">Apr 25, 2023</span>
         <p class="archive__item-excerpt" itemprop="description">이전에 건물 내 태양광/배터리 설치 시의 최적 용량/스케줄 도출에 대해 설명했는데, 이는 ‘시간별 요금제를 적용받는 일반용 건물’에 대한 내용이었다. 그런데 주택에서는, ‘누진제’라 불리는, 전기를 많이 쓰면 단가가 올라가 요금이 급증하는 요금 체계를 적용한다.
-</p>
-        
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/linprogfive.html">선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대</a>
-        </h2>
-        <span class="post-meta">Apr 24, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다.
 </p>
         
       </li>
@@ -540,7 +528,7 @@
     
 
     
-      <li><a href="/page6">6</a></li>
+      <li><a href="/page7">7</a></li>
     
 
     
@@ -588,7 +576,7 @@ layout: archive
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprognine.html" rel="permalink">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 9) 중/대형 설비의 출력 조정 관련 제약들
+        <a href="/linprognine.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 9) 출력 조정 관련 제약들
 </a>
       
     </h2>
@@ -610,7 +598,7 @@ layout: archive
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">전기는 배터리 등 별도의 비싼 저장용 설비가 없다면 저장할 수 없으므로, 발전설비 포트폴리오에는 부하의 시간적 변동을 고려해 최대수요까지 감당할 수 있는 설비가 포함되어야 한다.
+    <p class="archive__item-excerpt" itemprop="description">에너지 전환기 이전의 전통적 발전 포트폴리오에서도, 연료비가 저렴하고 탄소 배출이 적은 원자력’만’을 쓰지 않고 석탄/ 가스(LNG)/ 중유/ 양수발전 등을 결합해 구성했다. 이는 시간별로 전기 부하가 달라지며, 전원별로 ‘부하 변동에 대응하는 출력 조정 능력’이 다르기 때문이다.
 </p>
   </article>
 </div>
@@ -625,7 +613,7 @@ layout: archive
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprogeight.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 성능 관련 제약들
+        <a href="/linprogeight.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 관련 제약들
 </a>
       
     </h2>
@@ -662,7 +650,7 @@ layout: archive
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprogseven.html" rel="permalink">[작성중] 선형계획법 기반 분산에너지시스템 최적화 - 7) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)
+        <a href="/linprogseven.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 7) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)
 </a>
       
     </h2>
@@ -684,7 +672,7 @@ layout: archive
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">지금까지는 전기에 대해서만 다룸, 그러나 건물의 경우 난방과 냉방을 쓰고, 지역에너지의 경우에도 지역난방 등이 있음
+    <p class="archive__item-excerpt" itemprop="description">이전 포스팅들에서는 전기 부하만을 다루었으나, 실제로는 냉방/난방/급탕 등 열 부하 또한 에너지 소비에서 상당한 비중을 차지한다. 따라서 ‘전기와 열을 모두’ 공급하는 분산형 에너지시스템의 최적 구성 및 스케줄을 도출할 수 있어야 한다.
 </p>
   </article>
 </div>
@@ -722,43 +710,6 @@ layout: archive
 
 
     <p class="archive__item-excerpt" itemprop="description">이전에 건물 내 태양광/배터리 설치 시의 최적 용량/스케줄 도출에 대해 설명했는데, 이는 ‘시간별 요금제를 적용받는 일반용 건물’에 대한 내용이었다. 그런데 주택에서는, ‘누진제’라 불리는, 전기를 많이 쓰면 단가가 올라가 요금이 급증하는 요금 체계를 적용한다.
-</p>
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/linprogfive.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-24T00:00:00+09:00">2023-04-24</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">지금까지의 선형계획 관련 포스팅들에서는, 모든 변수들을 ‘음이 아닌 실수’ 라고 가정했다. 그러나, 만약 규격 용량이 정해진 발전기를 도입한다면, ‘이 발전기를 3.5대 도입하는 것이 최적이다’ 라고 보고하는 것은 비현실적이다. 발전기 대수는 3대 또는 4대이기 때문이다.
 </p>
   </article>
 </div>
@@ -809,7 +760,7 @@ layout: archive
     
 
     
-      <li><a href="/page6">6</a></li>
+      <li><a href="/page7">7</a></li>
     
 
     
@@ -839,10 +790,14 @@ layout: archive
       <div class="page__footer-follow">
   <ul class="social-icons">
     
-      <li><strong>E-mail</strong></li>
+      <li><strong>Contact:</strong></li>
     
 
     
+      
+        
+          <li><a href="mailto:song4energy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
       
         
           <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>

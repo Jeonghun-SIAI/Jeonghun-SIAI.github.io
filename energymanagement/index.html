@@ -46,6 +46,8 @@
 
 
 
+  <link rel="next" href="http://localhost:4000/energymanagement/page2/">
+
 
 <script type="application/ld+json">
   {
@@ -107,7 +109,7 @@
 </head>
 
 <body
-  class="layout--home">
+  class="layout--category_energymanagement">
   <nav class="skip-links">
   <ul>
     <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
@@ -186,13 +188,11 @@
   </div>
 
   <div class="author__urls-wrapper">
-    <button class="btn btn--inverse">E-mail</button>
+    <!-- <button class="btn btn--inverse">Contact</button>
     <ul class="author__urls social-icons">
       
 
       
-        
-          
         
           
         
@@ -212,7 +212,7 @@
         <li>
           <a href="mailto:song4energy@gmail.com" rel="me" class="u-email">
             <meta itemprop="email" content="song4energy@gmail.com" />
-            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">E-mail</span>
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
           </a>
         </li>
       
@@ -259,7 +259,7 @@
 
       
 
-      
+       // 주석처리해서, 화면 줄일 경우 나타나는 '팔로우' 버튼 없앰--> 
 
       <!--
   <li>
@@ -422,9 +422,209 @@
     
       <h1 id="page-title" class="page__title">EMS</h1>
     
-    <!-- Just some nice to have styles for the pager buttons -->
+    
+
+<!-- 
+<div class="entries-grid">
+  
+</div> -->
+
+<!-- 
+ 
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/reinforcefive/result_td3sac.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 5) TD3/ SAC를 통한 continuous control 도출
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-19T00:00:00+09:00">2023-04-19</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 ...</p>
+  </article>
+</div>
+  
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/reinforcefour/result_ddpg.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/reinforcefour.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 4) DDPG를 통한 continuous control 도출
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-18T00:00:00+09:00">2023-04-18</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에 ‘discrete’ action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic...</p>
+  </article>
+</div>
+  
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/reinforcethree/nn.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/reinforcethree.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-17T00:00:00+09:00">2023-04-17</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0, 1...</p>
+  </article>
+</div>
+  
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/reinforcetwo/reinforcement_deep.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/reinforcetwo.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-16T00:00:00+09:00">2023-04-16</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하에서 control을 얻게 됨을 논했다.
+</p>
+  </article>
+</div>
+  
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/reinforceone/system.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/reinforceone.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-15T00:00:00+09:00">2023-04-15</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할...</p>
+  </article>
+</div>
+  -->
+
 <style>
-  ul.pager { text-align: center; list-style: none; }
+  ul.pager { text-align: center; list-style: none; clear: both;}
   ul.pager li {display: inline;border: 1px solid black; padding: 10px; margin: 5px;}
 </style>
 
@@ -440,84 +640,16 @@
         All calls to site.posts should be replaced by paginator.posts 
     -->
     
-      <li>
-        <h2>
-          <a class="post-link" href="/reinforcefive.html">강화학습 기반 마이크로그리드 스케줄링 - 5) TD3/ SAC를 통한 continuous control 도출</a>
-        </h2>
-        <span class="post-meta">Apr 19, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 ...</p>
-        
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/reinforcefour.html">강화학습 기반 마이크로그리드 스케줄링 - 4) DDPG를 통한 continuous control 도출</a>
-        </h2>
-        <span class="post-meta">Apr 18, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에 ‘discrete’ action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic...</p>
-        
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/reinforcethree.html">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출</a>
-        </h2>
-        <span class="post-meta">Apr 17, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0, 1...</p>
-        
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/reinforcetwo.html">강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념</a>
-        </h2>
-        <span class="post-meta">Apr 16, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하에서 control을 얻게 됨을 논했다.
-</p>
-        
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/reinforceone.html">강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개</a>
-        </h2>
-        <span class="post-meta">Apr 15, 2023</span>
-        <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할...</p>
-        
-      </li>
-    
-  </ul>
-  
-  <!-- 
-    Showing buttons to move to the next and to the previous list of posts (pager buttons).
-  -->
-  <!-- 
- -->
-  
-
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
-
-</div>
-
-<!-- ---
-layout: archive
----
+      
 
 
 
-<h3 class="archive__subtitle">최근 포스트</h3>
-
-
-
-
-<div class="entries-list">
-  
-    
-
-
-
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/reinforcefive/result_td3sac.png" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -547,13 +679,17 @@ layout: archive
   </article>
 </div>
 
-  
     
+      
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/reinforcefour/result_ddpg.png" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -583,13 +719,17 @@ layout: archive
   </article>
 </div>
 
-  
     
+      
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/reinforcethree/nn.png" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -619,13 +759,17 @@ layout: archive
   </article>
 </div>
 
-  
     
+      
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/reinforcetwo/reinforcement_deep.png" alt="">
+      </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
@@ -656,47 +800,69 @@ layout: archive
   </article>
 </div>
 
-  
     
+  </ul>
 
 
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/reinforceone.html" rel="permalink">강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-04-15T00:00:00+09:00">2023-04-15</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할...</p>
-  </article>
 </div>
 
-  
-</div>
 
+
+    <!-- 
+    Showing buttons to move to the next and to the previous list of posts (pager buttons).
+  -->
+  <!-- 
+<nav class="pagination">
+  
+  <ul>
+    
+    
+    <li><a href="#" class="disabled"><span aria-hidden="true">이전</span></a></li>
+    
+
+    
+    
+      <li><a href="#" class="disabled current">1</a></li>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+
+    
+    
+
+    
+      <li><a href="/page2">2</a></li>
+    
+
+    
+    
+      <li><a href="/page2">다음</a></li>
+    
+  </ul>
+</nav>
 
  -->
+  
+  <ul class="pager">
+      
+      
+      <li class="next">
+          <a href="/energymanagement/page2/"><b>Older Posts &#9654;</b></a>
+      </li>
+      
+  </ul>
+  
+
+
+
+
 
   </div>
 </div>
@@ -716,10 +882,14 @@ layout: archive
       <div class="page__footer-follow">
   <ul class="social-icons">
     
-      <li><strong>E-mail</strong></li>
+      <li><strong>Contact:</strong></li>
     
 
     
+      
+        
+          <li><a href="mailto:song4energy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
       
         
           <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
