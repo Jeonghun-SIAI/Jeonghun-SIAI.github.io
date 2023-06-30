@@ -424,7 +424,7 @@
     
     <!-- Just some nice to have styles for the pager buttons -->
 <style>
-  ul.pager { text-align: center; list-style: none; }
+  ul.pager { text-align: center; list-style: none; clear: both;}
   ul.pager li {display: inline;border: 1px solid black; padding: 10px; margin: 5px;}
 </style>
 
@@ -440,7 +440,7 @@
         All calls to site.posts should be replaced by paginator.posts 
     -->
     
-      <li>
+      <!-- <li>
         <h2>
           <a class="post-link" href="/regression.html">회귀분석 관련 정리</a>
         </h2>
@@ -448,16 +448,87 @@
         <p class="archive__item-excerpt" itemprop="description">Ordinary least squares
 </p>
         
-      </li>
+      </li> -->
+      
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-      <li>
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/regression.html" rel="permalink">회귀분석 관련 정리
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-04T00:00:00+09:00">2023-04-04</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Ordinary least squares
+</p>
+  </article>
+</div>
+
+    
+      <!-- <li>
         <h2>
           <a class="post-link" href="/scrapper.html">Python 크롤링 코드 예시 (PubMed 사이트에서 논문 정보 크롤링)</a>
         </h2>
         <span class="post-meta">Apr 4, 2023</span>
         <p class="archive__item-excerpt" itemprop="description">의사인 절친이 PubMed 사이트에서 수동으로 논문을 수집하고 있길래, 총 두 시간 정도를 써서 (초안 작성 후 개량 시간 포함) Python으로 아래의 web scrapper를 만들어 준 적이 있다. 아래의 web scrapper로 검색어에 대응하는 논문들의 URL/ 출판일/ 저...</p>
         
-      </li>
+      </li> -->
+      
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/scrapper.html" rel="permalink">Python 크롤링 코드 예시 (PubMed 사이트에서 논문 정보 크롤링)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-04-04T00:00:00+09:00">2023-04-04</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">의사인 절친이 PubMed 사이트에서 수동으로 논문을 수집하고 있길래, 총 두 시간 정도를 써서 (초안 작성 후 개량 시간 포함) Python으로 아래의 web scrapper를 만들어 준 적이 있다. 아래의 web scrapper로 검색어에 대응하는 논문들의 URL/ 출판일/ 저...</p>
+  </article>
+</div>
+
     
   </ul>
   
@@ -548,13 +619,13 @@ layout: archive
 
 
 
-<div class="entries-list">
+<div class="entries-grid">
   
     
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
@@ -591,7 +662,7 @@ layout: archive
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
