@@ -77,6 +77,12 @@ var store = [{
         "url": "/linprogeight.html",
         "teaser": "/assets/images/linprogeight/chp_eff.png"
       },{
+        "title": "데이터 결측치 처리 예시 - 주택의 분 단위 전기 부하 자료",
+        "excerpt":"스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 ‘스마트그리드 빅데이터 분석의 활용’ 이 있다. 이 책의 7장 ‘딥러닝을 이용한 스마트그리드 데이터 분석’ 에서는, 널리 알려진 backpropagation 기반 ANN 모델 뿐 아니라 (Factored Conditional) Restricted Boltzmann Machine 기반 모델을 이용해 전력 부하를 예측하는 연구를 소개한다. Mocanu의...","categories": ["dataset"],
+        "tags": ["SQL","부하패턴","건물 에너지 데이터","데이터 전처리","Python"],
+        "url": "/preprocessmocanu.html",
+        "teaser": "/assets/images/preprocessmocanu/data_questionmarks.png"
+      },{
         "title": "선형계획법 기반 분산에너지시스템 최적화 - 9) 출력 조정 관련 제약들",
         "excerpt":"에너지 전환기 이전의 전통적 발전 포트폴리오에서도, 연료비가 저렴하고 탄소 배출이 적은 원자력’만’을 쓰지 않고 석탄/ 가스(LNG)/ 중유/ 양수발전 등을 결합해 구성했다. 이는 시간별로 전기 부하가 달라지며, 전원별로 ‘부하 변동에 대응하는 출력 조정 능력’이 다르기 때문이다. 시간대별 발전 포트폴리오. 일정 출력을 유지하는 기저설비, 특정 시간대에만 가동되는 첨두설비로 구성됨. (출처: 전력거래소) 위...","categories": ["optimalsystem"],
         "tags": ["선형계획법","부하패턴","경제성분석","Python"],
@@ -113,12 +119,6 @@ var store = [{
         "url": "/predictiontwo.html",
         "teaser": "/assets/images/predictiontwo/predict_rnn_nodummy.png"
       },{
-        "title": "데이터 결측치 처리 예시 - 주택의 분 단위 전기 부하 자료",
-        "excerpt":"스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 ‘스마트그리드 빅데이터 분석의 활용’ 이 있다. 이 책의 7장 ‘딥러닝을 이용한 스마트그리드 데이터 분석’ 에서는, 널리 알려진 backpropagation 기반 ANN 모델 뿐 아니라 (Factored Conditional) Restricted Boltzmann Machine 기반 모델을 이용해 전력 부하를 예측하는 연구를 소개한다. Mocanu의...","categories": ["dataset"],
-        "tags": ["SQL","부하패턴","건물 에너지 데이터","데이터 전처리","Python"],
-        "url": "/preprocessmocanu.html",
-        "teaser": "/assets/images/preprocessmocanu/data_questionmarks.png"
-      },{
         "title": "강화학습 기반 마이크로그리드 control - 1) 문제의식 및 케이스 소개",
         "excerpt":"재생 발전의 비중이 커질수록, 당장 몇 시간 뒤의 발전량 및 순 부하 (재생발전량을 제한 net power load) 예측조차도 어려워진다. 이런 상황에서 과거 데이터들을 잘 이용해서 ‘경제적으로’ 전력을 공급하도록 설비들을 control하는 것이, ‘스마트’그리드의 중요한 과제이다. 풍력발전 예측 시의 신뢰구간이 큼. 즉, 재생발전 비중이 높으면 발전량의 단기적 예측도 어려움. (출처: http://www.ningzhang.net/Renewables.html) 선형계획법의...","categories": ["energymanagement"],
         "tags": ["선형계획법","부하패턴","경제성분석","강화학습","녹색섬","Python"],
@@ -138,7 +138,7 @@ var store = [{
         "teaser": "/assets/images/reinforcetwo/reinforcement_deep.png"
       },{
         "title": "강화학습 기반 마이크로그리드 control - 3) Deep Q-Network를 통한 discrete control 도출",
-        "excerpt":"Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0, 1, 2라 하자. Vincent의 연구에서 가정된 마이크로그리드. 이 때 심층신경망은 state를 입력받아 3개 action 각각의 Q-value의 추정치 $\\hat{Q}(s_{t},0), \\hat{Q} (s_{t},1), \\hat{Q} (s_{t},2)$ 를...","categories": ["energymanagement"],
+        "excerpt":"Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0, 1, 2라 하자. Vincent의 연구에서 가정된 마이크로그리드. 이 때 심층신경망은 state를 입력받아 3개 action 각각의 Q-value의 추정치 $Q(s_{t},0), Q(s_{t},1), Q(s_{t},2)$ 를 출력으로 계산한다....","categories": ["energymanagement"],
         "tags": ["강화학습","녹색섬","Python"],
         "url": "/reinforcethree.html",
         "teaser": "/assets/images/reinforcethree/nn.png"

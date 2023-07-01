@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-07-01T23:03:14+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">에너지엔데이터연구소</title><subtitle>에너지 전환기를 맞아 에너지 분야의 데이터가 급증하고 있습니다. 이를 계산통계학/ 최적화 역량 기반으로 올바르게 분석/ 활용하여, 에너지 시스템/ 정책/ 시장 등에 관한 유익한 결과물들을 도출할 수 있도록 돕습니다.</subtitle><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><entry><title type="html">강화학습 기반 마이크로그리드 control - 5) TD3/ SAC를 통한 continuous control 도출</title><link href="http://localhost:4000/reinforcefive.html" rel="alternate" type="text/html" title="강화학습 기반 마이크로그리드 control - 5) TD3/ SAC를 통한 continuous control 도출" /><published>2023-07-01T00:00:00+09:00</published><updated>2023-07-01T00:00:00+09:00</updated><id>http://localhost:4000/reinforcefive</id><content type="html" xml:base="http://localhost:4000/reinforcefive.html"><![CDATA[<p>Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 (3개 action들은 각각 1.1kW 수전/ 1.1kW 송전/ idle).</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-07-02T00:21:27+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">에너지엔데이터연구소</title><subtitle>에너지 전환기를 맞아 에너지 분야의 데이터가 급증하고 있습니다. 이를 계산통계학/ 최적화 역량 기반으로 올바르게 분석/ 활용하여, 에너지 시스템/ 정책/ 시장 등에 관한 유익한 결과물들을 도출할 수 있도록 돕습니다.</subtitle><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><entry><title type="html">강화학습 기반 마이크로그리드 control - 5) TD3/ SAC를 통한 continuous control 도출</title><link href="http://localhost:4000/reinforcefive.html" rel="alternate" type="text/html" title="강화학습 기반 마이크로그리드 control - 5) TD3/ SAC를 통한 continuous control 도출" /><published>2023-07-01T00:00:00+09:00</published><updated>2023-07-01T00:00:00+09:00</updated><id>http://localhost:4000/reinforcefive</id><content type="html" xml:base="http://localhost:4000/reinforcefive.html"><![CDATA[<p>Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 (3개 action들은 각각 1.1kW 수전/ 1.1kW 송전/ idle).</p>
 
 <p><img src="/assets/images/reinforceone/system.png" alt="system" class="align-center" />
 <em>Vincent의 연구에서 가정된 마이크로그리드.</em></p>
@@ -1085,7 +1085,7 @@ TD3 훈련 코드는 아래와 같다. 코드 내 주석은 지난 포스팅의 
 <p><img src="/assets/images/reinforceone/system.png" alt="system" class="align-center" />
 <em>Vincent의 연구에서 가정된 마이크로그리드.</em></p>
 
-<p>이 때 심층신경망은 state를 입력받아 3개 action 각각의 Q-value의 추정치 $\hat{Q}(s_{t},0), \hat{Q} (s_{t},1), \hat{Q} (s_{t},2)$ 를 출력으로 계산한다. 이 심층신경망은 매 훈련 주기마다 튜플 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다.</p>
+<p>이 때 심층신경망은 state를 입력받아 3개 action 각각의 Q-value의 추정치 $Q(s_{t},0), Q(s_{t},1), Q(s_{t},2)$ 를 출력으로 계산한다. 이 심층신경망은 매 훈련 주기마다 튜플 $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다.</p>
 
 <p><br /></p>
 
@@ -1746,179 +1746,7 @@ Vincent의 마이크로그리드 사례에서는, 실제 수전량은 -1.1에서
 4) <a href="/reinforcefour.html">DDPG를 통한 continuous control 도출</a><br />
 5) <a href="/reinforcefive.html">TD3, SAC를 통한 continuous control 도출</a>
 
-</div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="energymanagement" /><category term="선형계획법" /><category term="부하패턴" /><category term="경제성분석" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[재생 발전의 비중이 커질수록, 당장 몇 시간 뒤의 발전량 및 순 부하 (재생발전량을 제한 net power load) 예측조차도 어려워진다. 이런 상황에서 과거 데이터들을 잘 이용해서 ‘경제적으로’ 전력을 공급하도록 설비들을 control하는 것이, ‘스마트’그리드의 중요한 과제이다.]]></summary></entry><entry><title type="html">데이터 결측치 처리 예시 - 주택의 분 단위 전기 부하 자료</title><link href="http://localhost:4000/preprocessmocanu.html" rel="alternate" type="text/html" title="데이터 결측치 처리 예시 - 주택의 분 단위 전기 부하 자료" /><published>2023-04-29T00:00:00+09:00</published><updated>2023-04-29T00:00:00+09:00</updated><id>http://localhost:4000/preprocessmocanu</id><content type="html" xml:base="http://localhost:4000/preprocessmocanu.html"><![CDATA[<p>스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 <a href="https://www.yes24.com/Product/Goods/86365343">‘스마트그리드 빅데이터 분석의 활용’</a> 이 있다.</p>
-
-<p>이 책의 7장 ‘딥러닝을 이용한 스마트그리드 데이터 분석’ 에서는, 널리 알려진 backpropagation 기반 ANN 모델 뿐 아니라 <a href="https://www.sciencedirect.com/science/article/abs/pii/S2352467716000163">(Factored Conditional) Restricted Boltzmann Machine 기반 모델을 이용해 전력 부하를 예측하는 연구</a>를 소개한다.</p>
-
-<p><img src="/assets/images/preprocessmocanu/prediction.png" alt="prediction" class="align-center" />
-<em>Mocanu의 논문에서 1주일 평균 전력 부하를 여러 기법들로 예측한 결과.</em></p>
-
-<p>해당 연구에서 사용한 데이터는, <a href="http://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption#">프랑스 내 특정 가구의 전기 부하를 1분 단위로 총 4년에 가까운 기간 동안 측정한 데이터</a>이다.</p>
-
-<p>이 포스팅은, 해당 데이터를 Python을 이용한 분석에 사용할 수 있도록 전처리하는 과정을 기록한 것이다.</p>
-
-<p><br /></p>
-
-<h2 id="sqlite-db로-변환">SQLite DB로 변환</h2>
-
-<p>먼저 다운받은 txt 파일을 SQL DB 파일로 변환한다.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
-</span>
-<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
-
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="s">'household_power_consumption.txt'</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s">';'</span><span class="p">)</span>
-
-<span class="kn">import</span> <span class="n">sqlite3</span>
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">'db_powerconsumption.db'</span><span class="p">)</span>
-
-<span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span> 
-
-<span class="k">with</span> <span class="n">conn</span><span class="p">:</span> 
-    
-    <span class="n">sql_create</span> <span class="o">=</span> <span class="s">"""
-    create table Individualhousehold
-    (date text,
-     time text,
-     global_active_power numeric,
-     global_reactive_power numeric,
-     voltage numeric,
-     global_intensity numeric,
-     sub_metering_1 integer,
-     sub_metering_2 integer,
-     sub_metering_3 integer
-    )
-    """</span>
-    
-    <span class="n">cur</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">sql_create</span><span class="p">)</span>
-    
-<span class="n">data</span><span class="p">.</span><span class="nf">to_sql</span><span class="p">(</span><span class="s">'Individualhousehold'</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s">'append'</span><span class="p">)</span>
-</code></pre></div></div>
-
-<h2 id="결측치-메꾸기">결측치 메꾸기</h2>
-
-<p>다음으로 결측치를 메꾼다. 원본 파일 및 SQL table을 불러온 파일에는 결측치가 ?로 표기되어 있다.</p>
-
-<p><img src="/assets/images/preprocessmocanu/data_questionmarks.png" alt="data_questionmarks" class="align-center" width="80%" />
-<em>결측치가 ?로 표시되어 있음.</em></p>
-
-<p>결측치를 메꾸는 코드는 다음과 같다.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
-</span>
-
-<span class="c1"># SQLite DB로부터 분별 유효전력 데이터 불러오기
-</span><span class="n">your_query</span> <span class="o">=</span> <span class="s">"""
-select date, time, global_active_power from Individualhousehold
-"""</span>
-
-<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
-<span class="kn">import</span> <span class="n">sqlite3</span>
-<span class="kn">import</span> <span class="n">datetime</span>
-
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">"db_powerconsumption.db"</span><span class="p">)</span> <span class="c1"># .db 까먹지 말 것
-</span>
-<span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
-
-<span class="k">with</span> <span class="n">conn</span><span class="p">:</span>
-
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">your_query</span><span class="p">).</span><span class="nf">fetchall</span><span class="p">())</span>
-    <span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cur</span><span class="p">.</span><span class="n">description</span><span class="p">]</span>
-<span class="n">conn</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>    
-
-
-<span class="c1"># 데이터 타입이 object이므로 이를 float로 변경, 일부 값들이 ?이므로 먼저 str로 변경 후 0으로 대체 후 float로 변경
-</span><span class="n">df</span><span class="p">.</span><span class="n">dtypes</span>
-<span class="n">df</span><span class="p">[</span><span class="s">'global_active_power'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'global_active_power'</span><span class="p">].</span><span class="nf">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="s">'?'</span><span class="p">,</span><span class="s">'0'</span><span class="p">).</span><span class="nf">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'date'</span><span class="p">]</span> <span class="o">+</span><span class="s">' '</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s">'time'</span><span class="p">]</span>
-
-<span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">],</span><span class="nb">format</span> <span class="o">=</span><span class="s">'%d/%m/%Y %H:%M:%S'</span><span class="p">)</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s">'datetime'</span><span class="p">,</span><span class="s">'global_active_power'</span><span class="p">]]</span>
-
-<span class="c1"># ?이었던 (그리고 임시로 0으로 바뀐) 데이터 imputation: 논문에서는 타 년도의 같은 시점의 값의 평균으로 함
-</span>
-<span class="n">list_year</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2006</span><span class="p">,</span><span class="mi">2007</span><span class="p">,</span><span class="mi">2008</span><span class="p">,</span><span class="mi">2009</span><span class="p">,</span><span class="mi">2010</span><span class="p">]</span>
-<span class="n">is_dropped</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'global_active_power'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># ?이었던 행만 모음
-</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">is_dropped</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-    <span class="n">num_for_impute</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># 각 누락시점별로 타 년도의 같은 시점의 전기사용량을 모을 임시리스
-</span>    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">list_year</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">is_dropped</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">].</span><span class="nf">date</span><span class="p">().</span><span class="n">year</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span> <span class="c1"># 누락시점의 연도가 아닌 경우
-</span>            <span class="n">temp_dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> 
-                              <span class="n">month</span><span class="o">=</span><span class="n">is_dropped</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">].</span><span class="nf">date</span><span class="p">().</span><span class="n">month</span><span class="p">,</span> 
-                              <span class="n">day</span><span class="o">=</span><span class="n">is_dropped</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">].</span><span class="nf">date</span><span class="p">().</span><span class="n">day</span><span class="p">,</span>
-                              <span class="n">hour</span><span class="o">=</span><span class="n">is_dropped</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">].</span><span class="nf">time</span><span class="p">().</span><span class="n">hour</span><span class="p">,</span>
-                              <span class="n">minute</span><span class="o">=</span><span class="n">is_dropped</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">].</span><span class="nf">time</span><span class="p">().</span><span class="n">minute</span><span class="p">)</span>   
-            <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span><span class="o">==</span><span class="n">temp_dt</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># 그 연도에 해당 날짜가 있으면
-</span>                <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span><span class="o">==</span><span class="n">temp_dt</span><span class="p">].</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span> <span class="c1"># 그 데이터가 0(누락)이 아니면
-</span>                    <span class="n">num_for_impute</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span><span class="o">==</span><span class="n">temp_dt</span><span class="p">].</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># 해당 연도의 그 시점의 전력사용량 데이터를 임시리스트에 저장
-</span>    <span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span><span class="o">==</span><span class="n">is_dropped</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="s">'global_active_power'</span><span class="p">]</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">num_for_impute</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">num_for_impute</span><span class="p">),</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># 타년도 같은시점의 전력사용 데이터들의 평균값을 임시리스트로부터 계산, 소수점 셋째자리에서 반올림한 후 impute
-</span>    <span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">connn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">"db_powerconsumption.db"</span><span class="p">)</span>
-<span class="n">df</span><span class="p">.</span><span class="nf">to_sql</span><span class="p">(</span><span class="s">'active_corrected_Individualhousehold'</span><span class="p">,</span> <span class="n">connn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s">'append'</span><span class="p">)</span> <span class="c1"># 별도의 SQLite DB로 저장
-</span></code></pre></div></div>
-
-<p>Pandas dataframe으로 불러올 경우 모든 칼럼들의 데이터타입이 object이기 때문에, 전처리를 하려면 데이터타입을 변경해야 한다.</p>
-
-<p>우선 전기부하의 경우 결측치가 ?으로 되어 있으므로, 먼저 데이터타입을 string으로 바꾼 후 ?를 0으로 바꾸고 나서 다시 데이터타입을 float으로 바꿨다.</p>
-
-<p>날짜와 시간의 경우, 원본 데이터에서는 날짜와 시간이 두 칼럼으로 분리되어 있지만 필자는 한번에 처리하기 위해 이를 하나로 합쳤다. 그리고 데이터타입을 datetime으로 바꿨다. (Python에서 날짜와 시간을 다루는 datetime 라이브러리를 불러와야 함)</p>
-
-<p>논문에서는 특정 시점의 결측치를, 타 년도의 같은 시점 (같은 월/ 일/ 시간/ 분) 의 값들의 산술평균으로 대체했다. (참고로 이 데이터에는 특정 시점의 전기부하 값의 누락은 있어도, 시점 자체의 누락은 없다, 즉 시작 시점부터 끝 시점까지의 모든 1분 간격 시간들이 각 row로써 존재한다.)</p>
-
-<p>이를 수행하기 위해, is_dropped에 누락 시점들을 모으고, 데이터셋에 해당 누락 시점과 연도만 다르고 나머지는 같은 시간이 각 연도별로 있는지, 있다면 전기부하 값이 0이 아닌지를 확인해서 그 값들을 num_for_impute에 모으고 평균을 내서 결측치를 대체한다.</p>
-
-<h2 id="기간별-평균-데이터로-변환">기간별 평균 데이터로 변환</h2>
-
-<p>마지막으로, 결측치를 대체한 데이터셋을 논문 내 시나리오 (15분 평균, 1시간 평균, 1주일 평균) 에 따라 쓸 수 있도록 시나리오별 timestep 단위 평균 데이터를 만든다.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
-</span>
-<span class="c1"># SQLite DB로부터 분별 유효전력 데이터 불러오기
-</span><span class="n">your_query</span> <span class="o">=</span> <span class="s">"""
-select * from active_corrected_Individualhousehold
-"""</span>
-
-<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
-<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="n">sqlite3</span>
-
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">"db_powerconsumption.db"</span><span class="p">)</span> <span class="c1"># .db 까먹지 말 것
-</span>
-<span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
-
-<span class="k">with</span> <span class="n">conn</span><span class="p">:</span>
-
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">your_query</span><span class="p">).</span><span class="nf">fetchall</span><span class="p">())</span>
-    <span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cur</span><span class="p">.</span><span class="n">description</span><span class="p">]</span>
-<span class="n">conn</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>    
-<span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">],</span><span class="nb">format</span> <span class="o">=</span><span class="s">'%Y-%m-%d %H:%M:%S'</span><span class="p">)</span>
-<span class="n">df</span><span class="p">.</span><span class="n">dtypes</span>
-
-<span class="c1"># 15분 평균 데이터 생성
-</span>
-<span class="c1"># 먼저, 시작을 0분/ 15분/ 30분/ 45분 중 하나로, 끝을 14분/ 29분/ 44분/ 59분 중 하나로 맞추기
-</span><span class="n">df_temp</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">&gt;=</span><span class="s">'2006-12-16 17:30:00'</span><span class="p">]</span> <span class="c1"># 데이터의 시작시점(2006-12-16 17:24:00) 에 가장 가까운 0분/15분/30분/45분  
-</span><span class="n">df_temp</span> <span class="o">=</span> <span class="n">df_temp</span><span class="p">[</span><span class="n">df_temp</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">&lt;=</span><span class="s">'2010-11-26 20:59:00'</span><span class="p">]</span> <span class="c1"># 데이터의 종료시점(20010-11-26 21:02:00) 에 가장 가까운 14분/39분/44분/59분, 우변에 df_temp 가 아니라 df로 착각하지 않도록 주의
-</span><span class="n">activepower_avg_temp</span> <span class="o">=</span> <span class="n">df_temp</span><span class="p">[</span><span class="s">'global_active_power'</span><span class="p">].</span><span class="nf">to_numpy</span><span class="p">().</span><span class="nf">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">15</span><span class="p">)).</span><span class="nf">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># mean(axis=1) 로 평균내기
-</span>
-
-
-<span class="c1"># 1시간 평균 데이터 생성
-# 먼저, 시작을 0분, 끝을 59분으로 맞추기
-</span><span class="n">df_temp</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">&gt;=</span><span class="s">'2006-12-16 18:00:00'</span><span class="p">]</span>
-<span class="n">df_temp</span> <span class="o">=</span> <span class="n">df_temp</span><span class="p">[</span><span class="n">df_temp</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">&lt;=</span><span class="s">'2010-11-26 20:59:00'</span><span class="p">]</span>
-<span class="n">activepower_avg_temp</span> <span class="o">=</span> <span class="n">df_temp</span><span class="p">[</span><span class="s">'global_active_power'</span><span class="p">].</span><span class="nf">to_numpy</span><span class="p">().</span><span class="nf">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">60</span><span class="p">)).</span><span class="nf">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-
-<span class="c1"># 1주일 평균 데이터 생성
-# 시작일을 2006년 12월 17일(일요일) 0시 0분으로, 끝을 2010년 11월 20일(토요일) 23시 59분으로 맞추기 
-</span><span class="n">df_temp</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">&gt;=</span><span class="s">'2006-12-17 00:00:00'</span><span class="p">]</span>
-<span class="n">df_temp</span> <span class="o">=</span> <span class="n">df_temp</span><span class="p">[</span><span class="n">df_temp</span><span class="p">[</span><span class="s">'datetime'</span><span class="p">]</span> <span class="o">&lt;=</span><span class="s">'2010-11-20 23:59:00'</span><span class="p">]</span>
-<span class="n">activepower_avg_temp</span> <span class="o">=</span> <span class="n">df_temp</span><span class="p">[</span><span class="s">'global_active_power'</span><span class="p">].</span><span class="nf">to_numpy</span><span class="p">().</span><span class="nf">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">60</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">7</span><span class="p">)).</span><span class="nf">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</code></pre></div></div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="dataset" /><category term="SQL" /><category term="부하패턴" /><category term="건물 에너지 데이터" /><category term="데이터 전처리" /><category term="Python" /><summary type="html"><![CDATA[스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 ‘스마트그리드 빅데이터 분석의 활용’ 이 있다.]]></summary></entry><entry><title type="html">건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?</title><link href="http://localhost:4000/predictiontwo.html" rel="alternate" type="text/html" title="건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?" /><published>2023-04-16T00:00:00+09:00</published><updated>2023-04-16T00:00:00+09:00</updated><id>http://localhost:4000/predictiontwo</id><content type="html" xml:base="http://localhost:4000/predictiontwo.html"><![CDATA[<p>지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 ‘전통적인’ 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA) 로 만들어 adjusted $R^2$ 0.95 이상의 우수한 성능을 얻을 수 있음을 보였다.</p>
+</div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="energymanagement" /><category term="선형계획법" /><category term="부하패턴" /><category term="경제성분석" /><category term="강화학습" /><category term="녹색섬" /><category term="Python" /><summary type="html"><![CDATA[재생 발전의 비중이 커질수록, 당장 몇 시간 뒤의 발전량 및 순 부하 (재생발전량을 제한 net power load) 예측조차도 어려워진다. 이런 상황에서 과거 데이터들을 잘 이용해서 ‘경제적으로’ 전력을 공급하도록 설비들을 control하는 것이, ‘스마트’그리드의 중요한 과제이다.]]></summary></entry><entry><title type="html">건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?</title><link href="http://localhost:4000/predictiontwo.html" rel="alternate" type="text/html" title="건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?" /><published>2023-04-16T00:00:00+09:00</published><updated>2023-04-16T00:00:00+09:00</updated><id>http://localhost:4000/predictiontwo</id><content type="html" xml:base="http://localhost:4000/predictiontwo.html"><![CDATA[<p>지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 ‘전통적인’ 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA) 로 만들어 adjusted $R^2$ 0.95 이상의 우수한 성능을 얻을 수 있음을 보였다.</p>
 
 <p>이번 포스팅에서는, 딥러닝을 써서 모델을 만들어 본다.</p>
 
@@ -2435,4 +2263,85 @@ D_{i}^{elec,m}=\frac{\hat{\epsilon}_{i}^{elec,m}h_{ii}}{k \cdot MSR^{elec,m}\lef
 2) <a href="/monthlyenergytwo.html">월별 사용 추이가 이상한 data point 제거</a><br />
 3) <b>월별 사용량 크기가 이상한 data point 제거</b>
 
-</div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="dataset" /><category term="건물 에너지 데이터" /><category term="회귀분석" /><summary type="html"><![CDATA[이전 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.]]></summary></entry></feed>
+</div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="dataset" /><category term="건물 에너지 데이터" /><category term="회귀분석" /><summary type="html"><![CDATA[이전 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.]]></summary></entry><entry><title type="html">건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거</title><link href="http://localhost:4000/monthlyenergytwo.html" rel="alternate" type="text/html" title="건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거" /><published>2023-03-25T00:00:00+09:00</published><updated>2023-03-25T00:00:00+09:00</updated><id>http://localhost:4000/monthlyenergytwo</id><content type="html" xml:base="http://localhost:4000/monthlyenergytwo.html"><![CDATA[<p>이전 포스팅에서, 건물 지번별/월별 전기/도시가스 사용량 데이터와 표제부의 결합을 소개했다. 해당 데이터셋을 그대로 쓰면 되는가? 그렇지 않다. 분명히 ‘이상한’ data point들이 존재할 것이며, 이상한 data point들을 ‘전처리’해야 올바른 연구 결과를 얻을 수 있다.</p>
+
+<p><br /></p>
+
+<h2 id="데이터-전처리-종류">데이터 전처리 종류</h2>
+
+<p>가장 먼저 떠올릴 전처리는, 누락이 있는 point 제거이다. 이미 이전 포스팅의 마지막 부분에서 SQLite DB로부터 서울 내 건물들 중 ‘전기 사용량 및 연면적 값의 누락이 없는’ point들만 불러왔다. 여기에 더해, 봄~가을의 도시가스 사용 내역이 있는데 겨울(12, 1, 2월)의 도시가스 사용 내역이 없는 point는 ‘이상한’ point로 보고 제거한다 (상식적으로 도시가스를 쓴다면 겨울에 집중적으로 쓰는 것이 정상이므로).</p>
+
+<p><br />
+그 외에 `이상하다’의 기준은, 크게 다음의 두 가지로 볼 수 있다.</p>
+
+<p>1) 12개월 간 월별 에너지 사용량의 추이가 이상함 (전기 사용량 내역을 봤더니 봄/가을 사용량이 여름 사용량보다 월등히 높다든지)</p>
+
+<p>2) 에너지 사용량의 크기(magnitude)가 이상함 (건물은 작은데 비슷한 크기의 타 건물들 대비 에너지 사용량이 지나치게 크다든지)</p>
+
+<p>이러한 ‘이상함’의 이유를 정확히는 알 수 없다. 그러나 이러한 point들은 ‘일반적인’ 건물들에 대한 통계적 에너지 모델링에 도움이 되기는커녕 오히려 해가 될 것이므로, 조치를 취해야 한다.</p>
+
+<p>(필자가 한 가지 발견했던 것은, 지하철 역사의 경우 사용량의 크기가 동일 면적의 타 건물들 대비 매우 컸다는 점이다. 지하철 운전을 위한 전기 사용이 각 역 건물에 대해 계량되는 것으로 추측만 할 뿐이다.)</p>
+
+<p>각 건물의 지번별 데이터는 row의 수가 많다. 서울의 경우 데이터 전처리를 해도 만 단위이다. 데이터가 이 정도로 크면, 회귀분석 등을 할 때 모델을 잘 구성했다는 전제 하에 일관성(consistency)이 있다. 즉, 계수추정량이 실제 값에 가까울 확률이 매우 높다. 그러므로 ‘이상한’ data point는 전부 삭제한다.</p>
+
+<p>이번 포스팅에서는 건물 월별 에너지 사용량의 `추이’가 이상한 data point를 판별하는 방법을 설명한다.</p>
+
+<p><br /></p>
+
+<h2 id="건물-월별-에너지-사용량의-추이">건물 월별 에너지 사용량의 ‘추이’</h2>
+<p>건물 월별 에너지 사용량의 ‘정상적인’ 추이는 아래 그림과 같다.</p>
+
+<p><img src="/assets/images/monthlyenergytwo/normalpattern.png" alt="normalpattern" class="align-center" />
+<em>일반적인 월별 전기 사용량 추이(좌) 와 가스 사용량 추이(우)</em></p>
+
+<p>일반적인 월별 전기 사용량 추이의 경우, 냉방으로 인해 여름의 사용량이 상대적으로 크다. 겨울의 전기 사용량은 봄/가을 대비 약간 크지만 전기난방을 하는 경우 건물에 따라 많이 클 수도 있고, 봄/ 가을과 거의 비슷할 수도 있다. 즉 월별 전기 사용량의 추이는 1~12월 plot 기준으로 중간이 튀어나온 압정 모양 혹은 더블유(W)자 모양을 띤다.</p>
+
+<p>일반적인 월별 가스 사용량 추이의 경우, 난방으로 인해 겨울의 사용량이 매우 크다. 여름의 사용량은 대부분은 매우 작으나, 식당/ 목욕탕 등 비중이 큰 일부 건물에서는 여름에도 봄/ 가을과 비슷한 가스 사용량을 보이기도 한다. 즉 월별 가스 사용량의 추이는 유(U)자 모양을 띤다.</p>
+
+<p><br />
+그런데, 이와는 매우 다른 추이를 보이는 data point들이 있다. 예를 들면 아래 그림과 같다.</p>
+
+<p><img src="/assets/images/monthlyenergytwo/abnormalpattern.png" alt="abnormalpattern" class="align-center" />
+<em>비정상적인 월별 전기 사용량 추이(좌) 와 가스 사용량 추이(우)</em></p>
+
+<p>정확히는, 위 그림은 `각 월별 사용량이 연간 사용량에서 차지하는 비중’을 나타낸 그림이다. 각 월별 전기 사용량을 원소로 하는 12차원 열벡터를 $y_{i}$라 할 때, 위 그림은 $y_{i} / \Vert y_{i} \Vert_{1}$이다.
+위 그림에서 보이는 월별 사용량 추이는, 일반적인 추이와 거리가 멀다. 그러므로 해당 data point를 삭제해야 한다.</p>
+
+<p><br /></p>
+
+<h2 id="비정상적인-추이를-보이는-data-point-판별-방법">비정상적인 추이를 보이는 data point 판별 방법</h2>
+<p>그러면, 이상한 추이를 보이는 data point들은 어떻게 판별할 수 있을까? 월별 비중 그림을 일일이 다 그려서? 데이터 size (data point의 개수) 가 수천개만 되어도 이는 불가능하다. 각 data point 별로 어떤 지표(metric)를 계산 후 그 지표의 크기로 이상한 point를 판별하는 방법이 필요하다.</p>
+
+<p>위에서 언급한 각 월별 사용량 비중을 나타내는 벡터 $y_{i} / \Vert y_{i} \Vert_{1}$를 $\tilde{y}_{i}$라 하자. 그리고 모든 건물들에 대한 $\tilde{y}_{i}$들을 ‘행벡터들을 쌓는 방식으로’ 결합하여 만든 행렬 $\tilde{Y} = [\tilde{y}_{1},\tilde{y}_{2},\cdots, \tilde{y}_{N}]^{\top}$ 을 생각하자.</p>
+
+<p>이 때, $i$번째 data point에 대해 스칼라 값 $\tilde{y}_{i}^{\top} (\tilde{Y}^{\top} \tilde{Y})^{-1} \tilde{y}_{i}$ 를 계산할 수 있다. 이 값이 큰 경우, $\tilde{y}_{i}$는 월별 사용량 비중 벡터들이 만드는 12차원 공간 내에서 다른 data point들로부터 멀리 떨어져 있는 ‘remote’ point임이 알려져 있다.</p>
+
+<p>구체적으로는 $\tilde{y}_{i}^{\top} (\tilde{Y}^{\top} \tilde{Y})^{-1} \tilde{y}_{i}$는 행렬 $\tilde{Y} (\tilde{Y}^{\top} \tilde{Y})^{-1} \tilde{Y}^{\top}$의 대각성분이다. 만약 $\tilde{y}_{i}$가 어떤 회귀모델의 설명변수 벡터인 경우, 이를 hat matrix라고 부른다. Hat matrix의 대각성분은, data point들의 중심으로부터의 표준화된 거리를 의미한다.</p>
+
+<p>(자세한 내용은 <a href="https://product.kyobobook.co.kr/detail/S000002582053">Montgomery의 Introduction to Linear Regression</a>의 7단원을 참고하길 바란다.)</p>
+
+<p><br />
+그러면 이 스칼라 값이 구체적으로 얼마 이상이면 remote point라고 볼 수 있을까? Rule of thumb가 되는 기준은 $2p/N$으로, $p$는 $\tilde{y}_{i}$가 설명변수 벡터라 할 때 설명변수의 수이고 (월별 에너지 사용량 case의 경우 12), $N$은 data point 수이다.</p>
+
+<p>정리하면, ‘이상한’ 월별 전기 사용량 추이를 갖는 data point들은 아래 과정을 거쳐 판별한다.</p>
+
+<p>1) 모든 data point들에 대한 월별 전기 사용량 자료를 월별 전기 사용량의 ‘비중’ 데이터로 변환 후 각 행이 월별 전기 사용량인 12열짜리 행렬 $\tilde{Y}$로써 결합</p>
+
+<p>2) 위에서 설명한 행렬 $\tilde{Y} (\tilde{Y}^{\top} \tilde{Y})^{-1} \tilde{Y}^{\top}$를 계산</p>
+
+<p>3) $i$번째 대각성분이 $24/N$ 이상인 경우 ‘이상한 월별 전기 사용량 추이’를 갖는 data point로 보고 삭제
+이는 월별 가스에 대해서도 마찬가지로 수행한다.</p>
+
+<p>(이상한 추이를 갖는 data point들 그림도, 위 과정을 통해 판별한 것이다)</p>
+
+<p>다음 포스팅에서는 건물 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.</p>
+
+<div class="notice--info">
+
+건축물 별 월별 에너지 사용량 데이터셋<br /><br />
+
+1) <a href="/monthlyenergyone.html">모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화</a><br />
+2) <b>월별 사용 추이가 이상한 data point 제거</b><br />
+3) <a href="/monthlyenergythree.html">월별 사용량 크기가 이상한 data point 제거</a>
+
+</div>]]></content><author><name>Jeonghun Song</name><email>song4energy@gmail.com</email></author><category term="dataset" /><category term="건물 에너지 데이터" /><category term="회귀분석" /><summary type="html"><![CDATA[이전 포스팅에서, 건물 지번별/월별 전기/도시가스 사용량 데이터와 표제부의 결합을 소개했다. 해당 데이터셋을 그대로 쓰면 되는가? 그렇지 않다. 분명히 ‘이상한’ data point들이 존재할 것이며, 이상한 data point들을 ‘전처리’해야 올바른 연구 결과를 얻을 수 있다.]]></summary></entry></feed>
