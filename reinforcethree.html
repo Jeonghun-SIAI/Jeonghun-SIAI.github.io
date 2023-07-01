@@ -10,7 +10,7 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출 | 에너지엔데이터연구소</title>
+<!-- begin _includes/seo.html --><title>강화학습 기반 마이크로그리드 control - 3) Deep Q-Network를 통한 discrete control 도출 | 에너지엔데이터연구소</title>
 <meta name="description" content="Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0, 1, 2라 하자.">
 
 
@@ -23,7 +23,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출">
+<meta property="og:title" content="강화학습 기반 마이크로그리드 control - 3) Deep Q-Network를 통한 discrete control 도출">
 <meta property="og:url" content="http://localhost:4000/reinforcethree.html">
 
 
@@ -37,7 +37,7 @@
 
 
 
-  <meta property="article:published_time" content="2023-04-17T00:00:00+09:00">
+  <meta property="article:published_time" content="2023-06-11T00:00:00+09:00">
 
 
 
@@ -152,8 +152,6 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/clean.jpg" alt="에너지엔데이터연구소"></a>
-        
         <a class="site-title" href="/">
           에너지엔데이터연구소
           <span class="site-subtitle">스마트한 에너지 전환에 기여하는 데이터 사이언티스트</span>
@@ -222,9 +220,9 @@
                     
                 
                     
-                
-                    
                         <li><a href="/optimalsystem" class="">Optimal system (11)</a></li>
+                    
+                
                     
                 
                     
@@ -258,19 +256,17 @@
                     
                 
                     
+                
+                    
+                
+                    
                         <li><a href="/estimation" class="">Estimation (2)</a></li>
-                    
-                
-                    
-                
                     
                 
                     
                 
             </ul>
             <ul>
-                
-                    
                 
                     
                 
@@ -284,8 +280,12 @@
                 
                     
                 
+                    
+                
             </ul>
             <ul>
+                
+                    
                 
                     
                         <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
@@ -299,8 +299,6 @@
                 
                     
                 
-                    
-                
             </ul>
             <ul>
                 
@@ -318,11 +316,11 @@
                 
             </ul>
             <ul>
-                
-                    
                 
                     
                         <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
                     
                 
                     
@@ -346,16 +344,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출">
+    <meta itemprop="headline" content="강화학습 기반 마이크로그리드 control - 3) Deep Q-Network를 통한 discrete control 도출">
     <meta itemprop="description" content="Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0, 1, 2라 하자.">
-    <meta itemprop="datePublished" content="2023-04-17T00:00:00+09:00">
+    <meta itemprop="datePublished" content="2023-06-11T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/reinforcethree.html" class="u-url" itemprop="url">강화학습 기반 마이크로그리드 스케줄링 - 3) Deep Q-Network를 통한 discrete control 도출
+            <a href="http://localhost:4000/reinforcethree.html" class="u-url" itemprop="url">강화학습 기반 마이크로그리드 control - 3) Deep Q-Network를 통한 discrete control 도출
 </a>
           </h1>
           
@@ -366,7 +364,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-17T00:00:00+09:00">2023-04-17</time>
+        <time datetime="2023-06-11T00:00:00+09:00">2023-06-11</time>
       </span>
     
 
@@ -404,20 +402,28 @@
 <p><img src="/assets/images/reinforcethree/nn.png" alt="nn" class="align-center" />
 <em>Vincent의 연구에서 사용된 심층신경망 구성. (논문의 그림을 필자가 재구성하였음)</em></p>
 
-<p>직전 24시간의 태양광 발전량은 첫 번째 Conv1D 층에, 직전 24시간의 부하는 두 번째 Conv1D 층에, 그리고 직전 1시간의 배터리 내 에너지양은 위 두 Conv1D층과 연결되는 Dense층에 바로 연결된다. 그리고 Dense층이 하나 더 있고, 이 층을 거쳐서 최종적으로 3개의 output node가 각 action별 Q-value를 출력한다. Conv1D 층을 쓰는 이유는, 태양광 발전량과 부하가 시간적인 정보를 갖고 있으므로 이를 반영하기 위함이다.</p>
+<p>직전 24시간의 태양광 발전량은 첫 번째 Conv1D 층에, 직전 24시간의 부하는 두 번째 Conv1D 층에, 그리고 직전 1시간의 배터리 내 에너지양은 위 두 Conv1D층과 연결되는 Dense층에 바로 연결된다.</p>
+
+<p>그리고 Dense층이 하나 더 있고, 이 층을 거쳐서 최종적으로 3개의 output node가 각 action별 Q-value를 출력한다. Conv1D 층을 쓰는 이유는, 태양광 발전량과 부하가 시간적인 정보를 갖고 있으므로 이를 반영하기 위함이다.</p>
 
 <p>해당 심층신경망 훈련을 위한 training set은 특정 2년 (17,520시간) 동안의 시간별 태양광발전량과 부하 자료이다. 해당 모델이 직전 24시간의 정보를 state로 사용하므로 control은 $t=25,26,\cdots, 17520$ 에 대해 정해진다. Validation set은 별도의 특정 1년 (8,760시간) 동안의 시간별 태양광 발전량과 부하 자료이다.</p>
 
-<p>Training set에 대해서는 epsilon-greedy policy를, validation set에 대해서는 greedy policy를 적용해 action을 결정한다. 매 time step (데이터에서의 1시간) 별로 state와 action에 따른 마이크로그리드 내 에너지 흐름 및 수전/송전에 따른 손익 (reward) 와 이번 시점의 배터리 내 에너지 (다음 시점에서의 state임) 를 계산하고, 매 24시간 주기로 심층신경망 훈련을 gradient descent로 수행한다. 이를 training set의 17,520-24 시간에 대해 수행하면 1 epoch이다.</p>
+<p>Training set에 대해서는 $\epsilon$-greedy policy를, validation set에 대해서는 greedy policy를 적용해 action을 결정한다.</p>
 
-<p>매 심층신경망 훈련 시 사용하는 데이터는 기본적으로 (state, action, reward, next state) 를 묶은 튜플로, 일종의 ‘경험’으로 볼 수 있다. 즉 시점 $t$에서 ($s_{t},a_{t},r_{t+1},s_{t+1}$) 를 추후 훈련에 쓸 수 있도록 buffer에 저장한다. 그리고 24시간 주기의 훈련에서는 직전 24시간의 튜플들이 아닌, buffer 내에서 랜덤하게 뽑은 32개 시간의 튜플들을 이용해 훈련시킨다. 이를 통해 훈련에 쓰이는 튜플들 간의 ‘시간적 상관성’을 감소시켜, 훈련의 효율성을 높일 수 있다.</p>
+<p>매 time step (데이터에서의 1시간) 별로 state와 action에 따른 마이크로그리드 내 에너지 흐름 및 수전/송전에 따른 손익 (reward) 와 이번 시점의 배터리 내 에너지 (다음 시점에서의 state임) 를 계산하고, 매 24시간 주기로 심층신경망 훈련을 gradient descent로 수행한다. 이를 training set의 17,520-24 시간에 대해 수행하면 1 epoch이다.</p>
+
+<p>매 심층신경망 훈련 시 사용하는 데이터는 기본적으로 (state, action, reward, next state) 를 묶은 tuple로, 일종의 ‘경험’으로 볼 수 있다. 즉 시점 $t$에서 ($s_{t},a_{t},r_{t+1},s_{t+1}$) 를 추후 훈련에 쓸 수 있도록 buffer에 저장한다.</p>
+
+<p>그리고 24시간 주기의 훈련에서는 직전 24시간의 tuple들이 아닌, buffer 내에서 랜덤하게 뽑은 32개 시간의 tuple들을 이용해 훈련시킨다. 이를 통해 훈련에 쓰이는 tuple들 간의 ‘시간적 상관성’을 감소시켜, 훈련의 효율성을 높일 수 있다.</p>
 
 <p><br /></p>
 
 <h2 id="dqn-코드">DQN 코드</h2>
 <p>이제 훈련 concept는 대략 이해가 될 것이니, 코드를 보자.</p>
 
-<p>(이 코드는 필자가 직접 작성하였다. Vincent의 학위논문에서 해당 연구에 사용한 코드의 <a href="https://github.com/VinF/deer/tree/master/examples/MG_two_storages">Github 링크</a>를 제공하나, 각 모듈별로 코드 파일들을 지나치게 분리해 놓아 사용이 여의치 않았다. 이에 필자가 ‘모든 기능들을 한 파일에 넣은 공부용’ 코드를 따로 만들었다. 다만 코드 작성 시 <a href="https://product.kyobobook.co.kr/detail/S000001810262">핸즈온 머신러닝</a>의 강화학습 chapter의 Cartpole 예제에 대한 Deep Q-Network 코드를 참고하였다.)</p>
+<p>이 코드는 필자가 직접 작성하였다. Vincent의 학위논문에서 해당 연구에 사용한 코드의 <a href="https://github.com/VinF/deer/tree/master/examples/MG_two_storages">Github 링크</a>를 제공하나, 각 모듈별로 코드 파일들을 지나치게 분리해 놓아 사용이 여의치 않았다. 이에 필자가 ‘모든 기능들을 한 파일에 넣은 공부용’ 코드를 따로 만들었다. (<a href="https://github.com/song4energyndata/Codes/tree/main/reinforcementlearning/microgrid_Vincent">GitHub Repo 링크</a>)</p>
+
+<p>(코드 작성 시 <a href="https://product.kyobobook.co.kr/detail/S000001810262">핸즈온 머신러닝</a>의 강화학습 chapter의 Cartpole 예제에 대한 Deep Q-Network 코드를 참고하였다.)</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
 </span>
@@ -658,9 +664,11 @@
 <p><img src="/assets/images/reinforcethree/trainingrecord.png" alt="trainingrecord" class="align-center" width="80%" />
 <em>훈련 epoch 별 validation case의 누적 ‘수익’.</em></p>
 
-<p>누적비용 27유로는, 미래를 안다고 가정하고 선형계획법 (Linear Programming, LP) 으로 도출한 control 시의 누적비용 -50유로에 근접한 값이다. 그러므로, 미래를 모르면서 과거 24시간 정보만 갖고 도출한 ‘discrete’ control 것 치고는 훌륭해 보인다. (Random control 시의 누적비용 2500~2700유로 대비 매우 낮기도 하고)</p>
+<p>누적비용 27유로는, 미래를 안다고 가정하고 선형계획법 (Linear Programming, LP) 으로 도출한 control 시의 누적비용 -50유로에 근접한 값이다.</p>
 
-<p>시간별 action (계통으로부터의 수전) 이 선형계획법과 DQN에서 각각 어떻게 결정되었는지를 아래 그림과 같이 보자.</p>
+<p>그러므로, 미래를 모르면서 과거 24시간 정보만 갖고 도출한 ‘discrete’ control 것 치고는 훌륭해 보인다. (Random control 시의 누적비용 2500~2700유로와 비교하면 큰 개선이다.)</p>
+
+<p>시간별 action (계통으로부터의 수전) 이 LP와 DQN에서 각각 어떻게 결정되었는지를 아래 그림과 같이 보자.</p>
 
 <p><img src="/assets/images/reinforcethree/result_dqn.png" alt="result_dqn" class="align-center" />
 <em>DQN으로 도출한 수전/송전 control. LP control과 어느 정도 비슷함.</em></p>
@@ -680,7 +688,7 @@
 
 <div class="notice--info">
 
-강화학습 기반 마이크로그리드 스케줄링<br /><br />
+강화학습 기반 마이크로그리드 control<br /><br />
 
 1) <a href="/reinforceone.html">문제의식 및 케이스 소개</a><br />
 2) <a href="/reinforcetwo.html">Q-learning 개념</a><br />
@@ -734,7 +742,7 @@
  -->
         <!-- 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-04-17T00:00:00+09:00">2023-04-17</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-06-11T00:00:00+09:00">2023-06-11</time></p>
  -->
       </footer>
 
@@ -743,7 +751,7 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5+%EA%B8%B0%EB%B0%98+%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EA%B7%B8%EB%A6%AC%EB%93%9C+%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81+-+3%29+Deep+Q-Network%EB%A5%BC+%ED%86%B5%ED%95%9C+discrete+control+%EB%8F%84%EC%B6%9C%20http%3A%2F%2Flocalhost%3A4000%2Freinforcethree.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5+%EA%B8%B0%EB%B0%98+%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EA%B7%B8%EB%A6%AC%EB%93%9C+control+-+3%29+Deep+Q-Network%EB%A5%BC+%ED%86%B5%ED%95%9C+discrete+control+%EB%8F%84%EC%B6%9C%20http%3A%2F%2Flocalhost%3A4000%2Freinforcethree.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Freinforcethree.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -752,7 +760,7 @@
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>energymanagement</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <!-- <h4 class="page__meta-title"><span>energymanagement</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
         
 
 
@@ -771,10 +779,10 @@
 
   
     
-      <a href="/reinforcefour.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>강화학습 기반 마이크로그리드 스케줄링 - 4) DDPG를 통한 continuous control 도출</a>
+      <a href="/reinforcefour.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>강화학습 기반 마이크로그리드 control - 4) DDPG를 통한 continuous control 도출</a>
     
     
-      <a href="/reinforcetwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념</a>
+      <a href="/reinforcetwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>강화학습 기반 마이크로그리드 control - 2) Q-learning 개념</a>
         
   
 
@@ -799,12 +807,12 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/linprognine/portfolio.png" alt="">
+        <img src="/assets/images/reinforcefive/result_td3sac.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprognine.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 9) 출력 조정 관련 제약들
+        <a href="/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 control - 5) TD3/ SAC를 통한 continuous control 도출
 </a>
       
     </h2>
@@ -816,7 +824,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-28T00:00:00+09:00">2023-04-28</time>
+        <time datetime="2023-07-01T00:00:00+09:00">2023-07-01</time>
       </span>
     
 
@@ -826,8 +834,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">에너지 전환기 이전의 전통적 발전 포트폴리오에서도, 연료비가 저렴하고 탄소 배출이 적은 원자력’만’을 쓰지 않고 석탄/ 가스(LNG)/ 중유/ 양수발전 등을 결합해 구성했다. 이는 시간별로 전기 부하가 달라지며, 전원별로 ‘부하 변동에 대응하는 출력 조정 능력’이 다르기 때문이다.
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 ...</p>
   </article>
 </div>
 
@@ -840,12 +847,12 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/linprogeight/chp_eff.png" alt="">
+        <img src="/assets/images/reinforcefour/result_ddpg.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprogeight.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 관련 제약들
+        <a href="/reinforcefour.html" rel="permalink">강화학습 기반 마이크로그리드 control - 4) DDPG를 통한 continuous control 도출
 </a>
       
     </h2>
@@ -857,7 +864,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-27T00:00:00+09:00">2023-04-27</time>
+        <time datetime="2023-06-25T00:00:00+09:00">2023-06-25</time>
       </span>
     
 
@@ -867,8 +874,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서는 설비의 효율과 COP(성능계수)를 상수로 가정했지만, 실제로는 부하율에 따라 효율과 COP가 달라진다. 이를테면 열병합발전기의 경우, 최대 출력(정격 출력)으로 운전할 때 비해 더 낮은 출력으로 ‘부분부하’운전 시 발전효율이 저하됨이 알려져 있다.
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에 ‘discrete’ action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic...</p>
   </article>
 </div>
 
@@ -881,12 +887,12 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/linprogseven/systemfigure.png" alt="">
+        <img src="/assets/images/reinforcetwo/reinforcement_deep.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprogseven.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 7) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)
+        <a href="/reinforcetwo.html" rel="permalink">강화학습 기반 마이크로그리드 control - 2) Q-learning 개념
 </a>
       
     </h2>
@@ -898,7 +904,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-26T00:00:00+09:00">2023-04-26</time>
+        <time datetime="2023-06-10T00:00:00+09:00">2023-06-10</time>
       </span>
     
 
@@ -908,7 +914,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">이전 포스팅들에서는 전기 부하만을 다루었으나, 실제로는 냉방/난방/급탕 등 열 부하 또한 에너지 소비에서 상당한 비중을 차지한다. 따라서 ‘전기와 열을 모두’ 공급하는 분산형 에너지시스템의 최적 구성 및 스케줄을 도출할 수 있어야 한다.
+    <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하의 control을 도출함을 보였다.
 </p>
   </article>
 </div>
@@ -921,13 +927,9 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-      <div class="archive__item-teaser">
-        <img src="/assets/images/linprogsix/graph.png" alt="">
-      </div>
-    
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprogsix.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 6) 공동주택의 ‘누진제’ 전기요금 (단일계약) 수식
+        <a href="/overconfidence.html" rel="permalink">로지스틱 회귀에서의 over-confidence에 대한 이해
 </a>
       
     </h2>
@@ -939,7 +941,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-25T00:00:00+09:00">2023-04-25</time>
+        <time datetime="2023-05-28T00:00:00+09:00">2023-05-28</time>
       </span>
     
 
@@ -949,8 +951,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">이전에 건물 내 태양광/배터리 설치 시의 최적 용량/스케줄 도출에 대해 설명했는데, 이는 ‘시간별 요금제를 적용받는 일반용 건물’에 대한 내용이었다. 그런데 주택에서는, ‘누진제’라 불리는, 전기를 많이 쓰면 단가가 올라가 요금이 급증하는 요금 체계를 적용한다.
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Logistic regression에서는 각 point 별로 response $y$가 0과 1 중 1일 확률 추정값 $\hat{y}$를 제공한다 (물론 실제 $y$값들은 알려져 있다). 한편, feature space에서 response가 1인 point들과 0인 point들이 완...</p>
   </article>
 </div>
 

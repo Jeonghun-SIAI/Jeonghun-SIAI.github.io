@@ -10,8 +10,8 @@
 <head>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개 | 에너지엔데이터연구소</title>
-<meta name="description" content="에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할 수 있어야 한다. 그래야 장기적인 에너지 공급 비용 및 화석연료 사용량 등을 줄일 수 있다.">
+<!-- begin _includes/seo.html --><title>강화학습 기반 마이크로그리드 control - 1) 문제의식 및 케이스 소개 | 에너지엔데이터연구소</title>
+<meta name="description" content="재생 발전의 비중이 커질수록, 당장 몇 시간 뒤의 발전량 및 순 부하 (재생발전량을 제한 net power load) 예측조차도 어려워진다. 이런 상황에서 과거 데이터들을 잘 이용해서 ‘경제적으로’ 전력을 공급하도록 설비들을 control하는 것이, ‘스마트’그리드의 중요한 과제이다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -23,11 +23,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개">
+<meta property="og:title" content="강화학습 기반 마이크로그리드 control - 1) 문제의식 및 케이스 소개">
 <meta property="og:url" content="http://localhost:4000/reinforceone.html">
 
 
-  <meta property="og:description" content="에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할 수 있어야 한다. 그래야 장기적인 에너지 공급 비용 및 화석연료 사용량 등을 줄일 수 있다.">
+  <meta property="og:description" content="재생 발전의 비중이 커질수록, 당장 몇 시간 뒤의 발전량 및 순 부하 (재생발전량을 제한 net power load) 예측조차도 어려워진다. 이런 상황에서 과거 데이터들을 잘 이용해서 ‘경제적으로’ 전력을 공급하도록 설비들을 control하는 것이, ‘스마트’그리드의 중요한 과제이다.">
 
 
 
@@ -37,7 +37,7 @@
 
 
 
-  <meta property="article:published_time" content="2023-04-15T00:00:00+09:00">
+  <meta property="article:published_time" content="2023-05-21T00:00:00+09:00">
 
 
 
@@ -152,8 +152,6 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/"><img src="/assets/images/clean.jpg" alt="에너지엔데이터연구소"></a>
-        
         <a class="site-title" href="/">
           에너지엔데이터연구소
           <span class="site-subtitle">스마트한 에너지 전환에 기여하는 데이터 사이언티스트</span>
@@ -222,9 +220,9 @@
                     
                 
                     
-                
-                    
                         <li><a href="/optimalsystem" class="">Optimal system (11)</a></li>
+                    
+                
                     
                 
                     
@@ -258,19 +256,17 @@
                     
                 
                     
+                
+                    
+                
+                    
                         <li><a href="/estimation" class="">Estimation (2)</a></li>
-                    
-                
-                    
-                
                     
                 
                     
                 
             </ul>
             <ul>
-                
-                    
                 
                     
                 
@@ -284,8 +280,12 @@
                 
                     
                 
+                    
+                
             </ul>
             <ul>
+                
+                    
                 
                     
                         <li><a href="/mathstat" class="">Math. & Stat. (2)</a></li>
@@ -299,8 +299,6 @@
                 
                     
                 
-                    
-                
             </ul>
             <ul>
                 
@@ -318,11 +316,11 @@
                 
             </ul>
             <ul>
-                
-                    
                 
                     
                         <li><a href="/etc" class="">Etc. (2)</a></li>
+                    
+                
                     
                 
                     
@@ -346,16 +344,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개">
-    <meta itemprop="description" content="에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할 수 있어야 한다. 그래야 장기적인 에너지 공급 비용 및 화석연료 사용량 등을 줄일 수 있다.">
-    <meta itemprop="datePublished" content="2023-04-15T00:00:00+09:00">
+    <meta itemprop="headline" content="강화학습 기반 마이크로그리드 control - 1) 문제의식 및 케이스 소개">
+    <meta itemprop="description" content="재생 발전의 비중이 커질수록, 당장 몇 시간 뒤의 발전량 및 순 부하 (재생발전량을 제한 net power load) 예측조차도 어려워진다. 이런 상황에서 과거 데이터들을 잘 이용해서 ‘경제적으로’ 전력을 공급하도록 설비들을 control하는 것이, ‘스마트’그리드의 중요한 과제이다.">
+    <meta itemprop="datePublished" content="2023-05-21T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/reinforceone.html" class="u-url" itemprop="url">강화학습 기반 마이크로그리드 스케줄링 - 1) 문제의식 및 케이스 소개
+            <a href="http://localhost:4000/reinforceone.html" class="u-url" itemprop="url">강화학습 기반 마이크로그리드 control - 1) 문제의식 및 케이스 소개
 </a>
           </h1>
           
@@ -366,7 +364,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-15T00:00:00+09:00">2023-04-15</time>
+        <time datetime="2023-05-21T00:00:00+09:00">2023-05-21</time>
       </span>
     
 
@@ -384,36 +382,50 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              
+              <ul class="toc__menu"><li><a href="#선형계획법의-한계-미래를-안다고-가정-비현실적">선형계획법의 한계: 미래를 안다고 가정 (비현실적)</a></li><li><a href="#강화학습을-쓴다면">강화학습을 쓴다면?</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <p>에너지 시스템에서 재생에너지의 비중이 점점 커지는 추세이다. 이러한 추세가 계속될수록, 불확실성이 커져 당장 몇 시간 뒤의 발전량 예측조차도 불확실하게 된다. 이러한 불확실성에도 불구하고, 지금 얼마만큼의 에너지를 저장하고 얼마만큼의 에너지를 계통으로부터 받을지 등을 ‘잘’ 결정할 수 있어야 한다. 그래야 장기적인 에너지 공급 비용 및 화석연료 사용량 등을 줄일 수 있다.</p>
+        <p>재생 발전의 비중이 커질수록, 당장 몇 시간 뒤의 발전량 및 순 부하 (재생발전량을 제한 net power load) 예측조차도 어려워진다. 이런 상황에서 과거 데이터들을 잘 이용해서 ‘경제적으로’ 전력을 공급하도록 설비들을 control하는 것이, ‘스마트’그리드의 중요한 과제이다.</p>
 
 <p><img src="/assets/images/reinforceone/renewableuncertainty.png" alt="renewableuncertainty" class="align-center" width="80%" />
-<em>풍력발전 예측 시의 신뢰구간이 큼. 즉, 재생발전 비중이 높으면 전기 발전량을 단기적으로도 정확히 예측하기 어려움. (출처: http://www.ningzhang.net/Renewables.html)</em></p>
+<em>풍력발전 예측 시의 신뢰구간이 큼. 즉, 재생발전 비중이 높으면 발전량의 단기적 예측도 어려움.<br />(출처: http://www.ningzhang.net/Renewables.html)</em></p>
 
-<p>그런데 선형계획법 등 전통적인 최적화 기반 에너지시스템 스케줄링 관련 연구들에서는, ‘미래’의 발전량과 부하를 정확히 알 경우의 control을 도출한다는 한계점이 있다 (실제로는 미래를 정확히 알 수 없음에도). 최적화문제의 변수들이 각 시간별 수전/ 충전/ 방전 등이라 할 때, 해당 문제의 제약조건들로 ‘모든 시간에 대한’ 에너지 밸런스 제약이 포함된 상태에서 최적화를 수행하기 때문이다.</p>
+<p><br /></p>
+
+<h2 id="선형계획법의-한계-미래를-안다고-가정-비현실적">선형계획법의 한계: 미래를 안다고 가정 (비현실적)</h2>
+
+<p>이 블로그의 ‘Optimal System’ 카테고리에, 필자가 선형계획법 기반의 최적 에너지시스템 구성 및 스케줄링 도출을 설명했으며 해당 내용에는 <a href="https://song4energyndata.github.io/linprogfive.html">태양광/ 풍력 등 재생발전 비중이 높은 시스템 대상 분석</a>도 포함되어 있다.</p>
+
+<p>그런데 선형계획법 기반 에너지시스템 스케줄링에서는, ‘미래’의 발전량과 부하를 ‘정확히 알 경우의’ control을 도출한다는 한계점이 있다 (실제로는 미래를 정확히 알 수 없음에도).</p>
+
+<p>최적화 문제의 변수들이 각 시간별 수전/ 충전/ 방전 등이라 할 때, 해당 문제의 제약조건들로 ‘모든 시간에 대한’ 에너지 밸런스 제약이 포함된 상태에서 최적화를 수행하기 때문이다.</p>
 
 <p><br />
 예시를 하나 들자. Vincent의 Liege 대학 박사학위논문 <a href="https://orbi.uliege.be/handle/2268/214216">‘Contributions to deep reinforcement learning and its applications in smartgrids’</a> 에서 연구대상으로 삼은 가상의 마이크로그리드 시스템은 아래와 같다.</p>
 
-<p>Peak 2kW 수준의 전기부하가 있으며, 이 부하에 전력을 공급하는 수단으로는 Peak 12kW급 태양광 패널, 실용량 15kWh급 배터리 (충방전 효율은 80%), 그리고 부하에 연결된 수소연료전지 기반 중앙 계통이 있다.</p>
+<p>최대부하 2kW 수준의 전기부하가 있으며, 이 부하에 전력을 공급하는 수단으로는 정격출력 12kW급 태양광 패널, 실용량 15kWh급 배터리 (충방전 효율은 80%), 그리고 부하에 연결된 수소연료전지 기반 중앙 계통이 있다.</p>
 
 <p><img src="/assets/images/reinforceone/system.png" alt="system" class="align-center" />
 <em>Vincent의 연구에서 가정된 마이크로그리드.</em></p>
 
-<p>태양광 발전량이 부족할 경우 중앙 수소연료전지 시스템으로부터 전기를 받을 수 있다(수전). 또는 태양광 발전량이 수요를 초과할 경우 전기를 역송해서 중앙 수소연료전지 시스템이 그린수소를 생산하도록 할 수 있다. 이 문제에서는 특이하게도, 계통 사이에 오갈 수 있는 전력이 1.1kW로 제한되어 있다.</p>
+<p>태양광 발전량이 부족할 경우 중앙 수소연료전지 시스템으로부터 전기를 받을 수 있다(수전). 또는 태양광 발전량이 수요를 초과할 경우 전기를 역송해서 중앙 수소연료전지 시스템이 그린수소를 생산하도록 할 수 있다.</p>
 
-<p>이때 계통으로부터 전력을 받는 데 드는 비용은 해당 전기에너지 생산에 필요한 양만큼의 수소의 가격, 계통으로 잉여전력을 보낼 때의 수익은 해당 전기에너지로 만들 수 있는 양만큼의 수소의 가격이다. (이 논문의 가정에서는 수소 에너지 기준으로 1kWh 당 0.1유로이며 수소-전기 간 변환효율은 65%이므로, 보낼 때의 수익은 약 0.065유로/kWh, 받을 때의 비용은 약 0.154유로/kWh이다)</p>
+<p>이 문제에서는 특이하게도, 계통 사이에 오갈 수 있는 전력이 1.1kW로 제한되어 있다 (개인적으로 일반적인 case는 아니라는 생각이 들지만… 일단 받아들이자).</p>
 
-<p>만약 태양광발전은 안 되고 배터리도 완방되어 있고 계통으로부터 1.1kW를 수전받음에도 부하를 충당하지 못할 경우, loss of load에 대한 큰 비용 2.0유로/kWh가 발생한다 (물리적인 피해는 없다고 가정하고 대신 이를 큰 비용으로 환산함). 그러므로 특정 시간에 잉여전력이 많더라도 이를 전부 송전해서 수소 가격만큼의 수익을 내려다가, 나중에 태양광 발전량이 부족해지면 큰 손실을 볼 수도 있으니 배터리 내 에너지 저장량을 적절히 유지해야 한다.</p>
+<p>이때 계통으로부터 전력을 받는 데 드는 비용은 해당 전기에너지 생산에 필요한 양만큼의 수소의 가격, 계통으로 잉여전력을 보낼 때의 수익은 해당 전기에너지로 만들 수 있는 양만큼의 수소의 가격이다.</p>
 
-<p>만약 잉여태양광전력이 너무 많아서 배터리 완충 + 계통으로 1.1kW 송전 시에도 전력이 남으면, 이는 curtail(출력제한)되며 따로 수익을 내지는 않는다.</p>
+<p>이 논문의 가정에서는 수소 에너지 기준으로 1kWh 당 0.1유로이며 수소-전기 간 변환효율은 65%이므로, 보낼 때의 수익은 약 0.065유로/kWh, 받을 때의 비용은 약 0.154유로/kWh이다. 즉 역송 시의 수익이 수전 시의 비용보다 더 적다.</p>
+
+<p>만약 태양광발전이 없고 배터리도 완방되어 있고 계통으로부터 1.1kW를 수전받음에도 부하를 충당하지 못할 경우, loss of load에 대한 큰 penalty성 비용 2.0유로/kWh가 발생한다 (부하 공급 실패에 대한 penalty를 큰 비용으로 환산함).</p>
+
+<p>그러므로 특정 시간에 잉여전력이 많더라도, 이를 전부 송전해서 수소 가격만큼의 수익을 내려다가 나중에 태양광 발전량이 부족해지면 큰 손실을 볼 수 있다. 그러므로 배터리 내 에너지 저장량을 ‘적절히’ 유지해야 한다.</p>
+
+<p>만약 잉여 태양광전력이 너무 많아서 배터리 완충 + 계통으로 1.1kW 송전 시에도 전력이 남으면, 이는 curtail(출력제한)된다. 출력제한은 전기를 버리는 것이므로, 수익을 내지 않는다.</p>
 
 <p><br />
-이 때 시간이 1, 2, …, T일 때, 모든 시간의 비용의 합을 최소화하는 계통으로부터의 수전/송전, 에너지저장장치의 충전/방전량을 결정하고자 한다. 최적화 문제는 아래와 같다.</p>
+시간 인덱스가 $t \in  \lbrace 1, 2, …, T \rbrace$ 일 때, 모든 시간의 비용의 합을 최소화하는 계통으로부터의 수전/송전, 에너지저장장치의 충전/방전량을 결정하고자 한다. 최적화 문제는 아래와 같다.</p>
 
 <p>Minimize $ \sum_{t=1}^{T} 0.154 p_{\text{import}}[t] - \sum_{t=1}^{T} 0.065 p_{\text{export}}[t] + \sum_{t=1}^{T} 2 p_{\text{loss}}[t] $</p>
 
@@ -427,9 +439,9 @@
 
 <p>위에서 load는 부하, pv는 태양광, import는 계통으로부터의 수전, export는 계통으로의 송전, disch는 배터리 방전, ch는 배터리 충전, loss는 전력 부족 시 loss of load, curtail은 전력 초과 시 출력제한, batt는 배터리이다. $p$는 전력, $e$는 저장된 에너지, $\mu$는 효율이다. $p_{\text{load}}[t]$와 $p_{\text{pv}}[t]$는 input data로써 주어져 있고, 나머지 nonnegative 변수들의 값을 결정한다.</p>
 
-<p>(참고로 보통은 battery의 c-rate까지 고려해야 하겠으나, 해당 논문에서는 배터리가 순간적인 발전량 전부를 유입시킬 수 있다고 가정했으므로 c-rate는 고려하지 않았다.)</p>
+<p>(참고로 보통은 battery의 c-rate까지 고려해야 하지만, Vincent의 논문에서는 배터리가 순간적인 발전량 전부를 유입시킬 수 있다고 가정했으므로 c-rate는 고려하지 않았다.)</p>
 
-<p>위 선형계획 문제를 Python에서 cvxopt 패키지와 glpk solver로 구성하고 푸는 코드는 아래와 같다.</p>
+<p>위 선형계획 문제를 Python에서 cvxopt 패키지와 glpk solver로 구성하고 푸는 코드는 아래와 같다. (<a href="https://github.com/song4energyndata/Codes/tree/main/linearprogramming/microgrid_Vincent">GitHub Repo 링크</a>)</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">cvxopt</span> <span class="kn">import</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">spmatrix</span><span class="p">,</span> <span class="n">sparse</span><span class="p">,</span> <span class="n">glpk</span>
 <span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
@@ -501,37 +513,52 @@
 <span class="nf">print</span><span class="p">(</span><span class="n">profit</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>특정 1년의 1월 2일~12월 31일에 대해 최적화 수행 시, 비용은 -50유로, 즉 누적해서 50유로의 수익을 낸다 (이는 다음 포스팅에서부터 소개할 강화학습에 대한 validation case이며, 왜 1월 2일부터인지는 다음 포스팅에서 설명함).</p>
+<p>특정 1년의 1월 2일~12월 31일에 대해 최적화 수행 시, 비용은 -50유로, 즉 누적해서 50유로의 수익을 낸다 (이는 다음 포스팅에서부터 소개할 강화학습에 대한 validation case이며, 왜 1월 2일부터인지는 다음 포스팅에서 설명한다).</p>
 
-<p>여기서 t=1일 때의 $p_{\text{export}}[1]$와 $p_{\text{import}}[1]$을 결정하는 데 $p_{\text{pv}}[1], p_{\text{pv}}[2], \cdots, p_{\text{pv}}[T]$ 즉 모든 시간의 태양광 발전량 값들 및 $p_{\text{load}}[1], p_{\text{load}}[2], \cdots, p_{\text{load}}[T]$ 즉 모든 시간의 부하 값들이 정보로 쓰인다. 즉 ‘미래를 정확히 아는 상황’ 이 된다.</p>
+<p>여기서 $t=1$일 때의 $p_{\text{export}}[1]$와 $p_{\text{import}}[1]$을 결정하는 데 쓰이는 정보는, $p_{\text{pv}}[1], p_{\text{pv}}[2], \cdots, p_{\text{pv}}[T]$ 즉 모든 시간의 태양광 발전량 값들 및 $p_{\text{load}}[1], p_{\text{load}}[2], \cdots, p_{\text{load}}[T]$ 즉 모든 시간의 부하 값들이다. 즉 ‘미래를 정확히 알 때의’ control이다.</p>
 
-<p>그러나 이는 이상적인, 비현실적인 가정이다. 시점 $k$의 $p_{\text{export}}[k]$와 $p_{\text{import}}[k]$를 결정하는 데 실제로 쓰이는 정보는 과거의 정보 즉 $p_{\text{pv}}[1], \cdots, p_{\text{pv}}[k-1], p_{\text{load}}[1], \cdots, p_{\text{load}}[k-1]$로 한정되어야 한다.</p>
-
-<p>그러면 어떻게 해야 과거 정보만으로 ‘미래의 누적비용까지 고려한’ 최적의 control을 계산해낼 수 있을까?</p>
+<p>그러나 이는 비현실적인 가정이다. 현실 세계에서는 시점 $k$의 $p_{\text{export}}[k]$와 $p_{\text{import}}[k]$를 결정하는 데 실제로 쓰일 수 있는 정보가, 과거의 정보 $p_{\text{pv}}[1], \cdots, p_{\text{pv}}[k-1], p_{\text{load}}[1], \cdots, p_{\text{load}}[k-1]$로 한정된다.</p>
 
 <p><br />
-강화학습이라는 말은 아마 알파고의 학습 원리 등으로 들어보았을 것이다.</p>
+이를 보완하기 위한 방법으로, 시점 $k$ 기준으로 시점 $k+1, k+2, \cdots, k+N$ ($N$은 24~168 즉 하루~일주일 정도의 비교적 짧은 기간) 까지에 대한 ‘작은 문제’를 풀어 해를 얻고, 그 해에서 시점 $k$의 control만 취하는 과정을 반복하는 ‘rolling horizon’ 방법이 있다.</p>
 
-<p>강화학습은, 주어진 환경에서 특정 상태에 처했을 때 할 수 있는 행동들 중 특정 행동을 함으로써 얻는 보상 (특히 당장의 보상 뿐 아니라 중/장기적 관점에서 미래 보상의 누적 합)의 기대값을 최대화할 수 있도록, 상태 별 행동을 정하는 규칙 (policy) 을 도출하도록 agent를 학습시키는 방법이다.</p>
+<p><img src="/assets/images/reinforceone/rolling.png" alt="rolling" class="align-center" width="70%" />
+<em>Rolling horizon 기반 control. 가까운 미래에 대한 예측 기반으로 현재의 control을 결정.<br />출처: <a href="https://doi.org/10.1016/j.apenergy.2015.05.090">Silvente et al. (2015)</a></em></p>
+
+<p>그러나 이는 두 가지 한계점이 있다.</p>
+
+<p>첫째, 이를 현실에서 사용하려면 단기라도 어쨌거나 미래 $N$시간 동안의 발전량과 부하 ‘예측’이 필요하다는 것이다. 재생발전 비중이 증가할수록 이에 대한 예측이 실제로부터 벗어나기 쉽다는 것은 이미 본문의 맨 위에서 언급했다.</p>
+
+<p>둘째, 해당 control은 현재 및 $N$시간 뒤까지 발생하는 비용의 합만을 최소화하지, 그보다 더 미래까지의 ‘누적비용’은 고려하지 않는다.</p>
+
+<p><br /></p>
+
+<h2 id="강화학습을-쓴다면">강화학습을 쓴다면?</h2>
+
+<p>그러면 어떻게 해야 ‘예측 없이 과거 정보만으로’, ‘먼 미래까지의 누적비용을 고려한’ 경제적 control을 도출할 수 있을까?</p>
+
+<p>‘강화학습’ (Reinforcement Learning) 이라는 말을 들어봤을 것이다 (아마 AlphaGo의 학습 원리 등으로).</p>
+
+<p>강화학습은, 주어진 환경에서 특정 상태(state)에 처했을 때 할 수 있는 행동(action)들 중 특정 행동을 함으로써 얻는 보상(reward), 특히 당장의 보상 뿐 아니라 중/장기적 관점에서 미래 보상의 ‘누적 합(return)’의 기대값을 최대화할 수 있도록, 상태 별 행동을 정하는 규칙 (policy) 을 도출하는 기계학습 방법이다.</p>
 
 <p><img src="/assets/images/reinforceone/reinforcement_basic.png" alt="reinforcement_basic" class="align-center" width="70%" />
 <em>강화학습 개요. State $S_t$에서 Action $A_t$를 취하면 Reward $R_{t+1}$을 얻으면서 State $S_{t+1}$로 전이됨.</em></p>
 
-<p>상태를 특정 N시간 전까지의 부하와 태양광 발전량, 행동을 제어로 보면 위에서 소개한 case에도 강화학습을 적용할 수 있다. 실제로 해당 학위논문에서는 계통으로부터의 송전/수전을 action으로 두고 Deep Q-learning을 적용하여 이러한 controller를 훈련했다.</p>
+<p>Vincent의 마이크로그리드 문제에서 state를 특정 N시간 ‘전’까지의 부하와 태양광 발전량, action을 현재 시간에서의 수전/송전으로 두면, 강화학습을 적용해 controller를 훈련시킬 수 있다.</p>
 
-<p>물론 이 controller를 사용할 경우의 누적 비용은 선형계획법 결과대로 제어할 경우의 비용보다는 클 것이다. 그렇지만 적어도 random control보다는 훨씬 나은 성과를 낼 수 있을 것이다.</p>
+<p>물론 이 controller를 사용할 경우의 누적 비용은, (미래를 다 안다고 가정해서 얻은) 선형계획법 결과 기반 control 시의 비용보다는 클 것이다. 그렇지만 적어도 random control보다는 훨씬 나은 성과를 낼 수 있을 것이다.</p>
 
-<p>실제로 해당 학위논문의 에너지시스템 사례에 대해 수전을 플러스, 송전을 마이너스라 할 때 [-1.1,+1.1] 구간에 대한 uniform distribution을 가정해 all random으로 control을 한다면, validation case에서 비용은 대략 2500~2700유로 정도이다. 그러나 DQN으로 훈련시킨 controller를 쓰면 27유로로, LP 결과인 -50유로에 상당히 근접한 economic control이 된다.</p>
+<p>실제로 해당 학위논문의 에너지시스템 사례에 대해 수전을 플러스, 송전을 마이너스라 할 때 [-1.1,+1.1] 구간에 대한 uniform distribution을 가정해 all random으로 control을 한다면, validation case에서 누적 비용은 대략 2500~2700유로 정도이다. 그러나 강화학습으로 훈련시킨 controller를 쓰면 27유로로, LP 결과인 -50유로에 상당히 근접한 economic control이 된다.</p>
 
-<p>다음 편에서는 해당 학위논문에 DQN을 적용한 사례를 상세히 소개한다.</p>
+<p>다음 편부터는 강화학습 개념, 그리고 Vincent의 마이크로그리드 문제에 강화학습을 적용하는 방법 및 결과를 소개한다.</p>
 
 <div class="notice--info">
 
-강화학습 기반 마이크로그리드 스케줄링<br /><br />
+강화학습 기반 마이크로그리드 control<br /><br />
 
 1) <b>문제의식 및 케이스 소개</b><br />
 2) <a href="/reinforcetwo.html">Q-learning 개념</a><br />
-3) <a href="/reinforcethree.html">Deep Q-learning을 통한 discrete control 도출</a><br />
+3) <a href="/reinforcethree.html">Deep Q-Network를 통한 discrete control 도출</a><br />
 4) <a href="/reinforcefour.html">DDPG를 통한 continuous control 도출</a><br />
 5) <a href="/reinforcefive.html">TD3, SAC를 통한 continuous control 도출</a>
 
@@ -587,7 +614,7 @@
  -->
         <!-- 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-04-15T00:00:00+09:00">2023-04-15</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-05-21T00:00:00+09:00">2023-05-21</time></p>
  -->
       </footer>
 
@@ -596,7 +623,7 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5+%EA%B8%B0%EB%B0%98+%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EA%B7%B8%EB%A6%AC%EB%93%9C+%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81+-+1%29+%EB%AC%B8%EC%A0%9C%EC%9D%98%EC%8B%9D+%EB%B0%8F+%EC%BC%80%EC%9D%B4%EC%8A%A4+%EC%86%8C%EA%B0%9C%20http%3A%2F%2Flocalhost%3A4000%2Freinforceone.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5+%EA%B8%B0%EB%B0%98+%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EA%B7%B8%EB%A6%AC%EB%93%9C+control+-+1%29+%EB%AC%B8%EC%A0%9C%EC%9D%98%EC%8B%9D+%EB%B0%8F+%EC%BC%80%EC%9D%B4%EC%8A%A4+%EC%86%8C%EA%B0%9C%20http%3A%2F%2Flocalhost%3A4000%2Freinforceone.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Freinforceone.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -605,7 +632,7 @@
 
 
       <p></p>
-        <h4 class="page__meta-title"><span>energymanagement</span> <span>카테고리 내 다른 글 보러가기</span></h4>
+        <!-- <h4 class="page__meta-title"><span>energymanagement</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
         
 
 
@@ -628,7 +655,7 @@
 
   
     
-      <a href="/reinforcetwo.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>강화학습 기반 마이크로그리드 스케줄링 - 2) Q-learning 개념</a>
+      <a href="/reinforcetwo.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>강화학습 기반 마이크로그리드 control - 2) Q-learning 개념</a>
     
     
       <a href="#" class="pagination_prev_next--pager disabled-first-child">첫 번째 글입니다</a>
@@ -656,12 +683,12 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/linprognine/portfolio.png" alt="">
+        <img src="/assets/images/reinforcefive/result_td3sac.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprognine.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 9) 출력 조정 관련 제약들
+        <a href="/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 control - 5) TD3/ SAC를 통한 continuous control 도출
 </a>
       
     </h2>
@@ -673,7 +700,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-28T00:00:00+09:00">2023-04-28</time>
+        <time datetime="2023-07-01T00:00:00+09:00">2023-07-01</time>
       </span>
     
 
@@ -683,8 +710,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">에너지 전환기 이전의 전통적 발전 포트폴리오에서도, 연료비가 저렴하고 탄소 배출이 적은 원자력’만’을 쓰지 않고 석탄/ 가스(LNG)/ 중유/ 양수발전 등을 결합해 구성했다. 이는 시간별로 전기 부하가 달라지며, 전원별로 ‘부하 변동에 대응하는 출력 조정 능력’이 다르기 때문이다.
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 ...</p>
   </article>
 </div>
 
@@ -697,12 +723,12 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/linprogeight/chp_eff.png" alt="">
+        <img src="/assets/images/reinforcefour/result_ddpg.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprogeight.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 관련 제약들
+        <a href="/reinforcefour.html" rel="permalink">강화학습 기반 마이크로그리드 control - 4) DDPG를 통한 continuous control 도출
 </a>
       
     </h2>
@@ -714,7 +740,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-27T00:00:00+09:00">2023-04-27</time>
+        <time datetime="2023-06-25T00:00:00+09:00">2023-06-25</time>
       </span>
     
 
@@ -724,8 +750,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서는 설비의 효율과 COP(성능계수)를 상수로 가정했지만, 실제로는 부하율에 따라 효율과 COP가 달라진다. 이를테면 열병합발전기의 경우, 최대 출력(정격 출력)으로 운전할 때 비해 더 낮은 출력으로 ‘부분부하’운전 시 발전효율이 저하됨이 알려져 있다.
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에 ‘discrete’ action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic...</p>
   </article>
 </div>
 
@@ -738,12 +763,12 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/linprogseven/systemfigure.png" alt="">
+        <img src="/assets/images/reinforcethree/nn.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprogseven.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 7) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)
+        <a href="/reinforcethree.html" rel="permalink">강화학습 기반 마이크로그리드 control - 3) Deep Q-Network를 통한 discrete control 도출
 </a>
       
     </h2>
@@ -755,7 +780,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-26T00:00:00+09:00">2023-04-26</time>
+        <time datetime="2023-06-11T00:00:00+09:00">2023-06-11</time>
       </span>
     
 
@@ -765,8 +790,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">이전 포스팅들에서는 전기 부하만을 다루었으나, 실제로는 냉방/난방/급탕 등 열 부하 또한 에너지 소비에서 상당한 비중을 차지한다. 따라서 ‘전기와 열을 모두’ 공급하는 분산형 에너지시스템의 최적 구성 및 스케줄을 도출할 수 있어야 한다.
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0, 1...</p>
   </article>
 </div>
 
@@ -779,12 +803,12 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/linprogsix/graph.png" alt="">
+        <img src="/assets/images/reinforcetwo/reinforcement_deep.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/linprogsix.html" rel="permalink">선형계획법 기반 분산에너지시스템 최적화 - 6) 공동주택의 ‘누진제’ 전기요금 (단일계약) 수식
+        <a href="/reinforcetwo.html" rel="permalink">강화학습 기반 마이크로그리드 control - 2) Q-learning 개념
 </a>
       
     </h2>
@@ -796,7 +820,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-04-25T00:00:00+09:00">2023-04-25</time>
+        <time datetime="2023-06-10T00:00:00+09:00">2023-06-10</time>
       </span>
     
 
@@ -806,7 +830,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">이전에 건물 내 태양광/배터리 설치 시의 최적 용량/스케줄 도출에 대해 설명했는데, 이는 ‘시간별 요금제를 적용받는 일반용 건물’에 대한 내용이었다. 그런데 주택에서는, ‘누진제’라 불리는, 전기를 많이 쓰면 단가가 올라가 요금이 급증하는 요금 체계를 적용한다.
+    <p class="archive__item-excerpt" itemprop="description">지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하의 control을 도출함을 보였다.
 </p>
   </article>
 </div>
