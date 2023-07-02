@@ -415,7 +415,7 @@
 
 <p>구체적으로, 원래 신경망들의 parameter를 $\theta$, target 신경망들의 parameter를 $\theta’$라 하고, 원래 actor와 target actor를 각각 $\mu(s)$와 $\mu’(s)$, 원래 critic과 target critic을 각각 $Q(s,a)$와 $Q’(s,a)$라 하자.</p>
 
-<p>그러면, critic 신경망 훈련 시의 목적함수는 $\hat{Q}(s_{t},a_{t})$와 $r_{t+1} + \gamma \text{max}_{\mu’} Q’(s_{t+1},\mu’(s_{t+1}))$ 간 차이의 평균제곱합이다. 두 번째 항이 target 신경망에 의해 계산되었음에 주목한다.</p>
+<p>그러면, critic 신경망 훈련 시의 목적함수는 $Q(s_{t},a_{t})$와 $r_{t+1} + \gamma \text{max}_{\mu’} Q’(s_{t+1},\mu’(s_{t+1}))$ 간 차이의 평균제곱합이다. 두 번째 항이 target 신경망에 의해 계산되었음에 주목한다.</p>
 
 <p>한편 actor 신경망 훈련 시의 목적함수는 $-Q(s_{t},\mu(s_{t}))$, 즉 음의 Q-value이다. Actor는 Q-value를 최대화하는 action을 도출해야 하기 때문이다. Actor 훈련 시의 목적함수는 target 신경망에 의해 계산되지 않았다.</p>
 
@@ -423,9 +423,13 @@
 
 <p>$\theta’ \leftarrow \tau \theta + (1-\tau) \theta’$</p>
 
-<p>Q-learning에서 Q-value에 대한 두 추정치 $Q(s_{t},a_{t})$와 $r_{t+1} + \gamma \text{max}_{a_{t+1}} Q(s_{t+1},a_{t+1})$가 말 그대로 ‘둘 다 추정치’이다. 즉 추정치를 추정치 기반으로 추정한다 (이를 bootstrap이라고도 한다).</p>
+<p>왜 target 신경망을 쓰면 학습의 안정성이 향상되는 것일까?</p>
 
-<p>이 때문에 운 나쁘게 추정이 잘못된 방향으로 진행되기 시작하면, 훈련이 발산해버리기 쉽다. Target 신경망 구성을 통해, Q-value 추정의 변화를 완화하여 훈련이 발산할 가능성을 크게 줄일 수 있다.</p>
+<p>Q-learning에서는 $q_{\ast}(s_{t},a_{t})$에 대한 두 추정치 $Q(s_{t},a_{t})$와 $r_{t+1} + \gamma \text{max}_{a_{t+1}} Q(s_{t+1},a_{t+1})$가 말 그대로 ‘둘 다 추정치’이다.</p>
+
+<p>즉 추정치를 추정치 기반으로 추정한다 (이를 bootstrap이라고도 한다). 이 때문에, 운 나쁘게 추정이 잘못된 방향으로 진행되기 시작하면, 훈련이 발산해버리기 쉽다.</p>
+
+<p>Target 신경망 구성을 통해, 두 추정치 중 후자의 변화를 완화하면, 훈련이 발산할 가능성을 크게 줄일 수 있다.</p>
 
 <p>(보다 더 상세한 내용은 <a href="https://arxiv.org/abs/1509.02971">논문 원문</a>을 참고하길 바란다)</p>
 
