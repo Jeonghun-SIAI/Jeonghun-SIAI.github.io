@@ -398,9 +398,9 @@
 
 <p>전기부하 데이터는 시계열 데이터이므로 Recurrent Neural Network (RNN) 을 쓸 수 있으나, 먼저 단순한 Dense Neural Network (DNN) 을 사용해 보자.</p>
 
-<p>이 경우 지난 포스팅의 선형회귀와 제대로 비교하기 위해서는, 선형회귀에서처럼 유형별 sub모델 4개를 만들고 predictor들도 이차항과 교차항을 제외하면 선형회귀에서와 똑같이 두어야 한다.</p>
+<p>이 경우 지난 포스팅의 선형회귀와 제대로 비교하기 위해서는, 선형회귀에서처럼 유형별 sub모델 4개를 만들고 predictor들도 교차항을 제외하면 선형회귀에서와 똑같이 두어야 한다. 즉, 일유형 dummy, 월별 dummy, 시간별 dummy를 두어야 한다.</p>
 
-<p>(단, 이차항과 교차항은 빼도 된다. NN이 제대로 적합된다면 기온/조도와 전기부하 간의 적절한 nonlinear function을 찾아줄 것이므로.)</p>
+<p>(교차항은 빼도 된다. NN이 제대로 적합된다면 기온/조도와 월/시간의 상호관계까지 고려한 전기부하 간의 적절한 nonlinear function을 ‘알아서 잘’ 찾아줄 것이므로.)</p>
 
 <p>여기서는 DNN은 2개의 Dense layer로 이루어져 있고 첫 layer의 node는 20개, 두 번째 layer의 node는 10개로 둔다. 훈련 epoch 수는 1000이고, optimizer는 특별한 이슈가 없으므로 가장 일반적인 Adam을 쓴다.</p>
 
@@ -565,7 +565,7 @@
 <span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p>Adjusted $R^2$를 계산해보면 훈련 set에 대한 값은 0.9509이다. 이는 Weighted Least square (WLS) 만 했을 때의 결과인 0.9263보다는 더 높지만, WLS에 잔차의 SARMA 모델 적합까지 추가 수행 시 결과인 0.9746보다는 낮다. 한편 검증 set에 대한 값은 0.8642로, WLS만 했을 때의 결과인 0.8716보다도 낮다.</p>
+<p>Adjusted $R^2$를 계산해보면 훈련 set에 대한 값은 0.9509이다. 이는 Weighted Least square (WLS) 만 했을 때의 결과인 0.9220보다는 더 높지만, WLS에 잔차의 SARMA 모델 적합까지 추가 수행 시 결과인 0.9735보다는 낮다. 한편 검증 set에 대한 값은 0.8642로, WLS만 했을 때의 결과인 0.8706보다도 낮다.</p>
 
 <p>검증 set에 대한 결과와 딥러닝 훈련에 드는 계산비용을 생각하면, 딥러닝이 우월하다고 볼 수 없다 (계산 시간만 따져도 몇 분 vs. 몇 초(WLS만 수행 시)).</p>
 
