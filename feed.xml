@@ -5,8 +5,8 @@
     <description>에너지 전환기를 맞아 에너지 분야의 데이터가 급증하고 있습니다. 이를 계산통계학/ 최적화 역량 기반으로 올바르게 분석/ 활용하여, 에너지 시스템/ 정책/ 시장 등에 관한 유익한 결과물들을 도출할 수 있도록 돕습니다.</description>
     <link>https://song4energyndata.github.io/</link>
     <atom:link href="https://song4energyndata.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 02 Jul 2023 10:57:18 +0900</pubDate>
-    <lastBuildDate>Sun, 02 Jul 2023 10:57:18 +0900</lastBuildDate>
+    <pubDate>Sun, 02 Jul 2023 11:11:55 +0900</pubDate>
+    <lastBuildDate>Sun, 02 Jul 2023 11:11:55 +0900</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
@@ -1871,7 +1871,7 @@ Vincent의 마이크로그리드 사례에서는, 실제 수전량은 -1.1에서
     
       <item>
         <title>건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?</title>
-        <description>&lt;p&gt;지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 ‘전통적인’ 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA) 로 만들어 adjusted $R^2$ 0.95 에 가까운 우수한 성능을 얻을 수 있음을 보였다.&lt;/p&gt;
+        <description>&lt;p&gt;지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 ‘전통적인’ 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA) 로 만들어 adjusted $R^2$ 0.95 이상의 우수한 성능을 얻을 수 있음을 보였다.&lt;/p&gt;
 
 &lt;p&gt;이번 포스팅에서는, 딥러닝을 써서 모델을 만들어 본다.&lt;/p&gt;
 
@@ -2310,15 +2310,17 @@ K년도의 자료를 갖고, 4개 sub모델 각각에 대해 Weighted Least Squa
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&quot;오차의-자기상관-모델링을-통한-예측력-향상&quot;&gt;오차의 자기상관 모델링을 통한 예측력 향상&lt;/h2&gt;
-&lt;p&gt;$K$년도 잔차로 적합한 SARMA 모델로 설명되는 맞춘값들을 기존 WLS 맞춘값들에 더하면, adjusted $R^2$가 증가할까?&lt;/p&gt;
+&lt;p&gt;$K$년도 WLS의 잔차로 적합한 SARMA 모델에, $K$년도 WLS 잔차와 $K+1$년도 WLS 잔차 각각을 대입해 맞춘값들을 구한다.&lt;/p&gt;
 
-&lt;p&gt;그렇다. 훈련 set (K년도)에 대해서는 0.9263에서 0.9746으로, 검증 set (K+1년도)에 대해서는 0.8716에서 0.9464로 증가한다. 아래 그림을 보면, 오차의 자기상관을 반영하기 전과 비교해서, 예측값이 실제값에 더 가까워졌다.&lt;/p&gt;
+&lt;p&gt;그리고 그 맞춘값들을 기존 WLS 맞춘값들에 더하면, adjusted $R^2$가 증가할까?&lt;/p&gt;
+
+&lt;p&gt;그렇다. 훈련 set (K년도)에 대해서는 0.9263에서 0.9746으로, 검증 set (K+1년도)에 대해서는 0.8716에서 0.9734로 증가한다. 아래 그림을 보면, 오차의 자기상관을 반영하기 전과 비교해서, 예측값이 실제값에 더 가까워졌다.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/predictionone/fit_arma.png&quot; alt=&quot;fit_arma&quot; class=&quot;align-center&quot; /&gt;
 &lt;img src=&quot;/assets/images/predictionone/predict_arma.png&quot; alt=&quot;predict_arma&quot; class=&quot;align-center&quot; /&gt;
 &lt;em&gt;$K$년도 데이터로 적합한 WLS + 잔차 SARMA 모델 기반 전기부하 추정.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Adjusted $R^2$가 꼭 절대적인 기준은 아니겠지만, 딥러닝을 쓰지 않고 전통적 회귀분석 기법만을 사용해서 검증 set에 대해 Adjusted $R^2$ 0.95 가까이를 달성한 것은 상당히 고무적이다.&lt;/p&gt;
+&lt;p&gt;Adjusted $R^2$가 꼭 절대적인 기준은 아니겠지만, 딥러닝을 쓰지 않고 전통적 회귀분석 기법만을 사용해서 검증 set에 대해 Adjusted $R^2$ 0.95 이상을 달성한 것은 상당히 고무적이다.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;
 그렇다면 딥러닝을 쓴다면 어떨까? Adjusted $R^2$ 0.99 정도는 쉽게 얻을 수 있을까?&lt;/p&gt;

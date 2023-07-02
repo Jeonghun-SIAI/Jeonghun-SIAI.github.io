@@ -507,15 +507,17 @@ K년도의 자료를 갖고, 4개 sub모델 각각에 대해 Weighted Least Squa
 
 <p><br /></p>
 <h2 id="오차의-자기상관-모델링을-통한-예측력-향상">오차의 자기상관 모델링을 통한 예측력 향상</h2>
-<p>$K$년도 잔차로 적합한 SARMA 모델로 설명되는 맞춘값들을 기존 WLS 맞춘값들에 더하면, adjusted $R^2$가 증가할까?</p>
+<p>$K$년도 WLS의 잔차로 적합한 SARMA 모델에, $K$년도 WLS 잔차와 $K+1$년도 WLS 잔차 각각을 대입해 맞춘값들을 구한다.</p>
 
-<p>그렇다. 훈련 set (K년도)에 대해서는 0.9263에서 0.9746으로, 검증 set (K+1년도)에 대해서는 0.8716에서 0.9464로 증가한다. 아래 그림을 보면, 오차의 자기상관을 반영하기 전과 비교해서, 예측값이 실제값에 더 가까워졌다.</p>
+<p>그리고 그 맞춘값들을 기존 WLS 맞춘값들에 더하면, adjusted $R^2$가 증가할까?</p>
+
+<p>그렇다. 훈련 set (K년도)에 대해서는 0.9263에서 0.9746으로, 검증 set (K+1년도)에 대해서는 0.8716에서 0.9734로 증가한다. 아래 그림을 보면, 오차의 자기상관을 반영하기 전과 비교해서, 예측값이 실제값에 더 가까워졌다.</p>
 
 <p><img src="/assets/images/predictionone/fit_arma.png" alt="fit_arma" class="align-center" />
 <img src="/assets/images/predictionone/predict_arma.png" alt="predict_arma" class="align-center" />
 <em>$K$년도 데이터로 적합한 WLS + 잔차 SARMA 모델 기반 전기부하 추정.</em></p>
 
-<p>Adjusted $R^2$가 꼭 절대적인 기준은 아니겠지만, 딥러닝을 쓰지 않고 전통적 회귀분석 기법만을 사용해서 검증 set에 대해 Adjusted $R^2$ 0.95 가까이를 달성한 것은 상당히 고무적이다.</p>
+<p>Adjusted $R^2$가 꼭 절대적인 기준은 아니겠지만, 딥러닝을 쓰지 않고 전통적 회귀분석 기법만을 사용해서 검증 set에 대해 Adjusted $R^2$ 0.95 이상을 달성한 것은 상당히 고무적이다.</p>
 
 <p><br />
 그렇다면 딥러닝을 쓴다면 어떨까? Adjusted $R^2$ 0.99 정도는 쉽게 얻을 수 있을까?</p>

@@ -114,7 +114,7 @@ var store = [{
         "teaser": "/assets/images/predictionone/predict_arma.png"
       },{
         "title": "건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?",
-        "excerpt":"지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 ‘전통적인’ 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA) 로 만들어 adjusted $R^2$ 0.95 에 가까운 우수한 성능을 얻을 수 있음을 보였다. 이번 포스팅에서는, 딥러닝을 써서 모델을 만들어 본다. Dense Neural Net 전기부하 데이터는 시계열 데이터이므로 Recurrent Neural Network (RNN) 을...","categories": ["estimation"],
+        "excerpt":"지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 ‘전통적인’ 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA) 로 만들어 adjusted $R^2$ 0.95 이상의 우수한 성능을 얻을 수 있음을 보였다. 이번 포스팅에서는, 딥러닝을 써서 모델을 만들어 본다. Dense Neural Net 전기부하 데이터는 시계열 데이터이므로 Recurrent Neural Network (RNN) 을 쓸...","categories": ["estimation"],
         "tags": ["회귀분석","딥러닝","부하패턴"],
         "url": "/predictiontwo.html",
         "teaser": "/assets/images/predictiontwo/predict_rnn_nodummy.png"
