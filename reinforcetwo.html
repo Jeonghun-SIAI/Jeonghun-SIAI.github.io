@@ -404,7 +404,7 @@
 
 <p>Vincent의 마이크로그리드 사례에서는, 시점 $t$에서 state는 $t-N, t-(N-1), …, t-1$ 시점들의 태양광발전량과 부하 및 $t-1$시점의 배터리 내 에너지량들의 총 $2N+1$차원 벡터로 두었고, action은 net 수전량 $p_{\text{import}}[t]-p_{\text{export}}[t]$이다 (net 송전 시 마이너스). Reward는 계통으로 송전시의 수익 (양의 reward) 또는 계통으로부터 수전하거나 loss of load가 발생할 때의 비용 (음의 reward) 이다.</p>
 
-<p>참고로 ESS의 충/방전은, 계통 수전/송전 값이 결정되면 에너지 밸런스를 맞추도록 ‘자동으로’ 결정된다고 가정한다. 이런 식으로 action의 자유도(degree of freedom)를 줄여야 실제 계산이 용이해진다.</p>
+<p>참고로 ESS의 충/방전은, 계통 수전/송전 값이 결정되면 에너지 밸런스를 맞추도록 ‘자동으로’ 결정된다고 가정한다. 이런 식으로 action의 자유도 (degree of freedom)를 줄여야 실제 계산이 용이해진다.</p>
 
 <p><br />
 각 state $s$에서 action $a$를 할 확률을 나타내는 policy $\pi(a \vert s)$가 주어졌다고 하자. 그리고 시점 $t$에서의 state $s_t$이고, 시점 $t$에서는 poilcy $\pi(a \vert s)$에 관계없이 특정 action $a_t$를 결정하되, 다음 시점인 $t+1$부터는 $\pi(a \vert s)$에 따라 action들 $a_{t+1}, a_{t+2}, \cdots$를 결정한다고 하자.</p>

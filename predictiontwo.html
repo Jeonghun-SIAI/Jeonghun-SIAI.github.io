@@ -11,7 +11,7 @@
   <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면? | 에너지엔데이터연구소</title>
-<meta name="description" content="지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 ‘전통적인’ 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA) 로 만들어 adjusted $R^2$ 0.95 이상의 우수한 성능을 얻을 수 있음을 보였다.">
+<meta name="description" content="지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 ‘전통적인’ 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA 보조회귀) 로 만들어 adjusted $R^2$ 0.95 이상의 우수한 성능을 얻을 수 있음을 보였다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="https://song4energyndata.github.io/predictiontwo.html">
 
 
-  <meta property="og:description" content="지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 ‘전통적인’ 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA) 로 만들어 adjusted $R^2$ 0.95 이상의 우수한 성능을 얻을 수 있음을 보였다.">
+  <meta property="og:description" content="지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 ‘전통적인’ 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA 보조회귀) 로 만들어 adjusted $R^2$ 0.95 이상의 우수한 성능을 얻을 수 있음을 보였다.">
 
 
 
@@ -346,7 +346,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?">
-    <meta itemprop="description" content="지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 ‘전통적인’ 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA) 로 만들어 adjusted $R^2$ 0.95 이상의 우수한 성능을 얻을 수 있음을 보였다.">
+    <meta itemprop="description" content="지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 ‘전통적인’ 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA 보조회귀) 로 만들어 adjusted $R^2$ 0.95 이상의 우수한 성능을 얻을 수 있음을 보였다.">
     <meta itemprop="datePublished" content="2023-04-16T00:00:00+09:00">
     
 
@@ -388,7 +388,7 @@
             </nav>
           </aside>
         
-        <p>지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 ‘전통적인’ 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA) 로 만들어 adjusted $R^2$ 0.95 이상의 우수한 성능을 얻을 수 있음을 보였다.</p>
+        <p>지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 ‘전통적인’ 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA 보조회귀) 로 만들어 adjusted $R^2$ 0.95 이상의 우수한 성능을 얻을 수 있음을 보였다.</p>
 
 <p>이번 포스팅에서는, 딥러닝을 써서 모델을 만들어 본다.</p>
 
@@ -565,7 +565,7 @@
 <span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p>Adjusted $R^2$를 계산해보면 훈련 set에 대한 값은 0.9509이다. 이는 Weighted Least square (WLS) 만 했을 때의 결과인 0.9220보다는 더 높지만, WLS에 잔차의 SARMA 모델 적합까지 추가 수행 시 결과인 0.9735보다는 낮다. 한편 검증 set에 대한 값은 0.8642로, WLS만 했을 때의 결과인 0.8706보다도 낮다.</p>
+<p>Adjusted $R^2$를 계산해보면 훈련 set에 대한 값은 0.9509이다. 이는 Weighted Least square (WLS) 만 했을 때의 결과인 0.9220보다는 더 높지만, WLS 잔차에 대한 SARMA 보조회귀모델 적합까지 추가 수행 시 결과인 0.9735보다는 낮다. 한편 검증 set에 대한 값은 0.8642로, WLS만 했을 때의 결과인 0.8706보다도 낮다.</p>
 
 <p>검증 set에 대한 결과와 딥러닝 훈련에 드는 계산비용을 생각하면, 딥러닝이 우월하다고 볼 수 없다 (계산 시간만 따져도 몇 분 vs. 몇 초(WLS만 수행 시)).</p>
 
