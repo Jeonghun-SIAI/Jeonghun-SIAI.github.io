@@ -19,8 +19,8 @@
 </script>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>회귀분석 관련 정리 | 에너지엔데이터연구소</title>
-<meta name="description" content="Ordinary least squares">
+<!-- begin _includes/seo.html --><title>선형계획법 기반 분산에너지시스템 최적화 - 10) 출력 조정 관련 제약들 | 에너지엔데이터연구소</title>
+<meta name="description" content="에너지 전환기 이전의 전통적 발전 포트폴리오에서도, 연료비가 저렴하고 탄소 배출이 적은 원자력’만’을 쓰지 않고 석탄/ 가스(LNG)/ 중유/ 양수발전 등을 결합해 구성했다. 이는 시간별로 전기 부하가 달라지며, 전원별로 ‘부하 변동에 대응하는 출력 조정 능력’이 다르기 때문이다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -32,19 +32,21 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="회귀분석 관련 정리">
-<meta property="og:url" content="https://song4energyndata.github.io/regression.html">
+<meta property="og:title" content="선형계획법 기반 분산에너지시스템 최적화 - 10) 출력 조정 관련 제약들">
+<meta property="og:url" content="https://song4energyndata.github.io/linprogten.html">
 
 
-  <meta property="og:description" content="Ordinary least squares">
-
-
-
+  <meta property="og:description" content="에너지 전환기 이전의 전통적 발전 포트폴리오에서도, 연료비가 저렴하고 탄소 배출이 적은 원자력’만’을 쓰지 않고 석탄/ 가스(LNG)/ 중유/ 양수발전 등을 결합해 구성했다. 이는 시간별로 전기 부하가 달라지며, 전원별로 ‘부하 변동에 대응하는 출력 조정 능력’이 다르기 때문이다.">
 
 
 
+  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/linprogten/portfolio.png">
 
-  <meta property="article:published_time" content="2022-09-18T00:00:00+09:00">
+
+
+
+
+  <meta property="article:published_time" content="2023-02-26T00:00:00+09:00">
 
 
 
@@ -55,7 +57,7 @@
   
 
 
-<link rel="canonical" href="https://song4energyndata.github.io/regression.html">
+<link rel="canonical" href="https://song4energyndata.github.io/linprogten.html">
 
 
 
@@ -393,16 +395,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="회귀분석 관련 정리">
-    <meta itemprop="description" content="Ordinary least squares">
-    <meta itemprop="datePublished" content="2022-09-18T00:00:00+09:00">
+    <meta itemprop="headline" content="선형계획법 기반 분산에너지시스템 최적화 - 10) 출력 조정 관련 제약들">
+    <meta itemprop="description" content="에너지 전환기 이전의 전통적 발전 포트폴리오에서도, 연료비가 저렴하고 탄소 배출이 적은 원자력’만’을 쓰지 않고 석탄/ 가스(LNG)/ 중유/ 양수발전 등을 결합해 구성했다. 이는 시간별로 전기 부하가 달라지며, 전원별로 ‘부하 변동에 대응하는 출력 조정 능력’이 다르기 때문이다.">
+    <meta itemprop="datePublished" content="2023-02-26T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://song4energyndata.github.io/regression.html" class="u-url" itemprop="url">회귀분석 관련 정리
+            <a href="https://song4energyndata.github.io/linprogten.html" class="u-url" itemprop="url">선형계획법 기반 분산에너지시스템 최적화 - 10) 출력 조정 관련 제약들
 </a>
           </h1>
           
@@ -413,7 +415,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-09-18T00:00:00+09:00">2022-09-18</time>
+        <time datetime="2023-02-26T00:00:00+09:00">2023-02-26</time>
       </span>
     
 
@@ -431,108 +433,123 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#ordinary-least-squares">Ordinary least squares</a></li><li><a href="#maximum-likelihood-estimation-in-linear-regression">Maximum likelihood estimation in linear regression</a></li></ul>
+              <ul class="toc__menu"><li><a href="#ramp-rate--duck-curve">Ramp rate (+ duck curve)</a></li><li><a href="#최소-기동유지시간정지유지시간">최소 기동유지시간/정지유지시간</a></li><li><a href="#시동-비용-start-up-cost">시동 비용 (start-up cost)</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <h2 id="ordinary-least-squares">Ordinary least squares</h2>
+        <p>에너지 전환기 이전의 전통적 발전 포트폴리오에서도, 연료비가 저렴하고 탄소 배출이 적은 원자력’만’을 쓰지 않고 석탄/ 가스(LNG)/ 중유/ 양수발전 등을 결합해 구성했다. 이는 시간별로 전기 부하가 달라지며, 전원별로 ‘부하 변동에 대응하는 출력 조정 능력’이 다르기 때문이다.</p>
 
-<ul>
-  <li>
-    <p>선형회귀모델 $y=X \beta + \epsilon$ 에는 아래의 다섯가지 가정이 들어감.</p>
+<p><img src="/assets/images/linprogten/portfolio.png" alt="portfolio" class="align-center" />
+<em>시간대별 발전 포트폴리오. 일정 출력을 유지하는 기저설비, 특정 시간대에만 가동되는 첨두설비로 구성됨.<br />(출처: 전력거래소)</em></p>
 
-    <p>A1:  $X$는 full rank임 (즉 특정 설명변수를 다른 설명변수들의 선형결합으로 완전하게 나타낼 수 없으며, $X’X$의 역행렬이 존재). 이 조건이 깨지면 estimator를 구할 수 없음.</p>
+<p>위 그림에서 보듯, 24시간 내내 거의 일정하게 운전하여 기저부하(base load)를 담당하는 데는 연료비가 상대적으로 저렴한 원자력, 석탄화력을 사용하고, 낮에만 발전하여 첨두부하(peak load)를 담당하는 데는 부하변동에 대한 응답성이 좋은 LNG/ 중유/ 양수발전 등을 사용한다.</p>
 
-    <p>A2: 설명변수와 반응변수 간에 선형관계가 성립하고, 오차항의 편향이 없음 (즉 $\text{E}[\epsilon] = 0$).</p>
+<p>이 때, 부하 변동에 대한 응답성이 좋다는 것은 아래와 같이 구체화할 수 있다.</p>
 
-    <p>A3: 설명변수 $X$와 오차항 $\epsilon$ 간에는 상관관계가 없음. $X$가 fixed된 값들이거나 (A3F) random이더라도 $\epsilon$과 완전히 독립인 경우 (A3Rfi), 또는 random인 $X$가 전부 주어졌을 때 오차항의 조건부평균 $\text{E}[ \epsilon_{t} | X] = 0$ 이면 (A3Rmi), estimator는 unbiased이면서 consistent함. 만약 $x_i$가 적어도 같은 row의 $\epsilon_{i}$와는 상관이 없다면 (A3Rsru), estimator는 biased일 수는 있으나 consistent함 (이를 테면 시계열에서 시점 $t$의 설명변수는, 과거의 오차항과는 상관이 있으나 현재 및 미래의 오차항과는 상관이 없음.</p>
+<p>1) 시간당 변화시킬 수 있는 출력 범위가 넓다.</p>
 
-    <p>A4: 오차항은 서로 독립이고 같은 분포를 따름, 즉 상관되어 있지 않고 일정한 분산을 가짐 (즉 $\text{E}[\epsilon \epsilon’ | X] = \sigma^2 I_N$). 이 조건이 깨지면 Generalized least square가 필요.</p>
+<p>2) 기동/정지 상태의 전환을 비교적 빈번하게 할 수 있다.</p>
 
-    <p>A5: 오차항이 정규분포를 따름. A5가 만족될 경우 MLE estimator가 OLS estimator와 같으므로 OLS가 효율적임. 꼭 정규분포는 아니라도 오차항의 분포를 알아야 MLE를 쓸 수 있음.</p>
-  </li>
-  <li>
-    <p>OLS에서 목적함수는 반응변수의 실제값과 추정값(설명변수 및 선형모델로 계산된) 간 차이의 제곱합인 $\sum_{i=1}^N [(y_i - x_i’ \beta)^2 ] = (y-X\beta)’(y-X\beta)$ 이며, 이를 최소화하는 해는 $\hat{\beta}_{OLS}=(X’X)^{-1}X’y$ 임.</p>
-  </li>
-  <li>
-    <p>Vector space 관점에서 보면, $X\hat{\beta}_{OLS}$는 $X$의 열공간의 원소이므로 $X\hat{\beta}_{OLS} = X(X’X)^{-1}X’y = \hat{y}$ 는 $y$를 $X$의 열공간에 정사영한 벡터, 즉 $X$의 열공간에 속하는 벡터 중 $y$에 가장 가까운 벡터임. 이로부터 $y$를 $X$의 열공간 내의 벡터로 변환하는 사상에 대응되는 행렬 $X(X’X)^{-1}X’$를 hat matrix라 하며, $y$의 정보 중 $X$로 설명되는 정보만 남긴 결과로 볼 수 있음.</p>
-  </li>
-  <li>
-    <p>A3Rsru 조건 $\text{E}[x_i \epsilon_i] = 0$ 으로부터 sample moment condition $\sum_{i=1}^N x_i (y_i - x_i’ \beta)/N = 0$ 을 세워 계산한 method of moments estimator $\hat{\beta}_{MME}$ 는 $\hat{\beta}_{OLS}$와 같음.</p>
-  </li>
-  <li>
-    <p>$y$와 $\hat{y}$ 간 차이는 잔차(residual, $\hat{\epsilon}$)임. 잔차벡터를 식으로 나타내면 $\epsilon = y - \hat{y} = (I-X(X’X)^{-1}X’)y$ 임. 행렬 $I-X(X’X)^{-1}X’$를 projection matrix라 하며, $y$의 정보 중 $X$로 설명되지 않는 정보만 남긴 결과로 볼 수 있음.</p>
-  </li>
-  <li>
-    <p>OLS에서의 잔차는 실제 오차와 다른 개념임. 실제로는 오차가 A4GM 가정을 만족하지 않더라도 OLS 잔차는 A4GM이 만족됨을 가정하고 계산된 값임. 그러므로 반드시 잔차 plot을 그려서 이분산이나 오차의 자기상관 등이 의심되는지를 확인해야 함. 또한 오차가 설명변수와 상관이 있든 없든, OLS 계산 결과인 잔차는 항상 $X$와 직교함 ($X \hat{\epsilon} = 0$). 그러므로 A3가정의 만족 여부는 잔차만으로는 알 수 없으며 endogeneity 관련 방법론이 필요함.</p>
-  </li>
-  <li>
-    <p>A1, A2, A3Rmi가 만족되면, $\text{E}[\hat{\beta}_{OLS} | X] = \beta$, 즉 OLS estimator는 unbiased임 ($y=X\beta+\epsilon$으로부터 유도). 또한 OLS estimator의 공분산행렬을 계산하면 $\text{Var}[\beta|X] = \sigma^2 (X’X)^{-1}$ 임 ($\hat{\beta}_{OLS} - \beta = (X’X)^{-1}X’\epsilon$ 으로부터 유도).</p>
-  </li>
-  <li>
-    <p>A1, A2, A3Rmi, A4가 만족되면, OLS estimator는 unbiased linear estimator ($\text{E}[\tilde{\beta}] = \beta$ 즉 unbiased 이면서, 어떤 full rank 행렬 A ($AX=I$) 에 대해 $\tilde{\beta} = Ay$ 즉 $y$에 대해 linear인 임의의 estimator) 들 중 분산이 가장 작은 (즉 가장 효율적인) estimator임. 이를 Gauss-Markov theorem이라 함.</p>
-  </li>
-  <li>
-    <p>Gauss-Markov theorem에서는 A5 (오차항의 정규분포 가정) 가 필요하지 않았음에 주의. 또한 biased되어 있거나 nonlinear인 estimator 중에서는 $\hat{\beta}_{OLS}$ 대비 분산이 더 작은 estimator가 존재할 수 있음 (이를 테면 $X$에 multicollinearity 문제가 있을 경우 이를 완화하기 위한 Ridge 회귀의 estimator는 biased estimator이지만 분산은 더 작음).</p>
-  </li>
-  <li>
-    <p>A1, A2, A3Rsru, A4가 만족되면, 표본크기가 무한히 많아질 때 OLS estimator는 true $\beta$에 확률수렴함 (확률수렴이란 말은, $X$의 DGP를 고려 시 엄연히 확률변수인 $\hat{\beta}_{OLS}$가, $N$이 무한히 커질 경우 true $\beta$에 매우 가까운 값으로 나올 확률이 100%임을 의미). 
-이는 $ \hat{\beta}_{OLS} - \beta = (X’X)^{-1}X’\epsilon = (X’X/N)^{-1} (X’\epsilon/N) $ 에 A3Rsru 조건 만족 시 $\text{plim} X’\epsilon/N=0$, 그리고 Slutsky theorem으로부터 $\text{plim}(X’X)^{-1}X’\epsilon$을  $\text{plim}(X’X/N)^{-1}=\Sigma_{xx}^{-1}$와 $\text{plim}X’\epsilon/N=0$의 곱으로 나타낼 수 있다는 사실로부터 유도됨.</p>
-  </li>
-  <li>
-    <p>A1, A2, A3Rmi, A4가 만족되면, OLS estimator는 asymptotically normal, 즉 표본크기가 크다면 따로 A5 가정을 하지 않아도 근사적으로 정규분포를 따름. $X’\epsilon/N$을 $\epsilon_i$의 표본평균에 $X’$가 곱해진 것으로 해석하면, 중심극한정리에 의해 $\sqrt{N} (X’\epsilon/N - 0) \rightarrow N(0,\sigma^2 \Sigma_{xx})$ 이고 $\sqrt{N} ((X’X/N)^{-1}X’\epsilon/N - 0) = \sqrt{N}(\hat{\beta}_{OLS}-\beta) \rightarrow N(0,\sigma^2 \Sigma_{xx}^{-1})$ 이기 때문.</p>
-  </li>
-  <li>
-    <p>실제로는 오차분산 $\sigma^2$를 정확히 알지 못하므로 표본 기반으로 추정함. A1, A2, A3Rmi, A4 조건이 만족될 경우, $s^2 = \sum_{i=1}^N \hat{\epsilon}^2/(N-k)$ 는 $\sigma^2$의 unbiased and consistent estimator임 ($k$는 intercept를 포함한 parameter의 수). 또한 A5 조건까지 만족될 경우, $(N-k) s^2/\sigma^2 \sim \chi^2(N-k)$ 임.</p>
-  </li>
-  <li>
-    <p>선형회귀모델 $y = X \beta + \epsilon$ 을 설명변수의 group 기준으로 분해해서 $y = X_1 \beta_1 + X_2 \beta_2 + \epsilon$ 으로 볼 때, $\beta_1$은 $X_2$가 통제된 상태에서 $X_1$만의 변화에 따른 $y$의 변화를 나타내야 함. 그러므로 $\hat{\beta}_1$을 구할 때는, $X_1$로부터 $X_2$의 정보를 projection matrix를 곱해 제거한 $(I - X_2(X_2’X_2)^{-1}X_2’)X_1 = M_2 X_1$ 을 기반으로 회귀해 구해야 함. 즉 $\hat{\beta}_1 = (X_1’M_2 X_1)^{-1} X_1’ M_2 y$ 임 (projection matrix가 idempotent, 즉 $M_2^2 = M_2$임을 이용함).</p>
-  </li>
-  <li>
-    <p>선형회귀모델 $y = X \beta + \epsilon$ 을 위에서는 $X$의 column을 기준으로 분해했는데, 이와 달리 모델을 row 기준으로 분해할 경우 (이를테면 특정 행 기준으로 old와 new로 구분할 경우), $X’X \hat{\beta} = X’y$ 로부터 아래와 같이 됨. 
-$ \begin{bmatrix}
-      X_{old}’ &amp; X_{new}’
-  \end{bmatrix}<br />
-  \begin{bmatrix}
-      X_{old} \ 
-      X_{new}
-  \end{bmatrix}<br />
-  \hat{\beta} = 
-  \begin{bmatrix}
-      X_{old}’ &amp; X_{new}’
-  \end{bmatrix}<br />
-  \begin{bmatrix}
-      y_{old} \ 
-      y_{new}
-  \end{bmatrix}<br />
-  \, \Rightarrow \, [X_{old}’X_{old} + X_{new}’X_{new}] \hat{\beta} = X_{old}’ y_{old} + X_{new}’ y_{new} $
-  이를 데이터의 갱신으로 보면 $X_{old}’X_{old}$ 및 $(X_{old}’X_{old})^{-1}$ 가 계산되어 있는 상황이므로, 새로운 데이터 행렬 전체에 대해 새로 계산할 필요 없이 아래 식으로부터 $\hat{\beta}$를 빠르게 계산할 수 있음.
-  $ [X_{old}’X_{old} + X_{new}’X_{new}]^{-1} = (X_{old}’X_{old})^{-1} - (I+ X_{new} (X_{old}’X_{old})^{-1} X_{new}’ )^{-1} (X_{old}’X_{old})^{-1} X_{new}’X_{new} (X_{old}’X_{old})^{-1} $</p>
-  </li>
-</ul>
+<p>3) 연료비와는 별도로 시동 (정지에서 기동상태로 전환) 시 발생하는 비용이 크지 않다.</p>
 
-<h2 id="maximum-likelihood-estimation-in-linear-regression">Maximum likelihood estimation in linear regression</h2>
+<p>중/대형 발전설비들은 대개 이러한 ‘응답성’이 아주 좋지는 않다. 그러므로 시간별 수요/공급을 고려하는 선형계획법을 중/대형 발전설비 대상으로 적용 시, 이러한 ‘응답성’ 또한 제약조건으로 추가해야 한다. (이를테면 시/구 단위 지역난방 시스템을 대상으로 할 경우, 이러한 제약이 중요하다.)</p>
 
-<ul>
-  <li>
-    <p>A1부터 A5까지의 가정들이 성립 시, $y_i = x_i’\beta + \epsilon_i$는 $x_i, \beta, \sigma^2$가 주어질 경우 오차항이 iid이며 정규분포를 따른다는 가정으로부터 $y_i | x_i, \beta, \sigma^2 \sim N(x_i’ \beta, \sigma^2)$ 임. 그러므로 $y$ 전체의 likelihood 및 log-likelihood는 아래와 같음.
-$ L(y_i | x_i, \beta, \sigma^2) = \prod_{i=1}^N \frac{1}{\sqrt{(2\pi \sigma^2)^N}} \text{exp} \left( -\frac{(y_i - x_i’\beta)^2}{2 \sigma^2} \right)  = \frac{1}{\sqrt{(2\pi \sigma^2)^N}} \text{exp} \left( -\frac{1}{2 \sigma^2} (y-X\beta)’(y-X\beta) \right)   $
-$ \text{log} L(y_i | x_i, \beta, \sigma^2) = - \frac{N}{2} \text{log}(2 \pi) - \frac{N}{2} \text{log}(\sigma^2) - \frac{1}{2 \sigma^2} (y-X\beta)’(y-X\beta) $
-여기서 log-likelihood에 $-(y-X\beta)’(y-X\beta)$ 가 포함되어 있으므로, $\sigma^2$가 주어질 때 log-likelihood를 최대화하는 추정량 $\hat{\beta}_{MLE}$는 $(y-X\beta)’(y-X\beta)$를 최소화하는 추정량, 즉 OLS 추정량과 같음.</p>
-  </li>
-  <li>
-    <p>$\beta$가 주어질 때 log-likelihood를 최대화하는 $\sigma^2$의 추정량은 $\widehat{\sigma^2}_{MLE} = \hat{\epsilon}’ \hat{\epsilon}/N$, 즉 잔차제곱합을 표본 크기로 나눈 값이 됨. 이는 biased estimator임 (OLS에서의 unbiased estimator는 잔차제곱합을 $N-k$로 나눈 값이었음). 그러나 표본크기가 무한히 커지면 $N-k$와 $N$이 비슷해지므로, $\sigma^2$의 maximum likelihood 추정량은 consistent함.</p>
-  </li>
-  <li>
-    <p>MLE에서 parameter를 $\theta$라 할 때 $\theta$의 분산은 log-likelihood의 Hessian의 평균에 마이너스를 붙인 후 역행렬을 취한 $(-\text{E}[H(\theta)])^{-1}$로 주어짐. 이 때 $(-\text{E}[H(\theta)])$ 를 information matrix $I(\theta)$라 부르기도 하며, $\text{Var}[\theta] = I(\theta)^{-1}$ 임. 
-이에 따라 계산하면 $\text{Var}[\hat{\beta}_{MLE}] = \sigma^2(X’X)^{-1}$을 얻고 (OLS estimator의 공분산행렬과 같음), $\text{Var}[\widehat{\sigma^2}_{MLE}] = 2\sigma^4/N$을 얻음.</p>
-  </li>
-  <li>
-    <p>MLE로 추정한 추정량은 consistent하며, asymptotic normal이고, Consistent Uniformly Asymptotically Normal (CUAN) 성질을 갖는 estimator들 중 가장 효율적인 추정량임 (MLE 추정량의 공분산행렬은 CUAN estimator들의 Cramer-Rao lower bound, 즉 unbiased estimator가 가지는 분산의 하한임). 그러므로 오차항의 분포에 확신이 있다면, MLE를 쓰는 것이 가장 좋음.</p>
-  </li>
-</ul>
+<p>사실 이는 중/대형 발전설비에만 국한되지 않는다. 이를테면 연료전지의 경우에도 소규모 설치가 가능한 발전 설비이지만, 부하 응답성이 기본적으로 나쁘다. 그래서 정격출력이 반강제되고, 정지 후 재기동 및 기동 유지에 장시간을 요구한다.</p>
 
+<p>이 포스팅에서는 ‘응답성’을 나타내는 출력 조정 관련 제약들을 설명한다.</p>
+
+<p><br /></p>
+
+<h2 id="ramp-rate--duck-curve">Ramp rate (+ duck curve)</h2>
+
+<p>차를 몰 때 악셀을 밟아도 1초당 늘릴 수 있는 속력에는 한계가 있다. 또한 급브레이크를 밟아도 1초당 줄일 수 있는 속력에는 한계가 있다. 무리해서 급브레이크를 계속 밟으면 차량 수명에 악영향을 끼치기도 한다.</p>
+
+<p>마찬가지로 발전기의 출력 또한 갑자기 크게 늘리거나 줄이는 것에는 한계가 있고 그 한계를 무리해서 넘으면 수명에 악영향을 끼친다. 그래서, 단위 시간 동안의 출력 증가/ 감소 각각에 대해 최대값을 설정하며, 이를  ramp rate라 한다.</p>
+
+<p>해당 최대값들을 정격출력 $s$로 나눈 값을 각각 $\delta_{up}$, $\delta_{down}$이라 할 때, ramp rate 제약은 아래와 같다.</p>
+
+<p>$ -\delta_{down} s \leq p_{gen}[t] - p_{gen}[t-1] \leq \delta_{up} s $</p>
+
+<p>즉 시간 $t-1$ 대비 시간 $t$에서 출력을 증가시키더라도 그 증가분은 $\delta_{up} s$를 초과할 수 없다. 반대로 시간 $t$에서 출력을 감소시키더라도 그 감소분은 $ \delta_{down} s$를 초과할 수 없다.</p>
+
+<p><br />
+한편 계통 내에 태양광 발전의 비중이 증가하면서, ramp rate가 큰 발전 설비에 대한 수요가 증가할 전망이다.</p>
+
+<p>이는 아래 그림과 같이, 태양광 비중이 증가할수록 낮 시간의 ‘태양광 발전량을 제한 순 부하 (net load)’가 작아지면서, 아침의 단위 시간 당 부하 감소량/ 오후의 단위 시간 당 부하 증가량이 커지기 때문이다.</p>
+
+<p><img src="/assets/images/linprogten/duckcurve.jpg" alt="duckcurve" class="align-center" />
+<em>시간에 따라 태양광 발전 비중 증가 가정 시, 태양광 발전량을 제한 순 부하의 변화. 이를 duck curve라 부른다.<br />(출처: https://www.synergy.net.au/Blog/2021/10/Everything-you-need-to-know-about-the-Duck-Curve)</em></p>
+
+<p>이러한 부하의 급격한 변동은 화력발전 설비들의 급격한 출력 변동으로 이어지고, 이는 시스템 불안정성을 야기한다. 그러므로 이에 대응할 수 있도록 ramp rate가 큰 발전 설비/ 전기 저장 설비/ 잉여전력을 활용하는 섹터커플링/ 다른 시간의 전기 부하 이전 등 ‘유연성 자원’ 확보의 필요성이 증가하고 있다.</p>
+
+<p>Ramp rate에 대한 제약을 응용해서, 만약 시점 $t$에서의 화력발전의 합을 $p_{\text{gen}}[t]$라 할 때, $p_{\text{gen}}[t] - p_{\text{gen}}[t-1]$ 의 상한값과 하한값을 설정할 수 있다. 이러한 제약은 화력발전의 출력 변동을 허용 선 이하로 제한할 경우의 적정 태양광 보급 안/ 유연성 자원 요구량 산출 등의 정책 연구에 활용할 수 있다.</p>
+
+<p><br /></p>
+
+<h2 id="최소-기동유지시간정지유지시간">최소 기동유지시간/정지유지시간</h2>
+
+<p>어떤 기계든, 지나치게 껐다 켰다를 빨리 반복하면 해당 기계 수명에 악영향을 미칠 것이다. 이는 발전기도 마찬가지로, 빈번하게 기동-정지 전환 시 기기 수명에 악영향을 미친다.</p>
+
+<p>이 때문에, 발전기가 정지 상태에서 기동 상태로 전환하면, 일정 시간 동안 기동 상태를 유지해 줘야 한다. 또한 기동 상태에서 정지 상태로 전환하면, 일정 시간 동안 정지 상태를 유지해 줘야 한다.</p>
+
+<p>특히 규모가 크고 기저설비에 가깝게 설계된 경우, 이런 최소 기동유지시간/정지유지시간이 수 시간 이상일 수 있다.</p>
+
+<p><br />
+어떤 발전설비가 정지상태에서 기동상태로 전환 시 ‘최소한 3시간은’ 기동상태를 유지해야 한다고 가정하자.</p>
+
+<p>해당 발전설비가 시점 $t-1$에서 정지상태였다가 시점 $t$에서 기동상태로 전환된 경우, 위 조건에 의해 최소한 시점 $t+1, t+2$에서는 기동상태를 유지해야 한다. 즉 $u[t-1]=0$이면서 $u[t]=1$이라면, 반드시 $u[t+1]=u[t+2]=1$이어야 한다.</p>
+
+<p>위 제약조건을 수식으로 표현하면 아래와 같다.</p>
+
+<p>$ 3 (u[t]-u[t-1]) \leq u[t]+u[t+1]+u[t+2]  $</p>
+
+<p>$u[t]=1$이고 $u[t-1]=0$인 경우 좌변은 3이 되는데, 우변에는 이진수 3개만 있으므로 반드시 셋 다 1이 되어야 한다. 그러므로 $u[t+1]=u[t+2]=1$이어야만 식이 성립한다. 이외의 경우에는 좌변이 0 또는 -3이 되므로, $u[t+1]$과 $u[t+2]$가 어떤 값을 가져도 식이 성립한다.</p>
+
+<p><br />
+이번에는 해당 발전설비가 기동상태에서 정지상태로 전환 시 ‘최소한 2시간은’ 정지상태를 유지해야 한다고 가정하자.</p>
+
+<p>한편 해당 발전설비가 시점 $t-1$에서 기동상태였다가 시점 $t$에서 정지상태로 전환된 경우, 위 조건에 의해 최소한 시점 $t+1$에서는 정지상태를 유지해야 한다. 즉 $u[t-1]=1$이면서 $u[t]=0$이라면, 반드시 $u[t+1]=0$이어야 한다.</p>
+
+<p>위 제약조건을 수식으로 표현하면 아래와 같다.</p>
+
+<p>$ 2 (u[t-1]-u[t]) \leq 2 - (u[t]+u[t+1])  $</p>
+
+<p>$u[t]=0$이고 $u[t-1]=1$인 경우 좌변은 2가 되는데, 우변에서 $u[t]=u[t+1]=0$이어야만 식이 성립한다. 이외의 경우에는 좌변이 0 또는 -2가 되므로, $u[t+1]$이 어떤 값을 가져도 식이 성립한다.</p>
+
+<p><br /></p>
+
+<h2 id="시동-비용-start-up-cost">시동 비용 (start-up cost)</h2>
+
+<p>일정 규모 이상의 발전기를 정지 상태에서 기동 상태로 전환, 즉 ‘시동’ 시, 무시할 수 없는 수준의 시동비용이 발생하기도 한다. 이는 전력 생산을 위한 연료 비용과는 별개의 비용으로 반영하여야 한다.</p>
+
+<p>시점 $t$에서 시동을 한다는 것은 $u[t-1]=0$이면서 $u[t]=1$임을 의미한다. 즉 시동 여부를 의미하는 새로운 이진수 $v[t]$를 도입해서, $u[t-1]=0$이면서 $u[t]=1$일 때는 반드시 $v[t]=1$이 되도록 제약을 걸고, $v[t]$에 시동비용 계수를 곱한 항을 목적함수에 추가해야 한다.</p>
+
+<p>필요한 제약식은 아래와 같다.</p>
+
+<p>$u[t] - u[t-1] \leq v[t]$</p>
+
+<p>$u[t]=1$이고 $u[t-1]=0$인 경우 좌변은 1이 되는데, $v[t]$는 이진수이므로 반드시 $v[t]=1$이어야 식이 성립한다. 이외의 경우에는 좌변이 0 또는 -1이므로 $v[t]$가 0이어도 상관이 없으며, 목적함수를 최소화하기 위해 $v[t]=0$이 될 것이다.</p>
+
+<div class="notice--info">
+
+선형계획법 기반 분산에너지시스템 최적화<br /><br />
+
+01) <a href="/linprogone.html"> 최소비용 시스템과 시간별 자료의 중요성</a><br />
+02) <a href="/linprogtwo.html"> 배터리의 충/방전 스케줄 결정: 수식</a> <br />
+03) <a href="/linprogthree.html"> 배터리의 충/방전 스케줄 결정: Python 코드 및 결과</a> <br />
+04) <a href="/linprogfour.html"> 태양광과 배터리의 '용량' 결정: 목적함수 ('현재가치' 비용) 및 수식</a> <br />
+05) <a href="/linprogfive.html"> 태양광과 배터리의 '용량' 결정: 코드, 결과, 투자회수기간 및 절감량 계산</a> <br />
+06) <a href="/linprogsix.html"> 정수 (integer) 변수 도입으로 현실 설명력 증대</a> <br />
+07) <a href="/linprogseven.html"> 공동주택의 '누진제' 전기요금 (단일계약) 수식</a> <br />
+08) <a href="/linprogeight.html"> 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)</a> <br />
+09) <a href="/linprognine.html"> '부분'부하 성능 관련 제약들</a> <br />
+10) <b> 출력 조정 관련 제약들</b>
+
+</div>
+
+<p><br />
+(선형계획법 시리즈의 지식들은, 필자가 2012년부터 <a href="http://www.besico.co.kr/">(주)블루이코노미전략연구원 (대표: 오시덕 박사)</a>과 함께 선형계획법 기반으로 신재생 및 열병합 에너지 시스템 경제성분석/ 최적 에너지시스템 도출 Tool 개발/ 에너지 정책 효과 분석 관련 프로젝트들을 여러 건 수행하며 축적한 ‘기본 지식’에 해당하는 부분임을 밝힌다.)</p>
 
         
       </section>
@@ -540,6 +557,27 @@ $ \text{log} L(y_i | x_i, \beta, \sigma^2) = - \frac{N}{2} \text{log}(2 \pi) - \
       <footer class="page__meta">
         
         
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">Python</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EA%B2%BD%EC%A0%9C%EC%84%B1%EB%B6%84%EC%84%9D" class="page__taxonomy-item p-category" rel="tag">경제성분석</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EB%B6%80%ED%95%98%ED%8C%A8%ED%84%B4" class="page__taxonomy-item p-category" rel="tag">부하패턴</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95" class="page__taxonomy-item p-category" rel="tag">선형계획법</a>
+    
+    </span>
+  </p>
+
+
 
 <!-- 
   
@@ -551,7 +589,7 @@ $ \text{log} L(y_i | x_i, \beta, \sigma^2) = - \frac{N}{2} \text{log}(2 \pi) - \
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#mathstat" class="page__taxonomy-item p-category" rel="tag">mathstat</a>
+      <a href="/categories/#optimalsystem" class="page__taxonomy-item p-category" rel="tag">optimalsystem</a>
     
     </span>
   </p>
@@ -559,7 +597,7 @@ $ \text{log} L(y_i | x_i, \beta, \sigma^2) = - \frac{N}{2} \text{log}(2 \pi) - \
  -->
         <!-- 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2022-09-18T00:00:00+09:00">2022-09-18</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-02-26T00:00:00+09:00">2023-02-26</time></p>
  -->
       </footer>
 
@@ -568,20 +606,18 @@ $ \text{log} L(y_i | x_i, \beta, \sigma^2) = - \frac{N}{2} \text{log}(2 \pi) - \
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%ED%9A%8C%EA%B7%80%EB%B6%84%EC%84%9D+%EA%B4%80%EB%A0%A8+%EC%A0%95%EB%A6%AC%20http%3A%2F%2Flocalhost%3A4000%2Fregression.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+-+10%29+%EC%B6%9C%EB%A0%A5+%EC%A1%B0%EC%A0%95+%EA%B4%80%EB%A0%A8+%EC%A0%9C%EC%95%BD%EB%93%A4%20http%3A%2F%2Flocalhost%3A4000%2Flinprogten.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fregression.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flinprogten.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fregression.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flinprogten.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       <p></p>
-        <!-- <h4 class="page__meta-title"><span>mathstat</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
+        <!-- <h4 class="page__meta-title"><span>optimalsystem</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
         
 
-
-  
 
   
   	
@@ -594,10 +630,10 @@ $ \text{log} L(y_i | x_i, \beta, \sigma^2) = - \frac{N}{2} \text{log}(2 \pi) - \
 
   
     
-      <a href="/overconfidence.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>로지스틱 회귀에서의 over-confidence에 대한 이해</a>
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
     
     
-      <a href="#" class="pagination_prev_next--pager disabled-first-child">첫 번째 글입니다</a>
+      <a href="/linprognine.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>선형계획법 기반 분산에너지시스템 최적화 - 9) '부분'부하 관련 제약들</a>
         
   
 

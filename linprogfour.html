@@ -19,7 +19,7 @@
 </script>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 ‘용량’ 결정 (코드 및 결과 포함) | 에너지엔데이터연구소</title>
+<!-- begin _includes/seo.html --><title>선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 ‘용량’ 결정: 목적함수 (‘현재가치’ 비용) 및 수식 | 에너지엔데이터연구소</title>
 <meta name="description" content="지난 포스팅에서는 ‘주어진 용량의’ 배터리가 건물에 설치된 경우의 스케줄링을 설명했다. 그런데, 실제 상황에서는 배터리의 ‘용량’도 경제성을 고려해 결정해야 할 것이다. 그래서 이번 포스팅에서는 용량까지 결정하는 문제를 설명한다.">
 
 
@@ -32,7 +32,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 ‘용량’ 결정 (코드 및 결과 포함)">
+<meta property="og:title" content="선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 ‘용량’ 결정: 목적함수 (‘현재가치’ 비용) 및 수식">
 <meta property="og:url" content="https://song4energyndata.github.io/linprogfour.html">
 
 
@@ -40,13 +40,13 @@
 
 
 
-  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/linprogfour/result_year.png">
+  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/linprogfour/system_pvbatt.png">
 
 
 
 
 
-  <meta property="article:published_time" content="2022-12-18T00:00:00+09:00">
+  <meta property="article:published_time" content="2022-12-11T00:00:00+09:00">
 
 
 
@@ -238,7 +238,9 @@
                     
                 
                     
-                        <li><a href="/optimalsystem" class="">&#x2022 경제성분석 및 최적구성 도출 [11]</a></li>
+                
+                    
+                        <li><a href="/optimalsystem" class="">&#x2022 경제성분석 및 최적구성 도출 [10]</a></li>
                     
                 
                     
@@ -251,6 +253,8 @@
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
+                
+                    
                 
                     
                 
@@ -278,6 +282,8 @@
                     
                 
                     
+                
+                    
                         <li><a href="/estimation" class="">&#x2022 예측 (회귀분석/ 머신러닝/ 딥러닝) [2]</a></li>
                     
                 
@@ -285,6 +291,8 @@
                 
             </ul>
             <ul>
+                
+                    
                 
                     
                 
@@ -317,8 +325,31 @@
                 
                     
                 
+                    
+                
             </ul>
             <ul>
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/mypapers" class="">&#x2022 My papers [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
                 
                     
                 
@@ -349,6 +380,8 @@
                 
                     
                 
+                    
+                
             </ul>
       </li>
   </ul>
@@ -362,16 +395,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 ‘용량’ 결정 (코드 및 결과 포함)">
+    <meta itemprop="headline" content="선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 ‘용량’ 결정: 목적함수 (‘현재가치’ 비용) 및 수식">
     <meta itemprop="description" content="지난 포스팅에서는 ‘주어진 용량의’ 배터리가 건물에 설치된 경우의 스케줄링을 설명했다. 그런데, 실제 상황에서는 배터리의 ‘용량’도 경제성을 고려해 결정해야 할 것이다. 그래서 이번 포스팅에서는 용량까지 결정하는 문제를 설명한다.">
-    <meta itemprop="datePublished" content="2022-12-18T00:00:00+09:00">
+    <meta itemprop="datePublished" content="2022-12-11T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://song4energyndata.github.io/linprogfour.html" class="u-url" itemprop="url">선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 ‘용량’ 결정 (코드 및 결과 포함)
+            <a href="https://song4energyndata.github.io/linprogfour.html" class="u-url" itemprop="url">선형계획법 기반 분산에너지시스템 최적화 - 4) 태양광과 배터리의 ‘용량’ 결정: 목적함수 (‘현재가치’ 비용) 및 수식
 </a>
           </h1>
           
@@ -382,7 +415,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-12-18T00:00:00+09:00">2022-12-18</time>
+        <time datetime="2022-12-11T00:00:00+09:00">2022-12-11</time>
       </span>
     
 
@@ -400,7 +433,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#용량-결정-문제의-목적함수-현재가치로-환산된-총-비용">용량 결정 문제의 목적함수: 현재가치로 환산된 총 비용</a></li><li><a href="#제약조건들">제약조건들</a></li><li><a href="#1년치-자료로-계산하기">1년치 자료로 계산하기</a></li><li><a href="#코드">코드</a></li><li><a href="#최적-용량-도출-결과">최적 용량 도출 결과</a></li><li><a href="#투자회수기간-계산">투자회수기간 계산</a></li></ul>
+              <ul class="toc__menu"><li><a href="#용량-결정-문제의-목적함수-현재가치로-환산된-총-비용">용량 결정 문제의 목적함수: 현재가치로 환산된 총 비용</a></li><li><a href="#제약조건들">제약조건들</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
@@ -521,193 +554,23 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
 
 <p>다만 이 포스팅의 예제는 선형계획 계산 자체를 설명하는 것이 목적이므로, 이러한 심화적 조건들은 적용하지 않는다.</p>
 
-<p><br /></p>
-
-<h2 id="1년치-자료로-계산하기">1년치 자료로 계산하기</h2>
-<p>이쯤 되면 눈치챈 사람도 있겠지만, 용량 결정 문제가 되면서 문제의 scale이 매우 커졌다. 최적화 문제에서 고려하는 시점의 수가 저번 포스팅 (하루 동안의 스케줄링만 결정) 에서는 24개였으나, 이번 포스팅에서는 $20 \times 8,760=175,200$개가 되었다. 즉 $p_{\text{grid}}[n,t]$ 항이 175,200개, $p_{\text{ch}}[n,t]$ 항이 175,200개, $p_{\text{disch}}[n,t]$ 항이 175,200개, $e_{\text{batt}}[n,t]$ 항이 175,201개이다. 여기에 $q[n]$ 항 20개, $s_{\text{pv}}$와 $s_{\text{batt}}$도 추가되었다.</p>
-
-<p>이렇게 큰 scale의 문제를 다루는 경우 두 가지 이슈가 생긴다.</p>
-
-<p>첫 번째 이슈는, 계산 시간이 매우 길어진다는 것이다. 필자의 경험 상, 변수가 수십만 개가 되면 Python cvxopt의 경우 계산시간이 수십 분 이상으로 늘어날 수 있고 MATLAB optimization toolbox 등을 써도 분 단위는 걸린다. Input 변수들의 값을 바꿔보면서 계산을 여러 번 돌리는 parametric study를 하고자 할 경우 이는 중요한 이슈다.</p>
-
-<p>두 번째 이슈는, 20년이라는 긴 기간 동안의 `시간별’ 전기부하 데이터와 태양광 발전량 데이터를 구하기 쉽지 않다는 것이다. 기상청 시간별 일사량 및 건물의 스마트미터 계측 모두, 아직은 그만큼 역사가 오래되지 않았기 때문이다. 심지어 일부 기상대에서는 아직도 시간별 일사량 자체를 제공하지 않기도 한다. 이런 경우 없는 데이터를 만들어낸다는 해결책은 마땅치 않은 경우가 대부분이다.</p>
-
 <p><br />
-이러한 이슈들 때문에, 많은 연구들에서는 대상 건물의 1년치 시간별 전기부하 자료를 구하고 이 부하가 20년간 똑같이 반복된다고 가정한다. 그리고 태양광 발전량에 대해서도 1년치 시간별 발전량을 구하고 이 발전 패턴이 20년간 똑같이 반복된다고 가정하는 경우도 많다.</p>
-
-<p>물론 현실은 그렇지 않지만, 이러한 가정 하의 계산으로도 ‘대략적인’ 최적 용량을 구하는 데 큰 문제는 없다. 어차피 목적함수 계산 시 모든 시간에 대한 총 합을 보는데, 각 시간별로는 오차가 있겠지만 그 오차들을 다 더하면 오차들의 합은 실제와 크게 다르지 않을 것이란 기대가 있기 때문이다. (표본평균의 분산은 표본의 크기가 커질수록 작아지듯)</p>
-
-<p>1년치 자료만을 사용한다면, 각 변수 뒤에 붙던 $[n,t]$는 $[t]$로 바꿀 수 있다. 그리고 변수의 수는 $p_{\text{grid}}[n,t]$ 항이 8,760개, $p_{\text{ch}}[n,t]$ 항이 8,760개, $p_{\text{disch}}[n,t]$ 항이 8,760개, $e_{\text{batt}}[n,t]$ 항이 8,761개, 기본요금 계산을 위해 도입한 $q$, 용량 변수 $s_{\text{pv}}$와 $s_{\text{batt}}$로, 총 35,044개이다.</p>
-
-<p>또한 각 시간별 전기 사용량 요금 $c_{\text{grid}}[t] p_{\text{grid}}[t]$, 기본요금 $12 c_{\text{grid}}^{\text{demand}} q$,  연간 설비 유지보수비용 $ c_{\text{pv}}^{\text{mtn}} s_{\text{pv}} + c_{\text{batt}}^{\text{mtn}} s_{\text{batt}} $ 앞에, factor $\sum_{n=1}^{20} (1+r)^{-n} $을 곱해줘야 한다. 그래야 ‘현재가치로 환산된’ 20년 간의 누적비용이 계산된다.</p>
-
-<p>그리고 현실성을 위해, 추가 제약조건 $e_{\text{batt}}[0] = e_{\text{batt}}[8760]$을 부여해야 한다. 이는 1년치 자료만을 사용하는 최적화 문제가 ‘같은 1년의 반복’을 가정함에 착안해, 해당 1년의 시작 직전 시간의 배터리 내 에너지 저장량과 끝 시간의 배터리 내 에너지 저장량을 동일하게 만든다. 2년차에서 0번째 시간은 1년차의 8760번째 시간과 같기 때문이다.</p>
-
-<p><br /></p>
-
-<h2 id="코드">코드</h2>
-<p>지금까지의 내용을 반영해, 1년치 자료를 입력으로 받아서 태양광과 배터리 용량을 결정하는 최적화 문제를 구성하고 풀어내는 Python 코드는 아래와 같다. (<a href="https://github.com/song4energyndata/Codes/tree/main/linearprogramming/design_pv_battery">GitHub Repo 링크</a>)</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
-</span>
-<span class="kn">from</span> <span class="n">cvxopt</span> <span class="kn">import</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">spmatrix</span><span class="p">,</span> <span class="n">sparse</span><span class="p">,</span> <span class="n">glpk</span>
-<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-
-<span class="n">p_load</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"load_hourly.txt"</span><span class="p">)</span>
-<span class="n">p_pv</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"pv_hourly.txt"</span><span class="p">)</span> <span class="c1"># 1kW 패널의 시간별 발전량
-</span><span class="n">eleccost</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">loadtxt</span><span class="p">(</span><span class="s">"eleccost_hourly.txt"</span><span class="p">)</span> <span class="c1"># 시간별 kWh당 전력량요금 (기후환경요금/ 연료비조정요금/ 부가세/ 전력산업기반기금 반영 전 금액)
-</span><span class="n">eleccost</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">9</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span> <span class="c1"># 기후환경요금 9원/kWh, 연료비조정요금 5원/kWh 반영
-</span><span class="n">eleccost_demandcharge</span> <span class="o">=</span> <span class="mi">8320</span> <span class="c1"># kW당 기본요금
-</span><span class="n">taxrate</span> <span class="o">=</span> <span class="mf">1.137</span>
-
-<span class="n">eff_batt</span> <span class="o">=</span> <span class="mf">0.94</span>
-<span class="n">c_rate_batt</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">initialenergy_batt</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="c1"># 화폐가치 하락 반영을 위한 할인율
-</span>
-<span class="n">initialcost_pv</span> <span class="o">=</span> <span class="mi">1400000</span> <span class="c1"># 태양광 1kW당 초기투자비
-</span><span class="n">initialcost_batt</span> <span class="o">=</span> <span class="mi">600000</span> <span class="c1"># 배터리 1kWh당 초기투자비 (SOC 고려한 실용량 가정)
-</span><span class="n">mtncost_pv</span> <span class="o">=</span> <span class="n">initialcost_pv</span> <span class="o">*</span> <span class="mf">0.02</span> <span class="c1"># 태양광 1kW당 유지보수비 (매년 발생) 
-</span><span class="n">mtncost_batt</span> <span class="o">=</span> <span class="n">initialcost_batt</span> <span class="o">*</span> <span class="mf">0.01</span> <span class="c1"># 배터리 1kWh당 유지보수비 (매년 발생)
-</span>
-<span class="n">t</span> <span class="o">=</span> <span class="mi">8760</span>
-
-<span class="k">def</span> <span class="nf">block_eye</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nf">spmatrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nf">range</span><span class="p">(</span><span class="n">size</span><span class="p">),</span><span class="nf">range</span><span class="p">(</span><span class="n">size</span><span class="p">))</span> 
-
-<span class="k">def</span> <span class="nf">block_zeros</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nf">sparse</span><span class="p">(</span><span class="nf">matrix</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">))))</span>
-
-<span class="k">def</span> <span class="nf">block_ones</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nf">sparse</span><span class="p">(</span><span class="nf">matrix</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">((</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">))))</span>
-
-<span class="k">def</span> <span class="nf">block_batt</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nf">sparse</span><span class="p">([[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="mi">1</span><span class="p">)],[</span><span class="nf">block_eye</span><span class="p">(</span><span class="n">size</span><span class="p">)]])</span> <span class="o">-</span> <span class="nf">sparse</span><span class="p">([[</span><span class="nf">block_eye</span><span class="p">(</span><span class="n">size</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="mi">1</span><span class="p">)]])</span>
-
-
-<span class="n">Aeq_balance</span> <span class="o">=</span> <span class="nf">sparse</span><span class="p">([</span> <span class="p">[</span><span class="nf">block_eye</span><span class="p">(</span><span class="n">t</span><span class="p">)],</span> <span class="p">[</span><span class="o">-</span><span class="nf">block_eye</span><span class="p">(</span><span class="n">t</span><span class="p">)],</span> <span class="p">[</span><span class="nf">block_eye</span><span class="p">(</span><span class="n">t</span><span class="p">)],</span> <span class="p">[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)],</span> <span class="p">[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">)],</span> <span class="p">[</span><span class="nf">matrix</span><span class="p">(</span><span class="n">p_pv</span><span class="p">)],</span> <span class="p">[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>  <span class="p">])</span>
-<span class="n">beq_balance</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">(</span><span class="n">p_load</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="s">'d'</span><span class="p">)</span>
-
-<span class="n">Aeq_batteryenergy</span> <span class="o">=</span> <span class="nf">sparse</span><span class="p">([[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="o">-</span><span class="n">eff_batt</span><span class="o">*</span><span class="nf">block_eye</span><span class="p">(</span><span class="n">t</span><span class="p">)],[</span><span class="mi">1</span><span class="o">/</span><span class="n">eff_batt</span><span class="o">*</span><span class="nf">block_eye</span><span class="p">(</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_batt</span><span class="p">(</span><span class="n">t</span><span class="p">)],</span> <span class="p">[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">3</span><span class="p">)]])</span>
-<span class="n">beq_batteryenergy</span> <span class="o">=</span> <span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">Aeq_batteryenergy_lasthour</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">([[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">matrix</span><span class="p">([</span><span class="mi">1</span><span class="p">])],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">)],[</span><span class="nf">matrix</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">])],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)]])</span>
-<span class="n">beq_batteryenergy_lasthour</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="n">Aeq</span> <span class="o">=</span> <span class="nf">sparse</span><span class="p">([</span><span class="n">Aeq_balance</span><span class="p">,</span><span class="n">Aeq_batteryenergy</span><span class="p">,</span> <span class="n">Aeq_batteryenergy_lasthour</span> <span class="p">])</span>
-<span class="n">beq</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">([</span><span class="n">beq_balance</span><span class="p">,</span><span class="n">beq_batteryenergy</span><span class="p">,</span> <span class="n">beq_batteryenergy_lasthour</span><span class="p">])</span>
-
-
-<span class="n">A_maximumstored</span> <span class="o">=</span> <span class="nf">sparse</span><span class="p">([[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">)],[</span><span class="nf">block_eye</span><span class="p">(</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">2</span><span class="p">)],[</span><span class="o">-</span><span class="nf">block_ones</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">)]])</span>
-<span class="n">b_maximumstored</span> <span class="o">=</span> <span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">A_maximumcharge</span> <span class="o">=</span> <span class="nf">sparse</span><span class="p">([[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_eye</span><span class="p">(</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">2</span><span class="p">)],[</span><span class="o">-</span><span class="n">c_rate_batt</span><span class="o">*</span><span class="nf">block_ones</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">)]])</span>
-<span class="n">b_maximumcharge</span> <span class="o">=</span> <span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">A_maximumdischarge</span> <span class="o">=</span> <span class="nf">sparse</span><span class="p">([[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_eye</span><span class="p">(</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">2</span><span class="p">)],[</span><span class="o">-</span><span class="n">c_rate_batt</span><span class="o">*</span><span class="nf">block_ones</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">)]])</span>
-<span class="n">b_maximumdischarge</span> <span class="o">=</span> <span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">A_maximumgrid</span> <span class="o">=</span> <span class="nf">sparse</span><span class="p">([[</span><span class="nf">block_eye</span><span class="p">(</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)],[</span><span class="o">-</span><span class="nf">block_ones</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">2</span><span class="p">)]])</span>
-<span class="n">b_maximumgrid</span> <span class="o">=</span> <span class="nf">block_zeros</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">lowerbounds</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">([[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">matrix</span><span class="p">([</span><span class="n">initialenergy_batt</span><span class="p">])],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)]])</span>
-<span class="n">A_lowerbound</span> <span class="o">=</span> <span class="o">-</span><span class="nf">block_eye</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">t</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">b_lowerbound</span> <span class="o">=</span> <span class="o">-</span><span class="n">lowerbounds</span><span class="p">.</span><span class="n">T</span>
-
-<span class="n">upperbounds</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">([[</span><span class="n">np</span><span class="p">.</span><span class="n">inf</span><span class="o">*</span><span class="nf">block_ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="n">np</span><span class="p">.</span><span class="n">inf</span><span class="o">*</span><span class="nf">block_ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="n">np</span><span class="p">.</span><span class="n">inf</span><span class="o">*</span><span class="nf">block_ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">matrix</span><span class="p">([</span><span class="n">initialenergy_batt</span><span class="p">])],[</span><span class="n">np</span><span class="p">.</span><span class="n">inf</span><span class="o">*</span><span class="nf">block_ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="n">np</span><span class="p">.</span><span class="n">inf</span><span class="o">*</span><span class="nf">block_ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)]])</span> 
-<span class="n">A_upperbound</span> <span class="o">=</span> <span class="nf">block_eye</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">t</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">b_upperbound</span> <span class="o">=</span> <span class="n">upperbounds</span><span class="p">.</span><span class="n">T</span>
-
-<span class="n">A</span> <span class="o">=</span> <span class="nf">sparse</span><span class="p">([</span><span class="n">A_maximumstored</span><span class="p">,</span> <span class="n">A_maximumcharge</span><span class="p">,</span> <span class="n">A_maximumdischarge</span><span class="p">,</span> <span class="n">A_maximumgrid</span><span class="p">,</span> <span class="n">A_lowerbound</span><span class="p">,</span> <span class="n">A_upperbound</span><span class="p">])</span>
-<span class="n">b</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">([</span><span class="n">b_maximumstored</span><span class="p">,</span> <span class="n">b_maximumcharge</span><span class="p">,</span> <span class="n">b_maximumdischarge</span><span class="p">,</span> <span class="n">b_maximumgrid</span><span class="p">,</span> <span class="n">b_lowerbound</span><span class="p">,</span> <span class="n">b_upperbound</span><span class="p">])</span>
-
-<span class="n">npvfactor</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">r</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">r</span><span class="p">))</span><span class="o">**</span><span class="mi">20</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">r</span><span class="p">)))</span> <span class="c1"># 초항이 (1+r)^{-1}, 마지막항이 (1+r)^{20}인 등비수열의 합
-</span><span class="n">costfun_pv</span> <span class="o">=</span> <span class="n">initialcost_pv</span> <span class="o">+</span> <span class="n">mtncost_pv</span> <span class="o">*</span> <span class="n">npvfactor</span> <span class="c1"># 초기투자비 + 매년 유지보수비(npvfactor를 곱해 현가화)
-</span><span class="n">costfun_batt</span> <span class="o">=</span> <span class="n">initialcost_batt</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">r</span><span class="p">))</span><span class="o">**</span><span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">mtncost_batt</span> <span class="o">*</span> <span class="n">npvfactor</span> <span class="c1"># 초기투자비 + 10년 후 재투자비(현가화) + 매년 유지보수비 (현가화)
-</span><span class="n">costfun_elec</span> <span class="o">=</span> <span class="n">taxrate</span> <span class="o">*</span> <span class="n">eleccost</span><span class="p">.</span><span class="nf">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">npvfactor</span> <span class="c1"># 전기 사용량 요금 (현가화), taxrate를 곱해 부가가치세/ 전력산업기반기금 반영
-</span><span class="n">costfun_elec_demand</span> <span class="o">=</span> <span class="n">taxrate</span> <span class="o">*</span> <span class="n">eleccost_demandcharge</span> <span class="o">*</span> <span class="mi">12</span> <span class="o">*</span> <span class="n">npvfactor</span> <span class="c1"># 전기 기본요금 (현가화), 매 월별이므로 12 곱함
-</span>
-<span class="n">c</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">([[</span><span class="nf">matrix</span><span class="p">(</span><span class="n">costfun_elec</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">)],[</span><span class="nf">block_zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)],[</span><span class="nf">matrix</span><span class="p">([</span><span class="n">costfun_elec_demand</span><span class="p">])],[</span><span class="nf">matrix</span><span class="p">([</span><span class="n">costfun_pv</span><span class="p">])],[</span><span class="nf">matrix</span><span class="p">([</span><span class="n">costfun_batt</span><span class="p">])]])</span> 
-
-<span class="n">x</span> <span class="o">=</span> <span class="n">glpk</span><span class="p">.</span><span class="nf">lp</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">Aeq</span><span class="p">,</span><span class="n">beq</span><span class="p">,</span><span class="n">options</span><span class="o">=</span><span class="p">{</span> <span class="s">'msg_lev'</span><span class="p">:</span> <span class="s">'GLP_MSG_ON'</span><span class="p">})</span>
-<span class="n">totalcost</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">capa_pv</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
-<span class="n">capa_batt</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">p_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="n">t</span><span class="p">])</span>
-<span class="n">p_ch</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][(</span><span class="n">t</span><span class="p">):(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)])</span> <span class="c1"># Python에서는 t+1:2*t+1 이 아님에 주의
-</span><span class="n">p_disch</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">):(</span><span class="mi">3</span><span class="o">*</span><span class="n">t</span><span class="p">)])</span>
-
-<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">73</span><span class="p">).</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">p_load</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">72</span><span class="p">])</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">73</span><span class="p">).</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">p_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">72</span><span class="p">]</span><span class="o">+</span><span class="n">p_pv</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">72</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">capa_pv</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">73</span><span class="p">))</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">))</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>위 코드의 초반부에서 시간별 전기 부하, 시간별 태양광 발전량, 시간별 전기 요금을 텍스트 파일로부터 불러왔다. 코드 내에 1년 (8,760시간) 내 각 시간별로 대응하는 수치들을 다 써 줄 수 없기 때문이다.</p>
-
-<p>이 때 주의할 점은, <a href="https://cyber.kepco.co.kr/ckepco/front/jsp/CY/D/C/CYDCHP00403.jsp">공휴일의 최대수요전력 및 사용전력량은 경부하시간대로 계량하고, 공휴일이 아닌 토요일 최대부하시간대의 사용전력량은 중간부하시간대로 계량한다</a>는 것이다. $\texttt{eleccost_hourly.txt}$에 해당 사항이 반영되어 있는지 확인해야 한다. 그렇지 않으면 전기요금 및 전기요금 절감액이 과다계상된다.</p>
-
-<p>또한 태양광 발전량 데이터가 이상하지 않은지 확인하기 위해, ‘이용률’을 계산해 보아야 한다. 태양광 패널의 이용률은, 정격출력에 8,760시간 (1년) 을 곱한 값 대비 1년간 실제로 발전한 전기 에너지의 양의 비율이다.</p>
-
-<p>이 포스팅 기준으로는, 이용률은 $\sum_{t=1}^{8760} p_{\text{pv}}[t]$, 즉 단순히 $\texttt{pv_hourly.txt}$의 수치들의 합이다. 일반적으로 국내에서는 태양광 이용률이 대략 11~16% 범위 내에 있으며, 이 범위를 크게 벗어날 경우 데이터 출처를 다시 확인해 보아야 한다.</p>
-
-<p><br /></p>
-
-<h2 id="최적-용량-도출-결과">최적 용량 도출 결과</h2>
-<p>필자가 지정한 케이스 (Peak 부하 약 2MW, 태양광 용량 제한 없다고 가정) 에 대해 계산한 결과, 최적 용량은 태양광 812kW + 배터리 435kWh로 도출되었다. 또한 특정 3일에 대한 전력 공급 패턴은 아래 그림과 같다.</p>
-
-<p><img src="/assets/images/linprogfour/result_year.png" alt="result_year" class="align-center" />
-<em>대상 건물에 최적 용량의 태양광과 배터리 설치 시 전력 공급 패턴.</em></p>
-
-<p>노란 영역은 태양광으로 공급되는 전기에너지, 파란 영역은 수전으로 공급되는 전기에너지, 빨간 영역은 배터리 방전으로 공급되는 에너지이다. 굵은 검정 곡선은 시간별 부하이며, 태양광과 수전의 합이 시간별 부하를 초과한 경우 그 초과분은 배터리로 충전된다.</p>
-
-<p><br /></p>
-
-<h2 id="투자회수기간-계산">투자회수기간 계산</h2>
-
-<p>위 최적화 문제를 풀었을 때 태양광/ 배터리 용량이 양수인 경우, 시스템 도입 시 ‘현재가치로 환산된 총 비용’이 감소한다는 것은 알 수 있다.</p>
-
-<p>그러나 의사결정권자들의 입장에서는, 태양광/배터리 도입 시 ‘투자회수기간’이 몇 년인지 궁금할 것이다. 설비 투자를 결정하는 주체들은 대개 짧게는 3년에서 길어도 7년 내에 투자금을 회수하기를 원한다. 그러나 위 문제의 최적해에서 태양광 용량이 양수더라도, 태양광 투자비가 수명 (20년) 내에는 회수되겠지만 7년 내에 회수되지 않을 수도 있다.</p>
-
-<p>투자회수기간을 계산하려면, ‘태양광/배터리 도입을 통해 절감한 1년간의 전기요금’을 계산해야 한다.</p>
-
-<p>태양광/배터리 도입 ‘전’에는 수전량이 곧 부하와 같다. 그러므로 1년간의 전기 사용량 요금은 $\sum_{t} c_{\text{grid}}[t] p_{\text{load}}[t]$ 이고, 1년간의 전기 기본 요금은 $12 c_{\text{grid}}^{\text{demand}} \text{max}_{t} p_{\text{load}}[t]$ 이다.</p>
-
-<p>태양광/배터리 도입 ‘후’에는, 전기요금이 최적화 문제를 풀어서 구한 $p_{\text{grid}}[t]$와 $q$로 표현되어야 한다. 1년간의 전기 사용량 요금은 $\sum_{t} c_{\text{grid}}[t] p_{\text{grid}}[t]$ 이고, 1년간의 전기 기본 요금은 $12 c_{\text{grid}}^{\text{demand}} q$ 이다. 한편, 태양광/배터리 도입 시 매년 발생하는 설비 유지보수비 $c_{\text{pv}}^{\text{mtn}} s_{\text{pv}} + c_{\text{batt}}^{\text{mtn}} s_{\text{batt}}$ 도 고려해야 한다.</p>
-
-<p>즉, 태양광/배터리 도입을 통한 ‘1년간의’ 전기요금 절감액 $C_{\text{grid}}^{\text{save}}$는 아래 식으로 계산된다.</p>
-
-<p>$C_{\text{grid}}^{\text{save}} = \lbrace \sum_{t} c_{\text{grid}}[t] p_{\text{load}}[t] + 12 c_{\text{grid}}^{\text{demand}} \text{max}_{t} p_{\text{load}}[t] \rbrace - \lbrace \sum_{t} c_{\text{grid}}[t] p_{\text{grid}}[t] + 12 c_{\text{grid}}^{\text{demand}} q \rbrace - \lbrace c_{\text{pv}}^{\text{mtn}} s_{\text{pv}} + c_{\text{batt}}^{\text{mtn}} s_{\text{batt}}  \rbrace$</p>
-
-<p>투자회수기간은 아래 식을 만족하는 가장 작은 자연수 $N$이다.</p>
-
-<p>\begin{align}
-\sum_{n=1}^{N}  \frac{C_{\text{grid}}^{\text{save}}}{(1+r)^{n}} \geq c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\text{batt}} \left( 1 + \frac{1}{(1+r)^{10}} \right)
-\notag 
-\end{align}</p>
-
-<p><br /></p>
-
-<p>(사족: 실제 프로젝트 레벨에서는 전기 뿐 아니라 난방/냉방 에너지 부하 및 난방/냉방 공급 설비, 전기와 열을 동시에 공급하는 설비 등도 포함된다. 같은 역할의 에너지원이라도 두 종류 이상이 후보가 될 수 있다. 또한 향후에 설명할 추가적인 제약조건들도 존재한다 (최소 가동부하, ramp rate, 최소기동/정지시간 등). 그러면 수식의 항 수가 증가하며 코드도 복잡해진다. <br />
-이 때 프로젝트 대상 시스템의 실제 여건을 충분히 반영하면서도 길지 않은 시간 내에 풀리는 최적화 문제를 구성하는 것, 이를 코드화하는 과정을 실수 없이 빠르게 수행하는 것, 프로젝트 도중 모델 변경이 필요해질 경우 코드 수정을 역시 실수 없이 빠르게 수행하는 것이, 필자에게 있어 일종의 영업비밀(?)이라 하겠다.)</p>
+다음 포스팅에서, 용량 결정 문제의 코드 및 결과를 살펴본다.</p>
 
 <div class="notice--info">
 
 선형계획법 기반 분산에너지시스템 최적화<br /><br />
 
-1) <a href="/linprogone.html">최소비용 시스템과 시간별 자료의 중요성</a><br />
-2) <a href="/linprogtwo.html">배터리의 충/방전 스케줄 결정: 수식</a> <br />
-3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드 및 결과</a> <br />
-4) <b>태양광과 배터리의 '용량' 결정 (코드 및 결과 포함)</b> <br />
-5) <a href="/linprogfive.html">정수 (integer) 변수 도입으로 현실 설명력 증대</a> <br />
-6) <a href="/linprogsix.html">공동주택의 '누진제' 전기요금 (단일계약) 수식</a> <br />
-7) <a href="/linprogseven.html"> 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)</a> <br />
-8) <a href="/linprogeight.html"> '부분'부하 성능 관련 제약들</a> <br />
-9) <a href="/linprognine.html"> 출력 조정 관련 제약들</a>
-
+01) <a href="/linprogone.html"> 최소비용 시스템과 시간별 자료의 중요성</a><br />
+02) <a href="/linprogtwo.html"> 배터리의 충/방전 스케줄 결정: 수식</a> <br />
+03) <a href="/linprogthree.html"> 배터리의 충/방전 스케줄 결정: Python 코드 및 결과</a> <br />
+04) <b> 태양광과 배터리의 '용량' 결정: 목적함수 ('현재가치' 비용) 및 수식</b> <br />
+05) <a href="/linprogfive.html"> 태양광과 배터리의 '용량' 결정: 코드, 결과, 투자회수기간 및 절감량 계산</a> <br />
+06) <a href="/linprogsix.html"> 정수 (integer) 변수 도입으로 현실 설명력 증대</a> <br />
+07) <a href="/linprogseven.html"> 공동주택의 '누진제' 전기요금 (단일계약) 수식</a> <br />
+08) <a href="/linprogeight.html"> 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)</a> <br />
+09) <a href="/linprognine.html"> '부분'부하 성능 관련 제약들</a> <br />
+10) <a href="/linprogten.html"> 출력 조정 관련 제약들</a>
 </div>
 
 <p><br />
@@ -759,7 +622,7 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
  -->
         <!-- 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2022-12-18T00:00:00+09:00">2022-12-18</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2022-12-11T00:00:00+09:00">2022-12-11</time></p>
  -->
       </footer>
 
@@ -768,7 +631,7 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+-+4%29+%ED%83%9C%EC%96%91%EA%B4%91%EA%B3%BC+%EB%B0%B0%ED%84%B0%EB%A6%AC%EC%9D%98+%27%EC%9A%A9%EB%9F%89%27+%EA%B2%B0%EC%A0%95+%28%EC%BD%94%EB%93%9C+%EB%B0%8F+%EA%B2%B0%EA%B3%BC+%ED%8F%AC%ED%95%A8%29%20http%3A%2F%2Flocalhost%3A4000%2Flinprogfour.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+-+4%29+%ED%83%9C%EC%96%91%EA%B4%91%EA%B3%BC+%EB%B0%B0%ED%84%B0%EB%A6%AC%EC%9D%98+%27%EC%9A%A9%EB%9F%89%27+%EA%B2%B0%EC%A0%95%3A+%EB%AA%A9%EC%A0%81%ED%95%A8%EC%88%98+%28%27%ED%98%84%EC%9E%AC%EA%B0%80%EC%B9%98%27+%EB%B9%84%EC%9A%A9%29+%EB%B0%8F+%EC%88%98%EC%8B%9D%20http%3A%2F%2Flocalhost%3A4000%2Flinprogfour.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flinprogfour.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -792,6 +655,8 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
   
 
   
+
+  
   	
   	
   	
@@ -802,7 +667,7 @@ c_{\text{pv}}^{\text{init}} s_{\text{pv}} + c_{\text{batt}}^{\text{init}} s_{\te
 
   
     
-      <a href="/linprogfive.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>선형계획법 기반 분산에너지시스템 최적화 - 5) 정수 (integer) 변수 도입으로 현실 설명력 증대</a>
+      <a href="/linprogfive.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>선형계획법 기반 분산에너지시스템 최적화 - 5) 태양광과 배터리의 '용량' 결정: 코드, 결과, 투자회수기간 및 절감량 계산</a>
     
     
       <a href="/linprogthree.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>선형계획법 기반 분산에너지시스템 최적화 - 3) 배터리의 충/방전 스케줄 결정: Python 코드 및 결과</a>

@@ -5,8 +5,8 @@
     <description>공학박사 과정에서 쌓은 에너지 시스템 전문성에 데이터 사이언스 석사를 더하며 쌓은 계산통계학 활용 역량을 결합하여, 에너지 시스템/ 정책/ 시장 관련 솔루션 도출을 올바르게 할 수 있도록 돕습니다.</description>
     <link>https://song4energyndata.github.io/</link>
     <atom:link href="https://song4energyndata.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 05 Jul 2023 09:37:53 +0900</pubDate>
-    <lastBuildDate>Wed, 05 Jul 2023 09:37:53 +0900</lastBuildDate>
+    <pubDate>Wed, 05 Jul 2023 19:32:08 +0900</pubDate>
+    <lastBuildDate>Wed, 05 Jul 2023 19:32:08 +0900</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
@@ -1875,9 +1875,7 @@ Vincent의 마이크로그리드 사례에서는, 실제 수전량은 -1.1에서
     
       <item>
         <title>건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?</title>
-        <description>&lt;p&gt;지난 포스팅에서는 건물의 시간별 전기부하 추정 모델을 딥러닝이 아닌 ‘전통적인’ 선형회귀 (Weighted Least squares + 잔차에 대한 SARMA 보조회귀) 로 만들어 adjusted $R^2$ 0.95 이상의 우수한 성능을 얻을 수 있음을 보였다.&lt;/p&gt;
-
-&lt;p&gt;이번 포스팅에서는, 딥러닝을 써서 모델을 만들어 본다.&lt;/p&gt;
+        <description>&lt;p&gt;지난 포스팅에서는, 건물의 시간별 전기부하 추정 문제에서 딥러닝이 아닌 ‘전통적인’ 선형회귀로도, 적절한 모델 구성 시 adjusted $R^2$ 0.95 이상의 우수한 성능을 얻을 수 있음을 보였다. 그렇다면, 딥러닝으로는 어떨까?&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -2167,6 +2165,8 @@ Vincent의 마이크로그리드 사례에서는, 실제 수전량은 -1.1에서
 
 &lt;p&gt;이렇듯 계산 시간도 빠르면서 성능도 나은 경우 ‘computational efficiency’가 좋다고 한다. 내가 가진 데이터에 대해 더 잘 알수록, 그리고 가능한 기법들 각각의 장단점에 대해 더 잘 알수록, ‘computationally efficient한’ 방법을 사용할 수 있을 가능성이 높다.&lt;/p&gt;
 
+&lt;p&gt;다만, ‘데이터에 대해 잘 알고 통계모델링에 대해서도 잘 아는 사람’이 흔치 않다는 것이 문제인데… 그래서 필자는 그 흔치 않은 사람 중 하나가 되고자 이 블로그를 운영하는 등의 노력을 지속할 계획이다.&lt;/p&gt;
+
 &lt;p&gt;&lt;a href=&quot;https://pdsi.pabii.com/data-scientists-future-2/&quot;&gt;(RNN과 전통적인 시계열 모델에 대해 참고할 만한 글)&lt;/a&gt;&lt;/p&gt;
 
 &lt;div class=&quot;notice--info&quot;&gt;
@@ -2195,7 +2195,7 @@ Vincent의 마이크로그리드 사례에서는, 실제 수전량은 -1.1에서
     
       <item>
         <title>건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝 대신 회귀분석으로</title>
-        <description>&lt;p&gt;시계열 데이터에 대해, 경우에 따라서는 전통적인 선형회귀가 딥러닝보다 더 좋은 예측력을 보인다는 놀라운(?) 사실을 아는가?&lt;/p&gt;
+        <description>&lt;p&gt;시계열 데이터에 대해, 경우에 따라서는 전통적인 선형회귀가 딥러닝보다 시간을 훨씬 덜 쓰고도 더 좋은 예측력을 보인다는 놀라운(?) 사실을 아는가?&lt;/p&gt;
 
 &lt;h2 id=&quot;건물의-시간별-전기-부하&quot;&gt;건물의 시간별 전기 부하&lt;/h2&gt;
 

@@ -19,8 +19,8 @@
 </script>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 관련 제약들 | 에너지엔데이터연구소</title>
-<meta name="description" content="지난 포스팅에서는 설비의 효율과 COP(성능계수)를 상수로 가정했지만, 실제로는 부하율에 따라 효율과 COP가 달라진다. 이를테면 열병합발전기의 경우, 최대 출력(정격 출력)으로 운전할 때 비해 더 낮은 출력으로 ‘부분부하’운전 시 발전효율이 저하됨이 알려져 있다.">
+<!-- begin _includes/seo.html --><title>선형계획법 기반 분산에너지시스템 최적화 - 8) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링) | 에너지엔데이터연구소</title>
+<meta name="description" content="이전 포스팅들에서는 전기 부하만을 다루었으나, 실제로는 냉방/난방/급탕 등 열 부하 또한 에너지 소비에서 상당한 비중을 차지한다. 따라서 ‘전기와 열을 모두’ 공급하는 분산형 에너지시스템의 최적 구성 및 스케줄을 도출할 수 있어야 한다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -32,21 +32,21 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 관련 제약들">
+<meta property="og:title" content="선형계획법 기반 분산에너지시스템 최적화 - 8) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)">
 <meta property="og:url" content="https://song4energyndata.github.io/linprogeight.html">
 
 
-  <meta property="og:description" content="지난 포스팅에서는 설비의 효율과 COP(성능계수)를 상수로 가정했지만, 실제로는 부하율에 따라 효율과 COP가 달라진다. 이를테면 열병합발전기의 경우, 최대 출력(정격 출력)으로 운전할 때 비해 더 낮은 출력으로 ‘부분부하’운전 시 발전효율이 저하됨이 알려져 있다.">
+  <meta property="og:description" content="이전 포스팅들에서는 전기 부하만을 다루었으나, 실제로는 냉방/난방/급탕 등 열 부하 또한 에너지 소비에서 상당한 비중을 차지한다. 따라서 ‘전기와 열을 모두’ 공급하는 분산형 에너지시스템의 최적 구성 및 스케줄을 도출할 수 있어야 한다.">
 
 
 
-  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/linprogeight/chp_eff.png">
+  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/linprogeight/systemfigure.png">
 
 
 
 
 
-  <meta property="article:published_time" content="2023-02-12T00:00:00+09:00">
+  <meta property="article:published_time" content="2023-02-04T00:00:00+09:00">
 
 
 
@@ -238,7 +238,9 @@
                     
                 
                     
-                        <li><a href="/optimalsystem" class="">&#x2022 경제성분석 및 최적구성 도출 [11]</a></li>
+                
+                    
+                        <li><a href="/optimalsystem" class="">&#x2022 경제성분석 및 최적구성 도출 [10]</a></li>
                     
                 
                     
@@ -251,6 +253,8 @@
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
+                
+                    
                 
                     
                 
@@ -278,6 +282,8 @@
                     
                 
                     
+                
+                    
                         <li><a href="/estimation" class="">&#x2022 예측 (회귀분석/ 머신러닝/ 딥러닝) [2]</a></li>
                     
                 
@@ -285,6 +291,8 @@
                 
             </ul>
             <ul>
+                
+                    
                 
                     
                 
@@ -317,8 +325,31 @@
                 
                     
                 
+                    
+                
             </ul>
             <ul>
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/mypapers" class="">&#x2022 My papers [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
                 
                     
                 
@@ -349,6 +380,8 @@
                 
                     
                 
+                    
+                
             </ul>
       </li>
   </ul>
@@ -362,16 +395,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 관련 제약들">
-    <meta itemprop="description" content="지난 포스팅에서는 설비의 효율과 COP(성능계수)를 상수로 가정했지만, 실제로는 부하율에 따라 효율과 COP가 달라진다. 이를테면 열병합발전기의 경우, 최대 출력(정격 출력)으로 운전할 때 비해 더 낮은 출력으로 ‘부분부하’운전 시 발전효율이 저하됨이 알려져 있다.">
-    <meta itemprop="datePublished" content="2023-02-12T00:00:00+09:00">
+    <meta itemprop="headline" content="선형계획법 기반 분산에너지시스템 최적화 - 8) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)">
+    <meta itemprop="description" content="이전 포스팅들에서는 전기 부하만을 다루었으나, 실제로는 냉방/난방/급탕 등 열 부하 또한 에너지 소비에서 상당한 비중을 차지한다. 따라서 ‘전기와 열을 모두’ 공급하는 분산형 에너지시스템의 최적 구성 및 스케줄을 도출할 수 있어야 한다.">
+    <meta itemprop="datePublished" content="2023-02-04T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://song4energyndata.github.io/linprogeight.html" class="u-url" itemprop="url">선형계획법 기반 분산에너지시스템 최적화 - 8) ‘부분’부하 관련 제약들
+            <a href="https://song4energyndata.github.io/linprogeight.html" class="u-url" itemprop="url">선형계획법 기반 분산에너지시스템 최적화 - 8) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)
 </a>
           </h1>
           
@@ -382,7 +415,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-02-12T00:00:00+09:00">2023-02-12</time>
+        <time datetime="2023-02-04T00:00:00+09:00">2023-02-04</time>
       </span>
     
 
@@ -400,107 +433,182 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#발전기의-부분부하-성능을-고려한-수식">발전기의 부분부하 성능을 고려한 수식</a></li><li><a href="#냉방기기의-부분부하-성능을-고려한-수식">냉방기기의 부분부하 성능을 고려한 수식</a></li><li><a href="#시간별-설비별-이진변수에-의한-계산시간-증가-문제">‘시간별/ 설비별’ 이진변수에 의한 계산시간 증가 문제</a></li></ul>
+              <ul class="toc__menu"><li><a href="#가장-간단한-케이스-전기로-냉방-공급-연료로-난방-공급">가장 간단한 케이스: 전기로 냉방 공급, 연료로 난방 공급</a></li><li><a href="#전기열-간-섹터-커플링-히트펌프-흡수식-냉동기-열병합-발전">전기/열 간 섹터 커플링: 히트펌프, 흡수식 냉동기, 열병합 발전</a></li><li><a href="#섹터커플링-설비를-포함하는-전기열-공급-시스템의-수식">섹터커플링 설비를 포함하는 전기/열 공급 시스템의 수식</a></li><li><a href="#시간별-냉방난방-부하-정보-취득의-어려움">‘시간별’ 냉방/난방 부하 정보 취득의 어려움</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <p>지난 포스팅에서는 설비의 효율과 COP(성능계수)를 상수로 가정했지만, 실제로는 부하율에 따라 효율과 COP가 달라진다. 이를테면 열병합발전기의 경우, 최대 출력(정격 출력)으로 운전할 때 비해 더 낮은 출력으로 ‘부분부하’운전 시 발전효율이 저하됨이 알려져 있다.</p>
+        <p>이전 포스팅들에서는 전기 부하만을 다루었으나, 실제로는 냉방/난방/급탕 등 열 부하 또한 에너지 소비에서 상당한 비중을 차지한다. 따라서 ‘전기와 열을 모두’ 공급하는 분산형 에너지시스템의 최적 구성 및 스케줄을 도출할 수 있어야 한다.</p>
 
-<p><img src="/assets/images/linprogeight/chp_eff.png" alt="chp_eff" class="align-center" />
-<em>열병합발전기의 통상적인 부하율-효율 그래프. 낮은 부하율에서 효율이 저하됨.<br />출처: <a href="https://doi.org/10.1016/j.apenergy.2015.03.053">“Modeling of non-linear CHP efficiency curves in distributed energy systems”</a></em></p>
+<p>이전부터 열병합 발전기/ 히트펌프/ 흡수식 냉동기 등 설비 도입 고려 시, 전기와 열을 동시에 고려하는 문제를 구성하고 풀어야 했다. 또한 2020년대에 들어서는, 점차 증가하는 재생발전의 잉여전력을 열/ 가스 등 타 형태의 에너지로 변환하여 사용/ 저장함으로써 화석연료 절감을 실현한다는 구상이 ‘섹터커플링’이란 이름으로 주목받고 있다.</p>
 
-<p>반대로 냉방기기의 경우, 정격부하 대비 부분부하에서 COP가 더 높다.</p>
-
-<p><img src="/assets/images/linprogeight/cop.png" alt="cop" class="align-center" />
-<em>LG전자의 지열기반 chiller의 부하율별 COP. 일반적인 turbo chiller, 흡수식냉동기도 비슷한 추이를 보임.</em></p>
-
-<p>이번 포스팅에서는, 선형계획법 문제에서 이러한 ‘부분부하’에서의 효율과 COP를 고려하여 설비의 input-output 관계를 보다 더 현실적으로 모델링하는 수식을 설명한다.</p>
+<p>이번 포스팅에서는 전기와 냉방/난방 부하를 동시에 충족하는 분산에너지 시스템을 설명한다. 우선 관련 설비 각각에 대해 설명 후, 선형계획법 문제를 설명한다.</p>
 
 <p><br /></p>
 
-<h2 id="발전기의-부분부하-성능을-고려한-수식">발전기의 부분부하 성능을 고려한 수식</h2>
+<h2 id="가장-간단한-케이스-전기로-냉방-공급-연료로-난방-공급">가장 간단한 케이스: 전기로 냉방 공급, 연료로 난방 공급</h2>
 
-<p>아래 그림은, 정격출력이 100이고 최소부하율이 50%인 가상의 발전기의 연료입력-발전출력 그래프다. 위에서 보인 열병합발전기의 부하율-효율 그래프와는 가로축, 세로축이 다름에 주의한다.</p>
+<p>가장 간단한 케이스는, 일반 사무용/ 조명/ 기계 부하 및 냉방기기 (에어컨) 가동을 위한 전기는 기존처럼 수전 및 전기를 생산할 수 있는 설비로 공급하고, 난방 부하는 연료를 연소하는 보일러를 통해 공급하는 것이다. 이 경우 냉방 부하는 ‘냉방 부하를 충족시키기 위해 냉방 설비를 가동하는 데 필요한 전기 부하’ 로써, 전기 부하에 포함된다.</p>
 
-<p><img src="/assets/images/linprogeight/chp.png" alt="chp" class="align-center" />
-<em>연료 입력 - 발전 출력 그래프.</em></p>
+<p>보일러는 도시가스 배관망으로부터 공급받은 LNG(액화천연가스) 또는 용기 단위로 구입한 LPG(액화석유가스) 연료를 열에너지로 변환해 난방부하 $ q_{\text{load.h}}[t]$를 충족한다 (아랫첨자 h는 heating). 그러므로 아래와 같이 연료의 에너지 $f_{\text{boiler}}[t]$ 를 실제 활용가능한 열에너지 $q_{\text{boiler.h}}[t]$로 변환 시의 변환계수(효율) $\eta_{\text{boiler.h}}$ 를 고려한 변환 식이 필요하다.</p>
 
-<p>시점 $t$의 연료 소비량을 $f[t]$, 발전량을 $p[t]$라 하자.
-위 검정 그래프는 상수 효율 $\eta$을 가정한 경우로, 절편이 없는 직선 $p[t]=\eta f[t]$상의 선분이다.</p>
+<p>$ q_{\text{boiler.h}}[t] = \eta_{\text{boiler.h}} f_{\text{boiler}}[t] $, $ q_{\text{load.h}}[t]=q_{\text{boiler.h}}[t]$</p>
 
-<p>그러나 부분부하 성능 저하를 고려 시, 위 빨간 그래프처럼, 음의 절편이 있는 직선상의 선분이 된다. 해당 설비의 기동/정지를 나타내는 이진수 $u[t]$를 다시 도입하면 (기동 시 1, 정지 시 0), 위 빨간 그래프는 $p[t] = \eta f[t] + \psi u[t]$로 표현된다 ($\psi$가 절편).</p>
+<p>또한 목적함수에 연료의 요금 $\sum_{t} c_{\text{fuel}}[t]f_{\text{boiler}}[t]$도 추가해야 한다. 도시가스의 경우, <a href="http://www.citygas.or.kr/info/charge.jsp">용도 및 계절별로 요금이 다르다.</a></p>
 
-<p>여기서는 연료입력-발전출력 관계를, 최소부하율과 정격출력 두 지점에서의 연료입력-발전출력이 주어질 때 두 점을 잇는 선분으로 근사하였다. $\eta$와 $\psi$를 계산하면 선형계획법을 적용할 수 있다. (해당 ‘선형’ 근사가 실제 발전기 특성에서 크게 벗어나지 않음이 알려져 있다.)</p>
-
-<p>최소부하율이란, 기기 안정성/수명에 해를 끼치지 않는 선에서 최소로 유지할 수 있는 부하율이다. 마치 자전거가 넘어지지 않고 앞으로 나아가려면 최소한의 속도가 필요한 것에 비유할 수 있다.</p>
-
-<p>설비 정격출력을 $S$, 최소부하율을 $\gamma_{min}$라 할 때, 설비의 출력 범위를 표현하는 제약조건은 아래와 같다.</p>
-
-<p>$ u[t] \gamma_{min} s \leq p[t] \leq u[t] s $</p>
-
-<p>$u[t]=0$이면 (즉 정지상태이면) $p[t]=0$이며, $u[t]=1$이면 (즉 기동상태이면) $ \gamma_{min} s \leq p[t] \leq s $ 가 되어 $p[t]$가 최소부하 출력과 정격출력 사이의 값을 가질 수 있다.</p>
+<p>(주의해야 할 점: 일반적으로 <a href="https://cyber.kgs.or.kr/scu.Scu01Read.ex.do;cyberJSESSIONID=YjLKhs6S49gtFfhwv5XfvHN2C9h9gtSsGJ1F30VrQY9190xt13nr!-1519862351!-1170866958?vocChCd=01&amp;vocKindCd=&amp;pageIndex=5138&amp;hiddenYn=&amp;iTotCnt=53116&amp;bulc=&amp;tc1CD=&amp;searchType=1&amp;searchText=&amp;vocRcptNo=200010120008">보일러 효율을 표시할 때는 보통 ‘저위’발열량 (Lower Heating Value) 기준으로 표시</a>하나, <a href="http://www.citygas.or.kr/info/policydata/read.jsp?reqPageNo=1&amp;no=22">도시가스 공급업체에서 명시하는 열량은 ‘고위’발열량 (Higher Heating Value) 기준으로 기재</a>한다. 그러므로 고위발열량을 저위발열량으로 변환 후 난방부하 충족량 및 요금 계산을 해야 한다.)</p>
 
 <p><br /></p>
 
-<h2 id="냉방기기의-부분부하-성능을-고려한-수식">냉방기기의 부분부하 성능을 고려한 수식</h2>
+<h2 id="전기열-간-섹터-커플링-히트펌프-흡수식-냉동기-열병합-발전">전기/열 간 섹터 커플링: 히트펌프, 흡수식 냉동기, 열병합 발전</h2>
 
-<p>아래 그림은, 정격출력(냉방)이 150kW인 가상의 냉방설비의 전기입력-냉방출력 그래프다. 위에서 보인 chiller의 부하율 별 COP를 적용하였다.</p>
+<p>사실 위의 시스템은 섹터’커플링’은 아니다. 수전을 포함한 전기 공급 설비들의 용량 및 스케줄을 결정할 때 난방 부하를 고려하지 않아도 되고, 반대로 보일러의 용량 및 스케줄을 결정할 때 전기 부하를 고려하지 않아도 되기 때문이다.</p>
 
-<p><img src="/assets/images/linprogeight/chiller.png" alt="chiller" class="align-center" width="70%" />
-<em>위 LG전자의 지열기반 chiller와 같은 부하율별 COP를 갖는 150kW(냉방출력)급 chiller의 전기 입력 - 냉방 출력 그래프.</em></p>
+<p>전기와 냉/난방 부하 및 공급을 동시에 고려해서 설비 별 용량 및 스케줄을 결정해야 하는 시스템은, 전기로 냉방 뿐 아니라 난방까지 하는 히트펌프, 온열을 냉열로 변환하는 흡수식냉동기, 전기와 열을 동시에 생산하는 열병합 발전기 등을 포함한다.</p>
 
-<p>냉방기기에 대해서는 보통 부하율 25%, 50%, 75%, 100%에 대한 성능이 주어진다. 즉 4개의 (전기입력,냉방출력) 점이 주어지는데, 4개의 점이 모두 한 선분 위에 있지 않다. 그러므로 더 이상 하나의 선분으로는 표현할 수 없으며, 선형계획을 적용하기 위해서는 3개의 연속된 선분으로 표현되어야 한다.</p>
+<p><img src="/assets/images/linprogeight/systemfigure.png" alt="systemfigure" class="align-center" />
+<em>건물 내 전기/ 냉방/ 난방 에너지를 동시에 공급하는 시스템 예시.</em></p>
 
-<p>냉방기기의 (시점 $t$의) 냉방 출력을 $q_{c}[t]$, 전기 입력을 $p_c[t]$라 하자. 그리고 위 그래프의 3개의 선분을 나타내는 일차식들을 각각 $q_c[t]=\alpha_1 + \beta_1 p_c[t]$ (출력기준 부하율 25%~50%), $q_c[t]=\alpha_2 + \beta_2 p_c[t]$ (부하율 50%~75%), $q_c[t]=\alpha_3 + \beta_3 p_c[t]$ (부하율 75%~100%)이라 하자.</p>
-
-<p>그러면 각 시간별로 냉방기기가 가동된다면 위 3개 구간 중 어디에 속하는지 (혹은 가동이 되지 않는지) 여부를 표현하는 이진수 3개의 세트가 있어야 한다. 각각을 $u_1[t]$, $u_2[t]$, $u_3[t]$이라 하자.</p>
-
-<p>또한 전기 입력 변수도 위 3개 구간 각각에 대응하는 3개의 변수 $p_1[t]$, $p_2[t]$, $p_3[t]$으로 두자. 또한 냉방기준 부하율 25%, 50%, 75%, 100%에 대응하는 전기 입력을 각각 $\tilde{p}_1$, $\tilde{p}_2$, $\tilde{p}_3$, $\tilde{p}_{\text{max}}$라 하자. 그러면, 위 그래프는 아래 제약조건들로 표현된다.</p>
-
-<p>$q_c[t] = \alpha_1 u_1[t] + \beta_1 p_1[t] + \alpha_2 u_2[t] + \beta_2 p_2[t] + \alpha_3 u_3[t] + \beta_3 p_3[t] $</p>
-
-<p>$ \tilde{p}_1 u_1[t] \leq p_1[t] \leq \tilde{p}_2 u_1[t] $</p>
-
-<p>$ \tilde{p}_2 u_2[t] \leq p_2[t] \leq \tilde{p}_3 u_2[t] $</p>
-
-<p>$ \tilde{p}_3 u_3[t] \leq p_3[t] \leq \tilde{p}_{\text{max}} u_3[t] $</p>
-
-<p>$ u_1[t] + u_2[t] + u_3[t] \leq 1 $</p>
-
-<p>위 제약을 통해 부분부하 성능 뿐 아니라 기동시의 최소 출력 ($\tilde{p}_1$) 도 반영된다.</p>
-
-<p><br /></p>
-
-<h2 id="시간별-설비별-이진변수에-의한-계산시간-증가-문제">‘시간별/ 설비별’ 이진변수에 의한 계산시간 증가 문제</h2>
-
-<p>위 방법 사용 시 ‘각 시간별/ 설비별’ 이진변수가 사용되므로 이진변수의 총 갯수가 커진다. 고려 대상 발전기 수가 많아지거나 전체 고려 기간이 길어지면, 풀이에 요구되는 시간이 오래 걸리고 심지어는 사실상 풀리지 않는 문제가 될 수도 있다.</p>
-
-<p>이를테면 1년치 자료를 기반으로 용량을 정하는 문제의 경우, 위 이진변수 기반 제약조건들을 그대로 적용하면 이진변수의 총 갯수가 8,760의 몇 배 이상에 달한다. 이를 그대로 푸는 것은 cvxopt의 glpk 모듈 혹은 MATLAB의 optimization toolbox 정도로는 불가능하며, CPLEX/ Gurobi 등 값비싼 상용 solver로도 꽤나 시간이 걸리는 일이다.</p>
+<p>해당 설비들은 에너지 분야 종사자가 아닌 독자에게 생소할 수 있으니, 약간 자세히 설명한다.</p>
 
 <p><br />
-이 경우, 아래와 같은 two-stage 기반으로 문제를 푸는 것이 현실적인 접근법이다.</p>
+1) 히트펌프 (Heat pump)</p>
 
-<p>1) 시간별 이진수가 들어가는 조건들을 무시하고 선형계획 문제를 구성해 풀어, 설비 별 용량을 구한다.</p>
+<p>히트펌프는 전기로 구동되어 여름에는 냉방을 하고 겨울에는 난방을 하는 일체형 설비이다. 아래 그림의 천장형 시스템 에어컨을 많이 보았을 것이다. 해당 설비는 대개 하절기 냉방 뿐 아니라 동절기 난방도 가능하다.</p>
 
-<p>2) 위에서 구한 설비 별 용량을 전제로, 일정 기간 (대략 24시간의 몇 배수) 의 최적 스케줄링 및 경제성을 위 이진변수 기반 제약조건들을 적용해 도출한다.</p>
+<p><img src="/assets/images/linprogeight/heatpump.jpg" alt="heatpump" class="align-center" width="60%" />
+<em>천장형 시스템 에어컨. 히트펌프의 일종이다.<br />출처: https://xn–oh5b1bt10b10b34a.com/article/%EC%84%A4%EC%B9%98%EC%82%AC%EB%A1%80/4/12/</em></p>
 
-<p>실제로는 1)에서 구한 용량이 전역 최적(global optimum)이 아닐 수 있으므로, 해당 용량에서 약간씩 변화시킨 후 다시 2)의 방법으로 최적 스케줄링을 구해, 더 나은 해가 있는지 탐색해 보는 것이 좋다. 특히 용량이 큰 설비의 대수가 용량변수에 포함되어 있을 경우, 대수를 줄이거나 늘려서 경제성을 원안과 비교해 보는 것이 좋다.</p>
+<p>최근에는 건물 냉/난방용 뿐 아니라, 대규모 히트펌프를 구축해 지역난방 혹은 산업체 대상 열 공급에 이용하며 풍력 발전 단지 등의 잉여 전력을 열로 변환시키는 섹터커플링 아이디어가 유럽을 필두로 구체화되고 있다 (<a href="https://www.keei.re.kr/main.nsf/index.html?open&amp;p=%2Fweb_keei%2Fd_results.nsf%2F0%2FF4BF4589C7680D03492589800008517C&amp;s=%3Fopendocument%26is_popup%3D1%26menucode%3DS3">해당 연구의 22페이지 참고</a>).</p>
+
+<p><br />
+2) 흡수식 냉동기 (Absorption chiller)</p>
+
+<p>흡수식 냉동기는 전기가 아니라 고온의 열을 입력받아 냉방을 수행하는 설비다. 히트펌프의 경우 냉방설비 내부에서 압축기를 통해 냉매가 순환하지만, 흡수식냉동기에서는 흡수용액이 증발/응축 과정에 의해 농도가 변하면서 순환되기 때문에 ‘흡수식’냉동기로 불린다. 기기의 규모가 커서, 주로 중/대형 빌딩에 쓰인다.</p>
+
+<p><img src="/assets/images/linprogeight/absorption.jpg" alt="absorption" class="align-center" width="80%" />
+<em>흡수식 냉동기 설치 현장.<br />출처: http://www.kmecnews.co.kr/news/articleView.html?idxno=25979</em></p>
+
+<p>흡수식 냉동기는 전기 대신 가스보일러 등으로 생산된 온열을 이용해 냉방을 한다는 측면에서, 건물 입장에서는 전기 기본요금 절감 수단이자, 국가적으로는 하절기 전력 수급 부담 완화 수단이기도 하다. 또한 가스가 덜 사용되는 하절기에 가스를 사용하므로, 하절기 가스 저장 시설 확보 부담 완화에도 기여한다.</p>
+
+<p>그래서 이전부터, <a href="http://www.gasnews.com/news/articleView.html?idxno=107057">가스냉방기기에 대한 설치장려금 등 지원제도</a>가 지속되어 왔다.</p>
+
+<p>참고로 흡수식 냉동기와 비슷하지만 다른 설비인 ‘직화식’ 흡수식 ‘냉온수’기도 있다. 이는 가스를 직접 투입해 여름에는 냉방을, 겨울에는 난방을 단일 설비로 제공하는 기기이다 (국내에서는 직화식 흡수식 냉온수기의 비중이 비교적 높은 것으로 알려져 있다).</p>
+
+<p><br />
+3) 열병합 발전기 (Cogeneration)</p>
+
+<p>열병합발전기는 연료를 공급받고 이를 전력으로 변환 후, 발전기에서 나오는 미사용 열에너지(배열) 를 산업용증기/ 건물난방/ 급탕 등에 활용하는 설비이다.</p>
+
+<p>가장 널리 알려진 열병합 발전 설비는 지역난방이다. 도심지 근처의 화력 발전기의 배열을 온수배관망을 통해 일반 수용가에 공급하는 시스템이다.</p>
+
+<p><img src="/assets/images/linprogeight/districtheat.jpg" alt="districtheat" class="align-center" width="90%" />
+<em>지역난방 도식도. 출처:한국지역난방공사 사업소개 페이지</em></p>
+
+<p><img src="/assets/images/linprogeight/pajuchp.jpg" alt="pajuchp" class="align-center" width="80%" />
+<em>한국지역난방공사 파주 열병합발전소 전경. 파주 내 약 3.9만 세대에 열을 공급한다.<br />출처: https://www.energy-news.co.kr/news/articleView.html?idxno=33801</em></p>
+
+<p>자칫 버려질 수 있는 열에너지를 최대한 활용함으로써, 전기와 열을 더한 종합 에너지 효율을 70% 혹은 그 이상으로 높일 수 있다는 장점이 있다. (배열을 활용하지 않고 전기 생산만 활용할 경우 에너지 효율은 대략 35~45% 정도임)</p>
+
+<p><img src="/assets/images/linprogeight/chpefficiency.png" alt="chpefficiency" class="align-center" />
+<em>열병합 설비 활용 시 (왼쪽), 그리고 발전과 열 생산을 개별 수행 시 (오른쪽)의 에너지 흐름. 열병합 설비 활용 시 같은 양의 전기와 열 에너지 공급에 드는 연료 에너지가 더 적다.<br />출처: “The benefits of micro-CHP”, Cogen Europe</em></p>
+
+<p>또한 오염물질 배출을 지역난방 사업자 소유의 단일 배출구에서 관리하므로, 각 건물이 개별적으로 보일러 난방을 하는 경우와 비교해 대기오염 절감이 가능하다는 장점도 있다.</p>
+
+<p>(주의: 여기서 열병합발전을 ‘복합화력발전’과 혼동하지 않도록 한다. 복합화력발전은 중/대형 가스터빈의 배열을 ‘증기터빈 구동’에 이용해 ‘추가적인 전기 생산’을 하는 방식이다.)</p>
+
+<p><br />
+한편 이번 포스팅에서 다루는 건물용 자가 열병합발전기도, 발전기의 배열을 적당한 난방/급탕 에너지로 사용할 수 있어, 열에너지가 많이 필요한 건물에 도입 시 경제성이 확보될 수 있다.</p>
+
+<p>혹자는 건물에 설치되는 연료전지(PEMFC)를 들어보았을 수 있는데, 이 또한 전기와 함께 열을 생산하고 열을 난방에 활용하는 열병합 시스템이다. 그렇기에, 전기 뿐 아니라 충분한 열 수요가 있는 건물에서’만’ PEMFC가 경제적이다.</p>
+
+<p>이를 고려하지 않고, 열 수요가 충분하지 않은 건물임에도 PEMFC를 도입했던 건물들도 많았다. 그러나 이런 건물들에서는 연료전지 가동을 위한 가스요금 증가 대비 전기요금 절감이 모자라서 경제성이 없어, 설치 후 정작 가동은 하지 않는 경우가 많았다. 연료전지의 높은 설비비를 생각하면, 실로 큰 낭비가 아닐 수 없다.</p>
+
+<p>선형계획 소개 시리즈의 첫 글에서도 언급했던 <a href="http://www.gasnews.com/news/articleView.html?idxno=96000">관련 기사</a>를 보면, 연료전지 도입 시부터 열 사용 계획을 세웠던 일부 초등학교와 백화점 등에서는 연료전지의 배열을 취사/ 급탕에 활용하여 난방요금까지 절감할 수 있었기에 정상적으로 가동되었다. 그러나, 대부분의 경우 배열을 활용하지 못해 가동할수록 손해를 보는 구조다 보니, 연료전지가 가동되지 않았다.</p>
+
+<p>대상 건물의 전기/ 냉방/ 난방 수요를 제대로 고려한 경제성분석을 통해, 위와 같은 문제를 예측하고 방지할 수 있다. 이것이 선형계획법 소개 시리즈 글의 기법들, 그리고 필자가 <a href="http://www.besico.co.kr/">(주)블루이코노미전략연구원</a>과 수행해 온 업무들의 중요한 가치라 하겠다.</p>
+
+<p><br /></p>
+
+<h2 id="섹터커플링-설비를-포함하는-전기열-공급-시스템의-수식">섹터커플링 설비를 포함하는 전기/열 공급 시스템의 수식</h2>
+
+<p>이제 아래 시스템을 표현하는 선형계획법 수식들을 설명한다.</p>
+
+<p><img src="/assets/images/linprogeight/systemfigure.png" alt="systemfigure" class="align-center" />
+<em>건물 내 전기/ 냉방/ 난방 에너지를 동시에 공급하는 시스템 예시. 열병합발전기/ 히트펌프/ 흡수식냉동기를 포함한다.</em></p>
+
+<p>전기부하 $ p_{\text{load}}[t]$는 계통으로부터의 수전$p_{\text{grid}}[t]$와 자가열병합발전기의 발전 $p_{\text{cogen}}[t]$에 의해 공급된다. 이 때 히트펌프를 구동하기 위한 전기 $p_{\text{hpump}}[t]$도 공급되어야 함에 주의한다.</p>
+
+<p>$ p_{\text{load}}[t] = p_{\text{grid}}[t] + p_{\text{cogen}}[t] - p_{\text{hpump}}[t]$</p>
+
+<p>냉방 부하 $q_{\text{load.c}}[t]$ (아래첨자 c는 cooling) 가 있는 기간에는, 냉방 부하가 히트펌프의 냉방 $q_{\text{hpump.c}}[t]$와 흡수식 냉동기의 냉방 $q_{\text{absorp.c}}[t] $로 충족된다.</p>
+
+<p>$ q_{\text{load.c}}[t] = q_{\text{hpump.c}}[t] + q_{\text{absorp.c}}[t] $</p>
+
+<p>냉방 수요가 있는 기간이더라도 온수 등의 일부 난방 수요 $q_{\text{load.h}}[t] $가 존재할 수 있는데, 이는 보일러의 열 $q_{\text{boiler.h}}[t] $와 열병합 배열 $q_{\text{cogen.h}}[t]$로 공급한다.</p>
+
+<p>$ q_{\text{load.h}}[t] = q_{\text{boiler.h}}[t] + q_{\text{cogen.h}}[t] $</p>
+
+<p>냉방 수요가 없는 기간에는, 보일러와 열병합 배열 뿐 아니라 히트펌프도 난방 $q_{\text{hpump.h}}[t]$를 공급한다. 흡수식냉동기는 작동하지 않는다.</p>
+
+<p>$ q_{\text{load.h}}[t] = q_{\text{boiler.h}}[t] + q_{\text{cogen.h}}[t] + q_{\text{hpump.c}}[t] $</p>
+
+<p>보일러와 열병합발전기는 연료 에너지 $f$를 전기/ 열 에너지로 변환한다. 연료 에너지에 변환계수(효율) $\eta$를 곱해야 한다.</p>
+
+<p>$ q_{\text{boiler.h}}[t] = \eta_{\text{boiler.h}}[t] f_{\text{boiler}}[t] $</p>
+
+<p>$ p_{\text{cogen}}[t] = \eta_{\text{cogen.p}}[t] f_{\text{cogen}}[t] $</p>
+
+<p>$ q_{\text{cogen.h}}[t] = \eta_{\text{cogen.h}}[t] f_{\text{cogen}}[t] $</p>
+
+<p>냉방 수요가 있는 기간에 히트펌프와 흡수식냉동기가 각각 전기와 온열을 냉열로 변환할 때 변환 계수를 곱해줘야 하며, 이 경우 변환 계수는 성적계수(Coefficient of Performance, COP)라 한다.</p>
+
+<p>$ q_{\text{hpump.c}}[t] = \text{COP}_{\text{hpump.c}} p_{\text{hpump}}[t] $</p>
+
+<p>$ q_{\text{absorp.c}}[t] = \text{COP}_{\text{absorp.c}} p_{\text{hpump}}[t] $</p>
+
+<p>냉방 수요가 없는 기간에는 히트펌프가 온열을 공급하며, 온열 공급 시의 COP는 일반적으로 냉열 공급시의 COP와 값이 다르다.</p>
+
+<p>$ q_{\text{hpump.h}}[t] = \text{COP}_{\text{hpump.h}} p_{\text{hpump}}[t] $</p>
+
+<p>여기서 COP가 1보다 클 수 있음에 주의한다. 히트펌프와 흡수식냉동기는 ‘연료의 에너지를 변환’하는 것이 아닌, ‘외부로부터 열을 운반’하는 원리로 구동되기 때문이다. 일반적으로 히트펌프의 COP는 3~5 정도 범위에, 흡수식냉동기의 COP는 1.0~1.3 정도 범위에 있다.</p>
+
+<p>(위 수식은 효율/COP가 ‘어떤 상황에서도 변하지 않는 상수라고 가정하고’ 세운 식이다. 실제로는, 부하율(정격출력 대비 실제 출력의 비율)에 따라 효율/ COP가 달라진다. 이러한 ‘부분부하 성능’에 대해서는 다음 포스팅에서 설명한다.)</p>
+
+<p>각 설비 별 출력은 정격 출력 (용량) 내의 범위에 있어야 한다. 용량을 $s$로 나타내면, 해당 제약은 아래와 같다.</p>
+
+<p>$q_{\text{boiler.h}}[t] \leq s_{\text{boiler}}$, $\, p_{\text{cogen}}[t] \leq s_{\text{cogen}}$, $\, q_{\text{hpump.c}}[t] \leq s_{\text{hpump}}$, $\, q_{\text{absorp.c}}[t] \leq s_{\text{absorp}}$</p>
+
+<p>위 식에서 보일러의 용량은 난방출력 기준, 열병합발전기의 용량은 전기 발전 기준, 히트펌프와 흡수식냉동기의 용량은 냉방출력 기준임에 주의한다.</p>
+
+<p>(실제로는 기동 상태에서 ‘최소로 유지해야 하는’ 최소부하율이 있는데, 이 또한 다음 포스팅에서 설명한다.)</p>
+
+<p><br /></p>
+
+<h2 id="시간별-냉방난방-부하-정보-취득의-어려움">‘시간별’ 냉방/난방 부하 정보 취득의 어려움</h2>
+
+<p>냉방/난방 부하를 포함하는 건물을 대상으로 선형계획법 기반의 경제성 분석을 수행하려면, 냉방과 난방의 ‘시간별’ 부하 정보도 구해야 한다.</p>
+
+<p>그런데 전기 사용의 ‘시간’단위 기록은 스마트미터가 있다는 전제 하에 바로 구할 수 있지만, 열 사용의 ‘시간’ 단위 기록은 보통 구하기 어렵다. 대부분의 경우 월별 가스 사용량/요금 자료만 구할 수 있기 때문이다.</p>
+
+<p>그래서 필자가 프로젝트를 수행할 당시에는, 대상 건물의 관리자를 인터뷰해서 열원별 가동시간 정보를 얻은 후 이를 바탕으로 시간별 사용량을 대략적으로 추정하는 것이 최선이었다.</p>
+
+<p>(사실 전기 사용량도, 스마트미터가 없는 건물인 경우 월별 사용량/요금 자료만 얻을 수 있다. 이 경우 역시 관리자를 인터뷰해서 얻은 재실 스케줄 및 기기 가동 등 정보를 바탕으로 대략적인 부하를 추정 후, 시간별 요금제 기반으로 요금 계산 시 총 합이 고지서의 값과 거의 비슷하게 나올 때까지 부하 추정을 수정하여 최종적인 시간별 부하 추정치를 결정하는 것이 최선이다.)</p>
 
 <div class="notice--info">
 
 선형계획법 기반 분산에너지시스템 최적화<br /><br />
 
-1) <a href="/linprogone.html">최소비용 시스템과 시간별 자료의 중요성</a><br />
-2) <a href="/linprogtwo.html">배터리의 충/방전 스케줄 결정: 수식</a> <br />
-3) <a href="/linprogthree.html">배터리의 충/방전 스케줄 결정: Python 코드 및 결과</a> <br />
-4) <a href="/linprogfour.html">태양광과 배터리의 '용량' 결정 (코드 및 결과 포함)</a> <br />
-5) <a href="/linprogfive.html">정수 (integer) 변수 도입으로 현실 설명력 증대</a> <br />
-6) <a href="/linprogsix.html">공동주택의 '누진제' 전기요금 (단일계약) 수식</a> <br />
-7) <a href="/linprogseven.html"> 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)</a> <br />
-8) <b> '부분'부하 성능 관련 제약들</b> <br />
-9) <a href="/linprognine.html"> 출력 조정 관련 제약들</a>
-
+01) <a href="/linprogone.html"> 최소비용 시스템과 시간별 자료의 중요성</a><br />
+02) <a href="/linprogtwo.html"> 배터리의 충/방전 스케줄 결정: 수식</a> <br />
+03) <a href="/linprogthree.html"> 배터리의 충/방전 스케줄 결정: Python 코드 및 결과</a> <br />
+04) <a href="/linprogfour.html"> 태양광과 배터리의 '용량' 결정: 목적함수 ('현재가치' 비용) 및 수식</a> <br />
+05) <a href="/linprogfive.html"> 태양광과 배터리의 '용량' 결정: 코드, 결과, 투자회수기간 및 절감량 계산</a> <br />
+06) <a href="/linprogsix.html"> 정수 (integer) 변수 도입으로 현실 설명력 증대</a> <br />
+07) <a href="/linprogseven.html"> 공동주택의 '누진제' 전기요금 (단일계약) 수식</a> <br />
+08) <b> 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)</b> <br />
+09) <a href="/linprognine.html"> '부분'부하 성능 관련 제약들</a> <br />
+10) <a href="/linprogten.html"> 출력 조정 관련 제약들</a>
 </div>
 
 <p><br />
@@ -552,7 +660,7 @@
  -->
         <!-- 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-02-12T00:00:00+09:00">2023-02-12</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-02-04T00:00:00+09:00">2023-02-04</time></p>
  -->
       </footer>
 
@@ -561,7 +669,7 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+-+8%29+%27%EB%B6%80%EB%B6%84%27%EB%B6%80%ED%95%98+%EA%B4%80%EB%A0%A8+%EC%A0%9C%EC%95%BD%EB%93%A4%20http%3A%2F%2Flocalhost%3A4000%2Flinprogeight.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%84%A0%ED%98%95%EA%B3%84%ED%9A%8D%EB%B2%95+%EA%B8%B0%EB%B0%98+%EB%B6%84%EC%82%B0%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94+-+8%29+%EC%A0%84%EA%B8%B0+%EB%B6%80%ED%95%98%EC%99%80+%EB%83%89%2F%EB%82%9C%EB%B0%A9+%EB%B6%80%ED%95%98%EB%A5%BC+%EB%8F%99%EC%8B%9C%EC%97%90+%EA%B3%A0%EB%A0%A4+%28%EC%84%B9%ED%84%B0%EC%BB%A4%ED%94%8C%EB%A7%81%29%20http%3A%2F%2Flocalhost%3A4000%2Flinprogeight.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flinprogeight.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -577,6 +685,8 @@
   
 
   
+
+  
   	
   	
   	
@@ -587,10 +697,10 @@
 
   
     
-      <a href="/linprognine.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>선형계획법 기반 분산에너지시스템 최적화 - 9) 출력 조정 관련 제약들</a>
+      <a href="/linprognine.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>선형계획법 기반 분산에너지시스템 최적화 - 9) '부분'부하 관련 제약들</a>
     
     
-      <a href="/linprogseven.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>선형계획법 기반 분산에너지시스템 최적화 - 7) 전기 부하와 냉/난방 부하를 동시에 고려 (섹터커플링)</a>
+      <a href="/linprogseven.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>선형계획법 기반 분산에너지시스템 최적화 - 7) 공동주택의 '누진제' 전기요금 (단일계약) 수식</a>
         
   
 
