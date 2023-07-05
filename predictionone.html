@@ -442,14 +442,14 @@
 
 <h2 id="건물의-시간별-전기-부하">건물의 시간별 전기 부하</h2>
 
-<p>다음 그림은, 어떤 건물의 특정 1주일 간 각 시간별 전기 사용량 그래프들이다. 파란색 곡선은 K년도의 특정 1주일이고 (K는 2010~2022 사이의 어떤 자연수), 초록색 곡선은 K+1년도에서의 같은 1주일이다.</p>
+<p>다음 그림은, 어떤 건물의 특정 1주일 간 각 시간별 전기 사용량 그래프들이다. 파란색 곡선은 K년도의 특정 1주일이고 (K는 2010~2022 사이의 어떤 자연수), 초록색 곡선은 K+1년도에서의 같은 1주일이다. (정확히는, K년도의 최대부하가 1000이 되도록 scaling한, 일종의 ‘가명처리’를 한 데이터이다)</p>
 
 <p><img src="/assets/images/predictionone/demands_winter.png" alt="demands_winter" class="align-center" />
 <img src="/assets/images/predictionone/demands_summer.png" alt="demands_summer" class="align-center" />
 <img src="/assets/images/predictionone/demands_spring.png" alt="demands_spring" class="align-center" />
 <em>특정 건물 내 1주일 간의 시간별 전기 부하 (위에서부터 겨울, 여름, 봄)</em></p>
 
-<p>두 해의 전기 사용량 패턴의 높이나 전반적인 모양이  비슷하다. 그러므로 해당 건물의 사용 행태나 건물 규모 또는 전기 요금체계 등에 급격한 변화가 없다면, 매년 비슷한 전기 사용 패턴을 보이리라 추측된다.</p>
+<p>두 해의 전기 사용량 패턴의 높이나 전반적인 모양이 비슷하다 (위 그림에서 모양이 차이가 나는 부분은 평일/휴일 차이다). 그러므로 해당 건물의 사용 행태나 건물 규모 또는 전기 요금체계 등에 급격한 변화가 없다면, 매년 비슷한 전기 사용 패턴을 보이리라 추측된다.</p>
 
 <p><br />
 그렇다면, K년도의 시간별 전기부하를 어떤 predictor들의 함수로써 학습시켰을 때, K+1년도의 predictor들 값만을 이용해 K+1년의 전기부하를 실제에 가깝게 예측할 수 있을까? 그리고 그 예측에는 어떤 방법을 사용해야 할까? 딥러닝 (Recurrent Neural Network 등)? 전통적인 선형회귀?</p>

@@ -452,7 +452,7 @@
 
 <p>여기서는 DNN은 2개의 Dense layer로 이루어져 있고 첫 layer의 node는 20개, 두 번째 layer의 node는 10개로 둔다. 훈련 epoch 수는 1000이고, optimizer는 특별한 이슈가 없으므로 가장 일반적인 Adam을 쓴다.</p>
 
-<p>구체적인 코드는 아래와 같다 (전기부하 데이터를 최대값이 1 이하가 되게 scaling하였음에 주의한다. Scaling하지 않으면 적합 결과가 상수함수가 되어 전혀 추정을 하지 못한다).<br />(<a href="https://github.com/song4energyndata/Codes/tree/main/deeplearning/loadprediction">GitHub Repo 링크</a>)</p>
+<p>구체적인 코드는 아래와 같다 (전기부하 데이터를 최대값이 1 근처가 되게 scaling하였음에 주의한다. Scaling하지 않으면 적합 결과가 상수함수가 되어 전혀 추정을 하지 못한다).<br />(<a href="https://github.com/song4energyndata/Codes/tree/main/deeplearning/loadprediction">GitHub Repo 링크</a>)</p>
 
 <p><br /></p>
 
@@ -489,11 +489,11 @@
         
 
 
-<span class="n">response_workday_summer_train</span> <span class="o">=</span> <span class="n">workday_summer_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span> <span class="c1"># [0,1] 구간즈음에 들어오게 scaling해야 함, 그렇지 않고 원본 쓰면 제대로 fit 안되고 대표값 1개만 반환함
+<span class="n">response_workday_summer_train</span> <span class="o">=</span> <span class="n">workday_summer_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span> <span class="c1"># [0,1] 구간즈음에 들어오게 scaling해야 함, 그렇지 않고 원본 쓰면 제대로 fit 안되고 대표값 1개만 반환함
 </span><span class="n">features_workday_summer_train</span> <span class="o">=</span> <span class="n">workday_summer_train</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
 <span class="n">hourindex_workday_summer_train</span> <span class="o">=</span> <span class="n">workday_summer_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
 
-<span class="n">response_workday_summer_test</span> <span class="o">=</span> <span class="n">workday_summer_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span>
+<span class="n">response_workday_summer_test</span> <span class="o">=</span> <span class="n">workday_summer_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span>
 <span class="n">features_workday_summer_test</span> <span class="o">=</span> <span class="n">workday_summer_test</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
 <span class="n">hourindex_workday_summer_test</span> <span class="o">=</span> <span class="n">workday_summer_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
 
@@ -508,11 +508,11 @@
 
 
 
-<span class="n">response_workday_winter_train</span> <span class="o">=</span> <span class="n">workday_winter_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span> <span class="c1"># [0,1] 구간즈음에 들어오게 scaling해야 함, 그렇지 않고 원본 쓰면 제대로 fit 안되고 대표값 1개만 반환함
+<span class="n">response_workday_winter_train</span> <span class="o">=</span> <span class="n">workday_winter_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span> <span class="c1"># [0,1] 구간즈음에 들어오게 scaling해야 함, 그렇지 않고 원본 쓰면 제대로 fit 안되고 대표값 1개만 반환함
 </span><span class="n">features_workday_winter_train</span> <span class="o">=</span> <span class="n">workday_winter_train</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
 <span class="n">hourindex_workday_winter_train</span> <span class="o">=</span> <span class="n">workday_winter_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
 
-<span class="n">response_workday_winter_test</span> <span class="o">=</span> <span class="n">workday_winter_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span>
+<span class="n">response_workday_winter_test</span> <span class="o">=</span> <span class="n">workday_winter_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span>
 <span class="n">features_workday_winter_test</span> <span class="o">=</span> <span class="n">workday_winter_test</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
 <span class="n">hourindex_workday_winter_test</span> <span class="o">=</span> <span class="n">workday_winter_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
 
@@ -527,11 +527,11 @@
 
 
 
-<span class="n">response_workday_springfall_train</span> <span class="o">=</span> <span class="n">workday_springfall_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span> <span class="c1"># [0,1] 구간즈음에 들어오게 scaling해야 함, 그렇지 않고 원본 쓰면 제대로 fit 안되고 대표값 1개만 반환함
+<span class="n">response_workday_springfall_train</span> <span class="o">=</span> <span class="n">workday_springfall_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span> <span class="c1"># [0,1] 구간즈음에 들어오게 scaling해야 함, 그렇지 않고 원본 쓰면 제대로 fit 안되고 대표값 1개만 반환함
 </span><span class="n">features_workday_springfall_train</span> <span class="o">=</span> <span class="n">workday_springfall_train</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
 <span class="n">hourindex_workday_springfall_train</span> <span class="o">=</span> <span class="n">workday_springfall_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
 
-<span class="n">response_workday_springfall_test</span> <span class="o">=</span> <span class="n">workday_springfall_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span>
+<span class="n">response_workday_springfall_test</span> <span class="o">=</span> <span class="n">workday_springfall_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span>
 <span class="n">features_workday_springfall_test</span> <span class="o">=</span> <span class="n">workday_springfall_test</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
 <span class="n">hourindex_workday_springfall_test</span> <span class="o">=</span> <span class="n">workday_springfall_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
 
@@ -546,11 +546,11 @@
 
 
 
-<span class="n">response_holiday_train</span> <span class="o">=</span> <span class="n">holiday_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span> <span class="c1"># [0,1] 구간즈음에 들어오게 scaling해야 함, 그렇지 않고 원본 쓰면 제대로 fit 안되고 대표값 1개만 반환함
+<span class="n">response_holiday_train</span> <span class="o">=</span> <span class="n">holiday_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span> <span class="c1"># [0,1] 구간즈음에 들어오게 scaling해야 함, 그렇지 않고 원본 쓰면 제대로 fit 안되고 대표값 1개만 반환함
 </span><span class="n">features_holiday_train</span> <span class="o">=</span> <span class="n">holiday_train</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
 <span class="n">hourindex_holiday_train</span> <span class="o">=</span> <span class="n">holiday_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
 
-<span class="n">response_holiday_test</span> <span class="o">=</span> <span class="n">holiday_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span>
+<span class="n">response_holiday_test</span> <span class="o">=</span> <span class="n">holiday_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span>
 <span class="n">features_holiday_test</span> <span class="o">=</span> <span class="n">holiday_test</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span>
 <span class="n">hourindex_holiday_test</span> <span class="o">=</span> <span class="n">holiday_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
 
@@ -585,8 +585,8 @@
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">y_pred_holiday</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
     <span class="n">predictedpower</span><span class="p">[</span><span class="nf">int</span><span class="p">(</span><span class="n">hourindex_holiday_test</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">y_pred_holiday</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>    
     
-<span class="n">fittedpower</span> <span class="o">=</span> <span class="n">fittedpower</span><span class="o">*</span><span class="mi">2000</span>   
-<span class="n">predictedpower</span> <span class="o">=</span> <span class="n">predictedpower</span><span class="o">*</span><span class="mi">2000</span>   
+<span class="n">fittedpower</span> <span class="o">=</span> <span class="n">fittedpower</span><span class="o">*</span><span class="mi">1000</span>   
+<span class="n">predictedpower</span> <span class="o">=</span> <span class="n">predictedpower</span><span class="o">*</span><span class="mi">1000</span>   
 
 
 
@@ -613,9 +613,11 @@
 <span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p>Adjusted $R^2$를 계산해보면 훈련 set에 대한 값은 0.9509이다. 이는 Weighted Least square (WLS) 만 했을 때의 결과인 0.9220보다는 더 높지만, WLS 잔차에 대한 SARMA 보조회귀모델 적합까지 추가 수행 시 결과인 0.9735보다는 낮다. 한편 검증 set에 대한 값은 0.8642로, WLS만 했을 때의 결과인 0.8706보다도 낮다.</p>
+<p>Adjusted $R^2$를 계산해보면 훈련 set에 대한 값은 0.9402이다. 이는 Weighted Least square (WLS) 만 했을 때의 결과인 0.9220보다는 더 높지만, WLS 잔차에 대한 SARMA 보조회귀모델 적합까지 추가 수행 시 결과인 0.9735보다는 낮다. 한편 검증 set에 대한 값은 0.8375로, WLS만 했을 때의 결과인 0.8706보다도 낮다.</p>
 
-<p>검증 set에 대한 결과와 딥러닝 훈련에 드는 계산비용을 생각하면, 딥러닝이 우월하다고 볼 수 없다 (계산 시간만 따져도 몇 분 vs. 몇 초(WLS만 수행 시)).</p>
+<p>딥러닝 특성상 수행 시 마다 결과가 조금씩 달라지므로 여러 번 계산해 보았으나, 어떤 경우에도 DNN이 검증 set에서 WLS보아 좋은 결과를 보이지 못했다.</p>
+
+<p>검증 set에 대한 결과와 딥러닝 훈련에 드는 계산비용을 생각하면, 딥러닝이 우월하다고 볼 수 없다 (계산 시간만 따져도 몇 분 vs. 몇 초 (WLS만 수행 시)).</p>
 
 <p><img src="/assets/images/predictiontwo/fit_dnn.png" alt="fit_dnn" class="align-center" />
 <img src="/assets/images/predictiontwo/predict_dnn.png" alt="predict_dnn" class="align-center" />
@@ -650,10 +652,10 @@
 <span class="n">optimizer</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">optimizers</span><span class="p">.</span><span class="nc">Adam</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span><span class="n">beta_1</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span><span class="n">beta_2</span><span class="o">=</span><span class="mf">0.999</span><span class="p">)</span>
 
 
-<span class="n">response_train</span> <span class="o">=</span> <span class="n">data_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2000</span> <span class="c1"># scaling
+<span class="n">response_train</span> <span class="o">=</span> <span class="n">data_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span> <span class="c1"># scaling
 </span><span class="n">features_train</span> <span class="o">=</span> <span class="n">data_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:].</span><span class="nf">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">37</span><span class="p">)</span> <span class="c1"># reshape 해 줘야 rnn코드가 돌아감
 </span>
-<span class="n">response_test</span> <span class="o">=</span> <span class="n">data_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2000</span>
+<span class="n">response_test</span> <span class="o">=</span> <span class="n">data_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span>
 <span class="n">features_test</span> <span class="o">=</span> <span class="n">data_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:].</span><span class="nf">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">37</span><span class="p">)</span>
 
 
@@ -668,8 +670,8 @@
 </span><span class="n">model_rnn</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">"mse"</span><span class="p">,</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">)</span>
 <span class="n">history_rnn</span> <span class="o">=</span> <span class="n">model_rnn</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span><span class="n">response_train</span><span class="p">,</span><span class="n">epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span><span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_cb_rnn</span><span class="p">])</span>
 
-<span class="n">y_fit</span> <span class="o">=</span> <span class="p">(</span><span class="n">model_rnn</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">features_train</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2000</span><span class="p">).</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="p">(</span><span class="n">model_rnn</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">features_test</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2000</span><span class="p">).</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y_fit</span> <span class="o">=</span> <span class="p">(</span><span class="n">model_rnn</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">features_train</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">).</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">(</span><span class="n">model_rnn</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">features_test</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">).</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
 
 
@@ -701,7 +703,7 @@
 
 <p>계산에 걸리는 시간은 수십 분으로, 당연히 DNN보다도 훨씬 길다. 그렇다면 적합 결과는?</p>
 
-<p>Adjusted $R^2$를 계산해보면 훈련 set에 대한 값은 0.6941, 검증 set에 대한 값은 0.4890으로, 처참한 수준이다. 심지어 훈련 set에 대해서조차 그렇다.</p>
+<p>Adjusted $R^2$를 계산해보면 훈련 set에 대한 값은 0.8880, 검증 set에 대한 값은 0.7936으로, 오히려 복잡한 모델을 썼음에도 성능이 더 떨어졌다. 심지어 훈련 set에 대해서조차 그렇다.</p>
 
 <p><img src="/assets/images/predictiontwo/fit_rnn.png" alt="fit_rnn" class="align-center" />
 <img src="/assets/images/predictiontwo/predict_rnn.png" alt="predict_rnn" class="align-center" />
@@ -709,7 +711,7 @@
 
 <p>위 그림을 보면, RNN으로 추정한 부하 그래프가 매우 울퉁불퉁하다. 이는 Data Generating Process와 맞지 않는 모델을 사용한 것, 즉 mis-specification을 암시한다. (그러므로 RNN에 layer 또는 node를 추가하거나, 더 복잡한 방법인 LSTM/ GRU 등을 시도하는 것은 의미가 없다고 판단된다.)</p>
 
-<p>실제로는, ‘그냥 무작정 RNN부터 쓰고 보는 사람’이라면 시간별/ 월별/ 일유형별 dummy variable 없이 온도와 조도만을 input으로 하여 신경망을 훈련시킬 가능성이 높다. 이 경우에 대해 adjusted $R^2$를 계산해 본 결과, 훈련 set에 대한 값은 0.3574, 검증 set에 대한 값은 0.2450으로 더욱 처참해진다.</p>
+<p>실제로는, ‘그냥 무작정 RNN부터 쓰고 보는 사람’이라면 시간별/ 월별/ 일유형별 dummy variable 없이 온도와 조도만을 input으로 하여 신경망을 훈련시킬 가능성이 높다. 이 경우에 대해 adjusted $R^2$를 계산해 본 결과, 훈련 set에 대한 값은 0.2328, 검증 set에 대한 값은 0.1756으로, 전혀 엉뚱한 결과를 얻는다.</p>
 
 <p><img src="/assets/images/predictiontwo/fit_rnn_nodummy.png" alt="fit_rnn_nodummy" class="align-center" />
 <img src="/assets/images/predictiontwo/predict_rnn_nodummy.png" alt="predict_rnn_nodummy" class="align-center" />
