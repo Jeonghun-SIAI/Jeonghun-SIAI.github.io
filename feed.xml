@@ -5,8 +5,8 @@
     <description>공학박사 과정에서 쌓은 에너지 시스템 전문성에 데이터 사이언스 석사를 더하며 쌓은 계산통계학 활용 역량을 결합하여, 에너지 시스템/ 정책/ 시장 관련 솔루션 도출을 올바르게 할 수 있도록 돕습니다.</description>
     <link>https://song4energyndata.github.io/</link>
     <atom:link href="https://song4energyndata.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 06 Jul 2023 09:41:44 +0900</pubDate>
-    <lastBuildDate>Thu, 06 Jul 2023 09:41:44 +0900</lastBuildDate>
+    <pubDate>Thu, 06 Jul 2023 17:18:47 +0900</pubDate>
+    <lastBuildDate>Thu, 06 Jul 2023 17:18:47 +0900</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
@@ -2050,7 +2050,7 @@ Vincent의 마이크로그리드 사례에서는, 실제 수전량은 -1.1에서
 
 &lt;p&gt;Adjusted $R^2$를 계산해보면 훈련 set에 대한 값은 0.9402이다. 이는 Weighted Least square (WLS) 만 했을 때의 결과인 0.9220보다는 더 높지만, WLS 잔차에 대한 SARMA 보조회귀모델 적합까지 추가 수행 시 결과인 0.9735보다는 낮다. 한편 검증 set에 대한 값은 0.8375로, WLS만 했을 때의 결과인 0.8706보다도 낮다.&lt;/p&gt;
 
-&lt;p&gt;딥러닝 특성상 수행 시 마다 결과가 조금씩 달라지므로 여러 번 계산해 보았으나, 어떤 경우에도 DNN이 검증 set에서 WLS보아 좋은 결과를 보이지 못했다.&lt;/p&gt;
+&lt;p&gt;딥러닝 특성상 수행 시 마다 결과가 조금씩 달라지므로 여러 번 계산해 보았으나, 어떤 경우에도 DNN이 검증 set에서 WLS보다 좋은 결과를 보이지 못했다.&lt;/p&gt;
 
 &lt;p&gt;검증 set에 대한 결과와 딥러닝 훈련에 드는 계산비용을 생각하면, 딥러닝이 우월하다고 볼 수 없다 (계산 시간만 따져도 몇 분 vs. 몇 초 (WLS만 수행 시)).&lt;/p&gt;
 
