@@ -125,7 +125,7 @@ var store = [{
         "url": "/predictiontwo.html",
         "teaser": "/assets/images/predictiontwo/predict_rnn_nodummy.png"
       },{
-        "title": "강화학습 기반 마이크로그리드 control - 1) 문제의식 및 케이스 소개",
+        "title": "강화학습 기반 마이크로그리드 control - 1) 미래를 모를 때의 '경제적' control을 위한 강화학습",
         "excerpt":"재생 발전의 비중이 커질수록, 당장 몇 시간 뒤의 발전량 및 순 부하 (재생발전량을 제한 net power load) 예측조차도 어려워진다. 이런 상황에서 과거 데이터들을 잘 이용해서 ‘경제적으로’ 전력을 공급하도록 설비들을 control하는 것이, ‘스마트’그리드의 중요한 과제이다. 풍력발전 예측 시의 신뢰구간이 큼. 즉, 재생발전 비중이 높으면 발전량의 단기적 예측도 어려움. (출처: http://www.ningzhang.net/Renewables.html) 선형계획법의...","categories": ["energymanagement"],
         "tags": ["선형계획법","부하패턴","경제성분석","강화학습","녹색섬","Python"],
         "url": "/reinforceone.html",
@@ -137,25 +137,25 @@ var store = [{
         "url": "/overconfidence.html",
         "teaser": null
       },{
-        "title": "강화학습 기반 마이크로그리드 control - 2) Q-learning 개념",
+        "title": "강화학습 기반 마이크로그리드 control - 2) 강화학습의 기본, Q-learning 리뷰",
         "excerpt":"지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하의 control을 도출함을 보였다. 이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내용은 Sutton의...","categories": ["energymanagement"],
         "tags": ["강화학습"],
         "url": "/reinforcetwo.html",
         "teaser": "/assets/images/reinforcetwo/reinforcement_deep.png"
       },{
-        "title": "강화학습 기반 마이크로그리드 control - 3) Deep Q-Network를 통한 discrete control 도출",
+        "title": "강화학습 기반 마이크로그리드 control - 3) Deep Q-Network를 통한 3-action control 도출",
         "excerpt":"Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0, 1, 2라 하자. Vincent의 연구에서 가정된 마이크로그리드. 이 때 심층신경망은 state를 입력받아 3개 action 각각의 Q-value의 추정치 $Q(s_{t},0), Q(s_{t},1), Q(s_{t},2)$ 를 출력으로 계산한다....","categories": ["energymanagement"],
         "tags": ["강화학습","녹색섬","Python"],
         "url": "/reinforcethree.html",
         "teaser": "/assets/images/reinforcethree/nn.png"
       },{
-        "title": "강화학습 기반 마이크로그리드 control - 4) DDPG를 통한 continuous control 도출",
-        "excerpt":"Vincent의 마이크로그리드 사례에 ‘discrete’ action (1.1kW 수전/ 1.1kW 송전/ idle) 기반의 Deep Q-Network (DQN) 을 적용한 결과, 미래를 모른 채 과거 24시간 동안의 태양광 발전량과 부하 정보를 활용하더라도 충분히 economic control이 가능했다. Vincent의 연구에서 가정된 마이크로그리드. 그러나 실제로는 수전/송전이 continuous action이다. 그러므로, continuous action을 다루는 심층강화학습 기법을 적용하면 더 우수한...","categories": ["energymanagement"],
+        "title": "강화학습 기반 마이크로그리드 control - 4) DDPG를 이용한 'continuous' control 도출",
+        "excerpt":"실제로는 수전/송전이 continuous action임에도, Vincent의 마이크로그리드 사례에선 ‘discrete’ action (1.1kW 수전/ 1.1kW 송전/ idle)으로도 충분히 economic control이 가능했다. 그렇다면, continuous action을 다루는 심층강화학습 기법을 적용하면 더 우수한 economic control이 가능할 지 궁금해진다. Vincent의 연구에서 가정된 마이크로그리드. 이번에는 continuous control의 기본적인 방법인 Deep Deterministic Policy Gradient (DDPG)를 적용해서, 수전/송전에 대한 continuous...","categories": ["energymanagement"],
         "tags": ["강화학습","녹색섬","Python"],
         "url": "/reinforcefour.html",
         "teaser": "/assets/images/reinforcefour/result_ddpg.png"
       },{
-        "title": "강화학습 기반 마이크로그리드 control - 5) TD3/ SAC를 통한 continuous control 도출",
+        "title": "강화학습 기반 마이크로그리드 control - 5) TD3/ SAC 등 '진보된' continuous control을 쓴다면?",
         "excerpt":"Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 (3개 action들은 각각 1.1kW 수전/ 1.1kW 송전/ idle). Vincent의 연구에서 가정된 마이크로그리드. 그렇다면 continuous control 도출을 위해 DDPG 이후에 개발된 더 진보된 방법을 쓴다면 어떨까? 진보된 방법들의...","categories": ["energymanagement"],
         "tags": ["강화학습","녹색섬","Python"],
         "url": "/reinforcefive.html",
