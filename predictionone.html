@@ -456,9 +456,11 @@
 
 <p>이러한 학습 및 예측을 수행해 보자. 이번 포스팅에서는, ‘딥러닝을 쓰지 않고’ 회귀분석으로 예측하는 모델을 구성해본다.</p>
 
+<p><br /></p>
+
 <h2 id="회귀모델-설명">회귀모델 설명</h2>
-<p><br /> 
-Predictor로는 기온과 일조를 선택했다. ‘기상청에서 쉽게 구할 수 있으면서’ 건물의 에너지 사용량에 영향을 미칠 것으로 추정되기 때문이다. 기온은 건물의 냉난방 부하에 큰 영향을 미치고, 일조도 냉난방 부하에 어느 정도 영향을 미치면서 조명 부하에도 약간 영향을 미칠 것으로 추정된다. <a href="https://data.kma.go.kr/data/grnd/selectAsosRltmList.do?pgmNo=36">(기상청 종간기상관측자료 링크)</a></p>
+
+<p>Predictor로는 기온과 일조를 선택했다. ‘기상청에서 쉽게 구할 수 있으면서’ 건물의 에너지 사용량에 영향을 미칠 것으로 추정되기 때문이다. 기온은 건물의 냉난방 부하에 큰 영향을 미치고, 일조도 냉난방 부하에 어느 정도 영향을 미치면서 조명 부하에도 약간 영향을 미칠 것으로 추정된다. <a href="https://data.kma.go.kr/data/grnd/selectAsosRltmList.do?pgmNo=36">(기상청 종간기상관측자료 링크)</a></p>
 
 <p><img src="/assets/images/predictionone/kma_data.png" alt="kma_data" class="align-center" width="70%" />
 <em>기상청 종간기상관측자료에서 다운로드받은, 시간별 기온과 일조 자료 예시.</em></p>
@@ -532,9 +534,11 @@ K년도의 자료를 갖고, 위 4개 sub모델 중 1), 2)에 대해서는 Weigh
 
 <p>아랫첨자 $k$와 $k+1$가 연도를 나타낸다고 하자. 그러면 $p_{t,k}$와 $p_{t,k+1}$은 시점 $t$의 각 연도별 실제 전기부하, $x_{t,k}$와 $x_{t,k+1}$은 시점 $t$의 각 연도별 설명변수 벡터이다. 그러면 $ \hat{\epsilon}_{t,k} = p_{t,k} - x_{t,k}^{\top} \hat{\beta}_j $ 은 $K$년도의 잔차, $ \hat{\epsilon}_{t,k+1} = p_{t,k+1} - x_{t,k+1}^{\top} \hat{\beta}_j$ 는 $K+1$년도의 잔차이다.</p>
 
-<p>이 때 $\hat{\epsilon}_{t,k}$에 대해 ARMA 보조회귀모델을 적합시킨다 (통계처리용 언어 R에서 $\texttt{auto.arima()}$ 함수를 사용. 단, 차분은 하지 않으며 drift와 mean은 사용하지 않는다). 즉 $\hat{\epsilon}_{t,k}$을 $\hat{\epsilon}_{t-1,k}, \hat{\epsilon}_{t-2,k}, \cdots$ 의 함수로 보는 것이다.</p>
+<p>이 때 $\hat{\epsilon}_{t,k}$에 대해 ARMA 보조회귀모델을 적합시킨다 (통계처리용 언어 R에서 $\texttt{auto.arima()}$ 함수를 사용. 단, 차분은 하지 않으며 drift와 mean은 사용하지 않는다). 즉 어떤 ‘선형’함수 $\hat{f}$에 대해 아래와 같이 두는 것이다 ($v_{t,k}$는 ARMA 보조회귀의 오차항).</p>
 
-<p>해당 ARMA 보조회귀모델의 잔차에 대해 ACF 및 PACF plot을 아래와 같이 그려보면, 자기상관성이 ‘거의’ 사라졌으나, 아직 24시간 주기의 자기상관성은 남아있다.</p>
+<p>$\hat{\epsilon}_{t,k} = \hat{f}(\hat{\epsilon}_{t-1,k}, \hat{\epsilon}_{t-2,k}, \cdots, v_{t-1,k}, v_{t-2,k},\cdots) + v_{t,k}$</p>
+
+<p>해당 ARMA 보조회귀모델의 잔차 $\hat{v}_{t,k}$에 대해 ACF 및 PACF plot을 아래와 같이 그려보면, 자기상관성이 ‘거의’ 사라졌으나, 아직 24시간 주기의 자기상관성은 남아있다.</p>
 
 <p><img src="/assets/images/predictionone/acfplot_after.png" alt="acfplot_before" class="align-center" width="90%" />
 <em>하절기 sub모델의 잔차에 대해 ARMA 모델을 적합시킨 후, ARMA 모델의 잔차에 대한 ACF와 PACF plot.</em></p>
@@ -543,7 +547,7 @@ K년도의 자료를 갖고, 위 4개 sub모델 중 1), 2)에 대해서는 Weigh
 
 <p>이는 seasonal ARMA (SARMA) 모델을 적합시켜 반영할 수 있다. 이를테면 $\texttt{auto.arima()}$로 적합된 모델이 ARIMA$(1,0,2)$라 하자. 그러면 $\texttt{Arima()}$ 함수를 사용해 SARIMA$(1,0,2)(1,0,1)_{24}$ 모델을 적합한다.</p>
 
-<p>$\hat{\epsilon}_{t,k}$에 대해 SARMA 모델을 적합 후 해당 SARMA 모델의 잔차에 대해 ACF 및 PACF plot을 아래와 같이 그려보면, 드디어 자기상관성이 완전히 사라졌다.</p>
+<p>$\hat{\epsilon}_{t,k}$에 대해 SARMA 모델을 적합 후 해당 SARMA 모델의 잔차 $\hat{v}_{t,k}$에 대해 ACF 및 PACF plot을 아래와 같이 그려보면, 드디어 자기상관성이 완전히 사라졌다.</p>
 
 <p><img src="/assets/images/predictionone/acfplot_sarima.png" alt="acfplot_sarima" class="align-center" width="90%" />
 <em>하절기 sub모델의 잔차에 대해 SARMA 모델을 적합시킨 후, SARMA 모델의 잔차에 대한 ACF와 PACF plot.</em></p>
@@ -558,15 +562,20 @@ K년도의 자료를 갖고, 위 4개 sub모델 중 1), 2)에 대해서는 Weigh
 <p>그러나 그 반대이다. 오차항에 자기상관이 있는 경우 과거 시점의 반응변수 (lagged dependent) 를 설명변수로 추가하면, 계수추정량이 ‘inconsistent’ 해진다는 것이 알려져 있다. Inconsistent란, ‘데이터가 많아져도 계수 추정량이 계수의 (숨겨진) 참값으로부터 벗어남’ 을 의미한다. (주로 계량경제 side의 회귀분석 강의에서 이를 가르친다)</p>
 
 <p><br /></p>
+
 <h2 id="오차의-자기상관-모델링을-통한-예측력-향상">오차의 자기상관 모델링을 통한 예측력 향상</h2>
 
-<p>이제 $\hat{\epsilon}_{t,k}$에 대해 SARMA 보조회귀모델로 설명되는 맞춘값을 얻고, $\hat{\epsilon}_{t,k+1}$에 대해서도 SARMA 보조회귀모델로 설명되는 맞춘값을 얻는다.</p>
+<p>$K$년도와 $K+1$년도 각각에 대해 SARMA 보조회귀모델의 맞춘값 $\hat{f}(\hat{\epsilon}_{t-1,k},  \cdots, \hat{v}_{t-1,k}, ,\cdots)$ 와 $\hat{f}(\hat{\epsilon}_{t-1,k+1},  \cdots, \hat{v}_{t-1,k+1}, ,\cdots)$ 를 얻는다.</p>
 
 <p>(현실에서의 적용에서는, $K+1$년도인 경우 $t-1$ 시점까지의 실제 부하를 안다고 가정한다, 그래야 $\hat{\epsilon}_{t-1,k+1}, \hat{\epsilon}_{t-2,k+1}, \cdots$ 가 계산된다)</p>
 
-<p>(그리고 $\hat{\epsilon}_{t,k+1}$으로 새로운 SARMA 보조회귀모델을 적합시킨 것이 아님에 유의. 만약 그랬다면 그건 반칙이다. 모델의 적합은 어떤 경우에도 $K$년도 데이터만으로 이루어져야 한다.)</p>
+<p>(그리고 $\hat{\epsilon}_{t,k+1}$으로 새로운 SARMA 보조회귀모델을 적합시킨 것이 아님에 유의. 만약 그랬다면 그건 반칙이다. $\hat{\beta}$와 $\hat{f}$는 어떤 경우에도 $K$년도 데이터만으로 추정되어야 한다.)</p>
 
-<p>이제 $x_{t,k}^{\top} \hat{\beta}_j $에는 $\hat{\epsilon}_{t,k}$에 대해 SARMA 보조회귀모델로 설명되는 맞춘값을 더하고, $x_{t,k+1}^{\top} \hat{\beta}_j $에는 $\hat{\epsilon}_{t,k+1}$에 대해 SARMA 보조회귀모델로 설명되는 맞춘값을 더한다. 이 값이 최종적인 전기부하 추정값이다.</p>
+<p>그러면, 아래처럼 주회귀모델의 맞춘값에 위 SARMA 보조회귀모델의 맞춘값을 더한 값이 최종적인 전기부하 추정량이다.</p>
+
+<p>$\hat{p}_{t,k} = x_{t,k}^{\top} \hat{\beta}_j + \hat{f}(\hat{\epsilon}_{t-1,k},  \cdots, \hat{v}_{t-1,k}, ,\cdots)$</p>
+
+<p>$\hat{p}_{t,k+1} = x_{t,k+1}^{\top} \hat{\beta}_j + \hat{f}(\hat{\epsilon}_{t-1,k+1},  \cdots, \hat{v}_{t-1,k+1}, ,\cdots)$</p>
 
 <p>SARMA 보조회귀모델까지 사용해 추정하면, adjusted $R^2$가 증가할까?</p>
 
