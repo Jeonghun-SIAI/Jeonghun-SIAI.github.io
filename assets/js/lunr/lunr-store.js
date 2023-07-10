@@ -160,4 +160,10 @@ var store = [{
         "tags": ["강화학습","녹색섬","Python"],
         "url": "/reinforcefive.html",
         "teaser": "/assets/images/reinforcefive/result_td3sac.png"
+      },{
+        "title": "건축물 별 월별 에너지 사용량 데이터셋 - 4) 결측치 추정: 조건부 다변량정규분포를 이용해서",
+        "excerpt":"건축물 별 월별 에너지 사용량 데이터셋에는 종종 값의 누락, 즉 결측치가 있다. 결측치가 있는 row들은 실제로는 활용이 불가능한데 용량만 차지하는 골칫덩어리이다. 대신 결측치를 ‘합리적으로’ 메꿀 수 있다면, 쓸 수 있는 데이터의 양이 많아지므로 분석의 정확도가 올라갈 것이다. 월별 사용량 데이터셋의 결측치 및 비정상적인 값들. 참값에 대한 합리적인 추정이 필요하다. Naive한...","categories": ["dataset"],
+        "tags": ["건물 에너지 데이터","회귀분석"],
+        "url": "/monthlyenergyfour.html",
+        "teaser": "/assets/images/monthlyenergyfour/teaser_monthlyenergyfour.png"
       }]
