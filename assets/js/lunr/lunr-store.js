@@ -166,4 +166,10 @@ var store = [{
         "tags": ["건물 에너지 데이터","회귀분석"],
         "url": "/monthlyenergyfour.html",
         "teaser": "/assets/images/monthlyenergyfour/teaser_monthlyenergyfour.png"
+      },{
+        "title": "Beer-Quiche game (동태적 미비정보 게임) 답안",
+        "excerpt":"아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려하여 Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 기반 방법론이 필요하다고 한다. 자율주행차에 게임이론이 들어간다고?” 관련 예시로 Beer-Quiche game을 들었는데, 해당 예시에 대해 필자 나름의 답안을 작성해보았다. 게임 구성 서부개척시대의 술집에 총잡이 두 명이 있다. 총잡이 1은 마실 것을 찾으러 왔으며,...","categories": ["mathstat"],
+        "tags": ["최적화","게임이론","에너지시스템"],
+        "url": "/beerquiche.html",
+        "teaser": "/assets/images/beerquiche/beerquiche.png"
       }]

@@ -1,0 +1,879 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BBZ8BXY4N7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BBZ8BXY4N7');
+</script>
+  <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Beer-Quiche game (동태적 미비정보 게임) 답안 | 에너지엔데이터연구소</title>
+<meta name="description" content="아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려하여 Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 기반 방법론이 필요하다고 한다.">
+
+
+  <meta name="author" content="Jeonghun Song">
+  
+  <meta property="article:author" content="Jeonghun Song">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="에너지엔데이터연구소">
+<meta property="og:title" content="Beer-Quiche game (동태적 미비정보 게임) 답안">
+<meta property="og:url" content="https://song4energyndata.github.io/beerquiche.html">
+
+
+  <meta property="og:description" content="아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려하여 Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 기반 방법론이 필요하다고 한다.">
+
+
+
+  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/beerquiche/beerquiche.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-07-23T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://song4energyndata.github.io/beerquiche.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "송정훈",
+      "url": "https://song4energyndata.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="naver-site-verification" content="7dda6777a2acc897ba51668ac7c58c380307dd6c">
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="에너지엔데이터연구소 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://song4energyndata.github.io/feed.xml">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<head>
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<!-- end custom head snippets -->
+  <style> 
+    ::-webkit-scrollbar{width: 12px;}
+    ::-webkit-scrollbar-track {background-color:#4b4f52; border-radius: 8px;}
+    ::-webkit-scrollbar-thumb {background-color:#5e6265; border-radius: 8px;}
+    ::-webkit-scrollbar-thumb:hover {background: #f7f6f3;}
+    ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment 
+    {width:12px;height:16px;background:transparent;} 
+  </style>
+</head>
+
+<body
+  class="layout--single">
+  <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+  
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          에너지엔데이터연구소
+          <span class="site-subtitle">에너지 데이터의 올바른 활용, 에너지 전환에 대한 데이터 기반의 합리적 솔루션</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/aboutme/">About Me</a>
+            </li><li class="masthead__menu-item">
+              <a href="/search/">Search</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tag</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">카테고리 목록</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+  <div class="initial-content">
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+    
+  
+  
+  
+  
+    
+    
+      
+    
+    
+  
+  
+   <!-- three lines added by Jeonghun  -->
+    
+
+<nav class="nav__list">
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">카테고리 목록</label>
+  <ul class="nav__items" id="category_tag_menu">
+      <!--전체 글 수-->
+      
+      <li>
+        <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
+        <span class="nav__sub-title">Categories</span>
+            <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">&#x2022 경제성분석 및 최적구성 도출 [10]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
+                <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/energymanagement" class="">&#x2022 제어 (최적화/ 강화학습) [5]</a></li>
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/estimation" class="">&#x2022 예측 (회귀분석/ 머신러닝/ 딥러닝) [2]</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/dataset" class="">&#x2022 데이터셋 (소개/ 전처리/ 활용안) [5]</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/mathstat" class="">&#x2022 수학/ 통계학 일반 [3]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/mypapers" class="">&#x2022 My papers [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/etc" class="">&#x2022 Etc. [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+      </li>
+  </ul>
+</nav>
+  
+  
+
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Beer-Quiche game (동태적 미비정보 게임) 답안">
+    <meta itemprop="description" content="아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려하여 Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 기반 방법론이 필요하다고 한다.">
+    <meta itemprop="datePublished" content="2023-07-23T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://song4energyndata.github.io/beerquiche.html" class="u-url" itemprop="url">Beer-Quiche game (동태적 미비정보 게임) 답안
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-07-23T00:00:00+09:00">2023-07-23</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#게임-구성">게임 구성</a></li><li><a href="#가정-a-총잡이-1이-강하면-맥주-약하면-사이다를-마신다고-가정-시">가정 A: 총잡이 1이 강하면 맥주, 약하면 사이다를 마신다고 가정 시</a></li><li><a href="#가정-b-총잡이-1이-강하든-약하든-맥주를-마신다고-가정-시">가정 B: 총잡이 1이 강하든 약하든 맥주를 마신다고 가정 시</a></li><li><a href="#가정-c-총잡이-1이-강하면-사이다-약하면-맥주를-마신다고-가정-시">가정 C: 총잡이 1이 강하면 사이다, 약하면 맥주를 마신다고 가정 시</a></li><li><a href="#가정-d-총잡이-1이-강하든-약하든-사이다를-마신다고-가정-시">가정 D: 총잡이 1이 강하든 약하든 사이다를 마신다고 가정 시</a></li><li><a href="#결론">결론</a></li></ul>
+ <!-- 우측 TOC -->
+            </nav>
+          </aside>
+        
+        <p>아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려하여 Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 기반 방법론이 필요하다고 한다.</p>
+
+<p><a href="https://pdsi.pabii.com/auto-driving-game-theory/">자율주행차에 게임이론이 들어간다고?”</a></p>
+
+<p>관련 예시로 Beer-Quiche game을 들었는데, 해당 예시에 대해 필자 나름의 답안을 작성해보았다.</p>
+
+<p><img src="/assets/images/beerquiche/beerquiche.png" alt="beerquicheproblem" class="align-center" /></p>
+
+<h2 id="게임-구성">게임 구성</h2>
+
+<p>서부개척시대의 술집에 총잡이 두 명이 있다. 총잡이 1은 마실 것을 찾으러 왔으며, 총잡이 2는 총잡이 1에게 시비를 걸고 싸워서 돈을 뜯어내는 시도를 할 지 고민 중이다. 총잡이 1은 총잡이 2가 자신에게 시비를 걸 지 말지 고민한다는 것을 알고 있다.</p>
+
+<p>총잡이 1은 강자(strong)이거나 약자(weak), 두 가지 유형 중 하나다. 총잡이 1이 강자라면, 총잡이 2는 시비를 걸더라도 돈을 뜯지 못하고, 결국 총잡이 2는 0의 보수를 얻는다. 오히려 강자인 총잡이 1에게 시비를 안 걸고 피할 경우, 총잡이 2는 1의 보수를 얻는다. 반면 총잡이 1이 약자라면, 총잡이 2는 시비를 걸어서 돈을 뜯을 수 있고 그 결과 총잡이 2는 1의 보수를 얻는다. 만약 총잡이 1이 약자인데 총잡이 2가 시비를 안 걸고 피하면, 총잡이 2는 0의 보수를 얻는다.</p>
+
+<p>총잡이 1은 기본적으로 싸움을 좋아하지 않는다. 따라서 자신의 유형 (강자인지 약자인지) 에 상관없이 총잡이 2가 자신에게 시비를 걸지 않으면 기본적으로 2의 보수를 얻고, 시비를 걸어오면 기본적으로 0의 보수를 얻는다.</p>
+
+<p>총잡이 1은 자신의 유형을 알지만, 총잡이 2는 총잡이 1의 유형을 정확히는 모른다. 다만 총잡이 2는 총잡이 1이 강자일 확률이 b라고 믿고 있다 ($0&lt;b&lt;1$). $b$의 값은 총잡이 2 뿐 아니라 총잡이 1도 알고 있는, 즉 모두가 알고 있는 사실 (주지사실) 이다.</p>
+
+<p>이 세계에선 일반적으로 강자들은 맥주를 좋아하고, 약자들은 사이다를 좋아한다. 총잡이 1은 맥주 또는 사이다를 마시는데, 자신의 유형에 맞게 좋아하는 음료를 마시면 (강자일 경우 맥주, 약자일 경우 사이다) 위에서 설명한 상황 별 보수에 더해 추가로 1의 보수를 얻는다. 좋아하지 않는 음료를 마시면 추가 보수는 0이다.</p>
+
+<p>총잡이 2는 총잡이 1이 뭘 마시는지 ‘본 뒤에’ 총잡이 1에게 시비를 걸 지 말지 결정한다. 즉 일반적인 선호도에 근거해 총잡이 1이 맥주를 시키면 피하고 사이다를 시키면 시비를 걸 수도 있지만, 총잡이 1이 맥주를 시키는 것을 ‘약자인데 강자인 척하는 것’ 으로 보고 시비를 걸 수도 있다. 총잡이 1과 2는 모두 합리적이며 상황 별 보수들이 주지사실이므로, 게임이론에 따라 행동을 결정한다.</p>
+
+<h2 id="가정-a-총잡이-1이-강하면-맥주-약하면-사이다를-마신다고-가정-시">가정 A: 총잡이 1이 강하면 맥주, 약하면 사이다를 마신다고 가정 시</h2>
+
+<p>가정 A 하에서 총잡이 2는 총잡이 1이 뭘 마시는지 보고 총잡이 1의 유형을 특정할 수 있다. 총잡이 1이 맥주를 마신다면 강자로 생각되므로, 총잡이 2는 시비를 걸지 말아야 한다 (시비 걸면 0, 안 걸면 1이므로). 총잡이 1이 사이다를 마신다면 약자로 생각되므로, 총잡이 2는 시비를 걸어야 한다 (시비 걸면 1, 안 걸면 0이므로).</p>
+
+<p>총잡이 1은 총잡이 2의 위와 같은 생각을 합리적으로 예상할 수 있다. 따라서 총잡이 2가 맥주를 보면 자신을 피하고 사이다를 보면 덤빈다는 걸 염두에 두고 나서 뭘 마실 지 결정한다고 하자.</p>
+
+<p>이 때 총잡이 1 자신이 강자라면, 가정 A대로 맥주를 마시는 게 좋다. 어차피 맥주를 본 총잡이 2가 자신을 피할 것이므로 총 3의 보수를 얻으며 (싸움 회피 2 + 선호하는 음료 1), 이는 괜히 사이다로 바꿔서 얻는 보수 0보다 크기 때문이다 (시비 걸림 0 + 선호하지 않는 음료 0).</p>
+
+<p>그러나 총잡이 1 자신이 약자라면, 가정 A대로 사이다를 마시는 것 보다는 맥주로 음료를 ‘바꾸는’ 게 좋다. 사이다를 마시면 1의 보수를 얻지만 (시비 걸림 0 + 선호하는 음료 1), 맥주를 마시면 2의 보수를 얻기 때문이다 (싸움 회피 2 + 선호하지 않는 음료 0).</p>
+
+<p>따라서 가정 A (강자면 맥주, 약자면 사이다) 하에서 총잡이 2가 할 행동 (맥주 보면 피하고, 사이다 보면 덤비기) 을 전제로 한 총잡이 1의 최선의 행동 (강자든 약자든 맥주) 이 가정 A와 같지 않으므로, 가정 A 하에서는 완전베이즈균형이 성립하지 않는다.</p>
+
+<h2 id="가정-b-총잡이-1이-강하든-약하든-맥주를-마신다고-가정-시">가정 B: 총잡이 1이 강하든 약하든 맥주를 마신다고 가정 시</h2>
+
+<p>가정 B 하에서는 총잡이 2가 총잡이 1의 음료를 보더라도 총잡이 1이 강자인지 약자인지 특정할 수 없다 (둘 다 똑같이 맥주이므로). 따라서 총잡이 1이 $b$의 확률로 강자, $1-b$의 확률로 약자라고 생각하고 기대보수를 계산해 본다.</p>
+
+<p>총잡이 2가 시비를 걸 때 총잡이 1이 강자였다면 총잡이 2는 0의 보수를, 약자였다면 1의 보수를 얻는다. 그러므로 총잡이 1에게 시비를 걸 경우 기대보수는 $1-b$이고 ($0 \times b + 1 \times (1-b)$), 시비를 걸지 않을 경우 기대보수는 b이다 ($ 1 \times b + 0 \times (1-b)$).</p>
+
+<p>[가정 2를 따르고 $b&gt;0.5$ 인 (총잡이 1이 강자일 확률이 더 높은) 경우]</p>
+
+<p>이 때 총잡이 2의 기대보수는 시비를 걸지 않을 때 더 높으므로 총잡이 2는 싸움을 포기한다. 총잡이 1은 총잡이 2의 이러한 생각을 합리적으로 예상할 수 있다. 따라서 총잡이 2가 맥주를 보면 피한다는 걸 염두에 두고 뭘 마실 지 결정한다.</p>
+
+<p>총잡이 1 자신이 강자라면, 가정 B대로 맥주를 마시는 게 좋다. 어차피 맥주를 본 총잡이 2가 자신을 피할 것이므로 총 3의 보수를 얻으며, 이는 괜히 사이다로 바꿔서 얻는 보수 (총잡이 2가 사이다를 보고 시비를 건다면 0, 시비를 걸지 않더라도 선호하는 음료가 아니므로 2) 보다 크기 때문이다.</p>
+
+<p>총잡이 1 자신이 약자라면, ‘가정 B 하에서 그러지는 않겠지만 만약 자신이 맥주 대신 사이다를 마신다면 총잡이 2가 어쩔 것인가’ 에 따라 맥주와 사이다 중 무엇이 더 나은 선택인지가 결정된다.</p>
+
+<p>만약 총잡이 2가 사이다를 보고 시비를 건다면, 총잡이 1은 가정 B대로 맥주를 마시는 게 좋다. 맥주를 좋아하지는 않지만 싸움을 피하므로 2의 보수를 얻는데, 이는 사이다를 마시지만 시비를 걸려서 얻는 보수 1보다 크기 때문이다. 그러나 총잡이 2가 사이다를 보고도 시비를 걸지 않는다면, 총잡이 1은 가정 B와 달리 음료를 사이다로 바꾸는 게 좋다. 시비도 안 걸리는데 좋아하는 음료까지 마시므로 3의 보수를 얻고, 이는 맥주를 마셔서 얻는 보수 2보다 크기 때문이다.</p>
+
+<p>따라서 가정 B (강자든 약자든 맥주) 하에서 $b&gt;0.5$ (강자일 확률이 더 높음) 인 경우 총잡이 2가 할 행동 (맥주를 보고 피함) 을 전제로 한 총잡이 1의 최선의 행동은 ‘총잡이 2가 사이다를 보면 시비를 건다’ 라는 추가 가정 하에 가정 B와 일치한다. 따라서 가정 2 및 $b&gt;0.5$ 조건 하에서는 총잡이 2가 사이다를 보고 덤빈다는 추가 가정 하에 완전베이즈균형이 성립한다.</p>
+
+<p>이 때 총잡이 2가 사이다를 보고 덤빈다는 것은, 사이다를 보고 총잡이 1이 약자라고 판단한다는 뜻이기도 하다. 시비를 걸 때의 기대보수가 더 높아야 시비를 걸 텐데, 약자를 상대로 시비를 걸어야 총잡이 2가 보수를 얻기 때문이다. 이게 타당하려면, ‘총잡이 2가 반드시 시비를 건다고 할 때’ 총잡이 1이 실제로 약자인 경우 사이다를 맥주보다 선호해야 한다. 그리고 이는 사실이다, 어차피 시비는 걸린다면 자신이 좋아하는 사이다를 마실 때 1의 보수를 얻는 반면 맥주를 먹으면 0의 보수를 얻기 때문이다. 그러므로 총잡이 2의 신념체계는 직관적으로도 옳다.</p>
+
+<p>[가정 B를 따르고 $b&lt;0.5$ 인 (총잡이 1이 약자일 확률이 더 높은) 경우]</p>
+
+<p>이 때 총잡이 2의 기대보수는 시비를 걸 때 더 높으므로 총잡이 2는 시비를 건다. 총잡이 1은 총잡이 2의 이러한 생각을 합리적으로 예상할 수 있다. 따라서 총잡이 2가 맥주를 보면 시비를 건다는 걸 염두에 두고 뭘 마실 지 결정한다.</p>
+
+<p>이 경우 ‘가정 B 하에서 그러지는 않겠지만 만약 자신이 맥주 대신 사이다를 마신다면 총잡이 2가 어쩔 것인가’ 에 따라 맥주와 사이다 중 무엇이 더 나은 선택인지가 결정된다.</p>
+
+<p>만약 총잡이 2가 사이다를 보고 시비를 건다면, 총잡이 1은 자신이 강할 경우 가정 B대로 맥주를 마시는 게 좋다. 어차피 뭘 해도 시비를 걸리는데, 좋아하는 맥주라도 마시는 것이 보수가 더 높기 때문이다 (맥주 마시면 1, 사이다 마시면 0). 그러나 자신이 약할 경우 ‘가정과 달리’ 사이다를 마시는 게 좋다. 어차피 시비를 걸린다면 좋아하는 사이다를 마시는 것이 보수가 더 높기 때문이다 (맥주 마시면 0, 사이다 마시면 1).</p>
+
+<p>만약 총잡이 2가 사이다를 보고 피한다면, 총잡이 1은 자신이 강할 경우 ‘가정 B와 달리’ 맥주 대신 사이다를 마시는 게 좋다. 좋아하는 맥주는 못 마시지만 싸움을 피할 수 있기 때문이다 (맥주 마시고 시비 걸리면 1, 사이다 마시고 싸움 피하면 2). 한편 총잡이 1 자신이 약할 경우에도 맥주 대신 사이다를 마시는 게 좋다. 좋아하는 사이다도 마시고 싸움도 피할 수 있기 때문이다 (맥주 마시고 시비 걸리면 0, 사이다 마시고 싸움 피하면 3).</p>
+
+<p>따라서 가정 B (강자든 약자든 맥주) 하에서 $b&lt;0.5$ (약자일 확률이 더 높음) 인 경우 총잡이 2가 할 행동 (맥주를 보고 시비 검) 을 전제로 한 총잡이 1의 최선의 행동은 어떤 경우에도 가정 B와 같지 않다. 따라서 가정 B 및 $b&lt;0.5$ 조건 하에서는 완전베이즈균형이 성립하지 않는다.</p>
+
+<h2 id="가정-c-총잡이-1이-강하면-사이다-약하면-맥주를-마신다고-가정-시">가정 C: 총잡이 1이 강하면 사이다, 약하면 맥주를 마신다고 가정 시</h2>
+
+<p>가정 C 하에서 총잡이 2는 총잡이 1이 뭘 마시는지 보고 총잡이 1의 유형을 특정할 수 있다. 총잡이 1이 맥주를 마신다면 약자로 생각되므로, 총잡이 2는 시비를 걸어야 한다 (시비 걸면 0, 안 걸면 1이므로). 총잡이 1이 사이다를 마신다면 강자로 생각되므로, 총잡이 2는 시비를 걸지 말아야 한다 (시비 걸면 0, 안 걸면 1이므로).</p>
+
+<p>총잡이 1은 총잡이 2의 위와 같은 생각을 합리적으로 예상할 수 있다. 따라서 총잡이 2가 맥주를 보면 자신에게 덤비고 사이다를 보면 피한다는 걸 염두에 두고 나서 뭘 마실 지 결정한다고 하자.</p>
+
+<p>이 때 총잡이 1 자신이 강자라면, 가정 C대로 사이다를 마시는 게 좋다. 좋아하는 맥주를 마시지는 못하지만 싸움을 피해서 얻는 보수 2가, 맥주를 마시지만 시비를 걸려서 얻는 보수 1보다 크기 때문이다.</p>
+
+<p>그러나 총잡이 1 자신이 약자라면, 가정 C와 달리 사이다로 음료를 ‘바꾸는’ 게 좋다. 맥주를 마시면 0의 보수를 얻지만 (시비 걸림 0 + 선호하지 않는 음료 0), 사이다를 마시면 3의 보수를 얻기 때문이다 (싸움 회피 2 + 선호하는 음료 1).</p>
+
+<p>따라서 가정 C (강자면 사이다, 약자면 맥주) 하에서 총잡이 2가 할 행동 (맥주 보면 덤비고, 사이다 보면 피하기) 을 전제로 한 총잡이 1의 최선의 행동 (강자든 약자든 사이다) 이 가정 C와 같지 않으므로, 가정 C 하에서는 완전베이즈균형이 성립하지 않는다.</p>
+
+<h2 id="가정-d-총잡이-1이-강하든-약하든-사이다를-마신다고-가정-시">가정 D: 총잡이 1이 강하든 약하든 사이다를 마신다고 가정 시</h2>
+
+<p>가정 D 하에서는 총잡이 2가 총잡이 1의 음료를 보더라도 총잡이 1이 강자인지 약자인지 특정할 수 없다 (둘 다 똑같이 사이다이므로). 따라서 총잡이 1이 $b$의 확률로 강자, $1-b$의 확률로 약자라고 생각하고 기대보수를 계산해 본다.</p>
+
+<p>총잡이 2가 시비를 걸 때 총잡이 1이 강자였다면 총잡이 2는 0의 보수를, 약자였다면 1의 보수를 얻는다. 그러므로 총잡이 1에게 시비를 걸 경우 기대보수는 $1-b$이고 ($0 \times b + 1 \times (1-b)$), 시비를 걸지 않을 경우 기대보수는 b이다 ($1 \times b + 0 \times (1-b)$).</p>
+
+<p>[가정 D를 따르고 $b&gt;0.5$ 인 (총잡이 1이 강자일 확률이 더 높은) 경우]</p>
+
+<p>이 때 총잡이 2의 기대보수는 시비를 걸지 않을 때 더 높으므로 총잡이 2는 싸움을 포기한다. 총잡이 1은 총잡이 2의 이러한 생각을 합리적으로 예상할 수 있다. 따라서 총잡이 2가 사이다를 보면 피한다는 걸 염두에 두고 뭘 마실 지 결정한다.</p>
+
+<p>총잡이 1 자신이 약자라면, 가정 D대로 사이다를 마시는 게 좋다. 어차피 사이다를 본 총잡이 2가 자신을 피할 것이므로 총 3의 보수를 얻으며, 이는 괜히 맥주로 바꿔서 얻는 보수 (총잡이 2가 맥주를 보고 시비를 건다면 0, 시비를 걸지 않더라도 선호하는 음료가 아니므로 2) 보다 크기 때문이다.</p>
+
+<p>총잡이 1 자신이 강자라면, ‘가정 D 하에서 그러지는 않겠지만 만약 자신이 사이다 대신 맥주를 마신다면 총잡이 2가 어쩔 것인가’ 에 따라 맥주와 사이다 중 무엇이 더 나은 선택인지가 결정된다.</p>
+
+<p>만약 총잡이 2가 맥주를 보고 시비를 건다면, 총잡이 1은 가정 D대로 사이다를 마시는 게 좋다. 사이다를 좋아하지는 않지만 싸움을 피하므로 2의 보수를 얻는데, 이는 맥주를 마시지만 시비를 걸려서 얻는 보수 1보다 크기 때문이다. 그러나 총잡이 2가 맥주를 보고도 시비를 걸지 않는다면, 총잡이 1은 가정 D와 달리 음료를 맥주로 바꾸는 게 좋다. 시비도 안 걸리는데 좋아하는 음료까지 마시므로 3의 보수를 얻고, 이는 사이다를 마셔서 얻는 보수 2보다 크기 때문이다.</p>
+
+<p>따라서 가정 D (강자든 약자든 사이다) 하에서 $b&gt;0.5$ (강자일 확률이 더 높음) 인 경우 총잡이 2가 할 행동 (사이다를 보고 피함) 을 전제로 한 총잡이 1의 최선의 행동은 ‘총잡이 2가 맥주를 보면 시비를 건다’ 라는 추가 가정 하에 가정 D와 일치한다. 따라서 가정 D 및 $b&gt;0.5$ 조건 하에서는 총잡이 2가 맥주를 보고 덤빈다는 추가 가정 하에 완전베이즈균형이 성립한다.</p>
+
+<p>이 때 총잡이 2가 맥주를 보고 덤빈다는 것은, 맥주를 보고 총잡이 1이 약자라고 판단한다는 뜻이기도 하다. 시비를 걸 때의 기대보수가 더 높아야 시비를 걸 텐데, 약자를 상대로 시비를 걸어야 총잡이 2가 보수를 얻기 때문이다. 이게 타당하려면, ‘총잡이 2가 반드시 시비를 건다고 할 때’ 총잡이 1이 실제로 약자인 경우 맥주를 사이다보다 선호해야 한다. 그런데 이는 ‘사실이 아니다’, 어차피 시비는 걸린다고 할 때 맥주를 먹으면 0의 보수를 얻는 반면 자신이 좋아하는 사이다를 마시면 1의 보수를 얻기 때문이다. 그러므로 총잡이 2의 신념체계는 직관적으로 옳지 않다.</p>
+
+<p>그러므로 가정 D 및 $b&gt;0.5$ 조건 하의 완전베이즈균형은 비직관적인 신념에 근거하기 때문에, 배제되어야 한다.</p>
+
+<p>[가정 D를 따르고 $b&lt;0.5$ 인 (총잡이 1이 약자일 확률이 더 높은) 경우]</p>
+
+<p>이 때 총잡이 2의 기대보수는 시비를 걸 때 더 높으므로 총잡이 2는 시비를 건다. 총잡이 1은 총잡이 2의 이러한 생각을 합리적으로 예상할 수 있다. 따라서 총잡이 2가 사이다를 보면 시비를 건다는 걸 염두에 두고 뭘 마실 지 결정한다.</p>
+
+<p>이 경우 ‘가정 D 하에서 그러지는 않겠지만 만약 자신이 사이다 대신 맥주를 마신다면 총잡이 2가 어쩔 것인가’ 에 따라 맥주와 사이다 중 무엇이 더 나은 선택인지가 결정된다.</p>
+
+<p>만약 총잡이 2가 맥주를 보고 시비를 건다면, 총잡이 1은 자신이 약할 경우 가정 D대로 사이다를 마시는 게 좋다. 어차피 뭘 해도 시비를 걸리는데, 좋아하는 사이다를 마시는 것이 보수가 더 높기 때문이다 (맥주 마시면 0, 사이다 마시면 1). 그러나 자신이 강할 경우 ‘가정 D와 달리’ 맥주로 바꾸는 게 좋다. 어차피 시비가 걸린다면 좋아하는 맥주라도 마시는 것이 보수가 더 높기 때문이다 (맥주 마시면 1, 사이다 마시면 0).</p>
+
+<p>만약 총잡이 2가 맥주를 보고 피한다면, 총잡이 1은 자신이 강할 경우 ‘가정 D와 달리’ 사이다 대신 맥주를 마시는 게 좋다. 좋아하는 맥주도 마시고 싸움도 피할 수 있기 때문이다 (맥주 마시고 싸움 피하면 3, 사이다 마시고 시비 걸리면 0). 한편 총잡이 1 자신이 약할 경우에도 사이다 대신 맥주를 마시는 게 좋다. 좋아하는 사이다는 못 마시지만 싸움을 피할 수 있기 때문이다 (맥주 마시고 싸움 피하면 2, 사이다 마시고 시비 걸리면 1).</p>
+
+<p>따라서 가정 D (강자든 약자든 사이다) 하에서 b&lt;0.5 (약자일 확률이 더 높음) 인 경우 총잡이 2가 할 행동 (사이다를 보고 시비 검) 을 전제로 한 총잡이 1의 최선의 행동은 어떤 경우에도 가정 D와 같지 않다. 따라서 가정 D 및 $b&lt;0.5$ 조건 하에서는 완전베이즈균형이 성립하지 않는다.</p>
+
+<h2 id="결론">결론</h2>
+
+<p>총잡이 2가 보기에 총잡이 1이 강자일 확률이 더 높으면, 완전베이즈균형 하에서 총잡이 1은 자신의 유형이 강자이든 약자이든 맥주를 마시고, 총잡이 2는 맥주를 보면 싸움을 피하되 혹시라도 사이다를 보면 시비를 건다.</p>
+
+<p>총잡이 2가 보기에 총잡이 1이 약자일 확률이 더 높으면, 완전베이즈균형이 성립하지 않는다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0" class="page__taxonomy-item p-category" rel="tag">게임이론</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C" class="page__taxonomy-item p-category" rel="tag">에너지시스템</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%B5%9C%EC%A0%81%ED%99%94" class="page__taxonomy-item p-category" rel="tag">최적화</a>
+    
+    </span>
+  </p>
+
+
+
+<!-- 
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#mathstat" class="page__taxonomy-item p-category" rel="tag">mathstat</a>
+    
+    </span>
+  </p>
+
+ -->
+        <!-- 
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-07-23T00:00:00+09:00">2023-07-23</time></p>
+ -->
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <!-- <a href="https://twitter.com/intent/tweet?text=Beer-Quiche+game+%28%EB%8F%99%ED%83%9C%EC%A0%81+%EB%AF%B8%EB%B9%84%EC%A0%95%EB%B3%B4+%EA%B2%8C%EC%9E%84%29+%EB%8B%B5%EC%95%88%20http%3A%2F%2Flocalhost%3A4000%2Fbeerquiche.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fbeerquiche.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fbeerquiche.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      <p></p>
+        <!-- <h4 class="page__meta-title"><span>mathstat</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
+        
+
+
+  
+  	
+  	
+  	
+  	
+  	
+
+<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
+
+  
+    
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
+    
+    
+      <a href="/overconfidence.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>로지스틱 회귀에서의 over-confidence에 대한 이해</a>
+        
+  
+
+</nav>
+      <p></p>
+    </div>
+
+    
+  </article>
+
+  
+  <!-- 
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/monthlyenergyfour.html" rel="permalink"><img src="/assets/images/monthlyenergyfour/teaser_monthlyenergyfour.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/monthlyenergyfour.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 4) 결측치 추정: 조건부 다변량정규분포를 이용해서
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-07-09T00:00:00+09:00">2023-07-09</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">건축물 별 월별 에너지 사용량 데이터셋에는 종종 값의 누락, 즉 결측치가 있다. 결측치가 있는 row들은 실제로는 활용이 불가능한데 용량만 차지하는 골칫덩어리이다. 대신 결측치를 ‘합리적으로’ 메꿀 수 있다면, 쓸 수 있는 데이터의 양이 많아지므로 분석의 정확도가 올라갈 것이다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/reinforcefive.html" rel="permalink"><img src="/assets/images/reinforcefive/result_td3sac.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 control - 5) TD3/ SAC 등 ‘진보된’ continuous control을 쓴다면?
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-07-01T00:00:00+09:00">2023-07-01</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/reinforcefour.html" rel="permalink"><img src="/assets/images/reinforcefour/result_ddpg.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/reinforcefour.html" rel="permalink">강화학습 기반 마이크로그리드 control - 4) DDPG를 이용한 ‘continuous’ control 도출
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00+09:00">2023-06-25</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">실제로는 수전/송전이 continuous action임에도, Vincent의 마이크로그리드 사례에선 ‘discrete’ action (1.1kW 수전/ 1.1kW 송전/ idle)으로도 충분히 economic control이 가능했다. 그렇다면, continuous action을 ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/reinforcethree.html" rel="permalink"><img src="/assets/images/reinforcethree/nn.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/reinforcethree.html" rel="permalink">강화학습 기반 마이크로그리드 control - 3) Deep Q-Network를 통한 3-action control 도출
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-11T00:00:00+09:00">2023-06-11</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Vincent의 마이크로그리드 사례에서 Q-learning의 concept를 이용하기 위해, 실제로는 수전/송전이 continuous한 값임에도 불구하고, 1.1kW 수전/ 1.1kW 송전/ idle 의 3가지 action만을 고려하기로 했다. 각 action 별 인덱스는 0, 1...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div> -->
+  
+  <!--  -->
+</div>
+
+  </div>
+
+  
+
+  <aside class="sidebar__top">
+    <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside>
+
+  <div id="footer" class="page__footer">
+    <footer>
+      <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+      <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Contact:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:song4energy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+          <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 송정훈. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+    </footer>
+  </div>
+
+  
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
