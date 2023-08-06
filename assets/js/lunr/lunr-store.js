@@ -172,4 +172,10 @@ var store = [{
         "tags": ["최적화","게임이론","에너지시스템"],
         "url": "/beerquiche.html",
         "teaser": "/assets/images/beerquiche/beerquiche.png"
+      },{
+        "title": "에너지 분야 최적화/ 게임이론/ 데이터과학 관련 교육 추천: DTU summer school",
+        "excerpt":"에너지시스템 planning/ scheduling 관련 연구자라면 고급 최적화 기법, 시장 문제에서의 게임이론적 접근, 시계열 데이터 예측 등의 지식들이 필요하다고 느낀 적이 있을 것이다. 관련해 좋은 교육 자료를 소개한다. Technical University of Denmark에서 매년 주최하는 summer school이다. (홈페이지 (강의 슬라이드들 포함)) (Youtube 채널) 박사과정 동안 해당 채널에서 다루는 주제들의 존재 자체는 알았으나,...","categories": ["optimalsystem"],
+        "tags": ["최적화","게임이론","에너지시스템"],
+        "url": "/dturecommendation.html",
+        "teaser": "/assets/images/dturecommendation/channel.png"
       }]

@@ -1,0 +1,866 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BBZ8BXY4N7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BBZ8BXY4N7');
+</script>
+  <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>에너지 분야 최적화/ 게임이론/ 데이터과학 관련 교육 추천: DTU summer school | 에너지엔데이터연구소</title>
+<meta name="description" content="에너지시스템 planning/ scheduling 관련 연구자라면 고급 최적화 기법, 시장 문제에서의 게임이론적 접근, 시계열 데이터 예측 등의 지식들이 필요하다고 느낀 적이 있을 것이다. 관련해 좋은 교육 자료를 소개한다. Technical University of Denmark에서 매년 주최하는 summer school이다.">
+
+
+  <meta name="author" content="Jeonghun Song">
+  
+  <meta property="article:author" content="Jeonghun Song">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="에너지엔데이터연구소">
+<meta property="og:title" content="에너지 분야 최적화/ 게임이론/ 데이터과학 관련 교육 추천: DTU summer school">
+<meta property="og:url" content="https://song4energyndata.github.io/dturecommendation.html">
+
+
+  <meta property="og:description" content="에너지시스템 planning/ scheduling 관련 연구자라면 고급 최적화 기법, 시장 문제에서의 게임이론적 접근, 시계열 데이터 예측 등의 지식들이 필요하다고 느낀 적이 있을 것이다. 관련해 좋은 교육 자료를 소개한다. Technical University of Denmark에서 매년 주최하는 summer school이다.">
+
+
+
+  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/dturecommendation/channel.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-08-06T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://song4energyndata.github.io/dturecommendation.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "송정훈",
+      "url": "https://song4energyndata.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="naver-site-verification" content="7dda6777a2acc897ba51668ac7c58c380307dd6c">
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="에너지엔데이터연구소 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://song4energyndata.github.io/feed.xml">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<head>
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<!-- end custom head snippets -->
+  <style> 
+    ::-webkit-scrollbar{width: 12px;}
+    ::-webkit-scrollbar-track {background-color:#4b4f52; border-radius: 8px;}
+    ::-webkit-scrollbar-thumb {background-color:#5e6265; border-radius: 8px;}
+    ::-webkit-scrollbar-thumb:hover {background: #f7f6f3;}
+    ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment 
+    {width:12px;height:16px;background:transparent;} 
+  </style>
+</head>
+
+<body
+  class="layout--single">
+  <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+  
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          에너지엔데이터연구소
+          <span class="site-subtitle">에너지 데이터의 올바른 활용, 에너지 전환에 대한 데이터 기반의 합리적 솔루션</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/aboutme/">About Me</a>
+            </li><li class="masthead__menu-item">
+              <a href="/search/">Search</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tag</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">카테고리 목록</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+  <div class="initial-content">
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+    
+  
+  
+  
+  
+    
+    
+      
+    
+    
+  
+  
+   <!-- three lines added by Jeonghun  -->
+    
+
+<nav class="nav__list">
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">카테고리 목록</label>
+  <ul class="nav__items" id="category_tag_menu">
+      <!--전체 글 수-->
+      
+      <li>
+        <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
+        <span class="nav__sub-title">Categories</span>
+            <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">&#x2022 경제성분석 및 최적구성 도출 [11]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
+                <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/energymanagement" class="">&#x2022 제어 (최적화/ 강화학습) [5]</a></li>
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/estimation" class="">&#x2022 예측 (회귀분석/ 머신러닝/ 딥러닝) [2]</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/dataset" class="">&#x2022 데이터셋 (소개/ 전처리/ 활용안) [5]</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/mathstat" class="">&#x2022 수학/ 통계학 일반 [3]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/mypapers" class="">&#x2022 My papers [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/etc" class="">&#x2022 Etc. [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+      </li>
+  </ul>
+</nav>
+  
+  
+
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="에너지 분야 최적화/ 게임이론/ 데이터과학 관련 교육 추천: DTU summer school">
+    <meta itemprop="description" content="에너지시스템 planning/ scheduling 관련 연구자라면 고급 최적화 기법, 시장 문제에서의 게임이론적 접근, 시계열 데이터 예측 등의 지식들이 필요하다고 느낀 적이 있을 것이다. 관련해 좋은 교육 자료를 소개한다. Technical University of Denmark에서 매년 주최하는 summer school이다.">
+    <meta itemprop="datePublished" content="2023-08-06T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://song4energyndata.github.io/dturecommendation.html" class="u-url" itemprop="url">에너지 분야 최적화/ 게임이론/ 데이터과학 관련 교육 추천: DTU summer school
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-08-06T00:00:00+09:00">2023-08-06</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#market-design-for-integrated-energy-systems-prof-jalal-kazempour">Market Design for Integrated Energy Systems (Prof. Jalal Kazempour)</a></li><li><a href="#distributed-optimization-prof-jalal-kazempour">Distributed Optimization (Prof. Jalal Kazempour)</a></li><li><a href="#statistical-and-machine-learning-for-forecasting-prof-pierre-pinson">Statistical and Machine Learning for Forecasting (Prof. Pierre Pinson)</a></li><li><a href="#data-markets-for-energy-prof-pierre-pinson">Data Markets for Energy (Prof. Pierre Pinson)</a></li><li><a href="#trustworthy-ai-for-power-systems-prof-spyros-chatzivasileiadis">Trustworthy AI for Power Systems (Prof. Spyros Chatzivasileiadis)</a></li><li><a href="#2023년-강의도-조만간-공개될-것으로-예상됨">2023년 강의도 조만간 공개될 것으로 예상됨</a></li></ul>
+ <!-- 우측 TOC -->
+            </nav>
+          </aside>
+        
+        <p>에너지시스템 planning/ scheduling 관련 연구자라면 고급 최적화 기법, 시장 문제에서의 게임이론적 접근, 시계열 데이터 예측 등의 지식들이 필요하다고 느낀 적이 있을 것이다. 관련해 좋은 교육 자료를 소개한다. Technical University of Denmark에서 매년 주최하는 summer school이다.</p>
+
+<p>(<a href="https://energy-markets-school.dk/">홈페이지 (강의 슬라이드들 포함)</a>) (<a href="https://www.youtube.com/@dtulecturesonpowerenergysy8133">Youtube 채널</a>)</p>
+
+<p>박사과정 동안 해당 채널에서 다루는 주제들의 존재 자체는 알았으나, 이를 체계적으로 공부할 길이 없어 막막했던 기억이 있다. DTU summer school의 존재를 알게 되었을 때, 필자의 박사과정 때 이런 강의들이 제공되었더라면 하는 아쉬움이 들면서도, 이제라도 이 주제들을 공부할 수 있게 되어 그 아쉬움을 덜 수 있어 기뻤다.</p>
+
+<p>해당 채널에서 특히 유익했던 강의들 몇 개를 들자면 아래와 같다.</p>
+
+<p><br /></p>
+<h2 id="market-design-for-integrated-energy-systems-prof-jalal-kazempour">Market Design for Integrated Energy Systems (Prof. Jalal Kazempour)</h2>
+
+<!-- Courtesy of embedresponsively.com -->
+
+<div class="responsive-video-container">
+    <iframe src="https://www.youtube-nocookie.com/embed/rJOQmcjzYBc" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+  </div>
+
+<p>이 강의는 크게 3개 파트로 구성되어 있다.</p>
+
+<p>첫번째 파트에서는 유럽과 미국의 전력시장에서 하루전 시장/ 당일 시장/ 실시간 시장의 구성 및 두 대륙 간 차이점, 보조서비스 시장의 유연성 자원 서비스, 유연성 자원에서 커뮤니티의 역할 등을 설명한다. 두번째 파트에서는 전력시장에서의 가격결정 메커니즘을 최적화 문제와 Nash 균형 탐색 문제로써 설명한다. 세번째 파트에서는 섹터커플링 시장 컨셉 및 현실적 한계점에 대해 설명한다.</p>
+
+<p>전력시장의 일반적 구성, 그리고 전력시장에서의 가격결정에 대한 수학적 모델링 등 주제들에 대한 대략적 이해를 단시간 내에 하고 싶은 분들에게 추천한다.</p>
+
+<p><br /></p>
+<h2 id="distributed-optimization-prof-jalal-kazempour">Distributed Optimization (Prof. Jalal Kazempour)</h2>
+
+<!-- Courtesy of embedresponsively.com -->
+
+<div class="responsive-video-container">
+    <iframe src="https://www.youtube-nocookie.com/embed/7AkQJhfAv-Q" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+  </div>
+
+<p>에너지 설비 용량 결정 문제를 연구하는 사람이라면, 긴 기간을 고려할 경우 최적화 문제의 규모가 커져 계산 결과를 제 때 얻기 어렵다는 난점에 대해 고민해 본 적이 있을 것이다.</p>
+
+<p>그리고 이에 관해 Bender’s decomposition 등의 decomposition method 공부를 시도해 본 사람들도 있을 것이다. 그러나 해당 주제는 책 및 논문 등의 텍스트로만 공부하기에는 비교적 어려운 주제이다 (박사과정 당시의 필자가 그랬다…).</p>
+
+<p>이 강의를 통해, Bender’s decomposition의 원리를 이해할 수 있을 것이다. 또한 에너지 설비 용량 같은 ‘공통의 변수’ 는 없지만 ‘공통의 제약’ 이 있어서 문제 크기가 큰 경우에 쓸 수 있는 Lagrangian Relaxation (LR), Alternating Direction Method of Multipliers (ADMM) 기법도 공부할 수 있다.</p>
+
+<p>Jalal Kazempour 교수가 위 두 개 강의 내용을 묶어 구성한 PhD-level course <a href="https://www.jalalkazempour.com/teaching">“Advanced Optimization and Game Theory for Energy Systems”</a> 가 있는데, 조만간 해당 강의 영상을 보고 공부하면서 각 강의 별 요약을 블로그에 게재할 계획이다.</p>
+
+<p><br /></p>
+<h2 id="statistical-and-machine-learning-for-forecasting-prof-pierre-pinson">Statistical and Machine Learning for Forecasting (Prof. Pierre Pinson)</h2>
+
+<!-- Courtesy of embedresponsively.com -->
+
+<div class="responsive-video-container">
+    <iframe src="https://www.youtube-nocookie.com/embed/AgWPedTE_10" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+  </div>
+
+<p>재생발전량 예측에 필요한 주요 데이터들, 데이터의 특성에 따른 실제 적용 방안 (temporal correlation이 강한 경우 단순한 신뢰구간 기반 계산보다 시나리오 기반 계산이 더 좋을 수 있다 등), 예측 오차를 나타내는 지표 등을 설명한다.</p>
+
+<p>또한 최근 무지성으로 범람하고 있는 딥러닝 기반 예측이 아닌, 전통적인 선형회귀 기반 예측 방법에 대해서도 설명한다.</p>
+
+<p><br /></p>
+<h2 id="data-markets-for-energy-prof-pierre-pinson">Data Markets for Energy (Prof. Pierre Pinson)</h2>
+
+<!-- Courtesy of embedresponsively.com -->
+
+<div class="responsive-video-container">
+    <iframe src="https://www.youtube-nocookie.com/embed/AgWPedTE_10" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+  </div>
+
+<p>데이터를 ‘사고 파는’ 경우의 비즈니스 모델에 대해 생각해 본 적이 있는가?</p>
+
+<p>아직까지 대부분의 데이터 시장에서는 가격이 ‘Data point 갯수 당’ 또는 ‘데이터 생산 원가에 마진을 붙인 판매가’ 기반으로 결정되거나, 일종의 ‘힘의 논리’ 기반으로 결정되곤 한다.</p>
+
+<p>이 강의에서는, 이러한 단순한 접근을 넘어서 ‘해당 data를 활용하는 특정 분석에서 data 추가로 인한 improvement’ 를 기준으로 가격을 책정하는 방법을 제시한다.</p>
+
+<p>이를테면 특정 회귀분석 대상의 DGP에 관여하는 설명변수들 x1, x2, x3 중 구매자는 x1만 갖고 있을 때 (y는 구매자도 갖고 있음),
+x1만 사용한 회귀모델의 Mean Squared Error (MSE) 대비 판매자의 data x2와 x3을 구매해 추가한 모델의 MSE가 더 줄어들었다면,
+MSE의 감소량에 비례하게끔 revenue를 책정하는 것이다.</p>
+
+<p>이 과정에서 data 판매자가 둘 이상일 경우 각 판매자에 대한 금액 분배는 Shapely value나 leave-one-out 등 방법으로 결정한다.</p>
+
+<p>MSE 감소량 기준으로 revenue 책정 시, 판매자가 가짜 데이터가 아닌 진짜로 유익한 데이터를 제공해야 revenue가 증가하므로, 판매자 입장에서 truth-telling이 최적전략이 된다는 장점이 있다고 한다.</p>
+
+<p>물론 몇 가지 현실적인 문제들이 있지만 (모델의 MSE를 구매자가 수긍할 것인지, 수긍 못 하니 모델과 x1을 공개하라고 하면 판매자가 이를 받아들일 지 등), data pricing에 대한 체계적 논의의 출발점으로는 좋은 강의로 보인다.</p>
+
+<p><br /></p>
+<h2 id="trustworthy-ai-for-power-systems-prof-spyros-chatzivasileiadis">Trustworthy AI for Power Systems (Prof. Spyros Chatzivasileiadis)</h2>
+
+<!-- Courtesy of embedresponsively.com -->
+
+<div class="responsive-video-container">
+    <iframe src="https://www.youtube-nocookie.com/embed/8iCw0hEfvzc" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+  </div>
+
+<p>전력시스템의 안전성 여부를 머신러닝/ 딥러닝 모델 기반으로 판단하려는 시도가 이루어지고 있다.</p>
+
+<p>그러나 모델 사용 시 training points 외의 point에 대해서는 필연적으로 interpolation/ extrapolation을 하게 되는데, 딥러닝 모델에서는 아주 조금의 input 차이로도 output이 바뀔 수 있으므로 모델을 마음놓고 쓸 수 없다.</p>
+
+<p>(팬더 사진에 사람 눈으로 볼 수 없는 noise를 추가하니 원숭이로 분류한다든가, 자율주행차량이 신호등을 판단하는 사진에서 픽셀 하나만 바꾸니 틀린 판단을 한다든가 등 사례들을 예시로 든다.)</p>
+
+<p>이 강의에서는, 딥러닝 모델이 ReLU activation들로 구성되었다는 전제 하에 mixed-integer linear programming problem을 구성해서 해당 모델이 제대로 interpolation/ extrapolation을 하는지를 검증할 수 있는 방법을 제시한다.</p>
+
+<p>물론 정수선형계획법 특성상 큰 모델에는 쓸 수 없지만, 정수선형계획법을 이렇게도 활용할 수 있다는 사실에 놀랐던 기억이 있다. 더불어 실제 물리적 시스템에 딥러닝을 적용한다는 것이 쉽지 않다는 교훈도 얻을 수 있었다.</p>
+
+<p><br /></p>
+<h2 id="2023년-강의도-조만간-공개될-것으로-예상됨">2023년 강의도 조만간 공개될 것으로 예상됨</h2>
+
+<p>현재는 Youtube 채널에 2022년 강의까지만 공개되어 있으나, 조만간 2023년 강의가 공개될 것으로 보인다. Summer school 현장 강의가 항상 6월 후반에 열리며, 2022년 강의 영상이 2022년 8월 초에 공개되었기 때문이다.</p>
+
+<p>2023년 강의 프로그램에도 여러 가지 흥미로운 주제들이 있어, 강의가 공개되면 바로 시청할 계획이다. <a href="https://energy-markets-school.dk/school-2023/downloads/">(data-driven modeling, privacy, online decision-making, business models for hybrid power plants 등)</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0" class="page__taxonomy-item p-category" rel="tag">게임이론</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C" class="page__taxonomy-item p-category" rel="tag">에너지시스템</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%B5%9C%EC%A0%81%ED%99%94" class="page__taxonomy-item p-category" rel="tag">최적화</a>
+    
+    </span>
+  </p>
+
+
+
+<!-- 
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#optimalsystem" class="page__taxonomy-item p-category" rel="tag">optimalsystem</a>
+    
+    </span>
+  </p>
+
+ -->
+        <!-- 
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-08-06T00:00:00+09:00">2023-08-06</time></p>
+ -->
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%97%90%EB%84%88%EC%A7%80+%EB%B6%84%EC%95%BC+%EC%B5%9C%EC%A0%81%ED%99%94%2F+%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0%2F+%EB%8D%B0%EC%9D%B4%ED%84%B0%EA%B3%BC%ED%95%99+%EA%B4%80%EB%A0%A8+%EA%B5%90%EC%9C%A1+%EC%B6%94%EC%B2%9C%3A+DTU+summer+school%20http%3A%2F%2Flocalhost%3A4000%2Fdturecommendation.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fdturecommendation.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fdturecommendation.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      <p></p>
+        <!-- <h4 class="page__meta-title"><span>optimalsystem</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
+        
+
+
+  
+  	
+  	
+  	
+  	
+  	
+
+<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
+
+  
+    
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
+    
+    
+      <a href="/linprogten.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>선형계획법 기반 분산에너지시스템 최적화 - 10) 출력 조정 관련 제약들</a>
+        
+  
+
+</nav>
+      <p></p>
+    </div>
+
+    
+  </article>
+
+  
+  <!-- 
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/beerquiche.html" rel="permalink"><img src="/assets/images/beerquiche/beerquiche.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/beerquiche.html" rel="permalink">Beer-Quiche game (동태적 미비정보 게임) 답안
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-07-23T00:00:00+09:00">2023-07-23</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려하여 Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 기반 방법론이 필요하다고 한다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/monthlyenergyfour.html" rel="permalink"><img src="/assets/images/monthlyenergyfour/teaser_monthlyenergyfour.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/monthlyenergyfour.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 4) 결측치 추정: 조건부 다변량정규분포를 이용해서
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-07-09T00:00:00+09:00">2023-07-09</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">건축물 별 월별 에너지 사용량 데이터셋에는 종종 값의 누락, 즉 결측치가 있다. 결측치가 있는 row들은 실제로는 활용이 불가능한데 용량만 차지하는 골칫덩어리이다. 대신 결측치를 ‘합리적으로’ 메꿀 수 있다면, 쓸 수 있는 데이터의 양이 많아지므로 분석의 정확도가 올라갈 것이다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/reinforcefive.html" rel="permalink"><img src="/assets/images/reinforcefive/result_td3sac.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 control - 5) TD3/ SAC 등 ‘진보된’ continuous control을 쓴다면?
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-07-01T00:00:00+09:00">2023-07-01</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/reinforcefour.html" rel="permalink"><img src="/assets/images/reinforcefour/result_ddpg.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/reinforcefour.html" rel="permalink">강화학습 기반 마이크로그리드 control - 4) DDPG를 이용한 ‘continuous’ control 도출
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-06-25T00:00:00+09:00">2023-06-25</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">실제로는 수전/송전이 continuous action임에도, Vincent의 마이크로그리드 사례에선 ‘discrete’ action (1.1kW 수전/ 1.1kW 송전/ idle)으로도 충분히 economic control이 가능했다. 그렇다면, continuous action을 ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div> -->
+  
+  <!--  -->
+</div>
+
+  </div>
+
+  
+
+  <aside class="sidebar__top">
+    <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside>
+
+  <div id="footer" class="page__footer">
+    <footer>
+      <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+      <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Contact:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:song4energy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+          <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 송정훈. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+    </footer>
+  </div>
+
+  
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
