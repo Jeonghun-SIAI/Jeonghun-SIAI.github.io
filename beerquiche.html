@@ -20,7 +20,7 @@
   <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Beer-Quiche game (동태적 미비정보 게임) 답안 | 에너지엔데이터연구소</title>
-<meta name="description" content="아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려하여 Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 기반 방법론이 필요하다고 한다.">
+<meta name="description" content="아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려한 Dynamic Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 방법론이 필요하다고 한다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -36,7 +36,7 @@
 <meta property="og:url" content="https://song4energyndata.github.io/beerquiche.html">
 
 
-  <meta property="og:description" content="아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려하여 Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 기반 방법론이 필요하다고 한다.">
+  <meta property="og:description" content="아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려한 Dynamic Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 방법론이 필요하다고 한다.">
 
 
 
@@ -396,7 +396,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Beer-Quiche game (동태적 미비정보 게임) 답안">
-    <meta itemprop="description" content="아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려하여 Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 기반 방법론이 필요하다고 한다.">
+    <meta itemprop="description" content="아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려한 Dynamic Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 방법론이 필요하다고 한다.">
     <meta itemprop="datePublished" content="2023-07-23T00:00:00+09:00">
     
 
@@ -438,7 +438,7 @@
             </nav>
           </aside>
         
-        <p>아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려하여 Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 기반 방법론이 필요하다고 한다.</p>
+        <p>아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려한 Dynamic Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 방법론이 필요하다고 한다.</p>
 
 <p><a href="https://pdsi.pabii.com/auto-driving-game-theory/">자율주행차에 게임이론이 들어간다고?”</a></p>
 
@@ -454,7 +454,7 @@
 
 <p>총잡이 1은 기본적으로 싸움을 좋아하지 않는다. 따라서 자신의 유형 (강자인지 약자인지) 에 상관없이 총잡이 2가 자신에게 시비를 걸지 않으면 기본적으로 2의 보수를 얻고, 시비를 걸어오면 기본적으로 0의 보수를 얻는다.</p>
 
-<p>총잡이 1은 자신의 유형을 알지만, 총잡이 2는 총잡이 1의 유형을 정확히는 모른다. 다만 총잡이 2는 총잡이 1이 강자일 확률이 b라고 믿고 있다 ($0&lt;b&lt;1$). $b$의 값은 총잡이 2 뿐 아니라 총잡이 1도 알고 있는, 즉 모두가 알고 있는 사실 (주지사실) 이다.</p>
+<p>총잡이 1은 자신의 유형을 알지만, 총잡이 2는 총잡이 1의 유형을 정확히는 모른다. 다만 총잡이 2는 총잡이 1이 강자일 확률이 $b$라고 믿고 있다 ($0&lt;b&lt;1$). $b$의 값은 총잡이 2 뿐 아니라 총잡이 1도 알고 있는, 즉 모두가 알고 있는 사실 (주지사실) 이다.</p>
 
 <p>이 세계에선 일반적으로 강자들은 맥주를 좋아하고, 약자들은 사이다를 좋아한다. 총잡이 1은 맥주 또는 사이다를 마시는데, 자신의 유형에 맞게 좋아하는 음료를 마시면 (강자일 경우 맥주, 약자일 경우 사이다) 위에서 설명한 상황 별 보수에 더해 추가로 1의 보수를 얻는다. 좋아하지 않는 음료를 마시면 추가 보수는 0이다.</p>
 
@@ -520,7 +520,7 @@
 
 <p>가정 D 하에서는 총잡이 2가 총잡이 1의 음료를 보더라도 총잡이 1이 강자인지 약자인지 특정할 수 없다 (둘 다 똑같이 사이다이므로). 따라서 총잡이 1이 $b$의 확률로 강자, $1-b$의 확률로 약자라고 생각하고 기대보수를 계산해 본다.</p>
 
-<p>총잡이 2가 시비를 걸 때 총잡이 1이 강자였다면 총잡이 2는 0의 보수를, 약자였다면 1의 보수를 얻는다. 그러므로 총잡이 1에게 시비를 걸 경우 기대보수는 $1-b$이고 ($0 \times b + 1 \times (1-b)$), 시비를 걸지 않을 경우 기대보수는 b이다 ($1 \times b + 0 \times (1-b)$).</p>
+<p>총잡이 2가 시비를 걸 때 총잡이 1이 강자였다면 총잡이 2는 0의 보수를, 약자였다면 1의 보수를 얻는다. 그러므로 총잡이 1에게 시비를 걸 경우 기대보수는 $1-b$이고 ($0 \times b + 1 \times (1-b)$), 시비를 걸지 않을 경우 기대보수는 $b$이다 ($1 \times b + 0 \times (1-b)$).</p>
 
 <p>[가정 D를 따르고 $b&gt;0.5$ 인 (총잡이 1이 강자일 확률이 더 높은) 경우]</p>
 
