@@ -121,10 +121,11 @@
 <lastmod>2023-08-06T00:00:00+09:00</lastmod>
 </url>
 <url>
-<loc>https://song4energyndata.github.io/aboutme/</loc>
+<loc>https://song4energyndata.github.io/jalalone.html</loc>
+<lastmod>2023-08-09T00:00:00+09:00</lastmod>
 </url>
 <url>
-<loc>https://song4energyndata.github.io/categories/mypapers</loc>
+<loc>https://song4energyndata.github.io/aboutme/</loc>
 </url>
 <url>
 <loc>https://song4energyndata.github.io/categories/dataset</loc>
@@ -136,7 +137,13 @@
 <loc>https://song4energyndata.github.io/categories/etc</loc>
 </url>
 <url>
+<loc>https://song4energyndata.github.io/categories/market</loc>
+</url>
+<url>
 <loc>https://song4energyndata.github.io/categories/mathstat</loc>
+</url>
+<url>
+<loc>https://song4energyndata.github.io/categories/mypapers</loc>
 </url>
 <url>
 <loc>https://song4energyndata.github.io/categories/optimalsystem</loc>
@@ -173,6 +180,9 @@
 </url>
 <url>
 <loc>https://song4energyndata.github.io/etc/</loc>
+</url>
+<url>
+<loc>https://song4energyndata.github.io/market/</loc>
 </url>
 <url>
 <loc>https://song4energyndata.github.io/mathstat/</loc>

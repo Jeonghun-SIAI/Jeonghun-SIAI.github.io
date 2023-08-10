@@ -240,13 +240,36 @@
                     
                 
                     
-                        <li><a href="/optimalsystem" class="">&#x2022 경제성분석 및 최적구성 도출 [11]</a></li>
+                        <li><a href="/optimalsystem" class="">&#x2022 경제성분석 및 최적구성 도출 [10]</a></li>
                     
                 
                     
                 
                     
                 
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/market" class="">&#x2022 전력시장 모델링 [2]</a></li>
                     
                 
             </ul>
@@ -270,6 +293,8 @@
                         <li><a href="/energymanagement" class="">&#x2022 제어 (최적화/ 강화학습) [5]</a></li>
                     
                 
+                    
+                
             </ul>
             <ul>
                 
@@ -285,6 +310,8 @@
                 
                     
                         <li><a href="/estimation" class="">&#x2022 예측 (회귀분석/ 머신러닝/ 딥러닝) [2]</a></li>
+                    
+                
                     
                 
                     
@@ -308,6 +335,8 @@
                 
                     
                 
+                    
+                
             </ul>
             <ul>
                 
@@ -315,6 +344,8 @@
                 
                     
                         <li><a href="/mathstat" class="">&#x2022 수학/ 통계학 일반 [3]</a></li>
+                    
+                
                     
                 
                     
@@ -346,8 +377,12 @@
                 
                     
                 
+                    
+                
             </ul>
             <ul>
+                
+                    
                 
                     
                 
@@ -368,6 +403,8 @@
                 
                     
                         <li><a href="/etc" class="">&#x2022 Etc. [2]</a></li>
+                    
+                
                     
                 
                     
@@ -433,7 +470,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#ramp-rate--duck-curve">Ramp rate (+ duck curve)</a></li><li><a href="#최소-기동유지시간정지유지시간">최소 기동유지시간/정지유지시간</a></li><li><a href="#시동-비용-start-up-cost">시동 비용 (start-up cost)</a></li></ul>
+              <ul class="toc__menu"><li><a href="#ramp-rate--duck-curve">Ramp rate (+ duck curve)</a></li><li><a href="#최소-기동유지시간-정지유지시간">최소 기동유지시간/ 정지유지시간</a></li><li><a href="#시동-가동중지-start-up-and-shutdown">시동/ 가동중지 (start-up and shutdown)</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
@@ -487,13 +524,13 @@
 
 <p><br /></p>
 
-<h2 id="최소-기동유지시간정지유지시간">최소 기동유지시간/정지유지시간</h2>
+<h2 id="최소-기동유지시간-정지유지시간">최소 기동유지시간/ 정지유지시간</h2>
 
 <p>어떤 기계든, 지나치게 껐다 켰다를 빨리 반복하면 해당 기계 수명에 악영향을 미칠 것이다. 이는 발전기도 마찬가지로, 빈번하게 기동-정지 전환 시 기기 수명에 악영향을 미친다.</p>
 
 <p>이 때문에, 발전기가 정지 상태에서 기동 상태로 전환하면, 일정 시간 동안 기동 상태를 유지해 줘야 한다. 또한 기동 상태에서 정지 상태로 전환하면, 일정 시간 동안 정지 상태를 유지해 줘야 한다.</p>
 
-<p>특히 규모가 크고 기저설비에 가깝게 설계된 경우, 이런 최소 기동유지시간/정지유지시간이 수 시간 이상일 수 있다.</p>
+<p>특히 규모가 크고 기저설비에 가깝게 설계된 경우, 이런 최소 기동유지시간/ 정지유지시간 이 수 시간 이상일 수 있다.</p>
 
 <p><br />
 어떤 발전설비가 정지상태에서 기동상태로 전환 시 ‘최소한 3시간은’ 기동상태를 유지해야 한다고 가정하자.</p>
@@ -519,17 +556,23 @@
 
 <p><br /></p>
 
-<h2 id="시동-비용-start-up-cost">시동 비용 (start-up cost)</h2>
+<h2 id="시동-가동중지-start-up-and-shutdown">시동/ 가동중지 (start-up and shutdown)</h2>
 
-<p>일정 규모 이상의 발전기를 정지 상태에서 기동 상태로 전환, 즉 ‘시동’ 시, 무시할 수 없는 수준의 시동비용이 발생하기도 한다. 이는 전력 생산을 위한 연료 비용과는 별개의 비용으로 반영하여야 한다.</p>
+<p>일정 규모 이상의 발전기를 정지 상태에서 기동 상태로 전환, 즉 ‘시동’ 시, 무시할 수 없는 수준의 시동비용이 발생하기도 한다. 이는 전력 생산을 위한 연료 비용과는 별개의 비용으로 반영하여야 한다. 한편, 기동 상태에서 정지 상태로 전환, 즉 ‘가동중지’ 시에도 비용이 발생할 수 있다.</p>
 
-<p>시점 $t$에서 시동을 한다는 것은 $u[t-1]=0$이면서 $u[t]=1$임을 의미한다. 즉 시동 여부를 의미하는 새로운 이진수 $v[t]$를 도입해서, $u[t-1]=0$이면서 $u[t]=1$일 때는 반드시 $v[t]=1$이 되도록 제약을 걸고, $v[t]$에 시동비용 계수를 곱한 항을 목적함수에 추가해야 한다.</p>
+<p>시점 $t$에서 시동을 한다는 것은 $u[t-1]=0$이면서 $u[t]=1$임을 의미한다. 한편 시점 $t$에서 가동중지를 한다는 것은 $u[t-1]=1$이면서 $u[t]=0$임을 의미한다.</p>
 
-<p>필요한 제약식은 아래와 같다.</p>
+<p>이를 반영하려면, 시동 여부를 의미하는 새로운 이진수 $y[t]$와 가동중지 여부를 의미하는 새로운 이진수 $z[t]$를 도입하고, $y[t]$에 시동비용 계수를 곱한 항과 $z[t]$에 가동중지비용 계수를 곱한 항을 목적함수에 추가해야 한다.</p>
 
-<p>$u[t] - u[t-1] \leq v[t]$</p>
+<p>필요한 logical constraint들은 아래와 같다.</p>
 
-<p>$u[t]=1$이고 $u[t-1]=0$인 경우 좌변은 1이 되는데, $v[t]$는 이진수이므로 반드시 $v[t]=1$이어야 식이 성립한다. 이외의 경우에는 좌변이 0 또는 -1이므로 $v[t]$가 0이어도 상관이 없으며, 목적함수를 최소화하기 위해 $v[t]=0$이 될 것이다.</p>
+<p>$y[t] + z[t] \leq 1 $</p>
+
+<p>$u[t] - u[t-1] = y[t] - z[t] $</p>
+
+<p>부등호 제약은 $y[t]$와 $z[t]$가 동시에 1인 경우는 없지만 동시에 0인 경우는 있음 (시동 이후 계속 가동 시, 가동중지 이후 계속 정지 시) 을 표현한다.</p>
+
+<p>등호 제약은 $u[t]=1$이고 $u[t-1]=0$ 인 경우 반드시 $y[t]=1$ 이 되게 하고, $u[t]=0$이고 $u[t-1]=1$ 인 경우 반드시 $z[t]=1$ 이 되게 한다. $u[t]=u[t-1]$인 경우에는 목적함수를 최소화하기 위해 $y[t]=0$, $z[t]=0$ 이 될 것이다.</p>
 
 <div class="notice--info">
 
@@ -620,8 +663,6 @@
 
 
   
-
-  
   	
   	
   	
@@ -632,7 +673,7 @@
 
   
     
-      <a href="/dturecommendation.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>에너지 분야 최적화/ 게임이론/ 데이터과학 관련 교육 추천: DTU summer school</a>
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
     
     
       <a href="/linprognine.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>선형계획법 기반 분산에너지시스템 최적화 - 9) '부분'부하 관련 제약들</a>
@@ -651,6 +692,47 @@
     <div class="page__related">
       <h2 class="page__related-title">참고</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/jalalone.html" rel="permalink"><img src="/assets/images/jalal/Lecture1_1.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/jalalone.html" rel="permalink">에너지시스템 최적화/게임이론 강의: 1) Market clearing as an optimization problem
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-08-09T00:00:00+09:00">2023-08-09</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 1강을 필자가 요약한 내용이다.
+</p>
+  </article>
+</div>
+
         
           
 
@@ -770,46 +852,6 @@
 
     <p class="archive__item-excerpt" itemprop="description">건축물 별 월별 에너지 사용량 데이터셋에는 종종 값의 누락, 즉 결측치가 있다. 결측치가 있는 row들은 실제로는 활용이 불가능한데 용량만 차지하는 골칫덩어리이다. 대신 결측치를 ‘합리적으로’ 메꿀 수 있다면, 쓸 수 있는 데이터의 양이 많아지므로 분석의 정확도가 올라갈 것이다.
 </p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <a href="/reinforcefive.html" rel="permalink"><img src="/assets/images/reinforcefive/result_td3sac.png" alt=""></a>
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/reinforcefive.html" rel="permalink">강화학습 기반 마이크로그리드 control - 5) TD3/ SAC 등 ‘진보된’ continuous control을 쓴다면?
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-07-01T00:00:00+09:00">2023-07-01</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Deep Deterministic Policy Gradient (DDPG) 로 도출한 수전/송전의 continuous control이, 놀랍게도(?) Vincent의 마이크로그리드 사례에서는, DQN으로 도출한 3-actions discrete control 대비 더 좋지 않았다 ...</p>
   </article>
 </div>
 

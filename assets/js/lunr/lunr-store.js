@@ -169,13 +169,19 @@ var store = [{
       },{
         "title": "Beer-Quiche game (동태적 미비정보 게임) 답안",
         "excerpt":"아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려한 Dynamic Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 방법론이 필요하다고 한다. 자율주행차에 게임이론이 들어간다고?” 관련 예시로 Beer-Quiche game을 들었는데, 해당 예시에 대해 필자 나름의 답안을 작성해보았다. 게임 구성 서부개척시대의 술집에 총잡이 두 명이 있다. 총잡이 1은 마실 것을 찾으러 왔으며,...","categories": ["mathstat"],
-        "tags": ["최적화","게임이론","에너지시스템"],
+        "tags": ["게임이론"],
         "url": "/beerquiche.html",
         "teaser": "/assets/images/beerquiche/beerquiche.png"
       },{
         "title": "에너지 분야 최적화/ 게임이론/ 데이터과학 관련 교육 추천: DTU summer school",
-        "excerpt":"에너지시스템 planning/ scheduling 관련 연구자라면 고급 최적화 기법, 시장 문제에서의 게임이론적 접근, 시계열 데이터 예측 등의 지식들이 필요하다고 느낀 적이 있을 것이다. 관련해 좋은 교육 자료를 소개한다. Technical University of Denmark에서 매년 주최하는 summer school이다. (홈페이지 (강의 슬라이드들 포함)) (Youtube 채널) 박사과정 동안 해당 채널에서 다루는 주제들의 존재 자체는 알았으나,...","categories": ["optimalsystem"],
-        "tags": ["최적화","게임이론","에너지시스템"],
+        "excerpt":"에너지시스템 planning/ scheduling 관련 연구자라면 고급 최적화 기법, 시장 문제에서의 게임이론적 접근, 시계열 데이터 예측 등의 지식들이 필요하다고 느낀 적이 있을 것이다. 관련해 좋은 교육 자료를 소개한다. Technical University of Denmark에서 매년 주최하는 summer school이다. (홈페이지 (강의 슬라이드들 포함)) (Youtube 채널) 박사과정 동안 해당 채널에서 다루는 주제들의 존재 자체는 알았으나,...","categories": ["market"],
+        "tags": ["최적화","게임이론","회귀분석","에너지시스템"],
         "url": "/dturecommendation.html",
         "teaser": "/assets/images/dturecommendation/channel.png"
+      },{
+        "title": "에너지시스템 최적화/게임이론 강의: 1) Market clearing as an optimization problem",
+        "excerpt":"이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 1강을 필자가 요약한 내용이다. (Course slides 링크) Market clearing price 결정 Market clearing이란, ‘수요와 공급을 일치시킬 때의 (단일)가격을 결정하는 과정’이다. 이를테면 아래 슬라이드처럼, 두 개의 발전기와 두 개의 수요처가 전력시장에서...","categories": ["market"],
+        "tags": ["최적화","게임이론","에너지시스템"],
+        "url": "/jalalone.html",
+        "teaser": "/assets/images/jalal/Lecture1_1.png"
       }]
