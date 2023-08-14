@@ -184,4 +184,16 @@ var store = [{
         "tags": ["최적화","게임이론","에너지시스템"],
         "url": "/jalalone.html",
         "teaser": "/assets/images/jalal/Lecture1_1.png"
+      },{
+        "title": "에너지시스템 최적화/게임이론 강의: 2) Market clearing as an equilibrium problem",
+        "excerpt":"이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 2강을 필자가 요약한 내용이다. (Course slides 링크) 최적화 기반 market clearing 결과는 game의 ‘Nash 균형’인가? 지난 강의에서 최적화 문제를 풀어서 각 발전기의 발전량, 각 수요처의 전기부하, 그리고 가격을 결정했다. 그런데,...","categories": ["market"],
+        "tags": ["최적화","게임이론","에너지시스템"],
+        "url": "/jalaltwo.html",
+        "teaser": "/assets/images/jalal/Lecture2_1.png"
+      },{
+        "title": "에너지시스템 최적화/게임이론 강의: 3) Desirable properties of market-clearing mechanisms",
+        "excerpt":"이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 3강을 필자가 요약한 내용이다. (Course slides 링크) Market clearing mechanism이 추구하는 4가지 성질들 1강에서는 market clearing이 social welfare를 최대화하는 최적화 문제의 풀이 결과임을 보였고, 2강에서는 최적화 결과가 Nash 균형이므로 어떤...","categories": ["market"],
+        "tags": ["최적화","게임이론","에너지시스템"],
+        "url": "/jalalthree.html",
+        "teaser": "/assets/images/jalal/Lecture3_1.png"
       }]

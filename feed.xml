@@ -5,9 +5,196 @@
     <description>공학박사 과정에서 쌓은 에너지 시스템 전문성에 데이터 사이언스 석사를 더하며 쌓은 계산통계학 활용 역량을 결합하여, 데이터 기반의 에너지 시스템/ 정책/ 시장 관련 솔루션 도출을 올바르게 할 수 있도록 돕습니다.</description>
     <link>https://song4energyndata.github.io/</link>
     <atom:link href="https://song4energyndata.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 10 Aug 2023 10:02:00 +0900</pubDate>
-    <lastBuildDate>Thu, 10 Aug 2023 10:02:00 +0900</lastBuildDate>
+    <pubDate>Tue, 15 Aug 2023 08:56:06 +0900</pubDate>
+    <lastBuildDate>Tue, 15 Aug 2023 08:56:06 +0900</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>에너지시스템 최적화/게임이론 강의: 3) Desirable properties of market-clearing mechanisms</title>
+        <description>&lt;p&gt;이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 3강을 필자가 요약한 내용이다.&lt;/p&gt;
+
+&lt;!-- Courtesy of embedresponsively.com --&gt;
+
+&lt;div class=&quot;responsive-video-container&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/hhtOAsXlxq8&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+  &lt;/div&gt;
+
+&lt;p&gt;(&lt;a href=&quot;https://www.jalalkazempour.com/teaching&quot;&gt;Course slides 링크&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h2 id=&quot;market-clearing-mechanism이-추구하는-4가지-성질들&quot;&gt;Market clearing mechanism이 추구하는 4가지 성질들&lt;/h2&gt;
+
+&lt;p&gt;1강에서는 market clearing이 social welfare를 최대화하는 최적화 문제의 풀이 결과임을 보였고, 2강에서는 최적화 결과가 Nash 균형이므로 어떤 참가자도 해당 결과를 받아들일 것임을 보였다.&lt;/p&gt;
+
+&lt;p&gt;이는 market clearing mechanism이 ‘market efficiency’ 성질을 충족한다고도 볼 수 있다.&lt;/p&gt;
+
+&lt;p&gt;Market clearing mechanism이 추구하는 성질은 market efficiency를 포함해 4개가 있다.&lt;/p&gt;
+
+&lt;p&gt;1) Market efficiency : Social welfare가 최대화되고, 각 참가자들이 받아들일 수 있는 결과가 도출된다.&lt;/p&gt;
+
+&lt;p&gt;2) Incentive compatibility : 각 참가자들이 자신의 정보를 왜곡 없이 그대로 제공하는 것이 각자에게 최선임을 의미한다.
+이를테면 어떤 발전기의 발전단가가 MWh당 12달러일 경우, offering을 MWh당 12달러보다 높은 값이 아닌 12달러 그대로 하는 것이 본인에게 있어 최선의 전략인 경우를 말한다.&lt;/p&gt;
+
+&lt;p&gt;여기서 offering을 ‘일부러’ 발전단가보다 높이 불러 (즉 거짓 정보를 제공해서) 수익 증대를 추구하는 것을 ‘전략적인 (strategic)’ 행동이라 하며, ‘exercising market power’라는 표현도 쓴다.&lt;/p&gt;
+
+&lt;p&gt;3) Cost recovery : 모든 참가자들이 최소한 각자의 operational cost는 건질 수 있음을, 즉 모든 참가자들에 대해 각자의 non-negative profit이 보장됨을 의미한다. (단, 이는 capital cost 회수 가능 여부와는 무관하다)&lt;/p&gt;
+
+&lt;p&gt;4) Revenue adequacy : Market operator가 operation 수행 시 최소한 손해는 보지 않음을 의미한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture3_11.png&quot; alt=&quot;clearingexample&quot; /&gt;
+&lt;img src=&quot;/assets/images/jalal/Lecture3_14.png&quot; alt=&quot;clearingexample&quot; /&gt;
+&lt;img src=&quot;/assets/images/jalal/Lecture3_16.png&quot; alt=&quot;clearingexample&quot; /&gt;
+&lt;img src=&quot;/assets/images/jalal/Lecture3_19.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;lmp-based-market에서-충족되는-성질들은&quot;&gt;LMP-based market에서 충족되는 성질들은?&lt;/h2&gt;
+
+&lt;p&gt;안타깝게도, 위 4개 성질들을 ‘전부 다’ 충족하는 것은 불가능하다 (Hurwicz theorem으로 증명됨).&lt;/p&gt;
+
+&lt;p&gt;그렇다면 1강부터 설명한 LMP (Local Marginal Price) based market에서는 위 4가지 성질들 중 어떤 성질이 충족되고 어떤 성질은 충족되지 않을까?&lt;/p&gt;
+
+&lt;p&gt;충족되지 않는 성질은 incentive compatibility와 market efficiency이다.&lt;/p&gt;
+
+&lt;p&gt;극단적인 예로 발전기와 수요처가 하나씩인 시장이 있다고 하자. 이 때 수요처의 bid price를 발전기가 알고 있을 경우, 발전기는 offer price를 자신의 발전단가가 아니라 수요처의 bid price로 제시하는 ‘strategic offering’ 을 할 것이다. 따라서 incentive compatibility가 깨진다.&lt;/p&gt;
+
+&lt;p&gt;이러한 strategic offering을 할 경우 market-clearing price는 이전과 달라진다. 이전에는 모든 발전기가 offer price를 각자의 발전단가로 제시했고 그 결과 social welfare가 최대화되었으나, price가 달라지므로 더 이상 social welfare가 최대화되지 않는다. 따라서 market efficiency도 깨진다.&lt;/p&gt;
+
+&lt;p&gt;충족되는 성질은 revenue adequacy와 cost recovery이다. (단, cost recovery 충족은 뒤에서 볼 unit commitment (UC) 제약을 고려하지 않았을 때 성립한다.)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture3_28.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;unit-commitment-제약을-고려한-market-clearing&quot;&gt;Unit commitment 제약을 고려한 market clearing&lt;/h2&gt;
+
+&lt;p&gt;1강의 최적화 문제에서는 발전기의 ramping limit, 최소부하, 시동비용, 최소기동유지시간 및 최소정지유지시간 등의 unit commitment (UC) 제약들을 고려하지 않았다.&lt;/p&gt;
+
+&lt;p&gt;UC 제약을 추가하면 어떻게 될까? Ramping limit을 제외한 나머지 제약들이 이진변수 (binary variable) 들을 포함하므로 UC 제약을 문제에 추가하면 mixed-integer 문제가 된다. Mixed-integer 문제에서는 dual variable을 계산할 수 없으므로, market clearing price를 도출할 수 없다 (discrete feasible space에 대해서 sensitivity를 정의하기 곤란함)&lt;/p&gt;
+
+&lt;p&gt;실제 적용에서는, 우선 UC 조건을 고려하는 문제를 풀어 이진변수들의 값을 얻고, 해당 이진변수들 값을 고정한 상태에서 다시 문제를 풀어 dual variable들을 계산한다. 미국에서는 independent system operator (ISO) 가 각 발전기 별 UC 제약들을 받아서 UC 문제를 푼다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture3_52.png&quot; alt=&quot;clearingexample&quot; /&gt;
+&lt;img src=&quot;/assets/images/jalal/Lecture3_56.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;단, 이진변수의 값을 고정하면 market clearing price 결정에 (이진변수로만 반영할 수 있는) 시동비용 정보를 반영할 수 없다. 시동비용도 operation cost이므로, 이는 cost recovery 성질을 충족하지 못함을 의미한다. 시동비용의 비중이 큰 원자력/ 석탄화력 발전소에게 있어 이는 중요한 이슈이다.&lt;/p&gt;
+
+&lt;p&gt;이 때문에 uplift mechanism 등의 side payment를 운용하여 cost recovery를 보장할 수 있도록 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;uc-제약에-대해-참고하면-좋은-문헌들&quot;&gt;UC 제약에 대해 참고하면 좋은 문헌들&lt;/h2&gt;
+
+&lt;p&gt;UC 제약은 다수의 이진변수를 포함하므로 최적화 문제 풀이 시간을 크게 증가시키거나 심지어는 현실적인 시간 내에 풀리지 않게 (intractable) 만드는 주범이다. 이 때문에 UC 제약을 다루는 데 대한 연구들이 수행되어 왔다.&lt;/p&gt;
+
+&lt;p&gt;참고할 만한 문헌들은 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;1) &lt;a href=&quot;https://doi.org/10.1109/TPWRS.2006.876672&quot;&gt;A computationally efficient mixed-integer linear formulation for the thermal unit commitment problem&lt;/a&gt;&lt;br /&gt;
+2) &lt;a href=&quot;https://doi.org/10.1109/TPWRS.2011.2162008&quot;&gt;Tight Mixed Integer Linear Programming Formulations for the Unit Commitment Problem&lt;/a&gt;&lt;br /&gt;
+3) &lt;a href=&quot;https://doi.org/10.1561/3100000014&quot;&gt;Unit Commitment in Electric Energy Systems&lt;/a&gt;&lt;br /&gt;
+4) &lt;a href=&quot;https://doi.org/10.1109/TPWRS.2017.2735026&quot;&gt;Representing Operational Flexibility in Generation Expansion Planning Through Convex Relaxation of Unit Commitment&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;notice--info&quot;&gt;
+
+Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&gt;&lt;br /&gt;
+
+01) &lt;a href=&quot;/jalalone.html&quot;&gt; Market clearing as an optimization problem&lt;/a&gt; &lt;br /&gt;
+02) &lt;a href=&quot;/jalaltwo.html&quot;&gt; Market clearing as an equilibrium problem&lt;/a&gt; &lt;br /&gt;
+03) &lt;b&gt; Desirable properties of market-clearing mechanisms&lt;/b&gt; &lt;br /&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Tue, 15 Aug 2023 00:00:00 +0900</pubDate>
+        <link>https://song4energyndata.github.io/jalalthree.html</link>
+        <guid isPermaLink="true">https://song4energyndata.github.io/jalalthree.html</guid>
+        
+        <category>최적화</category>
+        
+        <category>게임이론</category>
+        
+        <category>에너지시스템</category>
+        
+        
+        <category>market</category>
+        
+      </item>
+    
+      <item>
+        <title>에너지시스템 최적화/게임이론 강의: 2) Market clearing as an equilibrium problem</title>
+        <description>&lt;p&gt;이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 2강을 필자가 요약한 내용이다.&lt;/p&gt;
+
+&lt;!-- Courtesy of embedresponsively.com --&gt;
+
+&lt;div class=&quot;responsive-video-container&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/Dg64manEFRY&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+  &lt;/div&gt;
+
+&lt;p&gt;(&lt;a href=&quot;https://www.jalalkazempour.com/teaching&quot;&gt;Course slides 링크&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h2 id=&quot;최적화-기반-market-clearing-결과는-game의-nash-균형인가&quot;&gt;최적화 기반 market clearing 결과는 game의 ‘Nash 균형’인가?&lt;/h2&gt;
+
+&lt;p&gt;지난 강의에서 최적화 문제를 풀어서 각 발전기의 발전량, 각 수요처의 전기부하, 그리고 가격을 결정했다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture2_5.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그런데, 과연 각 발전사업자와 각 수요처 각자의 입장에서, 해당 최적화 문제의 결과가 ‘받아들일 만한’ 것일까? 받아들이지 못할 결과라면 참가자들이 시장에서 떠나는 (deviate) 문제가 발생할 것이다.&lt;/p&gt;
+
+&lt;p&gt;각 발전기는 발전량에 market price를 곱한 revenue에서 발전 비용을 뺀 profit을 최대화하려 할 것이고,
+각 수요처는 부하량에 bid price와 market price 간 차이를 곱한 utility를 최대화하려 할 것이다.&lt;/p&gt;
+
+&lt;p&gt;위 최적화 결과로 얻은 각 발전기 별 발전량, 각 수요처 별 부하량, 그리고 시장가격이 주어질 경우,
+어떤 참가자에 대해서도 (다른 참가자가 현재 상태를 유지한다는 전제 하에) 현재 상태가 profit 또는 utility를 최대화하는 상태여야 한다.&lt;/p&gt;
+
+&lt;p&gt;즉 각 발전기와 수요처를 ‘game의 참가자’ 로 볼 때, 위 최적화 문제를 풀어 얻은 결과가 해당 game의 (유일한) Nash 균형이어야 한다.&lt;/p&gt;
+
+&lt;p&gt;(‘유일한’ Nash 균형이 아닐 경우 갈등이 생길 수 있다. 어떤 참가자가 “나한테는 균형 1이 더 좋은데 왜 market operator 당신은 균형 2로 결정했냐” 등…)&lt;/p&gt;
+
+&lt;p&gt;각 참가자 ‘개별’의 최적화 문제들 모은 Nash 균형 문제를 보면 아래 슬라이드와 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture2_26.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;발전기와 수요처 뿐 아니라 price-setter가 있는데, 이는 수요-공급 균형 제약을 고려하면서 동시에 가격을 결정하기 위한 가상의 참가자이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;전력시장의-nash-균형-문제는-최적화-문제와-동치이다&quot;&gt;전력시장의 Nash 균형 문제는 최적화 문제와 동치이다&lt;/h2&gt;
+
+&lt;p&gt;최적화 문제를 풀어 얻은 결과가 Nash 균형인지 여부를 판단하려면, 최적화 문제와 Nash 균형 문제가 수학적으로 동치 (equivalent problem) 인지 여부를 판단할 수 있는 비교가 필요하다.&lt;/p&gt;
+
+&lt;p&gt;이를 위해서는, 최적화 문제의 KKT (Karush-Kuhn-Tucker) condition과 Nash 균형 문제의 각 참가자 별 KKT condition들의 모음을 서로 비교한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture2_47.png&quot; alt=&quot;clearingexample&quot; /&gt;
+&lt;img src=&quot;/assets/images/jalal/Lecture2_51.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;위 두 그림을 보면, 두 문제의 KKT condition이 서로 같으므로 두 문제는 동치이다.&lt;/p&gt;
+
+&lt;p&gt;그러므로 market operator가 최적화 문제를 풀면 그 결과는 Nash 균형이다.&lt;/p&gt;
+
+&lt;p&gt;일반적으로 각 참가자들의 목적함수를 모두 고려하는 game의 Nash 균형 문제를 푸는 것 보다는 단일 최적화 문제를 푸는 것이 더 쉬우므로, Nash 균형 문제와 최적화 문제 간 동치는 market clearing을 실제로 가능하게 해 주는 좋은 성질이다.&lt;/p&gt;
+
+&lt;p&gt;여러 개의 bus가 있어 각 nodal price를 결정하는 경우에도 Nash 균형 문제를 아래와 같이 구성할 수 있다 (DC flow approximation임에 유의).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture2_55.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이 때 두 bus 간 nodal price가 다른 경우, transmission owner는 일종의 공간적 차익거래 (spatial arbitrage) 를 추구한다.&lt;/p&gt;
+
+&lt;p&gt;이를테면 bus 1과 bus 2 각각의 nodal price가 $\lambda_1$과 $\lambda_2$이고, 두 bus 간 susceptance가 $B$, 각 bus에서의 voltage angle이 $\theta_1$과 $\theta_2$인 경우, transmission owner의 목적함수는 $(\lambda_2 - \lambda_1) B (\theta_1 - \theta_2)$ 가 되어, $\lambda_2$와 $\lambda_1$ 간에 차이가 있을 경우 (계통혼잡이 있을 경우 nodal price들이 서로 달라짐) 에 공간적 차익에 의한 profit을 벌 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이러한 차익 중 일부를 가져갈 권리를 financial transmission rights (FTR) 이라 하며, 실제로 미국에서는 매년 초에 각 송전선 별 FTR을 경매로 판매한다. FTR 구매자 입장에서는 계통혼잡에 의한 nodal price 상승 risk를 hedging할 수 있고, FTR 판매자 입장에서는 연초에 고정수익을 확보할 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;notice--info&quot;&gt;
+
+Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&gt;&lt;br /&gt;
+
+01) &lt;a href=&quot;/jalalone.html&quot;&gt; Market clearing as an optimization problem&lt;/a&gt; &lt;br /&gt;
+02) &lt;b&gt; Market clearing as an equilibrium problem&lt;/b&gt; &lt;br /&gt;
+03) &lt;a href=&quot;/jalalthree.html&quot;&gt; Desirable properties of market-clearing mechanisms&lt;/a&gt; &lt;br /&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Sat, 12 Aug 2023 00:00:00 +0900</pubDate>
+        <link>https://song4energyndata.github.io/jalaltwo.html</link>
+        <guid isPermaLink="true">https://song4energyndata.github.io/jalaltwo.html</guid>
+        
+        <category>최적화</category>
+        
+        <category>게임이론</category>
+        
+        <category>에너지시스템</category>
+        
+        
+        <category>market</category>
+        
+      </item>
     
       <item>
         <title>에너지시스템 최적화/게임이론 강의: 1) Market clearing as an optimization problem</title>
@@ -70,6 +257,8 @@
 Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&gt;&lt;br /&gt;
 
 01) &lt;b&gt; Market clearing as an optimization problem&lt;/b&gt; &lt;br /&gt;
+02) &lt;a href=&quot;/jalaltwo.html&quot;&gt; Market clearing as an equilibrium problem&lt;/a&gt; &lt;br /&gt;
+03) &lt;a href=&quot;/jalalthree.html&quot;&gt; Desirable properties of market-clearing mechanisms&lt;/a&gt; &lt;br /&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Wed, 09 Aug 2023 00:00:00 +0900</pubDate>
@@ -2090,261 +2279,6 @@ Vincent의 마이크로그리드 사례에서는, 실제 수전량은 -1.1에서
         <guid isPermaLink="true">https://song4energyndata.github.io/reinforcetwo.html</guid>
         
         <category>강화학습</category>
-        
-        
-        <category>energymanagement</category>
-        
-      </item>
-    
-      <item>
-        <title>로지스틱 회귀에서의 over-confidence에 대한 이해</title>
-        <description>&lt;p&gt;Logistic regression에서는 각 point 별로 response $y$가 0과 1 중 1일 확률 추정값 $\hat{y}$를 제공한다 (물론 실제 $y$값들은 알려져 있다). 한편, feature space에서 response가 1인 point들과 0인 point들이 완전히 linearly separable하면 (즉 $\hat{y}=0.5$를 기준으로 misclassified point가 하나도 없으면), logistic regression 추정이 되지 않음이 잘 알려져 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;over-confidence란&quot;&gt;Over-confidence란&lt;/h2&gt;
-&lt;p&gt;Feature space에서 response가 1인 point들과 0인 point들이 ‘거의’ linearly separable인 경우 (즉 $\hat{y}=0.5$를 기준으로 misclassified point들이 ‘거의’ 없는 경우) 에도 문제가 발생한다. 이 경우 계수추정량들의 magnitude가 매우 커지고, 그 결과 추정값들이 모든 경우에 대해 1 또는 0에 아주 가까워진다. 이를 어느 class에 속할지에 대해 지나치게 확신한다고 해서, over-confidence라 한다.&lt;/p&gt;
-
-&lt;p&gt;Toy problem을 예시로 들면, 아래와 같은 두 class의 point들을 분류하는 plane을 ($\hat{y}=0.5$를 기준으로) logistic regression으로 찾는다고 하자.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/overconfidence/overconfidence.png&quot; alt=&quot;overconfidence&quot; class=&quot;align-center&quot; /&gt;
-&lt;em&gt;두 class의 point들을 분류하는 plane을 찾는 문제, 각 경우에 대해 misclassified point 개수가 다름.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Plane을 $\beta_1 x_1 + \beta_2 x_2 + \beta_0 = 0$ 이라 할 때, 기울기가 -1이고 원점을 지나는 직선일 것이므로 $\beta_1 \approx \beta_2$,$\beta_0 \approx 0$임은 자명하다. 각 경우에 대해 $\beta_1$의 계수추정량들 및 계수추정량의 $t$-value들을 구하면 아래와 같다.&lt;/p&gt;
-
-&lt;p&gt;1) Many misclassifications: $\hat{\beta_1} = 8.85$, $t$-value는 $18.4$ &lt;br /&gt;&lt;br /&gt;
-2) A few misclassifications: $\hat{\beta_1} = 29.6$, $t$-value는 $13.8$ &lt;br /&gt;&lt;br /&gt;
-3) Perfect separation: $\hat{\beta_1} = 9,824$, $t$-value는 $0.8$ &lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Misclassified point의 비중이 적을수록 계수추정량의 magnitude는 커지고, $t$-value는 작아진다. Python에서는 perfectly separable case에 대해서도 결과를 제공하기는 하는데, t-value를 보면 계수의 값에 별 의미는 없는 것으로 보인다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h2 id=&quot;over-confidence가-발생하는-이유&quot;&gt;Over-confidence가 발생하는 이유&lt;/h2&gt;
-
-&lt;p&gt;Over-confidence에 대해 아주 엄밀한 설명은 아직 만나보지 못했지만, 필자가 간단히 수학적으로/ 직관적으로 생각해 본 바는 아래와 같다.&lt;/p&gt;
-
-&lt;p&gt;먼저 수학적으로는 다음과 같다.&lt;/p&gt;
-
-&lt;p&gt;로지스틱 회귀에서의 cost function은 ‘negative’ log-likelihood $-\sum_{i=1}^{N}[y_{i} \text{log}\hat{y}_{i} + (1-y_{i})\text{log}(1-\hat{y}_{i})]$ 이고 $ y_{i} \in \lbrace 0,1 \rbrace$이며 $0 \leq \hat{y}_{i}\leq 1$이다.&lt;/p&gt;
-
-&lt;p&gt;그러므로 실제 response가 1인 점을 기준으로, 추정값이 1에서 멀어지고 0으로 가까워질수록 penalty가 exponential하게 증가한다. 이는 실제 response가 0인데 추정값이 1에 가까워질 경우에도 마찬가지이다.&lt;/p&gt;
-
-&lt;p&gt;이 때 $\hat{y}=0.5$ 기준으로 misclassified point가 여럿 있는 경우에는, 해당 point들 때문에 생기는 exponential penalty를 줄이기 위해 추정값들이 1 또는 0에 너무 가까워지지 않도록 계수의 magnitude를 작게 설정해야 한다.&lt;/p&gt;
-
-&lt;p&gt;그러나 계수의 magnitude를 작게 할수록, 실제 값이 1이고 추정값이 1에 가까운 경우에도 완전히 1에 매우 가깝기보다는 1보다 어느 정도는 작은 값이 될 것이다. 실제 값이 0이고 추정값이 0인 경우에도 0보다 어느 정도는 큰 값이 될 것이다. 이 차이 또한 작게나마 penalty로 계산된다.&lt;/p&gt;
-
-&lt;p&gt;misclassified point가 매우 조금밖에 없을 경우에는, misclassified point의 penalty가 아무리 exponential하게 증가한다고 해도 그 숫자 자체가 매우 적기 때문에, 올바르게 분류된 point들에 대한 $\hat{y}$가 1 또는 0에 매우 가까워지도록 계수의 magnitude를 크게 설정하는 것이 total penalty를 더 작게 만드는 선택일 수 있는 것이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;
-다음으로 직관적으로는 아래와 같다.&lt;/p&gt;
-
-&lt;p&gt;Misclassified point가 여럿 있는 경우에는, boundary 근처 point들에 대해 이 분류가 맞다는 확신을 가지기가 어려울 것이다 (말 그대로 misclassification이 많으니까). 그래서 확률 추정값을 0.5에 가깝게 주는 것이 자연스럽다.&lt;/p&gt;
-
-&lt;p&gt;그러나 misclassified point가 거의 없는 경우에는, 분류가 잘 되니 boundary 근처 point들에 대해서도 보다 더 확신을 가질 것이다. 그러므로 확률 추정값도 0 또는 1에 가깝게 준다고 보는 것이 자연스럽다.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 28 May 2023 00:00:00 +0900</pubDate>
-        <link>https://song4energyndata.github.io/overconfidence.html</link>
-        <guid isPermaLink="true">https://song4energyndata.github.io/overconfidence.html</guid>
-        
-        <category>회귀분석</category>
-        
-        
-        <category>mathstat</category>
-        
-      </item>
-    
-      <item>
-        <title>강화학습 기반 마이크로그리드 control - 1) 미래를 모를 때의 &apos;경제적&apos; control을 위한 강화학습</title>
-        <description>&lt;p&gt;재생 발전의 비중이 커질수록, 당장 몇 시간 뒤의 발전량 및 순 부하 (재생발전량을 제한 net power load) 예측조차도 어려워진다. 이런 상황에서 과거 데이터들을 잘 이용해서 ‘경제적으로’ 전력을 공급하도록 설비들을 control하는 것이, ‘스마트’그리드의 중요한 과제이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/reinforceone/renewableuncertainty.png&quot; alt=&quot;renewableuncertainty&quot; class=&quot;align-center&quot; width=&quot;80%&quot; /&gt;
-&lt;em&gt;풍력발전 예측 시의 신뢰구간이 큼. 즉, 재생발전 비중이 높으면 발전량의 단기적 예측도 어려움.&lt;br /&gt;(출처: http://www.ningzhang.net/Renewables.html)&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;선형계획법의-한계-미래를-안다고-가정-비현실적&quot;&gt;선형계획법의 한계: 미래를 안다고 가정 (비현실적)&lt;/h2&gt;
-
-&lt;p&gt;이 블로그의 ‘Optimal System’ 카테고리에, 필자가 선형계획법 기반의 최적 에너지시스템 구성 및 스케줄링 도출을 설명했으며 해당 내용에는 &lt;a href=&quot;https://song4energyndata.github.io/linprogfive.html&quot;&gt;태양광/ 풍력 등 재생발전 비중이 높은 시스템 대상 분석&lt;/a&gt;도 포함되어 있다.&lt;/p&gt;
-
-&lt;p&gt;그런데 선형계획법 기반 에너지시스템 스케줄링에서는, ‘미래’의 발전량과 부하를 ‘정확히 알 경우의’ control을 도출한다는 한계점이 있다 (실제로는 미래를 정확히 알 수 없음에도).&lt;/p&gt;
-
-&lt;p&gt;최적화 문제의 변수들이 각 시간별 수전/ 충전/ 방전 등이라 할 때, 해당 문제의 제약조건들로 ‘모든 시간에 대한’ 에너지 밸런스 제약이 포함된 상태에서 최적화를 수행하기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;
-예시를 하나 들자. Vincent의 Liege 대학 박사학위논문 &lt;a href=&quot;https://orbi.uliege.be/handle/2268/214216&quot;&gt;‘Contributions to deep reinforcement learning and its applications in smartgrids’&lt;/a&gt; 에서 연구대상으로 삼은 가상의 마이크로그리드 시스템은 아래와 같다.&lt;/p&gt;
-
-&lt;p&gt;최대부하 2kW 수준의 전기부하가 있으며, 이 부하에 전력을 공급하는 수단으로는 정격출력 12kW급 태양광 패널, 실용량 15kWh급 배터리 (충방전 효율은 80%), 그리고 부하에 연결된 수소연료전지 기반 중앙 계통이 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/reinforceone/system.png&quot; alt=&quot;system&quot; class=&quot;align-center&quot; /&gt;
-&lt;em&gt;Vincent의 연구에서 가정된 마이크로그리드.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;태양광 발전량이 부족할 경우 중앙 수소연료전지 시스템으로부터 전기를 받을 수 있다 (수전). 또는 태양광 발전량이 수요를 초과할 경우 전기를 역송해서 중앙 수소연료전지 시스템이 그린수소를 생산하도록 할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;이 문제에서는 특이하게도, 계통 사이에 오갈 수 있는 전력이 1.1kW로 제한되어 있다 (개인적으로 일반적인 case는 아니라는 생각이 들지만… 일단 받아들이자).&lt;/p&gt;
-
-&lt;p&gt;이때 계통으로부터 전력을 받는 데 드는 비용은 해당 전기에너지 생산에 필요한 양만큼의 수소의 가격, 계통으로 잉여전력을 보낼 때의 수익은 해당 전기에너지로 만들 수 있는 양만큼의 수소의 가격이다.&lt;/p&gt;
-
-&lt;p&gt;이 논문의 가정에서는 수소 에너지 기준으로 1kWh 당 0.1유로이며 수소-전기 간 변환효율은 65%이므로, 보낼 때의 수익은 약 0.065유로/kWh, 받을 때의 비용은 약 0.154유로/kWh이다. 즉 역송 시의 수익이 수전 시의 비용보다 더 적다.&lt;/p&gt;
-
-&lt;p&gt;만약 태양광발전이 없고 배터리도 완방되어 있고 계통으로부터 1.1kW를 수전받음에도 부하를 충당하지 못할 경우, loss of load에 대한 큰 penalty성 비용 2.0유로/kWh가 발생한다 (부하 공급 실패에 대한 penalty를 큰 비용으로 환산함).&lt;/p&gt;
-
-&lt;p&gt;그러므로 특정 시간에 잉여전력이 많더라도, 이를 전부 송전해서 수소 가격만큼의 수익을 내려다가 나중에 태양광 발전량이 부족해지면 큰 손실을 볼 수 있다. 그러므로 배터리 내 에너지 저장량을 ‘적절히’ 유지해야 한다.&lt;/p&gt;
-
-&lt;p&gt;만약 잉여 태양광전력이 너무 많아서 배터리 완충 + 계통으로 1.1kW 송전 시에도 전력이 남으면, 이는 curtail(출력제한)된다. 출력제한은 전기를 버리는 것이므로, 수익을 내지 않는다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;
-시간 인덱스가 $t \in  \lbrace 1, 2, …, T \rbrace$ 일 때, 모든 시간의 비용의 합을 최소화하는 계통으로부터의 수전/송전, 에너지저장장치의 충전/방전량을 결정하고자 한다. 최적화 문제는 아래와 같다.&lt;/p&gt;
-
-&lt;p&gt;Minimize $ \sum_{t=1}^{T} 0.154 p_{\text{import}}[t] - \sum_{t=1}^{T} 0.065 p_{\text{export}}[t] + \sum_{t=1}^{T} 2 p_{\text{loss}}[t] $&lt;/p&gt;
-
-&lt;p&gt;Subject to&lt;/p&gt;
-
-&lt;p&gt;$ p_{\text{load}}[t] = p_{\text{pv}}[t] + p_{\text{import}}[t] - p_{\text{export}}[t] + p_{\text{disch}}[t] - p_{ch}[t] + p_{\text{loss}}[t] - p_{\text{curtail}}[t]  \quad \forall t$&lt;/p&gt;
-
-&lt;p&gt;$ e_{\text{batt}}[t] = e_{\text{batt}}[t-1] + 0.8 p_{\text{ch}}[t] - p_{\text{disch}}/0.8 \quad \forall t,\,\, e_{\text{batt}}[0]=0  $&lt;/p&gt;
-
-&lt;p&gt;$ p_{\text{import}}[t] \leq 1.1, \,\, p_{\text{export}}[t] \leq 1.1 \quad \forall t$&lt;/p&gt;
-
-&lt;p&gt;위에서 load는 부하, pv는 태양광, import는 계통으로부터의 수전, export는 계통으로의 송전, disch는 배터리 방전, ch는 배터리 충전, loss는 전력 부족 시 loss of load, curtail은 전력 초과 시 출력제한, batt는 배터리이다. $p$는 전력, $e$는 저장된 에너지, $\mu$는 효율이다. $p_{\text{load}}[t]$와 $p_{\text{pv}}[t]$는 input data로써 주어져 있고, 나머지 nonnegative 변수들의 값을 결정한다.&lt;/p&gt;
-
-&lt;p&gt;(참고로 보통은 battery의 c-rate까지 고려해야 하지만, Vincent의 논문에서는 배터리가 순간적인 발전량 전부를 유입시킬 수 있다고 가정했으므로 c-rate는 고려하지 않았다.)&lt;/p&gt;
-
-&lt;p&gt;위 선형계획 문제를 Python에서 cvxopt 패키지와 glpk solver로 구성하고 푸는 코드는 아래와 같다. (&lt;a href=&quot;https://github.com/song4energyndata/Codes/tree/main/linearprogramming/microgrid_Vincent&quot;&gt;GitHub Repo 링크&lt;/a&gt;)&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cvxopt&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spmatrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sparse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;glpk&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;load_peak&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;pv_peak&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;eff_h2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.65&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 수소-전기 변환효율
-&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;capa_batt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 배터리 용량 (겉보기용량이 아닌, SOC 상하한 고려한 실용량이라 가정)
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eff_batt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.9&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 배터리 충방전 효율
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;initialenergy_batt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;price_h2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 수소에너지의 가격 (Euro/kWh)
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cost_loss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# loss of load penalty (Euro/kWh)
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maxrate_h2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.1&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 계통으로부터의 송전/ 계통으로의 수전 의 상한 (kW)
-&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;data_load&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;loadtxt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;load_test.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;data_pv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;loadtxt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;pv_test.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;p_load&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data_load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;load_peak&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;p_pv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data_pv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pv_peak&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p_load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;block_eye&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;spmatrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; 
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sparse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;block_ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sparse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;block_batt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sparse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_eye&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sparse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_eye&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]])&lt;/span&gt;
-
-
-&lt;span class=&quot;n&quot;&gt;Aeq_balance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sparse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_eye&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_eye&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_eye&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_eye&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_eye&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_eye&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]])&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 변수 순서: 송전, 수전, 충전, 방전, 배터리내에너지, loss of load, curtailment
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beq_balance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p_load&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p_pv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;d&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;Aeq_batterydynamic&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sparse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eff_batt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_eye&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_eye&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eff_batt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_batt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]])&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;beq_batterydynamic&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;lowerbounds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;initialenergy_batt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]])&lt;/span&gt; 
-&lt;span class=&quot;n&quot;&gt;upperbounds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maxrate_h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maxrate_h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;initialenergy_batt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])],[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;capa_batt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]])&lt;/span&gt; 
-
-&lt;span class=&quot;n&quot;&gt;A_lowerbound&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_eye&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;b_lowerbound&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lowerbounds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;A_upperbound&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;block_eye&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;b_upperbound&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;upperbounds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;price_h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eff_h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;price_h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eff_h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cost_loss&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block_zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]])&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;Aeq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sparse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Aeq_balance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Aeq_batterydynamic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;beq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beq_balance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beq_batterydynamic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sparse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A_lowerbound&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A_upperbound&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b_lowerbound&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b_upperbound&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-
-
-&lt;span class=&quot;n&quot;&gt;start_time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;glpk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;lp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Aeq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;msg_lev&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;GLP_MSG_ON&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# c는 수익 관점의 벡터임, 그러므로 수익의 최&apos;대&apos;화를 위해 &apos;마이너스&apos; c를 입력
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elapsed_time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start_time&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;profit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;profit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;특정 1년의 1월 2일~12월 31일에 대해 최적화 수행 시, 비용은 -50유로, 즉 누적해서 50유로의 수익을 낸다 (이는 다음 포스팅에서부터 소개할 강화학습에 대한 validation case이며, 왜 1월 2일부터인지는 다음 포스팅에서 설명한다).&lt;/p&gt;
-
-&lt;p&gt;여기서 $t=1$일 때의 $p_{\text{export}}[1]$와 $p_{\text{import}}[1]$을 결정하는 데 쓰이는 정보는, $p_{\text{pv}}[1], p_{\text{pv}}[2], \cdots, p_{\text{pv}}[T]$ 즉 모든 시간의 태양광 발전량 값들 및 $p_{\text{load}}[1], p_{\text{load}}[2], \cdots, p_{\text{load}}[T]$ 즉 모든 시간의 부하 값들이다. 즉 ‘미래를 정확히 알 때의’ control이다.&lt;/p&gt;
-
-&lt;p&gt;그러나 이는 비현실적인 가정이다. 현실 세계에서는 시점 $k$의 $p_{\text{export}}[k]$와 $p_{\text{import}}[k]$를 결정하는 데 실제로 쓰일 수 있는 정보가, 과거의 정보 $p_{\text{pv}}[1], \cdots, p_{\text{pv}}[k-1], p_{\text{load}}[1], \cdots, p_{\text{load}}[k-1]$로 한정된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;
-이를 보완하기 위한 방법으로, 시점 $k$ 기준으로 시점 $k+1, k+2, \cdots, k+N$ ($N$은 24~168 즉 하루~일주일 정도의 비교적 짧은 기간) 까지에 대한 ‘작은 문제’를 풀어 해를 얻고, 그 해에서 시점 $k$의 control만 취하는 과정을 반복하는 ‘rolling horizon’ 방법이 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/reinforceone/rolling.png&quot; alt=&quot;rolling&quot; class=&quot;align-center&quot; width=&quot;70%&quot; /&gt;
-&lt;em&gt;Rolling horizon 기반 control. 가까운 미래에 대한 예측 기반으로 현재의 control을 결정.&lt;br /&gt;출처: &lt;a href=&quot;https://doi.org/10.1016/j.apenergy.2015.05.090&quot;&gt;Silvente et al. (2015)&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;그러나 이는 두 가지 한계점이 있다.&lt;/p&gt;
-
-&lt;p&gt;첫째, 이를 현실에서 사용하려면 단기라도 어쨌거나 미래 $N$시간 동안의 발전량과 부하 ‘예측’이 필요하다는 것이다. 재생발전 비중이 증가할수록 이에 대한 예측이 실제로부터 벗어나기 쉽다는 것은 이미 본문의 맨 위에서 언급했다.&lt;/p&gt;
-
-&lt;p&gt;둘째, 해당 control은 현재 및 $N$시간 뒤까지 발생하는 비용의 합만을 최소화하지, 그보다 더 미래까지의 ‘누적비용’은 고려하지 않는다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;강화학습을-쓴다면&quot;&gt;강화학습을 쓴다면?&lt;/h2&gt;
-
-&lt;p&gt;그러면 어떻게 해야 ‘예측 없이 과거 정보만으로’, ‘먼 미래까지의 누적비용을 고려한’ 경제적 control을 도출할 수 있을까?&lt;/p&gt;
-
-&lt;p&gt;‘강화학습’ (Reinforcement Learning) 이라는 말을 들어봤을 것이다 (아마 AlphaGo의 학습 원리 등으로).&lt;/p&gt;
-
-&lt;p&gt;강화학습은, 주어진 환경에서 특정 상태 (state)에 처했을 때 할 수 있는 행동 (action)들 중 특정 행동을 함으로써 얻는 보상 (reward), 특히 당장의 보상 뿐 아니라 중/장기적 관점에서 미래 보상의 ‘누적 합 (return)’의 기대값을 최대화할 수 있도록, 상태 별 행동을 정하는 규칙 (policy) 을 도출하는 기계학습 방법이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/reinforceone/reinforcement_basic.png&quot; alt=&quot;reinforcement_basic&quot; class=&quot;align-center&quot; width=&quot;70%&quot; /&gt;
-&lt;em&gt;강화학습 개요. State $S_t$에서 Action $A_t$를 취하면 Reward $R_{t+1}$을 얻으면서 State $S_{t+1}$로 전이됨.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Vincent의 마이크로그리드 문제에서 state를 특정 N시간 ‘전’까지의 부하와 태양광 발전량, action을 현재 시간에서의 수전/송전으로 두고 강화학습을 적용해 controller를 훈련시키면, 미래 정보 없이도 해당 controller로 ‘경제적인’ 수전/송전 결정을 할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;물론 이 controller를 사용할 경우의 누적 비용은, (미래를 다 안다고 가정해서 얻은) 선형계획법 결과 기반 control 시의 비용보다는 클 것이다. 그렇지만 적어도 random control보다는 훨씬 나은 성과를 낼 수 있을 것이다.&lt;/p&gt;
-
-&lt;p&gt;실제로 해당 학위논문의 에너지시스템 사례에 대해 수전을 플러스, 송전을 마이너스라 할 때 [-1.1,+1.1] 구간에 대한 uniform distribution을 가정해 all random으로 control을 한다면, validation case에서 누적 비용은 대략 2500~2700유로 정도이다. 그러나 강화학습으로 훈련시킨 controller를 쓰면 27유로로, LP 결과인 -50유로에 상당히 근접한 economic control이 된다.&lt;/p&gt;
-
-&lt;p&gt;다음 편부터는 강화학습 개념, 그리고 Vincent의 마이크로그리드 문제에 강화학습을 적용하는 방법 및 결과를 소개한다.&lt;/p&gt;
-
-&lt;div class=&quot;notice--info&quot;&gt;
-
-강화학습 기반 마이크로그리드 control&lt;br /&gt;&lt;br /&gt;
-
-1) &lt;b&gt;미래를 모를 때의 &apos;경제적&apos; control을 위한 강화학습&lt;/b&gt;&lt;br /&gt;
-2) &lt;a href=&quot;/reinforcetwo.html&quot;&gt;강화학습의 기본, Q-learning 리뷰&lt;/a&gt;&lt;br /&gt;
-3) &lt;a href=&quot;/reinforcethree.html&quot;&gt;Deep Q-Network를 통한 3-action control 도출&lt;/a&gt;&lt;br /&gt;
-4) &lt;a href=&quot;/reinforcefour.html&quot;&gt;DDPG를 이용한 &apos;continuous&apos; control 도출&lt;/a&gt;&lt;br /&gt;
-5) &lt;a href=&quot;/reinforcefive.html&quot;&gt;TD3/ SAC 등 &apos;진보된&apos; continuous control을 쓴다면?&lt;/a&gt;
-
-&lt;/div&gt;
-</description>
-        <pubDate>Sun, 21 May 2023 00:00:00 +0900</pubDate>
-        <link>https://song4energyndata.github.io/reinforceone.html</link>
-        <guid isPermaLink="true">https://song4energyndata.github.io/reinforceone.html</guid>
-        
-        <category>선형계획법</category>
-        
-        <category>부하패턴</category>
-        
-        <category>경제성분석</category>
-        
-        <category>강화학습</category>
-        
-        <category>녹색섬</category>
-        
-        <category>Python</category>
         
         
         <category>energymanagement</category>

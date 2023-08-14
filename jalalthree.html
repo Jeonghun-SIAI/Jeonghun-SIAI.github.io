@@ -19,8 +19,8 @@
 </script>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기 | 에너지엔데이터연구소</title>
-<meta name="description" content="이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.">
+<!-- begin _includes/seo.html --><title>에너지시스템 최적화/게임이론 강의: 3) Desirable properties of market-clearing mechanisms | 에너지엔데이터연구소</title>
+<meta name="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 3강을 필자가 요약한 내용이다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -32,19 +32,21 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기">
-<meta property="og:url" content="https://song4energyndata.github.io/cudadudnn.html">
+<meta property="og:title" content="에너지시스템 최적화/게임이론 강의: 3) Desirable properties of market-clearing mechanisms">
+<meta property="og:url" content="https://song4energyndata.github.io/jalalthree.html">
 
 
-  <meta property="og:description" content="이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.">
-
-
-
+  <meta property="og:description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 3강을 필자가 요약한 내용이다.">
 
 
 
+  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/jalal/Lecture3_1.png">
 
-  <meta property="article:published_time" content="2023-01-08T00:00:00+09:00">
+
+
+
+
+  <meta property="article:published_time" content="2023-08-15T00:00:00+09:00">
 
 
 
@@ -55,7 +57,7 @@
   
 
 
-<link rel="canonical" href="https://song4energyndata.github.io/cudadudnn.html">
+<link rel="canonical" href="https://song4energyndata.github.io/jalalthree.html">
 
 
 
@@ -430,269 +432,19 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기">
-    <meta itemprop="description" content="이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.">
-    <meta itemprop="datePublished" content="2023-01-08T00:00:00+09:00">
+    <meta itemprop="headline" content="에너지시스템 최적화/게임이론 강의: 3) Desirable properties of market-clearing mechanisms">
+    <meta itemprop="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 3강을 필자가 요약한 내용이다.">
+    <meta itemprop="datePublished" content="2023-08-15T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://song4energyndata.github.io/cudadudnn.html" class="u-url" itemprop="url">WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기
+            <a href="https://song4energyndata.github.io/jalalthree.html" class="u-url" itemprop="url">에너지시스템 최적화/게임이론 강의: 3) Desirable properties of market-clearing mechanisms
 </a>
           </h1>
           
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-01-08T00:00:00+09:00">2023-01-08</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-        </header>
-      
-
-      <section class="page__content e-content" itemprop="text">
-        
-          <aside class="sidebar__right sticky">
-            <nav class="toc">
-              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              
- <!-- 우측 TOC -->
-            </nav>
-          </aside>
-        
-        <p>이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.</p>
-
-<p>이에, 필자가 WSL2 Ubuntu 22.04 환경에 CUDA &amp; cuDNN을 설치하는 데 거쳤던 스텝들을 해당 포스팅으로 남긴다. 필자가 나중에 다른 컴퓨터에 CUDA를 설치하게 될 경우, 이 기록이 필자 본인에게라도 도움이 되길 바란다.</p>
-
-<p><br />
-자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 <a href="https://www.nvidia.co.kr/Download/index.aspx?lang=kr">다운로드 웹페이지</a> 찾아서 윈도우에서 설치.</p>
-
-<p>ubuntu bash에서 $\texttt{nvidia-smi}$ 실행 시, 드라이버 설치 확인 가능.</p>
-
-<p><br />
-<a href="https://www.tensorflow.org/install/gpu?hl=ko">Tensorflow 웹페이지</a>에서 호환되는 CUDA 버전 확인 (‘소프트웨어 요구사항’ 항목을 보면, Tensorflow의 경우 CUDA 11.2 지원).</p>
-
-<p><br />
-<a href="https://developer.nvidia.com/cuda-11.2.0-download-archive?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=WSLUbuntu&amp;target_version=20&amp;target_type=runfilelocal">CUDA Toolkit Downloads 웹페이지</a>에서 Linux - x86_64 - WSL-Ubuntu - 2.0 - runtime (local) 선택 시 보여주는 명령어를 ubuntu bash에 쳐서 CUDA를 다운로드.</p>
-
-<p>명령어는 아래와 같음.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://developer.download.nvidia.com/compute/cuda/11.2.0/local_installers/cuda_11.2.0_460.27.04_linux.run
-sudo sh cuda_11.2.0_460.27.04_linux.run
-</code></pre></div></div>
-
-<p><br />
-혹시 $\texttt{sudo sh cuda_11.2.0_460.27.04_linux.run}$ 입력 시</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Failed to verify gcc version. See log at /var/log/cuda-installer.log for details.
-</code></pre></div></div>
-<p>라는 gcc 버전 오류가 뜬다면, gcc를 버전 9로 낮춰야 함,
-<a href="https://gooopy.tistory.com/134">이 포스트</a>에서 소개하는 명령어들에서 버전 숫자를 8에서 9로만 바꿔서 입력 (버전 8까지는 apt 다운로드 서버에서 없어진 듯함), 명령어는 아래와 같음.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt -y install gcc-9 g++-9
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
-</code></pre></div></div>
-<p>그리고 다시 $\texttt{sudo sh cuda_11.2.0_460.27.04_linux.run}$ 를 bash에서 실행하면
-라이선스 관련 큰 창, 그리고 거기서 accept를 입력하면 설치 옵션 관련 큰 창이 뜰 것임 (미리 terminal 높이를 최대한 높여놓길 권장, 너무 낮으면 안 보임).</p>
-
-<p>선택하고 좀 기다리면 설치됨, 필자의 경우 설치 직후 아래의 메시지가 떴음.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>= Summary =
-===========
-
-Driver:   Not Selected
-Toolkit:  Installed in /usr/local/cuda-11.2/
-Samples:  Installed in /home/ubuntu/, but missing recommended libraries
-
-Please make sure that
- -   PATH includes /usr/local/cuda-11.2/bin
- -   LD_LIBRARY_PATH includes /usr/local/cuda-11.2/lib64, or, add /usr/local/cuda-11.2/lib64 to /etc/ld.so.conf and run ldconfig as root
-
-To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-11.2/bin
-***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least 460.00 is required for CUDA 11.2 functionality to work.
-To install the driver using this installer, run the following command, replacing &lt;CudaInstaller&gt; with the name of this run file:
-    sudo &lt;CudaInstaller&gt;.run --silent --driver
-
-Logfile is /var/log/cuda-installer.log
-</code></pre></div></div>
-
-<p><br />
-ubuntu bash에 $\texttt{vi /etc/profile}$ 입력 후 vi 에디터에서 $\texttt{i}$ 누르면 편집 가능.</p>
-
-<p>(vi 에디터 명령은 <a href="https://kkalkkalparrot.tistory.com/36">이 포스팅</a> 참고)</p>
-
-<p>etc/profile에 아래 코드 입력 (<a href="https://nirsa.tistory.com/332">이 포스팅 참고</a>).</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export PATH=$PATH:/usr/local/cuda-11.2/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.2/lib64
-export CUDADIR=/usr/local/cuda-11.2
-</code></pre></div></div>
-
-<p>입력 후 Esc 눌러 편집 모드에서 나오고 $\texttt{:w}$ 입력 시 저장됨.</p>
-
-<p>그리고 $\texttt{source /etc/profile}$ 입력.</p>
-
-<p>CUDA 설치 버전 확인은 bash에서 $\texttt{nvcc -V}$ 실행.</p>
-
-<p><br />
-cuDNN 설치는 <a href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html">공식 가이드</a> 참고.</p>
-
-<p>가이드의 1.1.3 항목대로 $\texttt{Zlib}$를 다운받기 위해, $\texttt{sudo apt-get install zlib1g}$ 를 bash에서 실행.</p>
-
-<p>가이드의 1.2 항목대로 cudNN을 다운로드 <a href="https://developer.nvidia.com/rdp/cudnn-download">(다운로드 링크).</a></p>
-
-<p>다운받으려면 NVIDIA 계정 필요하므로 없을 경우 생성.</p>
-
-<p>for CUDA 11.x 에 있는 Local Installer for Linux x86_64 (Tar) 를 우선 윈도우즈에서 다운받고,
-다운로드 완료되면 ubuntu shell에서 $\texttt{mtn}$으로 접근, 파일 확인 후 $\texttt{home}$ 내 폴더로 복사해 감</p>
-
-<p>이를테면 $\texttt{D:\Downloads}$ 에 받았다고 하면 ubuntu bash에서 아래 명령 실행.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp "/mnt/d/Downloads/cudnn-linux-x86_64-8.9.0.131_cuda11-archive.tar.xz" "/home/ubuntu/workspaces"
-</code></pre></div></div>
-<p>그리고 복사된 파일의 위치에서, 공식 가이드대로 아래 명령들 실행.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -xvf cudnn-linux-x86_64-8.9.0.131_cuda11-archive.tar.xz
-sudo cp cudnn-*-archive/include/cudnn*.h /usr/local/cuda/include
-sudo cp -P cudnn-*-archive/lib/libcudnn* /usr/local/cuda/lib64
-sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-</code></pre></div></div>
-
-<p><br />
-이후 재부팅한 후 ubuntu에서 tensorflow 쓰는 파이썬 코드 실행 시, 아래와 같은 맥락의 메시지를 본다면 성공임.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I tensorflow/core/common_runtime/gpu/gpu_device.cc:1635] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 2029 MB memory:  -&gt; device: 0, name: NVIDIA GeForce GTX 1650 SUPER, pci bus id: 0000:01:00.0, compute capability: 7.5
-</code></pre></div></div>
-
-<p>CUDA 설치 후 GPU 사용 시, Python에서 $\texttt{Tensorflow}$ 라이브러리를 사용할 경우 RNN 모델인 LSTM과 GRU 훈련의 속도가 매우 빨라졌음을 확인함.</p>
-
-<p>만약 tensorflow를 사용하지만 GPU를 사용하지는 않을 경우, Python 기준으로 코드 상단에 아래 코드를 추가함.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-</code></pre></div></div>
-
-        
-      </section>
-
-      <footer class="page__meta">
-        
-        
-  
-
-
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
-    <span itemprop="keywords">
-    
-      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">Python</a><span class="sep">, </span>
-    
-      <a href="/tags/#%EB%94%A5%EB%9F%AC%EB%8B%9D" class="page__taxonomy-item p-category" rel="tag">딥러닝</a>
-    
-    </span>
-  </p>
-
-
-
-<!-- 
-  
-
-
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
-    <span itemprop="keywords">
-    
-      <a href="/categories/#etc" class="page__taxonomy-item p-category" rel="tag">etc</a>
-    
-    </span>
-  </p>
-
- -->
-        <!-- 
-
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-01-08T00:00:00+09:00">2023-01-08</time></p>
- -->
-      </footer>
-
-      <section class="page__share">
-  
-    <h4 class="page__share-title">공유하기</h4>
-  
-
-  <!-- <a href="https://twitter.com/intent/tweet?text=WSL2+Ubuntu+22.04%EC%97%90+CUDA+%26+cuDNN+%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0%20http%3A%2F%2Flocalhost%3A4000%2Fcudadudnn.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
-
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcudadudnn.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
-
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcudadudnn.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
-</section>
-
-
-      <p></p>
-        <!-- <h4 class="page__meta-title"><span>etc</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
-        
-
-
-  
-  	
-  	
-  	
-  	
-  	
-
-<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
-
-  
-    
-      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
-    
-    
-      <a href="/scrapper.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>Python 크롤링 코드 예시 (PubMed 사이트에서 논문 정보 크롤링)</a>
-        
-  
-
-</nav>
-      <p></p>
-    </div>
-
-    
-  </article>
-
-  
-  <!-- 
-    <div class="page__related">
-      <h2 class="page__related-title">참고</h2>
-      <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <a href="/jalalthree.html" rel="permalink"><img src="/assets/images/jalal/Lecture3_1.png" alt=""></a>
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/jalalthree.html" rel="permalink">에너지시스템 최적화/게임이론 강의: 3) Desirable properties of market-clearing mechanisms
-</a>
-      
-    </h2>
-    
 
   <p class="page__meta">
     
@@ -710,11 +462,200 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 3강을 필자가 요약한 내용이다.
-</p>
-  </article>
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#market-clearing-mechanism이-추구하는-4가지-성질들">Market clearing mechanism이 추구하는 4가지 성질들</a></li><li><a href="#lmp-based-market에서-충족되는-성질들은">LMP-based market에서 충족되는 성질들은?</a></li><li><a href="#unit-commitment-제약을-고려한-market-clearing">Unit commitment 제약을 고려한 market clearing</a></li><li><a href="#uc-제약에-대해-참고하면-좋은-문헌들">UC 제약에 대해 참고하면 좋은 문헌들</a></li></ul>
+ <!-- 우측 TOC -->
+            </nav>
+          </aside>
+        
+        <p>이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 3강을 필자가 요약한 내용이다.</p>
+
+<!-- Courtesy of embedresponsively.com -->
+
+<div class="responsive-video-container">
+    <iframe src="https://www.youtube-nocookie.com/embed/hhtOAsXlxq8" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+  </div>
+
+<p>(<a href="https://www.jalalkazempour.com/teaching">Course slides 링크</a>)</p>
+
+<h2 id="market-clearing-mechanism이-추구하는-4가지-성질들">Market clearing mechanism이 추구하는 4가지 성질들</h2>
+
+<p>1강에서는 market clearing이 social welfare를 최대화하는 최적화 문제의 풀이 결과임을 보였고, 2강에서는 최적화 결과가 Nash 균형이므로 어떤 참가자도 해당 결과를 받아들일 것임을 보였다.</p>
+
+<p>이는 market clearing mechanism이 ‘market efficiency’ 성질을 충족한다고도 볼 수 있다.</p>
+
+<p>Market clearing mechanism이 추구하는 성질은 market efficiency를 포함해 4개가 있다.</p>
+
+<p>1) Market efficiency : Social welfare가 최대화되고, 각 참가자들이 받아들일 수 있는 결과가 도출된다.</p>
+
+<p>2) Incentive compatibility : 각 참가자들이 자신의 정보를 왜곡 없이 그대로 제공하는 것이 각자에게 최선임을 의미한다.
+이를테면 어떤 발전기의 발전단가가 MWh당 12달러일 경우, offering을 MWh당 12달러보다 높은 값이 아닌 12달러 그대로 하는 것이 본인에게 있어 최선의 전략인 경우를 말한다.</p>
+
+<p>여기서 offering을 ‘일부러’ 발전단가보다 높이 불러 (즉 거짓 정보를 제공해서) 수익 증대를 추구하는 것을 ‘전략적인 (strategic)’ 행동이라 하며, ‘exercising market power’라는 표현도 쓴다.</p>
+
+<p>3) Cost recovery : 모든 참가자들이 최소한 각자의 operational cost는 건질 수 있음을, 즉 모든 참가자들에 대해 각자의 non-negative profit이 보장됨을 의미한다. (단, 이는 capital cost 회수 가능 여부와는 무관하다)</p>
+
+<p>4) Revenue adequacy : Market operator가 operation 수행 시 최소한 손해는 보지 않음을 의미한다.</p>
+
+<p><img src="/assets/images/jalal/Lecture3_11.png" alt="clearingexample" />
+<img src="/assets/images/jalal/Lecture3_14.png" alt="clearingexample" />
+<img src="/assets/images/jalal/Lecture3_16.png" alt="clearingexample" />
+<img src="/assets/images/jalal/Lecture3_19.png" alt="clearingexample" /></p>
+
+<h2 id="lmp-based-market에서-충족되는-성질들은">LMP-based market에서 충족되는 성질들은?</h2>
+
+<p>안타깝게도, 위 4개 성질들을 ‘전부 다’ 충족하는 것은 불가능하다 (Hurwicz theorem으로 증명됨).</p>
+
+<p>그렇다면 1강부터 설명한 LMP (Local Marginal Price) based market에서는 위 4가지 성질들 중 어떤 성질이 충족되고 어떤 성질은 충족되지 않을까?</p>
+
+<p>충족되지 않는 성질은 incentive compatibility와 market efficiency이다.</p>
+
+<p>극단적인 예로 발전기와 수요처가 하나씩인 시장이 있다고 하자. 이 때 수요처의 bid price를 발전기가 알고 있을 경우, 발전기는 offer price를 자신의 발전단가가 아니라 수요처의 bid price로 제시하는 ‘strategic offering’ 을 할 것이다. 따라서 incentive compatibility가 깨진다.</p>
+
+<p>이러한 strategic offering을 할 경우 market-clearing price는 이전과 달라진다. 이전에는 모든 발전기가 offer price를 각자의 발전단가로 제시했고 그 결과 social welfare가 최대화되었으나, price가 달라지므로 더 이상 social welfare가 최대화되지 않는다. 따라서 market efficiency도 깨진다.</p>
+
+<p>충족되는 성질은 revenue adequacy와 cost recovery이다. (단, cost recovery 충족은 뒤에서 볼 unit commitment (UC) 제약을 고려하지 않았을 때 성립한다.)</p>
+
+<p><img src="/assets/images/jalal/Lecture3_28.png" alt="clearingexample" /></p>
+
+<h2 id="unit-commitment-제약을-고려한-market-clearing">Unit commitment 제약을 고려한 market clearing</h2>
+
+<p>1강의 최적화 문제에서는 발전기의 ramping limit, 최소부하, 시동비용, 최소기동유지시간 및 최소정지유지시간 등의 unit commitment (UC) 제약들을 고려하지 않았다.</p>
+
+<p>UC 제약을 추가하면 어떻게 될까? Ramping limit을 제외한 나머지 제약들이 이진변수 (binary variable) 들을 포함하므로 UC 제약을 문제에 추가하면 mixed-integer 문제가 된다. Mixed-integer 문제에서는 dual variable을 계산할 수 없으므로, market clearing price를 도출할 수 없다 (discrete feasible space에 대해서 sensitivity를 정의하기 곤란함)</p>
+
+<p>실제 적용에서는, 우선 UC 조건을 고려하는 문제를 풀어 이진변수들의 값을 얻고, 해당 이진변수들 값을 고정한 상태에서 다시 문제를 풀어 dual variable들을 계산한다. 미국에서는 independent system operator (ISO) 가 각 발전기 별 UC 제약들을 받아서 UC 문제를 푼다.</p>
+
+<p><img src="/assets/images/jalal/Lecture3_52.png" alt="clearingexample" />
+<img src="/assets/images/jalal/Lecture3_56.png" alt="clearingexample" /></p>
+
+<p>단, 이진변수의 값을 고정하면 market clearing price 결정에 (이진변수로만 반영할 수 있는) 시동비용 정보를 반영할 수 없다. 시동비용도 operation cost이므로, 이는 cost recovery 성질을 충족하지 못함을 의미한다. 시동비용의 비중이 큰 원자력/ 석탄화력 발전소에게 있어 이는 중요한 이슈이다.</p>
+
+<p>이 때문에 uplift mechanism 등의 side payment를 운용하여 cost recovery를 보장할 수 있도록 한다.</p>
+
+<h2 id="uc-제약에-대해-참고하면-좋은-문헌들">UC 제약에 대해 참고하면 좋은 문헌들</h2>
+
+<p>UC 제약은 다수의 이진변수를 포함하므로 최적화 문제 풀이 시간을 크게 증가시키거나 심지어는 현실적인 시간 내에 풀리지 않게 (intractable) 만드는 주범이다. 이 때문에 UC 제약을 다루는 데 대한 연구들이 수행되어 왔다.</p>
+
+<p>참고할 만한 문헌들은 아래와 같다.</p>
+
+<p>1) <a href="https://doi.org/10.1109/TPWRS.2006.876672">A computationally efficient mixed-integer linear formulation for the thermal unit commitment problem</a><br />
+2) <a href="https://doi.org/10.1109/TPWRS.2011.2162008">Tight Mixed Integer Linear Programming Formulations for the Unit Commitment Problem</a><br />
+3) <a href="https://doi.org/10.1561/3100000014">Unit Commitment in Electric Energy Systems</a><br />
+4) <a href="https://doi.org/10.1109/TPWRS.2017.2735026">Representing Operational Flexibility in Generation Expansion Planning Through Convex Relaxation of Unit Commitment</a></p>
+
+<div class="notice--info">
+
+Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br />
+
+01) <a href="/jalalone.html"> Market clearing as an optimization problem</a> <br />
+02) <a href="/jalaltwo.html"> Market clearing as an equilibrium problem</a> <br />
+03) <b> Desirable properties of market-clearing mechanisms</b> <br />
 </div>
 
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0" class="page__taxonomy-item p-category" rel="tag">게임이론</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C" class="page__taxonomy-item p-category" rel="tag">에너지시스템</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%B5%9C%EC%A0%81%ED%99%94" class="page__taxonomy-item p-category" rel="tag">최적화</a>
+    
+    </span>
+  </p>
+
+
+
+<!-- 
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#market" class="page__taxonomy-item p-category" rel="tag">market</a>
+    
+    </span>
+  </p>
+
+ -->
+        <!-- 
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-08-15T00:00:00+09:00">2023-08-15</time></p>
+ -->
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94%2F%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0+%EA%B0%95%EC%9D%98%3A+3%29+Desirable+properties+of+market-clearing+mechanisms%20http%3A%2F%2Flocalhost%3A4000%2Fjalalthree.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fjalalthree.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjalalthree.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      <p></p>
+        <!-- <h4 class="page__meta-title"><span>market</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
+        
+
+
+  
+  	
+  	
+  	
+  	
+  	
+
+<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
+
+  
+    
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
+    
+    
+      <a href="/jalaltwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>에너지시스템 최적화/게임이론 강의: 2) Market clearing as an equilibrium problem</a>
+        
+  
+
+</nav>
+      <p></p>
+    </div>
+
+    
+  </article>
+
+  
+  <!-- 
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
         
           
 
@@ -834,6 +775,47 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 
 
     <p class="archive__item-excerpt" itemprop="description">에너지시스템 planning/ scheduling 관련 연구자라면 고급 최적화 기법, 시장 문제에서의 게임이론적 접근, 시계열 데이터 예측 등의 지식들이 필요하다고 느낀 적이 있을 것이다. 관련해 좋은 교육 자료를 소개한다. Technical University of Denmark...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/beerquiche.html" rel="permalink"><img src="/assets/images/beerquiche/beerquiche.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/beerquiche.html" rel="permalink">Beer-Quiche game (동태적 미비정보 게임) 답안
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-07-23T00:00:00+09:00">2023-07-23</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려한 Dynamic Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 방법론이 필요하다고 한다.
+</p>
   </article>
 </div>
 

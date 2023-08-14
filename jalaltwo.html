@@ -19,8 +19,8 @@
 </script>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기 | 에너지엔데이터연구소</title>
-<meta name="description" content="이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.">
+<!-- begin _includes/seo.html --><title>에너지시스템 최적화/게임이론 강의: 2) Market clearing as an equilibrium problem | 에너지엔데이터연구소</title>
+<meta name="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 2강을 필자가 요약한 내용이다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -32,19 +32,21 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기">
-<meta property="og:url" content="https://song4energyndata.github.io/cudadudnn.html">
+<meta property="og:title" content="에너지시스템 최적화/게임이론 강의: 2) Market clearing as an equilibrium problem">
+<meta property="og:url" content="https://song4energyndata.github.io/jalaltwo.html">
 
 
-  <meta property="og:description" content="이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.">
-
-
-
+  <meta property="og:description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 2강을 필자가 요약한 내용이다.">
 
 
 
+  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/jalal/Lecture2_1.png">
 
-  <meta property="article:published_time" content="2023-01-08T00:00:00+09:00">
+
+
+
+
+  <meta property="article:published_time" content="2023-08-12T00:00:00+09:00">
 
 
 
@@ -55,7 +57,7 @@
   
 
 
-<link rel="canonical" href="https://song4energyndata.github.io/cudadudnn.html">
+<link rel="canonical" href="https://song4energyndata.github.io/jalaltwo.html">
 
 
 
@@ -430,16 +432,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기">
-    <meta itemprop="description" content="이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.">
-    <meta itemprop="datePublished" content="2023-01-08T00:00:00+09:00">
+    <meta itemprop="headline" content="에너지시스템 최적화/게임이론 강의: 2) Market clearing as an equilibrium problem">
+    <meta itemprop="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 2강을 필자가 요약한 내용이다.">
+    <meta itemprop="datePublished" content="2023-08-12T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://song4energyndata.github.io/cudadudnn.html" class="u-url" itemprop="url">WSL2 Ubuntu 22.04에 CUDA &amp; cuDNN 설치하기
+            <a href="https://song4energyndata.github.io/jalaltwo.html" class="u-url" itemprop="url">에너지시스템 최적화/게임이론 강의: 2) Market clearing as an equilibrium problem
 </a>
           </h1>
           
@@ -450,7 +452,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-01-08T00:00:00+09:00">2023-01-08</time>
+        <time datetime="2023-08-12T00:00:00+09:00">2023-08-12</time>
       </span>
     
 
@@ -468,117 +470,78 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              
+              <ul class="toc__menu"><li><a href="#최적화-기반-market-clearing-결과는-game의-nash-균형인가">최적화 기반 market clearing 결과는 game의 ‘Nash 균형’인가?</a></li><li><a href="#전력시장의-nash-균형-문제는-최적화-문제와-동치이다">전력시장의 Nash 균형 문제는 최적화 문제와 동치이다</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <p>이 블로그의 글을 무리 없이 읽을 정도의 독자라면, 복잡한 컴퓨터 환경 구축 때문에 많은 시간을 소비해 본 경험이 있을 것이다. 필자도 마찬가지다. 빠른 딥러닝 연산을 위해 NVIDIA CUDA를 설치하려다가, 계속되는 시행착오에 반나절을 넘게 컴퓨터만 붙잡고 있었다.</p>
+        <p>이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 2강을 필자가 요약한 내용이다.</p>
 
-<p>이에, 필자가 WSL2 Ubuntu 22.04 환경에 CUDA &amp; cuDNN을 설치하는 데 거쳤던 스텝들을 해당 포스팅으로 남긴다. 필자가 나중에 다른 컴퓨터에 CUDA를 설치하게 될 경우, 이 기록이 필자 본인에게라도 도움이 되길 바란다.</p>
+<!-- Courtesy of embedresponsively.com -->
 
-<p><br />
-자신의 NVIDIA 그래픽카드 모델명에 맞는 NVIDIA driver를 <a href="https://www.nvidia.co.kr/Download/index.aspx?lang=kr">다운로드 웹페이지</a> 찾아서 윈도우에서 설치.</p>
+<div class="responsive-video-container">
+    <iframe src="https://www.youtube-nocookie.com/embed/Dg64manEFRY" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+  </div>
 
-<p>ubuntu bash에서 $\texttt{nvidia-smi}$ 실행 시, 드라이버 설치 확인 가능.</p>
+<p>(<a href="https://www.jalalkazempour.com/teaching">Course slides 링크</a>)</p>
 
-<p><br />
-<a href="https://www.tensorflow.org/install/gpu?hl=ko">Tensorflow 웹페이지</a>에서 호환되는 CUDA 버전 확인 (‘소프트웨어 요구사항’ 항목을 보면, Tensorflow의 경우 CUDA 11.2 지원).</p>
+<h2 id="최적화-기반-market-clearing-결과는-game의-nash-균형인가">최적화 기반 market clearing 결과는 game의 ‘Nash 균형’인가?</h2>
 
-<p><br />
-<a href="https://developer.nvidia.com/cuda-11.2.0-download-archive?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=WSLUbuntu&amp;target_version=20&amp;target_type=runfilelocal">CUDA Toolkit Downloads 웹페이지</a>에서 Linux - x86_64 - WSL-Ubuntu - 2.0 - runtime (local) 선택 시 보여주는 명령어를 ubuntu bash에 쳐서 CUDA를 다운로드.</p>
+<p>지난 강의에서 최적화 문제를 풀어서 각 발전기의 발전량, 각 수요처의 전기부하, 그리고 가격을 결정했다.</p>
 
-<p>명령어는 아래와 같음.</p>
+<p><img src="/assets/images/jalal/Lecture2_5.png" alt="clearingexample" /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://developer.download.nvidia.com/compute/cuda/11.2.0/local_installers/cuda_11.2.0_460.27.04_linux.run
-sudo sh cuda_11.2.0_460.27.04_linux.run
-</code></pre></div></div>
+<p>그런데, 과연 각 발전사업자와 각 수요처 각자의 입장에서, 해당 최적화 문제의 결과가 ‘받아들일 만한’ 것일까? 받아들이지 못할 결과라면 참가자들이 시장에서 떠나는 (deviate) 문제가 발생할 것이다.</p>
 
-<p><br />
-혹시 $\texttt{sudo sh cuda_11.2.0_460.27.04_linux.run}$ 입력 시</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Failed to verify gcc version. See log at /var/log/cuda-installer.log for details.
-</code></pre></div></div>
-<p>라는 gcc 버전 오류가 뜬다면, gcc를 버전 9로 낮춰야 함,
-<a href="https://gooopy.tistory.com/134">이 포스트</a>에서 소개하는 명령어들에서 버전 숫자를 8에서 9로만 바꿔서 입력 (버전 8까지는 apt 다운로드 서버에서 없어진 듯함), 명령어는 아래와 같음.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt -y install gcc-9 g++-9
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
-</code></pre></div></div>
-<p>그리고 다시 $\texttt{sudo sh cuda_11.2.0_460.27.04_linux.run}$ 를 bash에서 실행하면
-라이선스 관련 큰 창, 그리고 거기서 accept를 입력하면 설치 옵션 관련 큰 창이 뜰 것임 (미리 terminal 높이를 최대한 높여놓길 권장, 너무 낮으면 안 보임).</p>
+<p>각 발전기는 발전량에 market price를 곱한 revenue에서 발전 비용을 뺀 profit을 최대화하려 할 것이고,
+각 수요처는 부하량에 bid price와 market price 간 차이를 곱한 utility를 최대화하려 할 것이다.</p>
 
-<p>선택하고 좀 기다리면 설치됨, 필자의 경우 설치 직후 아래의 메시지가 떴음.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>= Summary =
-===========
+<p>위 최적화 결과로 얻은 각 발전기 별 발전량, 각 수요처 별 부하량, 그리고 시장가격이 주어질 경우,
+어떤 참가자에 대해서도 (다른 참가자가 현재 상태를 유지한다는 전제 하에) 현재 상태가 profit 또는 utility를 최대화하는 상태여야 한다.</p>
 
-Driver:   Not Selected
-Toolkit:  Installed in /usr/local/cuda-11.2/
-Samples:  Installed in /home/ubuntu/, but missing recommended libraries
+<p>즉 각 발전기와 수요처를 ‘game의 참가자’ 로 볼 때, 위 최적화 문제를 풀어 얻은 결과가 해당 game의 (유일한) Nash 균형이어야 한다.</p>
 
-Please make sure that
- -   PATH includes /usr/local/cuda-11.2/bin
- -   LD_LIBRARY_PATH includes /usr/local/cuda-11.2/lib64, or, add /usr/local/cuda-11.2/lib64 to /etc/ld.so.conf and run ldconfig as root
+<p>(‘유일한’ Nash 균형이 아닐 경우 갈등이 생길 수 있다. 어떤 참가자가 “나한테는 균형 1이 더 좋은데 왜 market operator 당신은 균형 2로 결정했냐” 등…)</p>
 
-To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-11.2/bin
-***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least 460.00 is required for CUDA 11.2 functionality to work.
-To install the driver using this installer, run the following command, replacing &lt;CudaInstaller&gt; with the name of this run file:
-    sudo &lt;CudaInstaller&gt;.run --silent --driver
+<p>각 참가자 ‘개별’의 최적화 문제들 모은 Nash 균형 문제를 보면 아래 슬라이드와 같다.</p>
 
-Logfile is /var/log/cuda-installer.log
-</code></pre></div></div>
+<p><img src="/assets/images/jalal/Lecture2_26.png" alt="clearingexample" /></p>
 
-<p><br />
-ubuntu bash에 $\texttt{vi /etc/profile}$ 입력 후 vi 에디터에서 $\texttt{i}$ 누르면 편집 가능.</p>
+<p>발전기와 수요처 뿐 아니라 price-setter가 있는데, 이는 수요-공급 균형 제약을 고려하면서 동시에 가격을 결정하기 위한 가상의 참가자이다.</p>
 
-<p>(vi 에디터 명령은 <a href="https://kkalkkalparrot.tistory.com/36">이 포스팅</a> 참고)</p>
+<h2 id="전력시장의-nash-균형-문제는-최적화-문제와-동치이다">전력시장의 Nash 균형 문제는 최적화 문제와 동치이다</h2>
 
-<p>etc/profile에 아래 코드 입력 (<a href="https://nirsa.tistory.com/332">이 포스팅 참고</a>).</p>
+<p>최적화 문제를 풀어 얻은 결과가 Nash 균형인지 여부를 판단하려면, 최적화 문제와 Nash 균형 문제가 수학적으로 동치 (equivalent problem) 인지 여부를 판단할 수 있는 비교가 필요하다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export PATH=$PATH:/usr/local/cuda-11.2/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.2/lib64
-export CUDADIR=/usr/local/cuda-11.2
-</code></pre></div></div>
+<p>이를 위해서는, 최적화 문제의 KKT (Karush-Kuhn-Tucker) condition과 Nash 균형 문제의 각 참가자 별 KKT condition들의 모음을 서로 비교한다.</p>
 
-<p>입력 후 Esc 눌러 편집 모드에서 나오고 $\texttt{:w}$ 입력 시 저장됨.</p>
+<p><img src="/assets/images/jalal/Lecture2_47.png" alt="clearingexample" />
+<img src="/assets/images/jalal/Lecture2_51.png" alt="clearingexample" /></p>
 
-<p>그리고 $\texttt{source /etc/profile}$ 입력.</p>
+<p>위 두 그림을 보면, 두 문제의 KKT condition이 서로 같으므로 두 문제는 동치이다.</p>
 
-<p>CUDA 설치 버전 확인은 bash에서 $\texttt{nvcc -V}$ 실행.</p>
+<p>그러므로 market operator가 최적화 문제를 풀면 그 결과는 Nash 균형이다.</p>
 
-<p><br />
-cuDNN 설치는 <a href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html">공식 가이드</a> 참고.</p>
+<p>일반적으로 각 참가자들의 목적함수를 모두 고려하는 game의 Nash 균형 문제를 푸는 것 보다는 단일 최적화 문제를 푸는 것이 더 쉬우므로, Nash 균형 문제와 최적화 문제 간 동치는 market clearing을 실제로 가능하게 해 주는 좋은 성질이다.</p>
 
-<p>가이드의 1.1.3 항목대로 $\texttt{Zlib}$를 다운받기 위해, $\texttt{sudo apt-get install zlib1g}$ 를 bash에서 실행.</p>
+<p>여러 개의 bus가 있어 각 nodal price를 결정하는 경우에도 Nash 균형 문제를 아래와 같이 구성할 수 있다 (DC flow approximation임에 유의).</p>
 
-<p>가이드의 1.2 항목대로 cudNN을 다운로드 <a href="https://developer.nvidia.com/rdp/cudnn-download">(다운로드 링크).</a></p>
+<p><img src="/assets/images/jalal/Lecture2_55.png" alt="clearingexample" /></p>
 
-<p>다운받으려면 NVIDIA 계정 필요하므로 없을 경우 생성.</p>
+<p>이 때 두 bus 간 nodal price가 다른 경우, transmission owner는 일종의 공간적 차익거래 (spatial arbitrage) 를 추구한다.</p>
 
-<p>for CUDA 11.x 에 있는 Local Installer for Linux x86_64 (Tar) 를 우선 윈도우즈에서 다운받고,
-다운로드 완료되면 ubuntu shell에서 $\texttt{mtn}$으로 접근, 파일 확인 후 $\texttt{home}$ 내 폴더로 복사해 감</p>
+<p>이를테면 bus 1과 bus 2 각각의 nodal price가 $\lambda_1$과 $\lambda_2$이고, 두 bus 간 susceptance가 $B$, 각 bus에서의 voltage angle이 $\theta_1$과 $\theta_2$인 경우, transmission owner의 목적함수는 $(\lambda_2 - \lambda_1) B (\theta_1 - \theta_2)$ 가 되어, $\lambda_2$와 $\lambda_1$ 간에 차이가 있을 경우 (계통혼잡이 있을 경우 nodal price들이 서로 달라짐) 에 공간적 차익에 의한 profit을 벌 수 있다.</p>
 
-<p>이를테면 $\texttt{D:\Downloads}$ 에 받았다고 하면 ubuntu bash에서 아래 명령 실행.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp "/mnt/d/Downloads/cudnn-linux-x86_64-8.9.0.131_cuda11-archive.tar.xz" "/home/ubuntu/workspaces"
-</code></pre></div></div>
-<p>그리고 복사된 파일의 위치에서, 공식 가이드대로 아래 명령들 실행.</p>
+<p>이러한 차익 중 일부를 가져갈 권리를 financial transmission rights (FTR) 이라 하며, 실제로 미국에서는 매년 초에 각 송전선 별 FTR을 경매로 판매한다. FTR 구매자 입장에서는 계통혼잡에 의한 nodal price 상승 risk를 hedging할 수 있고, FTR 판매자 입장에서는 연초에 고정수익을 확보할 수 있다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -xvf cudnn-linux-x86_64-8.9.0.131_cuda11-archive.tar.xz
-sudo cp cudnn-*-archive/include/cudnn*.h /usr/local/cuda/include
-sudo cp -P cudnn-*-archive/lib/libcudnn* /usr/local/cuda/lib64
-sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-</code></pre></div></div>
+<div class="notice--info">
 
-<p><br />
-이후 재부팅한 후 ubuntu에서 tensorflow 쓰는 파이썬 코드 실행 시, 아래와 같은 맥락의 메시지를 본다면 성공임.</p>
+Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br />
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I tensorflow/core/common_runtime/gpu/gpu_device.cc:1635] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 2029 MB memory:  -&gt; device: 0, name: NVIDIA GeForce GTX 1650 SUPER, pci bus id: 0000:01:00.0, compute capability: 7.5
-</code></pre></div></div>
-
-<p>CUDA 설치 후 GPU 사용 시, Python에서 $\texttt{Tensorflow}$ 라이브러리를 사용할 경우 RNN 모델인 LSTM과 GRU 훈련의 속도가 매우 빨라졌음을 확인함.</p>
-
-<p>만약 tensorflow를 사용하지만 GPU를 사용하지는 않을 경우, Python 기준으로 코드 상단에 아래 코드를 추가함.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-</code></pre></div></div>
+01) <a href="/jalalone.html"> Market clearing as an optimization problem</a> <br />
+02) <b> Market clearing as an equilibrium problem</b> <br />
+03) <a href="/jalalthree.html"> Desirable properties of market-clearing mechanisms</a> <br />
+</div>
 
         
       </section>
@@ -595,9 +558,11 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
     <span itemprop="keywords">
     
-      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">Python</a><span class="sep">, </span>
+      <a href="/tags/#%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0" class="page__taxonomy-item p-category" rel="tag">게임이론</a><span class="sep">, </span>
     
-      <a href="/tags/#%EB%94%A5%EB%9F%AC%EB%8B%9D" class="page__taxonomy-item p-category" rel="tag">딥러닝</a>
+      <a href="/tags/#%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C" class="page__taxonomy-item p-category" rel="tag">에너지시스템</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%B5%9C%EC%A0%81%ED%99%94" class="page__taxonomy-item p-category" rel="tag">최적화</a>
     
     </span>
   </p>
@@ -614,7 +579,7 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#etc" class="page__taxonomy-item p-category" rel="tag">etc</a>
+      <a href="/categories/#market" class="page__taxonomy-item p-category" rel="tag">market</a>
     
     </span>
   </p>
@@ -622,7 +587,7 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
  -->
         <!-- 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-01-08T00:00:00+09:00">2023-01-08</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-08-12T00:00:00+09:00">2023-08-12</time></p>
  -->
       </footer>
 
@@ -631,18 +596,20 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=WSL2+Ubuntu+22.04%EC%97%90+CUDA+%26+cuDNN+%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0%20http%3A%2F%2Flocalhost%3A4000%2Fcudadudnn.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94%2F%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0+%EA%B0%95%EC%9D%98%3A+2%29+Market+clearing+as+an+equilibrium+problem%20http%3A%2F%2Flocalhost%3A4000%2Fjalaltwo.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcudadudnn.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fjalaltwo.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcudadudnn.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjalaltwo.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       <p></p>
-        <!-- <h4 class="page__meta-title"><span>etc</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
+        <!-- <h4 class="page__meta-title"><span>market</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
         
 
+
+  
 
   
   	
@@ -655,10 +622,10 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 
   
     
-      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
+      <a href="/jalalthree.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>에너지시스템 최적화/게임이론 강의: 3) Desirable properties of market-clearing mechanisms</a>
     
     
-      <a href="/scrapper.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>Python 크롤링 코드 예시 (PubMed 사이트에서 논문 정보 크롤링)</a>
+      <a href="/jalalone.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>에너지시스템 최적화/게임이론 강의: 1) Market clearing as an optimization problem</a>
         
   
 
@@ -711,47 +678,6 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 
 
     <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 3강을 필자가 요약한 내용이다.
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <a href="/jalaltwo.html" rel="permalink"><img src="/assets/images/jalal/Lecture2_1.png" alt=""></a>
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/jalaltwo.html" rel="permalink">에너지시스템 최적화/게임이론 강의: 2) Market clearing as an equilibrium problem
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-08-12T00:00:00+09:00">2023-08-12</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 2강을 필자가 요약한 내용이다.
 </p>
   </article>
 </div>
@@ -834,6 +760,47 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 
 
     <p class="archive__item-excerpt" itemprop="description">에너지시스템 planning/ scheduling 관련 연구자라면 고급 최적화 기법, 시장 문제에서의 게임이론적 접근, 시계열 데이터 예측 등의 지식들이 필요하다고 느낀 적이 있을 것이다. 관련해 좋은 교육 자료를 소개한다. Technical University of Denmark...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/beerquiche.html" rel="permalink"><img src="/assets/images/beerquiche/beerquiche.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/beerquiche.html" rel="permalink">Beer-Quiche game (동태적 미비정보 게임) 답안
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-07-23T00:00:00+09:00">2023-07-23</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려한 Dynamic Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 방법론이 필요하다고 한다.
+</p>
   </article>
 </div>
 
