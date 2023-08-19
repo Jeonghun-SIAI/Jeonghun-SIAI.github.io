@@ -196,4 +196,10 @@ var store = [{
         "tags": ["최적화","게임이론","에너지시스템"],
         "url": "/jalalthree.html",
         "teaser": "/assets/images/jalal/Lecture3_1.png"
+      },{
+        "title": "에너지시스템 최적화/게임이론 강의: 5) Stochastic merket clearing",
+        "excerpt":"이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 5강을 필자가 요약한 내용이다. (Course slides 링크) 불확실성에 대응하기 위한 실시간 시장 태양광과 풍력 발전 비중이 높은 전력시스템에서는, 하루전 시장 (Day-Ahead Market) 에서 예상한 발전량과 실제 발전량 간 차이가 클...","categories": ["market"],
+        "tags": ["최적화","게임이론","에너지시스템"],
+        "url": "/jalalfive.html",
+        "teaser": "/assets/images/monthlyenergythree/outliers.png"
       }]

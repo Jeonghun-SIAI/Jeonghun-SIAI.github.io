@@ -5,9 +5,138 @@
     <description>공학박사 과정에서 쌓은 에너지 시스템 전문성에 데이터 사이언스 석사를 더하며 쌓은 계산통계학 활용 역량을 결합하여, 데이터 기반의 에너지 시스템/ 정책/ 시장 관련 솔루션 도출을 올바르게 할 수 있도록 돕습니다.</description>
     <link>https://song4energyndata.github.io/</link>
     <atom:link href="https://song4energyndata.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 15 Aug 2023 08:56:06 +0900</pubDate>
-    <lastBuildDate>Tue, 15 Aug 2023 08:56:06 +0900</lastBuildDate>
+    <pubDate>Sat, 19 Aug 2023 15:15:32 +0900</pubDate>
+    <lastBuildDate>Sat, 19 Aug 2023 15:15:32 +0900</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>에너지시스템 최적화/게임이론 강의: 5) Stochastic merket clearing</title>
+        <description>&lt;p&gt;이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 5강을 필자가 요약한 내용이다.&lt;/p&gt;
+
+&lt;!-- Courtesy of embedresponsively.com --&gt;
+
+&lt;div class=&quot;responsive-video-container&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/8rWrxtH_IsM&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+  &lt;/div&gt;
+
+&lt;p&gt;(&lt;a href=&quot;https://www.jalalkazempour.com/teaching&quot;&gt;Course slides 링크&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h2 id=&quot;불확실성에-대응하기-위한-실시간-시장&quot;&gt;불확실성에 대응하기 위한 실시간 시장&lt;/h2&gt;
+
+&lt;p&gt;태양광과 풍력 발전 비중이 높은 전력시스템에서는, 하루전 시장 (Day-Ahead Market) 에서 예상한 발전량과 실제 발전량 간 차이가 클 수 있다. 
+이러한 차이는 수요-공급 간 불일치를 낳으므로, 실시간 시장 (Real-Time Market) 에서 다시 보정된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture5_9.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;아래 그림은 하루전 시장에서 다음날의 특정 시점의 풍력 발전량을 30MW로 예측하고 실제로 해당 시점의 풍력 발전량도 30MW인 경우이다. 이 경우 재생 발전량과 실제 발전량이 동일하므로, 실시간 시장에서 추가되는 비용은 없다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture5_17.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그러나 실제 발전량은 예측치와 다를 가능성이 높다.&lt;/p&gt;
+
+&lt;p&gt;실제 풍력 발전량은 30MW인데 하루전 예측이 60MW인 경우 (즉 실제보다 낙관적으로 예측한 경우) 의 결과는 아래와 같다. 실제 풍력 발전량이 예측에 못 미치므로 실시간 시장에서 flexible generator G2 가동으로 인한 추가 비용이 발생한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture5_23.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;예측치가 실제 발전량과 같을 경우와 비교해서 총 비용이 증가한다 (900달러에서 1200달러로).&lt;/p&gt;
+
+&lt;p&gt;실제 풍력 발전량은 30MW인데 하루전 예측이 70MW인 경우, 즉 예측이 더 지나치게 낙관적인 경우 아래 슬라이드와 같이 실시간 시장에서 매우 큰 비용이 발생하며 그 결과 총 비용이 더 크게 증가한다 (900달러에서 1900달러로).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture5_25.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;만약 예측이 실제 대비 비관적이라면 어떨까? 실제 풍력 발전량은 30MW인데 하루전 예측이 10MW였다면? 이 경우 예측 대비 실제 풍력 발전량이 증가했으니 ‘공짜’ 전기가 생겨서 이득이지 않을까?&lt;/p&gt;
+
+&lt;p&gt;그렇지 않다. 비록 flexible generator가 하루전 시장에서의 계획 대비 발전량을 줄이기 때문에 실시간 시장에서 음의 비용이 발생하긴 하지만, 대신 하루전 시장에서 화력발전기들이 많이 가동되도록 설정하므로 하루전 시장의 비용이 크다. 그 결과 총 비용은 역시 아래 슬라이드와 같이 증가한다 (900달러에서 1000달러로).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture5_27.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(재생발전량 예측은 일반적으로 해당 재생발전기를 소유한 사업자가 수행한다. Market operator는 정확한 예측에 대해 제도적 incentive를 주는 경우가 많다.)&lt;/p&gt;
+
+&lt;h2 id=&quot;재생발전량의-시나리오-기반-접근&quot;&gt;재생발전량의 ‘시나리오’ 기반 접근&lt;/h2&gt;
+
+&lt;p&gt;실제 재생발전량이 하루전 시장에서의 예측치와 다를 경우 총 비용이 증가했다. 이는 ‘단일한’ 예측치 사용을 전제로 했다.&lt;/p&gt;
+
+&lt;p&gt;그렇다면, 단일한 예측치 하나만 쓰는 대신, 여러 개의 가능한 예측치들을 각각의 ‘시나리오’로 두고 해당 시나리오들을 고려해 하루전 시장에서의 ‘stochastic’ market clearing을 수행하면 어떨까?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture5_35.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이를테면 위에서 고려했던 풍력 발전량 예측치 30MW, 60MW, 70MW, 10MW 각각을 시나리오로 두고 하루전 시장에서 네 개의 시나리오를 고려한 stochastic market clearing을 수행한다고 하자.&lt;/p&gt;
+
+&lt;p&gt;(‘편의상’ 각 시나리오의 확률은 같다고 (equiprobable) 가정한다. 실제로는 시나리오 별 확률이 다를 수 있다.)&lt;/p&gt;
+
+&lt;p&gt;총 공급비용은 하루전 시장에서의 공급비용과 실시간 시장에서의 공급비용의 합이며, 실시간 시장에서의 공급비용은 시나리오별로 다르므로 모든 시나리오들을 고려한 ‘기대값’으로 계산되어야 한다.&lt;/p&gt;
+
+&lt;p&gt;하루전 시장에서의 공급비용 + 실시간 시장에서의 공급비용의 ‘기대값’ 을 최소화하기 위한 최적화 문제는 아래 슬라이드와 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture5_57.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;윗첨자 DA는 하루전 시장, RT는 실시간 시장을 의미한다. 아랫첨자 $\omega i$은 $i$번째 시나리오를 의미한다.&lt;/p&gt;
+
+&lt;p&gt;$p^{G2.DA}$는 하루전 시장에서 flexible generator의 발전량을, $p_{\omega 1}^{G2.RT}$는 시나리오 1 하에서 실시간 시장에서 flexible generator의 발전량 ‘조정분’을 의미한다. 즉 실시간 시장에서 flexible generator의 실제 발전량은 $p^{G2.DA} + p_{\omega 1}^{G2.RT}$ 이다.&lt;/p&gt;
+
+&lt;p&gt;$p_{\omega 1}^{shed}$는 풍력 발전량이 지나치게 적거나 해서 부하를 충족하지 못할 경우의 부하삭감 (load shedding) 을 의미한다. 전력을 공급받아서 누릴 수 있는 효용을 포기하는 것이므로 penalty cost가 발생한다 (이 문제에서는 MWh당 80달러로 설정되었으나, 실제로는 훨씬 클 것이다.)&lt;/p&gt;
+
+&lt;p&gt;$p_{\omega 1}^{spill}$은 풍력 발전량이 지나치게 많을 경우의 출력제한 (curtailment) 양을 의미한다. 이 문제에서는 curtailment에 대한 비용 혹은 수익은 없다.&lt;/p&gt;
+
+&lt;p&gt;맨 아래 제약조건은 실시간 시장에서의 수요-공급 일치 조건이다. 해당 식 자체로는 deviation of G2, deviation of wind, deviation of load 즉 세 개의 deviation의 합이 0임을 의미한다.&lt;/p&gt;
+
+&lt;p&gt;아래의 식은 실시간 시장 수요-공급 일치 조건식이며, 여기에 하루전 시장의 수요-공급 일치 조건식을 대입하면 위 그림의 맨 아래 제약조건을 얻을 수 있다.&lt;/p&gt;
+
+&lt;p&gt;$ p^{G1.DA} + (p^{G2.DA} + p_{\omega 1}^{G2.RT}) + (30 - p_{\omega 1}^{spill}) = 120 - p_{\omega 1}^{shed} $&lt;/p&gt;
+
+&lt;p&gt;Market clearing price는 각 수요-공급 일치 제약에 대한 dual variable들이다. 하루전 시장에서의 price와 실시간 시장에서의 시나리오 별 price가 다름에 유의한다 (아래 슬라이드 참고).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture5_60.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;위 문제를 풀면, 총 ‘기대’비용은 1000달러가 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture5_63.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;실제 발전량이 30MW일 때의 총 비용은 1000달러로, 이는 단일 예측치만 사용하고 예측이 정확할 (30MW일) 때의 총 비용 (900달러) 보다는 높다.&lt;/p&gt;
+
+&lt;p&gt;그러나 예측이 틀렸을 경우까지 고려한 총 비용은 상대적으로 줄어든다.&lt;/p&gt;
+
+&lt;p&gt;앞에서 단일 발전량 예측치가 60MW일 때, 70MW일 때, 10MW일 때 각각의 총 비용은 1200달러, 1900달러, 1000달러였다. 예측이 정확할 때의 비용까지 고려한 단일 예측의 기대비용은 900 + 1200 + 1900 + 1000 을 4로 나눈 값, 1250달러이다. 즉 stochastic market clearing을 통해, (위 4개 시나리오만 있다고 가정할 경우의) 기대비용을 1250달러에서 1000달러로 줄일 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;stochastic-market-clearing의-실제-적용-가능성은&quot;&gt;Stochastic market clearing의 실제 적용 가능성은?&lt;/h2&gt;
+
+&lt;p&gt;Stochastic market clearing은 재생발전 비중이 높은 상황에서 전력 공급의 기대비용을 줄일 수 있음에도 불구하고, 실제 현실에서는 쓰이지 않고 있다. 그 이유로 아래의 세 가지를 들 수 있다.&lt;/p&gt;
+
+&lt;p&gt;1) 시나리오 수가 많을 경우의 계산비용 증가: 현실에서는 시나리오 수가 4개보다는 훨씬 많을 것이다. 특히 위 예제에서는 편의상 한 시간에 대해서만 문제를 구성하였으나, 실제 하루전 시장에서는 24시간에 대해 문제를 구성해야 한다. 그러므로 불확실성을 ‘충분히 표현하기 위한’ 시나리오의 수는 수천, 수만 개가 될 수도 있다 (여러 개의 재생발전원들을 고려하는 경우 시나리오 수는 더 많아진다). 하루전 시장에서는 말 그대로 ‘하루 전에’ 모든 계산이 끝나야 하므로, 계산시간은 중요한 이슈이다.&lt;/p&gt;
+
+&lt;p&gt;2) 시나리오 설정 방법에 대해 모든 전력시장 참가자들이 합의할 수 있을지 여부: 재생발전량 시나리오를 어떻게 생성할 것인지 (생성 기반이 되는 분포, 시나리오별 확률 등) 에 대한 의견이 참가자마다 다 다를 것이다. 특정 방법이 누군가에겐 유리하겠지만 누군가에겐 불리하기 때문이다. 게다가 재생발전량의 ‘true data generating process’ 를 모르기 때문에, 누구의 의견이 더 합리적인지 판단하기도 어렵다.&lt;/p&gt;
+
+&lt;p&gt;3) Cost recovery가 충족되지 않음: stochastic market clearing 수행 시 일부 참가자들이 operation cost 측면에서 ‘손해’를 볼 수 있음이, 즉 cost recovery가 충족되지 않음이 알려저 있다. 이 대문에 stochastic market clearing은 실질적인 측면 뿐 아니라 이론적인 측면에서도 차세대(?) 전력시장 모델로 받아들여지지 못하고 있다.&lt;/p&gt;
+
+&lt;p&gt;다만 stochastic market clearing은 일종의 ‘benchmark’로 볼 수 있다. 학계에서는 이러한 benchmark를 고려해 단일 예측 기반의 market clearing mechanism을 향상시키려는 시도가 이루어지고 있다.&lt;/p&gt;
+
+&lt;p&gt;(추천 책: &lt;a href=&quot;https://link.springer.com/book/10.1007/978-1-4614-9411-9&quot;&gt;Integrating Renewables in Electricity Markets: Operational Problems&lt;/a&gt;)&lt;/p&gt;
+
+&lt;div class=&quot;notice--info&quot;&gt;
+
+Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&gt;&lt;br /&gt;
+
+01) &lt;a href=&quot;/jalalone.html&quot;&gt; Market clearing as an optimization problem&lt;/a&gt; &lt;br /&gt;
+02) &lt;a href=&quot;/jalaltwo.html&quot;&gt; Market clearing as an equilibrium problem&lt;/a&gt; &lt;br /&gt;
+03) &lt;a href=&quot;/jalalthree.html&quot;&gt; Desirable properties of market-clearing mechanisms&lt;/a&gt; &lt;br /&gt;
+04) Market clearing using a cooperative game approach &lt;br /&gt;
+05) &lt;b&gt; Stochastic market clearing&lt;/b&gt; &lt;br /&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Sat, 19 Aug 2023 00:00:00 +0900</pubDate>
+        <link>https://song4energyndata.github.io/jalalfive.html</link>
+        <guid isPermaLink="true">https://song4energyndata.github.io/jalalfive.html</guid>
+        
+        <category>최적화</category>
+        
+        <category>게임이론</category>
+        
+        <category>에너지시스템</category>
+        
+        
+        <category>market</category>
+        
+      </item>
     
       <item>
         <title>에너지시스템 최적화/게임이론 강의: 3) Desirable properties of market-clearing mechanisms</title>
@@ -94,6 +223,8 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 01) &lt;a href=&quot;/jalalone.html&quot;&gt; Market clearing as an optimization problem&lt;/a&gt; &lt;br /&gt;
 02) &lt;a href=&quot;/jalaltwo.html&quot;&gt; Market clearing as an equilibrium problem&lt;/a&gt; &lt;br /&gt;
 03) &lt;b&gt; Desirable properties of market-clearing mechanisms&lt;/b&gt; &lt;br /&gt;
+04) Market clearing using a cooperative game approach &lt;br /&gt;
+05) &lt;a href=&quot;/jalalfive.html&quot;&gt; Stochastic market clearing&lt;/a&gt; &lt;br /&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Tue, 15 Aug 2023 00:00:00 +0900</pubDate>
@@ -179,6 +310,8 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 01) &lt;a href=&quot;/jalalone.html&quot;&gt; Market clearing as an optimization problem&lt;/a&gt; &lt;br /&gt;
 02) &lt;b&gt; Market clearing as an equilibrium problem&lt;/b&gt; &lt;br /&gt;
 03) &lt;a href=&quot;/jalalthree.html&quot;&gt; Desirable properties of market-clearing mechanisms&lt;/a&gt; &lt;br /&gt;
+04) Market clearing using a cooperative game approach &lt;br /&gt;
+05) &lt;a href=&quot;/jalalfive.html&quot;&gt; Stochastic market clearing&lt;/a&gt; &lt;br /&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Sat, 12 Aug 2023 00:00:00 +0900</pubDate>
@@ -259,6 +392,8 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 01) &lt;b&gt; Market clearing as an optimization problem&lt;/b&gt; &lt;br /&gt;
 02) &lt;a href=&quot;/jalaltwo.html&quot;&gt; Market clearing as an equilibrium problem&lt;/a&gt; &lt;br /&gt;
 03) &lt;a href=&quot;/jalalthree.html&quot;&gt; Desirable properties of market-clearing mechanisms&lt;/a&gt; &lt;br /&gt;
+04) Market clearing using a cooperative game approach &lt;br /&gt;
+05) &lt;a href=&quot;/jalalfive.html&quot;&gt; Stochastic market clearing&lt;/a&gt; &lt;br /&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Wed, 09 Aug 2023 00:00:00 +0900</pubDate>
@@ -2120,165 +2255,6 @@ TD3 훈련 코드는 아래와 같다. 코드 내 주석은 지난 포스팅의 
         <category>녹색섬</category>
         
         <category>Python</category>
-        
-        
-        <category>energymanagement</category>
-        
-      </item>
-    
-      <item>
-        <title>강화학습 기반 마이크로그리드 control - 2) 강화학습의 기본, Q-learning 리뷰</title>
-        <description>&lt;p&gt;지난 포스팅에서, Vincent의 태양광 기반 마이크로그리드의 누적 비용을 최소화하는 최적 control 문제를 소개했다. 또한 이를 선형계획법으로 풀 경우 ‘미래의 태양광 발전량과 부하를 안다’라는, ‘비현실적’인 가정 하의 control을 도출함을 보였다.&lt;/p&gt;
-
-&lt;p&gt;이번 포스팅에서는 ‘매 시점별로 과거의 자료만을 갖고’ control하는 데 필요한 강화학습의 이론적 내용을 최대한 간단히 소개한다 (강화학습에 대한 상세 내용은 &lt;a href=&quot;https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf&quot;&gt;Sutton의 Introduction&lt;/a&gt; 참고 바람)&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;state-action-pair-별-누적-보상&quot;&gt;State-action pair 별 누적 보상&lt;/h2&gt;
-&lt;p&gt;먼저, 강화학습에서 가장 널리 쓰이는 방법인인 Q-learning을 간단히 설명한다.&lt;/p&gt;
-
-&lt;p&gt;어떤 환경에서 시점 t에 state $s_{t}$에 있고, 이 때 action $a_{t}$를 수행하면 reward $r_{t+1}$을 받으면서 ‘next’ state $s_{t+1}$로 전이된다고 하자.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/reinforceone/reinforcement_basic.png&quot; alt=&quot;reinforcement_basic&quot; class=&quot;align-center&quot; width=&quot;70%&quot; /&gt;
-&lt;em&gt;강화학습 개요. State $S_t$에서 Action $A_t$를 취하면 Reward $R_{t+1}$을 얻으면서 State $S_{t+1}$로 전이됨.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Vincent의 마이크로그리드 사례에서는, 시점 $t$에서 state는 $t-N, t-(N-1), …, t-1$ 시점들의 태양광발전량과 부하 및 $t-1$시점의 배터리 내 에너지량들의 총 $2N+1$차원 벡터로 두었고, action은 net 수전량 $p_{\text{import}}[t]-p_{\text{export}}[t]$이다 (net 송전 시 마이너스). Reward는 계통으로 송전시의 수익 (양의 reward) 또는 계통으로부터 수전하거나 loss of load가 발생할 때의 비용 (음의 reward) 이다.&lt;/p&gt;
-
-&lt;p&gt;참고로 ESS의 충/방전은, 계통 수전/송전 값이 결정되면 에너지 밸런스를 맞추도록 ‘자동으로’ 결정된다고 가정한다. 이런 식으로 action의 자유도 (degree of freedom)를 줄여야 실제 계산이 용이해진다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;
-각 state $s$에서 action $a$를 할 확률을 나타내는 policy $\pi(a \vert s)$가 주어졌다고 하자. 그리고 시점 $t$에서의 state $s_t$이고, 시점 $t$에서는 poilcy $\pi(a \vert s)$에 관계없이 특정 action $a_t$를 결정하되, 다음 시점인 $t+1$부터는 $\pi(a \vert s)$에 따라 action들 $a_{t+1}, a_{t+2}, \cdots$를 결정한다고 하자.&lt;/p&gt;
-
-&lt;p&gt;이 때, state-action pair $(s_t,a_t)$에 대해 ‘미래의 reward들을 합친 누적 보상(return)의 기대값’ $q_{\pi}(s_{t},a_{t})$는 다음과 같다.&lt;/p&gt;
-
-&lt;p&gt;$ q_{\pi}(s_{t},a_{t}) = \mathbb{E} [r_{t+1} + \gamma r_{t+2} + \gamma^2 r_{t+3} + \cdots] $&lt;/p&gt;
-
-&lt;p&gt;우변에 기대값 기호 $ \mathbb{E}$가 붙은 이유는, 일반적으로는 같은 $s_{t}$에서 같은 $a_{t}$를 수행하더라도, 그 결과인 $r_{t+1}$과 $s_{t+1}$는 그때그때 다를 수 있으며 (즉 random, stochastic일 수 있음), 이에 따라 $t+1$시점 이후의 보상과 상태 전이도 달라질 수 있기 때문이다. 마이크로그리드 케이스에서도, 태양광 발전량과 부하는 외생적으로 random하게 결정되며 이에 따라 수전/송전량이 결정되므로, reward도 random하게 결정된다.&lt;/p&gt;
-
-&lt;p&gt;기대값 기호를 $t$에 대한 구분 ‘없이’ 쓴다는 것은, state 간 전이 확률이나 보상별 확률 같은 통계적 속성들이 ‘시간에 관계없이 일정’ 하다고 (즉 stationary하다고) 암묵적으로 전제함을 의미한다. 현실이 이 가정에서 크게 벗어나지 않는지를 고려해서 강화학습의 적정성 여부를 판단해야 한다. (마이크로그리드 케이스의 경우 부하 및 태양광 발전 추이에 급격한 변화가 없을 것이므로, 적절할 것으로 보인다)&lt;/p&gt;
-
-&lt;p&gt;$\gamma$는 1보다는 작되 1에 가까운 양수로 discount factor이다. 이를 곱하지 않으면, 환경에서의 행동이 특정 시점에 반드시 끝나는 게 아닌 한 누적비용이 무한대가 될 수 있다. 그러므로 discount factor를 곱해줘야 누적비용이 유한한 값으로 보장된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;누적-보상-추정-bellman-equation과-q-learning&quot;&gt;누적 보상 추정: Bellman equation과 Q-learning&lt;/h2&gt;
-
-&lt;p&gt;한편 시점 $t+1$에 대해서도 $q_{\pi}(s_{t+1},a_{t+1})$이 정의되므로, 위 식은 아래와 같이 $q_{\pi}$에 대해 재귀적인(recursive) 식으로 쓸 수 있다.&lt;/p&gt;
-
-&lt;p&gt;$ q_{\pi}(s_{t},a_{t}) = \mathbb{E} [r_{t+1} + \gamma q_{\pi}(s_{t+1},a_{t+1}) ] $&lt;/p&gt;
-
-&lt;p&gt;특히 주어진 policy가 ‘최적의’ 즉 optimal policy라면, 시점 $t+1$부터의 action들은 미래 누적비용의 기대값을 최대화도록 선택될 것이다. 따라서 ‘optimal policy 조건 하의’ 누적 보상의 기대값 $q_{\ast}$에 대해, $\text{max}$를 포함하는 아래 식이 성립한다.&lt;/p&gt;
-
-&lt;p&gt;$ q_{\ast} (s_{t},a_{t}) = \mathbb{E} [r_{t+1} + \gamma \text{max}_{a_{t+1}} q_{\ast} (s_{t+1},a_{t+1}) ] $&lt;/p&gt;
-
-&lt;p&gt;이를 Bellman equation이라 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;
-우리는 optimal policy 및 각 state-action pair 별 $q_{\ast}(s,a)$ 값을 모른다. 그러므로 처음에는 특정 policy 및 $q_{\ast}(s,a)$에 대한 추정량 $Q(s,a)$의 초기값으로부터 출발한다. 그리고 해당 policy 및 $Q(s,a)$를 업데이트시켜서, 점차 optimal policy 및 $q_{\ast}(s,a)$에 근접하게 만들어야 한다.&lt;/p&gt;
-
-&lt;p&gt;Bellman equation의 식을 보면, 우변에서 next state에 대해 $q_{\ast}$ 값을 최대화하는 action을 선택함이 전제되어 있다. 이에 착안해, 아래와 같은 $Q(s,a)$의 업데이트 방법을 생각할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;$ Q(s_{t},a_{t}) \leftarrow (1-\alpha) Q(s_{t},a_{t}) + \alpha [r_{t+1} + \gamma \text{max}_{a_{t+1}} Q(s_{t+1},a_{t+1})] $&lt;/p&gt;
-
-&lt;p&gt;즉 시점 $t$에서 state $s_t$일 때 action $a_t$를 수행하여 reward $r_{t+1}$을 얻고 next state $s_{t+1}$로 전이되었다면, $s_{t+1}$에서 가능한 action들 중 추정량 $Q(s_{t+1},a_{t+1})$를 최대화하는 action $a_{t+1}$을 선택한다고 가정하고 $Q(s_{t},a_{t})$를 업데이트한다. (여기서 $\alpha$는 작은 양수로, learning rate이다)&lt;/p&gt;
-
-&lt;p&gt;처음에는 모든 state-action pair들에 대해 $Q(s,a)$를 0으로 초기화하고, 시점 $t$에서 action을 결정해서 $t+1$로 넘어갈 때마다 위와 같이 업데이트 한다.&lt;/p&gt;
-
-&lt;p&gt;처음에는 모든 $Q$값이 0이므로 각 state $s$ 별로 $Q(s,a)$를 최대화하는 $a$가 무작위이다. 그러나 업데이트를 수행하면서 ‘실제 환경에서 얻은 정보’인 reward $r_{t+1}$ 를 계속 반영하므로, 업데이트를 거듭할수록 $Q(s,a)$가 점차 $ q_{\ast} (s,a)$에 가까워짐이 알려져 있다. 이에 따라, $Q(s,a)$를 최대화하는 $a$가 무엇인지 뚜렷해지므로 policy도 업데이트되는 셈이다.&lt;/p&gt;
-
-&lt;p&gt;이러한 업데이트 방법을 Q-learning이라 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;
-Vincent의 마이크로그리드 사례에서는, 실제 수전량은 -1.1에서 +1.1 사이의 실수이지만 (마이너스값은 송전), 문제를 간단히 하기 위해 세 가지의 ‘discrete’ action들로 구성된 action set (1.1kW로 수전, 1.1kW로 송전, 수전도 송전도 하지 않음 (idle)) 을 가정했다.&lt;/p&gt;
-
-&lt;p&gt;위 세 가지 action 각각의 각 action의 인덱스를 0,1,2라 하자. 그리고 시점 $t$에서 상태가 $s_t$일 때 3개의 action들 중 0번 action을 $a_t$로써 정해서 reward $r_{t+1}$을 얻은 후 다음 상태 $s_{t+1}$로 전이되었다고 하자.&lt;/p&gt;
-
-&lt;p&gt;그러면 현재의 추정량들 $Q(s_t,0)$, $Q(s_{t+1},0)$, $Q(s_{t+1},1)$, $Q(s_{t+1},2)$를 사용해서, 추정량 $Q(s_t,0)$를 업데이트할 수 있다. 이를 시점 $t, t+1, \cdots$ 에 대해 계속 반복한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;현재의-action-결정-exploration-exploitation&quot;&gt;현재의 action 결정: Exploration/ Exploitation&lt;/h2&gt;
-
-&lt;p&gt;위에서 $q_{\pi}(s_t,a_t)$를 설명할 때, 시점 $t+1$부터는 policy $\pi$를 따라 action들 $a_{t+1}, a_{t+2}, \cdots$를 결정하되, 시점 $t$에서는 $\pi$에 관계없이 action $a_t$를 결정한다고 했다.&lt;/p&gt;
-
-&lt;p&gt;그러면, $a_t$는 어떻게 결정해야 하는가?&lt;/p&gt;
-
-&lt;p&gt;가장 직관적인 방법은, 시점 $t$의 state가 $s_t$로 주어졌을 때 $Q(s_t,a_t)$를 최대화하는 action으로 결정하는 것이다. 이러한 $a_t$ 결정 규칙을 ‘greedy’ policy라 한다.&lt;/p&gt;
-
-&lt;p&gt;그러나 greedy policy는 controller 훈련을 끝낸 후 ‘validation 및 실제 구동 시’에 적용해야지, ‘훈련 중’에 적용하는 것은 적절하지 않다.&lt;/p&gt;
-
-&lt;p&gt;학습 초기에 아직 아무 정보도 학습하지 못했는데 단순히 $Q$ 값이 가장 큰 action만을 계속 하는 것은, 마치 평균적 보상이 다른 여러 개의 슬롯머신을 눈 앞에 두고도, 처음에 고른 몇 개의 슬롯머신 중 좋아 보이는 것만 계속 누르는 것과 비슷하다.&lt;/p&gt;
-
-&lt;p&gt;누적 보상을 최대화하려면 어떤 슬롯머신이 가장 (평균적으로) 큰 보상을 주는지 확인하는 절차가 먼저 필요하며, 이를 위해 초반에는 여러 슬롯머신들을 돌아가면서 눌러봐야 한다. 강화학습에서는 이를 exploration(탐색)이라 한다.&lt;/p&gt;
-
-&lt;p&gt;탐색을 통해 어떤 슬롯머신이 보상을 많이 주는지 감이 잡히면 그때부터 보상을 많이 주는 슬롯머신을 계속 누르면 되며, 이를 exploitation이라 한다. Q-learning에서 greedy policy는 exploitation’만’ 하는 것에 해당한다.&lt;/p&gt;
-
-&lt;p&gt;훈련 시에는 (특히 초반에는) exploration을 겸해서 해 줘야 더 좋은 action을 판별할 가능성이 열린다. 그러므로 시점 $t$에서 $a_t$를 결정할 때, 보통 주어진 값 $\epsilon$만큼의 확률로 $a_t$를 $Q(s_t,a_t)$ 값에 상관없이 random하게 결정한다 (exploration). 그리고 $1-\epsilon$의 확률로 $Q(s_t,a_t)$ 값이 최대가 되는 $a_t$를 결정한다 (exploitation).&lt;/p&gt;
-
-&lt;p&gt;이렇게 exploration과 exploitation 간 balance를 갖춘 $a_t$ 결정 규칙을  $\epsilon$-greedy policy라 한다. ($\epsilon$는 훈련 내내 고정되어야 하는 것은 아니며, 훈련 초기에는 크게 하고 훈련이 진행될수록 줄여서 적용할 수도 있다.)&lt;/p&gt;
-
-&lt;p&gt;(Exploration/ exploitation에 대해 제대로 이해하고 싶으면, Sutton의 책 2장의 ‘Multi-armed Bandits’를 공부하기 바란다)&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;state-action-pair-수가-매우-많은-경우-q-value-근사를-위한-딥러닝-사용&quot;&gt;State-action pair 수가 매우 많은 경우: Q-value 근사를 위한 딥러닝 사용&lt;/h2&gt;
-&lt;p&gt;지금까지 설명한 방법은, state-action pair의 수가 많지 않을 경우 각 state-action pair별 $Q$값들을 담는 table을 만들어 그대로 적용할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;이를테면 아래와 같은 공간에서 상하좌우로 한 칸씩 이동 가능한 환경에서 최단거리를 찾는 문제 (Gridworld) 에서는, 격자 수가 한정되어 있으므로 각 격자(state)-이동방향(action) pair 별로 $Q$값들을 따로 계산할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/reinforcetwo/gridworld.png&quot; alt=&quot;gridworld&quot; class=&quot;align-center&quot; /&gt;
-&lt;em&gt;Gridworld 환경. 칸이 38개이고 action은 상하좌우 4개이므로, state-action pair 총 152개 각각에 대해 Q-value를 추정할 수 있다.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;하지만 많은 경우 state가 continuous이거나, discrete라도 그 수가 매우 많다.&lt;/p&gt;
-
-&lt;p&gt;잘 알려진 cartpole 문제의 경우, action은 ‘수레를 정해진 힘으로 왼쪽으로 가속/ 오른쪽으로 가속’ 딱 두 개의 값 중 하나를 가지는 이진수로 볼 수 있으나, state는 ‘수레의 위치와 속도, 막대의 각도와 각속도’로 4차원의 연속된 벡터로 볼 수 있다. 연속변수이므로, state의 수가 ‘무한대’이다. 그러므로, 각 state-action pair에 대해 table 방식으로 $Q$값들을 따로 계산할 수는 없다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/reinforcetwo/cart_pole.gif&quot; alt=&quot;cart_pole&quot; class=&quot;align-center&quot; width=&quot;70%&quot; /&gt;
-&lt;em&gt;Cartpole 환경. State 수가 무한하므로, 각 state-action pair에 대해 Q-value를 정의할 수 없다.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Vincent의 마이크로그리드 케이스에서도 마찬가지이다. State (직전 $N$시간 동안의 시간별 부하와 태양광 발전량, 그리고 배터리에 저장된 에너지)가 $2N+1$차원의 continuous vector이기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;이런 경우 ‘모든 state-action pair 각각에 대해’ $Q$를 계산한다는 것은 사실상 불가능하다. 그렇다면 어떻게 해야 하나?&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;
-만약 state-action pair와 Q값 간의 관계가 어떤 domain knowledge에 의해 명확하게 정의될 수 있다면, 해당 관계를 명확한 수식으로 표현하여 $Q$를 쉽게 계산할 수 있을 것이다.&lt;/p&gt;
-
-&lt;p&gt;그러나 이 케이스를 포함한 많은 경우, state-action과 $Q$값 간의 관계식을 명확한 수식으로 나타낼 수 있을 것이라 기대되지 않는다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;
-그렇다면, state $s_t$를 입력으로 받고 각 action 별 $Q(s_t,a_t)$ 값들을 출력으로 하는 심층신경망 (Deep Neural Network, DNN) 모델을 훈련하는 것이 현실적인 방법이다.&lt;/p&gt;
-
-&lt;p&gt;심층신경망은 계산비용은 매우 높지만, node 수가 충분하면 어떤 비선형 함수도 근사할 수 있기 때문에 nonlinear function approximator로 기능한다는 점을 이용하는 것이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/reinforcetwo/reinforcement_deep.png&quot; alt=&quot;reinforcement_deep&quot; class=&quot;align-center&quot; width=&quot;80%&quot; /&gt;
-&lt;em&gt;‘심층’강화학습 개요. Action 결정이 심층신경망에 기반해 이루어짐.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;이 심층신경망 모델은 매 훈련 주기마다 tuple $(s_{t},a_{t},s_{t+1},r_{t+1})$ 의 batch를 받아서 업데이트된다. 이 때 훈련 주기는 1 time step보다 길 수 있으며, batch라 함은 여러 시점들의 tuple들을 한꺼번에 훈련에 사용함을 의미한다.&lt;/p&gt;
-
-&lt;p&gt;업데이트 시 최소화 대상 목적함수는 $Q(s_{t},a_{t})$와 $r_{t+1} + \gamma \text{max}_{a_{t+1}} Q(s_{t+1},a_{t+1})$ 간 차이의 평균제곱이다. Gradient descent 기반으로 심층신경망의 가중치를 수정해감에 따라, $Q(s_{t},a_{t})$가 $q_{\ast}(s_{t},a_{t})$에 가까워질 것이라 기대할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;이를 Deep Q-Network (DQN) 이라 한다. (위 cartpole 문제도 DQN으로 푼다)&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;
-다음 포스팅에서는 마이크로그리드 문제에 Deep Q-Network를 적용하는 과정과 결과에 대해 상세히 설명한다.&lt;/p&gt;
-
-&lt;div class=&quot;notice--info&quot;&gt;
-
-강화학습 기반 마이크로그리드 control&lt;br /&gt;&lt;br /&gt;
-
-1) &lt;a href=&quot;/reinforceone.html&quot;&gt;미래를 모를 때의 &apos;경제적&apos; control을 위한 강화학습&lt;/a&gt;&lt;br /&gt;
-2) &lt;b&gt;강화학습의 기본, Q-learning 리뷰&lt;/b&gt;&lt;br /&gt;
-3) &lt;a href=&quot;/reinforcethree.html&quot;&gt;Deep Q-Network를 통한 3-action control 도출&lt;/a&gt;&lt;br /&gt;
-4) &lt;a href=&quot;/reinforcefour.html&quot;&gt;DDPG를 이용한 &apos;continuous&apos; control 도출&lt;/a&gt;&lt;br /&gt;
-5) &lt;a href=&quot;/reinforcefive.html&quot;&gt;TD3/ SAC 등 &apos;진보된&apos; continuous control을 쓴다면?&lt;/a&gt;
-
-&lt;/div&gt;
-</description>
-        <pubDate>Sat, 10 Jun 2023 00:00:00 +0900</pubDate>
-        <link>https://song4energyndata.github.io/reinforcetwo.html</link>
-        <guid isPermaLink="true">https://song4energyndata.github.io/reinforcetwo.html</guid>
-        
-        <category>강화학습</category>
         
         
         <category>energymanagement</category>
