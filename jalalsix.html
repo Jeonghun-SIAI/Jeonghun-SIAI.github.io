@@ -19,8 +19,8 @@
 </script>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>에너지시스템 최적화/게임이론 강의: 3) Desirable properties of market-clearing mechanisms | 에너지엔데이터연구소</title>
-<meta name="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 3강을 필자가 요약한 내용이다.">
+<!-- begin _includes/seo.html --><title>에너지시스템 최적화/게임이론 강의: 6) Robust approaches for market clearing | 에너지엔데이터연구소</title>
+<meta name="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 6강을 필자가 요약한 내용이다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -32,32 +32,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="에너지시스템 최적화/게임이론 강의: 3) Desirable properties of market-clearing mechanisms">
-<meta property="og:url" content="https://song4energyndata.github.io/jalalthree.html">
+<meta property="og:title" content="에너지시스템 최적화/게임이론 강의: 6) Robust approaches for market clearing">
+<meta property="og:url" content="https://song4energyndata.github.io/jalalsix.html">
 
 
-  <meta property="og:description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 3강을 필자가 요약한 내용이다.">
-
-
-
-  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/jalal/Lecture3_1.png">
+  <meta property="og:description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 6강을 필자가 요약한 내용이다.">
 
 
 
-
-
-  <meta property="article:published_time" content="2023-08-15T00:00:00+09:00">
+  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/jalal/Lecture6_1.png">
 
 
 
 
 
-  
+  <meta property="article:published_time" content="2023-08-20T00:00:00+09:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://song4energyndata.github.io/jalalthree.html">
+
+<link rel="canonical" href="https://song4energyndata.github.io/jalalsix.html">
 
 
 
@@ -432,16 +432,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="에너지시스템 최적화/게임이론 강의: 3) Desirable properties of market-clearing mechanisms">
-    <meta itemprop="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 3강을 필자가 요약한 내용이다.">
-    <meta itemprop="datePublished" content="2023-08-15T00:00:00+09:00">
+    <meta itemprop="headline" content="에너지시스템 최적화/게임이론 강의: 6) Robust approaches for market clearing">
+    <meta itemprop="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 6강을 필자가 요약한 내용이다.">
+    <meta itemprop="datePublished" content="2023-08-20T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://song4energyndata.github.io/jalalthree.html" class="u-url" itemprop="url">에너지시스템 최적화/게임이론 강의: 3) Desirable properties of market-clearing mechanisms
+            <a href="https://song4energyndata.github.io/jalalsix.html" class="u-url" itemprop="url">에너지시스템 최적화/게임이론 강의: 6) Robust approaches for market clearing
 </a>
           </h1>
           
@@ -452,7 +452,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-08-15T00:00:00+09:00">2023-08-15</time>
+        <time datetime="2023-08-20T00:00:00+09:00">2023-08-20</time>
       </span>
     
 
@@ -470,86 +470,143 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#market-clearing-mechanism이-추구하는-4가지-성질들">Market clearing mechanism이 추구하는 4가지 성질들</a></li><li><a href="#lmp-based-market에서-충족되는-성질들은">LMP-based market에서 충족되는 성질들은?</a></li><li><a href="#unit-commitment-제약을-고려한-market-clearing">Unit commitment 제약을 고려한 market clearing</a></li><li><a href="#uc-제약에-대해-참고하면-좋은-문헌들">UC 제약에 대해 참고하면 좋은 문헌들</a></li></ul>
+              <ul class="toc__menu"><li><a href="#worst-case-scenario">Worst-case scenario</a></li><li><a href="#worst-case를-어떻게-찾는가">Worst-case를 어떻게 찾는가?</a></li><li><a href="#제약조건이-만족될-확률-기반-문제-구성">제약조건이 만족될 ‘확률’ 기반 문제 구성</a></li><li><a href="#uncertainty의-분포를-모른다면">Uncertainty의 분포를 모른다면?</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <p>이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 3강을 필자가 요약한 내용이다.</p>
+        <p>이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 6강을 필자가 요약한 내용이다.</p>
 
 <!-- Courtesy of embedresponsively.com -->
 
 <div class="responsive-video-container">
-    <iframe src="https://www.youtube-nocookie.com/embed/hhtOAsXlxq8" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+    <iframe src="https://www.youtube-nocookie.com/embed/GoZbvRV1FMs" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
   </div>
 
 <p>(<a href="https://www.jalalkazempour.com/teaching">Course slides 링크</a>)</p>
 
-<h2 id="market-clearing-mechanism이-추구하는-4가지-성질들">Market clearing mechanism이 추구하는 4가지 성질들</h2>
+<h2 id="worst-case-scenario">Worst-case scenario</h2>
 
-<p>1강에서는 market clearing이 social welfare를 최대화하는 최적화 문제의 풀이 결과임을 보였고, 2강에서는 최적화 결과가 Nash 균형이므로 어떤 참가자도 해당 결과를 받아들일 것임을 보였다.</p>
+<p>이전 강의에서의 시나리오 기반 stochastic market clearing에서는, 하루전 시장 비용과 각 시나리오 별 실시간 시장 비용의 ‘기대값’의 합을 최소화하는 급전계획을 수립하였다.</p>
 
-<p>이는 market clearing mechanism이 ‘market efficiency’ 성질을 충족한다고도 볼 수 있다.</p>
+<p>여기서 더 보수적으로 접근한다면, ‘총 비용이 가장 많이 발생하는 시나리오’의 총 비용을 최소화하고자 할 수 있다. 즉 ‘worst-case’ 의 비용을 최소화하는 것이다.</p>
 
-<p>Market clearing mechanism이 추구하는 성질은 market efficiency를 포함해 4개가 있다.</p>
+<p>이러한 접근을 ‘robust’ market clearing이라 하며, 시나리오 기반 robust market clearing 문제는 아래 슬라이드와 같다.</p>
 
-<p>1) Market efficiency : Social welfare가 최대화되고, 각 참가자들이 받아들일 수 있는 결과가 도출된다.</p>
+<p><img src="/assets/images/jalal/Lecture6_22.png" alt="clearingexample" /></p>
 
-<p>2) Incentive compatibility : 각 참가자들이 자신의 정보를 왜곡 없이 그대로 제공하는 것이 각자에게 최선임을 의미한다.
-이를테면 어떤 발전기의 발전단가가 MWh당 12달러일 경우, offering을 MWh당 12달러보다 높은 값이 아닌 12달러 그대로 하는 것이 본인에게 있어 최선의 전략인 경우를 말한다.</p>
+<p>변수 $\beta$가 각 시나리오 별 실시간 시장 비용 중 최대값, 즉 worst-case에서의 실시간 시장 비용이다.</p>
 
-<p>여기서 offering을 ‘일부러’ 발전단가보다 높이 불러 (즉 거짓 정보를 제공해서) 수익 증대를 추구하는 것을 ‘전략적인 (strategic)’ 행동이라 하며, ‘exercising market power’라는 표현도 쓴다.</p>
+<p>비용은 worst-case 시나리오만을 기준으로 계산되지만, 다른 시나리오들에 대해서도 위 최적화 문제가 풀 수 있는 (feasible) 문제이어야 함에 주의한다.</p>
 
-<p>3) Cost recovery : 모든 참가자들이 최소한 각자의 operational cost는 건질 수 있음을, 즉 모든 참가자들에 대해 각자의 non-negative profit이 보장됨을 의미한다. (단, 이는 capital cost 회수 가능 여부와는 무관하다)</p>
+<p>만약 풍력 발전량의 시나리오 4개가 각각 30MW, 60MW, 70MW, 40MW 일 경우 (네 번째 시나리오가 이전 강의에서의 10MW가 아님에 주의), robust market clearing 문제를 풀면 총 비용은 900달러이다.</p>
 
-<p>4) Revenue adequacy : Market operator가 operation 수행 시 최소한 손해는 보지 않음을 의미한다.</p>
+<p><img src="/assets/images/jalal/Lecture6_24.png" alt="clearingexample" /></p>
 
-<p><img src="/assets/images/jalal/Lecture3_11.png" alt="clearingexample" />
-<img src="/assets/images/jalal/Lecture3_14.png" alt="clearingexample" />
-<img src="/assets/images/jalal/Lecture3_16.png" alt="clearingexample" />
-<img src="/assets/images/jalal/Lecture3_19.png" alt="clearingexample" /></p>
+<p>위 4개 시나리오들에 대해 stochastic market clearing 수행 시 총 비용의 ‘기대값’은 850달러로 robust market clearing에서의 비용보다 낮다.</p>
 
-<h2 id="lmp-based-market에서-충족되는-성질들은">LMP-based market에서 충족되는 성질들은?</h2>
+<p>그러나 stochastic market clearing 기반으로 하루전 시장에서의 급전계획을 도출 후 실시간 시장에서 worst-case가 발생할 경우 (실제 풍력발전량이 30MW인 경우) 의 총 비용은 1200달러이다. 즉, robust market clearing을 통해 ‘최악의 상황에서의’ 비용을 1200달러에서 900달러로 낮추었다.</p>
 
-<p>안타깝게도, 위 4개 성질들을 ‘전부 다’ 충족하는 것은 불가능하다 (Hurwicz theorem으로 증명됨).</p>
+<h2 id="worst-case를-어떻게-찾는가">Worst-case를 어떻게 찾는가?</h2>
 
-<p>그렇다면 1강부터 설명한 LMP (Local Marginal Price) based market에서는 위 4가지 성질들 중 어떤 성질이 충족되고 어떤 성질은 충족되지 않을까?</p>
+<p>사실 위 문제처럼 풍력 발전기의 출력이 0 이상 70MW 이하인 경우, 엄밀히는 0에서 70MW까지의 모든 시나리오를 고려할 필요가 있으며, worst-case는 풍력 발전기의 출력이 0인 상황이다.</p>
 
-<p>충족되지 않는 성질은 incentive compatibility와 market efficiency이다.</p>
+<p>만약 풍력 발전기가 한 대 더 있는 경우에도, worst-case는 두 풍력 발전기 모두의 출력이 0인 상황이다. 아래 슬라이드의 가로축은 풍력발전기 1의 출력, 세로축은 풍력발전기 2의 출력이다. 이 경우 원점이 worst-case임이 자명하다.</p>
 
-<p>극단적인 예로 발전기와 수요처가 하나씩인 시장이 있다고 하자. 이 때 수요처의 bid price를 발전기가 알고 있을 경우, 발전기는 offer price를 자신의 발전단가가 아니라 수요처의 bid price로 제시하는 ‘strategic offering’ 을 할 것이다. 따라서 incentive compatibility가 깨진다.</p>
+<p><img src="/assets/images/jalal/Lecture6_37.png" alt="clearingexample" /></p>
 
-<p>이러한 strategic offering을 할 경우 market-clearing price는 이전과 달라진다. 이전에는 모든 발전기가 offer price를 각자의 발전단가로 제시했고 그 결과 social welfare가 최대화되었으나, price가 달라지므로 더 이상 social welfare가 최대화되지 않는다. 따라서 market efficiency도 깨진다.</p>
+<p>그리고 모든 풍력발전 출력 시나리오들은 ‘box’안에 있다. 이를 box uncertainty set이라 한다. Box uncertainty set에서는 worst-case가 꼭지점 중 하나이고 꼭지점 수가 적으므로 worst-case를 찾기 쉽다.</p>
 
-<p>충족되는 성질은 revenue adequacy와 cost recovery이다. (단, cost recovery 충족은 뒤에서 볼 unit commitment (UC) 제약을 고려하지 않았을 때 성립한다.)</p>
+<p>그러나 실제 적용 시, worst-case를 이렇게 직관적으로 찾을 수 없는 경우가 많다.</p>
 
-<p><img src="/assets/images/jalal/Lecture3_28.png" alt="clearingexample" /></p>
+<p>이를테면 여러 개의 발전원들을 다변화된 포트폴리오처럼 구성하여 ‘실질적으로는’ 모든 발전원의 출력이 0인 경우가 사실상 없다든지, correlation이 있어 위처럼 단순한 box 모양이 아니라 다면체 (polytope) 또는 타원 (ellipsoid) 꼴의 uncertainty set을 가진다든지 할 경우에는, worst-case를 직관적으로 찾을 수 없다.</p>
 
-<h2 id="unit-commitment-제약을-고려한-market-clearing">Unit commitment 제약을 고려한 market clearing</h2>
+<p><img src="/assets/images/jalal/Lecture6_38.png" alt="clearingexample" /></p>
 
-<p>1강의 최적화 문제에서는 발전기의 ramping limit, 최소부하, 시동비용, 최소기동유지시간 및 최소정지유지시간 등의 unit commitment (UC) 제약들을 고려하지 않았다.</p>
+<p>Uncertainty set을 수식으로 표현할 수 있을 경우, ‘시나리오를 쓰지 않고’ uncertainty set을 직접 최적화 문제에 명시하여 robust market clearing 문제를 구성할 수 있다.</p>
 
-<p>UC 제약을 추가하면 어떻게 될까? Ramping limit을 제외한 나머지 제약들이 이진변수 (binary variable) 들을 포함하므로 UC 제약을 문제에 추가하면 mixed-integer 문제가 된다. Mixed-integer 문제에서는 dual variable을 계산할 수 없으므로, market clearing price를 도출할 수 없다 (discrete feasible space에 대해서 sensitivity를 정의하기 곤란함)</p>
+<p><img src="/assets/images/jalal/Lecture6_48.png" alt="clearingexample" /></p>
 
-<p>실제 적용에서는, 우선 UC 조건을 고려하는 문제를 풀어 이진변수들의 값을 얻고, 해당 이진변수들 값을 고정한 상태에서 다시 문제를 풀어 dual variable들을 계산한다. 미국에서는 independent system operator (ISO) 가 각 발전기 별 UC 제약들을 받아서 UC 문제를 푼다.</p>
+<p>위 문제에서의 uncertainty set 수식은 $ 0 \leq W \leq 70 $ 이다.</p>
 
-<p><img src="/assets/images/jalal/Lecture3_52.png" alt="clearingexample" />
-<img src="/assets/images/jalal/Lecture3_56.png" alt="clearingexample" /></p>
+<p>그런데 위 문제에서는 세 개의 최적화 문제가 계층적으로 (hierarchically) 중첩되어 있어 바로 풀 수 없다. 구체적으로는 min-max-min problem으로, 이를 풀기 위해서는 duality를 이용한 변환이 필요하다.</p>
 
-<p>단, 이진변수의 값을 고정하면 market clearing price 결정에 (이진변수로만 반영할 수 있는) 시동비용 정보를 반영할 수 없다. 시동비용도 operation cost이므로, 이는 cost recovery 성질을 충족하지 못함을 의미한다. 시동비용의 비중이 큰 원자력/ 석탄화력 발전소에게 있어 이는 중요한 이슈이다.</p>
+<p>실시간 시장에 대한 최소화 문제를 inner problem이라 할 때, 이 inner problem의 dual problem은 최대화 문제이다. 그러므로 inner problem의 dual problem을 바로 바깥의 최대화 문제와 합칠 수 있다 (아래 두 슬라이드 참고).</p>
 
-<p>이 때문에 uplift mechanism 등의 side payment를 운용하여 cost recovery를 보장할 수 있도록 한다.</p>
+<p><img src="/assets/images/jalal/Lecture6_58.png" alt="clearingexample" />
+<img src="/assets/images/jalal/Lecture6_61.png" alt="clearingexample" /></p>
 
-<h2 id="uc-제약에-대해-참고하면-좋은-문헌들">UC 제약에 대해 참고하면 좋은 문헌들</h2>
+<p>여기서 난점은, 합쳐진 문제의 목적함수에 $W$와 dual variable 간 곱 (product), 즉 nonlinear term이 포함된다는 것이다.</p>
 
-<p>UC 제약은 다수의 이진변수를 포함하므로 최적화 문제 풀이 시간을 크게 증가시키거나 심지어는 현실적인 시간 내에 풀리지 않게 (intractable) 만드는 주범이다. 이 때문에 UC 제약을 다루는 데 대한 연구들이 수행되어 왔다.</p>
+<p><img src="/assets/images/jalal/Lecture6_63.png" alt="clearingexample" /></p>
 
-<p>참고할 만한 문헌들은 아래와 같다.</p>
+<p>이 문제를 푸는 한 가지 방법은, $W$의 값을 uncertainty set의 꼭지점 (vertex)의 값으로 ‘고정’하는 것이다. 그러면 linear problem이 되므로 빠르게 풀 수 있다. 이러한 linear problem을 각 vertex 별로 풀어서 목적함수를 비교할 수 있다.</p>
 
-<p>1) <a href="https://doi.org/10.1109/TPWRS.2006.876672">A computationally efficient mixed-integer linear formulation for the thermal unit commitment problem</a><br />
-2) <a href="https://doi.org/10.1109/TPWRS.2011.2162008">Tight Mixed Integer Linear Programming Formulations for the Unit Commitment Problem</a><br />
-3) <a href="https://doi.org/10.1561/3100000014">Unit Commitment in Electric Energy Systems</a><br />
-4) <a href="https://doi.org/10.1109/TPWRS.2017.2735026">Representing Operational Flexibility in Generation Expansion Planning Through Convex Relaxation of Unit Commitment</a></p>
+<p>그러나 이는 vertex 수가 많으면 실행하기 어렵고, 실제로 vertex 수는 재생발전원 수에 지수적으로 (exponentially) 증가한다.</p>
+
+<p>위에서 소개한 풍력발전기들에 대한 box uncertainty set을 예로 들면, 풍력발전기가 $N$개 있을 때 꼭지점 수는 $2^N$개이다. 그러므로 풍력발전기가 스무 개 정도만 넘어가도, 실질적으로 쓸 수 없는 방법이 된다.</p>
+
+<p>만약 풍력발전기들 간의 correlation 등까지 고려해서 uncertainty set이 복잡한 모양을 갖게 되면 꼭지점 수는 더 증가할 것이다 (또는 uncertainty set이 타원형 등이어서 아예 vertex가 없을 수도 있다).</p>
+
+<h2 id="제약조건이-만족될-확률-기반-문제-구성">제약조건이 만족될 ‘확률’ 기반 문제 구성</h2>
+
+<p>Worst-case approach로 얻은 solution은 종종 지나치게 보수적이다 (conservative). 불확실성이 크더라도, 대개 worst-case보다는 나을 것이기 때문이다.</p>
+
+<p>이를 완화하는 한 가지 방법으로, 각 제약조건들이 항상 충족되는 것이 아니라 100퍼센트보다 낮은 어떤 ‘확률’로 충족될 것을 조건으로 두는 chance-constrained programming이 있다.</p>
+
+<p><img src="/assets/images/jalal/Lecture6_95.png" alt="clearingexample" /></p>
+
+<p>Uncertainty $\Delta W$의 분포를 알고 있다고 가정하면 (최소한 충분한 데이터를 통해 근사 분포를 도출할 수 있다면), 위 제약조건이 충족될 확률도 계산 가능하다.</p>
+
+<p>Chance-constraints를 market clearing에 적용한 문제는 아래와 같다.</p>
+
+<p><img src="/assets/images/jalal/Lecture6_100.png" alt="clearingexample" /></p>
+
+<p>여기서 $p^{G2.RT}$, $p^{shed}$, $p^{spill}$은 $\Delta W$의 ‘함수’ 임에 유의한다. 이들은 실제 풍력발전량이 얼마인가에 따라 달라지는 변수들이기 때문이다.</p>
+
+<p>(여기서는 편의상 각각의 제약조건들이 ‘개별적으로’ $1 - \epsilon$의 확률로 충족된다고 하였으나, 실제로는 여러 제약조건들에 대한 ‘joint’ constraint가 필요할 수도 있다.)</p>
+
+<p>그러면 이 chance-constraint problem을 실제로 풀려면, 어떻게 해야 하는가?</p>
+
+<p>만약 uncertainty (위에서는 $\Delta W$) 의 분포가 정규분포인 case 등 특수한 몇몇 case에 해당한다면, analytical reformulation이 가능하다. 실제로 chance-constrained linear programming problem은 uncertainty가 정규분포라는 가정 하에 second-order cone programming (SOCP) problem으로 변환 가능함이 알려져 있다.</p>
+
+<p>그러나 위처럼 analytical reformulation이 가능한 확률분포로 가정할 수 있는 경우는 그리 많지 않다. 특히 재생발전원의 경우 true data generating process가 복잡하므로, 더더욱 가능성이 떨어진다.</p>
+
+<p>결국 확률분포로부터 sampling 수행 후 해당 sample들에 대해 제약조건이 만족된다는 조건을 설정하는 것이 현실적인 방안이다.</p>
+
+<p>아래 슬라이드를 보면, 주어진 $\epsilon$ 및 문제 크기 $n_x$와 confidence level $\beta$에 대해, $N$개 이상의 sample들에 대한 제약조건을 걸면 사실상 chance-constraint가 충족됨이 알려져 있다.</p>
+
+<p><img src="/assets/images/jalal/Lecture6_112.png" alt="clearingexample" /></p>
+
+<p>그러나 이 $N$값은 대개 매우 크므로, 문제도 매우 커져 풀기 곤란해진다. (이후 강의들에서 설명할 decomposition techniques를 쓰면 풀 수도 있다.)</p>
+
+<p><img src="/assets/images/jalal/Lecture6_115.png" alt="clearingexample" /></p>
+
+<p>만약 uncertainty의 차원이 작은 편이라면, 아래 슬라이드처럼 ‘approximate’ box uncertainty set을 구성하고 해당 set의 vertex들에 대해 문제를 풀 수도 있다 (단, 이 경우 robust optimization이 되므로 보다 보수적인 해를 얻는다).</p>
+
+<p><img src="/assets/images/jalal/Lecture6_123.png" alt="clearingexample" /></p>
+
+<h2 id="uncertainty의-분포를-모른다면">Uncertainty의 분포를 모른다면?</h2>
+
+<p>위에서 설명했던 chance-constraint problem은 uncertainty에 대한 분포를 필요로 했다. 그런데  실제로는 그 분포를 모른다.</p>
+
+<p>이 경우 대안으로, ‘data generating process를 표현할 가능성이 있는 여러 개의 확률분포들’ 을 사용할 수 있다. 이러한 방법을 distributionally robust optimization (DRO) 라 한다.</p>
+
+<p>실제 확률분포를 모르기 때문에 말 그대로 여러 개의 확률분포’들’을 사용하며, 해당 확률분포들의 집합을 ambiguity set이라 한다.</p>
+
+<p><img src="/assets/images/jalal/Lecture6_138.png" alt="clearingexample" /></p>
+
+<p>위 슬라이드에서 각 chance constraint는, ambiguity set 내의 모든 확률분포들 각각에 대해 해당 제약조건이 충족될 확률을 계산했을 때 그 중 ‘가장 낮은 확률’ 이 $1 - \epsilon$ 이상이 되어야 한다는 조건이다.</p>
+
+<p>이 때 첫번째 chance constraint에 대해 충족 확률이 가장 낮은 (그러나 $1 - \epsilon$보다는 크거나 같은) 분포를 A라 하고, 두번째 chance constraint에 대해 충족 확률이 가장 낮은 분포를 B라 하면, A와 B는 서로 다를 수 있다.</p>
+
+<p>Historic data가 있을 경우, ambiguity set을 구성하는 방법으로 크게 두 가지가 있다 (metric-based, moment-based)</p>
+
+<p>Metric-based 방법으로는, sample들로 구성된 empirical distribution과 차이가 일정 수준 이하인 분포들로 ambiguity set을 구성한다. 여기서 ‘차이’는 Wasserstein distance 등이 될 수 있다 (아래 슬라이드 참고)</p>
+
+<p><img src="/assets/images/jalal/Lecture6_154.png" alt="clearingexample" /></p>
+
+<p>Moment-based 방법으로는, sample들의 first moment와 second moment를 (+ 필요 시 higher moments를) 계산 후, 해당 moment condition을 갖는 모든 확률분포들로 ambiguity set을 구성한다.</p>
 
 <div class="notice--info">
 
@@ -557,10 +614,10 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
 
 01) <a href="/jalalone.html"> Market clearing as an optimization problem</a> <br />
 02) <a href="/jalaltwo.html"> Market clearing as an equilibrium problem</a> <br />
-03) <b> Desirable properties of market-clearing mechanisms</b> <br />
+03) <a href="/jalalthree.html"> Desirable properties of market-clearing mechanisms</a> <br />
 04) Market clearing using a cooperative game approach <br />
 05) <a href="/jalalfive.html"> Stochastic market clearing</a> <br />
-06) <a href="/jalalsix.html"> Robust approaches for market clearing</a>
+06) <b> Robust approaches for market clearing</b>
 </div>
 
         
@@ -607,7 +664,7 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
  -->
         <!-- 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-08-15T00:00:00+09:00">2023-08-15</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-08-20T00:00:00+09:00">2023-08-20</time></p>
  -->
       </footer>
 
@@ -616,11 +673,11 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94%2F%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0+%EA%B0%95%EC%9D%98%3A+3%29+Desirable+properties+of+market-clearing+mechanisms%20http%3A%2F%2Flocalhost%3A4000%2Fjalalthree.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94%2F%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0+%EA%B0%95%EC%9D%98%3A+6%29+Robust+approaches+for+market+clearing%20http%3A%2F%2Flocalhost%3A4000%2Fjalalsix.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fjalalthree.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fjalalsix.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjalalthree.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjalalsix.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -628,10 +685,6 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
         <!-- <h4 class="page__meta-title"><span>market</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
         
 
-
-  
-
-  
 
   
   	
@@ -644,10 +697,10 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
 
   
     
-      <a href="/jalalfive.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>에너지시스템 최적화/게임이론 강의: 5) Stochastic market clearing</a>
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
     
     
-      <a href="/jalaltwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>에너지시스템 최적화/게임이론 강의: 2) Market clearing as an equilibrium problem</a>
+      <a href="/jalalfive.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>에너지시스템 최적화/게임이론 강의: 5) Stochastic market clearing</a>
         
   
 
@@ -663,47 +716,6 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
     <div class="page__related">
       <h2 class="page__related-title">참고</h2>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <a href="/jalalsix.html" rel="permalink"><img src="/assets/images/jalal/Lecture6_1.png" alt=""></a>
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/jalalsix.html" rel="permalink">에너지시스템 최적화/게임이론 강의: 6) Robust approaches for market clearing
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-08-20T00:00:00+09:00">2023-08-20</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 6강을 필자가 요약한 내용이다.
-</p>
-  </article>
-</div>
-
         
           
 
@@ -741,6 +753,47 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
 
 
     <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 5강을 필자가 요약한 내용이다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/jalalthree.html" rel="permalink"><img src="/assets/images/jalal/Lecture3_1.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/jalalthree.html" rel="permalink">에너지시스템 최적화/게임이론 강의: 3) Desirable properties of market-clearing mechanisms
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-08-15T00:00:00+09:00">2023-08-15</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 3강을 필자가 요약한 내용이다.
 </p>
   </article>
 </div>

@@ -197,9 +197,15 @@ var store = [{
         "url": "/jalalthree.html",
         "teaser": "/assets/images/jalal/Lecture3_1.png"
       },{
-        "title": "에너지시스템 최적화/게임이론 강의: 5) Stochastic merket clearing",
+        "title": "에너지시스템 최적화/게임이론 강의: 5) Stochastic market clearing",
         "excerpt":"이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 5강을 필자가 요약한 내용이다. (Course slides 링크) 불확실성에 대응하기 위한 실시간 시장 태양광과 풍력 발전 비중이 높은 전력시스템에서는, 하루전 시장 (Day-Ahead Market) 에서 예상한 발전량과 실제 발전량 간 차이가 클...","categories": ["market"],
         "tags": ["최적화","게임이론","에너지시스템"],
         "url": "/jalalfive.html",
         "teaser": "/assets/images/jalal/Lecture5_1.png"
+      },{
+        "title": "에너지시스템 최적화/게임이론 강의: 6) Robust approaches for market clearing",
+        "excerpt":"이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 6강을 필자가 요약한 내용이다. (Course slides 링크) Worst-case scenario 이전 강의에서의 시나리오 기반 stochastic market clearing에서는, 하루전 시장 비용과 각 시나리오 별 실시간 시장 비용의 ‘기대값’의 합을 최소화하는 급전계획을 수립하였다....","categories": ["market"],
+        "tags": ["최적화","게임이론","에너지시스템"],
+        "url": "/jalalsix.html",
+        "teaser": "/assets/images/jalal/Lecture6_1.png"
       }]
