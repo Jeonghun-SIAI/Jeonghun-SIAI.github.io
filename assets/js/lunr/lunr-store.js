@@ -208,4 +208,10 @@ var store = [{
         "tags": ["최적화","게임이론","에너지시스템"],
         "url": "/jalalsix.html",
         "teaser": "/assets/images/jalal/Lecture6_1.png"
+      },{
+        "title": "에너지시스템 최적화/게임이론 강의: 7) Bilevel programming in energy systems",
+        "excerpt":"이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 7강을 필자가 요약한 내용이다. (Course slides 링크) 발전사업자가 ‘정직하지 않을’ 경우의 시장 지금까지의 강의들에서는 모든 발전사업자가 자기 소유 발전기의 발전비용 (production cost) 을 offer price로써 ‘정직하게’ 설정한다고 가정했다. 그리고 이...","categories": ["market"],
+        "tags": ["최적화","게임이론","에너지시스템"],
+        "url": "/jalalseven.html",
+        "teaser": "/assets/images/jalal/Lecture7_1.png"
       }]
