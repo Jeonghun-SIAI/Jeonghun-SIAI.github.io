@@ -19,8 +19,8 @@
 </script>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>에너지시스템 최적화/게임이론 강의: 1) Market clearing as an optimization problem | 에너지엔데이터연구소</title>
-<meta name="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 1강을 필자가 요약한 내용이다.">
+<!-- begin _includes/seo.html --><title>에너지시스템 최적화/게임이론 강의: 9) Bender’s decomposition | 에너지엔데이터연구소</title>
+<meta name="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 9강을 필자가 요약한 내용이다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -32,32 +32,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="에너지시스템 최적화/게임이론 강의: 1) Market clearing as an optimization problem">
-<meta property="og:url" content="https://song4energyndata.github.io/jalalone.html">
+<meta property="og:title" content="에너지시스템 최적화/게임이론 강의: 9) Bender’s decomposition">
+<meta property="og:url" content="https://song4energyndata.github.io/jalalnine.html">
 
 
-  <meta property="og:description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 1강을 필자가 요약한 내용이다.">
-
-
-
-  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/jalal/Lecture1_1.png">
+  <meta property="og:description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 9강을 필자가 요약한 내용이다.">
 
 
 
-
-
-  <meta property="article:published_time" content="2023-08-09T00:00:00+09:00">
+  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/jalal/Lecture9_1.png">
 
 
 
 
 
-  
+  <meta property="article:published_time" content="2023-08-26T00:00:00+09:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://song4energyndata.github.io/jalalone.html">
+
+<link rel="canonical" href="https://song4energyndata.github.io/jalalnine.html">
 
 
 
@@ -432,16 +432,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="에너지시스템 최적화/게임이론 강의: 1) Market clearing as an optimization problem">
-    <meta itemprop="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 1강을 필자가 요약한 내용이다.">
-    <meta itemprop="datePublished" content="2023-08-09T00:00:00+09:00">
+    <meta itemprop="headline" content="에너지시스템 최적화/게임이론 강의: 9) Bender’s decomposition">
+    <meta itemprop="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 9강을 필자가 요약한 내용이다.">
+    <meta itemprop="datePublished" content="2023-08-26T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://song4energyndata.github.io/jalalone.html" class="u-url" itemprop="url">에너지시스템 최적화/게임이론 강의: 1) Market clearing as an optimization problem
+            <a href="https://song4energyndata.github.io/jalalnine.html" class="u-url" itemprop="url">에너지시스템 최적화/게임이론 강의: 9) Bender’s decomposition
 </a>
           </h1>
           
@@ -452,7 +452,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-08-09T00:00:00+09:00">2023-08-09</time>
+        <time datetime="2023-08-26T00:00:00+09:00">2023-08-26</time>
       </span>
     
 
@@ -470,70 +470,105 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#market-clearing-price-결정">Market clearing price 결정</a></li><li><a href="#network-제약-하의-nodal-price">Network 제약 하의 nodal price</a></li></ul>
+              <ul class="toc__menu"><li><a href="#complicating-variable의-값을-찾는-원리">Complicating variable의 값을 찾는 원리</a></li><li><a href="#benders-decomposition-알고리즘">Bender’s decomposition 알고리즘</a></li><li><a href="#제약조건을-보다-간단히-쓰는-compact-form">제약조건을 보다 간단히 쓰는 Compact form</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <p>이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 1강을 필자가 요약한 내용이다.</p>
+        <p>이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 9강을 필자가 요약한 내용이다.</p>
 
 <!-- Courtesy of embedresponsively.com -->
 
 <div class="responsive-video-container">
-    <iframe src="https://www.youtube-nocookie.com/embed/pTxHvqpEegQ" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+    <iframe src="https://www.youtube-nocookie.com/embed/bJy4373v7Uo" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
   </div>
 
 <p>(<a href="https://www.jalalkazempour.com/teaching">Course slides 링크</a>)</p>
 
-<h2 id="market-clearing-price-결정">Market clearing price 결정</h2>
+<h2 id="complicating-variable의-값을-찾는-원리">Complicating variable의 값을 찾는 원리</h2>
 
-<p>Market clearing이란, ‘수요와 공급을 일치시킬 때의 (단일)가격을 결정하는 과정’이다.</p>
+<p>Bender’s decomposition은 complicating ‘variable’이 있을 때 사용하는 decomposition method이다.</p>
 
-<p>이를테면 아래 슬라이드처럼, 두 개의 발전기와 두 개의 수요처가 전력시장에서 offering 및 bidding을 할 경우를 보자.</p>
+<p>Complicating variable이 포함된 큰 문제를 여러 subproblem들로 쪼개기 위해서는, complicating variable의 값을 고정해야 한다. 그러면 그 고정값을 얼마로 해야 될까?</p>
 
-<p><img src="/assets/images/jalal/Lecture1_5.png" alt="clearingexample" /></p>
+<p>Complicating variable을 $x$라 할 때, $x$가 가질 수 있는 각 값들 별로 나머지 변수들에 대해 문제를 풀어 얻은 목적함수 값들을 아래 슬라이드와 같이 plot할 수 있다고 하면, 목적함수가 최소가 되는 $x$값을 선택하면 된다.</p>
 
-<p>위 예시에서 두 수요처의 최대 부하의 합이 각 발전기의 개별 용량보다 크므로, 두 발전기 모두 가동되어야 한다.</p>
+<p><img src="/assets/images/jalal/Lecture9_15.png" alt="clearingexample" /></p>
 
-<p>한편 위 예시에서는 전기 가격이 MWh당 20달러에서 35달러 사이의 어떤 숫자가 되어도 거래가 성립할 것이다. 수요처 입장에서 bidding price보다 낮은 가격이기 때문이다. 그렇다면, market clearing price는 왜 20달러로 결정되었을까?</p>
+<p>$x$가 ‘신규’ 발전설비의 용량이고 위 plot에서의 목적함수가 총 비용 (건설비용과 운영비용의 합) 이라 하면,
+$x$가 작아서 목적함수의 값이 큰 상황은 ‘발전설비 부족으로 전력 공급에 어려움을 겪을 경우의 운영비용 증가’,
+$x$가 커서 목적함수의 값이 큰 상황은 ‘발전설비를 필요 이상으로 과하게 건설할 경우의 고정비용 증가’ 로 볼 수 있다.</p>
 
-<p>이는 market clearing price가 social welfare (또는 market surplus) 를 최대화하게끔 결정되기 때문이다.</p>
+<p>실제로는 위와 같은 plot을 미리 알 수 없다. 그러나 다행히도, 위 plot을 piecewise-linear function으로 근사하는 방법이 있다.</p>
 
-<p>전력시장에서 social welfare는, ‘수요처가 bid price보다 저렴하게 전기를 구입해서 얻는 utility’ 에서 ‘발전기가 전기를 생산하는데 드는 비용 (offer price와 같다고 가정)’ 을 뺀 값으로 정의된다. (이 때, 발전기가 offer price를 발전단가 즉 production cost로 ‘정직하게’ 설정했다고 가정한다.)</p>
+<p>먼저 $x$의 initial point를 정하고, 해당 $x$값으로 고정 후 목적함수를 계산한다.</p>
 
-<p>Social welfare를 최대화 대상 목적함수로 하는 ‘최적화 문제’는 아래 슬라이드와 같다.</p>
+<p><img src="/assets/images/jalal/Lecture9_18.png" alt="clearingexample" />
+<img src="/assets/images/jalal/Lecture9_19.png" alt="clearingexample" /></p>
 
-<p><img src="/assets/images/jalal/Lecture1_10.png" alt="clearingexample" /></p>
+<p>다음으로 해당 $x$값에서 목적함수의 sensitivity 값 기반으로 접선을 계산한다 (subproblem의 dual variable을 계산해 얻으며, 자세한 내용은 뒤에서 설명한다).</p>
 
-<p>그런데 위 문제에서 변수는 각 발전기의 발전량 및 각 수요처의 전력부하이다. Market clearing price는 위 수식에서 보이지 않는다. 어디 있는 것일까?</p>
+<p><img src="/assets/images/jalal/Lecture9_20.png" alt="clearingexample" /></p>
 
-<p>Market clearing price는 수요-공급 일치 (balance) 조건의 dual variable이다.</p>
+<p>이 접선을 기준으로 목적함수를 최소화하는 $x$값을 구하고, 해당 $x$에 대해 위 과정을 다시 수행한다.</p>
 
-<p>특정 제약조건에 대한 dual variable은 ‘optimal point에서 목적함수가 해당 제약조건의 perturbation에 따라 변하는 정도, 즉 sensitivity’ 이다. Balance의 perturbation은 전기 수요 또는 공급량의 변화이므로, 단위 변화량 당 비용으로 생각하면 가격을 의미함은 자명하다.</p>
+<p><img src="/assets/images/jalal/Lecture9_21.png" alt="clearingexample" />
+<img src="/assets/images/jalal/Lecture9_22.png" alt="clearingexample" /></p>
 
-<p><img src="/assets/images/jalal/Lecture1_15.png" alt="clearingexample" /></p>
+<p>그러면 접선 두 개가 이루는 piecewise-linear function이 생기는데, 해당 function을 기준으로 목적함수를 최소화하는 $x$값을 구하고, 해당 $x$에 대해 위 과정을 다시 수행한다.</p>
 
-<h2 id="network-제약-하의-nodal-price">Network 제약 하의 nodal price</h2>
+<p><img src="/assets/images/jalal/Lecture9_23.png" alt="clearingexample" />
+<img src="/assets/images/jalal/Lecture9_24.png" alt="clearingexample" /></p>
 
-<p>실제로는 아래와 같이 여러 개의 bus가 존재하고 bus 간에 송전망에 의한 송전량 제약이 있으며, 각 bus별로 가격이 다를 수도 있다.</p>
+<p>이 과정을 반복할수록, piecewise-linear function이 $x$값과 목적함수 간의 실제 관계와 유사해진다. 그러므로 이 과정을 수렴 조건이 만족될 때까지 반복한다.</p>
 
-<p><img src="/assets/images/jalal/Lecture1_20.png" alt="clearingexample" /></p>
+<p><img src="/assets/images/jalal/Lecture9_26.png" alt="clearingexample" /></p>
 
-<p>DC power flow 근사 하에서, bus $n$에서 bus $m$으로 흐르는 전력은 $f_{n,m} = B_{n,m} (\theta_n - \theta_m)$ 으로 계산된다. (B는 susceptance, $\theta$는 voltage angle). 그러므로 voltage angle 기반 송전 제약을 추가한 최적화 문제를 아래와 같이 구성한다.</p>
+<p>(단, $x$값과 목적함수 간의 관계가 convex임을 전제로 한다. non-convex인 경우 local optimum에 도달할 수 있다. $x$가 벡터인 경우에도 $x$의 원소 각각에 대해 convex여야 한다.)</p>
 
-<p><img src="/assets/images/jalal/Lecture1_26.png" alt="clearingexample" /></p>
+<h2 id="benders-decomposition-알고리즘">Bender’s decomposition 알고리즘</h2>
 
-<p>위 문제에서 capacity of each transmission line 제약의 하한이 0이 아니라 -100 임에 주의한다 (마이너스는 반대 방향으로의 흐름을 의미한다).</p>
+<p>아래 슬라이드의 예제를 Bender’s decomposition으로 푼다고 하자. 여기서 $x$를 complicating variable로 본다.</p>
 
-<p>‘각 bus에서의’ power balance 제약 각각에 대한 dual variable이 각 bus 별 ‘nodal’ price이다. 이러한 node 별 단일가격 기반 시장을 LMP (Local Marginal Price) based market이라 한다.</p>
+<p><img src="/assets/images/jalal/Lecture9_31.png" alt="clearingexample" /></p>
 
-<p>Node 별 price는 congestion이 없을 경우 (즉 어떤 송전선에서도 송전량이 송전 상한에 도달하지 않은 경우, 수학적으로 말하면 송전량 제약들이 전부 inactive한 경우) 에는 전부 같다. 그러나 congestion이 있을 경우 node별로 가격이 달라질 수 있다.</p>
+<p>그러면 $x$를 고정했을 때의 $y$에 대한 subproblem과, subproblem의 dual variable들 기반으로 구성할 수 있는 $x$에 대한 master problem은 아래 슬라이드와 같다.</p>
+
+<p><img src="/assets/images/jalal/Lecture9_36.png" alt="clearingexample" /></p>
+
+<p>Master problem에서 $\alpha^{(i)}$는 원래 문제의 목적함수에서의 $y$에 대한 term ($-y$) 을 대체하는 auxiliary variable이고, $i$는 iteration index이다 (여기서는 $i$가 1부터 시작한다고 둠). $\alpha^{down}$은 첫 번째 iteration에서 master problem을 bounded problem으로 만들기 위한 상수로, 크기가 매우 큰 음수이다.</p>
+
+<p>$\pi^{(k)}$, $\mu^{(k)}$, $\sigma^{(k)}$, $\gamma^{(k)}$ 는 $k$번째 iteration에서의 subproblem의 dual variable의 값들이다. 이 때 $k=1,2,\cdots,i-1$, 즉 직전 iteration까지의 ‘모든 iteration 각각에 대한’ 값들을 전부 모은 것임에 주의한다. 즉 $\alpha^{(i)}$에 대한 부등호 제약조건이 $i-1$개가 있는 것이다. 그리고 첨자 $(i)$만이 변수이고 첨자 $(k)$는 전부 parameter들임에 주의한다.</p>
+
+<p>$\alpha^{(i)}$에 대한 부등호 제약의 우변은 subproblem의 dual objective function이다. 실제로 $y$에 대한 subproblem의 Lagrangian을 쓰고 $y$ term들을 제거하면 ($y$ term들을 제거하지 않으면 unbounded problem이 됨), dual objective를 우변과 같이 얻는다. 그리고 $alpha^{(i)}$는 최소화 대상이므로, $alpha^{(i)}$는 $i-1$개의 dual objective 중 적어도 하나와 같은 값이 된다.</p>
+
+<p>Duality theorem에 의해 primal problem의 목적함수 (여기서는 $-y$)는 dual problem의 목적함수 ($\alpha^{(i)}$에 대한 부등호 제약의 우변) 보다 크거나 같다. 그러므로 subproblem을 풀어 얻은 subproblem의 목적함수의 값은 $\alpha^{(i)}$보다 크거나 같다.</p>
+
+<p>또한 subproblem이 linear programming problem이므로, optimal point에서는 primal problem의 목적함수와 $\alpha^{(i)}$가 서로 같을 것이다.</p>
+
+<p>그러므로 primal problem의 목적함수를 UB (upper bound) 로, $\alpha^{(i)}$를 LB (lower bound) 로 두고, $\vert UB - LB \vert \leq \epsilon$ 이 될 때까지 반복한다. 알고리즘은 아래와 같다.</p>
+
+<p><img src="/assets/images/jalal/Lecture9_37.png" alt="clearingexample" /></p>
+
+<h2 id="제약조건을-보다-간단히-쓰는-compact-form">제약조건을 보다 간단히 쓰는 Compact form</h2>
+
+<p>위 설명대로라면, master problem의 $\alpha^{(i)}$에 대한 부등호 제약의 우변은 subproblem의 제약조건이 많을수록 매우 복잡해질 것이다 (dual variable 수가 늘어나므로). 게다가, 서두에 언급했던 $x$의 sensitivity를 기반으로 계산하는 방법도 아니다.</p>
+
+<p>$\alpha^{(i)}$에 대한 부등호 제약의 우변을 보다 간단하게 쓰는 compact form은 아래와 같다.</p>
+
+<p><img src="/assets/images/jalal/Lecture9_42.png" alt="clearingexample" /></p>
+
+<p>Subproblem에서 $x^{(i)}$를 형식적으로는 변수로 두되 맨 마지막 제약조건을 통해 그 값을 master problem에서 얻은 값으로 고정한다. 이 경우 어쨌든 제약조건은 맞으므로 $x^{(i)}$에 대한 sensitivity $\rho^{(i)}$를 구할 수 있다.</p>
+
+<p>Master problem에서는 subproblem의 목적함수 (여기서는 $-y^{(k)}$) 및 $x^{(k)}$에 대한 sensitivity $\rho^{(k)}$를 이용해서 $\alpha^{(i)}$에 대한 부등호 제약의 우변을 구성한다. 이는 훨씬 간단해진 compact form이자, 서두에 언급했듯 $x$의 sensitivity를 기울기로 하는 접선 계산이기도 하다.</p>
+
+<p>Compact form의 $\alpha^{(i)}$에 대한 부등호 제약의 우변이 original subproblem의 dual objective와 동치 (equivalent) 임은 KKT condition 비교를 통해 확인할 수 있다.</p>
 
 <div class="notice--info">
 
 Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br />
 
-01) <b> Market clearing as an optimization problem</b> <br />
+01) <a href="/jalalone.html"> Market clearing as an optimization problem</a> <br />
 02) <a href="/jalaltwo.html"> Market clearing as an equilibrium problem</a> <br />
 03) <a href="/jalalthree.html"> Desirable properties of market-clearing mechanisms</a> <br />
 04) Market clearing using a cooperative game approach <br />
@@ -541,7 +576,7 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
 06) <a href="/jalalsix.html"> Robust approaches for market clearing</a> <br />
 07) <a href="/jalalseven.html"> Bilevel programming in energy systems</a> <br />
 08) <a href="/jalaleight.html"> Optimization problems with decomposable structure</a> <br />
-09) <a href="/jalalnine.html"> Benders’ decomposition: Theory</a>
+09) <b> Benders’ decomposition: Theory</b> <br />
 </div>
 
         
@@ -588,7 +623,7 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
  -->
         <!-- 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-08-09T00:00:00+09:00">2023-08-09</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-08-26T00:00:00+09:00">2023-08-26</time></p>
  -->
       </footer>
 
@@ -597,11 +632,11 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94%2F%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0+%EA%B0%95%EC%9D%98%3A+1%29+Market+clearing+as+an+optimization+problem%20http%3A%2F%2Flocalhost%3A4000%2Fjalalone.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94%2F%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0+%EA%B0%95%EC%9D%98%3A+9%29+Bender%27s+decomposition%20http%3A%2F%2Flocalhost%3A4000%2Fjalalnine.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fjalalone.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fjalalnine.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjalalone.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjalalnine.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -609,20 +644,6 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
         <!-- <h4 class="page__meta-title"><span>market</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
         
 
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
   
   	
@@ -635,10 +656,10 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
 
   
     
-      <a href="/jalaltwo.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>에너지시스템 최적화/게임이론 강의: 2) Market clearing as an equilibrium problem</a>
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
     
     
-      <a href="/dturecommendation.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>에너지 분야 최적화/ 게임이론/ 데이터과학 관련 교육 추천: DTU summer school</a>
+      <a href="/jalaleight.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>에너지시스템 최적화/게임이론 강의: 8) Optimization problems with decomposable structure</a>
         
   
 
@@ -654,47 +675,6 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
     <div class="page__related">
       <h2 class="page__related-title">참고</h2>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <a href="/jalalnine.html" rel="permalink"><img src="/assets/images/jalal/Lecture9_1.png" alt=""></a>
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/jalalnine.html" rel="permalink">에너지시스템 최적화/게임이론 강의: 9) Bender’s decomposition
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-08-26T00:00:00+09:00">2023-08-26</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 9강을 필자가 요약한 내용이다.
-</p>
-  </article>
-</div>
-
         
           
 
@@ -814,6 +794,47 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
 
 
     <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 6강을 필자가 요약한 내용이다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/jalalfive.html" rel="permalink"><img src="/assets/images/jalal/Lecture5_1.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/jalalfive.html" rel="permalink">에너지시스템 최적화/게임이론 강의: 5) Stochastic market clearing
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-08-19T00:00:00+09:00">2023-08-19</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 5강을 필자가 요약한 내용이다.
 </p>
   </article>
 </div>

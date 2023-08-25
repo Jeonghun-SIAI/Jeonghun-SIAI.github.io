@@ -19,28 +19,34 @@
 </script>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>전력시장 모델링 | 에너지엔데이터연구소</title>
-<meta name="description" content="공학박사 과정에서 쌓은 에너지 시스템 전문성에 데이터 사이언스 석사를 더하며 쌓은 계산통계학 활용 역량을 결합하여, 데이터 기반의 에너지 시스템/ 정책/ 시장 관련 솔루션 도출을 올바르게 할 수 있도록 돕습니다.">
+<!-- begin _includes/seo.html --><title>에너지시스템 최적화/게임이론 강의: 8) Optimization problems with decomposable structure | 에너지엔데이터연구소</title>
+<meta name="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 8강을 필자가 요약한 내용이다.">
 
 
   <meta name="author" content="Jeonghun Song">
   
+  <meta property="article:author" content="Jeonghun Song">
+  
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="전력시장 모델링">
-<meta property="og:url" content="https://song4energyndata.github.io/market/">
+<meta property="og:title" content="에너지시스템 최적화/게임이론 강의: 8) Optimization problems with decomposable structure">
+<meta property="og:url" content="https://song4energyndata.github.io/jalaleight.html">
 
 
-  <meta property="og:description" content="공학박사 과정에서 쌓은 에너지 시스템 전문성에 데이터 사이언스 석사를 더하며 쌓은 계산통계학 활용 역량을 결합하여, 데이터 기반의 에너지 시스템/ 정책/ 시장 관련 솔루션 도출을 올바르게 할 수 있도록 돕습니다.">
-
-
-
+  <meta property="og:description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 8강을 필자가 요약한 내용이다.">
 
 
 
+  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/jalal/Lecture8_1.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-08-25T00:00:00+09:00">
 
 
 
@@ -51,11 +57,9 @@
   
 
 
-<link rel="canonical" href="https://song4energyndata.github.io/market/">
+<link rel="canonical" href="https://song4energyndata.github.io/jalaleight.html">
 
 
-
-  <link rel="next" href="https://song4energyndata.github.io/market/page2/">
 
 
 <script type="application/ld+json">
@@ -114,6 +118,29 @@
 </head>
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
 
 <!-- end custom head snippets -->
   <style> 
@@ -127,7 +154,7 @@
 </head>
 
 <body
-  class="layout--category_market">
+  class="layout--single">
   <nav class="skip-links">
   <ul>
     <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
@@ -173,122 +200,22 @@
 
 
 
+
+
 <div id="main" role="main">
   
 
   <div class="sidebar sticky">
     
   
-
-
-<div itemscope itemtype="https://schema.org/Person" class="h-card">
-
   
-    <div class="author__avatar">
-      <a href="/aboutme/"> <!--// default를 /에서 /aboutme/로 바꿔서, 프사 클릭 시 내 소개 페이지로 이동하게 함-->
-        <img src="/assets/images/myface_full.jpg" alt="Jeonghun Song" itemprop="image" class="u-photo">
-      </a>
-    </div>
   
-
-  <div class="author__content">
-    <h3 class="author__name p-name" itemprop="name">
-      <a class="u-url" rel="me" href="/aboutme/" itemprop="url">Jeonghun Song</a> <!--// default를 /에서 /aboutme/로 바꿔서, 이름 클릭 시 내 소개 페이지로 이동하게 함-->
-    </h3>
+  
     
-      <div class="author__bio p-note" itemprop="description">
-        <p>공학박사 과정에서 쌓은 에너지 시스템 전문성에 데이터 사이언스 석사를 더하며 쌓은 계산통계학 활용 역량을 결합하여, 데이터 기반의 에너지 시스템/ 정책/ 시장 관련 솔루션 도출을 올바르게 할 수 있도록 돕습니다.</p>
-
-      </div>
     
-  </div>
-
-  <div class="author__urls-wrapper">
-    <!-- <button class="btn btn--inverse">Contact</button>
-    <ul class="author__urls social-icons">
       
-
-      
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-
-      
-
-      
-        <li>
-          <a href="mailto:song4energy@gmail.com" rel="me" class="u-email">
-            <meta itemprop="email" content="song4energy@gmail.com" />
-            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
-          </a>
-        </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-       // 주석처리해서, 화면 줄일 경우 나타나는 '팔로우' 버튼 없앰--> 
-
-      <!--
-  <li>
-    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
-      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
-    </a>
-  </li>
--->
-    </ul>
-  </div>
-</div>
-
-  
+    
+    
   
   
    <!-- three lines added by Jeonghun  -->
@@ -504,235 +431,198 @@
 
 
 
-  <div class="archive">
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="에너지시스템 최적화/게임이론 강의: 8) Optimization problems with decomposable structure">
+    <meta itemprop="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 8강을 필자가 요약한 내용이다.">
+    <meta itemprop="datePublished" content="2023-08-25T00:00:00+09:00">
     
-      <h1 id="page-title" class="page__title">전력시장 모델링</h1>
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://song4energyndata.github.io/jalaleight.html" class="u-url" itemprop="url">에너지시스템 최적화/게임이론 강의: 8) Optimization problems with decomposable structure
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
     
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-08-25T00:00:00+09:00">2023-08-25</time>
+      </span>
     
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#큰-문제를-작은-문제들로-쪼개기">큰 문제를 작은 문제’들’로 쪼개기</a></li></ul>
+ <!-- 우측 TOC -->
+            </nav>
+          </aside>
+        
+        <p>이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 8강을 필자가 요약한 내용이다.</p>
+
+<!-- Courtesy of embedresponsively.com -->
+
+<div class="responsive-video-container">
+    <iframe src="https://www.youtube-nocookie.com/embed/kluugyDZ8qs" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+  </div>
+
+<p>(<a href="https://www.jalalkazempour.com/teaching">Course slides 링크</a>)</p>
+
+<h2 id="큰-문제를-작은-문제들로-쪼개기">큰 문제를 작은 문제’들’로 쪼개기</h2>
+
+<p>에너지 시스템에 대한 최적화 문제는 종종 그 크기가 크다. 매우 많은 시간들을 포함하기 때문일 수도 있고, stochastic programming에서 매우 많은 시나리오들을 고려하기 때문일 수도 있다.</p>
+
+<p>문제의 크기가 극단적으로 크면 현재의 컴퓨터로 풀지 못하는 (intractable) 문제가 될 수 있으며, 풀리긴 하더라도 필요한 시간 내에 풀어야만 할 수도 있다. 이를테면 하루전 시장에서의 급전계획을 결정하는 문제의 경우, 몇 시간 안에는 풀려야 다음 날의 실시간 시장에 결과 반영이 가능하다.</p>
+
+<p>그런데 에너지 분야에서는, 큰 최적화 문제가 종종 작은 최적화 문제들로 쪼개질 수 있다. 매우 많은 시간들을 포함하는 문제를 시간별 소문제들로 쪼갠다든지, 매우 많은 시나리오들을 고려하는 문제를 시나리오별 소문제들로 쪼갤 수 있다. 당연히 각 소문제는 원래 문제 대비 쉽게 풀린다.</p>
+
+<p><img src="/assets/images/jalal/Lecture8_4.png" alt="clearingexample" /></p>
+
+<p>작은 문제들로 쪼갤 수 있는 구조를 갖고 있지만 그 자체로는 큰 단일 문제인 최적화 문제의 경우, 바로 작은 문제들로 쪼개지 못하도록 만드는 변수 (complicating variables) 혹은 제약조건 (complicating constraints) 이 있다. 아래 두 슬라이드가 각각의 예시를 보여준다.</p>
+
+<p><img src="/assets/images/jalal/Lecture8_16.png" alt="clearingexample" />
+<img src="/assets/images/jalal/Lecture8_24.png" alt="clearingexample" /></p>
+
+<p>에너지 분야에 대한 간단한 예시들은 아래와 같다.</p>
+
+<p><img src="/assets/images/jalal/Lecture8_37.png" alt="clearingexample" />
+<img src="/assets/images/jalal/Lecture8_41.png" alt="clearingexample" />
+<img src="/assets/images/jalal/Lecture8_50.png" alt="clearingexample" /></p>
+
+<p>Generation expansion problem에서는, 일반적으로 investment variable (설비 용량 등) 을 complicating variable로 보고 fix하는 것이 좋다.</p>
+
+<div class="notice--info">
+
+Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br />
+
+01) <a href="/jalalone.html"> Market clearing as an optimization problem</a> <br />
+02) <a href="/jalaltwo.html"> Market clearing as an equilibrium problem</a> <br />
+03) <a href="/jalalthree.html"> Desirable properties of market-clearing mechanisms</a> <br />
+04) Market clearing using a cooperative game approach <br />
+05) <a href="/jalalfive.html"> Stochastic market clearing</a> <br />
+06) <a href="/jalalsix.html"> Robust approaches for market clearing</a> <br />
+07) <a href="/jalalseven.html"> Bilevel programming in energy systems</a> <br />
+08) <b> Optimization problems with decomposable structure</b> <br />
+09) <a href="/jalalnine.html"> Benders’ decomposition: Theory</a>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0" class="page__taxonomy-item p-category" rel="tag">게임이론</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C" class="page__taxonomy-item p-category" rel="tag">에너지시스템</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%B5%9C%EC%A0%81%ED%99%94" class="page__taxonomy-item p-category" rel="tag">최적화</a>
+    
+    </span>
+  </p>
+
+
 
 <!-- 
-<div class="entries-grid">
   
-</div> -->
-
-<!-- 
- 
 
 
+  
 
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
     
-      <div class="archive__item-teaser">
-        <a href="/monthlyenergyfour.html" rel="permalink"><img src="/assets/images/monthlyenergyfour/teaser_monthlyenergyfour.png" alt=""></a>
-      </div>
+      <a href="/categories/#market" class="page__taxonomy-item p-category" rel="tag">market</a>
     
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/monthlyenergyfour.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 4) 결측치 추정: 조건부 다변량정규분포를 이용해서
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-07-09T00:00:00+09:00">2023-07-09</time>
-      </span>
-    
-
-    
-
-    
+    </span>
   </p>
 
+ -->
+        <!-- 
 
-    <p class="archive__item-excerpt" itemprop="description">건축물 별 월별 에너지 사용량 데이터셋에는 종종 값의 누락, 즉 결측치가 있다. 결측치가 있는 row들은 실제로는 활용이 불가능한데 용량만 차지하는 골칫덩어리이다. 대신 결측치를 ‘합리적으로’ 메꿀 수 있다면, 쓸 수 있는 데이터의 양이 많아지므로 분석의 정확도가 올라갈 것이다.
-</p>
-  </article>
-</div>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-08-25T00:00:00+09:00">2023-08-25</time></p>
+ -->
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
   
 
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94%2F%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0+%EA%B0%95%EC%9D%98%3A+8%29+Optimization+problems+with+decomposable+structure%20http%3A%2F%2Flocalhost%3A4000%2Fjalaleight.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fjalaleight.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjalaleight.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
 
 
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <a href="/monthlyenergythree.html" rel="permalink"><img src="/assets/images/monthlyenergythree/outliers.png" alt=""></a>
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/monthlyenergythree.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      <p></p>
+        <!-- <h4 class="page__meta-title"><span>market</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
         
-        <time datetime="2023-03-26T00:00:00+09:00">2023-03-26</time>
-      </span>
-    
-
-    
-
-    
-  </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.
-</p>
-  </article>
-</div>
   
 
+  
+  	
+  	
+  	
+  	
+  	
 
+<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
 
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+  
     
-      <div class="archive__item-teaser">
-        <a href="/monthlyenergytwo.html" rel="permalink"><img src="/assets/images/monthlyenergytwo/teaser_monthlyenergytwo.png" alt=""></a>
-      </div>
+      <a href="/jalalnine.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>에너지시스템 최적화/게임이론 강의: 9) Bender's decomposition</a>
     
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/monthlyenergytwo.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거
-</a>
-      
-    </h2>
     
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      <a href="/jalalseven.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>에너지시스템 최적화/게임이론 강의: 7) Bilevel programming in energy systems</a>
         
-        <time datetime="2023-03-25T00:00:00+09:00">2023-03-25</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">이전 포스팅에서, 건물 지번별/월별 전기/도시가스 사용량 데이터와 표제부의 결합을 소개했다. 해당 데이터셋을 그대로 쓰면 되는가? 그렇지 않다. 분명히 ‘이상한’ data point들이 존재할 것이며, 이상한 data point들을 ‘전처리’해야 올바른 연구 결과를 얻을 수 있다.
-</p>
-  </article>
-</div>
   
 
+</nav>
+      <p></p>
+    </div>
 
+    
+  </article>
 
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <a href="/monthlyenergyone.html" rel="permalink"><img src="/assets/images/monthlyenergyone/typicalpattern.png" alt=""></a>
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/monthlyenergyone.html" rel="permalink">건축물 별 월별 에너지 사용량 데이터셋 - 1) 모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+  
+  <!-- 
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
         
-        <time datetime="2023-03-19T00:00:00+09:00">2023-03-19</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">필자의 박사과정 졸업에 결정적인 역할을 했던 데이터셋이 있다. 건축물 별 월별 에너지 사용량 데이터다. 각 지번 주소 단위의 개별 비주거용 건물별로 특정 월에 소비한 전기와 가스의 양을 kWh 단위로 기록한 데이터셋이다.
-</p>
-  </article>
-</div>
-  
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <a href="/preprocessmocanu.html" rel="permalink"><img src="/assets/images/preprocessmocanu/data_questionmarks.png" alt=""></a>
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/preprocessmocanu.html" rel="permalink">데이터 결측치 처리 예시 - 주택의 분 단위 전기 부하 자료
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-02-19T00:00:00+09:00">2023-02-19</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">스마트그리드 분야에 머신러닝/ 딥러닝/ 강화학습 기법이 어떻게 적용되는지에 대해 자세한 정보를 제공해주는 책으로 ‘스마트그리드 빅데이터 분석의 활용’ 이 있다.
-</p>
-  </article>
-</div>
-  -->
-
-<style>
-  ul.post-list {padding-left: 0;}
-  ul.pager { text-align: center; list-style: none; clear: both; padding-left: 0;} 
-  ul.pager li {display: inline;border: 1px solid black; padding: 10px; margin: 5px;}
-</style>
-<!-- 위 ul.pager { } 안에 clear: both; 를 넣어 줘야 pagination 버튼들이 글 목록 밑으로 감 -->
-
-<div class="home">
-
-  <!-- <h1 class="page-heading">Posts</h1> -->
-  
-  
-
-  <ul class="post-list">
-    <!-- 
-        Here is the main paginator logic called.
-        All calls to site.posts should be replaced by paginator.posts 
-    -->
-    
-      
+          
 
 
 
@@ -772,49 +662,8 @@
   </article>
 </div>
 
-    
-      
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <a href="/jalaleight.html" rel="permalink"><img src="/assets/images/jalal/Lecture8_1.png" alt=""></a>
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/jalaleight.html" rel="permalink">에너지시스템 최적화/게임이론 강의: 8) Optimization problems with decomposable structure
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-08-25T00:00:00+09:00">2023-08-25</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 8강을 필자가 요약한 내용이다.
-</p>
-  </article>
-</div>
-
-    
-      
+          
 
 
 
@@ -854,8 +703,8 @@
   </article>
 </div>
 
-    
-      
+        
+          
 
 
 
@@ -895,74 +744,54 @@
   </article>
 </div>
 
-    
-  </ul>
-
-    <!-- 
-    Showing buttons to move to the next and to the previous list of posts (pager buttons).
-  -->
-  <!-- 
-<nav class="pagination">
-  
-  <ul>
-    
-    
-    <li><a href="#" class="disabled"><span aria-hidden="true">이전</span></a></li>
-    
-
-    
-    
-      <li><a href="#" class="disabled current">1</a></li>
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
         
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/jalalfive.html" rel="permalink"><img src="/assets/images/jalal/Lecture5_1.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/jalalfive.html" rel="permalink">에너지시스템 최적화/게임이론 강의: 5) Stochastic market clearing
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        
-        <li><a href="/page2">2</a></li>
-      
+        <time datetime="2023-08-19T00:00:00+09:00">2023-08-19</time>
+      </span>
     
 
     
-    
 
     
-      <li><a href="/page3">3</a></li>
-    
+  </p>
 
-    
-    
-      <li><a href="/page2">다음</a></li>
-    
-  </ul>
-</nav>
 
- -->
-  
-  <ul class="pager">
-      
-      
-      <li class="next">
-          <a href="/market/page2/"><b>Older Posts &#9654;</b></a>
-      </li>
-      
-  </ul>
-  
-
+    <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 5강을 필자가 요약한 내용이다.
+</p>
+  </article>
 </div>
 
-
-
-  </div>
+        
+      </div>
+    </div> -->
+  
+  <!--  -->
 </div>
+
   </div>
 
   

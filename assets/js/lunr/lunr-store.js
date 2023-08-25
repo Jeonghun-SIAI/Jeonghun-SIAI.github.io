@@ -214,4 +214,16 @@ var store = [{
         "tags": ["최적화","게임이론","에너지시스템"],
         "url": "/jalalseven.html",
         "teaser": "/assets/images/jalal/Lecture7_1.png"
+      },{
+        "title": "에너지시스템 최적화/게임이론 강의: 8) Optimization problems with decomposable structure",
+        "excerpt":"이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 8강을 필자가 요약한 내용이다. (Course slides 링크) 큰 문제를 작은 문제’들’로 쪼개기 에너지 시스템에 대한 최적화 문제는 종종 그 크기가 크다. 매우 많은 시간들을 포함하기 때문일 수도 있고, stochastic programming에서...","categories": ["market"],
+        "tags": ["최적화","게임이론","에너지시스템"],
+        "url": "/jalaleight.html",
+        "teaser": "/assets/images/jalal/Lecture8_1.png"
+      },{
+        "title": "에너지시스템 최적화/게임이론 강의: 9) Bender's decomposition",
+        "excerpt":"이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 9강을 필자가 요약한 내용이다. (Course slides 링크) Complicating variable의 값을 찾는 원리 Bender’s decomposition은 complicating ‘variable’이 있을 때 사용하는 decomposition method이다. Complicating variable이 포함된 큰 문제를 여러 subproblem들로 쪼개기 위해서는,...","categories": ["market"],
+        "tags": ["최적화","게임이론","에너지시스템"],
+        "url": "/jalalnine.html",
+        "teaser": "/assets/images/jalal/Lecture9_1.png"
       }]
