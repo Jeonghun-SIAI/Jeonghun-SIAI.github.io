@@ -226,4 +226,10 @@ var store = [{
         "tags": ["최적화","게임이론","에너지시스템"],
         "url": "/jalalnine.html",
         "teaser": "/assets/images/jalal/Lecture9_1.png"
+      },{
+        "title": "에너지시스템 최적화/게임이론 강의: 10) Applications of Bender's decomposition",
+        "excerpt":"이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 10강을 필자가 요약한 내용이다. (Course slides 링크) Generation expansion planning 아래 문제는 기존 두 개의 발전기에 더해 새로 도입되는 세 번째 발전기의 용량 $x_3$을 결정하되, 각 시간별 수요-공급 일치 및...","categories": ["market"],
+        "tags": ["최적화","게임이론","에너지시스템"],
+        "url": "/jalalten.html",
+        "teaser": "/assets/images/jalal/Lecture10a_1.png"
       }]

@@ -5,9 +5,112 @@
     <description>공학박사 과정에서 쌓은 에너지 시스템 전문성에 데이터 사이언스 석사를 더하며 쌓은 계산통계학 활용 역량을 결합하여, 데이터 기반의 에너지 시스템/ 정책/ 시장 관련 솔루션 도출을 올바르게 할 수 있도록 돕습니다.</description>
     <link>https://song4energyndata.github.io/</link>
     <atom:link href="https://song4energyndata.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 26 Aug 2023 08:43:14 +0900</pubDate>
-    <lastBuildDate>Sat, 26 Aug 2023 08:43:14 +0900</lastBuildDate>
+    <pubDate>Sun, 27 Aug 2023 21:23:27 +0900</pubDate>
+    <lastBuildDate>Sun, 27 Aug 2023 21:23:27 +0900</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>에너지시스템 최적화/게임이론 강의: 10) Applications of Bender&apos;s decomposition</title>
+        <description>&lt;p&gt;이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 10강을 필자가 요약한 내용이다.&lt;/p&gt;
+
+&lt;!-- Courtesy of embedresponsively.com --&gt;
+
+&lt;div class=&quot;responsive-video-container&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/NOBde8kEOj0&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+  &lt;/div&gt;
+
+&lt;p&gt;(&lt;a href=&quot;https://www.jalalkazempour.com/teaching&quot;&gt;Course slides 링크&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h2 id=&quot;generation-expansion-planning&quot;&gt;Generation expansion planning&lt;/h2&gt;
+
+&lt;p&gt;아래 문제는 기존 두 개의 발전기에 더해 새로 도입되는 세 번째 발전기의 용량 $x_3$을 결정하되, 각 시간별 수요-공급 일치 및 발전기 별 운전 범위 조건을 만족시키면서 ‘발전기 건설비와 모든 시간의 운영비용의 합’을 최소화하도록 결정하는 설비 확장 (generation expansion) 문제이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture10a_8.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;$x_3$의 값을 고정하면, 각 시간 ($h$) 별로 subproblem을 구성할 수 있다. 주어진 $x_3$에 대해 각 시간 별 발전기들의 최적 출력을 결정하는 subproblem은 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture10a_11.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Master problem의 optimality cut을 compact form으로 구성하기 위해, $x_3^{(i)}$을 변수로 두되 해당 변수의 값을 고정하는 제약조건 $x_3^{(i)} = x_3^{fixed}$ 를 두었다. 해당 제약에 대응하는 dual variable $\lambda_h$가 $h$별로 다른데, 이는 각 시간 별 전기부하 $D_h$가 얼마냐에 따라 optimal solution이 달라지므로 dual variable도 $h$별로 다르기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;$x_3$의 값을 업데이트하기 위한 master problem은 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture10a_18.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;$\alpha^{(i)}$에 대한 제약조건의 우변이 모든 $h$에 대한 합임에 주의한다. $\alpha^{(i)}$가 목적함수의 $x$를 제외한 변수들에 대한 항들을 대신하는 auxiliary variable인데, 해당 항들은 ‘모든 시간에 대한 운영비용의 합’이기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;또한 제약조건이 총 $i-1$개임에 주의한다 (1번째, 2번째, …, $i-1$번째 iteration에서의 값들)&lt;/p&gt;
+
+&lt;h2 id=&quot;scenario-based-stochastic-programming&quot;&gt;Scenario based stochastic programming&lt;/h2&gt;
+
+&lt;p&gt;불확실성이 큰 재생발전기가 있을 때, 하루전 시장에 대해서는 재생발전기 발전량 시나리오에 관계없이 단일한 급전계획을 도출하고, 실시간 시장에 대해서는 각 시나리오 별 급전 수정 계획을 도출함을 이전 강의에서 설명하였다.&lt;/p&gt;
+
+&lt;p&gt;아래 슬라이드를 보면, stochastic market clearing problem에서 complicating variables는 하루전 (Day-Ahead) 시장에 대한 변수들이고 (파란색으로 표기됨), 해당 변수들을 고정하면 각 시나리오 별 subproblem들을 구성할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture10a_68.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;각 시나리오 별 subproblem은 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture10a_70.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;목적함수를 보면 0.25가 곱해져 있다. 이는 해당 시나리오의 확률이다. 각 subproblem별 목적함수에는 대응하는 시나리오의 확률을 곱해주도록 한다.&lt;/p&gt;
+
+&lt;p&gt;Master problem은 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture10a_75.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;여기서 주의할 점은, $\alpha^{(\theta)}$에 대한 제약조건의 우변에서, subproblem의 목적함수에 대응하는 부분에는 각 시나리오 별 확률을 곱해주지만, 그 뒤의 complicating variable들에 대한 부분에는 각 시나리오별 확률을 곱해주지 않는다는 것이다.&lt;/p&gt;
+
+&lt;p&gt;이는 subproblem의 목적함수에 이미 각 시나리오 별 확률이 곱해져 있었기 때문에, complicating variable을 고정하는 제약에 대한 dual variable들 $\rho$가 ‘시나리오 별 확률만큼 scaling된’ sensitivity를 의미하기 때문이다. 그러므로 dual variable들을 전부 합하기만 해도, 각 시나리오 별 확률을 가중치로 하는 가중평균 sensitivity를 반영한 optimality cut을 생성하는 셈이 된다.&lt;/p&gt;
+
+&lt;p&gt;위의 4개 시나리오에 대한 stochastic market clearing 문제를 Bender’s decomposition으로 풀면, 아래와 같이 5번의 iteartion으로 해를 얻는다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture10a_79.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;정수-변수가-있을-경우에는&quot;&gt;정수 변수가 있을 경우에는?&lt;/h2&gt;
+
+&lt;p&gt;에너지시스템 최적화 문제에는 정수가 많이 등장한다. 설비규모 변수가 용량 자체가 아닌 기기 숫자일 수 있고 (풍력터빈이 몇 대이냐 등), 각 시간별 subproblem을 기동/정지 여부를 나타내는 이진변수를 포함하는 unit commitment 문제로 고려해야 할 수도 있다.&lt;/p&gt;
+
+&lt;p&gt;만약 Master problem에는 정수 변수가 있지만 subproblem들에는 정수 변수가 없을 경우, Bender’s decomposition을 적용할 수는 있다. 단, 이 경우 golbal optimum으로의 수렴이 보장되지 않음에 주의한다.&lt;/p&gt;
+
+&lt;p&gt;만약 subproblem에 정수 변수가 있으면, 안타깝게도 Bender’s decomposition을 적용할 수 ‘없다’. 정수 변수가 포함된 문제를 풀 경우 dual variable을 계산할 수 없어, master problem에서 complicating variable의 sensitivity 기반의 optimality cut을 생성할 수 없기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;(필자도 개인적으로 관심을 갖는 주제 중 하나가 ‘unit commitment 제약을 고려한’ generation expanstion planning problem 풀이라서, 처음 이 사실을 알았을 때 좀 슬펐(?)다.)&lt;/p&gt;
+
+&lt;p&gt;이러한 경우 사용할 수 있는 방법론으로 primal-Benders, Dantzig-Wolfe decomposition 등이 있다고 알려져 있으나, 매우 복잡한 방법들이다.&lt;/p&gt;
+
+&lt;p&gt;현실적으로는 unit commitment 제약들을 ‘정수만 실수로 바꾸어서’ 구성한 문제를 풀어 용량변수의 값들을 도출 후, 해당 용량변수를 고정하고 일정 기간 (24시간 또는 48시간 정도) 동안의 unit commitment problem을 rolling 방식으로 푸는 것이 그나마 가능성 있는 방법으로 보인다. (단, 이 경우 용량변수의 값이 optimistic하게 계산되므로, 혹시라도 subproblem이 infeasible problem이 될 수 있으니 주의해야 한다.)&lt;/p&gt;
+
+&lt;div class=&quot;notice--info&quot;&gt;
+
+Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&gt;&lt;br /&gt;
+
+01) &lt;a href=&quot;/jalalone.html&quot;&gt; Market clearing as an optimization problem&lt;/a&gt; &lt;br /&gt;
+02) &lt;a href=&quot;/jalaltwo.html&quot;&gt; Market clearing as an equilibrium problem&lt;/a&gt; &lt;br /&gt;
+03) &lt;a href=&quot;/jalalthree.html&quot;&gt; Desirable properties of market-clearing mechanisms&lt;/a&gt; &lt;br /&gt;
+04) Market clearing using a cooperative game approach &lt;br /&gt;
+05) &lt;a href=&quot;/jalalfive.html&quot;&gt; Stochastic market clearing&lt;/a&gt; &lt;br /&gt;
+06) &lt;a href=&quot;/jalalsix.html&quot;&gt; Robust approaches for market clearing&lt;/a&gt; &lt;br /&gt;
+07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
+08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
+09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
+10) &lt;b&gt; Benders’ decomposition: Applications&lt;/b&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Sun, 27 Aug 2023 00:00:00 +0900</pubDate>
+        <link>https://song4energyndata.github.io/jalalten.html</link>
+        <guid isPermaLink="true">https://song4energyndata.github.io/jalalten.html</guid>
+        
+        <category>최적화</category>
+        
+        <category>게임이론</category>
+        
+        <category>에너지시스템</category>
+        
+        
+        <category>market</category>
+        
+      </item>
     
       <item>
         <title>에너지시스템 최적화/게임이론 강의: 9) Bender&apos;s decomposition</title>
@@ -113,6 +216,7 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
 08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
 09) &lt;b&gt; Benders’ decomposition: Theory&lt;/b&gt; &lt;br /&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Sat, 26 Aug 2023 00:00:00 +0900</pubDate>
@@ -177,7 +281,8 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 06) &lt;a href=&quot;/jalalsix.html&quot;&gt; Robust approaches for market clearing&lt;/a&gt; &lt;br /&gt;
 07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
 08) &lt;b&gt; Optimization problems with decomposable structure&lt;/b&gt; &lt;br /&gt;
-09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt;
+09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Fri, 25 Aug 2023 00:00:00 +0900</pubDate>
@@ -308,7 +413,8 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 06) &lt;a href=&quot;/jalalsix.html&quot;&gt; Robust approaches for market clearing&lt;/a&gt; &lt;br /&gt;
 07) &lt;b&gt; Bilevel programming in energy systems&lt;/b&gt; &lt;br /&gt;
 08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
-09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt;
+09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Wed, 23 Aug 2023 00:00:00 +0900</pubDate>
@@ -473,7 +579,8 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 06) &lt;b&gt; Robust approaches for market clearing&lt;/b&gt; &lt;br /&gt;
 07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
 08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
-09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt;
+09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 20 Aug 2023 00:00:00 +0900</pubDate>
@@ -606,7 +713,8 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 06) &lt;a href=&quot;/jalalsix.html&quot;&gt; Robust approaches for market clearing&lt;/a&gt; &lt;br /&gt;
 07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
 08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
-09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt;
+09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Sat, 19 Aug 2023 00:00:00 +0900</pubDate>
@@ -714,7 +822,8 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 06) &lt;a href=&quot;/jalalsix.html&quot;&gt; Robust approaches for market clearing&lt;/a&gt; &lt;br /&gt;
 07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
 08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
-09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt;
+09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Tue, 15 Aug 2023 00:00:00 +0900</pubDate>
@@ -805,7 +914,8 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 06) &lt;a href=&quot;/jalalsix.html&quot;&gt; Robust approaches for market clearing&lt;/a&gt; &lt;br /&gt;
 07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
 08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
-09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt;
+09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Sat, 12 Aug 2023 00:00:00 +0900</pubDate>
@@ -891,7 +1001,8 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 06) &lt;a href=&quot;/jalalsix.html&quot;&gt; Robust approaches for market clearing&lt;/a&gt; &lt;br /&gt;
 07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
 08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
-09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt;
+09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Wed, 09 Aug 2023 00:00:00 +0900</pubDate>
@@ -1029,137 +1140,6 @@ MSE의 감소량에 비례하게끔 revenue를 책정하는 것이다.&lt;/p&gt;
         
         
         <category>market</category>
-        
-      </item>
-    
-      <item>
-        <title>Beer-Quiche game (동태적 미비정보 게임) 답안</title>
-        <description>&lt;p&gt;아래 링크의 글을 보면, 자율주행차 구현을 위해서는 앞 차의 type을 고려한 Dynamic Bayesian update로 ‘equilibrium’ 을 계산하는 게임이론 방법론이 필요하다고 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://pdsi.pabii.com/auto-driving-game-theory/&quot;&gt;자율주행차에 게임이론이 들어간다고?”&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;관련 예시로 Beer-Quiche game을 들었는데, 해당 예시에 대해 필자 나름의 답안을 작성해보았다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/beerquiche/beerquiche.png&quot; alt=&quot;beerquicheproblem&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;게임-구성&quot;&gt;게임 구성&lt;/h2&gt;
-
-&lt;p&gt;서부개척시대의 술집에 총잡이 두 명이 있다. 총잡이 1은 마실 것을 찾으러 왔으며, 총잡이 2는 총잡이 1에게 시비를 걸고 싸워서 돈을 뜯어내는 시도를 할 지 고민 중이다. 총잡이 1은 총잡이 2가 자신에게 시비를 걸 지 말지 고민한다는 것을 알고 있다.&lt;/p&gt;
-
-&lt;p&gt;총잡이 1은 강자(strong)이거나 약자(weak), 두 가지 유형 중 하나다. 총잡이 1이 강자라면, 총잡이 2는 시비를 걸더라도 돈을 뜯지 못하고, 결국 총잡이 2는 0의 보수를 얻는다. 오히려 강자인 총잡이 1에게 시비를 안 걸고 피할 경우, 총잡이 2는 1의 보수를 얻는다. 반면 총잡이 1이 약자라면, 총잡이 2는 시비를 걸어서 돈을 뜯을 수 있고 그 결과 총잡이 2는 1의 보수를 얻는다. 만약 총잡이 1이 약자인데 총잡이 2가 시비를 안 걸고 피하면, 총잡이 2는 0의 보수를 얻는다.&lt;/p&gt;
-
-&lt;p&gt;총잡이 1은 기본적으로 싸움을 좋아하지 않는다. 따라서 자신의 유형 (강자인지 약자인지) 에 상관없이 총잡이 2가 자신에게 시비를 걸지 않으면 기본적으로 2의 보수를 얻고, 시비를 걸어오면 기본적으로 0의 보수를 얻는다.&lt;/p&gt;
-
-&lt;p&gt;총잡이 1은 자신의 유형을 알지만, 총잡이 2는 총잡이 1의 유형을 정확히는 모른다. 다만 총잡이 2는 총잡이 1이 강자일 확률이 $b$라고 믿고 있다 ($0&amp;lt;b&amp;lt;1$). $b$의 값은 총잡이 2 뿐 아니라 총잡이 1도 알고 있는, 즉 모두가 알고 있는 사실 (주지사실) 이다.&lt;/p&gt;
-
-&lt;p&gt;이 세계에선 일반적으로 강자들은 맥주를 좋아하고, 약자들은 사이다를 좋아한다. 총잡이 1은 맥주 또는 사이다를 마시는데, 자신의 유형에 맞게 좋아하는 음료를 마시면 (강자일 경우 맥주, 약자일 경우 사이다) 위에서 설명한 상황 별 보수에 더해 추가로 1의 보수를 얻는다. 좋아하지 않는 음료를 마시면 추가 보수는 0이다.&lt;/p&gt;
-
-&lt;p&gt;총잡이 2는 총잡이 1이 뭘 마시는지 ‘본 뒤에’ 총잡이 1에게 시비를 걸 지 말지 결정한다. 즉 일반적인 선호도에 근거해 총잡이 1이 맥주를 시키면 피하고 사이다를 시키면 시비를 걸 수도 있지만, 총잡이 1이 맥주를 시키는 것을 ‘약자인데 강자인 척하는 것’ 으로 보고 시비를 걸 수도 있다. 총잡이 1과 2는 모두 합리적이며 상황 별 보수들이 주지사실이므로, 게임이론에 따라 행동을 결정한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;가정-a-총잡이-1이-강하면-맥주-약하면-사이다를-마신다고-가정-시&quot;&gt;가정 A: 총잡이 1이 강하면 맥주, 약하면 사이다를 마신다고 가정 시&lt;/h2&gt;
-
-&lt;p&gt;가정 A 하에서 총잡이 2는 총잡이 1이 뭘 마시는지 보고 총잡이 1의 유형을 특정할 수 있다. 총잡이 1이 맥주를 마신다면 강자로 생각되므로, 총잡이 2는 시비를 걸지 말아야 한다 (시비 걸면 0, 안 걸면 1이므로). 총잡이 1이 사이다를 마신다면 약자로 생각되므로, 총잡이 2는 시비를 걸어야 한다 (시비 걸면 1, 안 걸면 0이므로).&lt;/p&gt;
-
-&lt;p&gt;총잡이 1은 총잡이 2의 위와 같은 생각을 합리적으로 예상할 수 있다. 따라서 총잡이 2가 맥주를 보면 자신을 피하고 사이다를 보면 덤빈다는 걸 염두에 두고 나서 뭘 마실 지 결정한다고 하자.&lt;/p&gt;
-
-&lt;p&gt;이 때 총잡이 1 자신이 강자라면, 가정 A대로 맥주를 마시는 게 좋다. 어차피 맥주를 본 총잡이 2가 자신을 피할 것이므로 총 3의 보수를 얻으며 (싸움 회피 2 + 선호하는 음료 1), 이는 괜히 사이다로 바꿔서 얻는 보수 0보다 크기 때문이다 (시비 걸림 0 + 선호하지 않는 음료 0).&lt;/p&gt;
-
-&lt;p&gt;그러나 총잡이 1 자신이 약자라면, 가정 A대로 사이다를 마시는 것 보다는 맥주로 음료를 ‘바꾸는’ 게 좋다. 사이다를 마시면 1의 보수를 얻지만 (시비 걸림 0 + 선호하는 음료 1), 맥주를 마시면 2의 보수를 얻기 때문이다 (싸움 회피 2 + 선호하지 않는 음료 0).&lt;/p&gt;
-
-&lt;p&gt;따라서 가정 A (강자면 맥주, 약자면 사이다) 하에서 총잡이 2가 할 행동 (맥주 보면 피하고, 사이다 보면 덤비기) 을 전제로 한 총잡이 1의 최선의 행동 (강자든 약자든 맥주) 이 가정 A와 같지 않으므로, 가정 A 하에서는 완전베이즈균형이 성립하지 않는다.&lt;/p&gt;
-
-&lt;h2 id=&quot;가정-b-총잡이-1이-강하든-약하든-맥주를-마신다고-가정-시&quot;&gt;가정 B: 총잡이 1이 강하든 약하든 맥주를 마신다고 가정 시&lt;/h2&gt;
-
-&lt;p&gt;가정 B 하에서는 총잡이 2가 총잡이 1의 음료를 보더라도 총잡이 1이 강자인지 약자인지 특정할 수 없다 (둘 다 똑같이 맥주이므로). 따라서 총잡이 1이 $b$의 확률로 강자, $1-b$의 확률로 약자라고 생각하고 기대보수를 계산해 본다.&lt;/p&gt;
-
-&lt;p&gt;총잡이 2가 시비를 걸 때 총잡이 1이 강자였다면 총잡이 2는 0의 보수를, 약자였다면 1의 보수를 얻는다. 그러므로 총잡이 1에게 시비를 걸 경우 기대보수는 $1-b$이고 ($0 \times b + 1 \times (1-b)$), 시비를 걸지 않을 경우 기대보수는 b이다 ($ 1 \times b + 0 \times (1-b)$).&lt;/p&gt;
-
-&lt;p&gt;[가정 2를 따르고 $b&amp;gt;0.5$ 인 (총잡이 1이 강자일 확률이 더 높은) 경우]&lt;/p&gt;
-
-&lt;p&gt;이 때 총잡이 2의 기대보수는 시비를 걸지 않을 때 더 높으므로 총잡이 2는 싸움을 포기한다. 총잡이 1은 총잡이 2의 이러한 생각을 합리적으로 예상할 수 있다. 따라서 총잡이 2가 맥주를 보면 피한다는 걸 염두에 두고 뭘 마실 지 결정한다.&lt;/p&gt;
-
-&lt;p&gt;총잡이 1 자신이 강자라면, 가정 B대로 맥주를 마시는 게 좋다. 어차피 맥주를 본 총잡이 2가 자신을 피할 것이므로 총 3의 보수를 얻으며, 이는 괜히 사이다로 바꿔서 얻는 보수 (총잡이 2가 사이다를 보고 시비를 건다면 0, 시비를 걸지 않더라도 선호하는 음료가 아니므로 2) 보다 크기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;총잡이 1 자신이 약자라면, ‘가정 B 하에서 그러지는 않겠지만 만약 자신이 맥주 대신 사이다를 마신다면 총잡이 2가 어쩔 것인가’ 에 따라 맥주와 사이다 중 무엇이 더 나은 선택인지가 결정된다.&lt;/p&gt;
-
-&lt;p&gt;만약 총잡이 2가 사이다를 보고 시비를 건다면, 총잡이 1은 가정 B대로 맥주를 마시는 게 좋다. 맥주를 좋아하지는 않지만 싸움을 피하므로 2의 보수를 얻는데, 이는 사이다를 마시지만 시비를 걸려서 얻는 보수 1보다 크기 때문이다. 그러나 총잡이 2가 사이다를 보고도 시비를 걸지 않는다면, 총잡이 1은 가정 B와 달리 음료를 사이다로 바꾸는 게 좋다. 시비도 안 걸리는데 좋아하는 음료까지 마시므로 3의 보수를 얻고, 이는 맥주를 마셔서 얻는 보수 2보다 크기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;따라서 가정 B (강자든 약자든 맥주) 하에서 $b&amp;gt;0.5$ (강자일 확률이 더 높음) 인 경우 총잡이 2가 할 행동 (맥주를 보고 피함) 을 전제로 한 총잡이 1의 최선의 행동은 ‘총잡이 2가 사이다를 보면 시비를 건다’ 라는 추가 가정 하에 가정 B와 일치한다. 따라서 가정 2 및 $b&amp;gt;0.5$ 조건 하에서는 총잡이 2가 사이다를 보고 덤빈다는 추가 가정 하에 완전베이즈균형이 성립한다.&lt;/p&gt;
-
-&lt;p&gt;이 때 총잡이 2가 사이다를 보고 덤빈다는 것은, 사이다를 보고 총잡이 1이 약자라고 판단한다는 뜻이기도 하다. 시비를 걸 때의 기대보수가 더 높아야 시비를 걸 텐데, 약자를 상대로 시비를 걸어야 총잡이 2가 보수를 얻기 때문이다. 이게 타당하려면, ‘총잡이 2가 반드시 시비를 건다고 할 때’ 총잡이 1이 실제로 약자인 경우 사이다를 맥주보다 선호해야 한다. 그리고 이는 사실이다, 어차피 시비는 걸린다면 자신이 좋아하는 사이다를 마실 때 1의 보수를 얻는 반면 맥주를 먹으면 0의 보수를 얻기 때문이다. 그러므로 총잡이 2의 신념체계는 직관적으로도 옳다.&lt;/p&gt;
-
-&lt;p&gt;[가정 B를 따르고 $b&amp;lt;0.5$ 인 (총잡이 1이 약자일 확률이 더 높은) 경우]&lt;/p&gt;
-
-&lt;p&gt;이 때 총잡이 2의 기대보수는 시비를 걸 때 더 높으므로 총잡이 2는 시비를 건다. 총잡이 1은 총잡이 2의 이러한 생각을 합리적으로 예상할 수 있다. 따라서 총잡이 2가 맥주를 보면 시비를 건다는 걸 염두에 두고 뭘 마실 지 결정한다.&lt;/p&gt;
-
-&lt;p&gt;이 경우 ‘가정 B 하에서 그러지는 않겠지만 만약 자신이 맥주 대신 사이다를 마신다면 총잡이 2가 어쩔 것인가’ 에 따라 맥주와 사이다 중 무엇이 더 나은 선택인지가 결정된다.&lt;/p&gt;
-
-&lt;p&gt;만약 총잡이 2가 사이다를 보고 시비를 건다면, 총잡이 1은 자신이 강할 경우 가정 B대로 맥주를 마시는 게 좋다. 어차피 뭘 해도 시비를 걸리는데, 좋아하는 맥주라도 마시는 것이 보수가 더 높기 때문이다 (맥주 마시면 1, 사이다 마시면 0). 그러나 자신이 약할 경우 ‘가정과 달리’ 사이다를 마시는 게 좋다. 어차피 시비를 걸린다면 좋아하는 사이다를 마시는 것이 보수가 더 높기 때문이다 (맥주 마시면 0, 사이다 마시면 1).&lt;/p&gt;
-
-&lt;p&gt;만약 총잡이 2가 사이다를 보고 피한다면, 총잡이 1은 자신이 강할 경우 ‘가정 B와 달리’ 맥주 대신 사이다를 마시는 게 좋다. 좋아하는 맥주는 못 마시지만 싸움을 피할 수 있기 때문이다 (맥주 마시고 시비 걸리면 1, 사이다 마시고 싸움 피하면 2). 한편 총잡이 1 자신이 약할 경우에도 맥주 대신 사이다를 마시는 게 좋다. 좋아하는 사이다도 마시고 싸움도 피할 수 있기 때문이다 (맥주 마시고 시비 걸리면 0, 사이다 마시고 싸움 피하면 3).&lt;/p&gt;
-
-&lt;p&gt;따라서 가정 B (강자든 약자든 맥주) 하에서 $b&amp;lt;0.5$ (약자일 확률이 더 높음) 인 경우 총잡이 2가 할 행동 (맥주를 보고 시비 검) 을 전제로 한 총잡이 1의 최선의 행동은 어떤 경우에도 가정 B와 같지 않다. 따라서 가정 B 및 $b&amp;lt;0.5$ 조건 하에서는 완전베이즈균형이 성립하지 않는다.&lt;/p&gt;
-
-&lt;h2 id=&quot;가정-c-총잡이-1이-강하면-사이다-약하면-맥주를-마신다고-가정-시&quot;&gt;가정 C: 총잡이 1이 강하면 사이다, 약하면 맥주를 마신다고 가정 시&lt;/h2&gt;
-
-&lt;p&gt;가정 C 하에서 총잡이 2는 총잡이 1이 뭘 마시는지 보고 총잡이 1의 유형을 특정할 수 있다. 총잡이 1이 맥주를 마신다면 약자로 생각되므로, 총잡이 2는 시비를 걸어야 한다 (시비 걸면 0, 안 걸면 1이므로). 총잡이 1이 사이다를 마신다면 강자로 생각되므로, 총잡이 2는 시비를 걸지 말아야 한다 (시비 걸면 0, 안 걸면 1이므로).&lt;/p&gt;
-
-&lt;p&gt;총잡이 1은 총잡이 2의 위와 같은 생각을 합리적으로 예상할 수 있다. 따라서 총잡이 2가 맥주를 보면 자신에게 덤비고 사이다를 보면 피한다는 걸 염두에 두고 나서 뭘 마실 지 결정한다고 하자.&lt;/p&gt;
-
-&lt;p&gt;이 때 총잡이 1 자신이 강자라면, 가정 C대로 사이다를 마시는 게 좋다. 좋아하는 맥주를 마시지는 못하지만 싸움을 피해서 얻는 보수 2가, 맥주를 마시지만 시비를 걸려서 얻는 보수 1보다 크기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;그러나 총잡이 1 자신이 약자라면, 가정 C와 달리 사이다로 음료를 ‘바꾸는’ 게 좋다. 맥주를 마시면 0의 보수를 얻지만 (시비 걸림 0 + 선호하지 않는 음료 0), 사이다를 마시면 3의 보수를 얻기 때문이다 (싸움 회피 2 + 선호하는 음료 1).&lt;/p&gt;
-
-&lt;p&gt;따라서 가정 C (강자면 사이다, 약자면 맥주) 하에서 총잡이 2가 할 행동 (맥주 보면 덤비고, 사이다 보면 피하기) 을 전제로 한 총잡이 1의 최선의 행동 (강자든 약자든 사이다) 이 가정 C와 같지 않으므로, 가정 C 하에서는 완전베이즈균형이 성립하지 않는다.&lt;/p&gt;
-
-&lt;h2 id=&quot;가정-d-총잡이-1이-강하든-약하든-사이다를-마신다고-가정-시&quot;&gt;가정 D: 총잡이 1이 강하든 약하든 사이다를 마신다고 가정 시&lt;/h2&gt;
-
-&lt;p&gt;가정 D 하에서는 총잡이 2가 총잡이 1의 음료를 보더라도 총잡이 1이 강자인지 약자인지 특정할 수 없다 (둘 다 똑같이 사이다이므로). 따라서 총잡이 1이 $b$의 확률로 강자, $1-b$의 확률로 약자라고 생각하고 기대보수를 계산해 본다.&lt;/p&gt;
-
-&lt;p&gt;총잡이 2가 시비를 걸 때 총잡이 1이 강자였다면 총잡이 2는 0의 보수를, 약자였다면 1의 보수를 얻는다. 그러므로 총잡이 1에게 시비를 걸 경우 기대보수는 $1-b$이고 ($0 \times b + 1 \times (1-b)$), 시비를 걸지 않을 경우 기대보수는 $b$이다 ($1 \times b + 0 \times (1-b)$).&lt;/p&gt;
-
-&lt;p&gt;[가정 D를 따르고 $b&amp;gt;0.5$ 인 (총잡이 1이 강자일 확률이 더 높은) 경우]&lt;/p&gt;
-
-&lt;p&gt;이 때 총잡이 2의 기대보수는 시비를 걸지 않을 때 더 높으므로 총잡이 2는 싸움을 포기한다. 총잡이 1은 총잡이 2의 이러한 생각을 합리적으로 예상할 수 있다. 따라서 총잡이 2가 사이다를 보면 피한다는 걸 염두에 두고 뭘 마실 지 결정한다.&lt;/p&gt;
-
-&lt;p&gt;총잡이 1 자신이 약자라면, 가정 D대로 사이다를 마시는 게 좋다. 어차피 사이다를 본 총잡이 2가 자신을 피할 것이므로 총 3의 보수를 얻으며, 이는 괜히 맥주로 바꿔서 얻는 보수 (총잡이 2가 맥주를 보고 시비를 건다면 0, 시비를 걸지 않더라도 선호하는 음료가 아니므로 2) 보다 크기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;총잡이 1 자신이 강자라면, ‘가정 D 하에서 그러지는 않겠지만 만약 자신이 사이다 대신 맥주를 마신다면 총잡이 2가 어쩔 것인가’ 에 따라 맥주와 사이다 중 무엇이 더 나은 선택인지가 결정된다.&lt;/p&gt;
-
-&lt;p&gt;만약 총잡이 2가 맥주를 보고 시비를 건다면, 총잡이 1은 가정 D대로 사이다를 마시는 게 좋다. 사이다를 좋아하지는 않지만 싸움을 피하므로 2의 보수를 얻는데, 이는 맥주를 마시지만 시비를 걸려서 얻는 보수 1보다 크기 때문이다. 그러나 총잡이 2가 맥주를 보고도 시비를 걸지 않는다면, 총잡이 1은 가정 D와 달리 음료를 맥주로 바꾸는 게 좋다. 시비도 안 걸리는데 좋아하는 음료까지 마시므로 3의 보수를 얻고, 이는 사이다를 마셔서 얻는 보수 2보다 크기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;따라서 가정 D (강자든 약자든 사이다) 하에서 $b&amp;gt;0.5$ (강자일 확률이 더 높음) 인 경우 총잡이 2가 할 행동 (사이다를 보고 피함) 을 전제로 한 총잡이 1의 최선의 행동은 ‘총잡이 2가 맥주를 보면 시비를 건다’ 라는 추가 가정 하에 가정 D와 일치한다. 따라서 가정 D 및 $b&amp;gt;0.5$ 조건 하에서는 총잡이 2가 맥주를 보고 덤빈다는 추가 가정 하에 완전베이즈균형이 성립한다.&lt;/p&gt;
-
-&lt;p&gt;이 때 총잡이 2가 맥주를 보고 덤빈다는 것은, 맥주를 보고 총잡이 1이 약자라고 판단한다는 뜻이기도 하다. 시비를 걸 때의 기대보수가 더 높아야 시비를 걸 텐데, 약자를 상대로 시비를 걸어야 총잡이 2가 보수를 얻기 때문이다. 이게 타당하려면, ‘총잡이 2가 반드시 시비를 건다고 할 때’ 총잡이 1이 실제로 약자인 경우 맥주를 사이다보다 선호해야 한다. 그런데 이는 ‘사실이 아니다’, 어차피 시비는 걸린다고 할 때 맥주를 먹으면 0의 보수를 얻는 반면 자신이 좋아하는 사이다를 마시면 1의 보수를 얻기 때문이다. 그러므로 총잡이 2의 신념체계는 직관적으로 옳지 않다.&lt;/p&gt;
-
-&lt;p&gt;그러므로 가정 D 및 $b&amp;gt;0.5$ 조건 하의 완전베이즈균형은 비직관적인 신념에 근거하기 때문에, 배제되어야 한다.&lt;/p&gt;
-
-&lt;p&gt;[가정 D를 따르고 $b&amp;lt;0.5$ 인 (총잡이 1이 약자일 확률이 더 높은) 경우]&lt;/p&gt;
-
-&lt;p&gt;이 때 총잡이 2의 기대보수는 시비를 걸 때 더 높으므로 총잡이 2는 시비를 건다. 총잡이 1은 총잡이 2의 이러한 생각을 합리적으로 예상할 수 있다. 따라서 총잡이 2가 사이다를 보면 시비를 건다는 걸 염두에 두고 뭘 마실 지 결정한다.&lt;/p&gt;
-
-&lt;p&gt;이 경우 ‘가정 D 하에서 그러지는 않겠지만 만약 자신이 사이다 대신 맥주를 마신다면 총잡이 2가 어쩔 것인가’ 에 따라 맥주와 사이다 중 무엇이 더 나은 선택인지가 결정된다.&lt;/p&gt;
-
-&lt;p&gt;만약 총잡이 2가 맥주를 보고 시비를 건다면, 총잡이 1은 자신이 약할 경우 가정 D대로 사이다를 마시는 게 좋다. 어차피 뭘 해도 시비를 걸리는데, 좋아하는 사이다를 마시는 것이 보수가 더 높기 때문이다 (맥주 마시면 0, 사이다 마시면 1). 그러나 자신이 강할 경우 ‘가정 D와 달리’ 맥주로 바꾸는 게 좋다. 어차피 시비가 걸린다면 좋아하는 맥주라도 마시는 것이 보수가 더 높기 때문이다 (맥주 마시면 1, 사이다 마시면 0).&lt;/p&gt;
-
-&lt;p&gt;만약 총잡이 2가 맥주를 보고 피한다면, 총잡이 1은 자신이 강할 경우 ‘가정 D와 달리’ 사이다 대신 맥주를 마시는 게 좋다. 좋아하는 맥주도 마시고 싸움도 피할 수 있기 때문이다 (맥주 마시고 싸움 피하면 3, 사이다 마시고 시비 걸리면 0). 한편 총잡이 1 자신이 약할 경우에도 사이다 대신 맥주를 마시는 게 좋다. 좋아하는 사이다는 못 마시지만 싸움을 피할 수 있기 때문이다 (맥주 마시고 싸움 피하면 2, 사이다 마시고 시비 걸리면 1).&lt;/p&gt;
-
-&lt;p&gt;따라서 가정 D (강자든 약자든 사이다) 하에서 b&amp;lt;0.5 (약자일 확률이 더 높음) 인 경우 총잡이 2가 할 행동 (사이다를 보고 시비 검) 을 전제로 한 총잡이 1의 최선의 행동은 어떤 경우에도 가정 D와 같지 않다. 따라서 가정 D 및 $b&amp;lt;0.5$ 조건 하에서는 완전베이즈균형이 성립하지 않는다.&lt;/p&gt;
-
-&lt;h2 id=&quot;결론&quot;&gt;결론&lt;/h2&gt;
-
-&lt;p&gt;총잡이 2가 보기에 총잡이 1이 강자일 확률이 더 높으면, 완전베이즈균형 하에서 총잡이 1은 자신의 유형이 강자이든 약자이든 맥주를 마시고, 총잡이 2는 맥주를 보면 싸움을 피하되 혹시라도 사이다를 보면 시비를 건다.&lt;/p&gt;
-
-&lt;p&gt;총잡이 2가 보기에 총잡이 1이 약자일 확률이 더 높으면, 완전베이즈균형이 성립하지 않는다.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 23 Jul 2023 00:00:00 +0900</pubDate>
-        <link>https://song4energyndata.github.io/beerquiche.html</link>
-        <guid isPermaLink="true">https://song4energyndata.github.io/beerquiche.html</guid>
-        
-        <category>게임이론</category>
-        
-        
-        <category>mathstat</category>
         
       </item>
     

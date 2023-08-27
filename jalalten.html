@@ -19,8 +19,8 @@
 </script>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>에너지시스템 최적화/게임이론 강의: 7) Bilevel programming in energy systems | 에너지엔데이터연구소</title>
-<meta name="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 7강을 필자가 요약한 내용이다.">
+<!-- begin _includes/seo.html --><title>에너지시스템 최적화/게임이론 강의: 10) Applications of Bender’s decomposition | 에너지엔데이터연구소</title>
+<meta name="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 10강을 필자가 요약한 내용이다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -32,32 +32,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="에너지시스템 최적화/게임이론 강의: 7) Bilevel programming in energy systems">
-<meta property="og:url" content="https://song4energyndata.github.io/jalalseven.html">
+<meta property="og:title" content="에너지시스템 최적화/게임이론 강의: 10) Applications of Bender’s decomposition">
+<meta property="og:url" content="https://song4energyndata.github.io/jalalten.html">
 
 
-  <meta property="og:description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 7강을 필자가 요약한 내용이다.">
-
-
-
-  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/jalal/Lecture7_1.png">
+  <meta property="og:description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 10강을 필자가 요약한 내용이다.">
 
 
 
-
-
-  <meta property="article:published_time" content="2023-08-23T00:00:00+09:00">
+  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/jalal/Lecture10a_1.png">
 
 
 
 
 
-  
+  <meta property="article:published_time" content="2023-08-27T00:00:00+09:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://song4energyndata.github.io/jalalseven.html">
+
+<link rel="canonical" href="https://song4energyndata.github.io/jalalten.html">
 
 
 
@@ -432,16 +432,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="에너지시스템 최적화/게임이론 강의: 7) Bilevel programming in energy systems">
-    <meta itemprop="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 7강을 필자가 요약한 내용이다.">
-    <meta itemprop="datePublished" content="2023-08-23T00:00:00+09:00">
+    <meta itemprop="headline" content="에너지시스템 최적화/게임이론 강의: 10) Applications of Bender’s decomposition">
+    <meta itemprop="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 10강을 필자가 요약한 내용이다.">
+    <meta itemprop="datePublished" content="2023-08-27T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://song4energyndata.github.io/jalalseven.html" class="u-url" itemprop="url">에너지시스템 최적화/게임이론 강의: 7) Bilevel programming in energy systems
+            <a href="https://song4energyndata.github.io/jalalten.html" class="u-url" itemprop="url">에너지시스템 최적화/게임이론 강의: 10) Applications of Bender’s decomposition
 </a>
           </h1>
           
@@ -452,7 +452,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2023-08-23T00:00:00+09:00">2023-08-23</time>
+        <time datetime="2023-08-27T00:00:00+09:00">2023-08-27</time>
       </span>
     
 
@@ -470,109 +470,80 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#발전사업자가-정직하지-않을-경우의-시장">발전사업자가 ‘정직하지 않을’ 경우의 시장</a></li><li><a href="#strategic-offering을-stackelberg-game으로-모델링">Strategic offering을 Stackelberg game으로 모델링</a></li><li><a href="#stackelberg-game-bi-level-problem을-푸는-방법">Stackelberg game bi-level problem을 푸는 방법</a></li><li><a href="#여러-명이-strategic-offering을-하는-경우는">‘여러 명이’ strategic offering을 하는 경우는?</a></li></ul>
+              <ul class="toc__menu"><li><a href="#generation-expansion-planning">Generation expansion planning</a></li><li><a href="#scenario-based-stochastic-programming">Scenario based stochastic programming</a></li><li><a href="#정수-변수가-있을-경우에는">정수 변수가 있을 경우에는?</a></li></ul>
  <!-- 우측 TOC -->
             </nav>
           </aside>
         
-        <p>이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 7강을 필자가 요약한 내용이다.</p>
+        <p>이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 10강을 필자가 요약한 내용이다.</p>
 
 <!-- Courtesy of embedresponsively.com -->
 
 <div class="responsive-video-container">
-    <iframe src="https://www.youtube-nocookie.com/embed/STQRFr4praA" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+    <iframe src="https://www.youtube-nocookie.com/embed/NOBde8kEOj0" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
   </div>
 
 <p>(<a href="https://www.jalalkazempour.com/teaching">Course slides 링크</a>)</p>
 
-<h2 id="발전사업자가-정직하지-않을-경우의-시장">발전사업자가 ‘정직하지 않을’ 경우의 시장</h2>
+<h2 id="generation-expansion-planning">Generation expansion planning</h2>
 
-<p>지금까지의 강의들에서는 모든 발전사업자가 자기 소유 발전기의 발전비용 (production cost) 을 offer price로써 ‘정직하게’ 설정한다고 가정했다. 그리고 이 때 social welfare가 최대화됨을 보였다.</p>
+<p>아래 문제는 기존 두 개의 발전기에 더해 새로 도입되는 세 번째 발전기의 용량 $x_3$을 결정하되, 각 시간별 수요-공급 일치 및 발전기 별 운전 범위 조건을 만족시키면서 ‘발전기 건설비와 모든 시간의 운영비용의 합’을 최소화하도록 결정하는 설비 확장 (generation expansion) 문제이다.</p>
 
-<p>그러나 만약에, 가격 결정의 key를 쥐고 있는 ‘marginal’ producer (수요-공급 일치점에 해당하여 자신의 offer price가 곧 market clearing price가 되는 공급자) 가 offer price를 production cost보다 높게 설정하는 ‘strategic’ offering을 했다고 하자. (이를 exercising market power 라 한다)</p>
+<p><img src="/assets/images/jalal/Lecture10a_8.png" alt="clearingexample" /></p>
 
-<p>그 결과, market clearing price는 증가하고, 전체 전력 공급량은 감소한다 (아래 슬라이드 참고).</p>
+<p>$x_3$의 값을 고정하면, 각 시간 ($h$) 별로 subproblem을 구성할 수 있다. 주어진 $x_3$에 대해 각 시간 별 발전기들의 최적 출력을 결정하는 subproblem은 아래와 같다.</p>
 
-<p><img src="/assets/images/jalal/Lecture7_8.png" alt="clearingexample" /></p>
+<p><img src="/assets/images/jalal/Lecture10a_11.png" alt="clearingexample" /></p>
 
-<p>이 때, marginal producer의 수익은 증가할까?</p>
+<p>Master problem의 optimality cut을 compact form으로 구성하기 위해, $x_3^{(i)}$을 변수로 두되 해당 변수의 값을 고정하는 제약조건 $x_3^{(i)} = x_3^{fixed}$ 를 두었다. 해당 제약에 대응하는 dual variable $\lambda_h$가 $h$별로 다른데, 이는 각 시간 별 전기부하 $D_h$가 얼마냐에 따라 optimal solution이 달라지므로 dual variable도 $h$별로 다르기 때문이다.</p>
 
-<p>이는 marginal producer의 판매량에 따라 다르다. 판매가격은 증가했지만, 전체 전력 공급량은 감소했다. 만약 전력 공급량 감소에 의해 marginal producer의 판매량이 크게 감소하면, marginal producer의 수익은 감소할 수도 있다. (물론 실제로는 marginal producer도 이를 예상하고 본인의 수익이 증가할 것 같을 때에만 strategic offering을 수행할 것이다)</p>
+<p>$x_3$의 값을 업데이트하기 위한 master problem은 아래와 같다.</p>
 
-<p>Marginal producer를 제외한 나머지 (전력수급 스케줄에 포함된) 발전사업자들의 수익은 증가한다. 판매량은 변하지 않는데 시장가격이 올랐기 때문이다. (일종의 free-rider로 볼 수 있다)</p>
+<p><img src="/assets/images/jalal/Lecture10a_18.png" alt="clearingexample" /></p>
 
-<p>또한 startegic offering의 결과, social welfare는 감소한다 (아래 슬라이드 참고).</p>
+<p>$\alpha^{(i)}$에 대한 제약조건의 우변이 모든 $h$에 대한 합임에 주의한다. $\alpha^{(i)}$가 목적함수의 $x$를 제외한 변수들에 대한 항들을 대신하는 auxiliary variable인데, 해당 항들은 ‘모든 시간에 대한 운영비용의 합’이기 때문이다.</p>
 
-<p><img src="/assets/images/jalal/Lecture7_10.png" alt="clearingexample" /></p>
+<p>또한 제약조건이 총 $i-1$개임에 주의한다 (1번째, 2번째, …, $i-1$번째 iteration에서의 값들)</p>
 
-<p>3강에서 보았듯 LMP-based market은 incentive compatibility가 충족되지 않는 시장이므로, 각 참여자들이 자신의 진짜 정보가 아닌 가짜 정보를 이용할 위험이 있다.</p>
+<h2 id="scenario-based-stochastic-programming">Scenario based stochastic programming</h2>
 
-<h2 id="strategic-offering을-stackelberg-game으로-모델링">Strategic offering을 Stackelberg game으로 모델링</h2>
+<p>불확실성이 큰 재생발전기가 있을 때, 하루전 시장에 대해서는 재생발전기 발전량 시나리오에 관계없이 단일한 급전계획을 도출하고, 실시간 시장에 대해서는 각 시나리오 별 급전 수정 계획을 도출함을 이전 강의에서 설명하였다.</p>
 
-<p>시장은 근본적으로 여러 참가자들이 각자의 이익 최대화를 목표로 하는 상호작용 공간이므로, game으로 모델링할 수 있다. 실제로 생산량 기반 경쟁을 모사하는 Cournot competition, 가격 기반 경쟁을 모사하는 Bertrand competition, 이들 모델보다 더 전력시장의 모습에 가까운 supply function model 등이 사용될 수 있다.</p>
+<p>아래 슬라이드를 보면, stochastic market clearing problem에서 complicating variables는 하루전 (Day-Ahead) 시장에 대한 변수들이고 (파란색으로 표기됨), 해당 변수들을 고정하면 각 시나리오 별 subproblem들을 구성할 수 있다.</p>
 
-<p>그러나 위 모델들은 기본적으로 ‘생산량과 가격 간 관계가 affine function이다’ 라고 전제하는데, 실제로는 그렇지 않다. 그러므로 이러한 전제를 필요로 하지 않는 다른 game 모델이 필요하다.</p>
+<p><img src="/assets/images/jalal/Lecture10a_68.png" alt="clearingexample" /></p>
 
-<p>Strategic offering을 하는 발전사업자가 자신의 offer price를 결정하면, market operator는 해당 offer price를 ‘주어진 것으로 받아들이고’ market clearing을 수행한다.</p>
+<p>각 시나리오 별 subproblem은 아래와 같다.</p>
 
-<p>그러므로 strategic offering을 하는 발전사업자를 leader로, market opeartor를 follower로 보면, 전형적인 Stackelberg game이 된다.</p>
+<p><img src="/assets/images/jalal/Lecture10a_70.png" alt="clearingexample" /></p>
 
-<p><img src="/assets/images/jalal/Lecture7_27.png" alt="clearingexample" /></p>
+<p>목적함수를 보면 0.25가 곱해져 있다. 이는 해당 시나리오의 확률이다. 각 subproblem별 목적함수에는 대응하는 시나리오의 확률을 곱해주도록 한다.</p>
 
-<p>Stackelberg game에서는 leader가 follower의 모델을 알고 있다고 가정하고, leader가 follower의 model에 기반해 자신의 선택에 대한 follower의 대응을 ‘예상해서’ 의사결정을 한다.</p>
+<p>Master problem은 아래와 같다.</p>
 
-<p>그러므로, leader의 의사결정에 대한 최적화 문제는 leader 자신에 대한 제약조건 뿐 아니라, follower의 의사결정에 대한 최적화 문제 자체를 제약조건으로 갖는 bi-level problem이 된다 (아래 슬라이드 참고).</p>
+<p><img src="/assets/images/jalal/Lecture10a_75.png" alt="clearingexample" /></p>
 
-<p><img src="/assets/images/jalal/Lecture7_32.png" alt="clearingexample" />
-<img src="/assets/images/jalal/Lecture7_37.png" alt="clearingexample" /></p>
+<p>여기서 주의할 점은, $\alpha^{(\theta)}$에 대한 제약조건의 우변에서, subproblem의 목적함수에 대응하는 부분에는 각 시나리오 별 확률을 곱해주지만, 그 뒤의 complicating variable들에 대한 부분에는 각 시나리오별 확률을 곱해주지 않는다는 것이다.</p>
 
-<p>Follower 입장에서의 lower-level problem에서는 leader의 의사결정이 변수가 아닌 parameter이다. Leader 입장에서의 upper-level problem에서는 leader의 의사결정과 follower의 의사결정 모두가 변수이지만, follower의 의사결정은 lower-level problem을 전제로 이루어진다.</p>
+<p>이는 subproblem의 목적함수에 이미 각 시나리오 별 확률이 곱해져 있었기 때문에, complicating variable을 고정하는 제약에 대한 dual variable들 $\rho$가 ‘시나리오 별 확률만큼 scaling된’ sensitivity를 의미하기 때문이다. 그러므로 dual variable들을 전부 합하기만 해도, 각 시나리오 별 확률을 가중치로 하는 가중평균 sensitivity를 반영한 optimality cut을 생성하는 셈이 된다.</p>
 
-<h2 id="stackelberg-game-bi-level-problem을-푸는-방법">Stackelberg game bi-level problem을 푸는 방법</h2>
+<p>위의 4개 시나리오에 대한 stochastic market clearing 문제를 Bender’s decomposition으로 풀면, 아래와 같이 5번의 iteartion으로 해를 얻는다.</p>
 
-<p>Bi-level problem을 푸는 일반적인 방법은, lower-level problem의 KKT condition을 upper-level problem의 제약조건으로 두는 것이다. Optimal point에서는 lower problem의 KKT condition도 만족되어야 하기 때문이다. 이 경우, 최적화 문제를 제약으로 갖지 않는 평범한(?) 최적화 문제가 된다.</p>
+<p><img src="/assets/images/jalal/Lecture10a_79.png" alt="clearingexample" /></p>
 
-<p>(이러한 문제를 Mathematical Program with Complementarity Constraint (MPCC) problem이라 하며, 특히 전력시장처럼 lower-level problem이 equilibrium을 구하는 문제인 경우에는 Mathmatical Program with Equilibrium Constraint (MPEC) problem이라 한다.)</p>
+<h2 id="정수-변수가-있을-경우에는">정수 변수가 있을 경우에는?</h2>
 
-<p>여기서 난점은, KKT condition 중 complementary slackness 조건에 의해 lower-level problem의 primal variable들과 dual variable들이 곱해져 product term들이 생기므로 nonlinear problem이 된다는 것이다.</p>
+<p>에너지시스템 최적화 문제에는 정수가 많이 등장한다. 설비규모 변수가 용량 자체가 아닌 기기 숫자일 수 있고 (풍력터빈이 몇 대이냐 등), 각 시간별 subproblem을 기동/정지 여부를 나타내는 이진변수를 포함하는 unit commitment 문제로 고려해야 할 수도 있다.</p>
 
-<p>이 때 각 product term에 대해 이진변수와 큰 계수 기반의 big-M approach를 쓰면, mixed-integer ‘linear’ problem으로 만들 수 있다 (아래 슬라이드 참고).</p>
+<p>만약 Master problem에는 정수 변수가 있지만 subproblem들에는 정수 변수가 없을 경우, Bender’s decomposition을 적용할 수는 있다. 단, 이 경우 golbal optimum으로의 수렴이 보장되지 않음에 주의한다.</p>
 
-<p><img src="/assets/images/jalal/Lecture7_55.png" alt="clearingexample" /></p>
+<p>만약 subproblem에 정수 변수가 있으면, 안타깝게도 Bender’s decomposition을 적용할 수 ‘없다’. 정수 변수가 포함된 문제를 풀 경우 dual variable을 계산할 수 없어, master problem에서 complicating variable의 sensitivity 기반의 optimality cut을 생성할 수 없기 때문이다.</p>
 
-<p>이제 strategic offering을 모사하는 최적화 문제를 보자. Bi-level problem은 아래 슬라이드와 같다.</p>
+<p>(필자도 개인적으로 관심을 갖는 주제 중 하나가 ‘unit commitment 제약을 고려한’ generation expanstion planning problem 풀이라서, 처음 이 사실을 알았을 때 좀 슬펐(?)다.)</p>
 
-<p><img src="/assets/images/jalal/Lecture7_76.png" alt="clearingexample" /></p>
+<p>이러한 경우 사용할 수 있는 방법론으로 primal-Benders, Dantzig-Wolfe decomposition 등이 있다고 알려져 있으나, 매우 복잡한 방법들이다.</p>
 
-<p>Market operator에 대한 lower-level problem의 KKT condition들을 도출하고 이를 big-M approach를 써서 이진변수 기반 선형 조건들로 변환한 문제는 아래 슬라이드와 같다.</p>
-
-<p><img src="/assets/images/jalal/Lecture7_87.png" alt="clearingexample" /></p>
-
-<p>여기서 또다른 난점이 있다. 목적함수에 있는 $p_i \lambda$ 항이 nonlinear term이란 것이다. $p_i$는 발전사업자의 판매량이고 $\lambda$는 가격인데, 둘 다 변수이기 때문이다.</p>
-
-<p>Mixed-integer ‘non’linear programming problem은 어떤 상용 solver로도 쉽게 풀 수 없는, 대단히 어려운 문제이다. 따라서 이를 동치인 선형 문제로 변환할 필요가 있으며, 다행히 이 문제에서는 변환이 가능하다.</p>
-
-<p>아래 슬라이드가, $\sum_i p_i \lambda$ 항을 동치인 linear term들로 표현하는 과정이다.</p>
-
-<p><img src="/assets/images/jalal/Lecture7_95.png" alt="clearingexample" /></p>
-
-<p>Lower-level problem은 linear programming problem이므로 항상 strong duailty가 성립한다. 그러므로 step 1에서는 primal objective와 dual objective 간의 등식을 쓴다.</p>
-
-<p>Step 2에서는 KKT condition의 zero first derivative 조건들 중 $\lambda$가 있는 조건을 쓰고, 여기에 $p_i$를 곱한 후 $i$에 대해 합한다. 그러면 step 1의 식을 대입해서, $\sum_i p_i \lambda$ 항을 동치인 linear term들로 표현할 수 있다.</p>
-
-<p>최종적인 mixed-integer ‘linear’ programming problem은 아래와 같다.</p>
-
-<p><img src="/assets/images/jalal/Lecture7_96.png" alt="clearingexample" /></p>
-
-<h2 id="여러-명이-strategic-offering을-하는-경우는">‘여러 명이’ strategic offering을 하는 경우는?</h2>
-
-<p>위 내용들은 모두 ‘한 명의 발전사업자가’ strategic offering을 수행하는 경우의 MPEC problem에 대한 설명이었다.</p>
-
-<p>그러나 실제 시장에서는, strategic offering을 할 유인이 있는 발전사업자들이 여러 명일 것이다. 그리고 여러 명이 strategic offering 수행 시에도, 나름대로의 ‘균형’ 상태에서 market clearing이 이루어질 것이다.</p>
-
-<p>이러한 문제를 Equilibrium Problem with Equilbrium Constraints (EPEC) problem이라 하며, 이는 상당히 풀기 어려운 문제이다. 문제 자체의 크기도 클 뿐 아니라, 수렴이 보장되지 않고, 수렴하더라도 해당 해가 균형이 아닐 수 있는 등 여러 가지 이슈가 있다.</p>
-
-<p><img src="/assets/images/jalal/Lecture7_103.png" alt="clearingexample" /></p>
+<p>현실적으로는 unit commitment 제약들을 ‘정수만 실수로 바꾸어서’ 구성한 문제를 풀어 용량변수의 값들을 도출 후, 해당 용량변수를 고정하고 일정 기간 (24시간 또는 48시간 정도) 동안의 unit commitment problem을 rolling 방식으로 푸는 것이 그나마 가능성 있는 방법으로 보인다. (단, 이 경우 용량변수의 값이 optimistic하게 계산되므로, 혹시라도 subproblem이 infeasible problem이 될 수 있으니 주의해야 한다.)</p>
 
 <div class="notice--info">
 
@@ -584,10 +555,10 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
 04) Market clearing using a cooperative game approach <br />
 05) <a href="/jalalfive.html"> Stochastic market clearing</a> <br />
 06) <a href="/jalalsix.html"> Robust approaches for market clearing</a> <br />
-07) <b> Bilevel programming in energy systems</b> <br />
+07) <a href="/jalalseven.html"> Bilevel programming in energy systems</a> <br />
 08) <a href="/jalaleight.html"> Optimization problems with decomposable structure</a> <br />
 09) <a href="/jalalnine.html"> Benders’ decomposition: Theory</a> <br />
-10) <a href="/jalalten.html"> Benders’ decomposition: Applications</a>
+10) <b> Benders’ decomposition: Applications</b>
 </div>
 
         
@@ -634,7 +605,7 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
  -->
         <!-- 
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-08-23T00:00:00+09:00">2023-08-23</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-08-27T00:00:00+09:00">2023-08-27</time></p>
  -->
       </footer>
 
@@ -643,11 +614,11 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94%2F%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0+%EA%B0%95%EC%9D%98%3A+7%29+Bilevel+programming+in+energy+systems%20http%3A%2F%2Flocalhost%3A4000%2Fjalalseven.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94%2F%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0+%EA%B0%95%EC%9D%98%3A+10%29+Applications+of+Bender%27s+decomposition%20http%3A%2F%2Flocalhost%3A4000%2Fjalalten.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fjalalseven.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fjalalten.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjalalseven.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjalalten.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -655,12 +626,6 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
         <!-- <h4 class="page__meta-title"><span>market</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
         
 
-
-  
-
-  
-
-  
 
   
   	
@@ -673,10 +638,10 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
 
   
     
-      <a href="/jalaleight.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>에너지시스템 최적화/게임이론 강의: 8) Optimization problems with decomposable structure</a>
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
     
     
-      <a href="/jalalsix.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>에너지시스템 최적화/게임이론 강의: 6) Robust approaches for market clearing</a>
+      <a href="/jalalnine.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>에너지시스템 최적화/게임이론 강의: 9) Bender's decomposition</a>
         
   
 
@@ -692,47 +657,6 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
     <div class="page__related">
       <h2 class="page__related-title">참고</h2>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <a href="/jalalten.html" rel="permalink"><img src="/assets/images/jalal/Lecture10a_1.png" alt=""></a>
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/jalalten.html" rel="permalink">에너지시스템 최적화/게임이론 강의: 10) Applications of Bender’s decomposition
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-08-27T00:00:00+09:00">2023-08-27</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 10강을 필자가 요약한 내용이다.
-</p>
-  </article>
-</div>
-
         
           
 
@@ -811,6 +735,47 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br 
 
 
     <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 8강을 필자가 요약한 내용이다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/jalalseven.html" rel="permalink"><img src="/assets/images/jalal/Lecture7_1.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/jalalseven.html" rel="permalink">에너지시스템 최적화/게임이론 강의: 7) Bilevel programming in energy systems
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-08-23T00:00:00+09:00">2023-08-23</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 7강을 필자가 요약한 내용이다.
 </p>
   </article>
 </div>
