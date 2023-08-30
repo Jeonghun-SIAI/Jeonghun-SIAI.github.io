@@ -36,7 +36,7 @@ var store = [{
         "teaser": "/assets/images/linprogtwo/system_batt.png"
       },{
         "title": "선형계획법 기반 분산에너지시스템 최적화 - 3) 배터리의 충/방전 스케줄 결정: Python 코드 및 결과",
-        "excerpt":"이번 포스팅에서는, 건물 내 배터리 최적 스케줄 도출 문제를 선형계획법 (Linear Programming) 을 이용해서 풀어본다. Python에서 무료로 쓸 수 있는 cvxopt 패키지의 glpk 모듈로 문제를 풀 것이며, 문제를 코딩하는 방법을 상세히 설명한다. cvxopt는 무료인 만큼 성능은 떨어져 계산 시간이 많이 필요하지만, 그래도 적절한 가정들 하에 간소화된 에너지 최적화 문제들은 푸는...","categories": ["optimalsystem"],
+        "excerpt":"이번 포스팅에서는, 건물 내 배터리 최적 스케줄 도출 문제를 선형계획법 (Linear Programming) 을 이용해서 풀어본다. Python에서 무료로 쓸 수 있는 cvxopt 패키지의 glpk 모듈로 문제를 풀 것이며, 문제를 코딩하는 방법을 상세히 설명한다. 등호 제약조건 코딩 코딩 시, 각 제약조건들을 개별적으로 입력하는 것이 아니라 등호 제약조건들을 하나의 큰 행렬로 통합해야 하고,...","categories": ["optimalsystem"],
         "tags": ["선형계획법","부하패턴","경제성분석","Python"],
         "url": "/linprogthree.html",
         "teaser": "/assets/images/linprogthree/result_24hour.png"
@@ -222,7 +222,7 @@ var store = [{
         "teaser": "/assets/images/jalal/Lecture8_1.png"
       },{
         "title": "에너지시스템 최적화/게임이론 강의: 9) Bender's decomposition",
-        "excerpt":"이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 9강을 필자가 요약한 내용이다. (Course slides 링크) Complicating variable의 값을 찾는 원리 Bender’s decomposition은 complicating ‘variable’이 있을 때 사용하는 decomposition method이다. Complicating variable이 포함된 큰 문제를 여러 subproblem들로 쪼개기 위해서는,...","categories": ["market"],
+        "excerpt":"이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 9강을 필자가 요약한 내용이다. (Course slides 링크) Complicating variable의 값을 찾는 원리 Bender’s decomposition은, 모든 소문제에 공통적으로 포함되는 ‘변수’인 complicating ‘variable’이 있을 때 사용하는 decomposition method이다. Complicating variable이 포함된 큰...","categories": ["market"],
         "tags": ["최적화","게임이론","에너지시스템"],
         "url": "/jalalnine.html",
         "teaser": "/assets/images/jalal/Lecture9_1.png"

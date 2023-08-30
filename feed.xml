@@ -5,8 +5,8 @@
     <description>공학박사 과정에서 쌓은 에너지 시스템 전문성에 데이터 사이언스 석사를 더하며 쌓은 계산통계학 활용 역량을 결합하여, 데이터 기반의 에너지 시스템/ 정책/ 시장 관련 솔루션 도출을 올바르게 할 수 있도록 돕습니다.</description>
     <link>https://song4energyndata.github.io/</link>
     <atom:link href="https://song4energyndata.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 27 Aug 2023 21:23:27 +0900</pubDate>
-    <lastBuildDate>Sun, 27 Aug 2023 21:23:27 +0900</lastBuildDate>
+    <pubDate>Wed, 30 Aug 2023 16:04:18 +0900</pubDate>
+    <lastBuildDate>Wed, 30 Aug 2023 16:04:18 +0900</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
@@ -71,7 +71,7 @@
 
 &lt;p&gt;에너지시스템 최적화 문제에는 정수가 많이 등장한다. 설비규모 변수가 용량 자체가 아닌 기기 숫자일 수 있고 (풍력터빈이 몇 대이냐 등), 각 시간별 subproblem을 기동/정지 여부를 나타내는 이진변수를 포함하는 unit commitment 문제로 고려해야 할 수도 있다.&lt;/p&gt;
 
-&lt;p&gt;만약 Master problem에는 정수 변수가 있지만 subproblem들에는 정수 변수가 없을 경우, Bender’s decomposition을 적용할 수는 있다. 단, 이 경우 golbal optimum으로의 수렴이 보장되지 않음에 주의한다.&lt;/p&gt;
+&lt;p&gt;만약 Master problem에는 정수 변수가 있지만 subproblem들에는 정수 변수가 없을 경우, Bender’s decomposition을 적용할 수는 있다. 단, 이 경우 global optimum으로의 수렴이 보장되지 않음에 주의한다.&lt;/p&gt;
 
 &lt;p&gt;만약 subproblem에 정수 변수가 있으면, 안타깝게도 Bender’s decomposition을 적용할 수 ‘없다’. 정수 변수가 포함된 문제를 풀 경우 dual variable을 계산할 수 없어, master problem에서 complicating variable의 sensitivity 기반의 optimality cut을 생성할 수 없기 때문이다.&lt;/p&gt;
 
@@ -126,7 +126,7 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 
 &lt;h2 id=&quot;complicating-variable의-값을-찾는-원리&quot;&gt;Complicating variable의 값을 찾는 원리&lt;/h2&gt;
 
-&lt;p&gt;Bender’s decomposition은 complicating ‘variable’이 있을 때 사용하는 decomposition method이다.&lt;/p&gt;
+&lt;p&gt;Bender’s decomposition은, 모든 소문제에 공통적으로 포함되는 ‘변수’인 complicating ‘variable’이 있을 때 사용하는 decomposition method이다.&lt;/p&gt;
 
 &lt;p&gt;Complicating variable이 포함된 큰 문제를 여러 subproblem들로 쪼개기 위해서는, complicating variable의 값을 고정해야 한다. 그러면 그 고정값을 얼마로 해야 될까?&lt;/p&gt;
 
@@ -179,7 +179,7 @@ $x$가 커서 목적함수의 값이 큰 상황은 ‘발전설비를 필요 이
 
 &lt;p&gt;$\pi^{(k)}$, $\mu^{(k)}$, $\sigma^{(k)}$, $\gamma^{(k)}$ 는 $k$번째 iteration에서의 subproblem의 dual variable의 값들이다. 이 때 $k=1,2,\cdots,i-1$, 즉 직전 iteration까지의 ‘모든 iteration 각각에 대한’ 값들을 전부 모은 것임에 주의한다. 즉 $\alpha^{(i)}$에 대한 부등호 제약조건이 $i-1$개가 있는 것이다. 그리고 첨자 $(i)$만이 변수이고 첨자 $(k)$는 전부 parameter들임에 주의한다.&lt;/p&gt;
 
-&lt;p&gt;$\alpha^{(i)}$에 대한 부등호 제약의 우변은 subproblem의 dual objective function이다. 실제로 $y$에 대한 subproblem의 Lagrangian을 쓰고 $y$ term들을 제거하면 ($y$ term들을 제거하지 않으면 unbounded problem이 됨), dual objective를 우변과 같이 얻는다. 그리고 $alpha^{(i)}$는 최소화 대상이므로, $alpha^{(i)}$는 $i-1$개의 dual objective 중 적어도 하나와 같은 값이 된다.&lt;/p&gt;
+&lt;p&gt;$\alpha^{(i)}$에 대한 부등호 제약의 우변은 subproblem의 dual objective function이다. 실제로 $y$에 대한 subproblem의 Lagrangian을 쓰고 $y$ term들을 제거하면 ($y$ term들을 제거하지 않으면 unbounded problem이 됨), dual objective를 우변과 같이 얻는다. 그리고 $\alpha^{(i)}$는 최소화 대상이므로, $\alpha^{(i)}$는 $i-1$개의 dual objective 중 적어도 하나와 같은 값이 된다.&lt;/p&gt;
 
 &lt;p&gt;Duality theorem에 의해 primal problem의 목적함수 (여기서는 $-y$)는 dual problem의 목적함수 ($\alpha^{(i)}$에 대한 부등호 제약의 우변) 보다 크거나 같다. 그러므로 subproblem을 풀어 얻은 subproblem의 목적함수의 값은 $\alpha^{(i)}$보다 크거나 같다.&lt;/p&gt;
 
