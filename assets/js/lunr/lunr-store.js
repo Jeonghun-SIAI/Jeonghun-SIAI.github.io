@@ -232,4 +232,16 @@ var store = [{
         "tags": ["최적화","게임이론","에너지시스템"],
         "url": "/jalalten.html",
         "teaser": "/assets/images/jalal/Lecture10a_1.png"
+      },{
+        "title": "에너지시스템 최적화/게임이론 강의: 11) (Augmented) Lagrangian relaxation",
+        "excerpt":"이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 11강을 필자가 요약한 내용이다. (Course slides 링크) Complicating constraint가 있을 경우의 Lagrangian Relaxation (LR) 에너지시스템 최적화 문제에서는 수요-공급 일치 조건, ramping limit 조건, 두 지역을 잇는 송전선 관련 조건 등이,...","categories": ["market"],
+        "tags": ["최적화","게임이론","에너지시스템"],
+        "url": "/jalaleleven.html",
+        "teaser": "/assets/images/jalal/Lecture11_1.png"
+      },{
+        "title": "에너지시스템 최적화/게임이론 강의: 12) Variants of ADMM and applications",
+        "excerpt":"이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 12강을 필자가 요약한 내용이다. (Course slides 링크) Economic dispatch 여러 대의 발전기로 시간별 수요를 만족시키는 최소비용의 스케줄을 구하는 문제에서는, 각 수요-공급 일치 조건이 complicating constraint이다. 해당 제약조건에 모든 발전기의 출력...","categories": ["market"],
+        "tags": ["최적화","게임이론","에너지시스템"],
+        "url": "/jalaltwelve.html",
+        "teaser": "/assets/images/jalal/Lecture12_1.png"
       }]

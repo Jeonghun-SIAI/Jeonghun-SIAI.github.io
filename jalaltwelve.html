@@ -19,8 +19,8 @@
 </script>
   <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거 | 에너지엔데이터연구소</title>
-<meta name="description" content="이전 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.">
+<!-- begin _includes/seo.html --><title>에너지시스템 최적화/게임이론 강의: 12) Variants of ADMM and applications | 에너지엔데이터연구소</title>
+<meta name="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 12강을 필자가 요약한 내용이다.">
 
 
   <meta name="author" content="Jeonghun Song">
@@ -32,32 +32,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="에너지엔데이터연구소">
-<meta property="og:title" content="건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거">
-<meta property="og:url" content="https://song4energyndata.github.io/monthlyenergythree.html">
+<meta property="og:title" content="에너지시스템 최적화/게임이론 강의: 12) Variants of ADMM and applications">
+<meta property="og:url" content="https://song4energyndata.github.io/jalaltwelve.html">
 
 
-  <meta property="og:description" content="이전 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.">
-
-
-
-  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/monthlyenergythree/outliers.png">
+  <meta property="og:description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 12강을 필자가 요약한 내용이다.">
 
 
 
-
-
-  <meta property="article:published_time" content="2023-03-26T00:00:00+09:00">
+  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/jalal/Lecture12_1.png">
 
 
 
 
 
-  
+  <meta property="article:published_time" content="2023-09-03T00:00:00+09:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://song4energyndata.github.io/monthlyenergythree.html">
+
+<link rel="canonical" href="https://song4energyndata.github.io/jalaltwelve.html">
 
 
 
@@ -451,240 +451,19 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거">
-    <meta itemprop="description" content="이전 포스팅에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.">
-    <meta itemprop="datePublished" content="2023-03-26T00:00:00+09:00">
+    <meta itemprop="headline" content="에너지시스템 최적화/게임이론 강의: 12) Variants of ADMM and applications">
+    <meta itemprop="description" content="이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 12강을 필자가 요약한 내용이다.">
+    <meta itemprop="datePublished" content="2023-09-03T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://song4energyndata.github.io/monthlyenergythree.html" class="u-url" itemprop="url">건축물 별 월별 에너지 사용량 데이터셋 - 3) 월별 사용량 크기가 이상한 data point 제거
+            <a href="https://song4energyndata.github.io/jalaltwelve.html" class="u-url" itemprop="url">에너지시스템 최적화/게임이론 강의: 12) Variants of ADMM and applications
 </a>
           </h1>
           
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-03-26T00:00:00+09:00">2023-03-26</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-        </header>
-      
-
-      <section class="page__content e-content" itemprop="text">
-        
-          <aside class="sidebar__right sticky">
-            <nav class="toc">
-              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
-              <ul class="toc__menu"><li><a href="#에너지-사용량-크기-측면에서의-outlier">에너지 사용량 크기 측면에서의 outlier</a></li><li><a href="#outlier-판별-방법">Outlier 판별 방법</a></li></ul>
- <!-- 우측 TOC -->
-            </nav>
-          </aside>
-        
-        <p><a href="/monthlyenergytwo.html">이전 포스팅</a>에서는 건물 월별 에너지 사용량의 ‘추이’가 이상한 data point를 판별하는 방법을 설명했다. 이번 포스팅에서는 월별 에너지 사용량의 ‘크기(magnitude)’가 이상한 data point를 판별하는 방법을 설명한다.</p>
-
-<p><br /></p>
-
-<h2 id="에너지-사용량-크기-측면에서의-outlier">에너지 사용량 크기 측면에서의 outlier</h2>
-<p>상식적으로, 같은 용도의 건물이라면 크기가 큰 건물일수록 에너지 사용량이 큰 경향이 있을 것이다. 이를테면 서울 내 업무용 건물들의 1월 전기 사용량을 연면적 (모든 층의 바닥면적의 합, 단 주차장이나 공용시설 등은 제외) 에 대해 scatter plot하면 아래 그림과 같다.</p>
-
-<p><img src="/assets/images/monthlyenergythree/outliers.png" alt="outliers" class="align-center" width="70%" />
-<em>x축이 연면적, y축이 1월 전기 사용량. 위쪽에 outlier들이 보임 (붉은 점들).</em></p>
-
-<p>다소 데이터의 흩어짐(분산)이 크긴 하나, 어쨌든 연면적이 클수록 ‘평균적으로는’ 전기 사용량이 커지는 경향이 있다.</p>
-
-<p><br />
-그런데, 위 그림의 붉은 점들은 딱 봐도 ‘크기가 이상한’ data point, 소위 말해서 ‘outlier’이다. 건물 연면적을 고려했을 때 전기 사용량의 값이 지나치게 크다.</p>
-
-<p>이는 측정/기재 오류일 수도 있고, 어쩌면 정말로 저만큼 많은 전기를 쓰는 것일 수도 있다. 그러나 만에 하나 정말로 저렇게 많은 전기를 사용한다고 하더라도, 그런 건물은 일반적이지 않으므로 따로 떼어서 별도의 모델링을 하는 것이 맞다.</p>
-
-<p>즉, ‘일반적인’ 건물들에 대한 통계적 연구 수행을 위해서는 위 outlier들은 제거해야 한다.</p>
-
-<p><br /></p>
-<h2 id="outlier-판별-방법">Outlier 판별 방법</h2>
-<p>그럼 outlier는 어떻게 판별하나? 데이터의 size가 그렇게 크지 않고 설명변수가 하나라면, 그냥 그래프를 그려서 눈으로 보고 제거할 수도 있을 것이다. 그러나 데이터 size도 커지고 설명변수도 둘 이상이 되면, 눈으로 보기 매우 힘들다 (이를 테면 반응변수를 에너지 사용량으로 하는 회귀모델에 대해, 설명변수가 건물 연면적 뿐 아니라 건물 층수, 사용연수, 재질 등 여러 가지가 될 수 있다.</p>
-
-<p>그러므로 시각화를 필요로 하지 않으면서 outlier를 판별할 수 있는, 이전 포스팅에서처럼 지표(metric)에 기반해서 판별하는 방법이 필요하다.</p>
-
-<p><br />
-여기서 생각해 볼 수 있는 것은, 위 그림에서 outlier들이 있을 때와 없을 때 각 경우에 대해 회귀분석을 했을 때의 직선의 기울기이다. 위 그림 기준으로는 빨간 점들이 없을 때 계산된 직선의 기울기에 비해, 빨간 점들이 있을 때 계산된 직선의 기울기가 더 가파를 것이다. 즉 outlier들이 있을 때 구한 회귀계수와 없을 때 구한 회귀계수 간에 유의미한 차이가 있을 것이다.</p>
-
-<p>반대로, 검정 점들 중 몇 개 정도를 없애고 회귀계수를 계산했다고 하자. 그 결과는 아마, 모든 점들이 있을 때의 회귀계수와 별 차이가 없을 것이다.</p>
-
-<p>그렇다면, 각 data point $i$에 대해, $i$가 포함되어 있을 때 구한 회귀계수와 $i$가 제외될 때 구한 회귀계수 간의 표준화된 차이를 모든 data point들 각각에 대해 구한다면, 그 차이가 큰 data point가 outlier일 것임을 짐작할 수 있다.</p>
-
-<p>이러한 ‘특정 점 $i$의 유무에 따른 회귀계수 간 표준화된 차이’를 Cook’s Distance라 한다. 
-$m$월의 전기 사용량을 반응변수로 하는 회귀모델에 대해, Cook’s Distance의 수식은 아래와 같다.</p>
-
-<p>\begin{align} 
-D_{i}^{elec,m}=\frac{\left({\hat{\beta}}^{elec,m}-{\hat{\beta}}_{-i}^{elec,m}\right)^{\top}X^{\top}X\left({\hat{\beta}}^{elec,m}-{\hat{\beta}}_{-i}^{elec,m}\right)}{k \cdot MSR^{elec,m}} 
-\notag
-\end{align}</p>
-
-<p>$\hat{\beta}$는 data point $i$를 포함해 모든 data point들이 있을 때 구한 회귀계수이고, $\hat{\beta}_{-i}$는 data point $i$만을 dataset으로부터 뺐을 때 구한 회귀계수이다. $X$는 설명변수 행렬로, $i$번째 행이 $i$번째 data point에 대한 설명변수들로 구성된 행벡터이다 (여기서 설명변수는 연면적, 층수, 사용연도, 재질, …, 그리고 상수항 표현을 위한 1). 분모의 $k$는 설명변수 개수이고, $MSR$은 잔차의 평균제곱합이다.</p>
-
-<p><br />
-이 때, 혹자는 계산시간 관련해서 우려를 표할 수 있다. 만약 data point가 수십만 개면, Cook’s Distance들을 계산하기 위해 수십만 번의 회귀분석을 계산해야 되는 것이 아닐까? 그러면 시간이 너무 오래 걸리지 않을까?</p>
-
-<p>다행히도 그렇지 않다. 단 한 번의 회귀분석과 한 번의 행렬 연산으로, 모든 data point 각각에 대한 Cook’s Distance들을 계산할 수 있다. Cook’s Distance의 다른 식은 아래와 같다.</p>
-
-<p>\begin{align} 
-D_{i}^{elec,m}=\frac{\hat{\epsilon}_{i}^{elec,m}h_{ii}}{k \cdot MSR^{elec,m}\left(1-h_{ii}\right)^2}
-\notag
-\end{align}</p>
-
-<p>여기서 $\hat{\epsilon}_{i}^{elec,m}$는 $i$번째 잔차, $h_{ii}$는 hat matrix $X\left(X^{\top} X \right)^{-1}X^{\top}$의 $i$번째 대각성분이다.</p>
-
-<p>(역시 자세한 내용은 <a href="https://product.kyobobook.co.kr/detail/S000002582053">Montgomery의 Introduction to Linear Regression</a>의 7단원을 참고하길 바란다.)</p>
-
-<p><br />
-필자가 알기로는 Cook’s D에는 어떤 rule of thumb로써의 수치가 있지는 않은 듯 하다. 사전에 정의한 갯수만큼의 데이터를, Cook’s D가 큰 순서대로 제거하는 것이 현실적인 방법으로 보인다.</p>
-
-<p>단, 주의할 점은, 한 번의 Cook’s D 계산 후 data point 여러 개를 제거하면 안 된다. Cook’s D가 가장 큰 ‘하나의’ point만 제거하고, 다시 모든 point Cook’s D를 계산해서 또 하나를 제거하고 다시 계산하는 과정을 반복해야 한다.</p>
-
-<p>이는 Cook’s D 자체가 ‘하나의’ data point의 유무 간 차이에 대해 정의되기 때문이다.</p>
-
-<p>만약 어떤 dataset에 대해 Cook’s D를 계산했더니 point $i$에 대해 Cook’s D가 가장 크고 $j$에 대해 Cook’s D가 두 번째로 크다고 하자. 이 때 point $j$에 대한 Cook’s D는, point $i$가 dataset에 있다는 가정 하에 계산된다. 그런데 우리는 outlier를 제거해나가야 하므로, Cook’s D가 가장 큰 outlier $i$가 dataset에 있다는 가정 하에 나머지 point들에 대한 outlier 여부를 판단하는 것은 부자연스럽다.</p>
-
-<div class="notice--info">
-
-건축물 별 월별 에너지 사용량 데이터셋<br /><br />
-
-1) <a href="/monthlyenergyone.html">모든 월에 대한 통합 및 표제부와의 결합 후 SQLite DB화</a><br />
-2) <a href="/monthlyenergytwo.html">월별 사용 추이가 이상한 data point 제거</a><br />
-3) <b>월별 사용량 크기가 이상한 data point 제거</b><br />
-4) <a href="/monthlyenergyfour.html">결측치 추정: 조건부 다변량정규분포를 이용해서</a>
-
-</div>
-
-        
-      </section>
-
-      <footer class="page__meta">
-        
-        
-  
-
-
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
-    <span itemprop="keywords">
-    
-      <a href="/tags/#%EA%B1%B4%EB%AC%BC-%EC%97%90%EB%84%88%EC%A7%80-%EB%8D%B0%EC%9D%B4%ED%84%B0" class="page__taxonomy-item p-category" rel="tag">건물 에너지 데이터</a><span class="sep">, </span>
-    
-      <a href="/tags/#%ED%9A%8C%EA%B7%80%EB%B6%84%EC%84%9D" class="page__taxonomy-item p-category" rel="tag">회귀분석</a>
-    
-    </span>
-  </p>
-
-
-
-<!-- 
-  
-
-
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
-    <span itemprop="keywords">
-    
-      <a href="/categories/#dataset" class="page__taxonomy-item p-category" rel="tag">dataset</a>
-    
-    </span>
-  </p>
-
- -->
-        <!-- 
-
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-03-26T00:00:00+09:00">2023-03-26</time></p>
- -->
-      </footer>
-
-      <section class="page__share">
-  
-    <h4 class="page__share-title">공유하기</h4>
-  
-
-  <!-- <a href="https://twitter.com/intent/tweet?text=%EA%B1%B4%EC%B6%95%EB%AC%BC+%EB%B3%84+%EC%9B%94%EB%B3%84+%EC%97%90%EB%84%88%EC%A7%80+%EC%82%AC%EC%9A%A9%EB%9F%89+%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B+-+3%29+%EC%9B%94%EB%B3%84+%EC%82%AC%EC%9A%A9%EB%9F%89+%ED%81%AC%EA%B8%B0%EA%B0%80+%EC%9D%B4%EC%83%81%ED%95%9C+data+point+%EC%A0%9C%EA%B1%B0%20http%3A%2F%2Flocalhost%3A4000%2Fmonthlyenergythree.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
-
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmonthlyenergythree.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
-
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fmonthlyenergythree.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
-</section>
-
-
-      <p></p>
-        <!-- <h4 class="page__meta-title"><span>dataset</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
-        
-
-
-  
-
-  
-  	
-  	
-  	
-  	
-  	
-
-<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
-
-  
-    
-      <a href="/monthlyenergyfour.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>건축물 별 월별 에너지 사용량 데이터셋 - 4) 결측치 추정: 조건부 다변량정규분포를 이용해서</a>
-    
-    
-      <a href="/monthlyenergytwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>건축물 별 월별 에너지 사용량 데이터셋 - 2) 월별 사용 추이가 이상한 data point 제거</a>
-        
-  
-
-</nav>
-      <p></p>
-    </div>
-
-    
-  </article>
-
-  
-  <!-- 
-    <div class="page__related">
-      <h2 class="page__related-title">참고</h2>
-      <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <a href="/jalaltwelve.html" rel="permalink"><img src="/assets/images/jalal/Lecture12_1.png" alt=""></a>
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/jalaltwelve.html" rel="permalink">에너지시스템 최적화/게임이론 강의: 12) Variants of ADMM and applications
-</a>
-      
-    </h2>
-    
 
   <p class="page__meta">
     
@@ -702,11 +481,223 @@ D_{i}^{elec,m}=\frac{\hat{\epsilon}_{i}^{elec,m}h_{ii}}{k \cdot MSR^{elec,m}\lef
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 12강을 필자가 요약한 내용이다.
-</p>
-  </article>
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#economic-dispatch">Economic dispatch</a></li><li><a href="#market-clearing-with-linear-offers">Market clearing (with linear offers)</a></li><li><a href="#privacy-이슈를-고려한-exchange-admm">Privacy 이슈를 고려한 Exchange ADMM</a></li><li><a href="#consensus-admm">Consensus ADMM</a></li></ul>
+ <!-- 우측 TOC -->
+            </nav>
+          </aside>
+        
+        <p>이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 12강을 필자가 요약한 내용이다.</p>
+
+<!-- Courtesy of embedresponsively.com -->
+
+<div class="responsive-video-container">
+    <iframe src="https://www.youtube-nocookie.com/embed/MWPJAl84Sac" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+  </div>
+
+<p>(<a href="https://www.jalalkazempour.com/teaching">Course slides 링크</a>)</p>
+
+<h2 id="economic-dispatch">Economic dispatch</h2>
+
+<p>여러 대의 발전기로 시간별 수요를 만족시키는 최소비용의 스케줄을 구하는 문제에서는, 각 수요-공급 일치 조건이 complicating constraint이다. 해당 제약조건에 모든 발전기의 출력 항들이 포함되기 때문으로, 해당 제약조건을 relax하면 각 발전기 별 subproblem으로 나눌 수 있다.</p>
+
+<p><img src="/assets/images/jalal/Lecture12_25.png" alt="clearingexample" /></p>
+
+<p>위 예제에서는 목적함수가 quadratic function이므로, Lagrangian Relaxation (LR) 을 적용할 수 있다.</p>
+
+<p>Complicating constraint인 수요-공급 일치 제약에 dual variable $\lambda$을 곱한 항을 목적함수에 추가하고, dual variable의 값을 $\bar{\lambda}$ 로 고정하면, 각 발전기 별 subproblem으로 나눌 수 있다.</p>
+
+<p><img src="/assets/images/jalal/Lecture12_27.png" alt="clearingexample" /></p>
+
+<p>그리고 각 발전기 별 subproblem을 풀어 $v$번째 iteration 기준 $p_g^{(v)}$를 구하고, 이를 통해 아래와 같이 $\bar{\lambda}^{(v)}$를 $\bar{\lambda}^{(v+1)}$로 업데이트한다.</p>
+
+<p><img src="/assets/images/jalal/Lecture12_35.png" alt="clearingexample" /></p>
+
+<p>이 때 $\bar{\lambda}^{(v)}$는 수요-공급 일치 제약에 대한 dual variable이므로 ‘가격’이기도 하다. 여기서는 각 발전기 별로 자신의 이익을 최대화하는 발전량을 설정하고, 이를 모두 취합한 market operator가 가격을 업데이트한 후 다시 발전기들에게 통보한다. 그리고 각 발전기는 수정된 가격에 대해 발전량을 재설정하고, market operator는 이를 다시 취합해 가격을 업데이트하는 과정을 수렴할 때까지 반복한다.</p>
+
+<p>이런 식으로 가격을 iterative하게 결정하는 시장을 Walrasian auction이라고 한다.</p>
+
+<p>이러한 ‘distributed’ technique 기반으로 가격을 결정하는 방법은, 시장에 여러 가지 externalities가 추가되어 시장 균형 문제가 더 이상 동치인 최적화 문제를 갖지 않는 경우에 특히 유용한 것으로 알려져 있다.</p>
+
+<h2 id="market-clearing-with-linear-offers">Market clearing (with linear offers)</h2>
+
+<p>Market clearing problem에서도 수요-공급 일치 조건이 complicating constraint이다.</p>
+
+<p><img src="/assets/images/jalal/Lecture12_42.png" alt="clearingexample" /></p>
+
+<p>만약 위 예제처럼 목적함수가 quadratic이 아니라 linear function이면, ‘augmented’ LR을 사용해야 한다. 그러므로 목적함수에 complicating constraint의 제곱항을 추가한다 (regulization coefficient $\gamma/2$를 곱해서).</p>
+
+<p><img src="/assets/images/jalal/Lecture12_45.png" alt="clearingexample" /></p>
+
+<p>단, 이 경우 $\lambda$의 값을 $\bar{\lambda}$로 고정해도 각 발전기 별 subproblem으로 바로 나눌 수 없다. Complicating constraint의 제곱항 내에 변수들 간 product term이 있기 때문이다. 그러므로 각 발전기에 대해, 나머지 발전기들의 발전량을 고정하여 구성한 문제를 푼다 (ADMM). 각 발전기 별 최적의 발전량을 기반으로, $\bar{\lambda}$가 업데이트된다.</p>
+
+<p><img src="/assets/images/jalal/Lecture12_50.png" alt="clearingexample" /></p>
+
+<h2 id="privacy-이슈를-고려한-exchange-admm">Privacy 이슈를 고려한 Exchange ADMM</h2>
+
+<p>위 슬라이드의 ADMM에는 한 가지 ‘실질적인’ 문제가 있다. 발전기 1번의 ($v$번째 iteration에서의) 발전량을 계산하려면 발전기 2와 발전기 3의 ($v-1$번째 iteration에서의) 발전량 정보가 발전기 1에 전달되어야 하는데, 이는 ‘privacy 침해’로 볼 수 있기 때문이다.</p>
+
+<p>그러나 문제의 식을 아래 슬라이드와 같이 ‘모든 발전기들의 발전량들의 평균’을 도입해 변형하면, 이러한 ‘privacy 침해’ 문제를 완화할 수 있다.</p>
+
+<p><img src="/assets/images/jalal/Lecture12_59.png" alt="clearingexample" /></p>
+
+<p>각 발전기는 $v-1$번째 iteration에서의 자기 자신의 발전량 $x_i^{(v-1)}$ 및 ‘모든 발전기들의 발전량들의 평균’ $\bar{x}^{(v-1)}$ 을 알면, $x_i^{(v)}$를 계산할 수 있다. 즉 각자의 발전량 정보는 market operator에게는 전달되지만, 다른 개별 발전기들에게는 전달되지 않기 때문에 privacy 침해 문제가 완화된다. 이를 ‘exchange’ ADMM이라 한다.</p>
+
+<h2 id="consensus-admm">Consensus ADMM</h2>
+
+<p>모든 subproblem들에 공통으로 포함된 complicating variable이 있을 경우 이를 Bender’s decomposition으로 푸는 대신, ADMM 방식으로 풀 수도 있다.</p>
+
+<p>아래 슬라이드에서는, 원래 문제에서의 complicating variable $x$를 각 subproblem $i$ 별로 $x_i$라는 변수로 두고, 대신 $x_i$가 공통의 값 $z$와 같다는 제약을 추가했다. 이 문제에서 $z$는 parameter가 아닌 변수임에 주의한다.</p>
+
+<p><img src="/assets/images/jalal/Lecture12_67.png" alt="clearingexample" /></p>
+
+<p>$x_i=z$는 complicating constraint이다. 그러므로, 각 subproblem별 목적함수에 제약 $x_i-z=0$의 좌변에 dual variable을 곱한 항과 좌변의 제곱에 regularization coefficient를 곱한 항을 추가 후 dual variable과 $z$의 값을 고정해 ADMM 스타일의 문제를 아래와 같이 구성할 수 있다.</p>
+
+<p><img src="/assets/images/jalal/Lecture12_71.png" alt="clearingexample" /></p>
+
+<p>각각의 $x_i$가 전부 특정 값 $z$로 같아야 한다는, 즉 ‘consensus를 이뤄야 한다는’ 제약이 있어, 이를 consensus ADMM이라 한다.</p>
+
+<p>여기서 난점은, $\bar{\lambda}$ 뿐 아니라 complicating variable이 최종적으로 가져야 할 값 $z$도 업데이트해야 한다는 것이다.</p>
+
+<p>다행히도, $z$를 업데이트하는 문제는 아래와 같이 analytic solution을 가진다.</p>
+
+<p><img src="/assets/images/jalal/Lecture12_74.png" alt="clearingexample" /></p>
+
+<p>$N^{-1} \sum_{i=1}^N x_i^{(v)}$를 $\bar{x}^{(v)}$로 쓰면, 아래와 같다.</p>
+
+<p><img src="/assets/images/jalal/Lecture12_78.png" alt="clearingexample" /></p>
+
+<p>이 식들을 적절히 결합하면, 최종적으로 $z$가 사라진 아래와 같은 알고리즘을 얻는다.</p>
+
+<p><img src="/assets/images/jalal/Lecture12_84.png" alt="clearingexample" /></p>
+
+<p>즉 $v$번째 iteration에서 각 $x_i^{(v)}$는, $v-1$번째 iteration에서의 $x_i^{(v-1)}$들의 평균 $\bar{x}^{(v-1)}$ 으로부터 멀어질수록 penalty를 가하는 목적함수에 의해 결정된다. 이 penalty가 zero가 되는 시점은 모든 $x_i^{(v)}$들이 같아질 때, 즉 consensus를 이룰 때이다. (이러한 방법을 progressive hedging이라고도 한다.)</p>
+
+<p>Consensus ADMM은 stochastic market clearing에서 하루전 시장에서의 급전변수들을 결정할 때, 전력 네트워크에 여러 개의 node들이 있을 때 각 node 개별의 ‘distributed optimal power flow’ 문제들로 나눌 때 쓸 수 있다.</p>
+
+<p><img src="/assets/images/jalal/Lecture12_91.png" alt="clearingexample" /></p>
+
+<div class="notice--info">
+
+Advanced Optimization and Game Theory for Energy Systems 강의 요약<br /><br />
+
+01) <a href="/jalalone.html"> Market clearing as an optimization problem</a> <br />
+02) <a href="/jalaltwo.html"> Market clearing as an equilibrium problem</a> <br />
+03) <a href="/jalalthree.html"> Desirable properties of market-clearing mechanisms</a> <br />
+04) Market clearing using a cooperative game approach <br />
+05) <a href="/jalalfive.html"> Stochastic market clearing</a> <br />
+06) <a href="/jalalsix.html"> Robust approaches for market clearing</a> <br />
+07) <a href="/jalalseven.html"> Bilevel programming in energy systems</a> <br />
+08) <a href="/jalalgeight.html"> Optimization problems with decomposable structure</a> <br />
+09) <a href="/jalalgnine.html"> Benders’ decomposition: Theory</a> <br />
+10) <a href="/jalalten.html"> Benders’ decomposition: Applications</a> <br />
+11) <a href="/jalaleleven.html"> Augmented Lagrangian relaxation</a> <br />
+12) <b> Variants of ADMM and applications</b>
 </div>
 
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0" class="page__taxonomy-item p-category" rel="tag">게임이론</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C" class="page__taxonomy-item p-category" rel="tag">에너지시스템</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%B5%9C%EC%A0%81%ED%99%94" class="page__taxonomy-item p-category" rel="tag">최적화</a>
+    
+    </span>
+  </p>
+
+
+
+<!-- 
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#market" class="page__taxonomy-item p-category" rel="tag">market</a>
+    
+    </span>
+  </p>
+
+ -->
+        <!-- 
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-09-03T00:00:00+09:00">2023-09-03</time></p>
+ -->
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EC%B5%9C%EC%A0%81%ED%99%94%2F%EA%B2%8C%EC%9E%84%EC%9D%B4%EB%A1%A0+%EA%B0%95%EC%9D%98%3A+12%29+Variants+of+ADMM+and+applications%20http%3A%2F%2Flocalhost%3A4000%2Fjalaltwelve.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fjalaltwelve.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjalaltwelve.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      <p></p>
+        <!-- <h4 class="page__meta-title"><span>market</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
+        
+
+
+  
+  	
+  	
+  	
+  	
+  	
+
+<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
+
+  
+    
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
+    
+    
+      <a href="/jalaleleven.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>에너지시스템 최적화/게임이론 강의: 11) (Augmented) Lagrangian relaxation</a>
+        
+  
+
+</nav>
+      <p></p>
+    </div>
+
+    
+  </article>
+
+  
+  <!-- 
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
         
           
 
@@ -826,6 +817,47 @@ D_{i}^{elec,m}=\frac{\hat{\epsilon}_{i}^{elec,m}h_{ii}}{k \cdot MSR^{elec,m}\lef
 
 
     <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 9강을 필자가 요약한 내용이다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/jalaleight.html" rel="permalink"><img src="/assets/images/jalal/Lecture8_1.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/jalaleight.html" rel="permalink">에너지시스템 최적화/게임이론 강의: 8) Optimization problems with decomposable structure
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-08-25T00:00:00+09:00">2023-08-25</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 8강을 필자가 요약한 내용이다.
 </p>
   </article>
 </div>

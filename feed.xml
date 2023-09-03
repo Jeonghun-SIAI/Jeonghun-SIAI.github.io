@@ -5,9 +5,234 @@
     <description>공학박사 과정에서 쌓은 에너지 시스템 전문성에 데이터 사이언스 석사를 더하며 쌓은 계산통계학 활용 역량을 결합하여, 데이터 기반의 에너지 시스템/ 정책/ 시장 관련 솔루션 도출을 올바르게 할 수 있도록 돕습니다.</description>
     <link>https://song4energyndata.github.io/</link>
     <atom:link href="https://song4energyndata.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 30 Aug 2023 16:04:18 +0900</pubDate>
-    <lastBuildDate>Wed, 30 Aug 2023 16:04:18 +0900</lastBuildDate>
+    <pubDate>Sun, 03 Sep 2023 22:20:15 +0900</pubDate>
+    <lastBuildDate>Sun, 03 Sep 2023 22:20:15 +0900</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>에너지시스템 최적화/게임이론 강의: 12) Variants of ADMM and applications</title>
+        <description>&lt;p&gt;이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 12강을 필자가 요약한 내용이다.&lt;/p&gt;
+
+&lt;!-- Courtesy of embedresponsively.com --&gt;
+
+&lt;div class=&quot;responsive-video-container&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/MWPJAl84Sac&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+  &lt;/div&gt;
+
+&lt;p&gt;(&lt;a href=&quot;https://www.jalalkazempour.com/teaching&quot;&gt;Course slides 링크&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h2 id=&quot;economic-dispatch&quot;&gt;Economic dispatch&lt;/h2&gt;
+
+&lt;p&gt;여러 대의 발전기로 시간별 수요를 만족시키는 최소비용의 스케줄을 구하는 문제에서는, 각 수요-공급 일치 조건이 complicating constraint이다. 해당 제약조건에 모든 발전기의 출력 항들이 포함되기 때문으로, 해당 제약조건을 relax하면 각 발전기 별 subproblem으로 나눌 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture12_25.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;위 예제에서는 목적함수가 quadratic function이므로, Lagrangian Relaxation (LR) 을 적용할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;Complicating constraint인 수요-공급 일치 제약에 dual variable $\lambda$을 곱한 항을 목적함수에 추가하고, dual variable의 값을 $\bar{\lambda}$ 로 고정하면, 각 발전기 별 subproblem으로 나눌 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture12_27.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그리고 각 발전기 별 subproblem을 풀어 $v$번째 iteration 기준 $p_g^{(v)}$를 구하고, 이를 통해 아래와 같이 $\bar{\lambda}^{(v)}$를 $\bar{\lambda}^{(v+1)}$로 업데이트한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture12_35.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이 때 $\bar{\lambda}^{(v)}$는 수요-공급 일치 제약에 대한 dual variable이므로 ‘가격’이기도 하다. 여기서는 각 발전기 별로 자신의 이익을 최대화하는 발전량을 설정하고, 이를 모두 취합한 market operator가 가격을 업데이트한 후 다시 발전기들에게 통보한다. 그리고 각 발전기는 수정된 가격에 대해 발전량을 재설정하고, market operator는 이를 다시 취합해 가격을 업데이트하는 과정을 수렴할 때까지 반복한다.&lt;/p&gt;
+
+&lt;p&gt;이런 식으로 가격을 iterative하게 결정하는 시장을 Walrasian auction이라고 한다.&lt;/p&gt;
+
+&lt;p&gt;이러한 ‘distributed’ technique 기반으로 가격을 결정하는 방법은, 시장에 여러 가지 externalities가 추가되어 시장 균형 문제가 더 이상 동치인 최적화 문제를 갖지 않는 경우에 특히 유용한 것으로 알려져 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;market-clearing-with-linear-offers&quot;&gt;Market clearing (with linear offers)&lt;/h2&gt;
+
+&lt;p&gt;Market clearing problem에서도 수요-공급 일치 조건이 complicating constraint이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture12_42.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;만약 위 예제처럼 목적함수가 quadratic이 아니라 linear function이면, ‘augmented’ LR을 사용해야 한다. 그러므로 목적함수에 complicating constraint의 제곱항을 추가한다 (regulization coefficient $\gamma/2$를 곱해서).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture12_45.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;단, 이 경우 $\lambda$의 값을 $\bar{\lambda}$로 고정해도 각 발전기 별 subproblem으로 바로 나눌 수 없다. Complicating constraint의 제곱항 내에 변수들 간 product term이 있기 때문이다. 그러므로 각 발전기에 대해, 나머지 발전기들의 발전량을 고정하여 구성한 문제를 푼다 (ADMM). 각 발전기 별 최적의 발전량을 기반으로, $\bar{\lambda}$가 업데이트된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture12_50.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;privacy-이슈를-고려한-exchange-admm&quot;&gt;Privacy 이슈를 고려한 Exchange ADMM&lt;/h2&gt;
+
+&lt;p&gt;위 슬라이드의 ADMM에는 한 가지 ‘실질적인’ 문제가 있다. 발전기 1번의 ($v$번째 iteration에서의) 발전량을 계산하려면 발전기 2와 발전기 3의 ($v-1$번째 iteration에서의) 발전량 정보가 발전기 1에 전달되어야 하는데, 이는 ‘privacy 침해’로 볼 수 있기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;그러나 문제의 식을 아래 슬라이드와 같이 ‘모든 발전기들의 발전량들의 평균’을 도입해 변형하면, 이러한 ‘privacy 침해’ 문제를 완화할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture12_59.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;각 발전기는 $v-1$번째 iteration에서의 자기 자신의 발전량 $x_i^{(v-1)}$ 및 ‘모든 발전기들의 발전량들의 평균’ $\bar{x}^{(v-1)}$ 을 알면, $x_i^{(v)}$를 계산할 수 있다. 즉 각자의 발전량 정보는 market operator에게는 전달되지만, 다른 개별 발전기들에게는 전달되지 않기 때문에 privacy 침해 문제가 완화된다. 이를 ‘exchange’ ADMM이라 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;consensus-admm&quot;&gt;Consensus ADMM&lt;/h2&gt;
+
+&lt;p&gt;모든 subproblem들에 공통으로 포함된 complicating variable이 있을 경우 이를 Bender’s decomposition으로 푸는 대신, ADMM 방식으로 풀 수도 있다.&lt;/p&gt;
+
+&lt;p&gt;아래 슬라이드에서는, 원래 문제에서의 complicating variable $x$를 각 subproblem $i$ 별로 $x_i$라는 변수로 두고, 대신 $x_i$가 공통의 값 $z$와 같다는 제약을 추가했다. 이 문제에서 $z$는 parameter가 아닌 변수임에 주의한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture12_67.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;$x_i=z$는 complicating constraint이다. 그러므로, 각 subproblem별 목적함수에 제약 $x_i-z=0$의 좌변에 dual variable을 곱한 항과 좌변의 제곱에 regularization coefficient를 곱한 항을 추가 후 dual variable과 $z$의 값을 고정해 ADMM 스타일의 문제를 아래와 같이 구성할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture12_71.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;각각의 $x_i$가 전부 특정 값 $z$로 같아야 한다는, 즉 ‘consensus를 이뤄야 한다는’ 제약이 있어, 이를 consensus ADMM이라 한다.&lt;/p&gt;
+
+&lt;p&gt;여기서 난점은, $\bar{\lambda}$ 뿐 아니라 complicating variable이 최종적으로 가져야 할 값 $z$도 업데이트해야 한다는 것이다.&lt;/p&gt;
+
+&lt;p&gt;다행히도, $z$를 업데이트하는 문제는 아래와 같이 analytic solution을 가진다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture12_74.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;$N^{-1} \sum_{i=1}^N x_i^{(v)}$를 $\bar{x}^{(v)}$로 쓰면, 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture12_78.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이 식들을 적절히 결합하면, 최종적으로 $z$가 사라진 아래와 같은 알고리즘을 얻는다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture12_84.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;즉 $v$번째 iteration에서 각 $x_i^{(v)}$는, $v-1$번째 iteration에서의 $x_i^{(v-1)}$들의 평균 $\bar{x}^{(v-1)}$ 으로부터 멀어질수록 penalty를 가하는 목적함수에 의해 결정된다. 이 penalty가 zero가 되는 시점은 모든 $x_i^{(v)}$들이 같아질 때, 즉 consensus를 이룰 때이다. (이러한 방법을 progressive hedging이라고도 한다.)&lt;/p&gt;
+
+&lt;p&gt;Consensus ADMM은 stochastic market clearing에서 하루전 시장에서의 급전변수들을 결정할 때, 전력 네트워크에 여러 개의 node들이 있을 때 각 node 개별의 ‘distributed optimal power flow’ 문제들로 나눌 때 쓸 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture12_91.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;notice--info&quot;&gt;
+
+Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&gt;&lt;br /&gt;
+
+01) &lt;a href=&quot;/jalalone.html&quot;&gt; Market clearing as an optimization problem&lt;/a&gt; &lt;br /&gt;
+02) &lt;a href=&quot;/jalaltwo.html&quot;&gt; Market clearing as an equilibrium problem&lt;/a&gt; &lt;br /&gt;
+03) &lt;a href=&quot;/jalalthree.html&quot;&gt; Desirable properties of market-clearing mechanisms&lt;/a&gt; &lt;br /&gt;
+04) Market clearing using a cooperative game approach &lt;br /&gt;
+05) &lt;a href=&quot;/jalalfive.html&quot;&gt; Stochastic market clearing&lt;/a&gt; &lt;br /&gt;
+06) &lt;a href=&quot;/jalalsix.html&quot;&gt; Robust approaches for market clearing&lt;/a&gt; &lt;br /&gt;
+07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
+08) &lt;a href=&quot;/jalalgeight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
+09) &lt;a href=&quot;/jalalgnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt; &lt;br /&gt;
+11) &lt;a href=&quot;/jalaleleven.html&quot;&gt; Augmented Lagrangian relaxation&lt;/a&gt; &lt;br /&gt;
+12) &lt;b&gt; Variants of ADMM and applications&lt;/b&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Sun, 03 Sep 2023 00:00:00 +0900</pubDate>
+        <link>https://song4energyndata.github.io/jalaltwelve.html</link>
+        <guid isPermaLink="true">https://song4energyndata.github.io/jalaltwelve.html</guid>
+        
+        <category>최적화</category>
+        
+        <category>게임이론</category>
+        
+        <category>에너지시스템</category>
+        
+        
+        <category>market</category>
+        
+      </item>
+    
+      <item>
+        <title>에너지시스템 최적화/게임이론 강의: 11) (Augmented) Lagrangian relaxation</title>
+        <description>&lt;p&gt;이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 11강을 필자가 요약한 내용이다.&lt;/p&gt;
+
+&lt;!-- Courtesy of embedresponsively.com --&gt;
+
+&lt;div class=&quot;responsive-video-container&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/MWPJAl84Sac&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+  &lt;/div&gt;
+
+&lt;p&gt;(&lt;a href=&quot;https://www.jalalkazempour.com/teaching&quot;&gt;Course slides 링크&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h2 id=&quot;complicating-constraint가-있을-경우의-lagrangian-relaxation-lr&quot;&gt;Complicating constraint가 있을 경우의 Lagrangian Relaxation (LR)&lt;/h2&gt;
+
+&lt;p&gt;에너지시스템 최적화 문제에서는 수요-공급 일치 조건, ramping limit 조건, 두 지역을 잇는 송전선 관련 조건 등이, ‘여러 소문제들의 변수들을 포함하는’ complicating constraint로써 포함되곤 한다. 해당 제약을 relax해서 큰 문제 대신 작은 subproblem들을 풀 수 있다.&lt;/p&gt;
+
+&lt;p&gt;(이를테면 여러 지역을 잇는 송전 제약을 relax하면, 각 지역 별 market clearing problem을 따로 푸는 문제로 변환될 수 있다.)&lt;/p&gt;
+
+&lt;p&gt;핵심은, 아래와 같이 complicating constraint들을 dual variable을 곱한 term으로 목적함수에 포함시키는 것, 그리고 dual variable들을 특정 값으로 고정하는 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture11_20.png&quot; alt=&quot;clearingexample&quot; /&gt;
+&lt;img src=&quot;/assets/images/jalal/Lecture11_24.png&quot; alt=&quot;clearingexample&quot; /&gt;
+&lt;img src=&quot;/assets/images/jalal/Lecture11_28.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Complicating constraint가 아닌 constraint는 그대로 두고 complicating constraint들만을 목적함수에 포함시키므로, 이는 ‘partial’ Lagrangian으로 볼 수 있다. 그래서 이 기법의 이름이 Lagrangian Relaxation (LR) 이다.&lt;/p&gt;
+
+&lt;p&gt;Dual variable의 값을 고정함으로써, 위 예시 기준으로 각 $i$별 subproblem들이 구성된다. 단, 해당 고정값이 최적의 값인지 모르므로, iteration을 통해 최적의 값에 가까워지게 해야 한다.&lt;/p&gt;
+
+&lt;p&gt;간단한 예시는 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture11_34.png&quot; alt=&quot;clearingexample&quot; /&gt;
+&lt;img src=&quot;/assets/images/jalal/Lecture11_35.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Complicating constraint $-x-y+4=0$에 dual variable $\mu$를 곱한 값을 목적함수에 더한 후 $\mu$의 값을 $\bar{\mu}$로 고정 후 $x$와 $y$ 각각에 대한 subproblem을 푼다. 그 결과 얻은 variable들의 값들 $x^{(v)}$와 $y^{(v)}$에 기반해 $\bar{\mu}$를 업데이트한다.&lt;/p&gt;
+
+&lt;p&gt;이 때 $a$와 $b$는 일종의 hyperparameter로, 그 값에 따라 수렴 속도 및 안정성이 달라진다. (Bender’s decomposition에서는 이런 hyperparamter가 없었다. 그래서 필자가 보기엔 LR은 약간은 ‘learning’ 요소가 있는 기법이다.)&lt;/p&gt;
+
+&lt;h2 id=&quot;목적함수가-linear-function일-때의-augmented-lr&quot;&gt;목적함수가 linear function일 때의 ‘Augmented’ LR&lt;/h2&gt;
+
+&lt;p&gt;주의할 점은, LR을 그대로 쓰려면 목적함수의 first derivative가 연속함수여야 한다는 것이다. 이 연속함수는 상수함수를 포함하지 않는다. 따라서 위 예제처럼 목적함수가 quadratic function인 경우 LR을 쓸 수 있지만, 만약 목적함수가 linear function이라면 LR을 쓸 수 없다 (정확히는 쓰더라도 수렴이 보장되지 않는다).&lt;/p&gt;
+
+&lt;p&gt;목적함수가 linear function이지만 complicating constraint를 relax해 subproblem들로 쪼개고 싶은 경우 쓸 수 있는 방법으로, ‘Augmented’ Lagrangian Relaxation (ALR) 이 있다.&lt;/p&gt;
+
+&lt;p&gt;ALR에서는 목적함수를 확실하게 quadratic function으로 만들기 위해, complicating constraint의 제곱항을 추가한다. 예시는 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture11_41.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(위 예시에서 목적함수가 이미 quadratic이므로 굳이 ALR을 쓸 필요가 없지만, 이해를 돕기 위해 앞의 LR 예시와 같은 예시로 설명하였다.)&lt;/p&gt;
+
+&lt;p&gt;어차피 optimal point에서는 $-x-y+4=0$이므로, 위 항을 추가해도 여전히 같은 문제를 푸는 셈이다. 위 식에서 $\gamma$는 regularization hyperparameter로 볼 수 있다.&lt;/p&gt;
+
+&lt;p&gt;단, 위 문제에서는 $\lambda$를 고정시키더라도 $x$와 $y$ 각각의 subproblem으로 쪼갤 수 없다. $(-x-y+4)^2$ 가 $xy$, 즉 product term을 포함하기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture11_43.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;alternating-direction-method-of-multipliers-admm&quot;&gt;Alternating Direction Method of Multipliers (ADMM)&lt;/h2&gt;
+
+&lt;p&gt;Product term 때문에 문제를 쪼갤 수 없다면, 차선책은 product term에 있는 변수 중 하나를 고정시키고 나머지 변수에 대한 문제를 푸는 것이다. 이러한 방법을 alternating direction method of multipliers (ADMM) 이라 한다.&lt;/p&gt;
+
+&lt;p&gt;위 예시에 ADMM을 적용하는 과정은 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture11_55.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;여기서 윗첨자가 $(v)$인 항들이 변수이고, 윗첨자가 $(v-1)$인 항들은 parameter들이다 (이전 iteration에서 구한 값들). Optimal point에서는 $-x-y+4=0$ 이므로, $\lambda^{(v)} \approx \lambda^{(v-1)}$ 이면 optimal point에 수렴한 것으로 본다.&lt;/p&gt;
+
+&lt;p&gt;$\gamma$가 일종의 learing rate 역할을 하므로, 이를 너무 크거나 작지 않게 적절히 결정해 주어야 한다.&lt;/p&gt;
+
+&lt;div class=&quot;notice--info&quot;&gt;
+
+Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&gt;&lt;br /&gt;
+
+01) &lt;a href=&quot;/jalalone.html&quot;&gt; Market clearing as an optimization problem&lt;/a&gt; &lt;br /&gt;
+02) &lt;a href=&quot;/jalaltwo.html&quot;&gt; Market clearing as an equilibrium problem&lt;/a&gt; &lt;br /&gt;
+03) &lt;a href=&quot;/jalalthree.html&quot;&gt; Desirable properties of market-clearing mechanisms&lt;/a&gt; &lt;br /&gt;
+04) Market clearing using a cooperative game approach &lt;br /&gt;
+05) &lt;a href=&quot;/jalalfive.html&quot;&gt; Stochastic market clearing&lt;/a&gt; &lt;br /&gt;
+06) &lt;a href=&quot;/jalalsix.html&quot;&gt; Robust approaches for market clearing&lt;/a&gt; &lt;br /&gt;
+07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
+08) &lt;a href=&quot;/jalalgeight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
+09) &lt;a href=&quot;/jalalgnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt; &lt;br /&gt;
+11) &lt;b&gt; Augmented Lagrangian relaxation&lt;/b&gt; &lt;br /&gt;
+12) &lt;a href=&quot;/jalaltwelve.html&quot;&gt; Variants of ADMM and applications&lt;/a&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Sat, 02 Sep 2023 00:00:00 +0900</pubDate>
+        <link>https://song4energyndata.github.io/jalaleleven.html</link>
+        <guid isPermaLink="true">https://song4energyndata.github.io/jalaleleven.html</guid>
+        
+        <category>최적화</category>
+        
+        <category>게임이론</category>
+        
+        <category>에너지시스템</category>
+        
+        
+        <category>market</category>
+        
+      </item>
     
       <item>
         <title>에너지시스템 최적화/게임이론 강의: 10) Applications of Bender&apos;s decomposition</title>
@@ -94,7 +319,9 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
 08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
 09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
-10) &lt;b&gt; Benders’ decomposition: Applications&lt;/b&gt;
+10) &lt;b&gt; Benders’ decomposition: Applications&lt;/b&gt; &lt;br /&gt;
+11) &lt;a href=&quot;/jalaleleven.html&quot;&gt; Augmented Lagrangian relaxation&lt;/a&gt; &lt;br /&gt;
+12) &lt;a href=&quot;/jalaltwelve.html&quot;&gt; Variants of ADMM and applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 27 Aug 2023 00:00:00 +0900</pubDate>
@@ -216,7 +443,9 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
 08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
 09) &lt;b&gt; Benders’ decomposition: Theory&lt;/b&gt; &lt;br /&gt;
-10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt; &lt;br /&gt;
+11) &lt;a href=&quot;/jalaleleven.html&quot;&gt; Augmented Lagrangian relaxation&lt;/a&gt; &lt;br /&gt;
+12) &lt;a href=&quot;/jalaltwelve.html&quot;&gt; Variants of ADMM and applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Sat, 26 Aug 2023 00:00:00 +0900</pubDate>
@@ -282,7 +511,9 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
 08) &lt;b&gt; Optimization problems with decomposable structure&lt;/b&gt; &lt;br /&gt;
 09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
-10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt; &lt;br /&gt;
+11) &lt;a href=&quot;/jalaleleven.html&quot;&gt; Augmented Lagrangian relaxation&lt;/a&gt; &lt;br /&gt;
+12) &lt;a href=&quot;/jalaltwelve.html&quot;&gt; Variants of ADMM and applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Fri, 25 Aug 2023 00:00:00 +0900</pubDate>
@@ -414,7 +645,9 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 07) &lt;b&gt; Bilevel programming in energy systems&lt;/b&gt; &lt;br /&gt;
 08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
 09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
-10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt; &lt;br /&gt;
+11) &lt;a href=&quot;/jalaleleven.html&quot;&gt; Augmented Lagrangian relaxation&lt;/a&gt; &lt;br /&gt;
+12) &lt;a href=&quot;/jalaltwelve.html&quot;&gt; Variants of ADMM and applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Wed, 23 Aug 2023 00:00:00 +0900</pubDate>
@@ -580,7 +813,9 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
 08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
 09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
-10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt; &lt;br /&gt;
+11) &lt;a href=&quot;/jalaleleven.html&quot;&gt; Augmented Lagrangian relaxation&lt;/a&gt; &lt;br /&gt;
+12) &lt;a href=&quot;/jalaltwelve.html&quot;&gt; Variants of ADMM and applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 20 Aug 2023 00:00:00 +0900</pubDate>
@@ -714,7 +949,9 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
 08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
 09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
-10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt; &lt;br /&gt;
+11) &lt;a href=&quot;/jalaleleven.html&quot;&gt; Augmented Lagrangian relaxation&lt;/a&gt; &lt;br /&gt;
+12) &lt;a href=&quot;/jalaltwelve.html&quot;&gt; Variants of ADMM and applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Sat, 19 Aug 2023 00:00:00 +0900</pubDate>
@@ -823,7 +1060,9 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
 08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
 09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
-10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt; &lt;br /&gt;
+11) &lt;a href=&quot;/jalaleleven.html&quot;&gt; Augmented Lagrangian relaxation&lt;/a&gt; &lt;br /&gt;
+12) &lt;a href=&quot;/jalaltwelve.html&quot;&gt; Variants of ADMM and applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Tue, 15 Aug 2023 00:00:00 +0900</pubDate>
@@ -915,7 +1154,9 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
 07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
 08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
 09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
-10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
+10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt; &lt;br /&gt;
+11) &lt;a href=&quot;/jalaleleven.html&quot;&gt; Augmented Lagrangian relaxation&lt;/a&gt; &lt;br /&gt;
+12) &lt;a href=&quot;/jalaltwelve.html&quot;&gt; Variants of ADMM and applications&lt;/a&gt;
 &lt;/div&gt;
 </description>
         <pubDate>Sat, 12 Aug 2023 00:00:00 +0900</pubDate>
@@ -925,216 +1166,6 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
         <category>최적화</category>
         
         <category>게임이론</category>
-        
-        <category>에너지시스템</category>
-        
-        
-        <category>market</category>
-        
-      </item>
-    
-      <item>
-        <title>에너지시스템 최적화/게임이론 강의: 1) Market clearing as an optimization problem</title>
-        <description>&lt;p&gt;이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 1강을 필자가 요약한 내용이다.&lt;/p&gt;
-
-&lt;!-- Courtesy of embedresponsively.com --&gt;
-
-&lt;div class=&quot;responsive-video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/pTxHvqpEegQ&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-  &lt;/div&gt;
-
-&lt;p&gt;(&lt;a href=&quot;https://www.jalalkazempour.com/teaching&quot;&gt;Course slides 링크&lt;/a&gt;)&lt;/p&gt;
-
-&lt;h2 id=&quot;market-clearing-price-결정&quot;&gt;Market clearing price 결정&lt;/h2&gt;
-
-&lt;p&gt;Market clearing이란, ‘수요와 공급을 일치시킬 때의 (단일)가격을 결정하는 과정’이다.&lt;/p&gt;
-
-&lt;p&gt;이를테면 아래 슬라이드처럼, 두 개의 발전기와 두 개의 수요처가 전력시장에서 offering 및 bidding을 할 경우를 보자.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture1_5.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;위 예시에서 두 수요처의 최대 부하의 합이 각 발전기의 개별 용량보다 크므로, 두 발전기 모두 가동되어야 한다.&lt;/p&gt;
-
-&lt;p&gt;한편 위 예시에서는 전기 가격이 MWh당 20달러에서 35달러 사이의 어떤 숫자가 되어도 거래가 성립할 것이다. 수요처 입장에서 bidding price보다 낮은 가격이기 때문이다. 그렇다면, market clearing price는 왜 20달러로 결정되었을까?&lt;/p&gt;
-
-&lt;p&gt;이는 market clearing price가 social welfare (또는 market surplus) 를 최대화하게끔 결정되기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;전력시장에서 social welfare는, ‘수요처가 bid price보다 저렴하게 전기를 구입해서 얻는 utility’ 에서 ‘발전기가 전기를 생산하는데 드는 비용 (offer price와 같다고 가정)’ 을 뺀 값으로 정의된다. (이 때, 발전기가 offer price를 발전단가 즉 production cost로 ‘정직하게’ 설정했다고 가정한다.)&lt;/p&gt;
-
-&lt;p&gt;Social welfare를 최대화 대상 목적함수로 하는 ‘최적화 문제’는 아래 슬라이드와 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture1_10.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그런데 위 문제에서 변수는 각 발전기의 발전량 및 각 수요처의 전력부하이다. Market clearing price는 위 수식에서 보이지 않는다. 어디 있는 것일까?&lt;/p&gt;
-
-&lt;p&gt;Market clearing price는 수요-공급 일치 (balance) 조건의 dual variable이다.&lt;/p&gt;
-
-&lt;p&gt;특정 제약조건에 대한 dual variable은 ‘optimal point에서 목적함수가 해당 제약조건의 perturbation에 따라 변하는 정도, 즉 sensitivity’ 이다. Balance의 perturbation은 전기 수요 또는 공급량의 변화이므로, 단위 변화량 당 비용으로 생각하면 가격을 의미함은 자명하다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture1_15.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;network-제약-하의-nodal-price&quot;&gt;Network 제약 하의 nodal price&lt;/h2&gt;
-
-&lt;p&gt;실제로는 아래와 같이 여러 개의 bus가 존재하고 bus 간에 송전망에 의한 송전량 제약이 있으며, 각 bus별로 가격이 다를 수도 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture1_20.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;DC power flow 근사 하에서, bus $n$에서 bus $m$으로 흐르는 전력은 $f_{n,m} = B_{n,m} (\theta_n - \theta_m)$ 으로 계산된다. (B는 susceptance, $\theta$는 voltage angle). 그러므로 voltage angle 기반 송전 제약을 추가한 최적화 문제를 아래와 같이 구성한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture1_26.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;위 문제에서 capacity of each transmission line 제약의 하한이 0이 아니라 -100 임에 주의한다 (마이너스는 반대 방향으로의 흐름을 의미한다).&lt;/p&gt;
-
-&lt;p&gt;‘각 bus에서의’ power balance 제약 각각에 대한 dual variable이 각 bus 별 ‘nodal’ price이다. 이러한 node 별 단일가격 기반 시장을 LMP (Local Marginal Price) based market이라 한다.&lt;/p&gt;
-
-&lt;p&gt;Node 별 price는 congestion이 없을 경우 (즉 어떤 송전선에서도 송전량이 송전 상한에 도달하지 않은 경우, 수학적으로 말하면 송전량 제약들이 전부 inactive한 경우) 에는 전부 같다. 그러나 congestion이 있을 경우 node별로 가격이 달라질 수 있다.&lt;/p&gt;
-
-&lt;div class=&quot;notice--info&quot;&gt;
-
-Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&gt;&lt;br /&gt;
-
-01) &lt;b&gt; Market clearing as an optimization problem&lt;/b&gt; &lt;br /&gt;
-02) &lt;a href=&quot;/jalaltwo.html&quot;&gt; Market clearing as an equilibrium problem&lt;/a&gt; &lt;br /&gt;
-03) &lt;a href=&quot;/jalalthree.html&quot;&gt; Desirable properties of market-clearing mechanisms&lt;/a&gt; &lt;br /&gt;
-04) Market clearing using a cooperative game approach &lt;br /&gt;
-05) &lt;a href=&quot;/jalalfive.html&quot;&gt; Stochastic market clearing&lt;/a&gt; &lt;br /&gt;
-06) &lt;a href=&quot;/jalalsix.html&quot;&gt; Robust approaches for market clearing&lt;/a&gt; &lt;br /&gt;
-07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
-08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
-09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
-10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Wed, 09 Aug 2023 00:00:00 +0900</pubDate>
-        <link>https://song4energyndata.github.io/jalalone.html</link>
-        <guid isPermaLink="true">https://song4energyndata.github.io/jalalone.html</guid>
-        
-        <category>최적화</category>
-        
-        <category>게임이론</category>
-        
-        <category>에너지시스템</category>
-        
-        
-        <category>market</category>
-        
-      </item>
-    
-      <item>
-        <title>에너지 분야 최적화/ 게임이론/ 데이터과학 관련 교육 추천: DTU summer school</title>
-        <description>&lt;p&gt;에너지시스템 planning/ scheduling 관련 연구자라면 고급 최적화 기법, 시장 문제에서의 게임이론적 접근, 시계열 데이터 예측 등의 지식들이 필요하다고 느낀 적이 있을 것이다. 관련해 좋은 교육 자료를 소개한다. Technical University of Denmark에서 매년 주최하는 summer school이다.&lt;/p&gt;
-
-&lt;p&gt;(&lt;a href=&quot;https://energy-markets-school.dk/&quot;&gt;홈페이지 (강의 슬라이드들 포함)&lt;/a&gt;) (&lt;a href=&quot;https://www.youtube.com/@dtulecturesonpowerenergysy8133&quot;&gt;Youtube 채널&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;박사과정 동안 해당 채널에서 다루는 주제들의 존재 자체는 알았으나, 이를 체계적으로 공부할 길이 없어 막막했던 기억이 있다. DTU summer school의 존재를 알게 되었을 때, 필자의 박사과정 때 이런 강의들이 제공되었더라면 하는 아쉬움이 들면서도, 이제라도 이 주제들을 공부할 수 있게 되어 그 아쉬움을 덜 수 있어 기뻤다.&lt;/p&gt;
-
-&lt;p&gt;해당 채널에서 특히 유익했던 강의들 몇 개를 들자면 아래와 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h2 id=&quot;market-design-for-integrated-energy-systems-prof-jalal-kazempour&quot;&gt;Market Design for Integrated Energy Systems (Prof. Jalal Kazempour)&lt;/h2&gt;
-
-&lt;!-- Courtesy of embedresponsively.com --&gt;
-
-&lt;div class=&quot;responsive-video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/rJOQmcjzYBc&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-  &lt;/div&gt;
-
-&lt;p&gt;이 강의는 크게 3개 파트로 구성되어 있다.&lt;/p&gt;
-
-&lt;p&gt;첫번째 파트에서는 유럽과 미국의 전력시장에서 하루전 시장/ 당일 시장/ 실시간 시장의 구성 및 두 대륙 간 차이점, 보조서비스 시장의 유연성 자원 서비스, 유연성 자원에서 커뮤니티의 역할 등을 설명한다. 두번째 파트에서는 전력시장에서의 가격결정 메커니즘을 최적화 문제와 Nash 균형 탐색 문제로써 설명한다. 세번째 파트에서는 섹터커플링 시장 컨셉 및 현실적 한계점에 대해 설명한다.&lt;/p&gt;
-
-&lt;p&gt;전력시장의 일반적 구성, 그리고 전력시장에서의 가격결정에 대한 수학적 모델링 등 주제들에 대한 대략적 이해를 단시간 내에 하고 싶은 분들에게 추천한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h2 id=&quot;distributed-optimization-prof-jalal-kazempour&quot;&gt;Distributed Optimization (Prof. Jalal Kazempour)&lt;/h2&gt;
-
-&lt;!-- Courtesy of embedresponsively.com --&gt;
-
-&lt;div class=&quot;responsive-video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/7AkQJhfAv-Q&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-  &lt;/div&gt;
-
-&lt;p&gt;에너지 설비 용량 결정 문제를 연구하는 사람이라면, 긴 기간을 고려할 경우 최적화 문제의 규모가 커져 계산 결과를 제 때 얻기 어렵다는 난점에 대해 고민해 본 적이 있을 것이다.&lt;/p&gt;
-
-&lt;p&gt;그리고 이에 관해 Bender’s decomposition 등의 decomposition method 공부를 시도해 본 사람들도 있을 것이다. 그러나 해당 주제는 책 및 논문 등의 텍스트로만 공부하기에는 비교적 어려운 주제이다 (박사과정 당시의 필자가 그랬다…).&lt;/p&gt;
-
-&lt;p&gt;이 강의를 통해, Bender’s decomposition의 원리를 이해할 수 있을 것이다. 또한 에너지 설비 용량 같은 ‘공통의 변수’ 는 없지만 ‘공통의 제약’ 이 있어서 문제 크기가 큰 경우에 쓸 수 있는 Lagrangian Relaxation (LR), Alternating Direction Method of Multipliers (ADMM) 기법도 공부할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;Jalal Kazempour 교수가 위 두 개 강의 내용을 묶어 구성한 PhD-level course &lt;a href=&quot;https://www.jalalkazempour.com/teaching&quot;&gt;“Advanced Optimization and Game Theory for Energy Systems”&lt;/a&gt; 가 있는데, 조만간 해당 강의 영상을 보고 공부하면서 각 강의 별 요약을 블로그에 게재할 계획이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h2 id=&quot;statistical-and-machine-learning-for-forecasting-prof-pierre-pinson&quot;&gt;Statistical and Machine Learning for Forecasting (Prof. Pierre Pinson)&lt;/h2&gt;
-
-&lt;!-- Courtesy of embedresponsively.com --&gt;
-
-&lt;div class=&quot;responsive-video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/e7uMRluA01M&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-  &lt;/div&gt;
-
-&lt;p&gt;재생발전량 예측에 필요한 주요 데이터들, 데이터의 특성에 따른 실제 적용 방안 (uncertaint 기반 계산 시 temporal correlation이 강한 경우 단순한 신뢰구간 기반 계산보다 시나리오 기반 계산이 더 좋을 수 있다 등), 예측 오차를 나타내는 지표 등을 설명한다.&lt;/p&gt;
-
-&lt;p&gt;또한 최근 무지성으로 범람하고 있는 딥러닝 기반 예측이 아닌, 전통적인 선형회귀 기반 예측 방법에 대해서도 설명한다. 특히 풍속-풍력발전량 간 관계처럼 nonlinear이면서 단순한 polynomial basis로 fitting이 어려운 경우의 local methods, non-stationary data를 plot할 때 주의해야 할 점 및 online-learning을 위한 recursive least square 등의 실제 적용 시 유용한 방법들을 설명한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h2 id=&quot;data-markets-for-energy-prof-pierre-pinson&quot;&gt;Data Markets for Energy (Prof. Pierre Pinson)&lt;/h2&gt;
-
-&lt;!-- Courtesy of embedresponsively.com --&gt;
-
-&lt;div class=&quot;responsive-video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/AgWPedTE_10&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-  &lt;/div&gt;
-
-&lt;p&gt;데이터를 ‘사고 파는’ 경우의 비즈니스 모델에 대해 생각해 본 적이 있는가?&lt;/p&gt;
-
-&lt;p&gt;아직까지 대부분의 데이터 시장에서는 가격이 ‘Data point 갯수 당’ 또는 ‘데이터 생산 원가에 마진을 붙인 판매가’ 기반으로 결정되거나, 일종의 ‘힘의 논리’ 기반으로 결정되곤 한다.&lt;/p&gt;
-
-&lt;p&gt;이 강의에서는, 이러한 단순한 접근을 넘어서 ‘해당 data를 활용하는 특정 분석에서 data 추가로 인한 improvement’ 를 기준으로 가격을 책정하는 방법을 제시한다.&lt;/p&gt;
-
-&lt;p&gt;이를테면 특정 회귀분석 대상의 DGP에 관여하는 설명변수들 x1, x2, x3 중 구매자는 x1만 갖고 있을 때 (y는 구매자도 갖고 있음),
-x1만 사용한 회귀모델의 Mean Squared Error (MSE) 대비 판매자의 data x2와 x3을 구매해 추가한 모델의 MSE가 더 줄어들었다면,
-MSE의 감소량에 비례하게끔 revenue를 책정하는 것이다.&lt;/p&gt;
-
-&lt;p&gt;이 과정에서 data 판매자가 둘 이상일 경우 각 판매자에 대한 금액 분배는 Shapely value나 leave-one-out 등 방법으로 결정한다.&lt;/p&gt;
-
-&lt;p&gt;MSE 감소량 기준으로 revenue 책정 시, 판매자가 가짜 데이터가 아닌 진짜로 유익한 데이터를 제공해야 revenue가 증가하므로, 판매자 입장에서 truth-telling이 최적전략이 된다는 장점이 있다고 한다.&lt;/p&gt;
-
-&lt;p&gt;물론 몇 가지 현실적인 문제들이 있지만 (모델의 MSE를 구매자가 수긍할 것인지, 수긍 못 하니 모델과 x1을 공개하라고 하면 판매자가 이를 받아들일 지 등), data pricing에 대한 체계적 논의의 출발점으로는 좋은 강의로 보인다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h2 id=&quot;trustworthy-ai-for-power-systems-prof-spyros-chatzivasileiadis&quot;&gt;Trustworthy AI for Power Systems (Prof. Spyros Chatzivasileiadis)&lt;/h2&gt;
-
-&lt;!-- Courtesy of embedresponsively.com --&gt;
-
-&lt;div class=&quot;responsive-video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/8iCw0hEfvzc&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-  &lt;/div&gt;
-
-&lt;p&gt;전력시스템의 안전성 여부를 머신러닝/ 딥러닝 모델 기반으로 판단하려는 시도가 이루어지고 있다.&lt;/p&gt;
-
-&lt;p&gt;그러나 모델 사용 시 training points 외의 point에 대해서는 필연적으로 interpolation/ extrapolation을 하게 되는데, 딥러닝 모델에서는 아주 조금의 input 차이로도 output이 바뀔 수 있으므로 모델을 마음놓고 쓸 수 없다.&lt;/p&gt;
-
-&lt;p&gt;(팬더 사진에 사람 눈으로 볼 수 없는 noise를 추가하니 원숭이로 분류한다든가, 자율주행차량이 신호등을 판단하는 사진에서 픽셀 하나만 바꾸니 틀린 판단을 한다든가 등 사례들을 예시로 든다.)&lt;/p&gt;
-
-&lt;p&gt;이 강의에서는, 딥러닝 모델이 ReLU activation들로 구성되었다는 전제 하에 mixed-integer linear programming problem을 구성해서 해당 모델이 제대로 interpolation/ extrapolation을 하는지를 검증할 수 있는 방법을 제시한다.&lt;/p&gt;
-
-&lt;p&gt;물론 정수선형계획법 특성상 큰 모델에는 쓸 수 없지만, 정수선형계획법을 이렇게도 활용할 수 있다는 사실에 놀랐던 기억이 있다. 더불어 실제 물리적 시스템에 딥러닝을 적용한다는 것이 쉽지 않다는 교훈도 얻을 수 있었다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h2 id=&quot;2023년-강의도-조만간-공개될-것으로-예상됨&quot;&gt;2023년 강의도 조만간 공개될 것으로 예상됨&lt;/h2&gt;
-
-&lt;p&gt;현재는 Youtube 채널에 2022년 강의까지만 공개되어 있으나, 조만간 2023년 강의가 공개될 것으로 보인다. 2023년을 포함해 매년 summer school 현장 강의가 6월 후반에 열렸고, 2022년 강의 영상이 2022년 8월 초에 공개되었기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;2023년 강의 프로그램에도 여러 가지 흥미로운 주제들이 있어, 강의가 공개되면 바로 시청할 계획이다. &lt;a href=&quot;https://energy-markets-school.dk/school-2023/downloads/&quot;&gt;(data-driven modeling, privacy, online decision-making, business models for hybrid power plants 등)&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 06 Aug 2023 00:00:00 +0900</pubDate>
-        <link>https://song4energyndata.github.io/dturecommendation.html</link>
-        <guid isPermaLink="true">https://song4energyndata.github.io/dturecommendation.html</guid>
-        
-        <category>최적화</category>
-        
-        <category>게임이론</category>
-        
-        <category>회귀분석</category>
         
         <category>에너지시스템</category>
         
