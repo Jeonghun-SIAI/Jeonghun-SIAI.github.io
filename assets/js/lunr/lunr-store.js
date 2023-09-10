@@ -244,4 +244,10 @@ var store = [{
         "tags": ["최적화","게임이론","에너지시스템"],
         "url": "/jalaltwelve.html",
         "teaser": "/assets/images/jalal/Lecture12_1.png"
+      },{
+        "title": "논문 소개: Virtual power plant의 하루전시장 입찰 결정 (stochastic programming 기반)",
+        "excerpt":"Virtual power plant (VPP, 가상발전소) 는 급전가능발전원 (가스터빈 등), 급전불가능발전원 (태양광/ 풍력 등), 에너지저장장치 (배터리/ 양수발전 등) 등 여러 발전/ 전력저장 설비들을 클라우드 등 IT기술 기반으로 한꺼번에 제어해 단일 주체로써 전력시장에 입찰하는 방법이다. 가상발전소 개념도. (출처: 한국전기연구원) VPP를 통해 다수의 분산전원 사업자들이 보다 쉽게 전력시장에 참여할 수 있고, 급전가능발전원 및...","categories": ["market"],
+        "tags": ["전력시장","에너지시스템","VPP"],
+        "url": "/vppintro.html",
+        "teaser": "/assets/images/vppintro/vppconcept.png"
       }]
