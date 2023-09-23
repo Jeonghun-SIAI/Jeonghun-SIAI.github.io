@@ -5,9 +5,144 @@
     <description>공학박사 과정에서 쌓은 에너지 시스템 전문성에 데이터 사이언스 석사를 더하며 쌓은 계산통계학 활용 역량을 결합하여, 데이터 기반의 에너지 시스템/ 정책/ 시장 관련 솔루션 도출을 올바르게 할 수 있도록 돕습니다.</description>
     <link>https://song4energyndata.github.io/</link>
     <atom:link href="https://song4energyndata.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 12 Sep 2023 22:01:46 +0900</pubDate>
-    <lastBuildDate>Tue, 12 Sep 2023 22:01:46 +0900</lastBuildDate>
+    <pubDate>Sun, 24 Sep 2023 07:55:53 +0900</pubDate>
+    <lastBuildDate>Sun, 24 Sep 2023 07:55:53 +0900</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>에너지효율 R&amp;D 투자효과 분석 (패널 데이터 기반) 연구 복원</title>
+        <description>&lt;p&gt;에너지정책의 효과를 ‘정량적으로’ 분석하는 방법으로, 회귀분석의 일종인 ‘패널 분석’ (Panel data analysis) 이 있다. 이를테면 에너지경제연구원에서는 에너지효율 R&amp;amp;D 투자가 에너지소비 감소에 기여했는지 여부를 검정하기 위해, &lt;a href=&quot;https://www.keei.re.kr/main.nsf/index.html?open&amp;amp;p=/web_keei/d_results.nsf/0/BE8E066A1FCE159A49258107001E2AA9&quot;&gt;“에너지효율향상 R&amp;amp;D 투자효과 분석 및 정책방향 연구”&lt;/a&gt; 를 수행한 바 있다.&lt;/p&gt;
+
+&lt;p&gt;해당 연구에서는 1985년부터 2013년까지 연도별로 12개 국가 각각의 에너지소비량/ R&amp;amp;D투자/ 통제대상변수들 데이터를 사용해, 에너지효율향상 R&amp;amp;D가 에너지소비량 절감에 유의미한 영향을 주었는지를 알아보았다. 이러한 데이터는 ‘여러 개체’ 를 ‘여러 시간’ 에 걸쳐 관측해 얻은 데이터이며, 이러한 데이터를 패널 데이터라고 한다.&lt;/p&gt;
+
+&lt;p&gt;이번 포스팅에서는, 필자가 패널데이터분석 실무 공부를 위해 해당 연구 결과의 복원을 시도한 결과를 정리하였다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;연구-상세&quot;&gt;연구 상세&lt;/h2&gt;
+
+&lt;p&gt;12개 국가 목록은 노르웨이/ 네덜란드/ 덴마크/ 독일/ 미국/ 스페인/ 스웨덴/ 영국/ 오스트리아/ 일본/ 포르투갈 이다.&lt;/p&gt;
+
+&lt;p&gt;해당 패널분석에서 반응변수는 ‘1인당’ 에너지 소비량이다. 설명변수들은 ‘1인당’ GDP/ 에너지 가격 지수/ 난방도일/ ‘1인당’ R&amp;amp;D 투자 축적량이다. 에너지 소비량에 큰 영향을 미치는 요소로 GDP/ 에너지가격/ 난방에너지사용량/ 인구수 가 있으므로, 이들을 통제한 상태에서 R&amp;amp;D투자의 효과를 계산하기 위함이다.&lt;/p&gt;
+
+&lt;p&gt;구체적으로는 변수들에 로그를 취해서 계수추정량이 탄력성을 의미하도록 하였다. 또한 명시적으로 반영하지 못한 변수들 (즉 오차항의 성분) 중 각 국가별로 시간에 관계없이 고유하게 가지면서 설명변수들과 상관된 요소가 존재할 수 있으므로 (이를테면 문화적 요소 등), 이를 고려한 고정효과 (fixed effect) 모델 및 1계차분 (first-order difference) 모델의 계수를 도출하였다.&lt;/p&gt;
+
+&lt;p&gt;고정효과 모델의 수식은 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;$\text{ln}(\frac{EC}{Pop})_{i,t} = \beta_0 + \beta_1 \text{ln}(\frac{GDP}{Pop})_{i,t} + \beta_2 \text{ln}(EP)_{i,t} + \beta_3 \text{ln}(HDD)_{i,t} + \beta_4 \text{ln}(\frac{AccRnD}{Pop})_{i,t} + u_i + e_{i,t}$&lt;/p&gt;
+
+&lt;p&gt;첨자 $i$와 $t$는 각각 나라와 연도를 의미한다. $EC$는 에너지 소비량, $Pop$는 인구수, $GDP$는 총 GDP, $EP$는 에너지 가격 지수, $HDD$는 난방도일, $AccRnD$는 해당 연도까지의 에너지효율 R&amp;amp;D 투자액의 축적량이다 (단, 모든 연도의 투자액을 단순히 더하지 않고 감가율을 적용하였다). 오차항에서 $u_i$는 시간에 관계없는 국가 고유의 요소들 (문화적 요소 등), $e_{i,t}$는 국가 및 시간별로 변하는 요소들을 의미한다.&lt;/p&gt;
+
+&lt;p&gt;1계차분 모델의 수식은 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;$\Delta \text{ln}(\frac{EC}{Pop})_{i,t} = \beta_1 \Delta \text{ln}(\frac{GDP}{Pop})_{i,t} + \beta_2 \Delta \text{ln}(EP)_{i,t} + \beta_3 \Delta \text{ln}(HDD)_{i,t} + \beta_4 \Delta \text{ln}(\frac{AccRnD}{Pop})_{i,t} + \Delta e_{i,t}$&lt;/p&gt;
+
+&lt;p&gt;해당 연구의 분석기간인 1985~2013년 중 1997년에 교토의정서가 채택되어, 해당 시기 전후로 에너지효율 R&amp;amp;D 투자에 양적/ 질적 차이가 나타날 가능성이 크다. 이를 고려해, 해당 연구에서는 1997년을 기준으로 전기와 후기를 나누어 각각에 대한 추정 및 모든 기간에 대한 변수별 계수추정을 수행하였다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/energyeffpanel/result_original.png&quot; alt=&quot;systemscheme&quot; class=&quot;align-center&quot; /&gt;
+&lt;em&gt;해당 연구의 패널 분석 결과.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;패널분석으로 도출한 변수 별 계수의 부호를 보면, 에너지가격은 음의 계수를, 1인당 GDP와 난방도일은 양의 계수를 갖는다. 일반적으로 에너지 가격이 상승하면 에너지 소비가 감소하고, GDP와 난방도일이 증가하면 에너지 소비가 증가할 것이라 예상하는데, 패널분석 결과가 예상과 일치한다.&lt;/p&gt;
+
+&lt;p&gt;에너지 효율 R&amp;amp;D 투자 축적은 전기에서는 계수가 통계적으로 유의하지 않았으나, 후기에서는 유의한 음의 계수를 가졌다. 이는 에너지 효율 R&amp;amp;D 투자가 에너지 절감에 기여한다는 예상과 일치하며, 그 효과가 교토의정서 채택 이후 본격적으로 나타났음을 의미한다.&lt;/p&gt;
+
+&lt;p&gt;(단, 고정효과 회귀와 1계차분 회귀의 계수들의 값들 및 유의성은 서로 다르다. 그래서 보통 두 회귀를 모두 수행 후, 부호가 일치하는지를 본다. 그리고 모든 항들에 자연로그를 취했으므로, 계수의 값은 ‘한 나라 내에서 다른 설명변수들의 불변 가정 하에 해당 설명변수가 현재 대비 1% 증가 시 반응변수의 퍼센트 기준 증감’을 의미한다.)&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;복원을-위한-데이터-수집&quot;&gt;복원을 위한 데이터 수집&lt;/h2&gt;
+
+&lt;p&gt;반응변수의 경우, &lt;a href=&quot;https://data.oecd.org/energy/primary-energy-supply.htm&quot;&gt;OECD database의 1차에너지 (primary energy supply)&lt;/a&gt; 를 사용하였다. 설명변수들 중 &lt;a href=&quot;https://data.oecd.org/gdp/gross-domestic-product-gdp.htm&quot;&gt;GDP&lt;/a&gt;, &lt;a href=&quot;https://data.oecd.org/pop/population.htm&quot;&gt;인구수&lt;/a&gt;, &lt;a href=&quot;https://stats.oecd.org/BrandedView.aspx?oecd_bv_id=enetech-data-en&amp;amp;doi=data-00488-en&quot;&gt;에너지효율 R&amp;amp;D 투자액&lt;/a&gt; 또한 OECD database에서 찾은 값들을 사용하였다. 에너지효율 R&amp;amp;D 투자액 자료를 누적 축적량으로 변환하는 방법은 에너지경제연구원 문헌에서 설명한 방법과 같다.&lt;/p&gt;
+
+&lt;p&gt;에너지가격의 경우, 해당 연구에서 사용한 자료를 그대로는 얻을 수 없었다. &lt;a href=&quot;https://www.oecd-ilibrary.org/energy/data/iea-energy-prices-and-taxes-statistics_eneprice-data-en&quot;&gt;IEA의 Energy prices and taxes Database&lt;/a&gt;가 유료회원 전용 자료이기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;그래서, 에너지가격을 누락변수 (ommited variable) 라 할 때, 해당 누락변수와 상관관계가 있어 도구변수 (instrumental variable) 로 쓸 수 있으면서 OECD database에서 구할 수 있는 자료인, &lt;a href=&quot;https://data.oecd.org/energy/crude-oil-import-prices.htm&quot;&gt;Crude oil import prices&lt;/a&gt;를 대신 사용하였다.&lt;/p&gt;
+
+&lt;p&gt;난방도일의 경우, 필자는 스위스/ 영국/ 일본 의 자료를 구할 수 없었다. (IHS와 IEEJ의 자료가 유료이며, 영국의 경우 EU에서 탈퇴하여 Eurostat에서 자료를 찾을 수 없었다.) 그래서, 최종적으로는 &lt;a href=&quot;https://ec.europa.eu/eurostat/web/energy/database&quot;&gt;해당 3개 국가를 제외한 나머지 9개 국가에 대한 자료&lt;/a&gt;를 사용하였다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;복원-결과&quot;&gt;복원 결과&lt;/h2&gt;
+
+&lt;p&gt;필자가 모은 데이터로 고정효과 회귀를 수행해 도출한 계수별 부호가, 기존 연구 결과와 일치하였다. 교토의정서 이후 기간과 전체 기간에 대해, R&amp;amp;D 투자액 축적과 에너지가격에 대해서는 음의 계수가, GDP와 난방도일에 대해서는 양의 계수가 유의미하게 도출되었다 (클러스터 표준오차 기준).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/energyeffpanel/result_fe_later.png&quot; alt=&quot;systemscheme&quot; class=&quot;align-center&quot; width=&quot;80%&quot; /&gt;
+&lt;img src=&quot;/assets/images/energyeffpanel/result_fe_whole.png&quot; alt=&quot;systemscheme&quot; class=&quot;align-center&quot; width=&quot;80%&quot; /&gt;
+&lt;em&gt;필자가 모은 데이터로 fixed effect 회귀를 수행한 결과. (위: 교토의정서 이후 기간, 아래: 전체기간)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Hausman test를 통해, 임의효과 (random effect) 가 아닌 고정효과 회귀를 수행해야 함도 확인하였다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/energyeffpanel/result_hausman.png&quot; alt=&quot;systemscheme&quot; class=&quot;align-center&quot; width=&quot;80%&quot; /&gt;
+&lt;em&gt;필자가 모은 데이터로 fixed effect 회귀를 수행한 결과. (위: 교토의정서 이후 기간, 아래: 전체기간)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;필자가 모은 데이터의 경우, 일계차분 회귀에서는 R&amp;amp;D 투자액 축적의 계수가 작아 유의미하지 않았다. 그러므로 일단은, 필자가 복원한 고정효과 모델에서 관측한 변수별 계수 부호가, 에너지경제연구원의 연구 원본에서의 그것과 같음을 확인했음에 의의를 둔다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;코드&quot;&gt;코드&lt;/h2&gt;
+
+&lt;p&gt;패널 분석에 사용한 R 코드는 아래와 같다. 필자가 사용한 데이터셋은 &lt;a href=&quot;https://github.com/song4energyndata/Codes/tree/main/paneldata/energyeffrnd&quot;&gt;GitHub Repo&lt;/a&gt;에 있다. Input 데이터 ($\texttt{energyrnd_rndpercapita.csv}$) 에서 첫 번째 열은 각 국가의 인덱스이며 (즉 서로 다른 숫자가 서로 다른 국가를 의미), 두 번째 열은 연도이다.&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;rm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setwd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dirname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rstudioapi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getActiveDocumentContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scriptpath&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getwd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;\014&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lmtest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sandwich&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;multiwayvcov&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;energyrnddat&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read.csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;energyrnd_rndpercapita.csv&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;energyrnddat.former&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;energyrnddat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;energyrnddat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;year&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1998&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 교토의정서 이전 기간&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;energyrnddat.later&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;energyrnddat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;energyrnddat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;year&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1997&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 교토의정서 이후 기간&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.former&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ecperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdpperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eprice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hdd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;accrndperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;energyrnddat.former&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;within&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.former&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Fixed effect regression&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coeftest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.former&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vcov&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vcovHC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.former&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sss&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cluster&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;group&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 클러스터 표준오차&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pwartest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.former&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.later&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ecperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdpperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eprice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hdd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;accrndperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;energyrnddat.later&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;within&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.later&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coeftest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.later&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vcov&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vcovHC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.later&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sss&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cluster&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;group&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pwartest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.later&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.whole&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ecperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdpperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eprice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hdd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;accrndperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;energyrnddat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;within&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.whole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coeftest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.whole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vcov&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vcovHC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.whole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sss&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cluster&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;group&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pwartest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.whole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.RE.former&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ecperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdpperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eprice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hdd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;accrndperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;energyrnddat.former&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;random&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;phtest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.former&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.RE.former&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Hausman test&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.RE.later&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ecperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdpperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eprice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hdd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;accrndperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;energyrnddat.later&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;random&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;phtest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FE.later&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.RE.later&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FD.former&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ecperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdpperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eprice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hdd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;accrndperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;energyrnddat.former&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;fd&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FD.former&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# First-order difference regression&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FD.later&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ecperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdpperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eprice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hdd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;accrndperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;energyrnddat.later&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;fd&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FD.later&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FD.whole&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ecperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdpperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eprice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hdd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;accrndperpop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;energyrnddat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;fd&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model.FD.whole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(위 R 코드 내 메서드들이, &lt;a href=&quot;https://product.kyobobook.co.kr/detail/S000001681310&quot;&gt;한치록 교수의 “패널데이터강의”&lt;/a&gt; 에 나오는 Stata 코드 기반 예제들에 대해 같은 데이터로 같은 결과를 도출함을 확인하였다.)&lt;/p&gt;
+</description>
+        <pubDate>Sun, 24 Sep 2023 00:00:00 +0900</pubDate>
+        <link>https://song4energyndata.github.io/energyeffpanel.html</link>
+        <guid isPermaLink="true">https://song4energyndata.github.io/energyeffpanel.html</guid>
+        
+        <category>에너지정책</category>
+        
+        <category>에너지효율</category>
+        
+        <category>회귀분석</category>
+        
+        
+        <category>policy</category>
+        
+      </item>
     
       <item>
         <title>논문 소개: Virtual power plant의 하루전시장 입찰 결정 (stochastic programming 기반)</title>
@@ -1055,117 +1190,6 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
         <pubDate>Sat, 19 Aug 2023 00:00:00 +0900</pubDate>
         <link>https://song4energyndata.github.io/jalalfive.html</link>
         <guid isPermaLink="true">https://song4energyndata.github.io/jalalfive.html</guid>
-        
-        <category>최적화</category>
-        
-        <category>게임이론</category>
-        
-        <category>에너지시스템</category>
-        
-        
-        <category>market</category>
-        
-      </item>
-    
-      <item>
-        <title>에너지시스템 최적화/게임이론 강의: 3) Desirable properties of market-clearing mechanisms</title>
-        <description>&lt;p&gt;이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 3강을 필자가 요약한 내용이다.&lt;/p&gt;
-
-&lt;!-- Courtesy of embedresponsively.com --&gt;
-
-&lt;div class=&quot;responsive-video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/hhtOAsXlxq8&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-  &lt;/div&gt;
-
-&lt;p&gt;(&lt;a href=&quot;https://www.jalalkazempour.com/teaching&quot;&gt;Course slides 링크&lt;/a&gt;)&lt;/p&gt;
-
-&lt;h2 id=&quot;market-clearing-mechanism이-추구하는-4가지-성질들&quot;&gt;Market clearing mechanism이 추구하는 4가지 성질들&lt;/h2&gt;
-
-&lt;p&gt;1강에서는 market clearing이 social welfare를 최대화하는 최적화 문제의 풀이 결과임을 보였고, 2강에서는 최적화 결과가 Nash 균형이므로 어떤 참가자도 해당 결과를 받아들일 것임을 보였다.&lt;/p&gt;
-
-&lt;p&gt;이는 market clearing mechanism이 ‘market efficiency’ 성질을 충족한다고도 볼 수 있다.&lt;/p&gt;
-
-&lt;p&gt;Market clearing mechanism이 추구하는 성질은 market efficiency를 포함해 4개가 있다.&lt;/p&gt;
-
-&lt;p&gt;1) Market efficiency : Social welfare가 최대화되고, 각 참가자들이 받아들일 수 있는 결과가 도출된다.&lt;/p&gt;
-
-&lt;p&gt;2) Incentive compatibility : 각 참가자들이 자신의 정보를 왜곡 없이 그대로 제공하는 것이 각자에게 최선임을 의미한다.
-이를테면 어떤 발전기의 발전단가가 MWh당 12달러일 경우, offering을 MWh당 12달러보다 높은 값이 아닌 12달러 그대로 하는 것이 본인에게 있어 최선의 전략인 경우를 말한다.&lt;/p&gt;
-
-&lt;p&gt;여기서 offering을 ‘일부러’ 발전단가보다 높이 불러 (즉 거짓 정보를 제공해서) 수익 증대를 추구하는 것을 ‘전략적인 (strategic)’ 행동이라 하며, ‘exercising market power’라는 표현도 쓴다.&lt;/p&gt;
-
-&lt;p&gt;3) Cost recovery : 모든 참가자들이 최소한 각자의 operational cost는 건질 수 있음을, 즉 모든 참가자들에 대해 각자의 non-negative profit이 보장됨을 의미한다. (단, 이는 capital cost 회수 가능 여부와는 무관하다)&lt;/p&gt;
-
-&lt;p&gt;4) Revenue adequacy : Market operator가 operation 수행 시 최소한 손해는 보지 않음을 의미한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture3_11.png&quot; alt=&quot;clearingexample&quot; /&gt;
-&lt;img src=&quot;/assets/images/jalal/Lecture3_14.png&quot; alt=&quot;clearingexample&quot; /&gt;
-&lt;img src=&quot;/assets/images/jalal/Lecture3_16.png&quot; alt=&quot;clearingexample&quot; /&gt;
-&lt;img src=&quot;/assets/images/jalal/Lecture3_19.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;lmp-based-market에서-충족되는-성질들은&quot;&gt;LMP-based market에서 충족되는 성질들은?&lt;/h2&gt;
-
-&lt;p&gt;안타깝게도, 위 4개 성질들을 ‘전부 다’ 충족하는 것은 불가능하다 (Hurwicz theorem으로 증명됨).&lt;/p&gt;
-
-&lt;p&gt;그렇다면 1강부터 설명한 LMP (Local Marginal Price) based market에서는 위 4가지 성질들 중 어떤 성질이 충족되고 어떤 성질은 충족되지 않을까?&lt;/p&gt;
-
-&lt;p&gt;충족되지 않는 성질은 incentive compatibility와 market efficiency이다.&lt;/p&gt;
-
-&lt;p&gt;극단적인 예로 발전기와 수요처가 하나씩인 시장이 있다고 하자. 이 때 수요처의 bid price를 발전기가 알고 있을 경우, 발전기는 offer price를 자신의 발전단가가 아니라 수요처의 bid price로 제시하는 ‘strategic offering’ 을 할 것이다. 따라서 incentive compatibility가 깨진다.&lt;/p&gt;
-
-&lt;p&gt;이러한 strategic offering을 할 경우 market-clearing price는 이전과 달라진다. 이전에는 모든 발전기가 offer price를 각자의 발전단가로 제시했고 그 결과 social welfare가 최대화되었으나, price가 달라지므로 더 이상 social welfare가 최대화되지 않는다. 따라서 market efficiency도 깨진다.&lt;/p&gt;
-
-&lt;p&gt;충족되는 성질은 revenue adequacy와 cost recovery이다. (단, cost recovery 충족은 뒤에서 볼 unit commitment (UC) 제약을 고려하지 않았을 때 성립한다.)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture3_28.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;unit-commitment-제약을-고려한-market-clearing&quot;&gt;Unit commitment 제약을 고려한 market clearing&lt;/h2&gt;
-
-&lt;p&gt;1강의 최적화 문제에서는 발전기의 ramping limit, 최소부하, 시동비용, 최소기동유지시간 및 최소정지유지시간 등의 unit commitment (UC) 제약들을 고려하지 않았다.&lt;/p&gt;
-
-&lt;p&gt;UC 제약을 추가하면 어떻게 될까? Ramping limit을 제외한 나머지 제약들이 이진변수 (binary variable) 들을 포함하므로 UC 제약을 문제에 추가하면 mixed-integer 문제가 된다. Mixed-integer 문제에서는 dual variable을 계산할 수 없으므로, market clearing price를 도출할 수 없다 (discrete feasible space에 대해서 sensitivity를 정의하기 곤란함)&lt;/p&gt;
-
-&lt;p&gt;실제 적용에서는, 우선 UC 조건을 고려하는 문제를 풀어 이진변수들의 값을 얻고, 해당 이진변수들 값을 고정한 상태에서 다시 문제를 풀어 dual variable들을 계산한다. 미국에서는 independent system operator (ISO) 가 각 발전기 별 UC 제약들을 받아서 UC 문제를 푼다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture3_52.png&quot; alt=&quot;clearingexample&quot; /&gt;
-&lt;img src=&quot;/assets/images/jalal/Lecture3_56.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;단, 이진변수의 값을 고정하면 market clearing price 결정에 (이진변수로만 반영할 수 있는) 시동비용 정보를 반영할 수 없다. 시동비용도 operation cost이므로, 이는 cost recovery 성질을 충족하지 못함을 의미한다. 시동비용의 비중이 큰 원자력/ 석탄화력 발전소에게 있어 이는 중요한 이슈이다.&lt;/p&gt;
-
-&lt;p&gt;이 때문에 uplift mechanism 등의 side payment를 운용하여 cost recovery를 보장할 수 있도록 한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;uc-제약에-대해-참고하면-좋은-문헌들&quot;&gt;UC 제약에 대해 참고하면 좋은 문헌들&lt;/h2&gt;
-
-&lt;p&gt;UC 제약은 다수의 이진변수를 포함하므로 최적화 문제 풀이 시간을 크게 증가시키거나 심지어는 현실적인 시간 내에 풀리지 않게 (intractable) 만드는 주범이다. 이 때문에 UC 제약을 다루는 데 대한 연구들이 수행되어 왔다.&lt;/p&gt;
-
-&lt;p&gt;참고할 만한 문헌들은 아래와 같다.&lt;/p&gt;
-
-&lt;p&gt;1) &lt;a href=&quot;https://doi.org/10.1109/TPWRS.2006.876672&quot;&gt;A computationally efficient mixed-integer linear formulation for the thermal unit commitment problem&lt;/a&gt;&lt;br /&gt;
-2) &lt;a href=&quot;https://doi.org/10.1109/TPWRS.2011.2162008&quot;&gt;Tight Mixed Integer Linear Programming Formulations for the Unit Commitment Problem&lt;/a&gt;&lt;br /&gt;
-3) &lt;a href=&quot;https://doi.org/10.1561/3100000014&quot;&gt;Unit Commitment in Electric Energy Systems&lt;/a&gt;&lt;br /&gt;
-4) &lt;a href=&quot;https://doi.org/10.1109/TPWRS.2017.2735026&quot;&gt;Representing Operational Flexibility in Generation Expansion Planning Through Convex Relaxation of Unit Commitment&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;notice--info&quot;&gt;
-
-Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&gt;&lt;br /&gt;
-
-01) &lt;a href=&quot;/jalalone.html&quot;&gt; Market clearing as an optimization problem&lt;/a&gt; &lt;br /&gt;
-02) &lt;a href=&quot;/jalaltwo.html&quot;&gt; Market clearing as an equilibrium problem&lt;/a&gt; &lt;br /&gt;
-03) &lt;b&gt; Desirable properties of market-clearing mechanisms&lt;/b&gt; &lt;br /&gt;
-04) Market clearing using a cooperative game approach &lt;br /&gt;
-05) &lt;a href=&quot;/jalalfive.html&quot;&gt; Stochastic market clearing&lt;/a&gt; &lt;br /&gt;
-06) &lt;a href=&quot;/jalalsix.html&quot;&gt; Robust approaches for market clearing&lt;/a&gt; &lt;br /&gt;
-07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
-08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
-09) &lt;a href=&quot;/jalalnine.html&quot;&gt; Benders’ decomposition: Theory&lt;/a&gt; &lt;br /&gt;
-10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt; &lt;br /&gt;
-11) &lt;a href=&quot;/jalaleleven.html&quot;&gt; Augmented Lagrangian relaxation&lt;/a&gt; &lt;br /&gt;
-12) &lt;a href=&quot;/jalaltwelve.html&quot;&gt; Variants of ADMM and applications&lt;/a&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Tue, 15 Aug 2023 00:00:00 +0900</pubDate>
-        <link>https://song4energyndata.github.io/jalalthree.html</link>
-        <guid isPermaLink="true">https://song4energyndata.github.io/jalalthree.html</guid>
         
         <category>최적화</category>
         

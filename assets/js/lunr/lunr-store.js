@@ -250,4 +250,10 @@ var store = [{
         "tags": ["전력시장","에너지시스템","VPP"],
         "url": "/vppintro.html",
         "teaser": "/assets/images/vppintro/vppconcept.png"
+      },{
+        "title": "에너지효율 R&D 투자효과 분석 (패널 데이터 기반) 연구 복원",
+        "excerpt":"에너지정책의 효과를 ‘정량적으로’ 분석하는 방법으로, 회귀분석의 일종인 ‘패널 분석’ (Panel data analysis) 이 있다. 이를테면 에너지경제연구원에서는 에너지효율 R&amp;D 투자가 에너지소비 감소에 기여했는지 여부를 검정하기 위해, “에너지효율향상 R&amp;D 투자효과 분석 및 정책방향 연구” 를 수행한 바 있다. 해당 연구에서는 1985년부터 2013년까지 연도별로 12개 국가 각각의 에너지소비량/ R&amp;D투자/ 통제대상변수들 데이터를 사용해, 에너지효율향상...","categories": ["policy"],
+        "tags": ["에너지정책","에너지효율","회귀분석"],
+        "url": "/energyeffpanel.html",
+        "teaser": "/assets/images/energyeffpanel/teaser.png"
       }]
