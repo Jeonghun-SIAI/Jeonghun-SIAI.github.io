@@ -1,0 +1,1055 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BBZ8BXY4N7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BBZ8BXY4N7');
+</script>
+  <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>재생발전 비중이 높은 전력시장에 대한 심화 주제들 | 에너지엔데이터연구소</title>
+<meta name="description" content="필자가 정리했던 Jalal Kazempour 교수의 전력시장 강의에서 reference로써 추천한 책으로, Integrating Renewables in Electricity Markets: Operational Problems 이 있다.">
+
+
+  <meta name="author" content="Jeonghun Song">
+  
+  <meta property="article:author" content="Jeonghun Song">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="에너지엔데이터연구소">
+<meta property="og:title" content="재생발전 비중이 높은 전력시장에 대한 심화 주제들">
+<meta property="og:url" content="https://song4energyndata.github.io/marketadvanced.html">
+
+
+  <meta property="og:description" content="필자가 정리했던 Jalal Kazempour 교수의 전력시장 강의에서 reference로써 추천한 책으로, Integrating Renewables in Electricity Markets: Operational Problems 이 있다.">
+
+
+
+  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/jalal/advanced.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-10-07T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://song4energyndata.github.io/marketadvanced.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "송정훈",
+      "url": "https://song4energyndata.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="naver-site-verification" content="7dda6777a2acc897ba51668ac7c58c380307dd6c">
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="에너지엔데이터연구소 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://song4energyndata.github.io/feed.xml">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<head>
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<!-- end custom head snippets -->
+  <style> 
+    ::-webkit-scrollbar{width: 12px;}
+    ::-webkit-scrollbar-track {background-color:#4b4f52; border-radius: 8px;}
+    ::-webkit-scrollbar-thumb {background-color:#5e6265; border-radius: 8px;}
+    ::-webkit-scrollbar-thumb:hover {background: #f7f6f3;}
+    ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment 
+    {width:12px;height:16px;background:transparent;} 
+  </style>
+</head>
+
+<body
+  class="layout--single">
+  <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+  
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          에너지엔데이터연구소
+          <span class="site-subtitle">에너지 데이터의 올바른 활용, 에너지 전환에 대한 데이터 기반의 합리적 솔루션</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/aboutme/">About Me</a>
+            </li><li class="masthead__menu-item">
+              <a href="/search/">Search</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tag</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">카테고리 목록</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+  <div class="initial-content">
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+    
+  
+  
+  
+  
+    
+    
+      
+    
+    
+  
+  
+   <!-- three lines added by Jeonghun  -->
+    
+
+<nav class="nav__list">
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">카테고리 목록</label>
+  <ul class="nav__items" id="category_tag_menu">
+      <!--전체 글 수-->
+      
+      <li>
+        <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
+        <span class="nav__sub-title">Categories</span>
+            <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">&#x2022 경제성분석 및 최적구성 도출 [10]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/market" class="">&#x2022 전력시장 모델링 [15]</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
+                <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/energymanagement" class="">&#x2022 제어 (최적화/ 강화학습) [5]</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/estimation" class="">&#x2022 예측 (회귀분석/ 머신러닝/ 딥러닝) [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/dataset" class="">&#x2022 데이터셋 (소개/ 전처리/ 활용안) [6]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/policy" class="">&#x2022 정책 (패널분석/ 시나리오분석) [1]</a></li>
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/mathstat" class="">&#x2022 수학/ 통계학 일반 [3]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/mypapers" class="">&#x2022 My papers [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/etc" class="">&#x2022 Etc. [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+      </li>
+  </ul>
+</nav>
+  
+  
+
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="재생발전 비중이 높은 전력시장에 대한 심화 주제들">
+    <meta itemprop="description" content="필자가 정리했던 Jalal Kazempour 교수의 전력시장 강의에서 reference로써 추천한 책으로, Integrating Renewables in Electricity Markets: Operational Problems 이 있다.">
+    <meta itemprop="datePublished" content="2023-10-07T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://song4energyndata.github.io/marketadvanced.html" class="u-url" itemprop="url">재생발전 비중이 높은 전력시장에 대한 심화 주제들
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-10-07T00:00:00+09:00">2023-10-07</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#예비력을-포함한-market-clearing">예비력을 포함한 market clearing</a></li><li><a href="#stochastic-market-clearing-시의-매출-계산">Stochastic market clearing 시의 매출 계산</a></li><li><a href="#실시간-시장에서-각-참가자들의-수익">실시간 시장에서 각 참가자들의 수익</a></li><li><a href="#재생발전의-merit-order-effect">재생발전의 merit-order effect</a></li><li><a href="#flexible-demand의-수리모델">Flexible demand의 수리모델</a></li><li><a href="#flexible-demand-예시-thermal-comfort를-고려한-열부하의-전기-사용량">Flexible demand 예시: Thermal comfort를 고려한 열부하의 전기 사용량</a></li></ul>
+ <!-- 우측 TOC -->
+            </nav>
+          </aside>
+        
+        <p>필자가 정리했던 <a href="https://song4energyndata.github.io/jalalone.html">Jalal Kazempour 교수의 전력시장 강의</a>에서 reference로써 추천한 책으로, <a href="https://link.springer.com/book/10.1007/978-1-4614-9411-9">Integrating Renewables in Electricity Markets: Operational Problems</a> 이 있다.</p>
+
+<p>강의 내용에 더해 해당 책을 공부하며, 하루전 시장과 실시간 시장으로 구성된 전력시장의 수리모델링에 대해 더 깊게 이해할 수 있었다.</p>
+
+<p>앞으로 우리나라에서도 <a href="https://www.electimes.com/news/articleView.html?idxno=325061">2024년부터 제주도에서 실시간 시장이 시범 실시되며 몇 년 내로 육지에서도 실시될 예정</a>인 만큼, 에너지시스템 모델링 전문가를 지향한다면 해당 주제에 대해 미리 공부해놓는 것이 당연하다 하겠다.</p>
+
+<p>이번 포스팅에서는, 해당 책 내용 중 Jalal 교수의 강의에서 다루지 않았으나 현실 세계에서 자주 볼 법한, 그러면서도 지나치게 복잡하지는 않은 (즉 우선순위가 높아 보이는) 모델들을 정리하였다.</p>
+
+<p><br /></p>
+<h2 id="예비력을-포함한-market-clearing">예비력을 포함한 market clearing</h2>
+
+<p>급전 계획에서 각 발전기의 출력은, 총 공급과 총 수요가 일치하도록 결정된다. 그런데 실제로는, 계획 대비 실시간에서의 총 수요가 더 클 수 있다. 이 때 수요 증가에 ‘신속하게’ 대응할 수 있도록, 예비력 (reserve capacity) 을 확보해야 한다.</p>
+
+<p>예비력을 제공하는 발전기에 대해, 급전과 별개로 예비력에 대해서도 비용을 지불하는 경우에 대한 최적 계획 문제를 보자.</p>
+
+<p>발전기 A는 용량 100 MW, offer price는 MWh당 10달러이고, 발전기 B는 용량 100 MW, offer price는 MWh당 20달러이다.</p>
+
+<p>한편 예상되는 총 수요는 130 MW 이지만, 예비력을 20 MW 확보해야 한다. 발전기 A는 예비력을 무상으로 제공하는 반면, 발전기 B의 예비력에 대한 offer price는 MW당 25달러이다.</p>
+
+<p>이 때 발전량과 예비력을 동시에 구하는 market clearing problem은 아래와 같다. (Unit commitment 제약들은 무시했다.)</p>
+
+<p>Min. $10 P_A + 30 P_B + 0 R_A + 25 R_B$</p>
+
+<p>Subject to</p>
+
+<p>$ P_A + P_B = 130$ : $\lambda_P$</p>
+
+<p>$ R_A + R_B = 20$ : $\lambda_R$</p>
+
+<p>$ P_A + R_A \leq 100$, $P_A \geq 0$, $R_A \geq 0$</p>
+
+<p>$ P_B + R_B \leq 100$, $P_B \geq 0$, $R_B \geq 0$</p>
+
+<p>예상 수요와 요구되는 예비력을 충족해야 하면서, 각 발전기 별로 실제 발전량과 예비력 제공량의 합이 용량을 초과할 수 없다는 제약 하에, 비용을 최소화하는 발전기 별 발전량과 예비력 제공량을 구한다.</p>
+
+<p>이 때 예상 수요 충족 제약의 dual variable $\lambda_P$는 energy price이고, 요구되는 예비력 충족 제약의 dual variable $\lambda_R$은 reserve capacity price이다.</p>
+
+<p><br />
+위 문제에서는 예비력 제공량이 미리 정해진 요구치 20 MW 를 반드시 충족해야 했다. 여기에는, 총 수요가 갑자기 20 MW 증가할 가능성이 어느 정도 있으며 해당 수요 증가분을 충족하지 못할 경우 심각한 손해를 입을 것이라는 가정이 암묵적으로 깔려 있다.</p>
+
+<p>만약 수요가 갑자기 20 MW 증가할 가능성이 매우 낮거나, 증가한 수요를 충족하지 못하더라도 그로 인해 입는 손실이 그다지 크지 않다면, 예비력을 20 MW 제공하는 것이 경제성 측면에서 최선이 아닐 수 있다.</p>
+
+<p>이를테면 수요가 갑자기 20 MW 증가할 확률이 5퍼센트이고, 갑자기 증가한 수요를 충족하지 못할 경우의 경제적 손실은 MWh당 1000달러라 하자. 이 때 예비력 제공량을 결정하는 문제는 아래와 같다.</p>
+
+<p>Min. $10 P_A + 30 P_B + 0 R_A + 25 R_B + 0.05 (10 r_A + 30 r_B + 1000 L^{shed})$</p>
+
+<p>Subject to</p>
+
+<p>$r_A \leq R_A$</p>
+
+<p>$r_B \leq R_B$</p>
+
+<p>$ P_A + P_B = 130$ : $\lambda_P$</p>
+
+<p>$ P_A + R_A \leq 100$</p>
+
+<p>$ P_B + R_B \leq 100$</p>
+
+<p>$ r_A + r_B + L^{shed} = 20 $</p>
+
+<p>$P_A, P_B, R_A, R_B, r_A, r_B, L^{shed} \geq 0$</p>
+
+<p>위에서 $r_A$와 $r_B$는 총 수요가 20 MW 증가할 경우에 각 발전기의 출력 증가량이고, $ L^{shed}$는 증가한 수요 중 충족하지 못한 양이다.</p>
+
+<p>이 문제를 풀어 얻는 $R_A + R_B$가 예비력 제공량이다. 수요 증가 확률 및 공급 부족에 의한 손실이 얼마나 큰가에 따라, 최적의 예비력 제공량은 20 MW 일 수도, 그보다 작을 수도, 아예 0일 수도 있다.</p>
+
+<p><br /></p>
+<h2 id="stochastic-market-clearing-시의-매출-계산">Stochastic market clearing 시의 매출 계산</h2>
+
+<p>Stochastic market clearing 문제에서 하루전 시장 수요-공급 일치 조건의 (bus $n$에서의) dual variable을 $\lambda_n^{D}$라 하자. 그러면 하루전 시장에서의 가격은 $\lambda_n^{D}$이다.</p>
+
+<p>한편 실시간 시장에서 시나리오 $\omega$ 하에 수요-공급 일치 조건의 dual variable을 $\gamma_{n \omega}$라 하자. 그리고 시나리오 $\omega$의 확률을 $\pi_{\omega}$라 하자. 그러면 해당 시나리오 하에 실시간 시장에서의 가격은 $\pi_{\omega}$이다.</p>
+
+<p>하루전 시장과 실시간 시장에서의 총 매출은, 하루전 시장에서 계획된 에너지 판매량을 $E$, 실시간 시장에서 시나리오 $\omega$ 하에 balancing을 위해 ‘추가적으로’ 판매하거나 수요처인 경우 소비를 줄인 에너지를 $\Delta E_{\omega}$라 할 때 아래와 같이 계산된다.</p>
+
+<p>$\lambda_n^{D} E + (\gamma_{n \omega}/\pi_{\omega}) \Delta E_{\omega}$</p>
+
+<p>$\gamma_{n \omega}$를 $\pi_{\omega}$로 나눠주는 이유는, 하루전 시장과 실시간 시장을 모두 포함하는 최적화 문제에서는 각 시나리오 별 subproblem의 목적함수에 이미 $\pi_{\omega}$가 곱해져 있으므로, dual variable이 ‘$\pi_{\omega}$만큼 scaling된’ sensitivity이기 때문이다.</p>
+
+<p>($E$가 음수면 에너지를 소비한 것, $\Delta E$가 음수면 발전량을 줄이거나 에너지를 추가로 소비한 것이다.)</p>
+
+<p><br /></p>
+<h2 id="실시간-시장에서-각-참가자들의-수익">실시간 시장에서 각 참가자들의 수익</h2>
+
+<p>하루전 시장에서의 market clearing price를 $\lambda^{S}$, 실시간 시장에서의 market clearing price를 $\lambda^{B}$라 하자.</p>
+
+<p>만약 실시간 시장에서의 total ‘net’ demand (총 부하에서 재생발전을 뺀 ‘순’부하) 가 ‘계획된’ 급전발전량을 초과하면 (즉 excess consumption이면), 도출된 market clearing price들에 대해 $\lambda^{B} \geq \lambda^{S}$ 가 성립한다.</p>
+
+<p>또한 하루전 시장에서와 실시간 시장에서의 순부하를 각각 $P_N^{S}$와 $P_N^{B}$라 할 때, 급전가능 발전기들은 전일시장에서 총합 $P_N^{S}$만큼의 전력을 공급하기로 계획되었을 것이므로, 실시간 시장에서 급전가능 발전기들이 추가로 얻는 총 매출은 $(P_N^{B}-P_N^{S}) \lambda^{B} &gt; 0$ 이다.</p>
+
+<p>이 때 각각의 재생 (즉 급전불가능) 발전기 $j$가 실시간 시장에서 얻는 매출은 얼마일까?</p>
+
+<p>재생발전기 $j$가 하루전 시장에서 예상한 발전량을 $P_{Uj}^{S}$, 실시간 시장에서의 실제 발전량을 $P_{Uj}^{B}$라 하자. 그러면 실시간 시장에서의 매출은 $(P_{Uj}^{B} - P_{Uj}^{S}) \lambda^{B}$ 이다.</p>
+
+<p>만약 재생발전기 $j$가 ‘하루전 시장에서 예상된 발전량 대비’ 실제로 더 적게 발전했다면, 즉 $P_{Uj}^{B} &lt; P_{Uj}^{S}$ 라면, 매출은 음수이다.</p>
+
+<p>이를 ‘급전발전기로부터 $(P_{Uj}^{B} - P_{Uj}^{S})$ 만큼의 전력을 구입해서 계획된 발전량을 맞추는 것’으로 해석한다면, $\lambda^{B} \geq \lambda^{S}$ 이므로 ‘실시간 시장에서 하루전 시장 대비 더 비싼 가격으로 전기를 구입하는’ penalty를 감수하는 셈이다. 이 penalty는 ‘재생발전기 $j$가 excess consumption을 악화시키는 역할을 했으므로’ 받는 것으로 해석할 수 있다.</p>
+
+<p>반대로 재생발전기 $j$가 ‘하루전 시장에서 예상된 발전량 대비’ 실제로 더 많이 발전했다면, 즉 $P_{Uj}^{B} &gt; P_{Uj}^{S}$ 라면, 매출은 양수이다.</p>
+
+<p>이는 ‘실시간 시장에서 $(P_{Uj}^{B} - P_{Uj}^{S})$ 만큼의 전력을 하루전 시장 대비 더 비싼 가격으로 판매하는’ advantage를 얻는 셈이다. 이 advantage는 ‘재생발전기 $j$가 (비록 자기의지는 아니지만) excess consumption을 해소하는 역할을 했으므로’ 얻는 것으로 해석할 수 있다.</p>
+
+<p>한편 수요처 $k$에서도 하루전 시장에서 계획한 부하 $P_{Dk}^{S}$와 실시간 시장에서의 실제 부하 $P_{Dk}^{B}$가 서로 다를 수 있다. 그러면 실시간 시장에서 지불해야 하는 금액은 $(P_{Dk}^{B} - P_{Dk}^{S}) \lambda^{B}$ 이다.</p>
+
+<p>만약 수요처 $k$가 ‘하루전 시장에서 계획된 부하 대비’ 실제로 더 많은 에너지를 소비했다면, 즉 $P_{Dk}^{B} &gt; P_{Dk}^{S}$ 라면, 지불해야 하는 금액은 양수이다.</p>
+
+<p>이는 부하 증가에 의한 추가적인 에너지를 ‘하루전 시장 대비 더 비싼 가격으로 구매하는’ penalty를 감수하는 셈이다. 이 penalty는 ‘부하 $k$가 excess consumption을 악화시키는 역할을 했으므로’ 받는 것으로 해석할 수 있다.</p>
+
+<p>반대로 수요처 $k$가 ‘하루전 시장에서 계획된 부하 대비’ 실제로 더 적은 에너지를 소비했다면, 즉 $P_{Dk}^{B} &lt; P_{Dk}^{S}$ 라면, 지불해야 하는 금액은 음수이다.</p>
+
+<p>이는 부하 감소에 의한 잉여 에너지를 ‘하루전 시장 대비 더 비싼 가격으로 판매하는’ advantage를 얻는 셈이다. 이 advantage는 ‘부하 $k$가 excess consumption을 해소하는 역할을 했으므로’ 얻는 것으로 해석할 수 있다.</p>
+
+<p><br />
+지금까지의 논의와 반대로, 만약 실시간 시장에서의 total ‘net’ demand (총 부하에서 재생발전을 뺀 ‘순’부하) 가 ‘계획된’ 급전발전량보다 적으면 (즉 excess production이면), 도출된 market clearing price들에 대해 $\lambda^{B} \leq \lambda^{S}$ 가 성립한다.</p>
+
+<p>이 경우 급전가능 발전기들이 하루전 시장 대비 출력을 줄임으로써 시장에 되돌려줘야 하는 금액의 총 합은 $(P_N^{S}-P_N^{B}) \lambda^{B} &gt; 0$ 이다.</p>
+
+<p>재생발전기 $j$가 ‘하루전 시장에서 예상된 발전량 대비’ 실제로 더 적게 발전했다면, 실시간 시장에서의 매출 $(P_{Uj}^{B} - P_{Uj}^{S}) \lambda^{B}$ 은 음수이다.</p>
+
+<p>이는 실시간 시장으로부터 $(P_{Uj}^{B} - P_{Uj}^{S})$ 만큼의 전력을 ‘더 저렴한 가격으로’ 구매하는 advantage를 얻는 셈이다. 이 advantage는 ‘재생발전기 $j$가 (비록 자기의지는 아니지만) excess production을 해소하는 역할을 했으므로’ 얻는 것으로 해석할 수 있다.</p>
+
+<p>반대로 재생발전기 $j$가 ‘하루전 시장에서 예상된 발전량 대비’ 실제로 더 많이 발전했다면, 실시간 시장에서의 매출 $(P_{Uj}^{B} - P_{Uj}^{S}) \lambda^{B}$ 은 양수이다.</p>
+
+<p>이는 실시간 시장에서 $(P_{Uj}^{B} - P_{Uj}^{S})$ 만큼의 잉여전력을 ‘더 낮은 가격에’ 판매하는 penalty를 감수하는 셈이다. 이 penalty는 ‘재생발전기 $j$가 excess production을 악화시키는 역할을 했으므로’ 받는 것으로 해석할 수 있다.</p>
+
+<p>한편 수요처 $k$가 실시간 시장에서 지불해야 하는 금액은 $(P_{Dk}^{B} - P_{Dk}^{S}) \lambda^{B}$ 이다.</p>
+
+<p>만약 수요처 $k$가 ‘하루전 시장에서 계획된 부하 대비’ 실제로 더 많은 에너지를 소비했다면, 즉 $P_{Dk}^{B} &gt; P_{Dk}^{S}$ 라면, 지불해야 하는 금액은 양수이다.</p>
+
+<p>이는 부하 증가에 의한 추가적인 에너지를 ‘하루전 시장 대비 더 저렴한 가격으로 구매하는’ advantage를 얻는 셈이다. 이 penalty는 ‘부하 $k$가 excess production을 해소하는 역할을 했으므로’ 받는 것으로 해석할 수 있다.</p>
+
+<p>반대로 수요처 $k$가 ‘하루전 시장에서 계획된 부하 대비’ 실제로 더 적은 에너지를 소비했다면, 즉 $P_{Dk}^{B} &lt; P_{Dk}^{S}$ 라면, 지불해야 하는 금액은 음수이다.</p>
+
+<p>이는 부하 감소에 의한 잉여 에너지를 ‘하루전 시장 대비 더 비싼 가격으로 판매하는’ penalty를 감수하는 셈이다. 이 advantage는 ‘부하 $k$가 excess production을 악화시키는 역할을 했으므로’ 얻는 것으로 해석할 수 있다.</p>
+
+<p><br /></p>
+<h2 id="재생발전의-merit-order-effect">재생발전의 merit-order effect</h2>
+
+<p>태양광/ 풍력 등 재생발전원은 일단 설치되었다면 일반적으로 ‘1단위의 전기를 더 생산하기 위한 marginal cost’가 거의 zero이다.</p>
+
+<p>그러므로 급전 시 최우선순위를 부여받고, marginal cost가 상대적으로 작은 급전가능 발전기들로도 net demand를 충당할 수 있게 된다. Marginal cost가 높은 급전가능 발전기들의 순위는 밀리게 된다.</p>
+
+<p>그 결과, 재생발전 비중이 증가할수록 전력 도매가격이 하락하는데, 이를 merit-order effect라 한다.</p>
+
+<p>한편 재생발전 비중이 높으면 수요-공급 곡선에서 공급곡선 위치의 불확실성이 증가하므로, 이에 따라 수요곡선과 공급곡선이 만나는 점 및 시장가격의 불확실성도 증가한다.</p>
+
+<p><img src="/assets/images/jalal/Lecture7_8.png" alt="clearingexample" /></p>
+
+<p><br /></p>
+<h2 id="flexible-demand의-수리모델">Flexible demand의 수리모델</h2>
+
+<p>Flexible demand란, ‘일정 범위 내에서’ 전기 소비량을 결정할 수 있으며, 하루전 시장에서 계획된 부하를 실시간 시장에서 능동적으로 변경할 수 있는 전기 수요를 말한다.</p>
+
+<p>Flexible demand $k$에 대해, 하루전 시장에서 $t$시에 대해 계획된 부하를 $d_k(t)$, 실시간 시장에서 stochasticity scenario $\omega$가 실현된 경우의 실제 부하를 $d_{k \omega}(t)$, 계획된 부하 대비 실제 부하를 증가시킬 경우 (발전기로 치면 down-regulation) 그 증가분을 $c_{k \omega}^{D}(t)$, 계획된 부하 대비 실제 부하를 감소시킬 경우 (발전기로 치면 up-regulation) 그 감소분을 $c_{k \omega}^{U}(t)$ 라 하자.</p>
+
+<p>그리고 각 시간별로 flexible demand $k$의 $t$시 부하의 하한과 상한을 각각 $D_k^{min}(t)$ 와 $D_k^{max}(t)$, ‘하루 동안에 최소로 공급되어야 하는 총 에너지’를 $E_k^{day}$라 하자.</p>
+
+<p>그러면, 아래 수식들이 성립한다.</p>
+
+<p>$d_{k \omega}(t) = d_k(t) + c_{k \omega}^{D}(t) - c_{k \omega}^{U}(t) $</p>
+
+<p>$0 \leq c_{k \omega}^{D}(t) \leq D_k^{max}(t) - d_k(t)$</p>
+
+<p>$0 \leq c_{k \omega}^{U}(t) \leq d_k(t) - D_k^{min}(t) $</p>
+
+<p>$\sum_{t=1}^T d_{k \omega}(t) \geq E_k^{day} $</p>
+
+<p>만약 발전기의 ramping limit처럼 flexible demand에서도 1시간 동안 감소시키거나 증가시킬 수 있는 부하량 각각의 상한이 $D_k^{D}$와 $D_k^{U}$로 존재한다고 하면, 아래 수식들도 성립한다.</p>
+
+<p>$ d_{k \omega}(t) - d_{k \omega}(t-1) \leq D_k^{U}$</p>
+
+<p>$ d_{k \omega}(t-1) - d_{k \omega}(t) \leq D_k^{D}$</p>
+
+<p>Flexible demand의 최적의 스케줄 도출을 위해서는 목적함수에 flexible demand에 대한 term들을 추가해야 한다. 이 때 해당 flexible demand가 전기를 공급받아서 얻는 ‘효용 (utility)’, 그리고 실시간 시장에서 부하를 조정해서 얻는 효용을 반영해야 한다.</p>
+
+<p>해당 flexible demand가 단위 전기를 공급받을 때 얻는 효용을 $U_k(t)$, 실시간 시장에서 부하를 늘릴 때 (down-regulation)와 줄일 때 (up-regulation) 얻는 효용을 각각 $U_k^{D}(t)$와 $U_k^{U}(t)$라 하자. 그리고 시나리오 $\omega$의 확률을 $\pi_{\omega}$라 하자.</p>
+
+<p>그러면 flexible demand가 얻는 총 효용은 아래와 같다.</p>
+
+<p>\begin{align} 
+\sum_{t=1}^T \lbrace U_k(t) d_k(t) + \sum_{\omega} \pi_{\omega} [U_k^{D}(t) c_{k \omega}^{D}(t) - U_k^{U}(t) c_{k \omega}^{U}(t)] \rbrace
+\notag
+\end{align}</p>
+
+<p><br /></p>
+<h2 id="flexible-demand-예시-thermal-comfort를-고려한-열부하의-전기-사용량">Flexible demand 예시: Thermal comfort를 고려한 열부하의 전기 사용량</h2>
+
+<p>Demand response (DR) 모델링 시, 수요처가 부하로부터 얻는 ‘효용 (utility)’과 부하를 줄여서 얻는 보상을 비교해서 DR 스케줄을 결정하게 된다.</p>
+
+<p>건물에서 냉난방기기를 제어해 DR을 수행할 경우, 주로 실내온도의 함수로 주어지는 ‘thermal comfort’를 효용으로 둔다. 즉 대상 건물에서 시간별로 가장 선호되는 기준 실내온도를 정한 후, 실제 실내온도가 기준온도에서 많이 벗어날수록 효용이 적다고, 즉 thermal ‘dis’comfort가 크다고 본다.</p>
+
+<p>시간 $t$에서의 기준 실내온도를 $\hat{x}^{i}_t$, 실제 실내온도를 $x^{i}_t$로 두자. 그러면, ‘기준온도보다 높아도 낮아도 효용이 줄어드는’ 것을 고려해 목적함수의 thermal discomfort term을 $\sum_{t} c (x^{i}_t - \hat{x}^{i}_t)^2$ 로 둘 수 있다 ($c$는 comfort의 가치를 반영하는 계수이며, $c$가 클수록 comfort를 중요하게 생각한다).</p>
+
+<p>목적함수에는 thermal discomfort term 뿐 아니라, 건물 온도를 기준 온도에 가깝게 유지하는 데 드는 에너지 요금도 포함되어야 한다. 그래야 thermal comfort와 에너지 사용 간 trade-off를 구할 수 있기 때문이다.</p>
+
+<p>해당 건물이 난방을 전기온수보일러로 수행하고, 전기온수보일러의 시간 $t$에서의 전기 소비량 $u_t$와 온수탱크 내 온도 $x^{w}_t$ 및 실내온도 $x^{i}_t$ 간의 관계를 아래와 같은 linear state-space model로 나타낼 수 있다고 하자.</p>
+
+<p>\begin{align}
+\begin{bmatrix}
+  x^{i}_{t+1} \newline
+  x^{w}_{t+1}
+  \end{bmatrix} = \begin{bmatrix}
+  a_{11} &amp; a_{12} \newline
+  0 &amp; a_{22}
+  \end{bmatrix} \begin{bmatrix}
+  x^{i}_{t} \newline
+  x^{w}_{t}
+  \end{bmatrix} + \begin{bmatrix}
+  0 \newline
+  b_2
+  \end{bmatrix} u_t
+\notag
+\end{align}</p>
+
+<p>그러면 최적화 문제는, 위 linear state-space model을 제약조건으로 하고 아래의 항을 목적함수로 하는 quadratic programming problem이 된다.</p>
+
+<p>$ \sum_{t} c (x^{i}_t - \hat{x}^{i}_t)^2 + \lambda^{R}_t u_t$</p>
+
+<p>여기서 $\lambda^{R}_t$는 시간 $t$에서의 사용량요금이다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#%EC%97%90%EB%84%88%EC%A7%80%EC%8B%9C%EC%8A%A4%ED%85%9C" class="page__taxonomy-item p-category" rel="tag">에너지시스템</a><span class="sep">, </span>
+    
+      <a href="/tags/#%EC%A0%84%EB%A0%A5%EC%8B%9C%EC%9E%A5" class="page__taxonomy-item p-category" rel="tag">전력시장</a>
+    
+    </span>
+  </p>
+
+
+
+<!-- 
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#market" class="page__taxonomy-item p-category" rel="tag">market</a>
+    
+    </span>
+  </p>
+
+ -->
+        <!-- 
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-10-07T00:00:00+09:00">2023-10-07</time></p>
+ -->
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%9E%AC%EC%83%9D%EB%B0%9C%EC%A0%84+%EB%B9%84%EC%A4%91%EC%9D%B4+%EB%86%92%EC%9D%80+%EC%A0%84%EB%A0%A5%EC%8B%9C%EC%9E%A5%EC%97%90+%EB%8C%80%ED%95%9C+%EC%8B%AC%ED%99%94+%EC%A3%BC%EC%A0%9C%EB%93%A4%20http%3A%2F%2Flocalhost%3A4000%2Fmarketadvanced.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmarketadvanced.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fmarketadvanced.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      <p></p>
+        <!-- <h4 class="page__meta-title"><span>market</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
+        
+
+
+  
+
+  
+  	
+  	
+  	
+  	
+  	
+
+<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
+
+  
+    
+      <a href="/koreanmarketrules.html" class="pagination_prev_next--pager"><span class="prev_next">다음 글  &nbsp  </span>국내 전력시장 주요 운영규칙 핵심사항 정리</a>
+    
+    
+      <a href="/vppintro.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>논문 소개: Virtual power plant의 하루전시장 입찰 결정 (stochastic programming 기반)</a>
+        
+  
+
+</nav>
+      <p></p>
+    </div>
+
+    
+  </article>
+
+  
+  <!-- 
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/koreanmarketrules.html" rel="permalink">국내 전력시장 주요 운영규칙 핵심사항 정리
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-10-22T00:00:00+09:00">2023-10-22</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">최근 에너지 플랫폼 업계 현직자들과 대화를 하며, 국내 전력시장 운영규칙을 상세히 알 필요성을 느꼈다. 본격적으로 에너지 플랫폼 업계에 종사한다면 전력시장 입찰을 전제로 한 에너지 설비들의 데이터 및 비즈니스 모델을 주로 분석하게 될 것이라 생각했기 때문이다. (그간 필자는 BTM...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/evestimate.html" rel="permalink"><img src="/assets/images/evestimates/teaser.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/evestimate.html" rel="permalink">논문 소개: 전기차 충전 이력 데이터 기반의, 계통 내 시간별 전기차 충전 부하 시뮬레이션
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-10-21T00:00:00+09:00">2023-10-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">전기차 및 충전 인프라 규모가 증가할수록 전력계통에 걸리는 부하가 증가한다. 그러므로 향후 발전/ 송전/ 배전 (특히 배전단) 설비 및 스케줄링 계획 수립을 위해, 전기차 충전으로 인한 시간별 부하 증가를 정확히 예측할 필요가 있다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/energyeffpanel.html" rel="permalink"><img src="/assets/images/energyeffpanel/teaser.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/energyeffpanel.html" rel="permalink">에너지효율 R&amp;D 투자효과 분석 (패널 데이터 기반) 연구 복원
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-09-24T00:00:00+09:00">2023-09-24</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">에너지정책의 효과를 ‘정량적으로’ 분석하는 방법으로, 회귀분석의 일종인 ‘패널 분석’ (Panel data analysis) 이 있다. 이를테면 에너지경제연구원에서는 에너지효율 R&amp;D 투자가 에너지소비 감소에 기여했는지 여부를 검정하기 위해, “에너지효율향상 R&amp;D ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/vppintro.html" rel="permalink"><img src="/assets/images/vppintro/vppconcept.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/vppintro.html" rel="permalink">논문 소개: Virtual power plant의 하루전시장 입찰 결정 (stochastic programming 기반)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-09-10T00:00:00+09:00">2023-09-10</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Virtual power plant (VPP, 가상발전소) 는 급전가능발전원 (가스터빈 등), 급전불가능발전원 (태양광/ 풍력 등), 에너지저장장치 (배터리/ 양수발전 등) 등 여러 발전/ 전력저장 설비들을 클라우드 등 IT기술 기반으로 한꺼번에 제어해 단일 주체로써 전력시장에 입...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div> -->
+  
+  <!--  -->
+</div>
+
+  </div>
+
+  
+
+  <aside class="sidebar__top">
+    <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside>
+
+  <div id="footer" class="page__footer">
+    <footer>
+      <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+      <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Contact:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:song4energy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+          <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 송정훈. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+    </footer>
+  </div>
+
+  
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -256,4 +256,22 @@ var store = [{
         "tags": ["에너지정책","에너지효율","회귀분석"],
         "url": "/energyeffpanel.html",
         "teaser": "/assets/images/energyeffpanel/teaser.png"
+      },{
+        "title": "재생발전 비중이 높은 전력시장에 대한 심화 주제들",
+        "excerpt":"필자가 정리했던 Jalal Kazempour 교수의 전력시장 강의에서 reference로써 추천한 책으로, Integrating Renewables in Electricity Markets: Operational Problems 이 있다. 강의 내용에 더해 해당 책을 공부하며, 하루전 시장과 실시간 시장으로 구성된 전력시장의 수리모델링에 대해 더 깊게 이해할 수 있었다. 앞으로 우리나라에서도 2024년부터 제주도에서 실시간 시장이 시범 실시되며 몇 년 내로 육지에서도...","categories": ["market"],
+        "tags": ["전력시장","에너지시스템"],
+        "url": "/marketadvanced.html",
+        "teaser": "/assets/images/jalal/advanced.png"
+      },{
+        "title": "논문 소개: 전기차 충전 이력 데이터 기반의, 계통 내 시간별 전기차 충전 부하 시뮬레이션",
+        "excerpt":"전기차 및 충전 인프라 규모가 증가할수록 전력계통에 걸리는 부하가 증가한다. 그러므로 향후 발전/ 송전/ 배전 (특히 배전단) 설비 및 스케줄링 계획 수립을 위해, 전기차 충전으로 인한 시간별 부하 증가를 정확히 예측할 필요가 있다. 이를테면 McKinsey에서는 150세대의 주거지역 배전단에서 가정 내 전기차 비중이 25%가 되면 아래 그림과 같이 모든 시간의 전기부하가...","categories": ["dataset"],
+        "tags": ["전기차","부하패턴","Clustering","GMM"],
+        "url": "/evestimate.html",
+        "teaser": "/assets/images/evestimates/teaser.png"
+      },{
+        "title": "국내 전력시장 주요 운영규칙 핵심사항 정리",
+        "excerpt":"최근 에너지 플랫폼 업계 현직자들과 대화를 하며, 국내 전력시장 운영규칙을 상세히 알 필요성을 느꼈다. 본격적으로 에너지 플랫폼 업계에 종사한다면 전력시장 입찰을 전제로 한 에너지 설비들의 데이터 및 비즈니스 모델을 주로 분석하게 될 것이라 생각했기 때문이다. (그간 필자는 BTM (Behind-the-Meter) 단의 에너지 설비 도입을 통한 수요처 에너지 요금 절감량 분석 프로젝트들을...","categories": ["market"],
+        "tags": ["전력시장"],
+        "url": "/koreanmarketrules.html",
+        "teaser": null
       }]

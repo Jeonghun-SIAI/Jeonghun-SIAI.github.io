@@ -1,0 +1,1025 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BBZ8BXY4N7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BBZ8BXY4N7');
+</script>
+  <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>국내 전력시장 주요 운영규칙 핵심사항 정리 | 에너지엔데이터연구소</title>
+<meta name="description" content="최근 에너지 플랫폼 업계 현직자들과 대화를 하며, 국내 전력시장 운영규칙을 상세히 알 필요성을 느꼈다. 본격적으로 에너지 플랫폼 업계에 종사한다면 전력시장 입찰을 전제로 한 에너지 설비들의 데이터 및 비즈니스 모델을 주로 분석하게 될 것이라 생각했기 때문이다. (그간 필자는 BTM (Behind-the-Meter) 단의 에너지 설비 도입을 통한 수요처 에너지 요금 절감량 분석 프로젝트들을 주로 수행했다)">
+
+
+  <meta name="author" content="Jeonghun Song">
+  
+  <meta property="article:author" content="Jeonghun Song">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="에너지엔데이터연구소">
+<meta property="og:title" content="국내 전력시장 주요 운영규칙 핵심사항 정리">
+<meta property="og:url" content="https://song4energyndata.github.io/koreanmarketrules.html">
+
+
+  <meta property="og:description" content="최근 에너지 플랫폼 업계 현직자들과 대화를 하며, 국내 전력시장 운영규칙을 상세히 알 필요성을 느꼈다. 본격적으로 에너지 플랫폼 업계에 종사한다면 전력시장 입찰을 전제로 한 에너지 설비들의 데이터 및 비즈니스 모델을 주로 분석하게 될 것이라 생각했기 때문이다. (그간 필자는 BTM (Behind-the-Meter) 단의 에너지 설비 도입을 통한 수요처 에너지 요금 절감량 분석 프로젝트들을 주로 수행했다)">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-10-22T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://song4energyndata.github.io/koreanmarketrules.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "송정훈",
+      "url": "https://song4energyndata.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="naver-site-verification" content="7dda6777a2acc897ba51668ac7c58c380307dd6c">
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="에너지엔데이터연구소 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://song4energyndata.github.io/feed.xml">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<head>
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<!-- end custom head snippets -->
+  <style> 
+    ::-webkit-scrollbar{width: 12px;}
+    ::-webkit-scrollbar-track {background-color:#4b4f52; border-radius: 8px;}
+    ::-webkit-scrollbar-thumb {background-color:#5e6265; border-radius: 8px;}
+    ::-webkit-scrollbar-thumb:hover {background: #f7f6f3;}
+    ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment 
+    {width:12px;height:16px;background:transparent;} 
+  </style>
+</head>
+
+<body
+  class="layout--single">
+  <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+  
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          에너지엔데이터연구소
+          <span class="site-subtitle">에너지 데이터의 올바른 활용, 에너지 전환에 대한 데이터 기반의 합리적 솔루션</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/aboutme/">About Me</a>
+            </li><li class="masthead__menu-item">
+              <a href="/search/">Search</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tag</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">카테고리 목록</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+  <div class="initial-content">
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+    
+  
+  
+  
+  
+    
+    
+      
+    
+    
+  
+  
+   <!-- three lines added by Jeonghun  -->
+    
+
+<nav class="nav__list">
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">카테고리 목록</label>
+  <ul class="nav__items" id="category_tag_menu">
+      <!--전체 글 수-->
+      
+      <li>
+        <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
+        <span class="nav__sub-title">Categories</span>
+            <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">&#x2022 경제성분석 및 최적구성 도출 [10]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/market" class="">&#x2022 전력시장 모델링 [15]</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
+                <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/energymanagement" class="">&#x2022 제어 (최적화/ 강화학습) [5]</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/estimation" class="">&#x2022 예측 (회귀분석/ 머신러닝/ 딥러닝) [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/dataset" class="">&#x2022 데이터셋 (소개/ 전처리/ 활용안) [6]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/policy" class="">&#x2022 정책 (패널분석/ 시나리오분석) [1]</a></li>
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/mathstat" class="">&#x2022 수학/ 통계학 일반 [3]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/mypapers" class="">&#x2022 My papers [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/etc" class="">&#x2022 Etc. [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+      </li>
+  </ul>
+</nav>
+  
+  
+
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="국내 전력시장 주요 운영규칙 핵심사항 정리">
+    <meta itemprop="description" content="최근 에너지 플랫폼 업계 현직자들과 대화를 하며, 국내 전력시장 운영규칙을 상세히 알 필요성을 느꼈다. 본격적으로 에너지 플랫폼 업계에 종사한다면 전력시장 입찰을 전제로 한 에너지 설비들의 데이터 및 비즈니스 모델을 주로 분석하게 될 것이라 생각했기 때문이다. (그간 필자는 BTM (Behind-the-Meter) 단의 에너지 설비 도입을 통한 수요처 에너지 요금 절감량 분석 프로젝트들을 주로 수행했다)">
+    <meta itemprop="datePublished" content="2023-10-22T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://song4energyndata.github.io/koreanmarketrules.html" class="u-url" itemprop="url">국내 전력시장 주요 운영규칙 핵심사항 정리
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-10-22T00:00:00+09:00">2023-10-22</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#발전-전력량-정산">발전 전력량 정산</a></li><li><a href="#용량가격-보조서비스가격-정산">용량가격/ 보조서비스가격 정산</a></li><li><a href="#급전지시-미이행-시-패널티">급전지시 미이행 시 패널티</a></li><li><a href="#수요반응자원">수요반응자원</a></li><li><a href="#재생에너지-발전량-예측제도">재생에너지 발전량 예측제도</a></li><li><a href="#실시간-시장에서의-재생에너지-입찰제도-제주-시범사업-기준">실시간 시장에서의 재생에너지 입찰제도 (제주 시범사업 기준)</a></li></ul>
+ <!-- 우측 TOC -->
+            </nav>
+          </aside>
+        
+        <p>최근 에너지 플랫폼 업계 현직자들과 대화를 하며, 국내 전력시장 운영규칙을 상세히 알 필요성을 느꼈다. 본격적으로 에너지 플랫폼 업계에 종사한다면 전력시장 입찰을 전제로 한 에너지 설비들의 데이터 및 비즈니스 모델을 주로 분석하게 될 것이라 생각했기 때문이다. (그간 필자는 BTM (Behind-the-Meter) 단의 에너지 설비 도입을 통한 수요처 에너지 요금 절감량 분석 프로젝트들을 주로 수행했다)</p>
+
+<p>이에, 전력시장 운영규칙 및 관련 시장제도 설명 원문을 읽고, 방대한 내용들 중 비즈니스모델의 정량적 분석을 위해 필수적으로 알아야 할 것으로 보이는 항목들을 요약하여 이 포스트에 기록하였다. 특히 구체적 수치가 있으면 가능한 한 포함하였다. (기록된 항목 못지않게 중요한 항목들 및 제도 개정으로 인해 변경된 항몰들은 앞으로 꾸준히 업데이트해나갈 예정이다)</p>
+
+<p><br /></p>
+<h2 id="발전-전력량-정산">발전 전력량 정산</h2>
+
+<p>내용 출처: <a href="https://new.kpx.or.kr/board.es?mid=a10502000000&amp;bid=0045&amp;act=view&amp;list_no=51715&amp;tag=&amp;nPage=12">전력거래소 정산규칙해설서 (2019)</a></p>
+
+<ul>
+<li>하루전 시장에서의 market clearing을 통해, 시간별로 예측수요를 최종적으로 충족시키는 발전기의 변동비가 해당 시간의 계통한계가격 (SMP) 로 결정됨.</li>
+
+<li>발전기가 하루전 발전계획에 포함된 발전량 범위 내에서 실제로 발전한 양에 대해, 시장가격 (MP) 을 단가로 하여 정산함. 이를 계획발전 전력량 정산금 (Scheduled Energy Payment, SEP) 이라 함.<br /><br />
+
+시장가격은 SMP와 다름. 시장가격은 발전기와 전력수요지와의 거리에 따른 송전손실 차이를 반영하기 위해 SMP에 송전손실계수 (TLF) 를 곱한 값임.<br /><br />
+
+이를테면 최대 수요지인 서울에 가까운 포천복합/ 하남열병합 등은 송전손실이 작으므로 TLF가 1보다 크고, 서울에서 먼 월성원자력/ 호남화력 등은 송전손실이 크므로 TLF가 1보다 작음.<br /><br />
+
+가격결정발전계획에 포함된 발전기의 변동비는 SMP보다 작거나 같으므로, 발전량에 대해 MP를 정산받으면 변동비를 회수하고도 수익을 얻음. <br />
+(단, 유연탄 및 원자력 발전은 수익 조정을 위한 정산조정계수를 적용받음 (0에서 1 사이))</li>
+
+<li>발전기가 하루전 발전계획 대비 초과 발전한 경우, 해당 초과분에 대해 정산하는 금액은 추가발전 사유가 발전사에 있느냐 전력계통에 있느냐에 따라 다름.</li>
+
+<li>발전기가 자체성능시험/ 열제약 등 계통사유가 아닌 발전사 사유로 초과 발전한 경우, 초과 발전량에 대해 무부하비 제외 변동비와 시장가격 중 작은 값을 정산함. 이를 발전사업자 제약 발전 전력량 정산금 (Payment by Market Price for Minimum Energy produced due to Generator-self Constraint, GSCON) 이라 함.<br /><br />
+
+(무부하비란 발전기를 전력시스템에 동기화시키되 출력은 내지 않을 때 소요되는 비용임, 자동차가 공회전할 때의 연료비에 비유할 수 있음, 무부하운전을 해야 발전기의 온도를 적정 상태로 맞추어 출력변경에 제때 응동할 수 있음.)<br /><br />
+
+초과 발전량에 대한 해당 발전기의 무부하비 제외 변동비가 시장가격보다 높다면 초과 발전량에 대해서는 변동비를 회수하지 못하고, 변동비가 시장가격보다 낮다면 변동비만 회수 가능하고 시장가격으로 전력을 판매하지 못함.<br /><br />
+
+단, 열공급 발전기가 하루전계획에는 포함되지 않았으나 실제로는 지역난방 난방수요 충족 등을 이유로 열제약 운전을 하는 경우, 열전비와 발전량에 따라 무부하비 일부를 지급함. 열전비가 작을수록, 변경공급가능용량 대비 실제 발전량이 클수록 무부하비 지급 비율이 커짐.</li>
+
+<li>발전기가 송전제약/ 수요예측오차 등 계통사유로 초과 발전한 경우, 초과 발전량에 대해 변동비와 시장가격 중 큰 값을 정산함. 이를 계통제약 발전 전력량 정산금 (payment for energy produced due to System Constraints, SCON) 이라 함.<br /><br />
+
+가격결정계획에 반영되지 못한 발전량에 대해서는 변동비가 SMP보다 클 것이므로, 변동비를 회수할 수 있도록 변동비를 정산함.<br /><br />
+
+특히 가격계획에 반영되지 않았고 자가제약도 없어 원래대로라면 기동하지 않았을 발전기가 계통 사유로 기동한 경우, 변동비 산정에 무부하비도 포함.</li>
+
+<li>발전기가 하루전 발전계획에 포함된 발전량을 '계통 지시에 의해 감발하거나 정지하여' 실제로는 발전하지 않은 경우, 발전했더라면 거둬들였을 기대 이익을 정산함. 이를 제약 비발전 전력량 정산금 (Constrained-off energy payment, COFF) 이라 함.<br /><br />
+
+기대이익 단가는 시장가격과 변동비의 차이임.<br /><br />
+
+감발한 급전발전기는 수요 증가에 의한 주파수 하락 시 출력 증가를 통해 주파수 회복에 기여할 수 있으므로, COFF는 일종의 예비력 정산금과 같이 볼 수 있음.</li>
+
+<li>비중앙급전 발전기에 대해서는 실제 발전량을 SMP로 정산하고, 기타 사항은 정산하지 않음.</li>
+</ul>
+
+<p><br /></p>
+<h2 id="용량가격-보조서비스가격-정산">용량가격/ 보조서비스가격 정산</h2>
+
+<p>내용 출처: <a href="https://new.kpx.or.kr/board.es?mid=a10502000000&amp;bid=0045&amp;act=view&amp;list_no=51715&amp;tag=&amp;nPage=12">전력거래소 정산규칙해설서 (2019)</a></p>
+
+<ul>
+<li>전력시장에 입찰하는 급전가능 발전기들에 대해, 공통적으로 공급가능용량에 대한 용량요금 (Trading Period Capacity Payment, CP) 을 정산함 (입찰은 했으나 하루전 발전계획에 포함되지 않은 발전기가 실제로도 발전하지 않은 경우에도 정산).<br /><br />
+
+초기입찰 후 공급가능용량을 낮추어서 변경입찰 시 최종 공급가능용량 기준으로 정산함. 반대로 초기입찰 후 공급가능용량을 높여 변경입찰하더라도 초기입찰용량 기준으로 정산함. 이는 공급용량을 정확히 예측하라는 의미임.<br /><br />
+
+단, 복합발전기 가스터빈의 경우 외기온도 저하로 공기밀도가 증가하면 공급가능용량이 증가함. 그러므로 거래일의 예측기온과 당일의 실제기온 간 차이를 보정한 온도보정 입찰값을 변경입찰값과 비교해 산정함.</li>
+
+<li>용량가격은 용량에 일반용량가격(용량당 단가)과 용량가격보정계수의 합을 곱하여 계산함. 일반용량가격은 기준용량가격, 용량가격계수, 시간대별용량가격계수, 연료전환성과계수 네 값의 곱임. 용량가격계수와 연료전환성과계수는 발전기 별로 상이함.</li>
+
+<li>비중앙급전 발전기의 경우 용량요금은 지불하지 않음.</li>
+
+<li>주파수 추종 운전상태를 30분 이상 유지하는 발전기에 대해 주파수 추종 서비스 정산금액을 지불함. 또한 자동발전제어 서비스 (주파수 제어 관련) 를 제공한 발전기에 대해 제어가용률 및 제어성과 가중치를 반영한 정산금액을 지불함.<br /><br />
+
+발전사업자가 소유한 중앙급전 전기저장장치가 주파수추종 또는 원격출력제어 서비스를 제공한 경우에도 위 규칙을 준용해 정산함.</li>
+
+<li>예비력 (20분 또는 120분 이내 응동) 계획에 포함된 발전기는 지정된 에비력 용량에 대해 발전 여부에 상관없이 예비력 정산금을 받음 (발전하는 경우 에너지 정산금도 받음).<br /><br />
+
+예비력 계획에 반영되었음에도 응동 및 발전하지 못하는 경우 예비력 정산금을 지불하지 않음은 물론, 예정 정산금의 3배를 환수함 (단, 고장 등 사유로 예비력 제공이 불가능해 사전 신고한 경우는 제외).</li>
+</ul>
+
+<p><br /></p>
+<h2 id="급전지시-미이행-시-패널티">급전지시 미이행 시 패널티</h2>
+
+<p>내용 출처: <a href="https://new.kpx.or.kr/board.es?mid=a10502000000&amp;bid=0045&amp;act=view&amp;list_no=51715&amp;tag=&amp;nPage=12">전력거래소 정산규칙해설서 (2019)</a></p>
+
+<ul>
+<li>계통 연결 또는 분리를 지시받고 지시받은 시각보다 (허용오차를 초과해) 늦게 또는 빨리 이행하는 경우 패널티를 받음.<br /><br />
+
+조기 계통연결 및 계통분리 지연시, 계획된 연결시간 이외 시간의 발전에 대한 계량값은 0으로 조정함.<br /><br />
+
+조기 계통분리시 빨리 분리한 시간 동안의 공급가능용량은 0으로 조정, 계통연결 지연시 공급가능용량은 계량값으로 조정함
+(이를테면 500MW 발전기가 15분 조기 분리 시 공급가능용량은 500MWh에 3분의 4를 곱한 375MWh).</li>
+
+<li>조기 계통연결 및 계통분리 지연은 공급 과잉으로 인한 주파수 상승을 야기하고, 조기 계통분리 및 계통연결 지연은 공급 부족으로 인한 주파수 하락을 야기함. 주파수 하락이 전력계통에 있어 더 큰 위협이므로, 조기 계통분리 및 계통연결 지연 시 패널티가 더 큼, 특히 계통연결 지연에 대해 매우 큰 패널티가 부여됨.</li>
+
+<li>발전사 사유로 급전지시량에 미달되게 발전하고도 적절한 변경입찰을 하지 않은 경우, 공급가능용량을 계량전력량으로 조정함.<br /><br />
+
+급전지시량을 초과하여 발전하는 경우 초과발전량만큼 공급가능용량을 차감함. 또한 SEP를 실제 발전량이 아닌 차감된 공급가능용량 기준으로 정산함.</li>
+</ul>
+
+<p><br /></p>
+<h2 id="수요반응자원">수요반응자원</h2>
+
+<p>내용 출처: <a href="https://new.kpx.or.kr/board.es?mid=a10205010000&amp;bid=0030">전력거래소 전력시장운영규칙</a></p>
+
+<ul>
+<li>고객기준부하 (수요반응에 참여하지 않았다면 사용했을 평상시 사용전력량 예측값) 기준으로 차이를 계산함. 전력부하감축량은 일반적으로 DR에서 말하는 감축량, 전력부하증대량은 플러스DR에 의해 사용량을 늘린 양</li>
+
+<li>각 거래시간 별 고객기준부하 산정 방식은 아래 중 택일.<br /><br />
+
+1) 최근 평일 5일(참고일) 중 거래시간 사용전력량이 큰 순서대로 최대 4일(유사일) 선택, 유사일의 사용전력량 평균<br />
+2) 최근 평일 10일 중 거래시간 사용전력량 기준 최대 2일과 최소 2일 제외 후 남은 6일 평균<br />
+3) 최근 평일 6일 중 최대 1일과 최소 1일 제외 후 남은 4일 평균 (플러스DR/ 국민DR의 고객기준부하 산정)<br />
+4) 최근 평일 10일 중 최대 1일과 최소 1일 제외 후 남은 8일 평균 (국민DR의 고객기준부하 산정)<br />
+5) 최근 10분의 1분 단위 전력사용량 합에 6을 곱한 값 (주파수DR의 고객기준부하 산정)<br />
+6) 최근 공휴일/ 토요일 6일 중 최대 1일과 최소 1일 제외 후 남은 4일ㄹ 평균 (플러스DR의 공휴일/ 토요일 전력부하증대량 평가를 위한 고객기준부하 산정)<br /><br />
+
+비정상근무일 (생산설비 고장/ 창립기념일 등 평상시 전기소비형태와 매우 다른 날) 이 참고일에 포함되지 않도록 함. 산출된 평균 사용전력량의 75% 미만인 날은 참고일 산정에서 제외함, 산업용의 경우 앞 기준으로 참고일 재산정 시 평균 대비 75% 미만 혹은 125% 초과인 날을 추가로 제외함.<br /><br />
+
+유사일과 감축일의 기온오차 등에 따른 전기소비형태를 반영하기 위해, 감축시작시간 1시간 전에서 4시간 전까지의 3시간 동안의 평균 사용전력량에서 유사일의 동일 시간대 평균 사용전력량을 차감한 값을 고객기준부하 값에 합해 '최종적인' 고객기준부하를 산출함.</li>
+
+<li>의무감축용량은 의무감축요청에 따른 용량임 (이전의 신뢰성 DR에 대응).</li>
+
+<li>감축가능용량은 입찰을 통해 하루전발전계획에 포함할 수 있는 용량임 (이전의 경제성 DR에 대응).<br /><br />
+
+자발적 수요감축 입찰은 평일 거래일에 대해 입찰함.</li>
+
+<li>규모에 따른 수요반응참여고객 유형은 하기와 같음.<br /><br />
+
+1) 표준<br />
+2) 중소형 (일반용/ 주택용/ 농사용/ 교육용 / 2MW이하 산업용)<br />
+3) 국민 (계약전력 200kW 이하/ 주택/ 집합건물 개별 세대)</li>
+
+<li>참여 전에 등록시험 및 전기소비형태 검증을 해야 함.<br /><br />
+
+등록시험의 경우 감축지속시간은 3시간~4시간 (중소형DR/ 제주DR은 1시간), 시간대는 평일 9시~20시 사이 (12~13시 제외) 제주DR은 평일 10시~21시 사이) 임.<br /><br />
+
+전기소비형태 검증 기준은, 검증대상일 (등록일로부터 20일 전부터 평일 45일, 감축일은 제외) 의 9시~20시 동안 계산된 RRMSE (Relative Root Mean Squared Error, 검증기간의 시간별 고객기준부하 (CBL) 와 실제 사용전력량 (Load)의 평균 오차와 검증기간의 평균 사용전력량의 비율) 가 30% 이하일 것임. RRMSE의 식은 하기와 같음.<br /><br />
+
+\begin{align} 
+\sqrt{\frac{\sum_{d \in D,t \in T} (CBL_{d,t} - Load_{d,t})^2}{D(n) \times T(n)}} \div \frac{\sum_{d \in D,t \in T} Load_{d,t}}{D(n) \times T(n)}
+\notag
+\end{align} </li>
+
+<li>평균감축이행률은 해당 거래일 거래시간별 전력부하감축량의 합을 감축계획량의 합으로 나눈 값임.<br /><br />
+
+평균감축이행률이 97% 이상이어야 온전히 정산받을 수 있음. 80% 이상 97% 미만이면 등록신청용량에 평균감축이행률을 곱한 값으로 용량이 하향조정되며, 평균 80% 미만이거나 시간대별 감축이행률의 최소값이 70% 미만이면 참여가 제한됨.</li>
+
+<li>연중 2회 (12월 및 6월 1~2주) 감축시험을 시행함. 시험에서 평균감축이행률이 97% 미만이거나 시간대별 감축이행률의 최소값이 70% 미만인 자원은 12월 및 6월 3~4주에 재시험을 시행함.</li>
+
+<li>감축일의 특정 감축시간대에 특정 고객의 사용전력량 데이터 누락 발생 시, 해당 고객의 해당 거래시간 감축량은 0으로 적용함.</li>
+
+<li>피크수요 저감/ 미세먼지 저감을 위한 수요반응자원 감축계획도 산정됨.</li>
+</ul>
+
+<p><br /></p>
+<h2 id="재생에너지-발전량-예측제도">재생에너지 발전량 예측제도</h2>
+
+<p>내용 출처: <a href="https://new.kpx.or.kr/board.es?mid=a10205010000&amp;bid=0030">전력거래소 전력시장운영규칙</a></p>
+
+<ul>
+<li>태양광/ 풍력 개별발전기 또는 집합전력자원의 총 용량이 20MW를 초과해야 함.</li>
+
+<li>시간대별 설비이용률 (전력거래량을 용량으로 나누어 얻은 비율) 이 10% 이상 되는 시간 각각에 대해, 예측오차율 (예측발전량과 실제전력거래량 간 차이의 절대값을 설비용량으로 나누어 얻은 비율) 을 계산함. (실제전력거래량으로 나누는 것이 아님에 주의)<br /><br />
+
+단, 설비이용률 산정 시 고장/ 정비로 정지해 있거나 급전지시로 출력제어 된 설비의 용량 및 발전량은 위 계산에서 제외함.</li>
+
+<li>예측발전량을 총 2회 (거래전일 10시, 17시) 에 걸쳐 제출하므로 각 예측발전량에 대해 예측오차율을 구한 후 산술평균을 냄. 이 산술평균이 6% 이하인 시간대에 대해서는 kWh당 4원, 6% 초과 8% 이하인 시간대에 대해서는 kWh당 3원의 인센티브를 정산함.</li>
+
+<li>대상자원 등록자격은 3개월 주기로 갱신하며, 직전 3개월 간의 시간대별 예측오차율들을 산술평균한 값이 10% 이하여야 자격이 연장됨.</li>
+</ul>
+
+<p><br /></p>
+<h2 id="실시간-시장에서의-재생에너지-입찰제도-제주-시범사업-기준">실시간 시장에서의 재생에너지 입찰제도 (제주 시범사업 기준)</h2>
+
+<p>내용 출처: <a href="https://www.kpx.or.kr/board.es?mid=a11203000000&amp;bid=0209&amp;act=view&amp;list_no=70470">전력시장 제도개선 제주 시범사업 운영규칙(안)</a></p>
+
+<ul>
+<li>제주도에서 하루전 시장 (1시간 단위) 과 더불어 당일 실시간 시장 (15분 단위) 을 신설함.<br /><br />
+
+하루전 시장에서의 낙찰량은 하루전 가격으로 정산, 하루전 낙찰량과 당일 실제 발전량 간 '차이'는 실시간가격으로 정산함.</li>
+
+<li>급전가능 재생에너지도 전력시장에 입찰해 가격결정에 관여함 (음의 가격으로 입찰하되, 하한은 2개월 전 현물 REC 평균가의 -2.5배임).</li>
+
+<li>급전가능 재생에너지는 보조 ESS 및 전력거래소에 실시간 정보를 제공하고 출력상한/ 출력제어 지시를 받는 인프라를 포함하고, 15분 평균 발전량을 출력상한 내로 조정 가능해야 함.<br /><br />
+
+용량은 개별 1MW 초과 20MW 이하 또는 VPP 용량 1MW 초과 100MW 이하여야 함. 특히 3MW 초과 시 의무적으로 참여해야 함.</li>
+
+<li>재생발전기의 가장 큰 이슈인 출력제한 (curtailment) 에 대한 보상안이 마련됨.<br /><br />
+
+재생발전기가 계통 지시로 출력제한 시, 그 출력제한 양에 실시간가격과 발전단가의 차이를 곱하여 계산되는 기대이익을 보상함. (만약 예비력 계획에 포함되었고 예비력실적에도 변동이 있었다면 이도 보상)</li>
+
+<li>실시간발전량이 허용오차를 벗어나는 수준으로 제약입찰량에 미달할 경우, 미달 발전량에 대해 실시간가격의 20%의 패널티를 부과함.<br /><br />
+
+허용오차는 변경입찰후 공급가능용량에 0.005를 곱한 값 (주파수추종/ 자동발전제어운전신고 후 운전한 발전기는 0.01을 곱한 값) 을 원칙으로 하되 하한은 0.5MWh, 상한은 5MWh임.</li>
+
+<li>재생에너지 입찰제도 도입 시 재생에너지 발전량 예측제도에 의한 인센티브 지급은 원칙적으로 종료되어야 함. 그러나 전환기 조치로 첫 1년간 현행 인센티브의 50%를 지급함. 또한 예측제도 참여자원 감소분을 고려해 예측제도의 용량 기준을 20MW에서 1MW로 완화함 (급전가능재생에너지 참여규모 기준과 일치).</li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#%EC%A0%84%EB%A0%A5%EC%8B%9C%EC%9E%A5" class="page__taxonomy-item p-category" rel="tag">전력시장</a>
+    
+    </span>
+  </p>
+
+
+
+<!-- 
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#market" class="page__taxonomy-item p-category" rel="tag">market</a>
+    
+    </span>
+  </p>
+
+ -->
+        <!-- 
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-10-22T00:00:00+09:00">2023-10-22</time></p>
+ -->
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EA%B5%AD%EB%82%B4+%EC%A0%84%EB%A0%A5%EC%8B%9C%EC%9E%A5+%EC%A3%BC%EC%9A%94+%EC%9A%B4%EC%98%81%EA%B7%9C%EC%B9%99+%ED%95%B5%EC%8B%AC%EC%82%AC%ED%95%AD+%EC%A0%95%EB%A6%AC%20http%3A%2F%2Flocalhost%3A4000%2Fkoreanmarketrules.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fkoreanmarketrules.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fkoreanmarketrules.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      <p></p>
+        <!-- <h4 class="page__meta-title"><span>market</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
+        
+
+
+  
+  	
+  	
+  	
+  	
+  	
+
+<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
+
+  
+    
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
+    
+    
+      <a href="/marketadvanced.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>재생발전 비중이 높은 전력시장에 대한 심화 주제들</a>
+        
+  
+
+</nav>
+      <p></p>
+    </div>
+
+    
+  </article>
+
+  
+  <!-- 
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/evestimate.html" rel="permalink"><img src="/assets/images/evestimates/teaser.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/evestimate.html" rel="permalink">논문 소개: 전기차 충전 이력 데이터 기반의, 계통 내 시간별 전기차 충전 부하 시뮬레이션
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-10-21T00:00:00+09:00">2023-10-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">전기차 및 충전 인프라 규모가 증가할수록 전력계통에 걸리는 부하가 증가한다. 그러므로 향후 발전/ 송전/ 배전 (특히 배전단) 설비 및 스케줄링 계획 수립을 위해, 전기차 충전으로 인한 시간별 부하 증가를 정확히 예측할 필요가 있다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/marketadvanced.html" rel="permalink"><img src="/assets/images/jalal/advanced.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/marketadvanced.html" rel="permalink">재생발전 비중이 높은 전력시장에 대한 심화 주제들
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-10-07T00:00:00+09:00">2023-10-07</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">필자가 정리했던 Jalal Kazempour 교수의 전력시장 강의에서 reference로써 추천한 책으로, Integrating Renewables in Electricity Markets: Operational Problems 이 있다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/energyeffpanel.html" rel="permalink"><img src="/assets/images/energyeffpanel/teaser.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/energyeffpanel.html" rel="permalink">에너지효율 R&amp;D 투자효과 분석 (패널 데이터 기반) 연구 복원
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-09-24T00:00:00+09:00">2023-09-24</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">에너지정책의 효과를 ‘정량적으로’ 분석하는 방법으로, 회귀분석의 일종인 ‘패널 분석’ (Panel data analysis) 이 있다. 이를테면 에너지경제연구원에서는 에너지효율 R&amp;D 투자가 에너지소비 감소에 기여했는지 여부를 검정하기 위해, “에너지효율향상 R&amp;D ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/vppintro.html" rel="permalink"><img src="/assets/images/vppintro/vppconcept.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/vppintro.html" rel="permalink">논문 소개: Virtual power plant의 하루전시장 입찰 결정 (stochastic programming 기반)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-09-10T00:00:00+09:00">2023-09-10</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Virtual power plant (VPP, 가상발전소) 는 급전가능발전원 (가스터빈 등), 급전불가능발전원 (태양광/ 풍력 등), 에너지저장장치 (배터리/ 양수발전 등) 등 여러 발전/ 전력저장 설비들을 클라우드 등 IT기술 기반으로 한꺼번에 제어해 단일 주체로써 전력시장에 입...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div> -->
+  
+  <!--  -->
+</div>
+
+  </div>
+
+  
+
+  <aside class="sidebar__top">
+    <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside>
+
+  <div id="footer" class="page__footer">
+    <footer>
+      <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+      <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Contact:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:song4energy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+          <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 송정훈. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+    </footer>
+  </div>
+
+  
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
