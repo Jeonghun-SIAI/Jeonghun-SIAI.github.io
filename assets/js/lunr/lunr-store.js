@@ -274,4 +274,10 @@ var store = [{
         "tags": ["전력시장"],
         "url": "/koreanmarketrules.html",
         "teaser": null
+      },{
+        "title": "Optimal power flow 예제 소개 문헌 및 풀이 코드",
+        "excerpt":"필자의 ‘선형계획법 기반 분산에너지시스템 최적화’ 시리즈 글에서는, 유효전력의 수요-공급을 고려하는 설비도입계획을 다루었다. 그러나 기 구축된 대규모 발송전시스템의 실제 운영은, 각 발전기 및 bus의 전압/ 무효전력/ 위상도 고려하는 optimal power flow (OPF) 문제를 풀어 이루어진다. OPF 예시 및 문헌 소개 이를테면 아래 그림의 교류전력망에 대해 OPF 문제를 풀어, 각 발전기의 유효전력과...","categories": ["optimalsystem"],
+        "tags": ["Optial Power Flow","경제성분석"],
+        "url": "/opf.html",
+        "teaser": "/assets/images/opf/network.png"
       }]
