@@ -530,7 +530,7 @@
 
 <p>다행히, OPF 문제의 기초를 ‘수학적 최적화 문제 구성 및 풀이’ 관점에서 간결하게 설명한 문헌이 있다. <a href="http://kgut.ac.ir/useruploads/1544077350809fgp.pdf">An introduction to optimal power flow: Theory, formulation, and examples</a> 이다.</p>
 
-<p>이번 포스팅에서는, 해당 문헌의 OPF 문제 설명 numerical example을 푸는 코드를 한국어로 재설명한다.</p>
+<p>이번 포스팅에서는, 해당 문헌의 OPF 문제 설명 및 numerical example 풀이 코드를 한국어로 재설명한다.</p>
 
 <p><br /></p>
 <h2 id="opf-풀이에-쓰이는-수식들">OPF 풀이에 쓰이는 수식들</h2>
@@ -556,7 +556,7 @@ $P = \text{Re} \vert V \vert e^{j \theta_V} \vert I \vert e^{-j \theta_I} = \tex
 
 <p>한편 전선 및 bus 자체에서 전류 누설이 발생할 수 있는데, 이에 관련된 admittance parameter를 shunt admittance라 한다. 두 bus $i$와 $k$를 잇는 전선의 shunt admittance는 $\tilde{y}_{ik}^{Sh}$로, bus $i$ 자체에서의 shunt admittance는 $\tilde{y}_i^{S}$로 표기한다.</p>
 
-<p>추가적 표기를 위해, bus $i$와 $k$를 잇는 전선이 존재할 경우 순서쌍 $(i,k)$가 집합 $\textbf{L}$에 속한다고 하고, $(i,k)$와 $(k,i)$ 중 하나가 $\textbf{L}$에 속하면 나머지 하나는 중복이므로 고려하지 않는다고 하자.</p>
+<p>서로 다른 두 bus $i$와 $k$를 잇는 전선이 존재할 경우 순서쌍 $(i,k)$가 집합 $\textbf{L}$에 속한다고 하고, $(i,k) \in \textbf{L}$ 이면 $(k,i) \notin \textbf{L}$ 이라고 하자.</p>
 
 <p>그러면, admittance matrix $\tilde{Y}$의 각 성분 $\tilde{Y}_{ik}$는 아래와 같이 계산된다.</p>
 
@@ -625,6 +625,7 @@ Q_i^L - Q_i^G + V_i \sum_{k=1}^N V_k [G_{ik} \text{sin}(\delta_i - \delta_k) - B
 </span><span class="n">q_bus</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 인덱스 15~19는 각 bus 내 발전기의 무효전력 (발전기가 없으면 0)
 </span><span class="n">phi_transf</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># 인덱스 20은 bus 3과 4 간 변압기의 위상차
 </span><span class="n">mag_transf</span> <span class="o">=</span> <span class="mi">21</span> <span class="c1"># 인덱스 21은 bus 3과 5 간 변압기의 전압비
+# 이를테면 # x[v_bus[0]] 은 1번 bus의 전압크기를, x[del_bus[1]] 은 2번 bus의 전압위상각을 의미
 </span></code></pre></div></div>
 
 <p>주어진 시스템 데이터인 각 전선 별 series admittance와 shunt admittance, 각 bus 별 shunt admittance, 각 부하의 유효전력 및 무효전력 요구치를 기재한다. 이 때 dtype=complex 로 두어 복소수로 쓴다.<br />
@@ -637,8 +638,8 @@ Q_i^L - Q_i^G + V_i \sum_{k=1}^N V_k [G_{ik} \text{sin}(\delta_i - \delta_k) - B
 </span><span class="n">y_sh_bus</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="n">n_bus</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span> <span class="c1"># 각 bus의 shunt admittance
 </span>
 <span class="n">y_series</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="mf">0.3j</span><span class="p">)</span> <span class="c1"># bus 1과 2를 잇는 전선의 series admittance
-</span><span class="n">y_series</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mf">0.023</span><span class="o">+</span><span class="mf">0.145j</span><span class="p">)</span>
-<span class="n">y_series</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mf">0.006</span><span class="o">+</span><span class="mf">0.032j</span><span class="p">)</span>
+</span><span class="n">y_series</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mf">0.023</span><span class="o">+</span><span class="mf">0.145j</span><span class="p">)</span> <span class="c1"># (i,k)가 L의 원소일 때 (k,i)는 L의 원소가 아닌 것과 같은 맥락으로 y_series[2,0] 은 설정하지 않음에 주의
+</span><span class="n">y_series</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mf">0.006</span><span class="o">+</span><span class="mf">0.032j</span><span class="p">)</span>
 <span class="n">y_series</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mf">0.02</span><span class="o">+</span><span class="mf">0.26j</span><span class="p">)</span>
 <span class="n">y_series</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="mf">0.32j</span><span class="p">)</span>
 <span class="n">y_series</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="mf">0.5j</span><span class="p">)</span>
@@ -686,29 +687,29 @@ Q_i^L - Q_i^G + V_i \sum_{k=1}^N V_k [G_{ik} \text{sin}(\delta_i - \delta_k) - B
     <span class="k">return</span> <span class="n">cost</span>
 </code></pre></div></div>
 
-<p>각 변수의 상하한을 설정하고, 초기값은 변수별 상하한 간 중간값으로 설정한다.</p>
+<p>각 변수의 상하한을 설정하되, 1번 bus를 slack bus로 생각하고 설정한다. 초기값은 변수별 상하한 간 중간값으로 설정한다.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bounds</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bounds</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="c1"># Bus 1은 Slack Bus이므로 전압크기 1로 고정
+</span>        <span class="p">(</span><span class="mf">0.95</span><span class="p">,</span><span class="mf">1.05</span><span class="p">),</span>
         <span class="p">(</span><span class="mf">0.95</span><span class="p">,</span><span class="mf">1.05</span><span class="p">),</span>
         <span class="p">(</span><span class="mf">0.95</span><span class="p">,</span><span class="mf">1.05</span><span class="p">),</span>
         <span class="p">(</span><span class="mf">0.95</span><span class="p">,</span><span class="mf">1.05</span><span class="p">),</span>
-        <span class="p">(</span><span class="mf">0.95</span><span class="p">,</span><span class="mf">1.05</span><span class="p">),</span>
-        <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
-        <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">,</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">),</span> <span class="c1"># 각도의 단위가 radian임에 주의
+        <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="c1"># Bus 1은 Slack Bus이므로 위상각 0으로 고정
+</span>        <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">,</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">),</span> <span class="c1"># 위상각의 단위가 radian임에 주의
 </span>        <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">,</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">),</span>
         <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">,</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">),</span>
         <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">,</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">),</span>
-        <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span>
-        <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
-        <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.4</span><span class="p">),</span>
+        <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="c1"># Bus 1은 unrestricted
+</span>        <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="c1"># Bus 2에는 발전기 없어 0으로 고정
+</span>        <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.4</span><span class="p">),</span>
         <span class="p">(</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.4</span><span class="p">),</span>
-        <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
-        <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span>
-        <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="c1"># Bus 5에는 발전기 없어 0으로 고정
+</span>        <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="c1"># Bus 1은 unrestricted
+</span>        <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="c1"># Bus 2에는 발전기 없어 0으로 고정
+</span>        <span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.2</span><span class="p">),</span>
         <span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.2</span><span class="p">),</span>
-        <span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.2</span><span class="p">),</span>
-        <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
-        <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="c1"># Bus 5에는 발전기 없어 0으로 고정
+</span>        <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">6</span><span class="p">),</span>
         <span class="p">(</span><span class="mf">0.95</span><span class="p">,</span><span class="mf">1.05</span><span class="p">)]</span>
 
 <span class="n">initialpoint</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">bounds</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">bounds</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
