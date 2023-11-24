@@ -1,0 +1,964 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BBZ8BXY4N7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BBZ8BXY4N7');
+</script>
+  <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>시간별 태양광 발전량 계산 모델 수식 설명 | 에너지엔데이터연구소</title>
+<meta name="description" content="태양광 패널을 포함하는 마이크로그리드의 경제성 분석을 위해서는 시간별 태양광 발전량을 계산해야 한다. 필자가 국내 케이스의 계산에 사용하는 데이터로는 기상청에서 제공하는 시간별 일사량이 있다. 즉, 시간별 일사량 데이터를 태양광 발전량으로 변환해야 한다.">
+
+
+  <meta name="author" content="Jeonghun Song">
+  
+  <meta property="article:author" content="Jeonghun Song">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="에너지엔데이터연구소">
+<meta property="og:title" content="시간별 태양광 발전량 계산 모델 수식 설명">
+<meta property="og:url" content="https://song4energyndata.github.io/hourlysolar.html">
+
+
+  <meta property="og:description" content="태양광 패널을 포함하는 마이크로그리드의 경제성 분석을 위해서는 시간별 태양광 발전량을 계산해야 한다. 필자가 국내 케이스의 계산에 사용하는 데이터로는 기상청에서 제공하는 시간별 일사량이 있다. 즉, 시간별 일사량 데이터를 태양광 발전량으로 변환해야 한다.">
+
+
+
+  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/solarradiation/diffuse.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-11-25T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://song4energyndata.github.io/hourlysolar.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "송정훈",
+      "url": "https://song4energyndata.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="naver-site-verification" content="7dda6777a2acc897ba51668ac7c58c380307dd6c">
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="에너지엔데이터연구소 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://song4energyndata.github.io/feed.xml">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<head>
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<!-- end custom head snippets -->
+  <style> 
+    ::-webkit-scrollbar{width: 12px;}
+    ::-webkit-scrollbar-track {background-color:#ced8e7; border-radius: 8px;}
+    ::-webkit-scrollbar-thumb {background-color:#eeebeb; border-radius: 8px;}
+    ::-webkit-scrollbar-thumb:hover {background: #f7f6f3;}
+    ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment 
+    {width:12px;height:16px;background:transparent;} 
+  </style>
+</head>
+
+<body
+  class="layout--single">
+  <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+  
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          에너지엔데이터연구소
+          <span class="site-subtitle">에너지 데이터의 올바른 활용, 에너지 전환에 대한 데이터 기반의 합리적 솔루션</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/aboutme/">About Me</a>
+            </li><li class="masthead__menu-item">
+              <a href="/search/">Search</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tag</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">카테고리 목록</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+  <div class="initial-content">
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+    
+  
+  
+  
+  
+    
+    
+      
+    
+    
+  
+  
+   <!-- three lines added by Jeonghun  -->
+    
+
+<nav class="nav__list">
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">카테고리 목록</label>
+  <ul class="nav__items" id="category_tag_menu">
+      <!--전체 글 수-->
+      
+      <li>
+        <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
+        <span class="nav__sub-title">Categories</span>
+            <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">&#x2022 경제성분석 및 최적구성 도출 [11]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/market" class="">&#x2022 전력시장 모델링 [15]</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
+                <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/energymanagement" class="">&#x2022 제어 (최적화/ 강화학습) [5]</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/estimation" class="">&#x2022 예측 (회귀분석/ 머신러닝/ 딥러닝) [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/dataset" class="">&#x2022 데이터셋 (소개/ 전처리/ 활용안) [7]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/policy" class="">&#x2022 정책 (패널분석/ 시나리오분석) [1]</a></li>
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/mathstat" class="">&#x2022 수학/ 통계학 일반 [3]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/mypapers" class="">&#x2022 My papers [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/etc" class="">&#x2022 Etc. [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+      </li>
+  </ul>
+</nav>
+  
+  
+
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="시간별 태양광 발전량 계산 모델 수식 설명">
+    <meta itemprop="description" content="태양광 패널을 포함하는 마이크로그리드의 경제성 분석을 위해서는 시간별 태양광 발전량을 계산해야 한다. 필자가 국내 케이스의 계산에 사용하는 데이터로는 기상청에서 제공하는 시간별 일사량이 있다. 즉, 시간별 일사량 데이터를 태양광 발전량으로 변환해야 한다.">
+    <meta itemprop="datePublished" content="2023-11-25T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://song4energyndata.github.io/hourlysolar.html" class="u-url" itemprop="url">시간별 태양광 발전량 계산 모델 수식 설명
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-11-25T00:00:00+09:00">2023-11-25</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#임의의-위치-날짜-시간에-태양으로부터-직달하는-일사량-계산">임의의 위치/ 날짜/ 시간에 태양으로부터 직달하는 일사량 계산</a></li><li><a href="#임의의-각도로-설치된-패널과-태양-광선-간-각도-계산">임의의 각도로 설치된 패널과 태양 광선 간 각도 계산</a></li><li><a href="#대기의-효과를-고려한-유효-일사량-계산">대기의 효과를 고려한 유효 일사량 계산</a></li><li><a href="#일사량을-태양광-패널-출력으로-변환">일사량을 태양광 패널 출력으로 변환</a></li><li><a href="#계산-모델-검증">계산 모델 검증</a></li></ul>
+ <!-- 우측 TOC -->
+            </nav>
+          </aside>
+        
+        <p>태양광 패널을 포함하는 마이크로그리드의 경제성 분석을 위해서는 시간별 태양광 발전량을 계산해야 한다. 필자가 국내 케이스의 계산에 사용하는 데이터로는 <a href="https://data.kma.go.kr/data/grnd/selectAsosRltmList.do?pgmNo=36">기상청에서 제공하는 시간별 일사량</a>이 있다. 즉, 시간별 일사량 데이터를 태양광 발전량으로 변환해야 한다.</p>
+
+<p>시간별 일사량 데이터를 태양광 발전량으로 변환한 결과만 얻고 싶다면, 미국의 National Renewable Energy Laboratory (NREL)에서 개발한 재생에너지시스템 경제성평가 tool인 <a href="https://sam.nrel.gov/">System Advison Model (SAM)</a>을 사용하면 된다.</p>
+
+<p>SAM으로 시간별 태양광 발전량을 계산하기 위한 ‘프로그램 사용’ 방법은 <a href="https://blog.naver.com/song4energy/221853737153">필자의 NAVER 블로그 포스트</a>에서 설명한 바 있다.</p>
+
+<p>그러나 SAM 사용 시 사용자가 매 case마다 수동으로 변환해야 한다. 만약 어떤 커스터마이징된 데이터 파이프라인이 일사량을 받고 자동으로 태양광 발전량으로 변환해 주기를 원한다면, SAM을 사용할 수 없다. 대신 태양광 발전량 계산 모델을 직접 코딩해서 포함시켜야 한다.</p>
+
+<p>이 포스트에서는, 기상청에서 제공하는 시간별 일사량으로 시간별/ 위도별/ 패널 각도별 태양광 발전량을 계산하는 수리모델을 설명한다. 참고한 자료들은 아래와 같다.</p>
+
+<p>1) <a href="https://www.slideshare.net/muammarzainuddin/9781846284663-c2">“Hybrid hydrogen systems”의 Chapter 2 “Renewable Energy Sources and Energy Conversion Devices”</a><br />
+2) <a href="https://www.researchgate.net/publication/283051726_A_comprehensive_solar_angles_simulation_and_calculation_using_Matlab">A comprehensive solar angles simulation and calculation using Matlab</a><br />
+3) <a href="https://doi.org/10.1016/0038-092X(82)90302-4">Estimation of the diffuse radiation fraction for hourly, daily and monthly-average global radiation</a></p>
+
+<p><br /></p>
+<h2 id="임의의-위치-날짜-시간에-태양으로부터-직달하는-일사량-계산">임의의 위치/ 날짜/ 시간에 태양으로부터 직달하는 일사량 계산</h2>
+
+<p>먼저 지구 대기권 경계에 직달하는 일사량의 연중 평균값을 global solar constant $G_{sc}$ 라 하며, 약 $1,367 \text{W}/m^2$이다.</p>
+
+<p><img src="/assets/images/solarradiation/extra.jpg" alt="Global solar constant" class="align-center" />
+<em>Global solar constant. (출처: https://www.greenrhinoenergy.com/solar/radiation/extraterrestrial.php)</em></p>
+
+<p>실제 각 날짜별로 지구 대기권 경계에 직달하는 실제 일사량 $G_{en}$은 지구 공전에 의해 달라진다. $G_{en}$은 $n=1,2,\dots,365$이며 1월 1일에 $n=1$이라 할 때 아래와 같다.</p>
+
+<p>\begin{align} 
+G_{en} = G_{sc}\left(1 + 0.033 \text{cos} \frac{360n}{365} \right)
+\notag
+\end{align}</p>
+
+<p>실제로는 시간 및 위도에 따라서도 일사량이 다르다. 위도(latitude)를 $\phi$, 시간에 대응하는 각도인 hour angle (정오 즉 남향일 때 0, 오후에 플러스, 오전에 마이너스, 1시간당 15도 변화) 을 $\omega$, 직달일사량과 지구 적도 간 각도인 declination angle (아래 그림 참고) 을 $\delta$라 할 때, 해당 날짜/ 위도/ 시간에 도달하는 일사량은 아래와 같다.</p>
+
+<p>\begin{align} 
+G_{0} = G_{sc}\left(1 + 0.033 \text{cos} \frac{360n}{365} \right) \left(\text{cos}\phi \text{cos}\delta \text{cos}\omega + \text{sin}\phi \text{sin}\delta \right) \quad \text{where} \,\, \delta = 23.45^o \text{sin} \left[\frac{360^o}{365}(284+n) \right]
+\notag
+\end{align}</p>
+
+<p><img src="/assets/images/solarradiation/declinationangle.png" alt="Declination angle" class="align-center" />
+<em>Declination angle. (출처: A comprehensive solar angles simulation and calculation using Matlab)</em></p>
+
+<p>실제 에너지시스템 최적화 문제를 풀 때 필요한 수치는 ‘$k$시부터 $k+1$시까지 도달한 총 에너지’ 이다. 이는 $k$시와 $k+1$시의 hour angle을 각각 $w_1$과 $w_2$라 할 때, 적분에 의해 아래와 같이 계산된다 (단위는 Wh).</p>
+
+<p>\begin{align} 
+I_o = \int_{w_1}^{w_2} G_o dw = \frac{12}{\pi} G_{en} \left[ \text{cos} \phi \text{cos} \delta (\text{sin} \omega_2 - \text{sin} \omega_1) + \frac{\pi (\omega_2 - \omega_1)}{180} \text{sin} \phi \text{sin} \delta \right]
+\notag
+\end{align}</p>
+
+<p><br /></p>
+<h2 id="임의의-각도로-설치된-패널과-태양-광선-간-각도-계산">임의의 각도로 설치된 패널과 태양 광선 간 각도 계산</h2>
+
+<p>지금까지의 논의는 모두 수평면에 도달하는 일사량에 대한 것이었다. 그러나 태양광 패널은 지면으로부터 일정 각도로 기울어져 설치되며, 대부분의 경우 정남향을 향하게 설치되지만 그렇지 않은 경우도 꽤 있다.</p>
+
+<p>지상으로부터 $\beta$만큼의 경사각으로 기울어져 있고 남향을 기준으로 $\gamma$만큼의 각도로 틀어져 있는 (서향이면 플러스, 동향이면 마이너스) 패널의 법선과 그 평면에 직달하는 일사량 간의 각도를 $\theta$ (angle of incidence) 라 하자.</p>
+
+<p><img src="/assets/images/solarradiation/theta.png" alt="Declination angle" class="align-center" />
+<em>태양광 패널의 설치각 및 angle of incidence. (출처: Optimal design and analysis of grid-connected photovoltaic under different tracking systems using HOMER)</em></p>
+
+<p>이 때 $\theta$는 아래와 같이 계산된다.</p>
+
+<p>\begin{align} 
+\text{cos} \theta = \text{sin} \delta \text{sin} \phi \text{cos} \beta - \text{sin} \delta \text{cos} \phi \text{sin} \beta \text{cos} \gamma + \text{cos} \delta \text{cos} \phi \text{cos} \beta \text{cos} \omega + \text{cos} \delta \text{sin} \phi \text{sin} \beta \text{cos} \gamma \text{cos} \omega + \text{cos} \delta \text{sin} \beta \text{sin} \gamma \text{sin} \omega
+\notag
+\end{align}</p>
+
+<p>위 식에서 $\beta=0$이면 지면 기준 ‘수평’면과 일사량 간의 각도 $\theta_z$ (zenith angle) 이다.</p>
+
+<p>\begin{align} 
+\text{cos} \theta_z = \text{cos} \phi \text{cos} \delta \text{cos} \omega + \text{sin} \phi \text{sin} \delta 
+\notag
+\end{align}</p>
+
+<p>잘 보면, $G_{0}$ 계산식에 $\text{cos} \theta_z$가 포함되어 있다.</p>
+
+<p><br /></p>
+<h2 id="대기의-효과를-고려한-유효-일사량-계산">대기의 효과를 고려한 유효 일사량 계산</h2>
+
+<p>$I_o$는 태양광이 대기를 뚫고 지면에 도달하는 과정에서 대기의 영향을 고려하지 않은 값이다. 실제로는 대기에서 산란이 발생하므로, 이 효과를 고려해야 한다.</p>
+
+<p>대기 효과를 고려해 최종적으로 수평 지표면에 도달하는 일사량을 수평면전일사량 (Global Horizontal Irradiance, GHI) $I$라 하며, <a href="https://data.kma.go.kr/data/grnd/selectAsosRltmList.do?pgmNo=36">기상청 종관기상관측자료</a>에서 제공하는 일사량 값이 GHI이다.</p>
+
+<p><img src="/assets/images/solarradiation/irradiancedata.png" alt="Declination angle" class="align-center" width="70%" />
+<em>기상청 종관기상관측자료에서 제공하는 시간별 GHI 데이터. 단위가 MJ/$m^2$임에 주의 (필자는 태양광 패널 성능곡선 단위가 W임에 착안해 1000을 곱한 후 3.6으로 나눈 값을 사용한다).</em></p>
+
+<p>지표면에 도달하는 일사량은 두 가지 성분으로 나눌 수 있다. 하나는 태양에서 지표면까지 직달하는 beam (direct) radiation $I_b$이고, 다른 하나는 대기 중에서 산란되어 해당 지표면에 도달하는 diffuse radiation $I_d$이다.</p>
+
+<p>한편 지표면에 도달한 태양 에너지의 일부는 우주로 반사되어 나가며, 반사되는 에너지의 비율을 albedo라 한다. Albedo의 연중 평균값은 대략 $\rho_g \approx 0.35$ 이다.</p>
+
+<p><img src="/assets/images/solarradiation/diffuse.png" alt="Erbs' correlation" class="align-center" width="60%" />
+<em>Beam radiation과 diffuse radiation의 concept. (출처: https://faculty.uml.edu/Nelson_Eby/ENVI.5720/Instructor%20Pdfs/Chapt%209%20-%20Solar%20Power.pdf)</em></p>
+
+<p>만약 $I=I_b + I_d$ 뿐 아니라 $I_b$와 $I_d$ 각각의 값을 안다면, 아래의 HDKR 모델 (Hay, Davies, Klucher, Reindl) 을 이용해 실제 태양광 발전량 계산의 기준이 되는 일사량 $I_T$ 를 계산할 수 있다.</p>
+
+<p>\begin{align} 
+I_T = \left(I_b + \frac{I_d I_b}{I_o}\right) \frac{\text{cos} \theta}{\text{cos} \theta_z} + I_d \left(1- \frac{I_b}{I_o}\right) \left(\frac{1+\text{cos}\beta}{2}\right) \left[ 1 + \sqrt{\frac{I_b}{I}} \text{sin}^3 (\frac{\beta}{2}) \right] + I \rho_g \left(\frac{1-\text{cos}\beta}{2}\right)
+\notag
+\end{align}</p>
+
+<p>$I_b$와 $I_d$의 값들을 추정하는 방법으로 Erbs’ correlation이 있다. 이는 $I_d/I$를 $K_T=I/I_o$로 정의되는 clearness index의 함수로 근사하는 correlation으로, $I$를 알면 $I_d$를 추정하고 이로부터 $I_b$ 또한 추정할 수 있다. 구체적 식은 아래와 같다.</p>
+
+<p>\begin{align} 
+I_d/I = 
+\begin{array}{rl}
+1 - 0.09 K_T &amp; \text{if } K_T \leq 0.22, \newline
+0.9511 - 0.1604 K_T + 4.388 K_T^2 - 16.638 K_T^3 + 12.336 K_T^4 &amp; \text{if } 0.22 \leq K_T \leq 0.80, \newline
+0.165 &amp; \text{if } 0.80 &lt; K_T
+\end{array}
+\notag
+\end{align}</p>
+
+<p><img src="/assets/images/solarradiation/erbs.png" alt="Erbs' correlation" class="align-center" width="50%" />
+<em>Clearness index와 $I_d/I$ 간 관계 (Erbs’ correlation)</em></p>
+
+<p><br /></p>
+<h2 id="일사량을-태양광-패널-출력으로-변환">일사량을 태양광 패널 출력으로 변환</h2>
+
+<p>패널에 도달하는 일사량 $I_T$를 태양광 발전량 $P_{pv}$로 변환하기 위해선 태양광 패널의 성능 곡선이 필요하다. 일반적으로 아래 그림처럼 nominal efficiency (세로축이 1.00일 때의 변환효율, 이를테면 15.1퍼센트) 대비 상대적인 값이 $I_T$의 함수로 주어진다.</p>
+
+<p><img src="/assets/images/solarradiation/pvperformance.png" alt="Performance of PV panel" class="align-center" width="60%" />
+<em>태양광 패널의 성능곡선.</em></p>
+
+<p>위 그림의 가로축의 단위는 W이지만 $I_T$의 단위는 Wh이다. 그러므로 편의상, 해당 1시간 동안 일사량의 세기는 일정하다고 가정하여, $I_T$의 값을 위 성능곡선에 대입해 $P_{pv}$를 계산한다.</p>
+
+<p><br /></p>
+<h2 id="계산-모델-검증">계산 모델 검증</h2>
+
+<p>아래 그림은, 모 지역의 정수시설에 설치된 태양광 패널의 특정 연도의 5월 실제 발전량 기록 (파란색) 과, 해당 지점으로부터 약 16km 떨어진 기상대에서 측정된 GHI와 이 포스팅에서 소개한 HDKR 모델로 계산된 태양광 발전량 추정치 (빨간색) 를 비교한 결과이다.</p>
+
+<p><img src="/assets/images/solarradiation/val_1st.png" alt="Validation: 1st half" class="align-center" />
+<img src="/assets/images/solarradiation/val_2nd.png" alt="Validation: 2nd half" class="align-center" />
+<em>태양광 패널의 실제 발전량 기록 (파랑) 과 모델 기반 계산 결과 (빨강) 비교. 세로축 단위는 kW.</em></p>
+
+<p>모델이 실제 발전량과 충분히 유사한 값을 계산해줌을 볼 수 있다. 참고로 27~30일은 시설 유지보수가 있었던 것으로 추정된다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#%ED%83%9C%EC%96%91%EA%B4%91" class="page__taxonomy-item p-category" rel="tag">태양광</a>
+    
+    </span>
+  </p>
+
+
+
+<!-- 
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#dataset" class="page__taxonomy-item p-category" rel="tag">dataset</a>
+    
+    </span>
+  </p>
+
+ -->
+        <!-- 
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-11-25T00:00:00+09:00">2023-11-25</time></p>
+ -->
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EC%8B%9C%EA%B0%84%EB%B3%84+%ED%83%9C%EC%96%91%EA%B4%91+%EB%B0%9C%EC%A0%84%EB%9F%89+%EA%B3%84%EC%82%B0+%EB%AA%A8%EB%8D%B8+%EC%88%98%EC%8B%9D+%EC%84%A4%EB%AA%85%20http%3A%2F%2Flocalhost%3A4000%2Fhourlysolar.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fhourlysolar.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fhourlysolar.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      <p></p>
+        <!-- <h4 class="page__meta-title"><span>dataset</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
+        
+
+
+  
+  	
+  	
+  	
+  	
+  	
+
+<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
+
+  
+    
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
+    
+    
+      <a href="/evestimate.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>논문 소개: 전기차 충전 이력 데이터 기반의, 계통 내 시간별 전기차 충전 부하 시뮬레이션</a>
+        
+  
+
+</nav>
+      <p></p>
+    </div>
+
+    
+  </article>
+
+  
+  <!-- 
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/opf.html" rel="permalink"><img src="/assets/images/opf/network.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/opf.html" rel="permalink">Optimal power flow 예제 소개 문헌 및 풀이 코드
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-11-11T00:00:00+09:00">2023-11-11</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">필자의 ‘선형계획법 기반 분산에너지시스템 최적화’ 시리즈 글에서는, 유효전력의 수요-공급을 고려하는 설비도입계획을 다루었다. 그러나 기 구축된 대규모 발송전시스템의 실제 운영은, 각 발전기 및 bus의 전압/ 무효전력/ 위상도 고려하는 optimal power flow (OPF) ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/koreanmarketrules.html" rel="permalink">국내 전력시장 주요 운영규칙 핵심사항 정리
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-10-22T00:00:00+09:00">2023-10-22</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">최근 에너지 플랫폼 업계 현직자들과 대화를 하며, 국내 전력시장 운영규칙을 상세히 알 필요성을 느꼈다. 본격적으로 에너지 플랫폼 업계에 종사한다면 전력시장 입찰을 전제로 한 에너지 설비들의 데이터 및 비즈니스 모델을 주로 분석하게 될 것이라 생각했기 때문이다. (그간 필자는 BTM...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/evestimate.html" rel="permalink"><img src="/assets/images/evestimates/teaser.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/evestimate.html" rel="permalink">논문 소개: 전기차 충전 이력 데이터 기반의, 계통 내 시간별 전기차 충전 부하 시뮬레이션
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-10-21T00:00:00+09:00">2023-10-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">전기차 및 충전 인프라 규모가 증가할수록 전력계통에 걸리는 부하가 증가한다. 그러므로 향후 발전/ 송전/ 배전 (특히 배전단) 설비 및 스케줄링 계획 수립을 위해, 전기차 충전으로 인한 시간별 부하 증가를 정확히 예측할 필요가 있다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/marketadvanced.html" rel="permalink"><img src="/assets/images/jalal/advanced.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/marketadvanced.html" rel="permalink">재생발전 비중이 높은 전력시장에 대한 심화 주제들
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-10-07T00:00:00+09:00">2023-10-07</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">필자가 정리했던 Jalal Kazempour 교수의 전력시장 강의에서 reference로써 추천한 책으로, Integrating Renewables in Electricity Markets: Operational Problems 이 있다.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div> -->
+  
+  <!--  -->
+</div>
+
+  </div>
+
+  
+
+  <aside class="sidebar__top">
+    <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside>
+
+  <div id="footer" class="page__footer">
+    <footer>
+      <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+      <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Contact:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:song4energy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+          <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 송정훈. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+    </footer>
+  </div>
+
+  
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

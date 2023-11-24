@@ -5,9 +5,154 @@
     <description>공학박사 과정에서 쌓은 에너지 시스템 전문성에 데이터 사이언스 석사를 더하며 쌓은 계산통계학 활용 역량을 결합하여, 데이터 기반의 에너지 시스템/ 정책/ 시장 관련 솔루션 도출을 올바르게 할 수 있도록 돕습니다.</description>
     <link>https://song4energyndata.github.io/</link>
     <atom:link href="https://song4energyndata.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 12 Nov 2023 08:10:01 +0900</pubDate>
-    <lastBuildDate>Sun, 12 Nov 2023 08:10:01 +0900</lastBuildDate>
+    <pubDate>Sat, 25 Nov 2023 04:14:45 +0900</pubDate>
+    <lastBuildDate>Sat, 25 Nov 2023 04:14:45 +0900</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>시간별 태양광 발전량 계산 모델 수식 설명</title>
+        <description>&lt;p&gt;태양광 패널을 포함하는 마이크로그리드의 경제성 분석을 위해서는 시간별 태양광 발전량을 계산해야 한다. 필자가 국내 케이스의 계산에 사용하는 데이터로는 &lt;a href=&quot;https://data.kma.go.kr/data/grnd/selectAsosRltmList.do?pgmNo=36&quot;&gt;기상청에서 제공하는 시간별 일사량&lt;/a&gt;이 있다. 즉, 시간별 일사량 데이터를 태양광 발전량으로 변환해야 한다.&lt;/p&gt;
+
+&lt;p&gt;시간별 일사량 데이터를 태양광 발전량으로 변환한 결과만 얻고 싶다면, 미국의 National Renewable Energy Laboratory (NREL)에서 개발한 재생에너지시스템 경제성평가 tool인 &lt;a href=&quot;https://sam.nrel.gov/&quot;&gt;System Advison Model (SAM)&lt;/a&gt;을 사용하면 된다.&lt;/p&gt;
+
+&lt;p&gt;SAM으로 시간별 태양광 발전량을 계산하기 위한 ‘프로그램 사용’ 방법은 &lt;a href=&quot;https://blog.naver.com/song4energy/221853737153&quot;&gt;필자의 NAVER 블로그 포스트&lt;/a&gt;에서 설명한 바 있다.&lt;/p&gt;
+
+&lt;p&gt;그러나 SAM 사용 시 사용자가 매 case마다 수동으로 변환해야 한다. 만약 어떤 커스터마이징된 데이터 파이프라인이 일사량을 받고 자동으로 태양광 발전량으로 변환해 주기를 원한다면, SAM을 사용할 수 없다. 대신 태양광 발전량 계산 모델을 직접 코딩해서 포함시켜야 한다.&lt;/p&gt;
+
+&lt;p&gt;이 포스트에서는, 기상청에서 제공하는 시간별 일사량으로 시간별/ 위도별/ 패널 각도별 태양광 발전량을 계산하는 수리모델을 설명한다. 참고한 자료들은 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;1) &lt;a href=&quot;https://www.slideshare.net/muammarzainuddin/9781846284663-c2&quot;&gt;“Hybrid hydrogen systems”의 Chapter 2 “Renewable Energy Sources and Energy Conversion Devices”&lt;/a&gt;&lt;br /&gt;
+2) &lt;a href=&quot;https://www.researchgate.net/publication/283051726_A_comprehensive_solar_angles_simulation_and_calculation_using_Matlab&quot;&gt;A comprehensive solar angles simulation and calculation using Matlab&lt;/a&gt;&lt;br /&gt;
+3) &lt;a href=&quot;https://doi.org/10.1016/0038-092X(82)90302-4&quot;&gt;Estimation of the diffuse radiation fraction for hourly, daily and monthly-average global radiation&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;임의의-위치-날짜-시간에-태양으로부터-직달하는-일사량-계산&quot;&gt;임의의 위치/ 날짜/ 시간에 태양으로부터 직달하는 일사량 계산&lt;/h2&gt;
+
+&lt;p&gt;먼저 지구 대기권 경계에 직달하는 일사량의 연중 평균값을 global solar constant $G_{sc}$ 라 하며, 약 $1,367 \text{W}/m^2$이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/solarradiation/extra.jpg&quot; alt=&quot;Global solar constant&quot; class=&quot;align-center&quot; /&gt;
+&lt;em&gt;Global solar constant. (출처: https://www.greenrhinoenergy.com/solar/radiation/extraterrestrial.php)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;실제 각 날짜별로 지구 대기권 경계에 직달하는 실제 일사량 $G_{en}$은 지구 공전에 의해 달라진다. $G_{en}$은 $n=1,2,\dots,365$이며 1월 1일에 $n=1$이라 할 때 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;\begin{align} 
+G_{en} = G_{sc}\left(1 + 0.033 \text{cos} \frac{360n}{365} \right)
+\notag
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;실제로는 시간 및 위도에 따라서도 일사량이 다르다. 위도(latitude)를 $\phi$, 시간에 대응하는 각도인 hour angle (정오 즉 남향일 때 0, 오후에 플러스, 오전에 마이너스, 1시간당 15도 변화) 을 $\omega$, 직달일사량과 지구 적도 간 각도인 declination angle (아래 그림 참고) 을 $\delta$라 할 때, 해당 날짜/ 위도/ 시간에 도달하는 일사량은 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;\begin{align} 
+G_{0} = G_{sc}\left(1 + 0.033 \text{cos} \frac{360n}{365} \right) \left(\text{cos}\phi \text{cos}\delta \text{cos}\omega + \text{sin}\phi \text{sin}\delta \right) \quad \text{where} \,\, \delta = 23.45^o \text{sin} \left[\frac{360^o}{365}(284+n) \right]
+\notag
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/solarradiation/declinationangle.png&quot; alt=&quot;Declination angle&quot; class=&quot;align-center&quot; /&gt;
+&lt;em&gt;Declination angle. (출처: A comprehensive solar angles simulation and calculation using Matlab)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;실제 에너지시스템 최적화 문제를 풀 때 필요한 수치는 ‘$k$시부터 $k+1$시까지 도달한 총 에너지’ 이다. 이는 $k$시와 $k+1$시의 hour angle을 각각 $w_1$과 $w_2$라 할 때, 적분에 의해 아래와 같이 계산된다 (단위는 Wh).&lt;/p&gt;
+
+&lt;p&gt;\begin{align} 
+I_o = \int_{w_1}^{w_2} G_o dw = \frac{12}{\pi} G_{en} \left[ \text{cos} \phi \text{cos} \delta (\text{sin} \omega_2 - \text{sin} \omega_1) + \frac{\pi (\omega_2 - \omega_1)}{180} \text{sin} \phi \text{sin} \delta \right]
+\notag
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;임의의-각도로-설치된-패널과-태양-광선-간-각도-계산&quot;&gt;임의의 각도로 설치된 패널과 태양 광선 간 각도 계산&lt;/h2&gt;
+
+&lt;p&gt;지금까지의 논의는 모두 수평면에 도달하는 일사량에 대한 것이었다. 그러나 태양광 패널은 지면으로부터 일정 각도로 기울어져 설치되며, 대부분의 경우 정남향을 향하게 설치되지만 그렇지 않은 경우도 꽤 있다.&lt;/p&gt;
+
+&lt;p&gt;지상으로부터 $\beta$만큼의 경사각으로 기울어져 있고 남향을 기준으로 $\gamma$만큼의 각도로 틀어져 있는 (서향이면 플러스, 동향이면 마이너스) 패널의 법선과 그 평면에 직달하는 일사량 간의 각도를 $\theta$ (angle of incidence) 라 하자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/solarradiation/theta.png&quot; alt=&quot;Declination angle&quot; class=&quot;align-center&quot; /&gt;
+&lt;em&gt;태양광 패널의 설치각 및 angle of incidence. (출처: Optimal design and analysis of grid-connected photovoltaic under different tracking systems using HOMER)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;이 때 $\theta$는 아래와 같이 계산된다.&lt;/p&gt;
+
+&lt;p&gt;\begin{align} 
+\text{cos} \theta = \text{sin} \delta \text{sin} \phi \text{cos} \beta - \text{sin} \delta \text{cos} \phi \text{sin} \beta \text{cos} \gamma + \text{cos} \delta \text{cos} \phi \text{cos} \beta \text{cos} \omega + \text{cos} \delta \text{sin} \phi \text{sin} \beta \text{cos} \gamma \text{cos} \omega + \text{cos} \delta \text{sin} \beta \text{sin} \gamma \text{sin} \omega
+\notag
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;위 식에서 $\beta=0$이면 지면 기준 ‘수평’면과 일사량 간의 각도 $\theta_z$ (zenith angle) 이다.&lt;/p&gt;
+
+&lt;p&gt;\begin{align} 
+\text{cos} \theta_z = \text{cos} \phi \text{cos} \delta \text{cos} \omega + \text{sin} \phi \text{sin} \delta 
+\notag
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;잘 보면, $G_{0}$ 계산식에 $\text{cos} \theta_z$가 포함되어 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;대기의-효과를-고려한-유효-일사량-계산&quot;&gt;대기의 효과를 고려한 유효 일사량 계산&lt;/h2&gt;
+
+&lt;p&gt;$I_o$는 태양광이 대기를 뚫고 지면에 도달하는 과정에서 대기의 영향을 고려하지 않은 값이다. 실제로는 대기에서 산란이 발생하므로, 이 효과를 고려해야 한다.&lt;/p&gt;
+
+&lt;p&gt;대기 효과를 고려해 최종적으로 수평 지표면에 도달하는 일사량을 수평면전일사량 (Global Horizontal Irradiance, GHI) $I$라 하며, &lt;a href=&quot;https://data.kma.go.kr/data/grnd/selectAsosRltmList.do?pgmNo=36&quot;&gt;기상청 종관기상관측자료&lt;/a&gt;에서 제공하는 일사량 값이 GHI이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/solarradiation/irradiancedata.png&quot; alt=&quot;Declination angle&quot; class=&quot;align-center&quot; width=&quot;70%&quot; /&gt;
+&lt;em&gt;기상청 종관기상관측자료에서 제공하는 시간별 GHI 데이터. 단위가 MJ/$m^2$임에 주의 (필자는 태양광 패널 성능곡선 단위가 W임에 착안해 1000을 곱한 후 3.6으로 나눈 값을 사용한다).&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;지표면에 도달하는 일사량은 두 가지 성분으로 나눌 수 있다. 하나는 태양에서 지표면까지 직달하는 beam (direct) radiation $I_b$이고, 다른 하나는 대기 중에서 산란되어 해당 지표면에 도달하는 diffuse radiation $I_d$이다.&lt;/p&gt;
+
+&lt;p&gt;한편 지표면에 도달한 태양 에너지의 일부는 우주로 반사되어 나가며, 반사되는 에너지의 비율을 albedo라 한다. Albedo의 연중 평균값은 대략 $\rho_g \approx 0.35$ 이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/solarradiation/diffuse.png&quot; alt=&quot;Erbs&apos; correlation&quot; class=&quot;align-center&quot; width=&quot;60%&quot; /&gt;
+&lt;em&gt;Beam radiation과 diffuse radiation의 concept. (출처: https://faculty.uml.edu/Nelson_Eby/ENVI.5720/Instructor%20Pdfs/Chapt%209%20-%20Solar%20Power.pdf)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;만약 $I=I_b + I_d$ 뿐 아니라 $I_b$와 $I_d$ 각각의 값을 안다면, 아래의 HDKR 모델 (Hay, Davies, Klucher, Reindl) 을 이용해 실제 태양광 발전량 계산의 기준이 되는 일사량 $I_T$ 를 계산할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;\begin{align} 
+I_T = \left(I_b + \frac{I_d I_b}{I_o}\right) \frac{\text{cos} \theta}{\text{cos} \theta_z} + I_d \left(1- \frac{I_b}{I_o}\right) \left(\frac{1+\text{cos}\beta}{2}\right) \left[ 1 + \sqrt{\frac{I_b}{I}} \text{sin}^3 (\frac{\beta}{2}) \right] + I \rho_g \left(\frac{1-\text{cos}\beta}{2}\right)
+\notag
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;$I_b$와 $I_d$의 값들을 추정하는 방법으로 Erbs’ correlation이 있다. 이는 $I_d/I$를 $K_T=I/I_o$로 정의되는 clearness index의 함수로 근사하는 correlation으로, $I$를 알면 $I_d$를 추정하고 이로부터 $I_b$ 또한 추정할 수 있다. 구체적 식은 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;\begin{align} 
+I_d/I = 
+\begin{array}{rl}
+1 - 0.09 K_T &amp;amp; \text{if } K_T \leq 0.22, \newline
+0.9511 - 0.1604 K_T + 4.388 K_T^2 - 16.638 K_T^3 + 12.336 K_T^4 &amp;amp; \text{if } 0.22 \leq K_T \leq 0.80, \newline
+0.165 &amp;amp; \text{if } 0.80 &amp;lt; K_T
+\end{array}
+\notag
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/solarradiation/erbs.png&quot; alt=&quot;Erbs&apos; correlation&quot; class=&quot;align-center&quot; width=&quot;50%&quot; /&gt;
+&lt;em&gt;Clearness index와 $I_d/I$ 간 관계 (Erbs’ correlation)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;일사량을-태양광-패널-출력으로-변환&quot;&gt;일사량을 태양광 패널 출력으로 변환&lt;/h2&gt;
+
+&lt;p&gt;패널에 도달하는 일사량 $I_T$를 태양광 발전량 $P_{pv}$로 변환하기 위해선 태양광 패널의 성능 곡선이 필요하다. 일반적으로 아래 그림처럼 nominal efficiency (세로축이 1.00일 때의 변환효율, 이를테면 15.1퍼센트) 대비 상대적인 값이 $I_T$의 함수로 주어진다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/solarradiation/pvperformance.png&quot; alt=&quot;Performance of PV panel&quot; class=&quot;align-center&quot; width=&quot;60%&quot; /&gt;
+&lt;em&gt;태양광 패널의 성능곡선.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;위 그림의 가로축의 단위는 W이지만 $I_T$의 단위는 Wh이다. 그러므로 편의상, 해당 1시간 동안 일사량의 세기는 일정하다고 가정하여, $I_T$의 값을 위 성능곡선에 대입해 $P_{pv}$를 계산한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;계산-모델-검증&quot;&gt;계산 모델 검증&lt;/h2&gt;
+
+&lt;p&gt;아래 그림은, 모 지역의 정수시설에 설치된 태양광 패널의 특정 연도의 5월 실제 발전량 기록 (파란색) 과, 해당 지점으로부터 약 16km 떨어진 기상대에서 측정된 GHI와 이 포스팅에서 소개한 HDKR 모델로 계산된 태양광 발전량 추정치 (빨간색) 를 비교한 결과이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/solarradiation/val_1st.png&quot; alt=&quot;Validation: 1st half&quot; class=&quot;align-center&quot; /&gt;
+&lt;img src=&quot;/assets/images/solarradiation/val_2nd.png&quot; alt=&quot;Validation: 2nd half&quot; class=&quot;align-center&quot; /&gt;
+&lt;em&gt;태양광 패널의 실제 발전량 기록 (파랑) 과 모델 기반 계산 결과 (빨강) 비교. 세로축 단위는 kW.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;모델이 실제 발전량과 충분히 유사한 값을 계산해줌을 볼 수 있다. 참고로 27~30일은 시설 유지보수가 있었던 것으로 추정된다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 25 Nov 2023 00:00:00 +0900</pubDate>
+        <link>https://song4energyndata.github.io/hourlysolar.html</link>
+        <guid isPermaLink="true">https://song4energyndata.github.io/hourlysolar.html</guid>
+        
+        <category>태양광</category>
+        
+        
+        <category>dataset</category>
+        
+      </item>
     
       <item>
         <title>Optimal power flow 예제 소개 문헌 및 풀이 코드</title>
@@ -1457,130 +1602,6 @@ Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&g
         <pubDate>Sun, 27 Aug 2023 00:00:00 +0900</pubDate>
         <link>https://song4energyndata.github.io/jalalten.html</link>
         <guid isPermaLink="true">https://song4energyndata.github.io/jalalten.html</guid>
-        
-        <category>최적화</category>
-        
-        <category>게임이론</category>
-        
-        <category>에너지시스템</category>
-        
-        
-        <category>market</category>
-        
-      </item>
-    
-      <item>
-        <title>에너지시스템 최적화/게임이론 강의: 9) Bender&apos;s decomposition</title>
-        <description>&lt;p&gt;이 포스팅은, Technical University of Denmark의 박사과정 과목 “Advanced Optimization and Game Theory for Energy Systems” (Prof. Jalal Kazempour) 의 9강을 필자가 요약한 내용이다.&lt;/p&gt;
-
-&lt;!-- Courtesy of embedresponsively.com --&gt;
-
-&lt;div class=&quot;responsive-video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/bJy4373v7Uo&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-  &lt;/div&gt;
-
-&lt;p&gt;(&lt;a href=&quot;https://www.jalalkazempour.com/teaching&quot;&gt;Course slides 링크&lt;/a&gt;)&lt;/p&gt;
-
-&lt;h2 id=&quot;complicating-variable의-값을-찾는-원리&quot;&gt;Complicating variable의 값을 찾는 원리&lt;/h2&gt;
-
-&lt;p&gt;Bender’s decomposition은, 모든 소문제에 공통적으로 포함되는 ‘변수’인 complicating ‘variable’이 있을 때 사용하는 decomposition method이다.&lt;/p&gt;
-
-&lt;p&gt;Complicating variable이 포함된 큰 문제를 여러 subproblem들로 쪼개기 위해서는, complicating variable의 값을 고정해야 한다. 그러면 그 고정값을 얼마로 해야 될까?&lt;/p&gt;
-
-&lt;p&gt;Complicating variable을 $x$라 할 때, $x$가 가질 수 있는 각 값들 별로 나머지 변수들에 대해 문제를 풀어 얻은 목적함수 값들을 아래 슬라이드와 같이 plot할 수 있다고 하면, 목적함수가 최소가 되는 $x$값을 선택하면 된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture9_15.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;$x$가 ‘신규’ 발전설비의 용량이고 위 plot에서의 목적함수가 총 비용 (건설비용과 운영비용의 합) 이라 하면,
-$x$가 작아서 목적함수의 값이 큰 상황은 ‘발전설비 부족으로 전력 공급에 어려움을 겪을 경우의 운영비용 증가’,
-$x$가 커서 목적함수의 값이 큰 상황은 ‘발전설비를 필요 이상으로 과하게 건설할 경우의 고정비용 증가’ 로 볼 수 있다.&lt;/p&gt;
-
-&lt;p&gt;실제로는 위와 같은 plot을 미리 알 수 없다. 그러나 다행히도, 위 plot을 piecewise-linear function으로 근사하는 방법이 있다.&lt;/p&gt;
-
-&lt;p&gt;먼저 $x$의 initial point를 정하고, 해당 $x$값으로 고정 후 목적함수를 계산한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture9_18.png&quot; alt=&quot;clearingexample&quot; /&gt;
-&lt;img src=&quot;/assets/images/jalal/Lecture9_19.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;다음으로 해당 $x$값에서 목적함수의 sensitivity 값 기반으로 접선을 계산한다 (subproblem의 dual variable을 계산해 얻으며, 자세한 내용은 뒤에서 설명한다).&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture9_20.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이 접선을 기준으로 목적함수를 최소화하는 $x$값을 구하고, 해당 $x$에 대해 위 과정을 다시 수행한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture9_21.png&quot; alt=&quot;clearingexample&quot; /&gt;
-&lt;img src=&quot;/assets/images/jalal/Lecture9_22.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그러면 접선 두 개가 이루는 piecewise-linear function이 생기는데, 해당 function을 기준으로 목적함수를 최소화하는 $x$값을 구하고, 해당 $x$에 대해 위 과정을 다시 수행한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture9_23.png&quot; alt=&quot;clearingexample&quot; /&gt;
-&lt;img src=&quot;/assets/images/jalal/Lecture9_24.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이 과정을 반복할수록, piecewise-linear function이 $x$값과 목적함수 간의 실제 관계와 유사해진다. 그러므로 이 과정을 수렴 조건이 만족될 때까지 반복한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture9_26.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;(단, $x$값과 목적함수 간의 관계가 convex임을 전제로 한다. non-convex인 경우 local optimum에 도달할 수 있다. $x$가 벡터인 경우에도 $x$의 원소 각각에 대해 convex여야 한다.)&lt;/p&gt;
-
-&lt;h2 id=&quot;benders-decomposition-알고리즘&quot;&gt;Bender’s decomposition 알고리즘&lt;/h2&gt;
-
-&lt;p&gt;아래 슬라이드의 예제를 Bender’s decomposition으로 푼다고 하자. 여기서 $x$를 complicating variable로 본다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture9_31.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그러면 $x$를 고정했을 때의 $y$에 대한 subproblem과, subproblem의 dual variable들 기반으로 구성할 수 있는 $x$에 대한 master problem은 아래 슬라이드와 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture9_36.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Master problem에서 $\alpha^{(i)}$는 원래 문제의 목적함수에서의 $y$에 대한 term ($-y$) 을 대체하는 auxiliary variable이고, $i$는 iteration index이다 (여기서는 $i$가 1부터 시작한다고 둠). $\alpha^{down}$은 첫 번째 iteration에서 master problem을 bounded problem으로 만들기 위한 상수로, 크기가 매우 큰 음수이다.&lt;/p&gt;
-
-&lt;p&gt;$\pi^{(k)}$, $\mu^{(k)}$, $\sigma^{(k)}$, $\gamma^{(k)}$ 는 $k$번째 iteration에서의 subproblem의 dual variable의 값들이다. 이 때 $k=1,2,\cdots,i-1$, 즉 직전 iteration까지의 ‘모든 iteration 각각에 대한’ 값들을 전부 모은 것임에 주의한다. 즉 $\alpha^{(i)}$에 대한 부등호 제약조건이 $i-1$개가 있는 것이다. 그리고 첨자 $(i)$만이 변수이고 첨자 $(k)$는 전부 parameter들임에 주의한다.&lt;/p&gt;
-
-&lt;p&gt;$\alpha^{(i)}$에 대한 부등호 제약의 우변은 subproblem의 dual objective function이다. 실제로 $y$에 대한 subproblem의 Lagrangian을 쓰고 $y$ term들을 제거하면 ($y$ term들을 제거하지 않으면 unbounded problem이 됨), dual objective를 우변과 같이 얻는다. 그리고 $\alpha^{(i)}$는 최소화 대상이므로, $\alpha^{(i)}$는 $i-1$개의 dual objective 중 적어도 하나와 같은 값이 된다.&lt;/p&gt;
-
-&lt;p&gt;Duality theorem에 의해 primal problem의 목적함수 (여기서는 $-y$)는 dual problem의 목적함수 ($\alpha^{(i)}$에 대한 부등호 제약의 우변) 보다 크거나 같다. 그러므로 subproblem을 풀어 얻은 subproblem의 목적함수의 값은 $\alpha^{(i)}$보다 크거나 같다.&lt;/p&gt;
-
-&lt;p&gt;또한 subproblem이 linear programming problem이므로, optimal point에서는 primal problem의 목적함수와 $\alpha^{(i)}$가 서로 같을 것이다.&lt;/p&gt;
-
-&lt;p&gt;그러므로 primal problem의 목적함수를 UB (upper bound) 로, $\alpha^{(i)}$를 LB (lower bound) 로 두고, $\vert UB - LB \vert \leq \epsilon$ 이 될 때까지 반복한다. 알고리즘은 아래와 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture9_37.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;제약조건을-보다-간단히-쓰는-compact-form&quot;&gt;제약조건을 보다 간단히 쓰는 Compact form&lt;/h2&gt;
-
-&lt;p&gt;위 설명대로라면, master problem의 $\alpha^{(i)}$에 대한 부등호 제약의 우변은 subproblem의 제약조건이 많을수록 매우 복잡해질 것이다 (dual variable 수가 늘어나므로). 게다가, 서두에 언급했던 $x$의 sensitivity를 기반으로 계산하는 방법도 아니다.&lt;/p&gt;
-
-&lt;p&gt;$\alpha^{(i)}$에 대한 부등호 제약의 우변을 보다 간단하게 쓰는 compact form은 아래와 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/jalal/Lecture9_42.png&quot; alt=&quot;clearingexample&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Subproblem에서 $x^{(i)}$를 형식적으로는 변수로 두되 맨 마지막 제약조건을 통해 그 값을 master problem에서 얻은 값으로 고정한다. 이 경우 어쨌든 제약조건은 맞으므로 $x^{(i)}$에 대한 sensitivity $\rho^{(i)}$를 구할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;Master problem에서는 subproblem의 목적함수 (여기서는 $-y^{(k)}$) 및 $x^{(k)}$에 대한 sensitivity $\rho^{(k)}$를 이용해서 $\alpha^{(i)}$에 대한 부등호 제약의 우변을 구성한다. 이는 훨씬 간단해진 compact form이자, 서두에 언급했듯 $x$의 sensitivity를 기울기로 하는 접선 계산이기도 하다.&lt;/p&gt;
-
-&lt;p&gt;Compact form의 $\alpha^{(i)}$에 대한 부등호 제약의 우변이 original subproblem의 dual objective와 동치 (equivalent) 임은 KKT condition 비교를 통해 확인할 수 있다.&lt;/p&gt;
-
-&lt;div class=&quot;notice--info&quot;&gt;
-
-Advanced Optimization and Game Theory for Energy Systems 강의 요약&lt;br /&gt;&lt;br /&gt;
-
-01) &lt;a href=&quot;/jalalone.html&quot;&gt; Market clearing as an optimization problem&lt;/a&gt; &lt;br /&gt;
-02) &lt;a href=&quot;/jalaltwo.html&quot;&gt; Market clearing as an equilibrium problem&lt;/a&gt; &lt;br /&gt;
-03) &lt;a href=&quot;/jalalthree.html&quot;&gt; Desirable properties of market-clearing mechanisms&lt;/a&gt; &lt;br /&gt;
-04) Market clearing using a cooperative game approach &lt;br /&gt;
-05) &lt;a href=&quot;/jalalfive.html&quot;&gt; Stochastic market clearing&lt;/a&gt; &lt;br /&gt;
-06) &lt;a href=&quot;/jalalsix.html&quot;&gt; Robust approaches for market clearing&lt;/a&gt; &lt;br /&gt;
-07) &lt;a href=&quot;/jalalseven.html&quot;&gt; Bilevel programming in energy systems&lt;/a&gt; &lt;br /&gt;
-08) &lt;a href=&quot;/jalaleight.html&quot;&gt; Optimization problems with decomposable structure&lt;/a&gt; &lt;br /&gt;
-09) &lt;b&gt; Benders’ decomposition: Theory&lt;/b&gt; &lt;br /&gt;
-10) &lt;a href=&quot;/jalalten.html&quot;&gt; Benders’ decomposition: Applications&lt;/a&gt; &lt;br /&gt;
-11) &lt;a href=&quot;/jalaleleven.html&quot;&gt; Augmented Lagrangian relaxation&lt;/a&gt; &lt;br /&gt;
-12) &lt;a href=&quot;/jalaltwelve.html&quot;&gt; Variants of ADMM and applications&lt;/a&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Sat, 26 Aug 2023 00:00:00 +0900</pubDate>
-        <link>https://song4energyndata.github.io/jalalnine.html</link>
-        <guid isPermaLink="true">https://song4energyndata.github.io/jalalnine.html</guid>
         
         <category>최적화</category>
         

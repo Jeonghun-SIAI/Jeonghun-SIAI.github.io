@@ -336,7 +336,7 @@
                     
                 
                     
-                        <li><a href="/dataset" class="">&#x2022 데이터셋 (소개/ 전처리/ 활용안) [6]</a></li>
+                        <li><a href="/dataset" class="">&#x2022 데이터셋 (소개/ 전처리/ 활용안) [7]</a></li>
                     
                 
                     
@@ -618,7 +618,8 @@
 <span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="nc">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">input_load</span><span class="p">,</span><span class="n">input_pv</span><span class="p">,</span><span class="n">input_others</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">output</span><span class="p">])</span>
 
 
-
+<span class="c1">### Policy에 따른 state 별 action 결정 함수
+</span>
 <span class="k">def</span> <span class="nf">e_greedy_policy</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span> <span class="c1"># epsilon-greedy policy
 </span>    <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span> <span class="c1"># epsilon의 확률로 exploration
 </span>        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># action을 랜덤하게 선택
@@ -628,13 +629,16 @@
         <span class="n">input_others</span> <span class="o">=</span><span class="n">state</span><span class="p">[(</span><span class="n">inputlen_load</span><span class="o">+</span><span class="n">inputlen_pv</span><span class="p">)].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Dense층의 input이므로 채널 수는 필요 없음
 </span>        <span class="n">Q_values</span> <span class="o">=</span> <span class="nf">model</span><span class="p">((</span><span class="n">input_load</span><span class="p">,</span><span class="n">input_pv</span><span class="p">,</span><span class="n">input_others</span><span class="p">))</span> <span class="c1"># 각 action 별 Q-value 도출
 </span>        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nf">argmax</span><span class="p">(</span><span class="n">Q_values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># 가장 큰 Q-value에 대응하는 action 선택      
-</span>        <span class="c1"># 주의: for loop 안에서 DNN에 input을 입력해 output 계산 시 model()로 해야지, model.predict()로 하면 안 됨! 메모리 누수가 발생함 (model.predict는 대량의 input data를 'model.predict를 한 번만 호출해서' 처리하는 데 특화됨, https://www.tensorflow.org/api_docs/python/tf/keras/Model#predict 참고)
+</span>        <span class="c1"># 주의: for loop 안에서 DNN에 input을 입력해 output 계산 시 model()로 해야지, 
+</span>        <span class="c1"># model.predict()로 하면 안 됨! 메모리 누수가 발생함 
+</span>        <span class="c1"># (model.predict는 대량의 input data를 'model.predict를 한 번만 호출해서' 처리하는 데 특화됨, https://www.tensorflow.org/api_docs/python/tf/keras/Model#predict 참고)
 </span>
 
-
+<span class="c1">### replay buffer 정의
+</span>
 <span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
-<span class="n">replay_buffer</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">buffer_size</span><span class="p">)</span> <span class="c1"># replay buffer 정의
-</span>
+<span class="n">replay_buffer</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">buffer_size</span><span class="p">)</span> 
+
 <span class="k">def</span> <span class="nf">sample_experiences</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span> <span class="c1"># batch_size만큼의 경험들의 state들, action들, reward들, nextstate들의 리스트들을 반환
 </span>    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">replay_buffer</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span> <span class="c1"># replay buffer 내 경험들 중 랜덤하게 batch_size만큼의 경험들을 지정 (인덱스 불러옴)
 </span>    <span class="n">batch</span> <span class="o">=</span> <span class="p">[</span><span class="n">replay_buffer</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span> <span class="c1"># 위에서 불러온 인덱스를 이용해 batch_size 만큼의 경험들을 batch 리스트에 담음
@@ -645,6 +649,8 @@
 
 
 
+<span class="c1">### 1 time step에 대해 action 수행
+</span>
 <span class="k">def</span> <span class="nf">play_one_step</span><span class="p">(</span><span class="n">profile_load</span><span class="p">,</span><span class="n">profile_pv</span><span class="p">,</span><span class="n">hour</span><span class="p">,</span><span class="n">energy_batt</span><span class="p">,</span><span class="n">epsilon</span><span class="p">,</span><span class="n">training</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span> <span class="c1"># 마이크로그리드 시스템의 시간별 operation 모델링
 </span>        
     <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">(</span> <span class="p">(</span><span class="n">profile_load</span><span class="p">[</span><span class="n">hour</span><span class="o">-</span><span class="n">inputlen_load</span><span class="p">:</span><span class="n">hour</span><span class="p">],</span> <span class="n">profile_pv</span><span class="p">[</span><span class="n">hour</span><span class="o">-</span><span class="n">inputlen_pv</span><span class="p">:</span><span class="n">hour</span><span class="p">],</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="n">energy_batt</span><span class="p">]))</span> <span class="p">)</span>
@@ -689,9 +695,10 @@
 </span>    <span class="k">return</span> <span class="n">energy_batt_after</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">action</span> <span class="c1"># scaled 배터리 내 저장량, unscaled reward, action index 반환
 </span>
 
-
-<span class="k">def</span> <span class="nf">training_step</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span> <span class="c1"># 심층신경망에 대해 Gradient descent 기반 가중치 업데이트 수행
+<span class="c1">### 심층신경망 가중치 업데이트 수행
 </span>
+<span class="k">def</span> <span class="nf">training_step</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span> 
+
     <span class="n">states</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">next_states</span> <span class="o">=</span> <span class="nf">sample_experiences</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
         
     <span class="n">input_load</span> <span class="o">=</span> <span class="n">states</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">inputlen_load</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">inputlen_load</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
@@ -716,17 +723,18 @@
 </span>    <span class="n">optimizer</span><span class="p">.</span><span class="nf">apply_gradients</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="n">model</span><span class="p">.</span><span class="n">trainable_variables</span><span class="p">))</span> <span class="c1"># Adam optimizer로 parameter update 수행, zip으로 gradient와 parameter pair를 맞춰줌
 </span>
 
-
+<span class="c1">### 훈련 및 검증 수행
+</span>
 <span class="n">profits_test</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">elapsedtime_test</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">count_step_fortrain</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">max_return_test</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">inf</span>
 
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span> 
-    <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># 맨 첫 번째 epoch에서는 훈련을 시작하지 않고 buffer를 채움, 두 번째 epoch부터는 buffer에 sample들이 채워졌으므로 훈련함
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span> <span class="c1"># epoch 수 설정
+</span>    <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># 맨 첫 번째 epoch에서는 훈련을 시작하지 않고 buffer를 채움, 두 번째 epoch부터는 buffer에 sample들이 채워졌으므로 훈련함
 </span>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
     
-    <span class="c1">### Train for each epoch  
+    <span class="c1">### 훈련 (2년치)
 </span>    <span class="n">hour</span> <span class="o">=</span> <span class="mi">24</span> <span class="c1"># 시작시점
 </span>    <span class="n">energy_batt</span> <span class="o">=</span> <span class="n">initialenergy_batt</span>  <span class="c1"># 배터리 내 에너지의 초기값
 </span>    
@@ -741,7 +749,7 @@
 </span>                <span class="n">count_step_fortrain</span> <span class="o">=</span> <span class="mi">0</span>
 
 
-    <span class="c1">### Validation for each epoch  
+    <span class="c1">### 검증 (1년치)  
 </span>    <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">testcase_actions</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">testcase_battenergy</span> <span class="o">=</span> <span class="p">[]</span>
@@ -936,6 +944,47 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
+        <a href="/hourlysolar.html" rel="permalink"><img src="/assets/images/solarradiation/diffuse.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/hourlysolar.html" rel="permalink">시간별 태양광 발전량 계산 모델 수식 설명
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-11-25T00:00:00+09:00">2023-11-25</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">태양광 패널을 포함하는 마이크로그리드의 경제성 분석을 위해서는 시간별 태양광 발전량을 계산해야 한다. 필자가 국내 케이스의 계산에 사용하는 데이터로는 기상청에서 제공하는 시간별 일사량이 있다. 즉, 시간별 일사량 데이터를 태양광 발전량으로 변환해야 한다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
         <a href="/opf.html" rel="permalink"><img src="/assets/images/opf/network.png" alt=""></a>
       </div>
     
@@ -1040,47 +1089,6 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">전기차 및 충전 인프라 규모가 증가할수록 전력계통에 걸리는 부하가 증가한다. 그러므로 향후 발전/ 송전/ 배전 (특히 배전단) 설비 및 스케줄링 계획 수립을 위해, 전기차 충전으로 인한 시간별 부하 증가를 정확히 예측할 필요가 있다.
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <a href="/marketadvanced.html" rel="permalink"><img src="/assets/images/jalal/advanced.png" alt=""></a>
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/marketadvanced.html" rel="permalink">재생발전 비중이 높은 전력시장에 대한 심화 주제들
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2023-10-07T00:00:00+09:00">2023-10-07</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">필자가 정리했던 Jalal Kazempour 교수의 전력시장 강의에서 reference로써 추천한 책으로, Integrating Renewables in Electricity Markets: Operational Problems 이 있다.
 </p>
   </article>
 </div>

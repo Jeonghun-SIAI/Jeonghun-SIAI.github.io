@@ -280,4 +280,10 @@ var store = [{
         "tags": ["Optial Power Flow","경제성분석"],
         "url": "/opf.html",
         "teaser": "/assets/images/opf/network.png"
+      },{
+        "title": "시간별 태양광 발전량 계산 모델 수식 설명",
+        "excerpt":"태양광 패널을 포함하는 마이크로그리드의 경제성 분석을 위해서는 시간별 태양광 발전량을 계산해야 한다. 필자가 국내 케이스의 계산에 사용하는 데이터로는 기상청에서 제공하는 시간별 일사량이 있다. 즉, 시간별 일사량 데이터를 태양광 발전량으로 변환해야 한다. 시간별 일사량 데이터를 태양광 발전량으로 변환한 결과만 얻고 싶다면, 미국의 National Renewable Energy Laboratory (NREL)에서 개발한 재생에너지시스템 경제성평가 tool인...","categories": ["dataset"],
+        "tags": ["태양광"],
+        "url": "/hourlysolar.html",
+        "teaser": "/assets/images/solarradiation/diffuse.png"
       }]
