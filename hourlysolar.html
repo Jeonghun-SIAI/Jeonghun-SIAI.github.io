@@ -545,15 +545,18 @@ G_{en} = G_{sc}\left(1 + 0.033 \text{cos} \frac{360n}{365} \right)
 \notag
 \end{align}</p>
 
-<p>실제로는 시간 및 위도에 따라서도 일사량이 다르다. 위도(latitude)를 $\phi$, 시간에 대응하는 각도인 hour angle (정오 즉 남향일 때 0, 오후에 플러스, 오전에 마이너스, 1시간당 15도 변화) 을 $\omega$, 직달일사량과 지구 적도 간 각도인 declination angle (아래 그림 참고) 을 $\delta$라 할 때, 해당 날짜/ 위도/ 시간에 도달하는 일사량은 아래와 같다.</p>
+<p>실제로는 시간 및 위도에 따라서도 일사량이 다르다. 위도(latitude)를 $\phi$, 시간에 대응하는 각도인 hour angle (정오 즉 남향일 때 0, 오후에 플러스, 오전에 마이너스, 1시간당 15도 변화) 을 $\omega$, 직달일사량과 지구 적도 간 각도인 declination angle 을 $\delta$라 할 때, 해당 날짜/ 위도/ 시간에 도달하는 일사량은 아래와 같다. (각 변수들의 구체적 의미는 식 아래 그림들 참고)</p>
 
 <p>\begin{align} 
 G_{0} = G_{sc}\left(1 + 0.033 \text{cos} \frac{360n}{365} \right) \left(\text{cos}\phi \text{cos}\delta \text{cos}\omega + \text{sin}\phi \text{sin}\delta \right) \quad \text{where} \,\, \delta = 23.45^o \text{sin} \left[\frac{360^o}{365}(284+n) \right]
 \notag
 \end{align}</p>
 
+<p><img src="/assets/images/solarradiation/coordinates.png" alt="Coordinates" class="align-center" />
+<em>위도, hour angle, declination angle 도식도. (출처: Estimation of Hourly, Daily and Monthly Global Solar Radiation on Inclined Surfaces: Models Re-Visited)</em></p>
+
 <p><img src="/assets/images/solarradiation/declinationangle.png" alt="Declination angle" class="align-center" />
-<em>Declination angle. (출처: A comprehensive solar angles simulation and calculation using Matlab)</em></p>
+<em>Declination angle의 연중 변화. (출처: A comprehensive solar angles simulation and calculation using Matlab)</em></p>
 
 <p>실제 에너지시스템 최적화 문제를 풀 때 필요한 수치는 ‘$k$시부터 $k+1$시까지 도달한 총 에너지’ 이다. 이는 $k$시와 $k+1$시의 hour angle을 각각 $w_1$과 $w_2$라 할 때, 적분에 의해 아래와 같이 계산된다 (단위는 Wh).</p>
 

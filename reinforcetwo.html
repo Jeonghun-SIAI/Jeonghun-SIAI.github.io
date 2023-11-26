@@ -622,7 +622,7 @@ Vincent의 마이크로그리드 사례에서는, 실제 수전량은 -1.1에서
 <p>잘 알려진 cartpole 문제의 경우, action은 ‘수레를 정해진 힘으로 왼쪽으로 가속/ 오른쪽으로 가속’ 딱 두 개의 값 중 하나를 가지는 이진수로 볼 수 있으나, state는 ‘수레의 위치와 속도, 막대의 각도와 각속도’로 4차원의 연속된 벡터로 볼 수 있다. 연속변수이므로, state의 수가 ‘무한대’이다. 그러므로, 각 state-action pair에 대해 table 방식으로 $Q$값들을 따로 계산할 수는 없다.</p>
 
 <p><img src="/assets/images/reinforcetwo/cart_pole.gif" alt="cart_pole" class="align-center" width="70%" />
-<em>Cartpole 환경. State 수가 무한하므로, 각 state-action pair에 대해 Q-value를 정의할 수 없다.</em></p>
+<em>Cartpole 환경. State 수가 무한하므로, 각 state-action pair에 대한 Q-value를 table 방식으로는 정의할 수 없다.</em></p>
 
 <p>Vincent의 마이크로그리드 케이스에서도 마찬가지이다. State (직전 $N$시간 동안의 시간별 부하와 태양광 발전량, 그리고 배터리에 저장된 에너지)가 $2N+1$차원의 continuous vector이기 때문이다.</p>
 

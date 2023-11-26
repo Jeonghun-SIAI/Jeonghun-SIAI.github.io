@@ -5,8 +5,8 @@
     <description>공학박사 과정에서 쌓은 에너지 시스템 전문성에 데이터 사이언스 석사를 더하며 쌓은 계산통계학 활용 역량을 결합하여, 데이터 기반의 에너지 시스템/ 정책/ 시장 관련 솔루션 도출을 올바르게 할 수 있도록 돕습니다.</description>
     <link>https://song4energyndata.github.io/</link>
     <atom:link href="https://song4energyndata.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 25 Nov 2023 04:14:45 +0900</pubDate>
-    <lastBuildDate>Sat, 25 Nov 2023 04:14:45 +0900</lastBuildDate>
+    <pubDate>Sun, 26 Nov 2023 09:14:00 +0900</pubDate>
+    <lastBuildDate>Sun, 26 Nov 2023 09:14:00 +0900</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
@@ -40,15 +40,18 @@ G_{en} = G_{sc}\left(1 + 0.033 \text{cos} \frac{360n}{365} \right)
 \notag
 \end{align}&lt;/p&gt;
 
-&lt;p&gt;실제로는 시간 및 위도에 따라서도 일사량이 다르다. 위도(latitude)를 $\phi$, 시간에 대응하는 각도인 hour angle (정오 즉 남향일 때 0, 오후에 플러스, 오전에 마이너스, 1시간당 15도 변화) 을 $\omega$, 직달일사량과 지구 적도 간 각도인 declination angle (아래 그림 참고) 을 $\delta$라 할 때, 해당 날짜/ 위도/ 시간에 도달하는 일사량은 아래와 같다.&lt;/p&gt;
+&lt;p&gt;실제로는 시간 및 위도에 따라서도 일사량이 다르다. 위도(latitude)를 $\phi$, 시간에 대응하는 각도인 hour angle (정오 즉 남향일 때 0, 오후에 플러스, 오전에 마이너스, 1시간당 15도 변화) 을 $\omega$, 직달일사량과 지구 적도 간 각도인 declination angle 을 $\delta$라 할 때, 해당 날짜/ 위도/ 시간에 도달하는 일사량은 아래와 같다. (각 변수들의 구체적 의미는 식 아래 그림들 참고)&lt;/p&gt;
 
 &lt;p&gt;\begin{align} 
 G_{0} = G_{sc}\left(1 + 0.033 \text{cos} \frac{360n}{365} \right) \left(\text{cos}\phi \text{cos}\delta \text{cos}\omega + \text{sin}\phi \text{sin}\delta \right) \quad \text{where} \,\, \delta = 23.45^o \text{sin} \left[\frac{360^o}{365}(284+n) \right]
 \notag
 \end{align}&lt;/p&gt;
 
+&lt;p&gt;&lt;img src=&quot;/assets/images/solarradiation/coordinates.png&quot; alt=&quot;Coordinates&quot; class=&quot;align-center&quot; /&gt;
+&lt;em&gt;위도, hour angle, declination angle 도식도. (출처: Estimation of Hourly, Daily and Monthly Global Solar Radiation on Inclined Surfaces: Models Re-Visited)&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;&lt;img src=&quot;/assets/images/solarradiation/declinationangle.png&quot; alt=&quot;Declination angle&quot; class=&quot;align-center&quot; /&gt;
-&lt;em&gt;Declination angle. (출처: A comprehensive solar angles simulation and calculation using Matlab)&lt;/em&gt;&lt;/p&gt;
+&lt;em&gt;Declination angle의 연중 변화. (출처: A comprehensive solar angles simulation and calculation using Matlab)&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;실제 에너지시스템 최적화 문제를 풀 때 필요한 수치는 ‘$k$시부터 $k+1$시까지 도달한 총 에너지’ 이다. 이는 $k$시와 $k+1$시의 hour angle을 각각 $w_1$과 $w_2$라 할 때, 적분에 의해 아래와 같이 계산된다 (단위는 Wh).&lt;/p&gt;
 
