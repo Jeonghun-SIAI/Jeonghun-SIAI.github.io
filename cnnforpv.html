@@ -1,0 +1,920 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BBZ8BXY4N7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BBZ8BXY4N7');
+</script>
+  <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>논문 소개: 태양광 패널 이상 탐지를 위한 합성곱 신경망(CNN)의 적용 | 에너지엔데이터연구소</title>
+<meta name="description" content="대규모 태양광 단지의 수많은 패널 중 어딘가에 이상이 있는지 여부를/ 이상이 있다면 이상 유형과 위치를 자동으로 탐지하기 위해, 태양광 패널 사진을 입력받는 합성곱 신경망 (Convolutional Neural Network, CNN) 을 활용할 수 있다.">
+
+
+  <meta name="author" content="Jeonghun Song">
+  
+  <meta property="article:author" content="Jeonghun Song">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="에너지엔데이터연구소">
+<meta property="og:title" content="논문 소개: 태양광 패널 이상 탐지를 위한 합성곱 신경망(CNN)의 적용">
+<meta property="og:url" content="https://song4energyndata.github.io/cnnforpv.html">
+
+
+  <meta property="og:description" content="대규모 태양광 단지의 수많은 패널 중 어딘가에 이상이 있는지 여부를/ 이상이 있다면 이상 유형과 위치를 자동으로 탐지하기 위해, 태양광 패널 사진을 입력받는 합성곱 신경망 (Convolutional Neural Network, CNN) 을 활용할 수 있다.">
+
+
+
+  <meta property="og:image" content="https://song4energyndata.github.io/assets/images/cnnforpv/teaser.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-20T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://song4energyndata.github.io/cnnforpv.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "송정훈",
+      "url": "https://song4energyndata.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="naver-site-verification" content="7dda6777a2acc897ba51668ac7c58c380307dd6c">
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="에너지엔데이터연구소 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://song4energyndata.github.io/feed.xml">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<head>
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    </script>
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<!-- end custom head snippets -->
+  <style> 
+    ::-webkit-scrollbar{width: 12px;}
+    ::-webkit-scrollbar-track {background-color:#ced8e7; border-radius: 8px;}
+    ::-webkit-scrollbar-thumb {background-color:#eeebeb; border-radius: 8px;}
+    ::-webkit-scrollbar-thumb:hover {background: #f7f6f3;}
+    ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment 
+    {width:12px;height:16px;background:transparent;} 
+  </style>
+</head>
+
+<body
+  class="layout--single">
+  <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+  
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          에너지엔데이터연구소
+          <span class="site-subtitle">에너지 데이터의 올바른 활용, 에너지 전환에 대한 데이터 기반의 합리적 솔루션</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/aboutme/">About Me</a>
+            </li><li class="masthead__menu-item">
+              <a href="/search/">Search</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tag</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">카테고리 목록</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+  <div class="initial-content">
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <div class="sidebar sticky">
+    
+  
+  
+  
+  
+    
+    
+      
+    
+    
+  
+  
+   <!-- three lines added by Jeonghun  -->
+    
+
+<nav class="nav__list">
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">카테고리 목록</label>
+  <ul class="nav__items" id="category_tag_menu">
+      <!--전체 글 수-->
+      
+      <li>
+        <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/C#-->
+        <span class="nav__sub-title">Categories</span>
+            <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/optimalsystem" class="">&#x2022 경제성분석 및 최적구성 도출 [11]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/market" class="">&#x2022 전력시장 모델링 [15]</a></li>
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
+                <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/energymanagement" class="">&#x2022 제어 (최적화/ 강화학습) [5]</a></li>
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/estimation" class="">&#x2022 예측 (회귀분석/ 머신러닝/ 딥러닝) [3]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/dataset" class="">&#x2022 데이터셋 (소개/ 전처리/ 활용안) [7]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/policy" class="">&#x2022 정책 (패널분석/ 시나리오분석) [1]</a></li>
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                        <li><a href="/mathstat" class="">&#x2022 수학/ 통계학 일반 [3]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                        <li><a href="/mypapers" class="">&#x2022 My papers [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+            <ul>
+                
+                    
+                        <li><a href="/etc" class="">&#x2022 Etc. [2]</a></li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+      </li>
+  </ul>
+</nav>
+  
+  
+
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="논문 소개: 태양광 패널 이상 탐지를 위한 합성곱 신경망(CNN)의 적용">
+    <meta itemprop="description" content="대규모 태양광 단지의 수많은 패널 중 어딘가에 이상이 있는지 여부를/ 이상이 있다면 이상 유형과 위치를 자동으로 탐지하기 위해, 태양광 패널 사진을 입력받는 합성곱 신경망 (Convolutional Neural Network, CNN) 을 활용할 수 있다.">
+    <meta itemprop="datePublished" content="2023-12-20T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://song4energyndata.github.io/cnnforpv.html" class="u-url" itemprop="url">논문 소개: 태양광 패널 이상 탐지를 위한 합성곱 신경망(CNN)의 적용
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-12-20T00:00:00+09:00">2023-12-20</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header> 
+              <ul class="toc__menu"><li><a href="#태양광-패널-존재-여부-판별">태양광 패널 존재 여부 판별</a></li><li><a href="#태양광-패널-이상-탐지-및-이상-유형-판별">태양광 패널 이상 탐지 및 이상 유형 판별</a></li><li><a href="#태양광-패널-이상-위치-탐지">태양광 패널 이상 위치 탐지</a></li></ul>
+ <!-- 우측 TOC -->
+            </nav>
+          </aside>
+        
+        <p>대규모 태양광 단지의 수많은 패널 중 어딘가에 이상이 있는지 여부를/ 이상이 있다면 이상 유형과 위치를 자동으로 탐지하기 위해, 태양광 패널 사진을 입력받는 합성곱 신경망 (Convolutional Neural Network, CNN) 을 활용할 수 있다.</p>
+
+<p>이 포스팅에서는, 태양광 패널을 포함하는 이미지를 입력받아 분류 작업을 수행하는 CNN 모델들에 대해 다룬 논문 몇 개를 리뷰한다.</p>
+
+<p>(이 포스팅의 모든 그림들 (teaser 포함) 은, 포스팅에서 소개하는 논문들의 figure들임을 밝힌다.)</p>
+
+<p><br /></p>
+<h2 id="태양광-패널-존재-여부-판별">태양광 패널 존재 여부 판별</h2>
+
+<p>가장 간단한 case는, 인공위성 등으로 촬영한 저화질 사진을 입력받아 해당 장소 내 태양광 패널의 존재 여부를 판별하는 것이다.</p>
+
+<p>논문 <a href="https://ieeexplore.ieee.org/abstract/document/8094501">Convolutional neural network based solar photovoltaic panel detection in satellite photos (2017)</a> 에서는, 도심지에 대한 Google Map 사진 3,347개로 이진 분류 CNN 모델을 훈련 및 검증하였다.</p>
+
+<p><img src="/assets/images/cnnforpv/rooftop.png" alt="Rooftop images" class="align-center" />
+<em>태양광이 설치된 지붕 사진들과 설치되지 않은 지붕 사진들.</em></p>
+
+<p>3,347개의 사진들 중 1,643개 사진은 지붕 태양광 패널을 포함하였고, 나머지는 포함하지 않았다. 훈련 세트는 전체 데이터의 80%였다.</p>
+
+<p>CNN 구조는 전형적인 구조 (Convolutional layer들과 Fully connected layer들의 순차적 조합 및 각 layer의 output에 ReLU activation function을 적용) 를 따랐으며, 훈련 과정에 dropout을 적용하였다.</p>
+
+<p>해당 모델은 검증 세트 (태양광 포함한 사진 313개와 태양광 포함하지 않은 사진 357개) 에 대해 accuracy 87%, F-measure 86%라는 준수한 성능을 보였다.</p>
+
+<p><br /></p>
+<h2 id="태양광-패널-이상-탐지-및-이상-유형-판별">태양광 패널 이상 탐지 및 이상 유형 판별</h2>
+
+<p>태양광 패널이 기대출력을 내지 못하는 원인은 여러 가지가 있다. 다른 물체의 그림자 혹은 쌓인 먼지에 의해 패널이 가려지거나, 태양광 패널 일부가 파손되거나, 국소적으로 온도가 높은 hot spot이 발생하거나 하면 출력이 감소한다.</p>
+
+<p>태양광 패널을 포함하는 사진이 있을 때, 해당 사진 내 패널의 이상 여부를 탐지할 뿐 아니라 이상 유형까지 판별하는 CNN 기반 분류 모델 연구 예시로 아래 두 논문들이 있다.</p>
+
+<p>1) <a href="https://doi.org/10.1016/j.renene.2020.07.154">Failure signature classification in solar photovoltaic plants using RGB images and convolutional neural networks (2020)</a><br />
+2) <a href="https://doi.org/10.1016/j.renene.2021.07.070">Automatic fault classification in photovoltaic modules using Convolutional Neural Networks (2021)</a></p>
+
+<p>논문 1)에서는 임의의 각도 및 크기로 촬영된 태양광 패널 array들의 사진을 입력받아 4개 class들 (breakage, shadow, dust, no-fault) 중 하나로 분류하는 모델을 훈련 및 검증하였다.</p>
+
+<p><img src="/assets/images/cnnforpv/faults.png" alt="Rooftop images" class="align-center" />
+<em>태양광 이상 유형별 사진 (왼쪽부터 shadow, dust, breakage).</em></p>
+
+<p>논문 1)에서 사용한 training data의 크기가 비교적 작았음에도 (총 145장의 사진), 해당 모델은 약 70%의 accuracy를 달성하였다.</p>
+
+<p>논문 2)에서는 특정 규격으로 촬영된 태양광 패널 사진들 2만개의 공개 데이터셋(<a href="https://github.com/RaptorMaps/InfraredSolarModules">Infrared Solar Modules</a>) 으로 패널 이상 유형을 분류하는 모델을 훈련 및 검증하였다.</p>
+
+<p><img src="/assets/images/cnnforpv/infraredsolarmodules.png" alt="Rooftop images" class="align-center" />
+<em>Infrared Solar Modules 데이터셋의 태양광 패널 사진 (원본은 흑백이며, 해당 논문에서 칼라로 변환함).</em></p>
+
+<p>논문 2)는 1)과 달리 사진 규격이 엄격하게 정해져 있어 사용처가 제한적일 수 있으나, 해당 규격을 충족하는 사진에 대해서는 더 다양한 이상 유형들을 분류할 수 있다<br /> 
+(offline-module, diode-multi, diode, shadowing, cell-multi, cell, hot-spot, cracking, hot-spot-multi, soilling , vegetation, no-anomaly).</p>
+
+<p>단, 일부 이상 유형들의 사진 수가 적어 imbalanced dataset 문제가 있다 (2만장 중 diode-multi 175장, soiling 205장, hot-spot-multi 247장 등).</p>
+
+<p>논문 2)에서는 imbalanced dataset 문제 대응을 위해, data augumentation (사진 반전, 사진이동 등) 을 통해 원본 사진 수가 적은 class에 대한 data size를 증가시키는 oversampling을 수행하였다.</p>
+
+<p>논문 2)의 모델은 average testing accuracy 59.53%를 달성하였다. Class 수가 많을 뿐 아니라 class 간 이미지의 차이가 아주 뚜렷하진 않았기 때문으로 보인다.</p>
+
+<p>흔히 딥러닝 교육용으로 쓰이는 Fashion MNIST 데이터셋 내 물체들은 뚜렷하게 구별되는 구조를 갖고 있어 (즉 위상구조가 강해), CNN 모델이 feature extraction을 하기에 적합하고 10개 class에 대한 분류 정확도도 높다.</p>
+
+<p>그러나 태양광 패널 사진들의 경우 몇 개의 어두운 영역들만 보이므로 위상구조가 약해 feature extraction을 하기 쉽지 않고 결국 분류 성능도 좋지 못한 것으로 풀이된다.</p>
+
+<p><br /></p>
+<h2 id="태양광-패널-이상-위치-탐지">태양광 패널 이상 위치 탐지</h2>
+
+<p>태양광 패널에 이상이 있을 때, 패널 내 이상의 정확한 위치도 중요한 정보다.</p>
+
+<p>논문 <a href="https://doi.org/10.1016/j.renene.2020.01.148">Photovoltaic plant condition monitoring using thermal images analysis by convolutional neural network-based structure (2020)</a> 에서는, 비행드론으로 촬영한 태양광 패널 array의 열화상 사진을 입력받아 패널 내 hot spot이 있는지, 있다면 구체적으로 어느 위치에 있는지를 탐지하는 모델을 구성하였다.</p>
+
+<p><img src="/assets/images/cnnforpv/location.png" alt="Rooftop images" class="align-center" />
+<em>비행 드론과 열화상 카메라를 이용한 태양광 이상 위치 탐지 시스템 개요도.</em></p>
+
+<p>해당 모델에서는 먼저 패널 사진에서 먼저 이상이 있는 것으로 의심되는 영역인 Regions of interest (ROI) 를 찾는다. 수학적으로는 의심되는 사각형 영역의 위치 좌표 (x,y) 및 높이와 너비, 총 4개의 값을 회귀모델로 예측하는 작업이다. 구체적으로 사용된 방법론은 Fast R-CNN이다.</p>
+
+<p>(<a href="https://ganghee-lee.tistory.com/36">Fast R-CNN에 대한 한국어 블로그 정리 글</a>)</p>
+
+<p>분류용 CNN 모델은 탐지된 ROI를 입력받아, 태양광 패널인지 여부와 hot spot인지 여부를 판별한다.</p>
+
+<p><img src="/assets/images/cnnforpv/process.png" alt="Rooftop images" class="align-center" />
+<em>태양광 패널 내 ROI 탐지 및 ROI를 입력으로 하는 분류 도식도.</em></p>
+
+<p>참고로 R-CNN 모델의 성능 향상을 위해, 패널 사진에서 패널 테두리를 사진의 경계와 최대한 평행하게 맞추는 image rotation process가 적용되었다.</p>
+
+<p>한편 최종 결과 report 시에는 ROI의 좌표를 실제 위치 좌표로 변환하기 위해 비행 드론과 패널 간 각도를 변수로 하는 삼각측량법이 사용되었다.</p>
+
+<p><img src="/assets/images/cnnforpv/trianglemeasure.png" alt="Rooftop images" class="align-center" />
+<em>비행드론과 패널 간 각도에 기반한 삼각측량 도식도.</em></p>
+
+<p>해당 모델은 분류 accuracy 92.25%, 이상 위치 평균오차 0.86m를 달성하였다.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#%EB%94%A5%EB%9F%AC%EB%8B%9D" class="page__taxonomy-item p-category" rel="tag">딥러닝</a><span class="sep">, </span>
+    
+      <a href="/tags/#%ED%83%9C%EC%96%91%EA%B4%91" class="page__taxonomy-item p-category" rel="tag">태양광</a>
+    
+    </span>
+  </p>
+
+
+
+<!-- 
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#estimation" class="page__taxonomy-item p-category" rel="tag">estimation</a>
+    
+    </span>
+  </p>
+
+ -->
+        <!-- 
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-12-20T00:00:00+09:00">2023-12-20</time></p>
+ -->
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <!-- <a href="https://twitter.com/intent/tweet?text=%EB%85%BC%EB%AC%B8+%EC%86%8C%EA%B0%9C%3A+%ED%83%9C%EC%96%91%EA%B4%91+%ED%8C%A8%EB%84%90+%EC%9D%B4%EC%83%81+%ED%83%90%EC%A7%80%EB%A5%BC+%EC%9C%84%ED%95%9C+%ED%95%A9%EC%84%B1%EA%B3%B1+%EC%8B%A0%EA%B2%BD%EB%A7%9D%28CNN%29%EC%9D%98+%EC%A0%81%EC%9A%A9%20http%3A%2F%2Flocalhost%3A4000%2Fcnnforpv.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> -->
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcnnforpv.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcnnforpv.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      <p></p>
+        <!-- <h4 class="page__meta-title"><span>estimation</span> <span>카테고리 내 다른 글 보러가기</span></h4> -->
+        
+
+
+  
+  	
+  	
+  	
+  	
+  	
+
+<nav class="pagination_prev_next"> <!-- 식빵맘 코드에서 조금 수정함 -->
+
+  
+    
+      <a href="#" class="pagination_prev_next--pager disabled-last-child ">가장 최근 글입니다</a>
+    
+    
+      <a href="/predictiontwo.html" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>건물의 시간별 전기부하 학습 후 예측하기 - 딥러닝을 쓴다면?</a>
+        
+  
+
+</nav>
+      <p></p>
+    </div>
+
+    
+  </article>
+
+  
+  <!-- 
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/hourlysolar.html" rel="permalink"><img src="/assets/images/solarradiation/diffuse.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/hourlysolar.html" rel="permalink">시간별 태양광 발전량 계산 모델 수식 설명
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-11-25T00:00:00+09:00">2023-11-25</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">태양광 패널을 포함하는 마이크로그리드의 경제성 분석을 위해서는 시간별 태양광 발전량을 계산해야 한다. 필자가 국내 케이스의 계산에 사용하는 데이터로는 기상청에서 제공하는 시간별 일사량이 있다. 즉, 시간별 일사량 데이터를 태양광 발전량으로 변환해야 한다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/opf.html" rel="permalink"><img src="/assets/images/opf/network.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/opf.html" rel="permalink">Optimal power flow 예제 소개 문헌 및 풀이 코드
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-11-11T00:00:00+09:00">2023-11-11</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">필자의 ‘선형계획법 기반 분산에너지시스템 최적화’ 시리즈 글에서는, 유효전력의 수요-공급을 고려하는 설비도입계획을 다루었다. 그러나 기 구축된 대규모 발송전시스템의 실제 운영은, 각 발전기 및 bus의 전압/ 무효전력/ 위상도 고려하는 optimal power flow (OPF) ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/koreanmarketrules.html" rel="permalink">국내 전력시장 주요 운영규칙 핵심사항 정리
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-10-22T00:00:00+09:00">2023-10-22</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">최근 에너지 플랫폼 업계 현직자들과 대화를 하며, 국내 전력시장 운영규칙을 상세히 알 필요성을 느꼈다. 본격적으로 에너지 플랫폼 업계에 종사한다면 전력시장 입찰을 전제로 한 에너지 설비들의 데이터 및 비즈니스 모델을 주로 분석하게 될 것이라 생각했기 때문이다. (그간 필자는 BTM...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <a href="/evestimate.html" rel="permalink"><img src="/assets/images/evestimates/teaser.png" alt=""></a>
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/evestimate.html" rel="permalink">논문 소개: 전기차 충전 이력 데이터 기반의, 계통 내 시간별 전기차 충전 부하 시뮬레이션
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-10-21T00:00:00+09:00">2023-10-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">전기차 및 충전 인프라 규모가 증가할수록 전력계통에 걸리는 부하가 증가한다. 그러므로 향후 발전/ 송전/ 배전 (특히 배전단) 설비 및 스케줄링 계획 수립을 위해, 전기차 충전으로 인한 시간별 부하 증가를 정확히 예측할 필요가 있다.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div> -->
+  
+  <!--  -->
+</div>
+
+  </div>
+
+  
+
+  <aside class="sidebar__top">
+    <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside>
+
+  <div id="footer" class="page__footer">
+    <footer>
+      <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+      <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Contact:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:song4energy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+          <li><a href="https://github.com/song4energyndata" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 송정훈. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+    </footer>
+  </div>
+
+  
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

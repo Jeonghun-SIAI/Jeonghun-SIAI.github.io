@@ -286,4 +286,10 @@ var store = [{
         "tags": ["태양광"],
         "url": "/hourlysolar.html",
         "teaser": "/assets/images/solarradiation/diffuse.png"
+      },{
+        "title": "논문 소개: 태양광 패널 이상 탐지를 위한 합성곱 신경망(CNN)의 적용",
+        "excerpt":"대규모 태양광 단지의 수많은 패널 중 어딘가에 이상이 있는지 여부를/ 이상이 있다면 이상 유형과 위치를 자동으로 탐지하기 위해, 태양광 패널 사진을 입력받는 합성곱 신경망 (Convolutional Neural Network, CNN) 을 활용할 수 있다. 이 포스팅에서는, 태양광 패널을 포함하는 이미지를 입력받아 분류 작업을 수행하는 CNN 모델들에 대해 다룬 논문 몇 개를 리뷰한다....","categories": ["estimation"],
+        "tags": ["태양광","딥러닝"],
+        "url": "/cnnforpv.html",
+        "teaser": "/assets/images/cnnforpv/teaser.png"
       }]
